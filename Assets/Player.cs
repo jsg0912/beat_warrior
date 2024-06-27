@@ -1,10 +1,14 @@
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] Text tt;
+
+    public static Player Instance;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -16,12 +20,14 @@ public class PlayerController : MonoBehaviour
     private bool isAlive;
     private bool canMove;
     private bool isDown;
+    private bool isDash;
     private bool isCharge;
     private bool isInvincibility;
     private int direction;
 
     private float moveSpeed;
     private float jumpSpeed;
+    private float markerSpeed;
     private float attackChargeTime;
     private float invincibilityTime;
 
@@ -30,14 +36,18 @@ public class PlayerController : MonoBehaviour
     private float skill1CoolTimeMax;
     private float skill2CoolTimeMax;
 
+    private float ghostDelayTime;
+    private float ghostDelayTimeMax;
+    private GameObject GhostPrefab;
+
     private float markCoolTime;
     private float dashCoolTime;
     private float skill1CoolTime;
     private float skill2CoolTime;
 
+    private GameObject MarkerPrefab;
     private GameObject TargetMonster;
-
-    Vector2 target;
+    private List<GameObject> DashTargetMonster;
 
     void Start()
     {
@@ -58,6 +68,7 @@ public class PlayerController : MonoBehaviour
             Attack();
             Mark();
             Dash();
+            Ghost();
             CountCoolTime();
 
             tt.text = attackPoint + "";
@@ -66,6 +77,8 @@ public class PlayerController : MonoBehaviour
 
     private void Initialize()
     {
+        Instance = this;
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
@@ -78,24 +91,33 @@ public class PlayerController : MonoBehaviour
         isAlive = true;
         canMove = true;
         isDown = false;
+        isDash = false;
         isCharge = false;
         isInvincibility = false;
         direction = 1;
 
-        moveSpeed = 10.0f;
+        moveSpeed = 7.0f;
         jumpSpeed = 20.0f;
+        markerSpeed = 30.0f;
         attackChargeTime = 10.0f;
         invincibilityTime = 0.5f;
 
-        markCoolTimeMax = 10.0f;
-        dashCoolTimeMax = 10.0f;
-        skill1CoolTimeMax = 10.0f;
-        skill2CoolTimeMax = 10.0f;
+        markCoolTimeMax = 0f;
+        dashCoolTimeMax = 2.0f;
+        skill1CoolTimeMax = 2.0f;
+        skill2CoolTimeMax = 2.0f;
+
+        ghostDelayTime = 0.0f;
+        ghostDelayTimeMax = 0.05f;
+        GhostPrefab = Resources.Load("Prefab/Ghost") as GameObject;
 
         markCoolTime = 0.0f;
         dashCoolTime = 0.0f;
         skill1CoolTime = 0.0f;
         skill2CoolTime = 0.0f;
+
+        MarkerPrefab = Resources.Load("Prefab/Marker") as GameObject;
+        DashTargetMonster = new List<GameObject>();
     }
 
     private void CountCoolTime()
@@ -114,6 +136,17 @@ public class PlayerController : MonoBehaviour
         skill2CoolTime = 0.0f;
 
         TargetMonster = null;
+    }
+
+    private void Ghost()
+    {
+        if (ghostDelayTime > 0) ghostDelayTime -= Time.deltaTime;
+        else if (!isDash) return;
+        else
+        {
+            GameObject ghost = Instantiate(GhostPrefab, transform.position, Quaternion.identity);
+            ghostDelayTime = ghostDelayTimeMax;
+        }
     }
 
     private void Move()
@@ -146,7 +179,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (isDown) return;
+        if (isDown || isDash) return;
 
         if (Input.GetKeyDown(KeySetting.keys[ACTION.JUMP]) && !anim.GetBool("isJump"))
         {
@@ -191,25 +224,36 @@ public class PlayerController : MonoBehaviour
 
     private void Mark()
     {
+        if (markCoolTime > 0) return;
+
         if (Input.GetKeyDown(KeySetting.keys[ACTION.MARK]))
         {
-            target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(target, Vector2.zero);
+            Vector3 start = transform.position + new Vector3(0, 0.5f, 0);
+            Vector3 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if (hit.collider == null || !hit.collider.gameObject.CompareTag("Monster")) return;
+            GameObject Marker = Instantiate(MarkerPrefab, start, Quaternion.identity);
 
-            TargetMonster = hit.collider.gameObject;
+            Marker.GetComponent<Rigidbody2D>().velocity = (end - start).normalized * markerSpeed;
+
             markCoolTime = markCoolTimeMax;
         }
     }
 
+    public void SetTarget(GameObject obj)
+    {
+        TargetMonster = obj;
+    }
+
     private void Dash()
     {
+        if (dashCoolTime > 0) return;
+
         if (Input.GetKeyDown(KeySetting.keys[ACTION.DASH]))
         {
             if (dashCoolTime > 0 || TargetMonster == null) return;
 
             dashCoolTime = dashCoolTimeMax;
+            anim.SetBool("isJump", false);
 
             StartCoroutine(Dashing());
         }
@@ -218,21 +262,54 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Dashing()
     {
         canMove = false;
+        isDash = true;
         rb.gravityScale = 0.0f;
+        rb.velocity = Vector3.zero;
 
+        Vector2 start = transform.position;
         Vector2 end = TargetMonster.transform.position;
+        int dir = end.x > start.x ? 1 : -1;
+        end += new Vector2(dir, 0);
 
         direction = end.x > transform.position.x ? 1 : -1;
         transform.localScale = new Vector3(direction, 1, 1);
         anim.SetBool("isRun", true);
 
-        while (Vector2.Distance(end, transform.position) >= 0.5f)
+        while (Vector2.Distance(end, transform.position) >= 0.05f)
         {
-            transform.position = Vector2.Lerp(transform.position, end, 0.05f);
+            transform.position = Vector2.Lerp(transform.position, end, 0.03f);
             yield return null;
         }
 
+        transform.localScale = new Vector3(-dir, 1, 1);
+
+        Vector2 offset = new Vector2(0, 1.0f);
+        RaycastHit2D[] hits;
+
+        hits = Physics2D.RaycastAll(start, end - start, Vector2.Distance(start, end));
+        foreach (RaycastHit2D hit in hits) DashTargetMonster.Add(hit.collider.gameObject);
+
+        hits = Physics2D.RaycastAll(start + offset, end - start, Vector2.Distance(start, end));
+        foreach (RaycastHit2D hit in hits) DashTargetMonster.Add(hit.collider.gameObject);
+
+        //Debug.DrawRay(start, end - start, Color.red, Vector2.Distance(start, end));
+        //Debug.DrawRay(start + offset, end - start, Color.red, Vector2.Distance(start, end));
+
+        DashTargetMonster = DashTargetMonster.Distinct().ToList();
+
+        foreach (GameObject obj in DashTargetMonster)
+        {
+            if(obj.CompareTag("Monster"))
+            {
+                // 몬스터 데미지
+                Debug.Log(obj.name);
+            }
+        }
+
+        DashTargetMonster.Clear();
+
         canMove = true;
+        isDash = false;
         rb.gravityScale = 5.0f;
     }
 
@@ -258,7 +335,12 @@ public class PlayerController : MonoBehaviour
         if (isInvincibility) return;
 
         hp--;
-        if (hp <= 0) Die();
+
+        if (hp <= 0)
+        {
+            Die();
+            return;
+        }
 
         StartCoroutine(Invincibility(invincibilityTime));
 
@@ -280,8 +362,14 @@ public class PlayerController : MonoBehaviour
         isAlive = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (rb.velocity.y < 0) anim.SetBool("isJump", false);
+        GameObject obj = collision.gameObject;
+
+        if (rb.velocity.y <= 0 && (obj.CompareTag("Tile") || obj.CompareTag("Base")))
+        {
+            anim.SetBool("isJump", false);
+            return;
+        }
     }
 }
