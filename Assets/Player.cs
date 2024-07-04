@@ -146,6 +146,7 @@ public class Player : MonoBehaviour
         {
             GameObject ghost = Instantiate(GhostPrefab, transform.position, Quaternion.identity);
             ghostDelayTime = ghostDelayTimeMax;
+            Destroy(ghost, 1.0f);
         }
     }
 
