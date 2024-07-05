@@ -6,11 +6,14 @@ public class ColliderController : MonoBehaviour
 {
     private CapsuleCollider2D playerCollider;
     private GameObject tile;
+    private GameObject monster;
 
     private void Start()
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
+
     }
+
 
     public void PassTile()
     {
@@ -26,6 +29,13 @@ public class ColliderController : MonoBehaviour
         {
             tile = collision.gameObject;
         }
+
+        if (collision.gameObject.CompareTag("Monster"))
+        {
+            monster = collision.gameObject;
+            BoxCollider2D monsterCollider = monster.GetComponent<BoxCollider2D>();
+            Physics2D.IgnoreCollision(playerCollider, monsterCollider);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -34,6 +44,8 @@ public class ColliderController : MonoBehaviour
         {
             tile = null;
         }
+
+
     }
 
     private IEnumerator DisableCollision()
