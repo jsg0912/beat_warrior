@@ -11,8 +11,14 @@ public class RangedEnemy : MonoBehaviour
     private float FindRange;
     private LayerMask ObjectLayer;
     private Animator anim;
-    private float direction;
-    private bool alert;
+    public float direction;
+    public bool alert;
+    public bool stop;
+    private float hp;
+    private bool alive;
+    private float tempdir;
+
+
 
 
     private GameObject ArrowPrefab;
@@ -30,16 +36,21 @@ public class RangedEnemy : MonoBehaviour
         direction = 1;
         moveSpeed = 1f;
         alert = false;
+        alive = true;
+        hp = 3f;
+        stop = false;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
-        CheckCoolTime();
-        CheckCollision();
-
+        if(alive)
+        {
+            Move();
+            CheckCoolTime();
+            CheckCollision();
+        }
     }
 
     private void Move()
@@ -49,16 +60,28 @@ public class RangedEnemy : MonoBehaviour
         RaycastHit2D rayHit = Physics2D.Raycast(transform.position + new Vector3(direction, 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
         if (rayHit.collider == null)
         {
-            direction *= -1;
+            if (alert == true) SetStop();
+            else direction *= -1;
         }
         if (direction != 0)
         {
             transform.localScale = new Vector3(-1 * direction, 1, 1);
-            if (!anim.GetBool("isJump")) anim.SetBool("isRun", true);
         }
         transform.position += new Vector3(direction * moveSpeed * Time.deltaTime, 0, 0);
     }
 
+    private void SetStop()
+    {
+        tempdir = direction;
+        direction = 0;
+        stop = true;
+    }
+
+    private void SetMove()
+    {
+        direction = tempdir;
+        stop = false;
+    }
 
 
     private void CheckCoolTime()
@@ -73,21 +96,29 @@ public class RangedEnemy : MonoBehaviour
 
         foreach (Collider2D collider in collider2Ds)
         {
-            if (collider.tag == "Player")
-            {
-                StartCoroutine(Shoot(collider));
-                alert = true;
 
+            StartCoroutine(Shoot(collider));
+            alert = true;
+
+            if(stop == false)
+            {
                 if (collider.transform.position.x > transform.position.x) direction = 1;
                 else direction = -1;
             }
-            else alert = false;
+
         }
+        if(Physics2D.OverlapCircle(transform.position, FindRange, ObjectLayer) == false && alert == true)
+        {
+            alert = false;
+            SetMove();
+        }
+
     }
 
     private IEnumerator Shoot(Collider2D player)
     {
         if (shootCoolTime > 0) yield break;
+        SetStop();
         shootCoolTime = shootCoolMaxTime;
 
         anim.SetTrigger("attack");
@@ -104,11 +135,21 @@ public class RangedEnemy : MonoBehaviour
         Arrow.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, Quaternion.FromToRotation(Vector3.up, direction.normalized).eulerAngles.z);
         Arrow.GetComponent<Rigidbody2D>().velocity = direction.normalized * arrowSpeed;
 
-        
-
-        
+        SetMove();
 
     }
 
+
+    public void RangedGetDamage()
+    {
+        if(hp <= 0)
+        {
+            anim.SetTrigger("die");
+            alive = false;
+            return;
+        }
+        anim.SetTrigger("hurt");
+        hp -= 1;
+    }
 
 }
