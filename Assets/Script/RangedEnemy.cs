@@ -29,7 +29,7 @@ public class RangedEnemy : MonoBehaviour
         shootCoolMaxTime = 2f;
         shootCoolTime = 2f;
         arrowSpeed = 5f;
-        FindRange = 4f;
+        FindRange = 5f;
         ArrowPrefab = Resources.Load("Prefab/Arrow") as GameObject;
         ObjectLayer = LayerMask.GetMask("Player");
         anim = GetComponent<Animator>();
@@ -39,6 +39,7 @@ public class RangedEnemy : MonoBehaviour
         alive = true;
         hp = 3f;
         stop = false;
+        tempdir = 1;
 
     }
 
@@ -47,27 +48,28 @@ public class RangedEnemy : MonoBehaviour
     {
         if(alive)
         {
-            Move();
+            MoveAnim();
             CheckCoolTime();
             CheckCollision();
+            Move();
         }
     }
 
     private void Move()
     {
-        if (direction == 0) anim.SetBool("isWalk", false);
-        else anim.SetBool("isWalk", true);
-        RaycastHit2D rayHit = Physics2D.Raycast(transform.position + new Vector3(direction, 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
-        if (rayHit.collider == null)
-        {
-            if (alert == true) SetStop();
-            else direction *= -1;
-        }
+        
+        
         if (direction != 0)
         {
             transform.localScale = new Vector3(-1 * direction, 1, 1);
         }
         transform.position += new Vector3(direction * moveSpeed * Time.deltaTime, 0, 0);
+    }
+
+    private void MoveAnim()
+    {
+        if (direction == 0) anim.SetBool("isWalk", false);
+        else anim.SetBool("isWalk", true);
     }
 
     private void SetStop()
@@ -107,11 +109,21 @@ public class RangedEnemy : MonoBehaviour
             }
 
         }
-        if(Physics2D.OverlapCircle(transform.position, FindRange, ObjectLayer) == false && alert == true)
+        if(alert == true)
         {
-            alert = false;
-            SetMove();
+            if (Physics2D.OverlapCircle(transform.position, FindRange, ObjectLayer) == false)
+            {
+                alert = false;
+                SetMove();
+            }
         }
+        RaycastHit2D rayHit = Physics2D.Raycast(transform.position + new Vector3(direction, 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
+        if (rayHit.collider == null)
+        {
+            if (alert == true) SetStop();
+            else direction *= -1;
+        }
+
 
     }
 
