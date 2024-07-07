@@ -14,6 +14,9 @@ public class ChangeScene : MonoBehaviour
             case "SettingBtn":
                 SceneManager.LoadScene("Setting");
                 break;
+            case "TittleBtn":
+                SceneManager.LoadScene("MainScene");
+                break;
             case "ExitBtn":
                 Application.Quit();
                 break;

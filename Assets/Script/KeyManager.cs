@@ -28,11 +28,29 @@ public class KeyManager : MonoBehaviour
     { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.Mouse1, KeyCode.Mouse0,
         KeyCode.Space, KeyCode.Q, KeyCode.E, KeyCode.F };
 
-    private void Start()
+
+    int key = -1;
+    private void Awake()
     {
         for (int i = 0; i < defaultKeys.Length; i++)
         {
             KeySetting.keys.Add((ACTION)i, defaultKeys[i]);
         }
+    }
+
+    private void OnGUI()
+    {
+        Event keyEvent = Event.current;
+
+        if (keyEvent.isKey)
+        {
+            KeySetting.keys[(ACTION)key] = keyEvent.keyCode;
+            key = -1;
+        }
+    }
+    
+    public void ChangeKey(int num)
+    {
+        key = num;
     }
 }
