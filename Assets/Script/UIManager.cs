@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image Skill2Img;
 
     public TextMeshProUGUI[] txt;
+    public GameObject menuSet;
 
 
 
@@ -30,6 +31,7 @@ public class UIManager : MonoBehaviour
     {
         UpdateHP();
         UpdateCoolTime();
+        AppearGameSet();
         
 
         for (int i = 0; i < txt.Length; i++)
@@ -53,5 +55,13 @@ public class UIManager : MonoBehaviour
         DashImg.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetDashCoolTime() / Player.dashCoolTimeMax;
         Skill1Img.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetSkill1CoolTime() / Player.skill1CoolTimeMax;
         Skill2Img.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetSkill2CoolTime() / Player.skill2CoolTimeMax;
+    }
+
+    private void AppearGameSet()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            menuSet.SetActive(true);
+        }
     }
 }
