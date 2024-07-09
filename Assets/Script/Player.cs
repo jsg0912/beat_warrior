@@ -31,10 +31,10 @@ public class Player : MonoBehaviour
     private float attackChargeTime;
     private float invincibilityTime;
 
-    private float markCoolTimeMax;
-    private float dashCoolTimeMax;
-    private float skill1CoolTimeMax;
-    private float skill2CoolTimeMax;
+    public static float markCoolTimeMax = 2.0f;
+    public static float dashCoolTimeMax = 2.0f;
+    public static float skill1CoolTimeMax = 2.0f;
+    public static float skill2CoolTimeMax = 2.0f;
 
     private float ghostDelayTime;
     private float ghostDelayTimeMax;
@@ -68,6 +68,8 @@ public class Player : MonoBehaviour
             Attack();
             Mark();
             Dash();
+            Skill1();
+            Skill2();
             Ghost();
             CountCoolTime();
 
@@ -84,7 +86,7 @@ public class Player : MonoBehaviour
 
         anim.SetTrigger("idle");
 
-        hp = 0;
+        hp = 3;
         attackPointMax = 2;
         attackPoint = attackPointMax;
 
@@ -101,11 +103,6 @@ public class Player : MonoBehaviour
         markerSpeed = 30.0f;
         attackChargeTime = 10.0f;
         invincibilityTime = 0.5f;
-
-        markCoolTimeMax = 0f;
-        dashCoolTimeMax = 2.0f;
-        skill1CoolTimeMax = 2.0f;
-        skill2CoolTimeMax = 2.0f;
 
         ghostDelayTime = 0.0f;
         ghostDelayTimeMax = 0.05f;
@@ -126,6 +123,31 @@ public class Player : MonoBehaviour
         if (dashCoolTime >= 0) dashCoolTime -= Time.deltaTime;
         if (skill1CoolTime >= 0) skill1CoolTime -= Time.deltaTime;
         if (skill2CoolTime >= 0) skill2CoolTime -= Time.deltaTime;
+    }
+
+    public float GetMarkCoolTime()
+    {
+        return markCoolTime;
+    }
+
+    public float GetDashCoolTime()
+    {
+        return dashCoolTime;
+    }
+
+    public float GetSkill1CoolTime()
+    {
+        return skill1CoolTime;
+    }
+
+    public float GetSkill2CoolTime()
+    {
+        return skill2CoolTime;
+    }
+
+    public int GetHP()
+    {
+        return hp;
     }
 
     public void ResetSkill()
@@ -333,7 +355,7 @@ public class Player : MonoBehaviour
 
     public void GetDamaged()
     {
-        if (isInvincibility) return;
+        if (isInvincibility || hp <= 0) return;
 
         hp--;
 
