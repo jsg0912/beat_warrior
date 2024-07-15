@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-public class ChangeScene : MonoBehaviour
+using UnityEngine.UI;
+public class ChangeSceneBtn : Button
 {
-    public void ChangeSceneBtn()
+    public void ChangeScene()
     {
         switch (this.gameObject.name)
         {
             case "PlayBtn":
-                SceneManager.LoadScene("Player");
+                SceneController.instance.ChangeScene(SceneName.Player);
                 break;
             case "SettingBtn":
-                SceneManager.LoadScene("Setting");
+                SceneController.instance.ChangeScene(SceneName.Setting);
                 break;
             case "TittleBtn":
-                SceneManager.LoadScene("MainScene");
+                SceneController.instance.ChangeScene(SceneName.MainScene);
                 break;
             case "ExitBtn":
                 Application.Quit();

@@ -16,8 +16,6 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI[] txt;
     public GameObject menuSet;
 
-
-
     private void Start()
     {
         for (int i = 0; i < txt.Length; i++)
@@ -51,10 +49,10 @@ public class UIManager : MonoBehaviour
 
     private void UpdateCoolTime()
     {
-        MarkImg.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetMarkCoolTime() / Player.markCoolTimeMax;
-        DashImg.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetDashCoolTime() / Player.dashCoolTimeMax;
-        Skill1Img.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetSkill1CoolTime() / Player.skill1CoolTimeMax;
-        Skill2Img.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetSkill2CoolTime() / Player.skill2CoolTimeMax;
+        MarkImg.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetMarkCoolTime() / PlayerSkillConstant.markCoolTimeMax;
+        DashImg.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetDashCoolTime() / PlayerSkillConstant.dashCoolTimeMax;
+        Skill1Img.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetSkill1CoolTime() / PlayerSkillConstant.skill1CoolTimeMax;
+        Skill2Img.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetSkill2CoolTime() / PlayerSkillConstant.skill2CoolTimeMax;
     }
 
     private void AppearGameSet()
