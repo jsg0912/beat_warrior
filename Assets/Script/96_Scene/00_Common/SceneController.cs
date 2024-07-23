@@ -19,8 +19,8 @@ public class SceneController: MonoBehaviour
             case SceneName.Player:
                 SceneManager.LoadScene("Player");
                 break;
-            case SceneName.MainScene:
-                SceneManager.LoadScene("MainScene");
+            case SceneName.Tittle:
+                SceneManager.LoadScene("Tittle");
                 break;
             case SceneName.Setting:
                 SceneManager.LoadScene("Setting");
