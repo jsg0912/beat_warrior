@@ -1,4 +1,4 @@
-// PlayerÀÇ ±âº» °íÀ¯°ª
+// Playerï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 public enum PLAYERSTATUS
 {
@@ -16,7 +16,7 @@ public enum PLAYERSTATUS
 
 public class PlayerConstant
 {
-    public const int hpMax = 10;
+    public const int hpMax = 3;
 
     public const float gravityScale = 5.0f;
     public const float moveSpeed = 7.0f;
