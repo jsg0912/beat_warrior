@@ -51,12 +51,12 @@ public class Player : MonoBehaviour
         dash = GetComponent<Dash>();
         skill1 = GetComponent<Skill1>();
         skill2 = GetComponent<Skill2>();
-        
+
         status = PLAYERSTATUS.IDLE;
         anim.SetTrigger("idle");
 
         hp = PlayerConstant.hpMax;
-        
+
         isInvincibility = false;
         direction = 1;
     }
