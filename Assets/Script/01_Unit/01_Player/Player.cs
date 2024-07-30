@@ -69,31 +69,13 @@ public class Player : MonoBehaviour
     public void SetPlayerStatus(PLAYERSTATUS status)
     {
         this.status = status;
-
-        switch (status)
-        {
-
-            case PLAYERSTATUS.MARK:
-                // anim.SetTrigger("mark");
-                this.status = PLAYERSTATUS.IDLE;
-                break;
-            case PLAYERSTATUS.ATTACK:
-                anim.SetTrigger("attack");
-                this.status = PLAYERSTATUS.IDLE;
-                break;
-            case PLAYERSTATUS.SKILL1:
-                anim.SetTrigger("skill1");
-                this.status = PLAYERSTATUS.IDLE;
-                break;
-            case PLAYERSTATUS.SKILL2:
-                anim.SetTrigger("skill2");
-                this.status = PLAYERSTATUS.IDLE;
-                break;
-            case PLAYERSTATUS.DEAD:
-                anim.SetTrigger("die");
-                break;
-        }
     }
+
+    public void SetPlayerAnim(string trigger)
+    {
+        anim.SetTrigger(trigger);
+    }
+
     public void SetIn(bool bb)
     {
         isInvincibility = bb;
@@ -134,7 +116,7 @@ public class Player : MonoBehaviour
         direction = 0;
         anim.SetBool("isRun", false);
 
-        if (IsMoveable()) return;
+        if (!IsMoveable()) return;
 
         if (Input.GetKey(KeySetting.keys[ACTION.LEFT])) direction = -1;
 
@@ -154,8 +136,9 @@ public class Player : MonoBehaviour
 
     private bool IsMoveable()
     {
-        return status != PLAYERSTATUS.IDLE && status != PLAYERSTATUS.RUN && status != PLAYERSTATUS.JUMP && status != PLAYERSTATUS.DASH;
+        return status == PLAYERSTATUS.IDLE || status == PLAYERSTATUS.RUN || status == PLAYERSTATUS.JUMP;
     }
+
     private void Down()
     {
         if (Input.GetKeyDown(KeySetting.keys[ACTION.DOWN]))

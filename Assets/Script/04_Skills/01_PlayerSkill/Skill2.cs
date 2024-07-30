@@ -8,6 +8,8 @@ public class Skill2 : Skill
     {
         status = PLAYERSTATUS.SKILL2;
 
+        animTrigger = PlayerSkillConstant.skill2AnimTrigger;
+
         cooltimeMax = PlayerSkillConstant.skill2CoolTimeMax;
         cooltime = 0;
     }

@@ -10,26 +10,41 @@ public class Dash : Skill
     private List<GameObject> DashTargetMonster;
     private GameObject TargetMonster;
 
+    private float ghostDelayTime;
+    private float ghostDelayTimeMax;
+    private GameObject GhostPrefab;
+
     private void Start()
     {
         status = PLAYERSTATUS.DASH;
+
+        animTrigger = PlayerSkillConstant.dashkAnimTrigger;
 
         cooltimeMax = PlayerSkillConstant.dashCoolTimeMax;
         cooltime = 0;
 
         rb = GetComponent<Rigidbody2D>();
         DashTargetMonster = new List<GameObject>();
+
+        ghostDelayTime = 0;
+        ghostDelayTimeMax = PlayerSkillConstant.ghostDelayTimeMax;
+        GhostPrefab = Resources.Load("Prefab/Ghost") as GameObject;
     }
 
     protected override void PlaySkill()
     {
         UpdateKey();
+        Ghost();
 
         if (Input.GetKeyDown(key))
         {
             if (cooltime <= 0) return;
 
             SkillMethod();
+
+            Player.Instance.SetPlayerStatus(status);
+            Player.Instance.SetPlayerAnim(animTrigger);
+
             cooltime = 0;
         }
     }
@@ -62,7 +77,6 @@ public class Dash : Skill
 
         Player.Instance.direction = end.x > transform.position.x ? 1 : -1;
         transform.localScale = new Vector3(Player.Instance.direction, 1, 1);
-        //anim.SetBool("isRun", true);
 
         Player.Instance.SetIn(true);
 
@@ -73,6 +87,7 @@ public class Dash : Skill
         }
 
         Player.Instance.SetIn(false);
+        Player.Instance.SetPlayerStatus(PLAYERSTATUS.IDLE);
 
         transform.position = end;
 
@@ -106,4 +121,18 @@ public class Dash : Skill
         rb.gravityScale = 5.0f;
     }
 
+    private void Ghost()
+    {
+        if (ghostDelayTime > 0)
+        {
+            ghostDelayTime -= Time.deltaTime;
+            return;
+        }
+
+        if (Player.Instance.status != PLAYERSTATUS.DASH) return;
+
+        GameObject ghost = Instantiate(GhostPrefab, transform.position, Quaternion.identity);
+        ghostDelayTime = ghostDelayTimeMax;
+        Destroy(ghost, 1.0f);
+    }
 }
