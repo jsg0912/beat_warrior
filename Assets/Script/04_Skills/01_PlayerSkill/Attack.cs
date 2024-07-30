@@ -48,7 +48,7 @@ public class Attack : Skill
             Player.Instance.SetAnimTrigger(animTrigger);
 
             SkillMethod();
-            Player.Instance.SetPlayerAnim(animTrigger);
+            Player.Instance.SetAnimTrigger(animTrigger);
         }
     }
 

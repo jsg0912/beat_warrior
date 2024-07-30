@@ -11,9 +11,6 @@ public class Dash : Skill
     private GameObject TargetMonster;
 
     private float ghostDelayTime;
-    private GameObject GhostPrefab;
-
-    private float ghostDelayTime;
     private float ghostDelayTimeMax;
     private GameObject GhostPrefab;
 
@@ -21,7 +18,7 @@ public class Dash : Skill
     {
         status = PLAYERSTATUS.DASH;
 
-        animTrigger = PlayerSkillConstant.dashkAnimTrigger;
+        animTrigger = PlayerSkillConstant.dashAnimTrigger;
 
         cooltimeMax = PlayerSkillConstant.dashCoolTimeMax;
         cooltime = 0;
@@ -49,7 +46,7 @@ public class Dash : Skill
             SkillMethod();
 
             Player.Instance.SetPlayerStatus(status);
-            Player.Instance.SetPlayerAnim(animTrigger);
+            Player.Instance.SetAnimTrigger(animTrigger);
 
             cooltime = 0;
         }

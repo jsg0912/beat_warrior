@@ -8,8 +8,6 @@ public abstract class Skill : MonoBehaviour
 
     protected string animTrigger;
 
-    protected string animTrigger;
-
     protected float cooltimeMax;
     protected float cooltime;
 
