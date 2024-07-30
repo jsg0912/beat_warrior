@@ -33,20 +33,9 @@ public class Dash : Skill
 
     protected override void PlaySkill()
     {
-        UpdateKey();
+        base.PlaySkill();
+
         Ghost();
-
-        if (Input.GetKeyDown(key))
-        {
-            if (cooltime <= 0) return;
-
-            Player.Instance.SetPlayerStatus(status);
-            Player.Instance.SetPlayerAnimTrigger(animTrigger);
-
-            SkillMethod();
-
-            cooltime = 0;
-        }
     }
 
     protected override void UpdateKey()

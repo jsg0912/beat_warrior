@@ -38,15 +38,20 @@ public abstract class Skill : MonoBehaviour
 
         if (Input.GetKeyDown(key))
         {
-            if (cooltime > 0) return;
-
-            SkillMethod();
-
-            Player.Instance.SetPlayerStatus(status);
-            Player.Instance.SetPlayerAnimTrigger(animTrigger);
-
-            cooltime = cooltimeMax;
+            UseSkill();
         }
+    }
+
+    protected virtual void UseSkill()
+    {
+        if (cooltime > 0) return;
+
+        Player.Instance.SetPlayerStatus(status);
+        Player.Instance.SetPlayerAnimTrigger(animTrigger);
+
+        SkillMethod();
+
+        cooltime = cooltimeMax;
     }
 
     protected abstract void UpdateKey();

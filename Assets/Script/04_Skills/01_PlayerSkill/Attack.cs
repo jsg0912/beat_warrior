@@ -34,21 +34,16 @@ public class Attack : Skill
         cooltime = cooltimeMax;
     }
 
-    protected override void PlaySkill()
+    protected override void UseSkill()
     {
-        UpdateKey();
+        if (attackPoint <= 0) return;
 
-        if (Input.GetKeyDown(key))
-        {
-            if (attackPoint <= 0) return;
+        if (attackPoint == PlayerSkillConstant.attackPointMax) cooltime = cooltimeMax;
 
-            if (attackPoint == PlayerSkillConstant.attackPointMax) cooltime = cooltimeMax;
+        Player.Instance.SetPlayerStatus(status);
+        Player.Instance.SetPlayerAnimTrigger(animTrigger);
 
-            Player.Instance.SetPlayerStatus(status);
-            Player.Instance.SetPlayerAnimTrigger(animTrigger);
-
-            SkillMethod();
-        }
+        SkillMethod();
     }
 
     protected override void UpdateKey()
