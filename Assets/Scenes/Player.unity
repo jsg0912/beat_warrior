@@ -280,6 +280,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3633998777720057048, guid: 0896d0eddb5627849b74b9e35ff1d0f8, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6851555915202274700, guid: 0896d0eddb5627849b74b9e35ff1d0f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.56
@@ -879,6 +883,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550609768}
   m_CullTransparentMesh: 1
+--- !u!1001 &586216244
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 676866255340647914, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_Name
+      value: Soldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085830300751806640, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.0805442
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085830300751806640, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5627232
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085830300751806640, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085830300751806640, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085830300751806640, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085830300751806640, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085830300751806640, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085830300751806640, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085830300751806640, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3085830300751806640, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6921030980091005680, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
 --- !u!1 &609624614
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,7 +1596,7 @@ GameObject:
   - component: {fileID: 1029373449}
   - component: {fileID: 1029373451}
   - component: {fileID: 1029373452}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tile1
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -1599,8 +1664,8 @@ Transform:
   m_GameObject: {fileID: 1029373447}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.68, y: -1.6299999, z: 0}
-  m_LocalScale: {x: 20, y: 0.3, z: 1}
+  m_LocalPosition: {x: -4.2567, y: -1.648, z: 0}
+  m_LocalScale: {x: 9.154, y: 0.33591, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2913,7 +2978,7 @@ GameObject:
   - component: {fileID: 1661926095}
   - component: {fileID: 1661926094}
   - component: {fileID: 1661926093}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tile2
   m_TagString: Tile
   m_Icon: {fileID: 0}
@@ -3045,8 +3110,8 @@ Transform:
   m_GameObject: {fileID: 1661926092}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.87, y: 0.95, z: 0}
-  m_LocalScale: {x: 20, y: 0.3, z: 1}
+  m_LocalPosition: {x: 2.8223, y: 0.95, z: 0}
+  m_LocalScale: {x: 11.904, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3506,3 +3571,4 @@ SceneRoots:
   - {fileID: 1531535329}
   - {fileID: 1460430533}
   - {fileID: 129020299}
+  - {fileID: 586216244}
