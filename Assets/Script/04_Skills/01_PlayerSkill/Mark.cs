@@ -22,8 +22,8 @@ public class Mark : Skill
 
     protected override void SkillMethod()
     {
-        Vector3 start = transform.position + new Vector3(0, 0.5f, 0);
-        Vector3 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 start = transform.position + new Vector3(0, 0.5f, 0);
+        Vector2 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         GameObject Marker = Instantiate(MarkerPrefab, start, Quaternion.identity);
 

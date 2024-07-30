@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemy : MonoBehaviour
+public class RangedEnemy : Monster
 {
     public float shootCoolTime;
     private float shootCoolMaxTime;
@@ -10,12 +10,9 @@ public class RangedEnemy : MonoBehaviour
     private float arrowSpeed;
     private float FindRange;
     private LayerMask ObjectLayer;
-    private Animator anim;
     public float direction;
     public bool alert;
     public bool stop;
-    private float hp;
-    private bool alive;
     private float tempdir;
 
 
@@ -36,8 +33,8 @@ public class RangedEnemy : MonoBehaviour
         direction = 1;
         moveSpeed = 1f;
         alert = false;
-        alive = true;
-        hp = 3f;
+        isAlive = true;
+        hp = 3;
         stop = false;
         tempdir = 1;
 
@@ -46,7 +43,7 @@ public class RangedEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(alive)
+        if(isAlive)
         {
             MoveAnim();
             CheckCoolTime();
@@ -150,18 +147,4 @@ public class RangedEnemy : MonoBehaviour
         SetMove();
 
     }
-
-
-    public void RangedGetDamage()
-    {
-        if(hp <= 0)
-        {
-            anim.SetTrigger("die");
-            alive = false;
-            return;
-        }
-        anim.SetTrigger("hurt");
-        hp -= 1;
-    }
-
 }
