@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RangedEnemy : Pattern
@@ -85,7 +84,7 @@ public class RangedEnemy : Pattern
         foreach (Collider2D collider in collider2Ds)
         {
 
-            StartCoroutine(Shoot(collider));
+            gameObject.GetComponent<MonoBehaviour>().StartCoroutine(Shoot(collider));
             alert = true;
 
             if (stop == false)
@@ -126,12 +125,17 @@ public class RangedEnemy : Pattern
         Vector3 direction = end - start;
 
 
-        GameObject Arrow = Instantiate(ArrowPrefab, start, Quaternion.identity);
+        GameObject Arrow = GameObject.Instantiate(ArrowPrefab, start, Quaternion.identity);
 
         Arrow.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, Quaternion.FromToRotation(Vector3.up, direction.normalized).eulerAngles.z);
         Arrow.GetComponent<Rigidbody2D>().velocity = direction.normalized * arrowSpeed;
 
         SetMove();
 
+    }
+
+    public override Pattern Copy()
+    {
+        return new RangedEnemy();
     }
 }

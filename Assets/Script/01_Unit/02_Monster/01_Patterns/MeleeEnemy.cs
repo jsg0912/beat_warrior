@@ -11,4 +11,8 @@ public class MeleeEnemy : Pattern
     {
 
     }
+    public override Pattern Copy()
+    {
+        return new MeleeEnemy();
+    }
 }

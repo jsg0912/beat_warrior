@@ -9,4 +9,6 @@ public abstract class Pattern
         this.gameObject = gameObject;
     }
     public abstract void PlayPattern();
+
+    public abstract Pattern Copy();
 }

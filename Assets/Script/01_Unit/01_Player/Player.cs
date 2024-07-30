@@ -1,10 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class Player : Unit
+public class Player : MonoBehaviour
 {
     public static Player Instance;
-
+    public Unit playerUnit;
     private Rigidbody2D rb;
     private Animator anim;
 
@@ -54,7 +54,7 @@ public class Player : Unit
         status = PLAYERSTATUS.IDLE;
         anim.SetTrigger("idle");
 
-        unitStat.hp = PlayerConstant.hpMax;
+        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.hpMax, PlayerConstant.atk));
 
         isInvincibility = false;
         direction = 1;
@@ -101,7 +101,7 @@ public class Player : Unit
 
     public int GetHP()
     {
-        return unitStat.hp;
+        return playerUnit.unitStat.hp;
     }
 
     public float GetMarkCoolTime()
@@ -191,7 +191,7 @@ public class Player : Unit
     {
         if (isInvincibility || GetHP() <= 0) return;
 
-        unitStat.hp--;
+        playerUnit.unitStat.hp--;
 
         if (GetHP() <= 0)
         {
