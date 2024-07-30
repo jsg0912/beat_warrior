@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeEnemy : MonoBehaviour
+public class MeleeEnemy : Pattern
 {
 
-    // Start is called before the first frame update
-    void Start()
+    public override void Initialize(GameObject gameObject)
     {
-        
+        base.Initialize(gameObject);
     }
-
-    // Update is called once per frame
-    void Update()
+    public override void PlayPattern()
     {
-        
+
     }
 }

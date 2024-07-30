@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Unit
 {
     public static Player Instance;
 
@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
     private ColliderController colliderController;
 
     public PLAYERSTATUS status;
-    private int hp;
 
     private bool isInvincibility;
     public int direction;
@@ -55,7 +54,7 @@ public class Player : MonoBehaviour
         status = PLAYERSTATUS.IDLE;
         anim.SetTrigger("idle");
 
-        hp = PlayerConstant.hpMax;
+        unitStat.hp = PlayerConstant.hpMax;
 
         isInvincibility = false;
         direction = 1;
@@ -102,7 +101,7 @@ public class Player : MonoBehaviour
 
     public int GetHP()
     {
-        return hp;
+        return unitStat.hp;
     }
 
     public float GetMarkCoolTime()
@@ -155,7 +154,7 @@ public class Player : MonoBehaviour
 
     private bool IsMoveable()
     {
-        switch(status)
+        switch (status)
         {
             case PLAYERSTATUS.IDLE:
             case PLAYERSTATUS.RUN:
@@ -190,11 +189,11 @@ public class Player : MonoBehaviour
 
     public void GetDamaged()
     {
-        if (isInvincibility || hp <= 0) return;
+        if (isInvincibility || GetHP() <= 0) return;
 
-        hp--;
+        unitStat.hp--;
 
-        if (hp <= 0)
+        if (GetHP() <= 0)
         {
             Die();
             return;

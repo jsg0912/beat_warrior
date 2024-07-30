@@ -18,7 +18,8 @@ public class Marker : MonoBehaviour
 
     public void SetVelocity(Vector3 start, Vector3 end)
     {
-        GetComponent<Rigidbody2D>().velocity = (end - start).normalized * markerSpeed;
+        Vector2 direction = (end - start).normalized;
+        GetComponent<Rigidbody2D>().velocity = direction * markerSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
