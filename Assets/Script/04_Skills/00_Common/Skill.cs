@@ -13,7 +13,7 @@ public abstract class Skill : MonoBehaviour
     protected void Update()
     {
         CountCooltime();
-        if (Player.Instance.GetPlayerStatus() != PLAYERSTATUS.DEAD) PlaySkill();
+        if (Player.Instance.GetPlayerStatus() != PLAYERSTATUS.DEAD) CheckSkill();
     }
 
     public float GetCooltime()
@@ -32,26 +32,31 @@ public abstract class Skill : MonoBehaviour
         cooltime -= Time.deltaTime;
     }
 
-    protected virtual void PlaySkill()
+    protected virtual void CheckSkill()
     {
         UpdateKey();
 
         if (Input.GetKeyDown(key))
         {
-            UseSkill();
+            PlaySkill();
         }
+    }
+
+    protected virtual void PlaySkill()
+    {
+        if (cooltime > 0) return;
+
+        UseSkill();
+
+        cooltime = cooltimeMax;
     }
 
     protected virtual void UseSkill()
     {
-        if (cooltime > 0) return;
-
         Player.Instance.SetPlayerStatus(status);
         Player.Instance.SetPlayerAnimTrigger(animTrigger);
 
         SkillMethod();
-
-        cooltime = cooltimeMax;
     }
 
     protected abstract void UpdateKey();

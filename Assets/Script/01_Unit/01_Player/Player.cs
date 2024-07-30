@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Player : MonoBehaviour
     public PLAYERSTATUS status;
 
     private bool isInvincibility;
-    public int direction;
+    private int direction;
 
     void Start()
     {
@@ -83,7 +84,24 @@ public class Player : MonoBehaviour
         }
     }
 
-    IEnumerator UseSkill()
+    public int GetDirection()
+    {
+        return direction;
+    }
+
+    public void SetDirection(int dir)
+    {
+        direction = dir;
+        transform.localScale = new Vector3(direction, 1, 1);
+    }
+
+    public void SetGravity(bool gravity)
+    {
+        rb.gravityScale = gravity ? PlayerConstant.gravityScale : 0;
+        if (!gravity) rb.velocity = Vector3.zero;
+    }
+
+        IEnumerator UseSkill()
     {
         yield return new WaitForSeconds(0.5f);
         SetPlayerStatus(PLAYERSTATUS.IDLE);
@@ -94,9 +112,9 @@ public class Player : MonoBehaviour
         anim.SetTrigger(trigger);
     }
 
-    public void SetIn(bool bb)
+    public void SetInvincibility(bool isInvin)
     {
-        isInvincibility = bb;
+        isInvincibility = isInvin;
     }
 
     public int GetHP()
@@ -136,16 +154,15 @@ public class Player : MonoBehaviour
 
         if (!IsMoveable()) return;
 
-        if (Input.GetKey(KeySetting.keys[ACTION.LEFT])) direction = -1;
+        if (Input.GetKey(KeySetting.keys[ACTION.LEFT])) SetDirection(-1);
 
-        if (Input.GetKey(KeySetting.keys[ACTION.RIGHT])) direction = 1;
+        if (Input.GetKey(KeySetting.keys[ACTION.RIGHT])) SetDirection(1);
 
         SetPlayerStatus(PLAYERSTATUS.IDLE);
 
         if (direction != 0)
         {
             SetPlayerStatus(PLAYERSTATUS.RUN);
-            transform.localScale = new Vector3(direction, 1, 1);
             if (!anim.GetBool("isJump")) anim.SetBool("isRun", true);
         }
 

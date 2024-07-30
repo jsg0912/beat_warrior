@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Dash : Skill
 {
-    private Rigidbody2D rb;
-
     private List<GameObject> DashTargetMonster;
     private GameObject TargetMonster;
 
@@ -23,7 +21,6 @@ public class Dash : Skill
         cooltimeMax = PlayerSkillConstant.dashCoolTimeMax;
         cooltime = 0;
 
-        rb = GetComponent<Rigidbody2D>();
         DashTargetMonster = new List<GameObject>();
 
         ghostDelayTime = 0;
@@ -31,9 +28,9 @@ public class Dash : Skill
         GhostPrefab = Resources.Load("Prefab/Ghost") as GameObject;
     }
 
-    protected override void PlaySkill()
+    protected override void CheckSkill()
     {
-        base.PlaySkill();
+        base.CheckSkill();
 
         Ghost();
     }
@@ -41,6 +38,15 @@ public class Dash : Skill
     protected override void UpdateKey()
     {
         key = KeySetting.keys[ACTION.DASH];
+    }
+
+    protected override void PlaySkill()
+    {
+        if (TargetMonster == null) return;
+
+        if (cooltime <= 0) return;
+
+        UseSkill();
     }
 
     protected override void SkillMethod()
@@ -56,18 +62,16 @@ public class Dash : Skill
 
     private IEnumerator Dashing()
     {
-        rb.gravityScale = 0.0f;
-        rb.velocity = Vector3.zero;
+        Player.Instance.SetGravity(false);
 
         Vector2 start = transform.position;
         Vector2 end = TargetMonster.transform.position;
+
         int dir = end.x > start.x ? 1 : -1;
         end += new Vector2(dir, 0);
 
-        Player.Instance.direction = end.x > transform.position.x ? 1 : -1;
-        transform.localScale = new Vector3(Player.Instance.direction, 1, 1);
-
-        Player.Instance.SetIn(true);
+        Player.Instance.SetDirection(dir);
+        Player.Instance.SetInvincibility(true);
 
         while (Vector2.Distance(end, transform.position) >= 0.05f)
         {
@@ -75,12 +79,13 @@ public class Dash : Skill
             yield return null;
         }
 
-        Player.Instance.SetIn(false);
         Player.Instance.SetPlayerStatus(PLAYERSTATUS.IDLE);
+        Player.Instance.SetInvincibility(false);
 
         transform.position = end;
-
         transform.localScale = new Vector3(-dir, 1, 1);
+
+        Player.Instance.SetGravity(true);
 
         Vector2 offset = new Vector2(0, 1.0f);
         RaycastHit2D[] hits;
@@ -106,8 +111,6 @@ public class Dash : Skill
         }
 
         DashTargetMonster.Clear();
-
-        rb.gravityScale = 5.0f;
     }
 
     private void Ghost()
