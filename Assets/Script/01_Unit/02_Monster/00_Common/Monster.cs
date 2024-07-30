@@ -2,22 +2,20 @@ using UnityEngine;
 
 public abstract class Monster : Unit
 {
-    protected int hp;
-    protected bool isAlive;
-
     protected Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        isAlive = true;
+        unitStat.hp = 3;
     }
 
     public virtual void GetDamaged(int dmg)
     {
-        hp -= dmg;
+        unitStat.hp -= dmg;
 
-        if (hp <= 0)
+        if (unitStat.hp <= 0)
         {
             Die();
             return;
