@@ -13,10 +13,15 @@ public class Dash : Skill
     private float ghostDelayTime;
     private GameObject GhostPrefab;
 
+    private float ghostDelayTime;
+    private float ghostDelayTimeMax;
+    private GameObject GhostPrefab;
+
     private void Start()
     {
         status = PLAYERSTATUS.DASH;
-        animTrigger = PlayerSkillConstant.dashAnimTrigger;
+
+        animTrigger = PlayerSkillConstant.dashkAnimTrigger;
 
         cooltimeMax = PlayerSkillConstant.dashCoolTimeMax;
         cooltime = 0;
@@ -24,9 +29,9 @@ public class Dash : Skill
         rb = GetComponent<Rigidbody2D>();
         DashTargetMonster = new List<GameObject>();
 
-        ghostDelayTime = 0.0f;
+        ghostDelayTime = 0;
+        ghostDelayTimeMax = PlayerSkillConstant.ghostDelayTimeMax;
         GhostPrefab = Resources.Load("Prefab/Ghost") as GameObject;
-
     }
 
     protected override void PlaySkill()
@@ -42,6 +47,10 @@ public class Dash : Skill
             Player.Instance.SetAnimTrigger(animTrigger);
 
             SkillMethod();
+
+            Player.Instance.SetPlayerStatus(status);
+            Player.Instance.SetPlayerAnim(animTrigger);
+
             cooltime = 0;
         }
     }
@@ -108,7 +117,7 @@ public class Dash : Skill
         {
             if (obj.CompareTag("Monster"))
             {
-                // ¸ó½ºÅÍ µ¥¹ÌÁö
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 Debug.Log(obj.name);
             }
         }
@@ -120,16 +129,16 @@ public class Dash : Skill
 
     private void Ghost()
     {
-        if (Player.Instance.status != PLAYERSTATUS.DASH) return;
-
         if (ghostDelayTime > 0)
         {
             ghostDelayTime -= Time.deltaTime;
             return;
         }
 
+        if (Player.Instance.status != PLAYERSTATUS.DASH) return;
+
         GameObject ghost = Instantiate(GhostPrefab, transform.position, Quaternion.identity);
-        ghostDelayTime = PlayerSkillConstant.ghostDelayTimeMax;
+        ghostDelayTime = ghostDelayTimeMax;
         Destroy(ghost, 1.0f);
     }
 }

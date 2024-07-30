@@ -1,9 +1,12 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public abstract class Skill : MonoBehaviour
 {
     protected PLAYERSTATUS status;
     protected KeyCode key;
+
+    protected string animTrigger;
 
     protected string animTrigger;
 
@@ -40,10 +43,11 @@ public abstract class Skill : MonoBehaviour
         {
             if (cooltime > 0) return;
 
+            SkillMethod();
+
             Player.Instance.SetPlayerStatus(status);
             Player.Instance.SetAnimTrigger(animTrigger);
 
-            SkillMethod();
             cooltime = cooltimeMax;
         }
     }
