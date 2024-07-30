@@ -111,7 +111,7 @@ public class Dash : Skill
         {
             if (obj.CompareTag("Monster"))
             {
-                // ���� ������
+                obj.GetComponent<Monster>().GetDamaged(1);
                 Debug.Log(obj.name);
             }
         }

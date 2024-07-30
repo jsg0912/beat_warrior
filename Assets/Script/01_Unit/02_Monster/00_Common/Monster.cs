@@ -1,18 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : Unit
+public abstract class Monster : Unit
 {
+    protected int hp;
+    protected bool isAlive;
+
+    protected Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual void GetDamaged(int dmg)
     {
+        hp -= dmg;
 
+        if (hp <= 0)
+        {
+            Die();
+            return;
+        }
+
+        anim.SetTrigger("hurt");
+    }
+
+    protected virtual void Die()
+    {
+        isAlive = false;
+        anim.SetTrigger("die");
+        Destroy(this.gameObject, 2.0f);
     }
 }

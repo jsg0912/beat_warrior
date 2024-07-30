@@ -10,12 +10,9 @@ public class RangedEnemy : Pattern
     private float arrowSpeed;
     private float FindRange;
     private LayerMask ObjectLayer;
-    private Animator anim;
     public float direction;
     public bool alert;
     public bool stop;
-    private float hp;
-    private bool alive;
     private float tempdir;
 
 
@@ -36,14 +33,14 @@ public class RangedEnemy : Pattern
         direction = 1;
         moveSpeed = 0.5f;
         alert = false;
-        alive = true;
-        hp = 3f;
+        isAlive = true;
+        hp = 3;
         stop = false;
         tempdir = 1;
     }
     public override void PlayPattern()
     {
-        if (alive)
+        if (isAlive)
         {
             MoveAnim();
             CheckCoolTime();

@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Marker : MonoBehaviour
 {
-    private const float markerSpeed = 30.0f;
+    private const float markerSpeed = 15.0f;
 
     private void Start()
     {
@@ -16,7 +14,7 @@ public class Marker : MonoBehaviour
         transform.Rotate(new Vector3(0, 0, -1) * Time.deltaTime * 500);
     }
 
-    public void SetVelocity(Vector3 start, Vector3 end)
+    public void SetVelocity(Vector2 start, Vector2 end)
     {
         Vector2 direction = (end - start).normalized;
         GetComponent<Rigidbody2D>().velocity = direction * markerSpeed;

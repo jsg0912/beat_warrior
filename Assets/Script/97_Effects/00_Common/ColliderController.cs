@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ColliderController : MonoBehaviour
@@ -10,7 +9,6 @@ public class ColliderController : MonoBehaviour
     private void Start()
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
-
     }
 
 
@@ -28,7 +26,6 @@ public class ColliderController : MonoBehaviour
         {
             tile = collision.gameObject;
         }
-
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -37,8 +34,6 @@ public class ColliderController : MonoBehaviour
         {
             tile = null;
         }
-
-
     }
 
     private IEnumerator DisableCollision()
