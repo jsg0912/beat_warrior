@@ -7,8 +7,9 @@ public class Monster : MonoBehaviour
     public MonsterName monsterName;
     public MonsterUnit monsterUnit;
 
-    void Awake()
+    void Start()
     {
+        anim = GetComponent<Animator>();
         monsterUnit = MonsterList.FindMonster(monsterName);
         monsterUnit.pattern.Initialize(gameObject);
     }
