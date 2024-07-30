@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 939154751671455851}
   - component: {fileID: 6921030980091005680}
   - component: {fileID: 2193146265879669062}
+  - component: {fileID: 6398501334689460275}
   m_Layer: 7
   m_Name: Soldier
   m_TagString: Monster
@@ -212,6 +213,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1.8}
   m_EdgeRadius: 0
+--- !u!114 &6398501334689460275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676866255340647914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5833a4c1f2adea741ac0d28befbb471a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterName: 0
 --- !u!1 &883184142575478506
 GameObject:
   m_ObjectHideFlags: 0

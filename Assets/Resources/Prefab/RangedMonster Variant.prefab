@@ -116,7 +116,7 @@ PrefabInstance:
       addedObject: {fileID: 5442204090632481438}
     - targetCorrespondingSourceObject: {fileID: 1000010854855540, guid: a3c1faf915dc240bca8ed7566d46910c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1661306581989496925}
+      addedObject: {fileID: 4045461260641811942}
   m_SourcePrefab: {fileID: 100100000, guid: a3c1faf915dc240bca8ed7566d46910c, type: 3}
 --- !u!1 &6852268279164686408 stripped
 GameObject:
@@ -195,7 +195,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 1.8}
   m_EdgeRadius: 0
---- !u!114 &1661306581989496925
+--- !u!114 &4045461260641811942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,10 +204,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6852268279164686408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f285ce5aee3ab842bbd4d11963e56ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 5833a4c1f2adea741ac0d28befbb471a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootCoolTime: 0
-  direction: 0
-  alert: 0
-  stop: 0
+  monsterName: 1
