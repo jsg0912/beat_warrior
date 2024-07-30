@@ -5,6 +5,8 @@ public abstract class Skill : MonoBehaviour
     protected PLAYERSTATUS status;
     protected KeyCode key;
 
+    protected string animTrigger;
+
     protected float cooltimeMax;
     protected float cooltime;
 
@@ -39,6 +41,7 @@ public abstract class Skill : MonoBehaviour
             if (cooltime > 0) return;
 
             Player.Instance.SetPlayerStatus(status);
+            Player.Instance.SetAnimTrigger(animTrigger);
 
             SkillMethod();
             cooltime = cooltimeMax;

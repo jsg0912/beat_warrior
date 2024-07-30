@@ -94,6 +94,12 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
+    public void SetAnimTrigger(string trigger)
+    {
+        anim.SetTrigger(trigger);
+    }
+
     public void SetIn(bool bb)
     {
         isInvincibility = bb;
@@ -156,6 +162,7 @@ public class Player : MonoBehaviour
     {
         return status != PLAYERSTATUS.IDLE && status != PLAYERSTATUS.RUN && status != PLAYERSTATUS.JUMP && status != PLAYERSTATUS.DASH;
     }
+
     private void Down()
     {
         if (Input.GetKeyDown(KeySetting.keys[ACTION.DOWN]))
