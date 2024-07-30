@@ -72,27 +72,22 @@ public class Player : MonoBehaviour
 
         switch (status)
         {
-
-            case PLAYERSTATUS.MARK:
-                // anim.SetTrigger("mark");
-                this.status = PLAYERSTATUS.IDLE;
-                break;
             case PLAYERSTATUS.ATTACK:
-                anim.SetTrigger("attack");
-                this.status = PLAYERSTATUS.IDLE;
-                break;
+            case PLAYERSTATUS.MARK:
             case PLAYERSTATUS.SKILL1:
-                anim.SetTrigger("skill1");
-                this.status = PLAYERSTATUS.IDLE;
-                break;
             case PLAYERSTATUS.SKILL2:
-                anim.SetTrigger("skill2");
-                this.status = PLAYERSTATUS.IDLE;
+                StartCoroutine(UseSkill());
                 break;
             case PLAYERSTATUS.DEAD:
                 anim.SetTrigger("die");
                 break;
         }
+    }
+
+    IEnumerator UseSkill()
+    {
+        yield return new WaitForSeconds(0.5f);
+        SetPlayerStatus(PLAYERSTATUS.IDLE);
     }
 
     public void SetAnimTrigger(string trigger)
@@ -140,7 +135,7 @@ public class Player : MonoBehaviour
         direction = 0;
         anim.SetBool("isRun", false);
 
-        if (IsMoveable()) return;
+        if (!IsMoveable()) return;
 
         if (Input.GetKey(KeySetting.keys[ACTION.LEFT])) direction = -1;
 
@@ -160,7 +155,16 @@ public class Player : MonoBehaviour
 
     private bool IsMoveable()
     {
-        return status != PLAYERSTATUS.IDLE && status != PLAYERSTATUS.RUN && status != PLAYERSTATUS.JUMP && status != PLAYERSTATUS.DASH;
+        switch(status)
+        {
+            case PLAYERSTATUS.IDLE:
+            case PLAYERSTATUS.RUN:
+            case PLAYERSTATUS.JUMP:
+            case PLAYERSTATUS.MARK:
+                return true;
+            default:
+                return false;
+        }
     }
 
     private void Down()
@@ -222,7 +226,7 @@ public class Player : MonoBehaviour
         if (rb.velocity.y <= 0 && (obj.CompareTag("Tile") || obj.CompareTag("Base")))
         {
             anim.SetBool("isJump", false);
-            SetPlayerStatus(PLAYERSTATUS.IDLE);
+            if (status == PLAYERSTATUS.JUMP) SetPlayerStatus(PLAYERSTATUS.IDLE);
             return;
         }
     }

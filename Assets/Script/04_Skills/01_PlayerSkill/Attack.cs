@@ -7,6 +7,8 @@ public class Attack : Skill
     void Start()
     {
         status = PLAYERSTATUS.ATTACK;
+        animTrigger = PlayerSkillConstant.attackAnimTrigger;
+
         attackPoint = PlayerSkillConstant.attackPointMax;
 
         cooltimeMax = PlayerSkillConstant.attackChargeTimeMax;
@@ -41,6 +43,9 @@ public class Attack : Skill
             if (attackPoint <= 0) return;
 
             if (attackPoint == PlayerSkillConstant.attackPointMax) cooltime = cooltimeMax;
+
+            Player.Instance.SetPlayerStatus(status);
+            Player.Instance.SetAnimTrigger(animTrigger);
 
             SkillMethod();
         }

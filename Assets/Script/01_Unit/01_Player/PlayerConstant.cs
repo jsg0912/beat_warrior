@@ -1,5 +1,3 @@
-// Player�� �⺻ ������
-
 public enum PLAYERSTATUS
 {
     IDLE,
