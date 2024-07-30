@@ -14,6 +14,7 @@ public enum PLAYERSTATUS
 
 public class PlayerConstant
 {
+    public const int atk = 1;
     public const int hpMax = 3;
 
     public const float gravityScale = 5.0f;
