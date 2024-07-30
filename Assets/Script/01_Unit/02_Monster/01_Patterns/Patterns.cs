@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class Pattern
 {
+    protected Animator anim;
     protected GameObject gameObject;
     public virtual void Initialize(GameObject gameObject)
     {

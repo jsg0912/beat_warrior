@@ -15,9 +15,6 @@ public class RangedEnemy : Pattern
     public bool stop;
     private float tempdir;
 
-
-
-
     private GameObject ArrowPrefab;
 
     public override void Initialize(GameObject gameObject)
@@ -33,20 +30,15 @@ public class RangedEnemy : Pattern
         direction = 1;
         moveSpeed = 0.5f;
         alert = false;
-        isAlive = true;
-        hp = 3;
         stop = false;
         tempdir = 1;
     }
     public override void PlayPattern()
     {
-        if (isAlive)
-        {
-            MoveAnim();
-            CheckCoolTime();
-            CheckCollision();
-            Move();
-        }
+        MoveAnim();
+        CheckCoolTime();
+        CheckCollision();
+        Move();
     }
 
     private void Move()
@@ -142,18 +134,4 @@ public class RangedEnemy : Pattern
         SetMove();
 
     }
-
-
-    public void RangedGetDamage()
-    {
-        if (hp <= 0)
-        {
-            anim.SetTrigger("die");
-            alive = false;
-            return;
-        }
-        anim.SetTrigger("hurt");
-        hp -= 1;
-    }
-
 }
