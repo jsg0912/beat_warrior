@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         SetPlayerStatus(PLAYERSTATUS.IDLE);
     }
 
-    public void SetAnimTrigger(string trigger)
+    public void SetPlayerAnimTrigger(string trigger)
     {
         anim.SetTrigger(trigger);
     }

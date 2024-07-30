@@ -41,12 +41,9 @@ public class Dash : Skill
             if (cooltime <= 0) return;
 
             Player.Instance.SetPlayerStatus(status);
-            Player.Instance.SetAnimTrigger(animTrigger);
+            Player.Instance.SetPlayerAnimTrigger(animTrigger);
 
             SkillMethod();
-
-            Player.Instance.SetPlayerStatus(status);
-            Player.Instance.SetAnimTrigger(animTrigger);
 
             cooltime = 0;
         }

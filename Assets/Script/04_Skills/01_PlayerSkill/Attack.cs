@@ -45,10 +45,9 @@ public class Attack : Skill
             if (attackPoint == PlayerSkillConstant.attackPointMax) cooltime = cooltimeMax;
 
             Player.Instance.SetPlayerStatus(status);
-            Player.Instance.SetAnimTrigger(animTrigger);
+            Player.Instance.SetPlayerAnimTrigger(animTrigger);
 
             SkillMethod();
-            Player.Instance.SetAnimTrigger(animTrigger);
         }
     }
 

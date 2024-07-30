@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public abstract class Skill : MonoBehaviour
@@ -44,7 +43,7 @@ public abstract class Skill : MonoBehaviour
             SkillMethod();
 
             Player.Instance.SetPlayerStatus(status);
-            Player.Instance.SetAnimTrigger(animTrigger);
+            Player.Instance.SetPlayerAnimTrigger(animTrigger);
 
             cooltime = cooltimeMax;
         }
