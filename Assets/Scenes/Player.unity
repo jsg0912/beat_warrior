@@ -1195,6 +1195,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 105773761605316176, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 676866255340647914, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
       propertyPath: m_Name
       value: Soldier
@@ -1206,6 +1210,10 @@ PrefabInstance:
     - target: {fileID: 676866255340647914, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
       propertyPath: m_TagString
       value: Monster
+      objectReference: {fileID: 0}
+    - target: {fileID: 883184142575478506, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3085830300751806640, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1247,9 +1255,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3872113785599870324, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186987909010614313, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5329095736858344235, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6664389143956452794, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6921030980091005680, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7995570321204911795, guid: 976d7f040fba5634fa22530b78bd7937, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3608,6 +3636,10 @@ PrefabInstance:
     - target: {fileID: 1486466440032137011, guid: f826aa65999748f4b8b194514d8682d2, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2625434650226367685, guid: f826aa65999748f4b8b194514d8682d2, type: 3}
+      propertyPath: skillList.Array.size
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

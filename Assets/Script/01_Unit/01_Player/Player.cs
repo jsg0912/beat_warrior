@@ -6,10 +6,10 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
     public Unit playerUnit;
-    private Rigidbody2D rb;
-    private Animator anim;
-
-    [SerializeField] private List<Skill> skillList;
+    private Rigidbody2D _rigidbody;
+    private Animator _animator;
+    
+    private List<Skill> skillList;
 
     private ColliderController colliderController;
 
@@ -37,14 +37,17 @@ public class Player : MonoBehaviour
 
             foreach (var skill in skillList) skill.CheckSkill();
         }
+
+        if(Input.GetKey(KeyCode.B)) RestartPlayer();
     }
 
     private void Initialize()
     {
         Instance = this;
+        DontDestroyOnLoad(this.gameObject);
 
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         colliderController = GetComponent<ColliderController>();
 
         skillList = new List<Skill>
@@ -59,12 +62,17 @@ public class Player : MonoBehaviour
         foreach (var skill in skillList) skill.Initialize();
 
         status = PLAYERSTATUS.IDLE;
-        anim.SetTrigger("idle");
+        _animator.SetTrigger("idle");
 
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.hpMax, PlayerConstant.atk));
 
         isInvincibility = false;
         direction = 1;
+    }
+
+    public void RestartPlayer()
+    {
+        Initialize();
     }
 
     public PLAYERSTATUS GetPlayerStatus()
@@ -85,7 +93,7 @@ public class Player : MonoBehaviour
                 StartCoroutine(UseSkill());
                 break;
             case PLAYERSTATUS.DEAD:
-                anim.SetTrigger("die");
+                _animator.SetTrigger("die");
                 break;
         }
     }
@@ -103,19 +111,19 @@ public class Player : MonoBehaviour
 
     public void SetGravity(bool gravity)
     {
-        rb.gravityScale = gravity ? PlayerConstant.gravityScale : 0;
-        if (!gravity) rb.velocity = Vector3.zero;
+        _rigidbody.gravityScale = gravity ? PlayerConstant.gravityScale : 0;
+        if (!gravity) _rigidbody.velocity = Vector3.zero;
     }
-
-        IEnumerator UseSkill()
+    
+    IEnumerator UseSkill()
     {
         yield return new WaitForSeconds(0.5f);
-        SetPlayerStatus(PLAYERSTATUS.IDLE);
+        if (status != PLAYERSTATUS.DEAD) SetPlayerStatus(PLAYERSTATUS.IDLE);
     }
 
     public void SetPlayerAnimTrigger(string trigger)
     {
-        anim.SetTrigger(trigger);
+        _animator.SetTrigger(trigger);
     }
 
     public void SetInvincibility(bool isInvin)
@@ -148,22 +156,20 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        direction = 0;
-        anim.SetBool("isRun", false);
+        _animator.SetBool("isRun", false);
 
         if (!IsMoveable()) return;
+
+        SetPlayerStatus(PLAYERSTATUS.IDLE);
+
+        if (!Input.GetKey(KeySetting.keys[ACTION.LEFT]) && !Input.GetKey(KeySetting.keys[ACTION.RIGHT])) return;
 
         if (Input.GetKey(KeySetting.keys[ACTION.LEFT])) SetDirection(-1);
 
         if (Input.GetKey(KeySetting.keys[ACTION.RIGHT])) SetDirection(1);
 
-        SetPlayerStatus(PLAYERSTATUS.IDLE);
-
-        if (direction != 0)
-        {
-            SetPlayerStatus(PLAYERSTATUS.RUN);
-            if (!anim.GetBool("isJump")) anim.SetBool("isRun", true);
-        }
+        SetPlayerStatus(PLAYERSTATUS.RUN);
+        if (!_animator.GetBool("isJump")) _animator.SetBool("isRun", true);
 
         transform.position += new Vector3(direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
@@ -182,6 +188,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    public bool IsSkillUseable()
+    {
+        switch (status)
+        {
+            case PLAYERSTATUS.IDLE:
+            case PLAYERSTATUS.RUN:
+            case PLAYERSTATUS.JUMP:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     private void Down()
     {
         if (Input.GetKeyDown(KeySetting.keys[ACTION.DOWN]))
@@ -194,20 +213,20 @@ public class Player : MonoBehaviour
     {
         if (status == PLAYERSTATUS.JUMP || status == PLAYERSTATUS.DASH) return;
 
-        if (Input.GetKeyDown(KeySetting.keys[ACTION.JUMP]) && !anim.GetBool("isJump"))
+        if (Input.GetKeyDown(KeySetting.keys[ACTION.JUMP]) && !_animator.GetBool("isJump"))
         {
             status = PLAYERSTATUS.JUMP;
-            anim.SetBool("isJump", true);
+            _animator.SetBool("isJump", true);
 
-            rb.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
+            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
         }
     }
 
-    public void GetDamaged()
+    public void GetDamaged(int dmg)
     {
         if (isInvincibility || GetHP() <= 0) return;
 
-        playerUnit.unitStat.hp--;
+        playerUnit.unitStat.hp -= dmg;
 
         if (GetHP() <= 0)
         {
@@ -217,9 +236,8 @@ public class Player : MonoBehaviour
 
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
 
-        anim.SetTrigger("hurt");
-        if (direction == 1) rb.AddForce(new Vector2(-5f, 1f), ForceMode2D.Impulse);
-        else rb.AddForce(new Vector2(5f, 1f), ForceMode2D.Impulse);
+        _animator.SetTrigger("hurt");
+        _rigidbody.AddForce(new Vector2(-5f * direction, 1f), ForceMode2D.Impulse);
     }
 
     private IEnumerator Invincibility(float timer)
@@ -238,9 +256,9 @@ public class Player : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
 
-        if (rb.velocity.y <= 0 && (obj.CompareTag("Tile") || obj.CompareTag("Base")))
+        if (_rigidbody.velocity.y <= 0 && (obj.CompareTag("Tile") || obj.CompareTag("Base")))
         {
-            anim.SetBool("isJump", false);
+            _animator.SetBool("isJump", false);
             if (status == PLAYERSTATUS.JUMP) SetPlayerStatus(PLAYERSTATUS.IDLE);
             return;
         }

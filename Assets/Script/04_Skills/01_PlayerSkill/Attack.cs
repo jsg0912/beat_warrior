@@ -3,11 +3,10 @@ using UnityEngine;
 public class Attack : Skill
 {
     private int attackPoint;
+    private GameObject SwordPrefab;
 
     public override void Initialize()
     {
-        Debug.Log("attack init");
-
         skillName = PLAYERSKILLNAME.ATTACK;
         status = PLAYERSTATUS.ATTACK;
         animTrigger = PlayerSkillConstant.attackAnimTrigger;
@@ -16,6 +15,8 @@ public class Attack : Skill
 
         cooltimeMax = PlayerSkillConstant.attackChargeTimeMax;
         cooltime = 0;
+
+        SwordPrefab = Resources.Load("Prefab/Sword") as GameObject;
     }
 
     protected override void CountCooltime()
@@ -55,6 +56,7 @@ public class Attack : Skill
     {
         attackPoint--;
 
-        Debug.Log("attack");
+        GameObject sword = GameObject.Instantiate(SwordPrefab);
+        sword.transform.SetParent(Player.Instance.transform, false);
     }
 }

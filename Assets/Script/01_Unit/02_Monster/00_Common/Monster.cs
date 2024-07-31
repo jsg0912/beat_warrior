@@ -16,11 +16,13 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        monsterUnit.pattern.PlayPattern();
+        if (monsterUnit.isAlive) monsterUnit.pattern.PlayPattern();
     }
 
     public virtual void GetDamaged(int dmg)
     {
+        if (!monsterUnit.isAlive) return;
+
         monsterUnit.unitStat.hp -= dmg;
 
         if (monsterUnit.unitStat.hp <= 0)

@@ -28,7 +28,7 @@ public class Mark : Skill
         Vector2 start = playerTransform.position + new Vector3(0, 0.5f, 0);
         Vector2 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        GameObject Marker = Instantiate(MarkerPrefab, start, Quaternion.identity);
+        GameObject Marker = GameObject.Instantiate(MarkerPrefab, start, Quaternion.identity);
 
         Marker.GetComponent<Marker>().SetVelocity(start, end);
     }

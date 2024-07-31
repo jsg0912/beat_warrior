@@ -20,6 +20,7 @@ public class Dash : Skill
 
         animTrigger = PlayerSkillConstant.dashAnimTrigger;
 
+        atk = PlayerSkillConstant.dashAtk;
         cooltimeMax = PlayerSkillConstant.dashCoolTimeMax;
         cooltime = 0;
 
@@ -34,7 +35,7 @@ public class Dash : Skill
     {
         base.CheckSkill();
 
-        //Ghost();
+        Ghost();
     }
 
     protected override void UpdateKey()
@@ -53,7 +54,7 @@ public class Dash : Skill
 
     protected override void SkillMethod()
     {
-        StartCoroutine(Dashing());
+        Player.Instance.GetComponent<MonoBehaviour>().StartCoroutine(Dashing());
     }
 
     private void StartCoroutine(IEnumerator enumerator)
@@ -114,7 +115,7 @@ public class Dash : Skill
         {
             if (obj.CompareTag("Monster"))
             {
-                obj.GetComponent<Monster>().GetDamaged(1);
+                obj.GetComponent<Monster>().GetDamaged(atk);
                 Debug.Log(obj.name);
             }
         }
@@ -122,7 +123,7 @@ public class Dash : Skill
         DashTargetMonster.Clear();
     }
 
-    /*ivate void Ghost()
+    private void Ghost()
     {
         if (ghostDelayTime > 0)
         {
@@ -132,8 +133,8 @@ public class Dash : Skill
 
         if (Player.Instance.status != PLAYERSTATUS.DASH) return;
 
-        GameObject ghost = Instantiate(GhostPrefab, Player.Instance.transform.position, Quaternion.identity);
+        GameObject ghost = GameObject.Instantiate(GhostPrefab, Player.Instance.transform.position, Quaternion.identity);
         ghostDelayTime = ghostDelayTimeMax;
-        //Destroy(ghost, 1.0f);
-    }*/
+        GameObject.Destroy(ghost, 1.0f);
+    }
 }

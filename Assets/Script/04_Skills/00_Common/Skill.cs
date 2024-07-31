@@ -9,6 +9,7 @@ public abstract class Skill
 
     protected string animTrigger;
 
+    protected int atk;
     protected float cooltimeMax;
     protected float cooltime;
 
@@ -32,7 +33,7 @@ public abstract class Skill
 
     public virtual void CheckSkill()
     {
-        if (Player.Instance.GetPlayerStatus() == PLAYERSTATUS.DEAD) return;
+        if (!Player.Instance.IsSkillUseable()) return;
 
         CountCooltime();
         UpdateKey();
