@@ -47,10 +47,14 @@ public class UIManager : MonoBehaviour
 
     private void UpdateCoolTime()
     {
-        MarkImg.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetMarkCoolTime() / PlayerSkillConstant.markCoolTimeMax;
-        DashImg.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetDashCoolTime() / PlayerSkillConstant.dashCoolTimeMax;
-        Skill1Img.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetSkill1CoolTime() / PlayerSkillConstant.skill1CoolTimeMax;
-        Skill2Img.GetComponent<Image>().fillAmount = 1 - Player.Instance.GetSkill2CoolTime() / PlayerSkillConstant.skill2CoolTimeMax;
+        MarkImg.GetComponent<Image>().fillAmount 
+            = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.MARK) / PlayerSkillConstant.markCoolTimeMax;
+        DashImg.GetComponent<Image>().fillAmount 
+            = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.DASH) / PlayerSkillConstant.dashCoolTimeMax;
+        Skill1Img.GetComponent<Image>().fillAmount 
+            = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.SKILL1) / PlayerSkillConstant.skill1CoolTimeMax;
+        Skill2Img.GetComponent<Image>().fillAmount 
+            = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.SKILL2) / PlayerSkillConstant.skill2CoolTimeMax;
     }
 
     private void AppearGameSet()

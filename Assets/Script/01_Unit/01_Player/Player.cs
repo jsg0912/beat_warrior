@@ -1,6 +1,6 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -9,10 +9,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
-    private Mark mark;
-    private Dash dash;
-    private Skill1 skill1;
-    private Skill2 skill2;
+    [SerializeField] private List<Skill> skillList;
+
     private ColliderController colliderController;
 
     public PLAYERSTATUS status;
@@ -36,6 +34,8 @@ public class Player : MonoBehaviour
         {
             Jump();
             Down();
+
+            foreach (var skill in skillList) skill.CheckSkill();
         }
     }
 
@@ -47,10 +47,16 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         colliderController = GetComponent<ColliderController>();
 
-        mark = GetComponent<Mark>();
-        dash = GetComponent<Dash>();
-        skill1 = GetComponent<Skill1>();
-        skill2 = GetComponent<Skill2>();
+        skillList = new List<Skill>
+        {
+            new Attack(),
+            new Mark(),
+            new Dash(),
+            new Skill1(),
+            new Skill2()
+        };
+
+        foreach (var skill in skillList) skill.Initialize();
 
         status = PLAYERSTATUS.IDLE;
         anim.SetTrigger("idle");
@@ -122,29 +128,22 @@ public class Player : MonoBehaviour
         return playerUnit.unitStat.hp;
     }
 
-    public float GetMarkCoolTime()
+    public float GetSkillCoolTime(PLAYERSKILLNAME skillName)
     {
-        return mark.GetCooltime();
-    }
+        foreach (Skill skill in skillList)
+        {
+            if (skill.skillName == skillName) return skill.GetCooltime();
+        }
 
-    public float GetDashCoolTime()
-    {
-        return dash.GetCooltime();
-    }
-
-    public float GetSkill1CoolTime()
-    {
-        return skill1.GetCooltime();
-    }
-
-    public float GetSkill2CoolTime()
-    {
-        return skill2.GetCooltime();
+        return 0;
     }
 
     public void SetTarget(GameObject obj)
     {
-        dash.SetTarget(obj);
+        foreach(Skill skill in skillList)
+        {
+            if (skill.skillName == PLAYERSKILLNAME.DASH) (skill as Dash).SetTarget(obj);
+        }
     }
 
     private void Move()

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Skill2 : Skill
 {
-    void Start()
+    public override void Initialize()
     {
+        skillName = PLAYERSKILLNAME.SKILL2;
         status = PLAYERSTATUS.SKILL2;
         animTrigger = PlayerSkillConstant.skill2AnimTrigger;
 

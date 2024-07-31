@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public abstract class Skill : MonoBehaviour
+public abstract class Skill
 {
+    public PLAYERSKILLNAME skillName;
+
     protected PLAYERSTATUS status;
     protected KeyCode key;
 
@@ -10,11 +12,7 @@ public abstract class Skill : MonoBehaviour
     protected float cooltimeMax;
     protected float cooltime;
 
-    protected void Update()
-    {
-        CountCooltime();
-        if (Player.Instance.GetPlayerStatus() != PLAYERSTATUS.DEAD) CheckSkill();
-    }
+    public abstract void Initialize();
 
     public float GetCooltime()
     {
@@ -32,8 +30,11 @@ public abstract class Skill : MonoBehaviour
         cooltime -= Time.deltaTime;
     }
 
-    protected virtual void CheckSkill()
+    public virtual void CheckSkill()
     {
+        if (Player.Instance.GetPlayerStatus() == PLAYERSTATUS.DEAD) return;
+
+        CountCooltime();
         UpdateKey();
 
         if (Input.GetKeyDown(key))

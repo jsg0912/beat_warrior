@@ -4,8 +4,11 @@ public class Attack : Skill
 {
     private int attackPoint;
 
-    void Start()
+    public override void Initialize()
     {
+        Debug.Log("attack init");
+
+        skillName = PLAYERSKILLNAME.ATTACK;
         status = PLAYERSTATUS.ATTACK;
         animTrigger = PlayerSkillConstant.attackAnimTrigger;
 
@@ -51,5 +54,7 @@ public class Attack : Skill
     protected override void SkillMethod()
     {
         attackPoint--;
+
+        Debug.Log("attack");
     }
 }

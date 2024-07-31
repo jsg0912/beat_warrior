@@ -4,8 +4,9 @@ public class Mark : Skill
 {
     private GameObject MarkerPrefab;
 
-    void Start()
+    public override void Initialize()
     {
+        skillName = PLAYERSKILLNAME.MARK;
         status = PLAYERSTATUS.MARK;
         animTrigger = PlayerSkillConstant.markAnimTrigger;
 
@@ -22,7 +23,9 @@ public class Mark : Skill
 
     protected override void SkillMethod()
     {
-        Vector2 start = transform.position + new Vector3(0, 0.5f, 0);
+        Transform playerTransform = Player.Instance.transform;
+
+        Vector2 start = playerTransform.position + new Vector3(0, 0.5f, 0);
         Vector2 end = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         GameObject Marker = Instantiate(MarkerPrefab, start, Quaternion.identity);

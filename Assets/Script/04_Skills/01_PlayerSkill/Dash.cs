@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,9 @@ public class Dash : Skill
     private float ghostDelayTimeMax;
     private GameObject GhostPrefab;
 
-    private void Start()
+    public override void Initialize()
     {
+        skillName = PLAYERSKILLNAME.DASH;
         status = PLAYERSTATUS.DASH;
 
         animTrigger = PlayerSkillConstant.dashAnimTrigger;
@@ -28,11 +30,11 @@ public class Dash : Skill
         GhostPrefab = Resources.Load("Prefab/Ghost") as GameObject;
     }
 
-    protected override void CheckSkill()
+    public override void CheckSkill()
     {
         base.CheckSkill();
 
-        Ghost();
+        //Ghost();
     }
 
     protected override void UpdateKey()
@@ -54,6 +56,11 @@ public class Dash : Skill
         StartCoroutine(Dashing());
     }
 
+    private void StartCoroutine(IEnumerator enumerator)
+    {
+        throw new NotImplementedException();
+    }
+
     public void SetTarget(GameObject obj)
     {
         TargetMonster = obj;
@@ -64,7 +71,9 @@ public class Dash : Skill
     {
         Player.Instance.SetGravity(false);
 
-        Vector2 start = transform.position;
+        Transform playerTransform = Player.Instance.transform;
+
+        Vector2 start = playerTransform.position;
         Vector2 end = TargetMonster.transform.position;
 
         int dir = end.x > start.x ? 1 : -1;
@@ -73,17 +82,17 @@ public class Dash : Skill
         Player.Instance.SetDirection(dir);
         Player.Instance.SetInvincibility(true);
 
-        while (Vector2.Distance(end, transform.position) >= 0.05f)
+        while (Vector2.Distance(end, playerTransform.position) >= 0.05f)
         {
-            transform.position = Vector2.Lerp(transform.position, end, 0.03f);
+            playerTransform.position = Vector2.Lerp(playerTransform.position, end, 0.03f);
             yield return null;
         }
 
         Player.Instance.SetPlayerStatus(PLAYERSTATUS.IDLE);
         Player.Instance.SetInvincibility(false);
 
-        transform.position = end;
-        transform.localScale = new Vector3(-dir, 1, 1);
+        playerTransform.position = end;
+        playerTransform.localScale = new Vector3(-dir, 1, 1);
 
         Player.Instance.SetGravity(true);
 
@@ -113,7 +122,7 @@ public class Dash : Skill
         DashTargetMonster.Clear();
     }
 
-    private void Ghost()
+    /*ivate void Ghost()
     {
         if (ghostDelayTime > 0)
         {
@@ -123,8 +132,8 @@ public class Dash : Skill
 
         if (Player.Instance.status != PLAYERSTATUS.DASH) return;
 
-        GameObject ghost = Instantiate(GhostPrefab, transform.position, Quaternion.identity);
+        GameObject ghost = Instantiate(GhostPrefab, Player.Instance.transform.position, Quaternion.identity);
         ghostDelayTime = ghostDelayTimeMax;
-        Destroy(ghost, 1.0f);
-    }
+        //Destroy(ghost, 1.0f);
+    }*/
 }
