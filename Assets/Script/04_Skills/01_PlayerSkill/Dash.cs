@@ -54,12 +54,9 @@ public class Dash : PlayerSkill
 
     protected override void SkillMethod()
     {
-        Player.Instance.GetComponent<MonoBehaviour>().StartCoroutine(Dashing());
-    }
+        cooltime = 0;
 
-    private void StartCoroutine(IEnumerator enumerator)
-    {
-        throw new NotImplementedException();
+        Player.Instance.GetComponent<MonoBehaviour>().StartCoroutine(Dashing());
     }
 
     public void SetTarget(GameObject obj)
@@ -70,8 +67,6 @@ public class Dash : PlayerSkill
 
     private IEnumerator Dashing()
     {
-        Player.Instance.SetGravity(false);
-
         Transform playerTransform = Player.Instance.transform;
 
         Vector2 start = playerTransform.position;
@@ -82,6 +77,7 @@ public class Dash : PlayerSkill
 
         Player.Instance.SetDirection(dir);
         Player.Instance.SetInvincibility(true);
+        Player.Instance.SetGravity(false);
 
         while (Vector2.Distance(end, playerTransform.position) >= 0.05f)
         {
@@ -89,13 +85,13 @@ public class Dash : PlayerSkill
             yield return null;
         }
 
-        Player.Instance.SetPlayerStatus(PLAYERSTATUS.IDLE);
-        Player.Instance.SetInvincibility(false);
-
         playerTransform.position = end;
-        playerTransform.localScale = new Vector3(-dir, 1, 1);
 
+        Player.Instance.SetDirection(-dir);
+        Player.Instance.SetInvincibility(false);
         Player.Instance.SetGravity(true);
+
+        Player.Instance.SetPlayerStatus(PLAYERSTATUS.IDLE);
 
         Vector2 offset = new Vector2(0, 1.0f);
         RaycastHit2D[] hits;

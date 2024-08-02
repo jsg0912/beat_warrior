@@ -15,12 +15,13 @@ public class PlayerSkillConstant
 {
     public const int attackPointMax = 2;
     public const float attackKnockbackRange = 3.0f;
+    public const float skill2DashRange = 2.0f;
 
     public const float attackChargeTimeMax = 4.0f;
-    public const float markCoolTimeMax = 8.0f;
-    public const float dashCoolTimeMax = 8.0f;
-    public const float skill1CoolTimeMax = 8.0f;
-    public const float skill2CoolTimeMax = 8.0f;
+    public const float markCoolTimeMax = 4.0f;
+    public const float dashCoolTimeMax = 4.0f;
+    public const float skill1CoolTimeMax = 1.0f;
+    public const float skill2CoolTimeMax = 1.0f;
     public const float ghostDelayTimeMax = 0.05f;
 
     public const int attackAtk = 1;

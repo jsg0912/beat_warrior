@@ -214,6 +214,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void PlayerAddForce(Vector2 force, int dir)
+    {
+        _rigidbody.AddForce(force * direction * dir, ForceMode2D.Impulse);
+    }
+
     private void Jump()
     {
         if (status == PLAYERSTATUS.JUMP || status == PLAYERSTATUS.DASH) return;
