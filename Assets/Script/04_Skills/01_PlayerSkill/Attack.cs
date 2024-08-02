@@ -3,6 +3,7 @@ using UnityEngine;
 public class Attack : PlayerSkill
 {
     private int attackPoint;
+    private int attackPointMax;
 
     public override void Initialize()
     {
@@ -12,6 +13,7 @@ public class Attack : PlayerSkill
 
         atk = PlayerSkillConstant.attackAtk;
         attackPoint = PlayerSkillConstant.attackPointMax;
+        attackPointMax = PlayerSkillConstant.attackPointMax;
 
         cooltimeMax = PlayerSkillConstant.attackChargeTimeMax;
         cooltime = 0;
@@ -32,7 +34,7 @@ public class Attack : PlayerSkill
             return;
         }
 
-        if (attackPoint == PlayerSkillConstant.attackPointMax)
+        if (attackPoint == attackPointMax)
         {
             cooltime = 0;
             return;
@@ -47,7 +49,7 @@ public class Attack : PlayerSkill
     {
         if (attackPoint <= 0) return;
 
-        if (attackPoint == PlayerSkillConstant.attackPointMax) cooltime = cooltimeMax;
+        if (attackPoint == attackPointMax) cooltime = cooltimeMax;
 
         UseSkill();
     }

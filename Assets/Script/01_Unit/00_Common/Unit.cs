@@ -1,3 +1,5 @@
+using System.Xml.Serialization;
+
 public class Unit
 {
     public bool isAlive;
@@ -7,6 +9,16 @@ public class Unit
     public bool getIsAlive()
     {
         return isAlive;
+    }
+
+    public int GetHP()
+    {
+        return unitStat.hp;
+    }
+
+    public void SetHP(int hp)
+    {
+        unitStat.hp = hp;
     }
 
     public void SetDead()

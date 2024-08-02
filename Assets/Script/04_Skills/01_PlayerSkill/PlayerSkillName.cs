@@ -5,5 +5,6 @@ public enum PLAYERSKILLNAME
     DASH,
     SKILL1,
     SKILL2,
+    RECOVERYHP,
     NULL
 }

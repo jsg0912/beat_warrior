@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -59,7 +60,8 @@ public class Player : MonoBehaviour
             new Mark(),
             new Dash(),
             new Skill1(),
-            new Skill2()
+            new Skill2(),
+            new RecoveryHP()
         };
 
         foreach (var skill in skillList) skill.Initialize();
@@ -135,9 +137,19 @@ public class Player : MonoBehaviour
         isInvincibility = isInvin;
     }
 
+    public void PlayerAddForce(Vector2 force, int dir)
+    {
+        _rigidbody.AddForce(force * direction * dir, ForceMode2D.Impulse);
+    }
+
     public int GetHP()
     {
         return playerUnit.unitStat.hp;
+    }
+
+    public void SetHP(int hp)
+    {
+        playerUnit.unitStat.hp = hp;
     }
 
     public float GetSkillCoolTime(PLAYERSKILLNAME skillName)
@@ -214,11 +226,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void PlayerAddForce(Vector2 force, int dir)
-    {
-        _rigidbody.AddForce(force * direction * dir, ForceMode2D.Impulse);
-    }
-
     private void Jump()
     {
         if (status == PLAYERSTATUS.JUMP || status == PLAYERSTATUS.DASH) return;
@@ -228,7 +235,7 @@ public class Player : MonoBehaviour
             status = PLAYERSTATUS.JUMP;
             _animator.SetBool("isJump", true);
 
-            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
+            PlayerAddForce(Vector2.up * PlayerConstant.jumpHeight, 1);
         }
     }
 
@@ -247,7 +254,7 @@ public class Player : MonoBehaviour
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
 
         _animator.SetTrigger("hurt");
-        _rigidbody.AddForce(new Vector2(-5f * direction, 1f), ForceMode2D.Impulse);
+        PlayerAddForce(new Vector2(5.0f, 1.0f), -1);
     }
 
     private IEnumerator Invincibility(float timer)

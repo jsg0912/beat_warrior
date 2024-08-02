@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,6 +7,8 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject HP;
+    private GameObject HPPrefab;
+    private List<Image> HPList;
 
     [SerializeField] private Image MarkImg;
     [SerializeField] private Image DashImg;
@@ -21,6 +25,7 @@ public class UIManager : MonoBehaviour
             txt[i].text = KeySetting.keys[(ACTION)i].ToString();
         }
 
+        InitializeHP();
     }
 
     private void Update()
@@ -36,13 +41,38 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private void InitializeHP()
+    {
+        HPPrefab = Resources.Load("Prefab/HP") as GameObject;
+        HPList = new List<Image>();
+
+        for (int i = 0; i < PlayerConstant.hpMax; i++)
+        {
+            GameObject hp = Instantiate(HPPrefab);
+            hp.transform.SetParent(HP.transform, false);
+            HPList.Add(hp.transform.GetChild(0).GetComponent<Image>());
+        }
+    }
+
     private void UpdateHP()
     {
         int hp = Player.Instance.GetHP();
 
-        HP.transform.GetChild(0).gameObject.SetActive(hp > 2);
-        HP.transform.GetChild(1).gameObject.SetActive(hp > 1);
-        HP.transform.GetChild(2).gameObject.SetActive(hp > 0);
+        if (hp == PlayerConstant.hpMax) return;
+
+        if (hp == 0)
+        {
+            HP.SetActive(false);
+            return;
+        }
+
+        for (int i = 0; i < PlayerConstant.hpMax; i++)
+        {
+            if (i == hp) HPList[i].fillAmount = Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.RECOVERYHP) / PlayerSkillConstant.recoveryHPTimeMax;
+            else HPList[i].fillAmount = 0;
+
+            HP.transform.GetChild(i).gameObject.SetActive(i <= hp);
+        }
     }
 
     private void UpdateCoolTime()

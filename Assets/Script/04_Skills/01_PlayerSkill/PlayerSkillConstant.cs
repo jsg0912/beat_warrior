@@ -4,6 +4,7 @@ public class PlayerSkillConstant
     public const float attackKnockbackRange = 3.0f;
     public const float skill2DashRange = 2.0f;
 
+    public const float recoveryHPTimeMax = 10.0f;
     public const float attackChargeTimeMax = 4.0f;
     public const float markCoolTimeMax = 4.0f;
     public const float dashCoolTimeMax = 4.0f;
