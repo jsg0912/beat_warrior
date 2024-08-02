@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] Text tt;
+
     public static Player Instance;
     public Unit playerUnit;
     private Rigidbody2D _rigidbody;
@@ -87,6 +90,7 @@ public class Player : MonoBehaviour
         switch (status)
         {
             case PLAYERSTATUS.ATTACK:
+            case PLAYERSTATUS.DASH:
             case PLAYERSTATUS.MARK:
             case PLAYERSTATUS.SKILL1:
             case PLAYERSTATUS.SKILL2:
@@ -160,7 +164,7 @@ public class Player : MonoBehaviour
 
         if (!IsMoveable()) return;
 
-        SetPlayerStatus(PLAYERSTATUS.IDLE);
+        if (IsSkillUseable()) SetPlayerStatus(PLAYERSTATUS.IDLE);
 
         if (!Input.GetKey(KeySetting.keys[ACTION.LEFT]) && !Input.GetKey(KeySetting.keys[ACTION.RIGHT])) return;
 
@@ -168,7 +172,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeySetting.keys[ACTION.RIGHT])) SetDirection(1);
 
-        SetPlayerStatus(PLAYERSTATUS.RUN);
+        if (IsSkillUseable()) SetPlayerStatus(PLAYERSTATUS.RUN);
         if (!_animator.GetBool("isJump")) _animator.SetBool("isRun", true);
 
         transform.position += new Vector3(direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
@@ -181,6 +185,7 @@ public class Player : MonoBehaviour
             case PLAYERSTATUS.IDLE:
             case PLAYERSTATUS.RUN:
             case PLAYERSTATUS.JUMP:
+            case PLAYERSTATUS.ATTACK:
             case PLAYERSTATUS.MARK:
                 return true;
             default:
