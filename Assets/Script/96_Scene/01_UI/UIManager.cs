@@ -62,16 +62,16 @@ public class UIManager : MonoBehaviour
 
         if (hp == 0)
         {
-            HP.SetActive(false);
+            foreach (Image image in HPList) image.fillAmount = 1;
             return;
         }
 
         for (int i = 0; i < PlayerConstant.hpMax; i++)
         {
-            if (i == hp) HPList[i].fillAmount = Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.RECOVERYHP) / PlayerSkillConstant.recoveryHPTimeMax;
-            else HPList[i].fillAmount = 0;
-
-            HP.transform.GetChild(i).gameObject.SetActive(i <= hp);
+            if (i > hp) HPList[i].fillAmount = 1;
+            else if (i < hp) HPList[i].fillAmount = 0;
+            else HPList[i].fillAmount 
+                    = Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.RECOVERYHP) / PlayerSkillConstant.recoveryHPTimeMax;
         }
     }
 
