@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6328444386979436554}
   - component: {fileID: 7683049656842354650}
   - component: {fileID: 6332485202819237811}
-  - component: {fileID: 2190353146357370713}
+  - component: {fileID: 3623969268874569274}
   m_Layer: 0
-  m_Name: Sword
+  m_Name: AttackCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,7 +131,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2190353146357370713
+--- !u!114 &3623969268874569274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8204780606003230419}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa3ffe25581a73744a720fd525b203e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 93eb7ed9b80b8904e8d29ec63642e40c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockback: 1

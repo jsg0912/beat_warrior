@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class Attack : Skill
+public class Attack : PlayerSkill
 {
     private int attackPoint;
-    private GameObject SwordPrefab;
 
     public override void Initialize()
     {
@@ -11,12 +10,13 @@ public class Attack : Skill
         status = PLAYERSTATUS.ATTACK;
         animTrigger = PlayerSkillConstant.attackAnimTrigger;
 
+        atk = PlayerSkillConstant.attackAtk;
         attackPoint = PlayerSkillConstant.attackPointMax;
 
         cooltimeMax = PlayerSkillConstant.attackChargeTimeMax;
         cooltime = 0;
 
-        SwordPrefab = Resources.Load("Prefab/Sword") as GameObject;
+        AttackPrefab = Resources.Load(PlayerSkillConstant.attackPrefab) as GameObject;
     }
 
     public int GetAttackPoint()
@@ -61,7 +61,6 @@ public class Attack : Skill
     {
         attackPoint--;
 
-        GameObject sword = GameObject.Instantiate(SwordPrefab);
-        sword.transform.SetParent(Player.Instance.transform, false);
+        CreateAttackPrefab();
     }
 }

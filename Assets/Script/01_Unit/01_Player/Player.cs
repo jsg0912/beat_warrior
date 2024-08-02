@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     
-    private List<Skill> skillList;
+    private List<PlayerSkill> skillList;
 
     private ColliderController colliderController;
 
@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         colliderController = GetComponent<ColliderController>();
 
-        skillList = new List<Skill>
+        skillList = new List<PlayerSkill>
         {
             new Attack(),
             new Mark(),
@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
 
     public float GetSkillCoolTime(PLAYERSKILLNAME skillName)
     {
-        foreach (Skill skill in skillList)
+        foreach (PlayerSkill skill in skillList)
         {
             if (skill.skillName == skillName) return skill.GetCooltime();
         }
@@ -152,7 +152,7 @@ public class Player : MonoBehaviour
 
     public void SetTarget(GameObject obj)
     {
-        foreach(Skill skill in skillList)
+        foreach(PlayerSkill skill in skillList)
         {
             if (skill.skillName == PLAYERSKILLNAME.DASH) (skill as Dash).SetTarget(obj);
         }

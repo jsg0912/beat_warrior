@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Mark : Skill
+public class Mark : PlayerSkill
 {
     private GameObject MarkerPrefab;
 

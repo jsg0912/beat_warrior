@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Dash : Skill
+public class Dash : PlayerSkill
 {
     private List<GameObject> DashTargetMonster;
     private GameObject TargetMonster;

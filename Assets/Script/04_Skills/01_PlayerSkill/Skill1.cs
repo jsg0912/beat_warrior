@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill1 : Skill
+public class Skill1 : PlayerSkill
 {
     public override void Initialize()
     {
@@ -10,8 +8,12 @@ public class Skill1 : Skill
         status = PLAYERSTATUS.SKILL1;
         animTrigger = PlayerSkillConstant.skill1AnimTrigger;
 
+        atk = PlayerSkillConstant.skill1Atk;
+
         cooltimeMax = PlayerSkillConstant.skill1CoolTimeMax;
         cooltime = 0;
+
+        AttackPrefab = Resources.Load(PlayerSkillConstant.skill1Prefab) as GameObject;
     }
 
     protected override void UpdateKey()
@@ -21,6 +23,6 @@ public class Skill1 : Skill
 
     protected override void SkillMethod()
     {
-
+        CreateAttackPrefab();
     }
 }
