@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public abstract class PlayerSkill
+public abstract class Skill
 {
-    public PLAYERSKILLNAME skillName;
-
-    protected PLAYERSTATUS status;
     protected KeyCode key;
 
     protected string animTrigger;
@@ -55,20 +52,9 @@ public abstract class PlayerSkill
         cooltime = cooltimeMax;
     }
 
-    protected virtual void UseSkill()
-    {
-        Player.Instance.SetPlayerStatus(status);
-        Player.Instance.SetPlayerAnimTrigger(animTrigger);
+    protected abstract void UseSkill();
 
-        SkillMethod();
-    }
-
-    protected void CreateAttackPrefab()
-    {
-        GameObject sword = GameObject.Instantiate(AttackPrefab);
-        sword.transform.SetParent(Player.Instance.transform, false);
-        sword.GetComponent<AttackCollider>().SetAtk(atk);
-    }
+    protected abstract void CreateAttackPrefab();
 
     protected abstract void UpdateKey();
 

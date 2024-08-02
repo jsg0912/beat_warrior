@@ -1,16 +1,3 @@
-using UnityEngine;
-
-public enum PLAYERSKILLNAME
-{
-    ATTACK,
-    MARK,
-    DASH,
-    SKILL1,
-    SKILL2,
-    NULL
-}
-
-
 public class PlayerSkillConstant
 {
     public const int attackPointMax = 2;
