@@ -12,7 +12,7 @@ public class RangedEnemy : Pattern
     public float direction;
     public bool alert;
     public bool stop;
-    private float tempdir;
+    private float tempDir;
 
     private GameObject ArrowPrefab;
 
@@ -30,7 +30,7 @@ public class RangedEnemy : Pattern
         moveSpeed = 0.5f;
         alert = false;
         stop = false;
-        tempdir = 1;
+        tempDir = 1;
     }
     public override void PlayPattern()
     {
@@ -42,8 +42,6 @@ public class RangedEnemy : Pattern
 
     private void Move()
     {
-
-
         if (direction != 0)
         {
             gameObject.transform.localScale = new Vector3(-1 * direction, 1, 1);
@@ -59,14 +57,14 @@ public class RangedEnemy : Pattern
 
     private void SetStop()
     {
-        tempdir = direction;
+        tempDir = direction;
         direction = 0;
         stop = true;
     }
 
     private void SetMove()
     {
-        direction = tempdir;
+        direction = tempDir;
         stop = false;
     }
 
@@ -83,7 +81,6 @@ public class RangedEnemy : Pattern
 
         foreach (Collider2D collider in collider2Ds)
         {
-
             gameObject.GetComponent<MonoBehaviour>().StartCoroutine(Shoot(collider));
             alert = true;
 
