@@ -23,8 +23,6 @@ public class Monster : MonoBehaviour
     {
         if (!monsterUnit.isAlive) return;
 
-        Debug.Log(monsterName);
-
         monsterUnit.unitStat.hp -= dmg;
 
         if (monsterUnit.unitStat.hp <= 0)

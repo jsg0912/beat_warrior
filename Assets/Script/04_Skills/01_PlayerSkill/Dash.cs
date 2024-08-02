@@ -112,7 +112,6 @@ public class Dash : PlayerSkill
             if (obj.CompareTag("Monster"))
             {
                 obj.GetComponent<Monster>().GetDamaged(atk);
-                Debug.Log(obj.name);
             }
         }
 
