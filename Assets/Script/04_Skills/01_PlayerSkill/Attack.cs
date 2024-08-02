@@ -19,6 +19,11 @@ public class Attack : Skill
         SwordPrefab = Resources.Load("Prefab/Sword") as GameObject;
     }
 
+    public int GetAttackPoint()
+    {
+        return attackPoint;
+    }
+
     protected override void CountCooltime()
     {
         if (cooltime > 0)
@@ -27,13 +32,13 @@ public class Attack : Skill
             return;
         }
 
-        attackPoint++;
-
         if (attackPoint == PlayerSkillConstant.attackPointMax)
         {
             cooltime = 0;
             return;
         }
+
+        attackPoint++;
 
         cooltime = cooltimeMax;
     }
