@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     private bool isInvincibility;
     private int direction;
 
+    private GameObject targetInfo;
+
     void Start()
     {
         Initialize();
@@ -144,7 +146,13 @@ public class Player : MonoBehaviour
 
     public void SetTarget(GameObject obj)
     {
+        targetInfo = obj;
         dash.SetTarget(obj);
+    }
+
+    public GameObject GetTargetInfo()
+    {
+        return targetInfo;
     }
 
     private void Move()
