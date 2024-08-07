@@ -197,7 +197,7 @@ public class Player : MonoBehaviour
 
         if (!IsMoveable()) return;
 
-        if (IsSkillUseable()) SetPlayerStatus(PLAYERSTATUS.IDLE);
+        if (IsSkillUseable() && status != PLAYERSTATUS.JUMP) SetPlayerStatus(PLAYERSTATUS.IDLE);
 
         if (!Input.GetKey(KeySetting.keys[ACTION.LEFT]) && !Input.GetKey(KeySetting.keys[ACTION.RIGHT])) return;
 
@@ -256,7 +256,7 @@ public class Player : MonoBehaviour
             status = PLAYERSTATUS.JUMP;
             _animator.SetBool("isJump", true);
 
-            PlayerAddForce(Vector2.up * PlayerConstant.jumpHeight, 1);
+            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
         }
     }
 
