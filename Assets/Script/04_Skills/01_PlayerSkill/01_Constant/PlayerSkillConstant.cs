@@ -8,8 +8,8 @@ public class PlayerSkillConstant
     public const float attackChargeTimeMax = 4.0f;
     public const float markCoolTimeMax = 8.0f;
     public const float dashCoolTimeMax = 8.0f;
-    public const float skill1CoolTimeMax = 4.0f;
-    public const float skill2CoolTimeMax = 4.0f;
+    public const float skill1CoolTimeMax = 8.0f;
+    public const float skill2CoolTimeMax = 8.0f;
     public const float ghostDelayTimeMax = 0.05f;
 
     public const int attackAtk = 1;
