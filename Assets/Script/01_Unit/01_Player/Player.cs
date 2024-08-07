@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     private bool isInvincibility;
     private int direction;
 
+    private GameObject targetInfo;
+
     void Start()
     {
         Initialize();
@@ -189,6 +191,11 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
+    public GameObject GetTargetInfo()
+    {
+        return targetInfo;
     }
 
     private void Move()
