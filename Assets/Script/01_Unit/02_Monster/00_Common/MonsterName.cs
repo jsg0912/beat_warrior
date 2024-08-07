@@ -1,5 +1,8 @@
 public enum MonsterName
 {
-    DummySoldier,
-    DummyArcher
+    DummySoldierHP1,
+    DummySoldierHP2,
+    DummySoldierHP3,
+    DummyArcher,
+    DummyArcherHP3
 }
