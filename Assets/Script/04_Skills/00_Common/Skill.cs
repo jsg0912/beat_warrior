@@ -30,6 +30,11 @@ public abstract class Skill
         cooltime -= Time.deltaTime;
     }
 
+    public void ResetCoolTime()
+    {
+        cooltime = 0;
+    }
+
     public virtual void CheckSkill()
     {
         if (!Player.Instance.IsSkillUseable()) return;
