@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public Unit playerUnit;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
-    
+
     private List<PlayerSkill> skillList;
 
     private ColliderController colliderController;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
             foreach (var skill in skillList) skill.CheckSkill();
         }
 
-        if(Input.GetKey(KeyCode.B)) RestartPlayer();
+        if (Input.GetKey(KeyCode.B)) RestartPlayer();
     }
 
     private void Initialize()
@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
         _rigidbody.gravityScale = gravity ? PlayerConstant.gravityScale : 0;
         if (!gravity) _rigidbody.velocity = Vector3.zero;
     }
-    
+
     IEnumerator UseSkill()
     {
         yield return new WaitForSeconds(0.5f);
@@ -164,9 +164,30 @@ public class Player : MonoBehaviour
 
     public void SetTarget(GameObject obj)
     {
-        foreach(PlayerSkill skill in skillList)
+        foreach (PlayerSkill skill in skillList)
         {
             if (skill.skillName == PLAYERSKILLNAME.DASH) (skill as Dash).SetTarget(obj);
+        }
+    }
+
+    public void CheckResetSkills(GameObject obj)
+    {
+        foreach (PlayerSkill skill in skillList)
+        {
+            if (skill.skillName == PLAYERSKILLNAME.DASH)
+            {
+                DebugConsole.Log("obj.name");
+                DebugConsole.Log(obj.name);
+                if ((skill as Dash).GetTarget() == obj)
+                {
+                    DebugConsole.Log("죽은 Monster가 표식 몬스터 맞음");
+                    foreach (PlayerSkill playerSkill in skillList)
+                    {
+                        playerSkill.ResetCoolTime();
+                    }
+                    break;
+                }
+            }
         }
     }
 
