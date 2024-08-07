@@ -65,6 +65,11 @@ public class Dash : PlayerSkill
         cooltime = cooltimeMax;
     }
 
+    public GameObject GetTarget()
+    {
+        return TargetMonster;
+    }
+
     private IEnumerator Dashing()
     {
         Transform playerTransform = Player.Instance.transform;
