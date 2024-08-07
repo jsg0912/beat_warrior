@@ -24,7 +24,7 @@ public class Marker : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
 
-        if (obj.CompareTag("Monster"))
+        if (obj.CompareTag("Monster") && obj.GetComponent<Monster>().monsterUnit.isAlive == true)
         {
             Player.Instance.SetTarget(obj);
             Destroy(this.gameObject);
