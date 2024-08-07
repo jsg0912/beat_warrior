@@ -2,11 +2,11 @@ using System.Xml.Serialization;
 
 public class Unit
 {
-    public bool isAlive;
+    private bool isAlive;
     public UnitInfo unitInfo;
     public UnitStat unitStat;
 
-    public bool getIsAlive()
+    public bool GetIsAlive()
     {
         return isAlive;
     }

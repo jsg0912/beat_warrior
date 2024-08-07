@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
@@ -36,7 +35,7 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (monsterUnit.isAlive == true)
+        if (monsterUnit.GetIsAlive() == true)
         {
             ShowUI();
             monsterUnit.pattern.PlayPattern();
@@ -46,7 +45,7 @@ public class Monster : MonoBehaviour
 
     public virtual void GetDamaged(int dmg)
     {
-        if (!monsterUnit.isAlive) return;
+        if (!monsterUnit.GetIsAlive()) return;
 
         monsterUnit.unitStat.hp -= dmg;
         Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.unitStat.hp);
