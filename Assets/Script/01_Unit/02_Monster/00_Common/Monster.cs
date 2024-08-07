@@ -37,6 +37,7 @@ public class Monster : MonoBehaviour
     protected virtual void Die()
     {
         monsterUnit.SetDead();
+        Player.Instance.CheckResetSkills(this.gameObject);
         anim.SetTrigger("die");
         Destroy(gameObject, 2.0f);
     }
