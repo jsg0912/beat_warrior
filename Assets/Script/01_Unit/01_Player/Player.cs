@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,9 +18,10 @@ public class Player : MonoBehaviour
 
     public PLAYERSTATUS status;
 
-    private bool isInvincibility;
     private int direction;
-
+    private bool isStop;
+    private bool isInvincibility;
+    
     private GameObject targetInfo;
 
     void Start()
@@ -40,8 +40,7 @@ public class Player : MonoBehaviour
         {
             Jump();
             Down();
-
-            foreach (var skill in skillList) skill.CheckSkill();
+            Skill();
         }
 
         if (Input.GetKey(KeyCode.B)) RestartPlayer();
@@ -68,13 +67,13 @@ public class Player : MonoBehaviour
 
         foreach (var skill in skillList) skill.Initialize();
 
-        status = PLAYERSTATUS.IDLE;
-        _animator.SetTrigger("idle");
+        SetPlayerStatus(PLAYERSTATUS.IDLE);
 
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.hpMax, PlayerConstant.atk));
 
-        isInvincibility = false;
         direction = 1;
+        isStop = true;
+        isInvincibility = false;
     }
 
     public void RestartPlayer()
@@ -93,17 +92,33 @@ public class Player : MonoBehaviour
 
         switch (status)
         {
+            case PLAYERSTATUS.IDLE:
+                _animator.SetTrigger(PlayerConstant.idleAnimTrigger);
+                break;
+            case PLAYERSTATUS.JUMP:
+                _animator.SetBool(PlayerConstant.jumpAnimBool, true);
+                break;
             case PLAYERSTATUS.ATTACK:
+                _animator.SetTrigger(PlayerSkillConstant.attackAnimTrigger);
+                break;
             case PLAYERSTATUS.DASH:
+                _animator.SetTrigger(PlayerSkillConstant.dashAnimTrigger);
+                break;
             case PLAYERSTATUS.MARK:
+                _animator.SetTrigger(PlayerSkillConstant.markAnimTrigger);
+                break;
             case PLAYERSTATUS.SKILL1:
+                _animator.SetTrigger(PlayerSkillConstant.skill1AnimTrigger);
+                break;
             case PLAYERSTATUS.SKILL2:
-                StartCoroutine(UseSkill());
+                _animator.SetTrigger(PlayerSkillConstant.skill2AnimTrigger);
                 break;
             case PLAYERSTATUS.DEAD:
-                _animator.SetTrigger("die");
+                _animator.SetTrigger(PlayerSkillConstant.dashAnimTrigger);
                 break;
         }
+
+        if (IsUsingSkill() == true) StartCoroutine(UseSkill());
     }
 
     public int GetDirection()
@@ -166,30 +181,20 @@ public class Player : MonoBehaviour
 
     public void SetTarget(GameObject obj)
     {
-        foreach (PlayerSkill skill in skillList)
-        {
-            if (skill.skillName == PLAYERSKILLNAME.DASH) (skill as Dash).SetTarget(obj);
-        }
+        Dash dash = FindSkill(PLAYERSKILLNAME.DASH) as Dash;
+
+        dash.SetTarget(obj);
     }
 
     public void CheckResetSkills(GameObject obj)
     {
-        foreach (PlayerSkill skill in skillList)
+        Dash dash = FindSkill(PLAYERSKILLNAME.DASH) as Dash;
+
+        if (dash.GetTarget() != obj) return;
+
+        foreach (PlayerSkill playerSkill in skillList)
         {
-            if (skill.skillName == PLAYERSKILLNAME.DASH)
-            {
-                DebugConsole.Log("obj.name");
-                DebugConsole.Log(obj.name);
-                if ((skill as Dash).GetTarget() == obj)
-                {
-                    DebugConsole.Log("죽은 Monster가 표식 몬스터 맞음");
-                    foreach (PlayerSkill playerSkill in skillList)
-                    {
-                        playerSkill.ResetCoolTime();
-                    }
-                    break;
-                }
-            }
+            playerSkill.ResetCoolTime();
         }
     }
 
@@ -202,18 +207,19 @@ public class Player : MonoBehaviour
     {
         _animator.SetBool("isRun", false);
 
-        if (!IsMoveable()) return;
+        if (IsMoveable() == false) return;
 
-        if (IsSkillUseable() && status != PLAYERSTATUS.JUMP) SetPlayerStatus(PLAYERSTATUS.IDLE);
-
-        if (!Input.GetKey(KeySetting.keys[ACTION.LEFT]) && !Input.GetKey(KeySetting.keys[ACTION.RIGHT])) return;
-
-        if (Input.GetKey(KeySetting.keys[ACTION.LEFT])) SetDirection(-1);
+        isStop = false;
 
         if (Input.GetKey(KeySetting.keys[ACTION.RIGHT])) SetDirection(1);
+        else if (Input.GetKey(KeySetting.keys[ACTION.LEFT])) SetDirection(-1);
+        else isStop = true;
 
-        if (IsSkillUseable()) SetPlayerStatus(PLAYERSTATUS.RUN);
-        if (!_animator.GetBool("isJump")) _animator.SetBool("isRun", true);
+        if (IsUsingSkill() == false && status != PLAYERSTATUS.JUMP) SetPlayerStatus(isStop ? PLAYERSTATUS.IDLE : PLAYERSTATUS.RUN);
+
+        if (isStop == true) return;
+
+        if (status != PLAYERSTATUS.JUMP) _animator.SetBool("isRun", true);
 
         transform.position += new Vector3(direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
@@ -233,13 +239,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool IsSkillUseable()
+    public bool IsUsingSkill()
     {
         switch (status)
         {
-            case PLAYERSTATUS.IDLE:
-            case PLAYERSTATUS.RUN:
-            case PLAYERSTATUS.JUMP:
+            case PLAYERSTATUS.ATTACK:
+            case PLAYERSTATUS.MARK:
+            case PLAYERSTATUS.DASH:
+            case PLAYERSTATUS.SKILL1:
+            case PLAYERSTATUS.SKILL2:
                 return true;
             default:
                 return false;
@@ -251,6 +259,9 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeySetting.keys[ACTION.DOWN]))
         {
             colliderController.PassTile();
+
+            SetPlayerStatus(PLAYERSTATUS.JUMP);
+            _animator.SetBool("isJump", true);
         }
     }
 
@@ -260,11 +271,52 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeySetting.keys[ACTION.JUMP]) && !_animator.GetBool("isJump"))
         {
-            status = PLAYERSTATUS.JUMP;
+            SetPlayerStatus(PLAYERSTATUS.JUMP);
             _animator.SetBool("isJump", true);
 
             _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
         }
+    }
+
+    public void Dashing(Vector2 end, bool changeDir, bool isInvincibility)
+    {
+        StartCoroutine(Dash(end, changeDir, isInvincibility));
+    }
+
+    private IEnumerator Dash(Vector2 end, bool changeDir, bool isInvincibility)
+    {
+        int dir = end.x > transform.position.x ? 1 : -1;
+
+        SetGravity(false);
+        if (changeDir == true) SetDirection(dir);
+        if (isInvincibility == true) SetInvincibility(true);
+
+        while (Vector2.Distance(end, transform.position) >= 0.05f)
+        {
+            transform.position = Vector2.Lerp(transform.position, end, 0.03f);
+            yield return null;
+        }
+
+        transform.position = end;
+
+        SetGravity(true);
+        if (changeDir == true) SetDirection(-dir);
+        if (isInvincibility == true) SetInvincibility(false);
+    }
+
+    private void Skill()
+    {
+        foreach (var skill in skillList) skill.CheckSkill();
+    }
+
+    public Skill FindSkill(PLAYERSKILLNAME name)
+    {
+        foreach(var skill in skillList)
+        {
+            if (skill.skillName == name) return skill;
+        }
+
+        return null;
     }
 
     public void GetDamaged(int dmg)

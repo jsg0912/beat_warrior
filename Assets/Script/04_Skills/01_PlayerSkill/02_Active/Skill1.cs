@@ -6,7 +6,6 @@ public class Skill1 : PlayerSkill
     {
         skillName = PLAYERSKILLNAME.SKILL1;
         status = PLAYERSTATUS.SKILL1;
-        animTrigger = PlayerSkillConstant.skill1AnimTrigger;
 
         atk = PlayerSkillConstant.skill1Atk;
 

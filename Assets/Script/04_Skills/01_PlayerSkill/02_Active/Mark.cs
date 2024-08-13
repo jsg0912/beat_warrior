@@ -8,7 +8,6 @@ public class Mark : PlayerSkill
     {
         skillName = PLAYERSKILLNAME.MARK;
         status = PLAYERSTATUS.MARK;
-        animTrigger = PlayerSkillConstant.markAnimTrigger;
 
         cooltimeMax = PlayerSkillConstant.dashCoolTimeMax;
         cooltime = 0;

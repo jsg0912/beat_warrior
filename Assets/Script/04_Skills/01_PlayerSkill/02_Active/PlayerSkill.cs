@@ -9,7 +9,6 @@ public abstract class PlayerSkill : Skill
     protected override void UseSkill()
     {
         Player.Instance.SetPlayerStatus(status);
-        Player.Instance.SetPlayerAnimTrigger(animTrigger);
 
         SkillMethod();
     }

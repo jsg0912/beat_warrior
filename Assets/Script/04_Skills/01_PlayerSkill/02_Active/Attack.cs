@@ -9,7 +9,6 @@ public class Attack : PlayerSkill
     {
         skillName = PLAYERSKILLNAME.ATTACK;
         status = PLAYERSTATUS.ATTACK;
-        animTrigger = PlayerSkillConstant.attackAnimTrigger;
 
         atk = PlayerSkillConstant.attackAtk;
         attackPoint = PlayerSkillConstant.attackPointMax;

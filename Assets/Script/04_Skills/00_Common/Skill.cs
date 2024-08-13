@@ -4,8 +4,6 @@ public abstract class Skill
 {
     protected KeyCode key;
 
-    protected string animTrigger;
-
     protected int atk;
     protected float cooltimeMax;
     protected float cooltime;
@@ -37,7 +35,7 @@ public abstract class Skill
 
     public virtual void CheckSkill()
     {
-        if (!Player.Instance.IsSkillUseable()) return;
+        if (Player.Instance.IsUsingSkill() == true) return;
 
         CountCooltime();
         UpdateKey();

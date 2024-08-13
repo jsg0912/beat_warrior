@@ -22,4 +22,9 @@ public class PlayerConstant
     public const float jumpHeight = 20.0f;
 
     public const float invincibilityTime = 0.5f;
+
+    public const string idleAnimTrigger = "idle";
+    public const string runAnimBool = "isRun";
+    public const string jumpAnimBool = "isJump";
+    public const string dieAnimTrigger = "die";
 }
