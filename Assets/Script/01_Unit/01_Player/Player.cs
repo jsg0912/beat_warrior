@@ -13,12 +13,11 @@ public class Player : MonoBehaviour
     private Animator _animator;
 
     private List<ActiveSkillPlayer> skillList;
+    public List<Skill> specialSkillList = new List<Skill>();
 
     private ColliderController colliderController;
 
     public PLAYERSTATUS status;
-
-    public List<Skill> specialSkillList = new List<Skill>();
 
     private int direction;
     private int jumpCount;
