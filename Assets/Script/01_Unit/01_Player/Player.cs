@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public PLAYERSTATUS status;
 
     private int direction;
+    private int jumpCount;
     private bool isMove;
     private bool isInvincibility;
     
@@ -72,6 +73,7 @@ public class Player : MonoBehaviour
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.hpMax, PlayerConstant.atk));
 
         direction = 1;
+        jumpCount = PlayerConstant.jumpCountMax;
         isMove = true;
         isInvincibility = false;
     }
@@ -261,12 +263,15 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        if (status == PLAYERSTATUS.JUMP || status == PLAYERSTATUS.DASH) return;
+        if (IsUsingSkill() == true || jumpCount == 0) return;
 
         if (Input.GetKeyDown(KeySetting.keys[ACTION.JUMP]))
         {
             SetPlayerStatus(PLAYERSTATUS.JUMP);
 
+            jumpCount--;
+
+            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
             _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
         }
     }
@@ -350,6 +355,7 @@ public class Player : MonoBehaviour
         {
             _animator.SetBool(PlayerConstant.jumpAnimBool, false);
             if (status == PLAYERSTATUS.JUMP) SetPlayerStatus(PLAYERSTATUS.IDLE);
+            jumpCount = PlayerConstant.jumpCountMax;
             return;
         }
     }
