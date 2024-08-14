@@ -168,9 +168,9 @@ public class Player : MonoBehaviour
         _rigidbody.AddForce(force * direction * dir, ForceMode2D.Impulse);
     }
 
-    public int GetHP()
+    public int GetCurrentHP()
     {
-        return playerUnit.GetHP();
+        return playerUnit.GetCurrentHP();
     }
 
     public int GetFinalStat(StatKind statKind)
@@ -178,9 +178,9 @@ public class Player : MonoBehaviour
         return playerUnit.unitStat.GetFinalStat(statKind);
     }
 
-    public void ChangeCurrentHP(int hp)
+    public bool ChangeCurrentHP(int hp)
     {
-        playerUnit.unitStat.ChangeCurrentHP(hp);
+        return playerUnit.ChangeCurrentHP(hp);
     }
 
     public float GetSkillCoolTime(PLAYERSKILLNAME skillName)
@@ -331,11 +331,11 @@ public class Player : MonoBehaviour
 
     public void GetDamaged(int dmg)
     {
-        if (isInvincibility || GetHP() <= 0) return;
+        if (isInvincibility || playerUnit.GetIsAlive() == false) return;
 
-        ChangeCurrentHP(-dmg);
+        bool isAlive = ChangeCurrentHP(-dmg);
 
-        if (GetHP() <= 0)
+        if (isAlive == false)
         {
             Die();
             return;

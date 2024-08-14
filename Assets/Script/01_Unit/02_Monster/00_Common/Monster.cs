@@ -29,7 +29,7 @@ public class Monster : MonoBehaviour
         Vector3 HpPos = gameObject.transform.position + new Vector3(0, -0.5f, 0);
         Hp = GameObject.Instantiate(HpPrefab, HpPos, Quaternion.identity);
 
-        Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetHP());
+        Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetCurrentHP());
 
     }
 
@@ -47,10 +47,10 @@ public class Monster : MonoBehaviour
     {
         if (!monsterUnit.GetIsAlive()) return;
 
-        int currentHp = monsterUnit.unitStat.ChangeCurrentHP(-dmg);
-        Hp.GetComponent<EnemyHp>().SetHp(currentHp);
+        bool isAlive = monsterUnit.ChangeCurrentHP(-dmg);
+        Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetCurrentHP());
 
-        if (monsterUnit.GetHP() <= 0)
+        if (isAlive == false)
         {
             Die();
             return;
@@ -61,7 +61,6 @@ public class Monster : MonoBehaviour
 
     protected virtual void Die()
     {
-        monsterUnit.SetDead();
         Player.Instance.CheckResetSkills(this.gameObject);
         anim.SetTrigger("die");
         Destroy(gameObject, 2.0f);

@@ -1,6 +1,8 @@
+using Unity.VisualScripting;
+
 public class Unit
 {
-    private bool isAlive;
+    private bool isAlive = true;
     public UnitInfo unitInfo;
     public UnitStat unitStat;
 
@@ -9,20 +11,23 @@ public class Unit
         return isAlive;
     }
 
-    public int GetHP()
+    public int GetCurrentHP()
     {
         return unitStat.GetCurrentStat(StatKind.HP);
     }
 
-    public void SetDead()
+    public bool ChangeCurrentHP(int change)
     {
-        isAlive = false;
+        int currentHP = unitStat.ChangeCurrentHP(change);
+        if (currentHP < 0)
+        {
+            isAlive = false;
+        }
+        return isAlive;
     }
 
     public Unit(UnitInfo unitInfo, UnitStat unitStat)
     {
-        isAlive = true;
-
         this.unitInfo = unitInfo;
         this.unitStat = unitStat.Copy();
     }
