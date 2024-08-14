@@ -45,15 +45,17 @@ public class Player : MonoBehaviour
             Skill();
         }
 
-        if (Input.GetKey(KeyCode.B)) RestartPlayer();
+        if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
 
         // TODO: 임시 코드(추가특성 장착 및 해제)
-        if (Input.GetKey(KeyCode.Alpha0))
+        if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             AppendMaxHP trait = (AppendMaxHP)traitList.Find(trait => trait.GetType() == typeof(AppendMaxHP));
             if (trait == null)
             {
-                traitList.Add(new AppendMaxHP());
+                trait = new AppendMaxHP();
+                traitList.Add(trait);
+                trait.GetSkill();
             }
             else
             {

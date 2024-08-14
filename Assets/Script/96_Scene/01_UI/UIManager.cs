@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance;
+
     [SerializeField] private GameObject HP;
     private GameObject HPPrefab;
     private List<Image> HPList;
@@ -43,22 +45,36 @@ public class UIManager : MonoBehaviour
 
     private void InitializeHP()
     {
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);
+
         HPPrefab = Resources.Load("Prefab/HP") as GameObject;
         HPList = new List<Image>();
 
         for (int i = 0; i < PlayerConstant.hpMax; i++)
         {
-            GameObject hp = Instantiate(HPPrefab);
-            hp.transform.SetParent(HP.transform, false);
-            HPList.Add(hp.transform.GetChild(0).GetComponent<Image>());
+            AddHPUI();
         }
+    }
+
+    public void AddHPUI()
+    {
+        GameObject hp = Instantiate(HPPrefab);
+        hp.transform.SetParent(HP.transform, false);
+        HPList.Add(hp.transform.GetChild(0).GetComponent<Image>());
+    }
+
+    public void RemoveHPUI()
+    {
+        Destroy(HP.transform.GetChild(0).gameObject);
+        HPList.RemoveAt(0);
     }
 
     private void UpdateHP()
     {
         int hp = Player.Instance.GetCurrentHP();
 
-        if (hp == PlayerConstant.hpMax) return;
+        if (hp == Player.Instance.GetFinalStat(StatKind.HP)) return;
 
         if (hp == 0)
         {
