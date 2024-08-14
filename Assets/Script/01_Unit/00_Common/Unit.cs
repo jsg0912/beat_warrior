@@ -2,23 +2,18 @@ using System.Xml.Serialization;
 
 public class Unit
 {
-    public bool isAlive;
+    private bool isAlive;
     public UnitInfo unitInfo;
     public UnitStat unitStat;
 
-    public bool getIsAlive()
+    public bool GetIsAlive()
     {
         return isAlive;
     }
 
     public int GetHP()
     {
-        return unitStat.hp;
-    }
-
-    public void SetHP(int hp)
-    {
-        unitStat.hp = hp;
+        return unitStat.GetCurrentStat(StatKind.HP);
     }
 
     public void SetDead()

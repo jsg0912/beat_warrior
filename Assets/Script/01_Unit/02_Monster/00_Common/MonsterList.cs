@@ -1,7 +1,6 @@
 // Monster's Instances List
 using System.Collections.Generic;
 using System;
-using System.Diagnostics;
 
 public static class MonsterList
 {
@@ -9,27 +8,42 @@ public static class MonsterList
     {
         new MonsterUnit(new MonsterInfo(MonsterName.DummySoldierHP1,
         "Prototype Test용 근접 쓰레기1"),
-        new UnitStat(1, 1),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 1},
+            {StatKind.ATK, 1},
+        }),
         new MeleeEnemy()),
 
          new MonsterUnit(new MonsterInfo(MonsterName.DummySoldierHP2,
         "Prototype Test용 근접 쓰레기2"),
-        new UnitStat(2, 1),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 2},
+            {StatKind.ATK, 1},
+        }),
         new MeleeEnemy()),
 
          new MonsterUnit(new MonsterInfo(MonsterName.DummySoldierHP3,
         "Prototype Test용 근접 쓰레기3"),
-        new UnitStat(3, 1),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 3},
+            {StatKind.ATK, 1},
+        }),
         new MeleeEnemy()),
 
         new MonsterUnit(new MonsterInfo(MonsterName.DummyArcher,
         "Prototype Test용 원거리 쓰레기"),
-        new UnitStat(2, 1),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 2},
+            {StatKind.ATK, 1},
+        }),
         new RangedEnemy()),
 
          new MonsterUnit(new MonsterInfo(MonsterName.DummyArcherHP3,
         "Prototype Test용 원거리 쓰레기"),
-        new UnitStat(3, 1),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 3},
+            {StatKind.ATK, 1},
+        }),
         new RangedEnemy()),
     };
 

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
@@ -30,13 +29,13 @@ public class Monster : MonoBehaviour
         Vector3 HpPos = gameObject.transform.position + new Vector3(0, -0.5f, 0);
         Hp = GameObject.Instantiate(HpPrefab, HpPos, Quaternion.identity);
 
-        Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.unitStat.hp);
+        Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetHP());
 
     }
 
     void Update()
     {
-        if (monsterUnit.isAlive == true)
+        if (monsterUnit.GetIsAlive() == true)
         {
             ShowUI();
             monsterUnit.pattern.PlayPattern();
@@ -46,12 +45,12 @@ public class Monster : MonoBehaviour
 
     public virtual void GetDamaged(int dmg)
     {
-        if (!monsterUnit.isAlive) return;
+        if (!monsterUnit.GetIsAlive()) return;
 
-        monsterUnit.unitStat.hp -= dmg;
-        Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.unitStat.hp);
+        int currentHp = monsterUnit.unitStat.ChangeCurrentHP(-dmg);
+        Hp.GetComponent<EnemyHp>().SetHp(currentHp);
 
-        if (monsterUnit.unitStat.hp <= 0)
+        if (monsterUnit.GetHP() <= 0)
         {
             Die();
             return;
