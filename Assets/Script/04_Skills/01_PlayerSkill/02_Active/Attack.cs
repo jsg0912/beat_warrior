@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Attack : ActiveSkillPlayer
 {
-    private int attackPoint;
-    private int attackPointMax;
+    private int attackCount;
+    private int attackCountMax;
 
     public override void Initialize()
     {
@@ -11,8 +11,8 @@ public class Attack : ActiveSkillPlayer
         status = PLAYERSTATUS.ATTACK;
 
         damageMultiplier = PlayerSkillConstant.attackAtk;
-        attackPoint = PlayerSkillConstant.attackPointMax;
-        attackPointMax = PlayerSkillConstant.attackPointMax;
+        attackCount = PlayerSkillConstant.attackCountMax;
+        attackCountMax = PlayerSkillConstant.attackCountMax;
 
         coolTimeMax = PlayerSkillConstant.attackChargeTimeMax;
         coolTime = 0;
@@ -20,9 +20,9 @@ public class Attack : ActiveSkillPlayer
         EffectPrefab = Resources.Load(PlayerSkillConstant.attackPrefab) as GameObject;
     }
 
-    public int GetAttackPoint()
+    public int GetAttackCount()
     {
-        return attackPoint;
+        return attackCount;
     }
 
     protected override void CountCoolTime()
@@ -33,22 +33,22 @@ public class Attack : ActiveSkillPlayer
             return;
         }
 
-        if (attackPoint == attackPointMax)
+        if (attackCount == attackCountMax)
         {
             coolTime = 0;
             return;
         }
 
-        attackPoint++;
+        attackCount++;
 
         coolTime = coolTimeMax;
     }
 
     protected override void TrySkill()
     {
-        if (attackPoint <= 0) return;
+        if (attackCount <= 0) return;
 
-        if (attackPoint == attackPointMax) coolTime = coolTimeMax;
+        if (attackCount == attackCountMax) coolTime = coolTimeMax;
 
         UseSkill();
     }
@@ -60,7 +60,7 @@ public class Attack : ActiveSkillPlayer
 
     protected override void SkillMethod()
     {
-        attackPoint--;
+        attackCount--;
 
         CreateAttackPrefab();
     }

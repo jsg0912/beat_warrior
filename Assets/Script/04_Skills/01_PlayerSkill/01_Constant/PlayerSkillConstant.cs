@@ -1,6 +1,6 @@
 public class PlayerSkillConstant
 {
-    public const int attackPointMax = 2;
+    public const int attackCountMax = 2;
     public const float attackKnockbackRange = 3.0f;
     public const float skill2DashRange = 2.0f;
 
