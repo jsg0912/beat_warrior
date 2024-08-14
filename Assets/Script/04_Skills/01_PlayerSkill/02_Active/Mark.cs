@@ -6,7 +6,7 @@ public class Mark : ActiveSkillPlayer
 
     public override void Initialize()
     {
-        skillName = PlayerSkillName.Mark;
+        skillName = SkillName.Mark;
         status = PlayerStatus.Mark;
 
         coolTimeMax = PlayerSkillConstant.dashCoolTimeMax;

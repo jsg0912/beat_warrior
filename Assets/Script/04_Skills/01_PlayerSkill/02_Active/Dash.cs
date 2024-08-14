@@ -13,7 +13,7 @@ public class Dash : ActiveSkillPlayer
 
     public override void Initialize()
     {
-        skillName = PlayerSkillName.Dash;
+        skillName = SkillName.Dash;
         status = PlayerStatus.Dash;
 
         damageMultiplier = PlayerSkillConstant.dashAtk;

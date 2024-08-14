@@ -1,10 +1,12 @@
-public class DoubleJump : PassiveSkillBuff
+public class DoubleJump : PassiveSkillBuffPlayer
 {
-    public override void GetPassiveSkill()
+    public override void GetSkill()
     {
-        statKind = StatKind.JUMPCOUNT;
+        skillName = SkillName.DoubleJump;
+
+        statKind = StatKind.JumpCount;
         statBuff = 1;
 
-        base.GetPassiveSkill();
+        base.GetSkill();
     }
 }

@@ -1,10 +1,12 @@
-public class AppendMaxAttackCount : PassiveSkillBuff
+public class AppendMaxAttackCount : PassiveSkillBuffPlayer
 {
-    public override void GetPassiveSkill()
+    public override void GetSkill()
     {
-        statKind = StatKind.ATTACKCOUNT;
+        skillName = SkillName.AppendAttack;
+
+        statKind = StatKind.AttackCount;
         statBuff = 1;
 
-        base.GetPassiveSkill();
+        base.GetSkill();
     }
 }

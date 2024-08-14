@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private Animator _animator;
 
     private List<ActiveSkillPlayer> skillList;
-    public List<Skill> specialSkillList = new List<Skill>();
+    private List<Skill> traitList = new List<Skill>();
 
     private ColliderController colliderController;
 
@@ -74,8 +74,8 @@ public class Player : MonoBehaviour
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, PlayerConstant.hpMax},
             {StatKind.ATK, PlayerConstant.atk},
-            {StatKind.JUMPCOUNT, PlayerConstant.jumpCountMax},
-            {StatKind.ATTACKCOUNT, PlayerSkillConstant.attackCountMax}
+            {StatKind.JumpCount, PlayerConstant.jumpCountMax},
+            {StatKind.AttackCount, PlayerSkillConstant.attackCountMax}
         }));
 
         direction = 1;
@@ -146,12 +146,6 @@ public class Player : MonoBehaviour
         if (!gravity) _rigidbody.velocity = Vector3.zero;
     }
 
-    IEnumerator UseSkill()
-    {
-        yield return new WaitForSeconds(0.5f);
-        if (status != PlayerStatus.Dead) SetPlayerStatus(PlayerStatus.Idle);
-    }
-
     public void SetPlayerAnimTrigger(string trigger)
     {
         _animator.SetTrigger(trigger);
@@ -182,26 +176,16 @@ public class Player : MonoBehaviour
         return playerUnit.ChangeCurrentHP(hp);
     }
 
-    public float GetSkillCoolTime(PlayerSkillName skillName)
-    {
-        foreach (ActiveSkillPlayer skill in skillList)
-        {
-            if (skill.skillName == skillName) return skill.GetCoolTime();
-        }
-
-        return 0;
-    }
-
     public void SetTarget(GameObject obj)
     {
-        Dash dash = FindSkill(PlayerSkillName.Dash) as Dash;
+        Dash dash = HaveSkill(SkillName.Dash) as Dash;
 
         dash.SetTarget(obj);
     }
 
     public void CheckResetSkills(GameObject obj)
     {
-        Dash dash = FindSkill(PlayerSkillName.Dash) as Dash;
+        Dash dash = HaveSkill(SkillName.Dash) as Dash;
 
         if (dash.GetTarget() != obj) return;
 
@@ -318,7 +302,23 @@ public class Player : MonoBehaviour
         foreach (var skill in skillList) skill.UpdateSkill();
     }
 
-    public Skill FindSkill(PlayerSkillName name)
+    IEnumerator UseSkill()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (status != PlayerStatus.Dead) SetPlayerStatus(PlayerStatus.Idle);
+    }
+
+    public float GetSkillCoolTime(SkillName skillName)
+    {
+        foreach (ActiveSkillPlayer skill in skillList)
+        {
+            if (skill.skillName == skillName) return skill.GetCoolTime();
+        }
+
+        return 0;
+    }
+
+    public Skill HaveSkill(SkillName name)
     {
         foreach (var skill in skillList)
         {
@@ -326,6 +326,44 @@ public class Player : MonoBehaviour
         }
 
         return null;
+    }
+
+    public bool HaveTrait(SkillName name)
+    {
+        foreach (var trait in traitList)
+        {
+            if (trait.skillName == name) return true;
+        }
+
+        return false;
+    }
+
+    public void AddTrait(SkillName name)
+    {
+        Skill trait = null;
+
+        switch (name)
+        {
+            case SkillName.AppendHP:
+                trait = new AppendMaxHP();
+                break;
+        }
+
+        traitList.Add(trait);
+        trait.GetSkill();
+    }
+
+    public void RemoveTrait(SkillName name)
+    {
+        foreach (var trait in traitList)
+        {
+            if (trait.skillName == name)
+            {
+                traitList.Remove(trait);
+                trait.RemoveSkill();
+                return;
+            }
+        }
     }
 
     public void GetDamaged(int dmg)

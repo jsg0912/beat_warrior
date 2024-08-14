@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Skill
 {
+    public SkillName skillName;
+
     // CoolTime
     protected float coolTimeMax;
     protected float coolTime;
@@ -47,4 +49,8 @@ public class Skill
     protected virtual void SkillMethod() { return; }
 
     protected virtual void CreateAttackPrefab() { return; }
+
+    public virtual void GetSkill() { return; }
+
+    public virtual void RemoveSkill() { return; }
 }

@@ -2,7 +2,7 @@ public enum StatKind
 {
     HP,
     ATK,
-    JUMPCOUNT,
-    ATTACKCOUNT,
-    NULL
+    JumpCount,
+    AttackCount,
+    Null
 }

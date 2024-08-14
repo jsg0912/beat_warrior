@@ -2,7 +2,6 @@ using UnityEngine;
 
 public abstract class ActiveSkillPlayer : ActiveSkill
 {
-    public PlayerSkillName skillName;
     protected KeyCode keyCode;
     protected PlayerStatus status;
 

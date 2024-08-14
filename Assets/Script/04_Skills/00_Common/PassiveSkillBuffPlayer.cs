@@ -1,14 +1,14 @@
-public class PassiveSkillBuff : PassiveSkill
+public class PassiveSkillBuffPlayer : PassiveSkill
 {
     protected StatKind statKind;
     protected int statBuff;
 
-    public override void GetPassiveSkill()
+    public override void GetSkill()
     {
         Player.Instance.playerUnit.unitStat.SetBuffPlus(statKind, statBuff);
     }
 
-    public override void RemovePassiveSkill()
+    public override void RemoveSkill()
     {
         Player.Instance.playerUnit.unitStat.ResetBuffPlus(statKind);
     }

@@ -4,7 +4,7 @@ public class Skill1 : ActiveSkillPlayer
 {
     public override void Initialize()
     {
-        skillName = PlayerSkillName.Skill1;
+        skillName = SkillName.Skill1;
         status = PlayerStatus.Skill1;
 
         damageMultiplier = PlayerSkillConstant.skill1Atk;
