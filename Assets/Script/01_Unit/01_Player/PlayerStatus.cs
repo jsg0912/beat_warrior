@@ -1,13 +1,13 @@
-public enum PLAYERSTATUS
+public enum PlayerStatus
 {
-    IDLE,
-    RUN,
-    JUMP,
-    MARK,
-    DASH,
-    ATTACK,
-    SKILL1,
-    SKILL2,
-    DEAD,
-    NULL
+    Idle,
+    Run,
+    Jump,
+    Mark,
+    Dash,
+    Attack,
+    Skill1,
+    Skill2,
+    Dead,
+    Null
 }

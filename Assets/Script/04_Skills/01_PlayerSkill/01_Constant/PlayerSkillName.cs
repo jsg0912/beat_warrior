@@ -1,10 +1,10 @@
-public enum PLAYERSKILLNAME
+public enum PlayerSkillName
 {
-    ATTACK,
-    MARK,
-    DASH,
-    SKILL1,
-    SKILL2,
-    RECOVERYHP,
-    NULL
+    Attack,
+    Mark,
+    Dash,
+    Skill1,
+    Skill2,
+    RecoveryHP,
+    Null
 }

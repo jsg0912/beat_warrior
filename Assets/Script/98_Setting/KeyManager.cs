@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ACTION
+public enum Action
 {
-    JUMP,
-    DOWN,
-    LEFT,
-    RIGHT,
-    MARK,
-    DASH,
-    ATTACK,
-    SKILL1,
-    SKILL2,
-    INTERACTION,
-    NULL
+    Jump,
+    Down,
+    Left,
+    Right,
+    Mark,
+    Dash,
+    Attack,
+    Skill1,
+    Skill2,
+    Interaction,
+    Null
 }
 
 public static class KeySetting
 {
-    public static Dictionary<ACTION, KeyCode> keys = new Dictionary<ACTION, KeyCode>();
+    public static Dictionary<Action, KeyCode> keys = new Dictionary<Action, KeyCode>();
 }
 
 public class KeyManager : MonoBehaviour
@@ -34,7 +34,7 @@ public class KeyManager : MonoBehaviour
     {
         for (int i = 0; i < defaultKeys.Length; i++)
         {
-            KeySetting.keys.Add((ACTION)i, defaultKeys[i]);
+            KeySetting.keys.Add((Action)i, defaultKeys[i]);
         }
     }
 
@@ -44,11 +44,11 @@ public class KeyManager : MonoBehaviour
 
         if (keyEvent.isKey)
         {
-            KeySetting.keys[(ACTION)key] = keyEvent.keyCode;
+            KeySetting.keys[(Action)key] = keyEvent.keyCode;
             key = -1;
         }
     }
-    
+
     public void ChangeKey(int num)
     {
         key = num;

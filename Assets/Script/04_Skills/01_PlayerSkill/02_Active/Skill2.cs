@@ -6,8 +6,8 @@ public class Skill2 : ActiveSkillPlayer
 
     public override void Initialize()
     {
-        skillName = PLAYERSKILLNAME.SKILL2;
-        status = PLAYERSTATUS.SKILL2;
+        skillName = PlayerSkillName.Skill2;
+        status = PlayerStatus.Skill2;
 
         damageMultiplier = PlayerSkillConstant.skill2Atk;
         dashRange = PlayerSkillConstant.skill2DashRange;
@@ -20,7 +20,7 @@ public class Skill2 : ActiveSkillPlayer
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[ACTION.SKILL2];
+        keyCode = KeySetting.keys[Action.Skill2];
     }
 
     protected override void SkillMethod()

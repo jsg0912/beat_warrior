@@ -13,8 +13,8 @@ public class Dash : ActiveSkillPlayer
 
     public override void Initialize()
     {
-        skillName = PLAYERSKILLNAME.DASH;
-        status = PLAYERSTATUS.DASH;
+        skillName = PlayerSkillName.Dash;
+        status = PlayerStatus.Dash;
 
         damageMultiplier = PlayerSkillConstant.dashAtk;
         coolTimeMax = PlayerSkillConstant.dashCoolTimeMax;
@@ -36,7 +36,7 @@ public class Dash : ActiveSkillPlayer
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[ACTION.DASH];
+        keyCode = KeySetting.keys[Action.Dash];
     }
 
     protected override void TrySkill()
@@ -106,7 +106,7 @@ public class Dash : ActiveSkillPlayer
             return;
         }
 
-        if (Player.Instance.status != PLAYERSTATUS.DASH) return;
+        if (Player.Instance.status != PlayerStatus.Dash) return;
 
         GameObject ghost = GameObject.Instantiate(GhostPrefab, Player.Instance.transform.position, Quaternion.identity);
         ghostDelayTime = ghostDelayTimeMax;

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public abstract class ActiveSkillPlayer : ActiveSkill
 {
-    public PLAYERSKILLNAME skillName;
+    public PlayerSkillName skillName;
     protected KeyCode keyCode;
-    protected PLAYERSTATUS status;
+    protected PlayerStatus status;
 
     protected override void UseSkill()
     {
