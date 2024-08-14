@@ -48,22 +48,22 @@ public class UnitStat
 
     public void ResetBuffPlus(StatKind statKind)
     {
-        buffPlus.Add(statKind, 0);
+        buffPlus[statKind] = 0;
     }
 
     public void ResetBuffMultiply(StatKind statKind)
     {
-        buffMultiply.Add(statKind, 1);
+        buffMultiply[statKind] = 0;
     }
 
     public void SetBuffPlus(StatKind statKind, int value)
     {
-        buffPlus.Add(statKind, value);
+        buffPlus[statKind] = value;
     }
 
     public void SetBuffMultiply(StatKind statKind, int value)
     {
-        buffMultiply.Add(statKind, value);
+        buffMultiply[statKind] = value;
     }
 
     // 소모성까지 고려한 Stat을 얻는 함수
