@@ -66,8 +66,8 @@ public class UIManager : MonoBehaviour
 
     public void RemoveHPUI()
     {
-        Destroy(HP.transform.GetChild(0).gameObject);
-        HPList.RemoveAt(0);
+        Destroy(HP.transform.GetChild(HPList.Count - 1).gameObject);
+        //HPList.RemoveAt(HPList.Count - 1);
     }
 
     private void UpdateHP()
@@ -84,10 +84,9 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < Player.Instance.GetFinalStat(StatKind.HP); i++)
         {
-            if (i > hp) HPList[i].fillAmount = 1;
-            else if (i < hp) HPList[i].fillAmount = 0;
-            else HPList[i].fillAmount
-                    = Player.Instance.GetSkillCoolTime(SkillName.KillRecoveryHP) / PlayerSkillConstant.recoveryHPTimeMax;
+            Debug.Log(Player.Instance.GetFinalStat(StatKind.HP));
+            if (i > hp) HPList[i].gameObject.SetActive(true);
+            else if (i < hp) HPList[i].gameObject.SetActive(false);
         }
     }
 
