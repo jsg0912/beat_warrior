@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
 
     private void UpdateHP()
     {
-        int hp = Player.Instance.GetHP();
+        int hp = Player.Instance.GetCurrentHP();
 
         if (hp == PlayerConstant.hpMax) return;
 
@@ -70,20 +70,20 @@ public class UIManager : MonoBehaviour
         {
             if (i > hp) HPList[i].fillAmount = 1;
             else if (i < hp) HPList[i].fillAmount = 0;
-            else HPList[i].fillAmount 
+            else HPList[i].fillAmount
                     = Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.RECOVERYHP) / PlayerSkillConstant.recoveryHPTimeMax;
         }
     }
 
     private void UpdateCoolTime()
     {
-        MarkImg.GetComponent<Image>().fillAmount 
+        MarkImg.GetComponent<Image>().fillAmount
             = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.MARK) / PlayerSkillConstant.markCoolTimeMax;
-        DashImg.GetComponent<Image>().fillAmount 
+        DashImg.GetComponent<Image>().fillAmount
             = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.DASH) / PlayerSkillConstant.dashCoolTimeMax;
-        Skill1Img.GetComponent<Image>().fillAmount 
+        Skill1Img.GetComponent<Image>().fillAmount
             = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.SKILL1) / PlayerSkillConstant.skill1CoolTimeMax;
-        Skill2Img.GetComponent<Image>().fillAmount 
+        Skill2Img.GetComponent<Image>().fillAmount
             = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.SKILL2) / PlayerSkillConstant.skill2CoolTimeMax;
     }
 
