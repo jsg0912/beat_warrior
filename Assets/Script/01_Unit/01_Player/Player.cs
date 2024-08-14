@@ -81,7 +81,7 @@ public class Player : MonoBehaviour
             new Dash(),
             new Skill1(),
             new Skill2(),
-            new RecoveryHP()
+            //new RecoveryHP()
         };
 
         foreach (var skill in skillList) skill.Initialize();
