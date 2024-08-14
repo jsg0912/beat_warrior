@@ -5,6 +5,7 @@ public class UnitStat
 {
     // TODO: 만약 소모성 Stat이 더 추가가 되면, HP를 StatKind에 분리하고 StatList나 Dictionary도 소모성과 비소모성을 분리해서 따로 두고 바꿔야함 - 신동환, 20240814
     // Stat
+    private bool isFullHP = true; // 속도 개선을 위해 존재함.
     private int currentHP;
     private Dictionary<StatKind, int> stats = new Dictionary<StatKind, int>();
     // Buff
@@ -67,7 +68,7 @@ public class UnitStat
         // TODO: 만약 소모성 Stat이 더 추가가 되면, HP를 StatKind에 분리하고 StatList나 Dictionary도 소모성과 비소모성을 분리해서 따로 두고 바꿔야함 - 신동환, 20240814
         if (statKind == StatKind.HP)
         {
-            return GetCurrentHP();
+            return currentHP;
         }
         else
         {
@@ -88,14 +89,22 @@ public class UnitStat
         }
     }
 
-    private int GetCurrentHP()
-    {
-        return currentHP;
-    }
+    public bool GetIsFUllHP() { return isFullHP; }
 
     public int ChangeCurrentHP(int change)
     {
         currentHP += change;
+        int maxHP = GetFinalStat(StatKind.HP);
+        if (currentHP >= maxHP)
+        {
+            currentHP = maxHP;
+            isFullHP = true;
+        }
+        else
+        {
+            isFullHP = false;
+        }
+
         if (currentHP < 0)
         {
             currentHP = 0;
