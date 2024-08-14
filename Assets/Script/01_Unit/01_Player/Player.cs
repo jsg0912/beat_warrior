@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
             else
             {
                 traitList.Remove(trait);
+                trait.RemoveSkill();
             }
         }
     }

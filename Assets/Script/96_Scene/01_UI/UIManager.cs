@@ -82,7 +82,7 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < PlayerConstant.hpMax; i++)
+        for (int i = 0; i < Player.Instance.GetFinalStat(StatKind.HP); i++)
         {
             if (i > hp) HPList[i].fillAmount = 1;
             else if (i < hp) HPList[i].fillAmount = 0;
