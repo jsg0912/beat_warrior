@@ -328,14 +328,14 @@ public class Player : MonoBehaviour
         return null;
     }
 
-    public bool HaveTrait(SkillName name)
+    public Skill HaveTrait(SkillName name)
     {
         foreach (var trait in traitList)
         {
-            if (trait.skillName == name) return true;
+            if (trait.skillName == name) return trait;
         }
 
-        return false;
+        return null;
     }
 
     public void AddTrait(SkillName name)
@@ -344,7 +344,7 @@ public class Player : MonoBehaviour
 
         switch (name)
         {
-            case SkillName.AppendHP:
+            case SkillName.AppendMaxHP:
                 trait = new AppendMaxHP();
                 break;
         }

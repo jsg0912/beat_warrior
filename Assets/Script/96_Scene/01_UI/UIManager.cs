@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour
             if (i > hp) HPList[i].fillAmount = 1;
             else if (i < hp) HPList[i].fillAmount = 0;
             else HPList[i].fillAmount
-                    = Player.Instance.GetSkillCoolTime(SkillName.RecoveryHP) / PlayerSkillConstant.recoveryHPTimeMax;
+                    = Player.Instance.GetSkillCoolTime(SkillName.KillRecoveryHP) / PlayerSkillConstant.recoveryHPTimeMax;
         }
     }
 

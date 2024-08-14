@@ -19,7 +19,13 @@ public abstract class ActiveSkillPlayer : ActiveSkill
         if (Input.GetKeyDown(keyCode))
         {
             if (Player.Instance.IsUsingSkill() == true) return;
+
             TrySkill();
+
+            if (Player.Instance.HaveTrait(SkillName.SkillReset) != null)
+            {
+                if (Random.Range(0, 10) == 0) coolTime = 0;
+            }
         }
     }
 

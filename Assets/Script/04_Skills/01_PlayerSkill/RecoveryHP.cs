@@ -4,7 +4,7 @@ public class RecoveryHP : ActiveSkillPlayer
 {
     public override void Initialize()
     {
-        skillName = SkillName.RecoveryHP;
+        skillName = SkillName.KillRecoveryHP;
 
         coolTimeMax = PlayerSkillConstant.recoveryHPTimeMax;
         coolTime = coolTimeMax;
