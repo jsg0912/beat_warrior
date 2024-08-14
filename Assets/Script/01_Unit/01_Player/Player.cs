@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public PLAYERSTATUS status;
 
     private int direction;
-    private bool isStop;
+    private bool isMove;
     private bool isInvincibility;
     
     private GameObject targetInfo;
@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.hpMax, PlayerConstant.atk));
 
         direction = 1;
-        isStop = true;
+        isMove = true;
         isInvincibility = false;
     }
 
@@ -90,13 +90,13 @@ public class Player : MonoBehaviour
     {
         this.status = status;
 
+        _animator.SetBool(PlayerConstant.runAnimBool, status == PLAYERSTATUS.RUN);
+        _animator.SetBool(PlayerConstant.jumpAnimBool, status == PLAYERSTATUS.JUMP);
+
         switch (status)
         {
             case PLAYERSTATUS.IDLE:
                 _animator.SetTrigger(PlayerConstant.idleAnimTrigger);
-                break;
-            case PLAYERSTATUS.JUMP:
-                _animator.SetBool(PlayerConstant.jumpAnimBool, true);
                 break;
             case PLAYERSTATUS.ATTACK:
                 _animator.SetTrigger(PlayerSkillConstant.attackAnimTrigger);
@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
                 _animator.SetTrigger(PlayerSkillConstant.skill2AnimTrigger);
                 break;
             case PLAYERSTATUS.DEAD:
-                _animator.SetTrigger(PlayerSkillConstant.dashAnimTrigger);
+                _animator.SetTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
 
@@ -205,23 +205,17 @@ public class Player : MonoBehaviour
 
     private void Move()
     {
-        _animator.SetBool("isRun", false);
-
         if (IsMoveable() == false) return;
 
-        isStop = false;
+        isMove = true;
 
         if (Input.GetKey(KeySetting.keys[ACTION.RIGHT])) SetDirection(1);
         else if (Input.GetKey(KeySetting.keys[ACTION.LEFT])) SetDirection(-1);
-        else isStop = true;
+        else isMove = false;
 
-        if (IsUsingSkill() == false && status != PLAYERSTATUS.JUMP) SetPlayerStatus(isStop ? PLAYERSTATUS.IDLE : PLAYERSTATUS.RUN);
+        if (IsUsingSkill() == false && status != PLAYERSTATUS.JUMP) SetPlayerStatus(isMove ? PLAYERSTATUS.RUN : PLAYERSTATUS.IDLE);
 
-        if (isStop == true) return;
-
-        if (status != PLAYERSTATUS.JUMP) _animator.SetBool("isRun", true);
-
-        transform.position += new Vector3(direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
+        if (isMove == true) transform.position += new Vector3(direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
     private bool IsMoveable()
@@ -235,6 +229,7 @@ public class Player : MonoBehaviour
             case PLAYERSTATUS.MARK:
                 return true;
             default:
+                isMove = false;
                 return false;
         }
     }
@@ -261,7 +256,6 @@ public class Player : MonoBehaviour
             colliderController.PassTile();
 
             SetPlayerStatus(PLAYERSTATUS.JUMP);
-            _animator.SetBool("isJump", true);
         }
     }
 
@@ -269,10 +263,9 @@ public class Player : MonoBehaviour
     {
         if (status == PLAYERSTATUS.JUMP || status == PLAYERSTATUS.DASH) return;
 
-        if (Input.GetKeyDown(KeySetting.keys[ACTION.JUMP]) && !_animator.GetBool("isJump"))
+        if (Input.GetKeyDown(KeySetting.keys[ACTION.JUMP]))
         {
             SetPlayerStatus(PLAYERSTATUS.JUMP);
-            _animator.SetBool("isJump", true);
 
             _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
         }
@@ -353,9 +346,9 @@ public class Player : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
 
-        if (_rigidbody.velocity.y <= 0 && (obj.CompareTag("Tile") || obj.CompareTag("Base")))
+        if (_rigidbody.velocity.y <= 0.5f && (obj.CompareTag("Tile") || obj.CompareTag("Base")))
         {
-            _animator.SetBool("isJump", false);
+            _animator.SetBool(PlayerConstant.jumpAnimBool, false);
             if (status == PLAYERSTATUS.JUMP) SetPlayerStatus(PLAYERSTATUS.IDLE);
             return;
         }
