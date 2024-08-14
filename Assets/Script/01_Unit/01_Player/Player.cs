@@ -46,6 +46,20 @@ public class Player : MonoBehaviour
         }
 
         if (Input.GetKey(KeyCode.B)) RestartPlayer();
+
+        // TODO: 임시 코드(추가특성 장착 및 해제)
+        if (Input.GetKey(KeyCode.Alpha0))
+        {
+            AppendMaxHP trait = (AppendMaxHP)traitList.Find(trait => trait.GetType() == typeof(AppendMaxHP));
+            if (trait == null)
+            {
+                traitList.Add(new AppendMaxHP());
+            }
+            else
+            {
+                traitList.Remove(trait);
+            }
+        }
     }
 
     private void Initialize()
