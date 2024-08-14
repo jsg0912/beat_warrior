@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public abstract class Skill
+public class Skill
 {
     // CoolTime
     protected float coolTimeMax;
     protected float coolTime;
+
     // Damage
     protected int damageMultiplier;
 
     protected GameObject EffectPrefab;
 
-    public abstract void Initialize();
+    public virtual void Initialize() { return; }
 
     public float GetCoolTime()
     {
@@ -41,9 +42,9 @@ public abstract class Skill
         coolTime = coolTimeMax;
     }
 
-    protected abstract void UseSkill();
+    protected virtual void UseSkill() { return; }
 
-    protected abstract void SkillMethod();
+    protected virtual void SkillMethod() { return; }
 
     protected virtual void CreateAttackPrefab() { return; }
 }

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] Text tt;
 
     public static Player Instance;
-    private Unit playerUnit;
+    public Unit playerUnit;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
 
@@ -73,6 +73,8 @@ public class Player : MonoBehaviour
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, PlayerConstant.hpMax},
             {StatKind.ATK, PlayerConstant.atk},
+            {StatKind.JUMPCOUNT, PlayerConstant.jumpCountMax},
+            {StatKind.ATTACKCOUNT, PlayerSkillConstant.attackCountMax}
         }));
 
         direction = 1;
