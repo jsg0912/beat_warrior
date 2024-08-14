@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System;
+using Unity.VisualScripting;
 
 public class UnitStat
 {
@@ -48,22 +49,48 @@ public class UnitStat
 
     public void ResetBuffPlus(StatKind statKind)
     {
-        buffPlus[statKind] = 0;
+        // TODO: 추후 Consumable StatKind이 더 늘어나면 Consumable StatKind인지 확인하는걸로 바꿔야함 - 신동환, 20240814
+        if (statKind == StatKind.HP)
+        {
+            int deltaHP = GetFinalStat(statKind) - GetCurrentStat(statKind);
+            buffPlus[statKind] = 0;
+            int maxHP = GetFinalStat(statKind);
+            currentHP = maxHP - deltaHP;
+            if (currentHP <= 0)
+            {
+                currentHP = 1;
+            }
+        }
+        else
+        {
+            buffPlus[statKind] = 0;
+        }
+
     }
 
     public void ResetBuffMultiply(StatKind statKind)
     {
         buffMultiply[statKind] = 0;
+        // TODO: ResetBuffPlus에 있는 것처럼 Consumable Stat은 Multiply값 변경에 따라 조정하는 과정이 필요함 - 신동환, 20240814
     }
 
     public void SetBuffPlus(StatKind statKind, int value)
     {
         buffPlus[statKind] = value;
+        if (statKind == StatKind.HP)
+        {
+            currentHP += value;
+        }
     }
 
     public void SetBuffMultiply(StatKind statKind, int value)
     {
         buffMultiply[statKind] = value;
+        // TODO: ResetBuffPlus에 있는 것처럼 Consumable Stat은 Multiply값 변경에 따라 조정하는 과정이 필요함 - 신동환, 20240814
+        if (statKind == StatKind.HP)
+        {
+            currentHP *= (1 + value);
+        }
     }
 
     // 소모성까지 고려한 Stat을 얻는 함수
@@ -85,7 +112,7 @@ public class UnitStat
         if (stats.ContainsKey(statKind))
         {
             int stat = stats[statKind];
-            return (int)((stat + buffPlus[statKind]) * buffMultiply[statKind]);
+            return (int)((stat + buffPlus[statKind]) * (1 + buffMultiply[statKind]));
         }
         else
         {
