@@ -1,6 +1,6 @@
 public abstract class PassiveSkill : Skill
 {
-    protected abstract void GetPassiveSkill();
+    public abstract void GetPassiveSkill();
 
-    protected abstract void RemovePassiveSkill();
+    public abstract void RemovePassiveSkill();
 }

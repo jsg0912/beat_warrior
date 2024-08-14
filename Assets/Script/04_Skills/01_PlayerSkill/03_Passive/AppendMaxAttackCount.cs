@@ -1,8 +1,8 @@
-public class DoubleJump : PassiveSkillBuff
+public class AppendMaxAttackCount : PassiveSkillBuff
 {
     public override void GetPassiveSkill()
     {
-        statKind = StatKind.JUMPCOUNT;
+        statKind = StatKind.ATTACKCOUNT;
         statBuff = 1;
 
         base.GetPassiveSkill();
