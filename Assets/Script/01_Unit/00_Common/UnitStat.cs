@@ -25,7 +25,7 @@ public class UnitStat
     {
         foreach (StatKind statKind in Enum.GetValues(typeof(StatKind)))
         {
-            if (Util.isHasKey(stats, statKind) == false)
+            if (stats.ContainsKey(statKind) == false)
             {
                 throw new Exception($"Stat이 없음 ${statKind}");
             }
@@ -77,7 +77,7 @@ public class UnitStat
 
     public int GetFinalStat(StatKind statKind)
     {
-        if (Util.isHasKey(stats, statKind))
+        if (stats.ContainsKey(statKind))
         {
             int stat = stats[statKind];
             return (int)((stat + buffPlus[statKind]) * buffMultiply[statKind]);
