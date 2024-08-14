@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
 
     public PLAYERSTATUS status;
 
+    public List<Skill> specialSkillList = new List<Skill>();
+
     private int direction;
     private int jumpCount;
     private bool isMove;
