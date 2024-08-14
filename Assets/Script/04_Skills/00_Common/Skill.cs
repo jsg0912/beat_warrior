@@ -2,64 +2,48 @@ using UnityEngine;
 
 public abstract class Skill
 {
-    protected KeyCode key;
+    // CoolTime
+    protected float coolTimeMax;
+    protected float coolTime;
+    // Damage
+    protected int damageMultiplier;
 
-    protected int atk;
-    protected float cooltimeMax;
-    protected float cooltime;
-
-    protected GameObject AttackPrefab;
+    protected GameObject EffectPrefab;
 
     public abstract void Initialize();
 
-    public float GetCooltime()
+    public float GetCoolTime()
     {
-        return cooltime;
+        return coolTime;
     }
 
-    protected virtual void CountCooltime()
+    protected virtual void CountCoolTime()
     {
-        if (cooltime <= 0)
-        {
-            cooltime = 0;
-            return;
-        }
-
-        cooltime -= Time.deltaTime;
+        if (coolTime <= 0) return;
+        coolTime -= Time.deltaTime;
     }
 
     public void ResetCoolTime()
     {
-        cooltime = 0;
+        coolTime = 0;
     }
 
-    public virtual void CheckSkill()
+    public virtual void UpdateSkill()
     {
-        if (Player.Instance.IsUsingSkill() == true) return;
-
-        CountCooltime();
-        UpdateKey();
-
-        if (Input.GetKeyDown(key))
-        {
-            PlaySkill();
-        }
+        CountCoolTime();
     }
 
-    protected virtual void PlaySkill()
+    protected virtual void TrySkill()
     {
-        if (cooltime > 0) return;
+        if (coolTime > 0) return;
 
         UseSkill();
-
-        cooltime = cooltimeMax;
+        coolTime = coolTimeMax;
     }
 
     protected abstract void UseSkill();
 
-    protected abstract void CreateAttackPrefab();
-
-    protected abstract void UpdateKey();
-
     protected abstract void SkillMethod();
+
+    protected virtual void CreateAttackPrefab() { return; }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Attack : PlayerSkill
+public class Attack : ActiveSkillPlayer
 {
     private int attackPoint;
     private int attackPointMax;
@@ -10,14 +10,14 @@ public class Attack : PlayerSkill
         skillName = PLAYERSKILLNAME.ATTACK;
         status = PLAYERSTATUS.ATTACK;
 
-        atk = PlayerSkillConstant.attackAtk;
+        damageMultiplier = PlayerSkillConstant.attackAtk;
         attackPoint = PlayerSkillConstant.attackPointMax;
         attackPointMax = PlayerSkillConstant.attackPointMax;
 
-        cooltimeMax = PlayerSkillConstant.attackChargeTimeMax;
-        cooltime = 0;
+        coolTimeMax = PlayerSkillConstant.attackChargeTimeMax;
+        coolTime = 0;
 
-        AttackPrefab = Resources.Load(PlayerSkillConstant.attackPrefab) as GameObject;
+        EffectPrefab = Resources.Load(PlayerSkillConstant.attackPrefab) as GameObject;
     }
 
     public int GetAttackPoint()
@@ -25,37 +25,37 @@ public class Attack : PlayerSkill
         return attackPoint;
     }
 
-    protected override void CountCooltime()
+    protected override void CountCoolTime()
     {
-        if (cooltime > 0)
+        if (coolTime > 0)
         {
-            cooltime -= Time.deltaTime;
+            coolTime -= Time.deltaTime;
             return;
         }
 
         if (attackPoint == attackPointMax)
         {
-            cooltime = 0;
+            coolTime = 0;
             return;
         }
 
         attackPoint++;
 
-        cooltime = cooltimeMax;
+        coolTime = coolTimeMax;
     }
 
-    protected override void PlaySkill()
+    protected override void TrySkill()
     {
         if (attackPoint <= 0) return;
 
-        if (attackPoint == attackPointMax) cooltime = cooltimeMax;
+        if (attackPoint == attackPointMax) coolTime = coolTimeMax;
 
         UseSkill();
     }
 
     protected override void UpdateKey()
     {
-        key = KeySetting.keys[ACTION.ATTACK];
+        keyCode = KeySetting.keys[ACTION.ATTACK];
     }
 
     protected override void SkillMethod()

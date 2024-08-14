@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Skill2 : PlayerSkill
+public class Skill2 : ActiveSkillPlayer
 {
     private float dashRange;
 
@@ -9,18 +9,18 @@ public class Skill2 : PlayerSkill
         skillName = PLAYERSKILLNAME.SKILL2;
         status = PLAYERSTATUS.SKILL2;
 
-        atk = PlayerSkillConstant.skill2Atk;
+        damageMultiplier = PlayerSkillConstant.skill2Atk;
         dashRange = PlayerSkillConstant.skill2DashRange;
 
-        cooltimeMax = PlayerSkillConstant.skill2CoolTimeMax;
-        cooltime = 0;
+        coolTimeMax = PlayerSkillConstant.skill2CoolTimeMax;
+        coolTime = 0;
 
-        AttackPrefab = Resources.Load(PlayerSkillConstant.skill2Prefab) as GameObject;
+        EffectPrefab = Resources.Load(PlayerSkillConstant.skill2Prefab) as GameObject;
     }
 
     protected override void UpdateKey()
     {
-        key = KeySetting.keys[ACTION.SKILL2];
+        keyCode = KeySetting.keys[ACTION.SKILL2];
     }
 
     protected override void SkillMethod()

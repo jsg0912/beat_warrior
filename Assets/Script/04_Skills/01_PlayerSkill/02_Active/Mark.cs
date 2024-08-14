@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Mark : PlayerSkill
+public class Mark : ActiveSkillPlayer
 {
     private GameObject MarkerPrefab;
 
@@ -9,15 +9,15 @@ public class Mark : PlayerSkill
         skillName = PLAYERSKILLNAME.MARK;
         status = PLAYERSTATUS.MARK;
 
-        cooltimeMax = PlayerSkillConstant.dashCoolTimeMax;
-        cooltime = 0;
+        coolTimeMax = PlayerSkillConstant.dashCoolTimeMax;
+        coolTime = 0;
 
         MarkerPrefab = Resources.Load("Prefab/Marker") as GameObject;
     }
 
     protected override void UpdateKey()
     {
-        key = KeySetting.keys[ACTION.MARK];
+        keyCode = KeySetting.keys[ACTION.MARK];
     }
 
     protected override void SkillMethod()

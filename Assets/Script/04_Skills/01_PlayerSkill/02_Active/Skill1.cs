@@ -1,23 +1,23 @@
 using UnityEngine;
 
-public class Skill1 : PlayerSkill
+public class Skill1 : ActiveSkillPlayer
 {
     public override void Initialize()
     {
         skillName = PLAYERSKILLNAME.SKILL1;
         status = PLAYERSTATUS.SKILL1;
 
-        atk = PlayerSkillConstant.skill1Atk;
+        damageMultiplier = PlayerSkillConstant.skill1Atk;
 
-        cooltimeMax = PlayerSkillConstant.skill1CoolTimeMax;
-        cooltime = 0;
+        coolTimeMax = PlayerSkillConstant.skill1CoolTimeMax;
+        coolTime = 0;
 
-        AttackPrefab = Resources.Load(PlayerSkillConstant.skill1Prefab) as GameObject;
+        EffectPrefab = Resources.Load(PlayerSkillConstant.skill1Prefab) as GameObject;
     }
 
     protected override void UpdateKey()
     {
-        key = KeySetting.keys[ACTION.SKILL1];
+        keyCode = KeySetting.keys[ACTION.SKILL1];
     }
 
     protected override void SkillMethod()

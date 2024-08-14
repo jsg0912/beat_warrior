@@ -1,32 +1,32 @@
 using UnityEngine;
 
-public class RecoveryHP : PlayerSkill
+public class RecoveryHP : ActiveSkillPlayer
 {
     public override void Initialize()
     {
         skillName = PLAYERSKILLNAME.RECOVERYHP;
 
-        cooltimeMax = PlayerSkillConstant.recoveryHPTimeMax;
-        cooltime = cooltimeMax;
+        coolTimeMax = PlayerSkillConstant.recoveryHPTimeMax;
+        coolTime = coolTimeMax;
     }
 
-    protected override void CountCooltime()
+    protected override void CountCoolTime()
     {
         if (Player.Instance.GetHP() == Player.Instance.GetFinalStat(StatKind.HP))
         {
-            cooltime = cooltimeMax;
+            coolTime = coolTimeMax;
             return;
         }
 
-        if (cooltime > 0)
+        if (coolTime > 0)
         {
-            cooltime -= Time.deltaTime;
+            coolTime -= Time.deltaTime;
             return;
         }
 
         Player.Instance.ChangeCurrentHP(1);
 
-        cooltime = cooltimeMax;
+        coolTime = coolTimeMax;
     }
 
     protected override void SkillMethod() { }

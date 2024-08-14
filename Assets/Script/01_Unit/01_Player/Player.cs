@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Animator _animator;
 
-    private List<PlayerSkill> skillList;
+    private List<ActiveSkillPlayer> skillList;
 
     private ColliderController colliderController;
 
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     private int jumpCount;
     private bool isMove;
     private bool isInvincibility;
-    
+
     private GameObject targetInfo;
 
     void Start()
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         _animator = GetComponent<Animator>();
         colliderController = GetComponent<ColliderController>();
 
-        skillList = new List<PlayerSkill>
+        skillList = new List<ActiveSkillPlayer>
         {
             new Attack(),
             new Mark(),
@@ -181,9 +181,9 @@ public class Player : MonoBehaviour
 
     public float GetSkillCoolTime(PLAYERSKILLNAME skillName)
     {
-        foreach (PlayerSkill skill in skillList)
+        foreach (ActiveSkillPlayer skill in skillList)
         {
-            if (skill.skillName == skillName) return skill.GetCooltime();
+            if (skill.skillName == skillName) return skill.GetCoolTime();
         }
 
         return 0;
@@ -202,7 +202,7 @@ public class Player : MonoBehaviour
 
         if (dash.GetTarget() != obj) return;
 
-        foreach (PlayerSkill playerSkill in skillList)
+        foreach (ActiveSkillPlayer playerSkill in skillList)
         {
             playerSkill.ResetCoolTime();
         }
@@ -312,12 +312,12 @@ public class Player : MonoBehaviour
 
     private void Skill()
     {
-        foreach (var skill in skillList) skill.CheckSkill();
+        foreach (var skill in skillList) skill.UpdateSkill();
     }
 
     public Skill FindSkill(PLAYERSKILLNAME name)
     {
-        foreach(var skill in skillList)
+        foreach (var skill in skillList)
         {
             if (skill.skillName == name) return skill;
         }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Dash : PlayerSkill
+public class Dash : ActiveSkillPlayer
 {
     private List<GameObject> DashTargetMonster;
     private GameObject TargetMonster;
@@ -16,9 +16,9 @@ public class Dash : PlayerSkill
         skillName = PLAYERSKILLNAME.DASH;
         status = PLAYERSTATUS.DASH;
 
-        atk = PlayerSkillConstant.dashAtk;
-        cooltimeMax = PlayerSkillConstant.dashCoolTimeMax;
-        cooltime = 0;
+        damageMultiplier = PlayerSkillConstant.dashAtk;
+        coolTimeMax = PlayerSkillConstant.dashCoolTimeMax;
+        coolTime = 0;
 
         DashTargetMonster = new List<GameObject>();
 
@@ -27,30 +27,30 @@ public class Dash : PlayerSkill
         GhostPrefab = Resources.Load("Prefab/Ghost") as GameObject;
     }
 
-    public override void CheckSkill()
+    public override void UpdateSkill()
     {
-        base.CheckSkill();
+        base.UpdateSkill();
 
         Ghost();
     }
 
     protected override void UpdateKey()
     {
-        key = KeySetting.keys[ACTION.DASH];
+        keyCode = KeySetting.keys[ACTION.DASH];
     }
 
-    protected override void PlaySkill()
+    protected override void TrySkill()
     {
         if (TargetMonster == null) return;
 
-        if (cooltime <= 0) return;
+        if (coolTime <= 0) return;
 
         UseSkill();
     }
 
     protected override void SkillMethod()
     {
-        cooltime = 0;
+        coolTime = 0;
 
         Transform playerTransform = Player.Instance.transform;
 
@@ -80,7 +80,7 @@ public class Dash : PlayerSkill
         {
             if (obj.CompareTag("Monster"))
             {
-                obj.GetComponent<Monster>().GetDamaged(atk);
+                obj.GetComponent<Monster>().GetDamaged(damageMultiplier);
             }
         }
 
@@ -90,7 +90,7 @@ public class Dash : PlayerSkill
     public void SetTarget(GameObject obj)
     {
         TargetMonster = obj;
-        cooltime = cooltimeMax;
+        coolTime = coolTimeMax;
     }
 
     public GameObject GetTarget()
