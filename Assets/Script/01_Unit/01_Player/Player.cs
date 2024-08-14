@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] Text tt;
 
     public static Player Instance;
-    public Unit playerUnit;
+    private Unit playerUnit;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
 
@@ -71,7 +70,10 @@ public class Player : MonoBehaviour
         status = PLAYERSTATUS.IDLE;
         _animator.SetTrigger("idle");
 
-        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.hpMax, PlayerConstant.atk));
+        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, PlayerConstant.hpMax},
+            {StatKind.ATK, PlayerConstant.atk},
+        }));
 
         isInvincibility = false;
         direction = 1;
@@ -146,12 +148,17 @@ public class Player : MonoBehaviour
 
     public int GetHP()
     {
-        return playerUnit.unitStat.hp;
+        return playerUnit.GetHP();
     }
 
-    public void SetHP(int hp)
+    public int GetFinalStat(StatKind statKind)
     {
-        playerUnit.unitStat.hp = hp;
+        return playerUnit.unitStat.GetFinalStat(statKind);
+    }
+
+    public void ChangeCurrentHP(int hp)
+    {
+        playerUnit.unitStat.ChangeCurrentHP(hp);
     }
 
     public float GetSkillCoolTime(PLAYERSKILLNAME skillName)
@@ -271,7 +278,7 @@ public class Player : MonoBehaviour
     {
         if (isInvincibility || GetHP() <= 0) return;
 
-        playerUnit.unitStat.hp -= dmg;
+        ChangeCurrentHP(-dmg);
 
         if (GetHP() <= 0)
         {

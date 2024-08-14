@@ -2,13 +2,9 @@ using UnityEngine;
 
 public class RecoveryHP : PlayerSkill
 {
-    private int hpMax;
-
     public override void Initialize()
     {
         skillName = PLAYERSKILLNAME.RECOVERYHP;
-
-        hpMax = PlayerConstant.hpMax;
 
         cooltimeMax = PlayerSkillConstant.recoveryHPTimeMax;
         cooltime = cooltimeMax;
@@ -16,7 +12,7 @@ public class RecoveryHP : PlayerSkill
 
     protected override void CountCooltime()
     {
-        if (Player.Instance.GetHP() == hpMax)
+        if (Player.Instance.GetHP() == Player.Instance.GetFinalStat(StatKind.HP))
         {
             cooltime = cooltimeMax;
             return;
@@ -28,7 +24,7 @@ public class RecoveryHP : PlayerSkill
             return;
         }
 
-        Player.Instance.SetHP(Player.Instance.GetHP() + 1);
+        Player.Instance.ChangeCurrentHP(1);
 
         cooltime = cooltimeMax;
     }

@@ -13,12 +13,7 @@ public class Unit
 
     public int GetHP()
     {
-        return unitStat.hp;
-    }
-
-    public void SetHP(int hp)
-    {
-        unitStat.hp = hp;
+        return unitStat.GetCurrentStat(StatKind.HP);
     }
 
     public void SetDead()
