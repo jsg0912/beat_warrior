@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     private ColliderController colliderController;
 
-    public PLAYERSTATUS status;
+    public PlayerStatus status;
 
     private int direction;
     private int jumpCount;
@@ -33,12 +33,12 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (status != PLAYERSTATUS.DEAD) Move();
+        if (status != PlayerStatus.Dead) Move();
     }
 
     void Update()
     {
-        if (status != PLAYERSTATUS.DEAD)
+        if (status != PlayerStatus.Dead)
         {
             Jump();
             Down();
@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
 
         foreach (var skill in skillList) skill.Initialize();
 
-        SetPlayerStatus(PLAYERSTATUS.IDLE);
+        SetPlayerStatus(PlayerStatus.Idle);
 
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, PlayerConstant.hpMax},
@@ -89,39 +89,39 @@ public class Player : MonoBehaviour
         Initialize();
     }
 
-    public PLAYERSTATUS GetPlayerStatus()
+    public PlayerStatus GetPlayerStatus()
     {
         return status;
     }
 
-    public void SetPlayerStatus(PLAYERSTATUS status)
+    public void SetPlayerStatus(PlayerStatus status)
     {
         this.status = status;
 
-        _animator.SetBool(PlayerConstant.runAnimBool, status == PLAYERSTATUS.RUN);
-        _animator.SetBool(PlayerConstant.jumpAnimBool, status == PLAYERSTATUS.JUMP);
+        _animator.SetBool(PlayerConstant.runAnimBool, status == PlayerStatus.Run);
+        _animator.SetBool(PlayerConstant.jumpAnimBool, status == PlayerStatus.Jump);
 
         switch (status)
         {
-            case PLAYERSTATUS.IDLE:
+            case PlayerStatus.Idle:
                 _animator.SetTrigger(PlayerConstant.idleAnimTrigger);
                 break;
-            case PLAYERSTATUS.ATTACK:
+            case PlayerStatus.Attack:
                 _animator.SetTrigger(PlayerSkillConstant.attackAnimTrigger);
                 break;
-            case PLAYERSTATUS.DASH:
+            case PlayerStatus.Dash:
                 _animator.SetTrigger(PlayerSkillConstant.dashAnimTrigger);
                 break;
-            case PLAYERSTATUS.MARK:
+            case PlayerStatus.Mark:
                 _animator.SetTrigger(PlayerSkillConstant.markAnimTrigger);
                 break;
-            case PLAYERSTATUS.SKILL1:
+            case PlayerStatus.Skill1:
                 _animator.SetTrigger(PlayerSkillConstant.skill1AnimTrigger);
                 break;
-            case PLAYERSTATUS.SKILL2:
+            case PlayerStatus.Skill2:
                 _animator.SetTrigger(PlayerSkillConstant.skill2AnimTrigger);
                 break;
-            case PLAYERSTATUS.DEAD:
+            case PlayerStatus.Dead:
                 _animator.SetTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
     IEnumerator UseSkill()
     {
         yield return new WaitForSeconds(0.5f);
-        if (status != PLAYERSTATUS.DEAD) SetPlayerStatus(PLAYERSTATUS.IDLE);
+        if (status != PlayerStatus.Dead) SetPlayerStatus(PlayerStatus.Idle);
     }
 
     public void SetPlayerAnimTrigger(string trigger)
@@ -182,7 +182,7 @@ public class Player : MonoBehaviour
         return playerUnit.ChangeCurrentHP(hp);
     }
 
-    public float GetSkillCoolTime(PLAYERSKILLNAME skillName)
+    public float GetSkillCoolTime(PlayerSkillName skillName)
     {
         foreach (ActiveSkillPlayer skill in skillList)
         {
@@ -194,14 +194,14 @@ public class Player : MonoBehaviour
 
     public void SetTarget(GameObject obj)
     {
-        Dash dash = FindSkill(PLAYERSKILLNAME.DASH) as Dash;
+        Dash dash = FindSkill(PlayerSkillName.Dash) as Dash;
 
         dash.SetTarget(obj);
     }
 
     public void CheckResetSkills(GameObject obj)
     {
-        Dash dash = FindSkill(PLAYERSKILLNAME.DASH) as Dash;
+        Dash dash = FindSkill(PlayerSkillName.Dash) as Dash;
 
         if (dash.GetTarget() != obj) return;
 
@@ -222,11 +222,11 @@ public class Player : MonoBehaviour
 
         isMove = true;
 
-        if (Input.GetKey(KeySetting.keys[ACTION.RIGHT])) SetDirection(1);
-        else if (Input.GetKey(KeySetting.keys[ACTION.LEFT])) SetDirection(-1);
+        if (Input.GetKey(KeySetting.keys[Action.Right])) SetDirection(1);
+        else if (Input.GetKey(KeySetting.keys[Action.Left])) SetDirection(-1);
         else isMove = false;
 
-        if (IsUsingSkill() == false && status != PLAYERSTATUS.JUMP) SetPlayerStatus(isMove ? PLAYERSTATUS.RUN : PLAYERSTATUS.IDLE);
+        if (IsUsingSkill() == false && status != PlayerStatus.Jump) SetPlayerStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
 
         if (isMove == true) transform.position += new Vector3(direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
@@ -235,11 +235,11 @@ public class Player : MonoBehaviour
     {
         switch (status)
         {
-            case PLAYERSTATUS.IDLE:
-            case PLAYERSTATUS.RUN:
-            case PLAYERSTATUS.JUMP:
-            case PLAYERSTATUS.ATTACK:
-            case PLAYERSTATUS.MARK:
+            case PlayerStatus.Idle:
+            case PlayerStatus.Run:
+            case PlayerStatus.Jump:
+            case PlayerStatus.Attack:
+            case PlayerStatus.Mark:
                 return true;
             default:
                 isMove = false;
@@ -251,11 +251,11 @@ public class Player : MonoBehaviour
     {
         switch (status)
         {
-            case PLAYERSTATUS.ATTACK:
-            case PLAYERSTATUS.MARK:
-            case PLAYERSTATUS.DASH:
-            case PLAYERSTATUS.SKILL1:
-            case PLAYERSTATUS.SKILL2:
+            case PlayerStatus.Attack:
+            case PlayerStatus.Mark:
+            case PlayerStatus.Dash:
+            case PlayerStatus.Skill1:
+            case PlayerStatus.Skill2:
                 return true;
             default:
                 return false;
@@ -264,11 +264,11 @@ public class Player : MonoBehaviour
 
     private void Down()
     {
-        if (Input.GetKeyDown(KeySetting.keys[ACTION.DOWN]))
+        if (Input.GetKeyDown(KeySetting.keys[Action.Down]))
         {
             colliderController.PassTile();
 
-            SetPlayerStatus(PLAYERSTATUS.JUMP);
+            SetPlayerStatus(PlayerStatus.Jump);
         }
     }
 
@@ -276,9 +276,9 @@ public class Player : MonoBehaviour
     {
         if (IsUsingSkill() == true || jumpCount == 0) return;
 
-        if (Input.GetKeyDown(KeySetting.keys[ACTION.JUMP]))
+        if (Input.GetKeyDown(KeySetting.keys[Action.Jump]))
         {
-            SetPlayerStatus(PLAYERSTATUS.JUMP);
+            SetPlayerStatus(PlayerStatus.Jump);
 
             jumpCount--;
 
@@ -318,7 +318,7 @@ public class Player : MonoBehaviour
         foreach (var skill in skillList) skill.UpdateSkill();
     }
 
-    public Skill FindSkill(PLAYERSKILLNAME name)
+    public Skill FindSkill(PlayerSkillName name)
     {
         foreach (var skill in skillList)
         {
@@ -355,7 +355,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        SetPlayerStatus(PLAYERSTATUS.DEAD);
+        SetPlayerStatus(PlayerStatus.Dead);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -365,7 +365,7 @@ public class Player : MonoBehaviour
         if (_rigidbody.velocity.y <= 0.5f && (obj.CompareTag("Tile") || obj.CompareTag("Base")))
         {
             _animator.SetBool(PlayerConstant.jumpAnimBool, false);
-            if (status == PLAYERSTATUS.JUMP) SetPlayerStatus(PLAYERSTATUS.IDLE);
+            if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
             jumpCount = PlayerConstant.jumpCountMax;
             return;
         }

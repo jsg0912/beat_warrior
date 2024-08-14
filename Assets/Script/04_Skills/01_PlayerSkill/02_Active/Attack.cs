@@ -7,8 +7,8 @@ public class Attack : ActiveSkillPlayer
 
     public override void Initialize()
     {
-        skillName = PLAYERSKILLNAME.ATTACK;
-        status = PLAYERSTATUS.ATTACK;
+        skillName = PlayerSkillName.Attack;
+        status = PlayerStatus.Attack;
 
         damageMultiplier = PlayerSkillConstant.attackAtk;
         attackCount = PlayerSkillConstant.attackCountMax;
@@ -55,7 +55,7 @@ public class Attack : ActiveSkillPlayer
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[ACTION.ATTACK];
+        keyCode = KeySetting.keys[Action.Attack];
     }
 
     protected override void SkillMethod()

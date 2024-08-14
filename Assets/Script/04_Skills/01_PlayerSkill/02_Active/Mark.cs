@@ -6,8 +6,8 @@ public class Mark : ActiveSkillPlayer
 
     public override void Initialize()
     {
-        skillName = PLAYERSKILLNAME.MARK;
-        status = PLAYERSTATUS.MARK;
+        skillName = PlayerSkillName.Mark;
+        status = PlayerStatus.Mark;
 
         coolTimeMax = PlayerSkillConstant.dashCoolTimeMax;
         coolTime = 0;
@@ -17,7 +17,7 @@ public class Mark : ActiveSkillPlayer
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[ACTION.MARK];
+        keyCode = KeySetting.keys[Action.Mark];
     }
 
     protected override void SkillMethod()

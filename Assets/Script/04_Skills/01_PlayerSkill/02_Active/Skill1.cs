@@ -4,8 +4,8 @@ public class Skill1 : ActiveSkillPlayer
 {
     public override void Initialize()
     {
-        skillName = PLAYERSKILLNAME.SKILL1;
-        status = PLAYERSTATUS.SKILL1;
+        skillName = PlayerSkillName.Skill1;
+        status = PlayerStatus.Skill1;
 
         damageMultiplier = PlayerSkillConstant.skill1Atk;
 
@@ -17,7 +17,7 @@ public class Skill1 : ActiveSkillPlayer
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[ACTION.SKILL1];
+        keyCode = KeySetting.keys[Action.Skill1];
     }
 
     protected override void SkillMethod()

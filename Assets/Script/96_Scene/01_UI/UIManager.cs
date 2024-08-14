@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < txt.Length; i++)
         {
-            txt[i].text = KeySetting.keys[(ACTION)i].ToString();
+            txt[i].text = KeySetting.keys[(Action)i].ToString();
         }
 
         InitializeHP();
@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < txt.Length; i++)
         {
-            txt[i].text = KeySetting.keys[(ACTION)i].ToString();
+            txt[i].text = KeySetting.keys[(Action)i].ToString();
         }
     }
 
@@ -71,20 +71,20 @@ public class UIManager : MonoBehaviour
             if (i > hp) HPList[i].fillAmount = 1;
             else if (i < hp) HPList[i].fillAmount = 0;
             else HPList[i].fillAmount
-                    = Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.RECOVERYHP) / PlayerSkillConstant.recoveryHPTimeMax;
+                    = Player.Instance.GetSkillCoolTime(PlayerSkillName.RecoveryHP) / PlayerSkillConstant.recoveryHPTimeMax;
         }
     }
 
     private void UpdateCoolTime()
     {
         MarkImg.GetComponent<Image>().fillAmount
-            = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.MARK) / PlayerSkillConstant.markCoolTimeMax;
+            = 1 - Player.Instance.GetSkillCoolTime(PlayerSkillName.Mark) / PlayerSkillConstant.markCoolTimeMax;
         DashImg.GetComponent<Image>().fillAmount
-            = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.DASH) / PlayerSkillConstant.dashCoolTimeMax;
+            = 1 - Player.Instance.GetSkillCoolTime(PlayerSkillName.Dash) / PlayerSkillConstant.dashCoolTimeMax;
         Skill1Img.GetComponent<Image>().fillAmount
-            = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.SKILL1) / PlayerSkillConstant.skill1CoolTimeMax;
+            = 1 - Player.Instance.GetSkillCoolTime(PlayerSkillName.Skill1) / PlayerSkillConstant.skill1CoolTimeMax;
         Skill2Img.GetComponent<Image>().fillAmount
-            = 1 - Player.Instance.GetSkillCoolTime(PLAYERSKILLNAME.SKILL2) / PlayerSkillConstant.skill2CoolTimeMax;
+            = 1 - Player.Instance.GetSkillCoolTime(PlayerSkillName.Skill2) / PlayerSkillConstant.skill2CoolTimeMax;
     }
 
     private void AppearGameSet()
