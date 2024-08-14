@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
     public void RemoveHPUI()
     {
         Destroy(HP.transform.GetChild(HPList.Count - 1).gameObject);
-        //HPList.RemoveAt(HPList.Count - 1);
+        HPList.RemoveAt(HPList.Count - 1);
     }
 
     private void UpdateHP()
@@ -84,9 +84,8 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < Player.Instance.GetFinalStat(StatKind.HP); i++)
         {
-            Debug.Log(Player.Instance.GetFinalStat(StatKind.HP));
-            if (i > hp) HPList[i].gameObject.SetActive(true);
-            else if (i < hp) HPList[i].gameObject.SetActive(false);
+            if (i >= hp) HPList[i].gameObject.SetActive(true);
+            else HPList[i].gameObject.SetActive(false);
         }
     }
 
