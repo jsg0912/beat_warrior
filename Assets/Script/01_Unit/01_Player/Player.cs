@@ -50,18 +50,7 @@ public class Player : MonoBehaviour
         // TODO: 임시 코드(추가특성 장착 및 해제)
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            AppendMaxHP trait = (AppendMaxHP)traitList.Find(trait => trait.GetType() == typeof(AppendMaxHP));
-            if (trait == null)
-            {
-                trait = new AppendMaxHP(this.gameObject);
-                traitList.Add(trait);
-                trait.GetSkill();
-            }
-            else
-            {
-                traitList.Remove(trait);
-                trait.RemoveSkill();
-            }
+            AddOrRemoveTrait(SkillName.AppendMaxHP);
         }
     }
 
@@ -338,6 +327,12 @@ public class Player : MonoBehaviour
         return null;
     }
 
+    public void AddOrRemoveTrait(SkillName name)
+    {
+        if (HaveTrait(name) == null) AddTrait(name);
+        else RemoveTrait(name);
+    }
+
     public void AddTrait(SkillName name)
     {
         Skill trait = null;
@@ -350,7 +345,6 @@ public class Player : MonoBehaviour
         }
 
         traitList.Add(trait);
-        trait.GetSkill();
     }
 
     public void RemoveTrait(SkillName name)
