@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-
 public class Unit
 {
     private bool isAlive = true;
@@ -11,10 +9,9 @@ public class Unit
         return isAlive;
     }
 
-    public int GetCurrentHP()
-    {
-        return unitStat.GetCurrentStat(StatKind.HP);
-    }
+    public bool GetIsFUllHP() { return unitStat.GetIsFUllHP(); }
+
+    public int GetCurrentHP() { return unitStat.GetCurrentStat(StatKind.HP); }
 
     public bool ChangeCurrentHP(int change)
     {
