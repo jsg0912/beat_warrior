@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
 
         direction = 1;
         remainJumpCount = PlayerConstant.jumpCountMax;
-        isMove = true;
+        isMove = false;
         isInvincibility = false;
     }
 
@@ -193,11 +193,19 @@ public class Player : MonoBehaviour
     {
         if (IsMoveable() == false) return;
 
-        isMove = true;
+        isMove = false;
 
-        if (Input.GetKey(KeySetting.keys[Action.Right])) SetDirection(1);
-        else if (Input.GetKey(KeySetting.keys[Action.Left])) SetDirection(-1);
-        else isMove = false;
+        if (Input.GetKey(KeySetting.keys[Action.Right]))
+        {
+            SetDirection(1);
+            isMove = true;
+        }
+
+        if (Input.GetKey(KeySetting.keys[Action.Left]))
+        {
+            SetDirection(-1);
+            isMove = true;
+        }
 
         if (IsUsingSkill() == false && status != PlayerStatus.Jump) SetPlayerStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
 
