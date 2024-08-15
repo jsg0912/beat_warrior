@@ -8,12 +8,6 @@ public class Arrow : MonoBehaviour
         Destroy(this.gameObject, 1.0f);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject obj = collision.gameObject;
