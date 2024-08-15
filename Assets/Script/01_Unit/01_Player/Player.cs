@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     private Animator _animator;
 
     private List<ActiveSkillPlayer> skillList;
-    private List<Skill> traitList = new List<Skill>();
+    private List<Skill> traitList = new();
 
     private ColliderController colliderController;
 
@@ -389,7 +389,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(timer);
         isInvincibility = false;
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
