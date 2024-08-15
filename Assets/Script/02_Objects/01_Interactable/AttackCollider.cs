@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AttackCollider : MonoBehaviour
 {
-    [SerializeField] private bool knockback;
+    [SerializeField] private bool knockBack;
 
     protected int atk;
     private float attackForce;
@@ -22,7 +22,7 @@ public class AttackCollider : MonoBehaviour
         this.atk = atk;
     }
 
-    private void Knockback(GameObject obj)
+    private void KnockBack(GameObject obj)
     {
         int dir = Player.Instance.transform.position.x < obj.transform.position.x ? 1 : -1;
         obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * attackForce, 0.0f), ForceMode2D.Impulse);
@@ -36,7 +36,7 @@ public class AttackCollider : MonoBehaviour
 
         if (TargetMonster.Contains(obj)) return;
 
-        if (knockback) Knockback(obj);
+        if (knockBack) KnockBack(obj);
 
         obj.GetComponent<Monster>().GetDamaged(atk);
         TargetMonster.Add(obj);

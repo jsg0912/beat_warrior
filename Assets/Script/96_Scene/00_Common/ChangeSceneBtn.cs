@@ -20,6 +20,4 @@ public class ChangeSceneBtn : Button
                 break;
         }
     }
-
-
 }

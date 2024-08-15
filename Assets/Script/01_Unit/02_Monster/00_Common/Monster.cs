@@ -13,7 +13,6 @@ public class Monster : MonoBehaviour
     private Vector3 HpPos;
     private GameObject Obj;
 
-
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -67,7 +66,6 @@ public class Monster : MonoBehaviour
 
     protected virtual void Die()
     {
-
         Player.Instance.CheckResetSkills(this.gameObject);
         if (Player.Instance.HaveTrait(SkillName.KillRecoveryHP) != null)
         {

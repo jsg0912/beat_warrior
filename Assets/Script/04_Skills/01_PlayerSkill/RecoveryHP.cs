@@ -12,7 +12,7 @@ public class RecoveryHP : ActiveSkillPlayer
 
     protected override void CountCoolTime()
     {
-        if (Player.Instance.playerUnit.unitStat.GetIsFUllHP() == true)
+        if (Player.Instance.GetIsFullHP() == true)
         {
             coolTime = coolTimeMax;
             return;

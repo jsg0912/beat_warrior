@@ -111,7 +111,7 @@ public class Dash : ActiveSkillPlayer
             return;
         }
 
-        if (Player.Instance.status != PlayerStatus.Dash) return;
+        if (Player.Instance.GetPlayerStatus() != PlayerStatus.Dash) return;
 
         GameObject ghost = GameObject.Instantiate(GhostPrefab, Player.Instance.transform.position, Quaternion.identity);
         ghostDelayTime = ghostDelayTimeMax;
