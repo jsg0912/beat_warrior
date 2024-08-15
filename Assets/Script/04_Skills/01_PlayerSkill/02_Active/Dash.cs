@@ -11,7 +11,9 @@ public class Dash : ActiveSkillPlayer
     private float ghostDelayTimeMax;
     private GameObject GhostPrefab;
 
-    public override void Initialize()
+    public Dash(GameObject unit) : base(unit) { }
+
+    public override void GetSkill()
     {
         skillName = SkillName.Dash;
         status = PlayerStatus.Dash;

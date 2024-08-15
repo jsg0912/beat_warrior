@@ -5,7 +5,7 @@ public class Attack : ActiveSkillPlayer
 {
     private int attackCount;
 
-    private bool isCharging;
+    public Attack(GameObject unit) : base(unit) { }
 
     public override void GetSkill()
     {
@@ -17,8 +17,6 @@ public class Attack : ActiveSkillPlayer
 
         coolTimeMax = PlayerSkillConstant.attackChargeTimeMax;
         coolTime = 0;
-
-        isCharging = false;
 
         EffectPrefab = Resources.Load(PlayerSkillConstant.attackPrefab) as GameObject;
     }
@@ -41,6 +39,9 @@ public class Attack : ActiveSkillPlayer
         coolTime = 0;
 
         attackCount++;
+
+        if (attackCount < Player.Instance.GetFinalStat(StatKind.AttackCount))
+            unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 
     protected override void TrySkill()

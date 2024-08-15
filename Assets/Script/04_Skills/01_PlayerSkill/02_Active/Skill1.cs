@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class Skill1 : ActiveSkillPlayer
 {
-    public override void Initialize()
+    public Skill1(GameObject unit) : base(unit) { }
+
+    public override void GetSkill()
     {
         skillName = SkillName.Skill1;
         status = PlayerStatus.Skill1;

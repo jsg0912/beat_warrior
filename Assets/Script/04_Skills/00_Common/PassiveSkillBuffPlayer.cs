@@ -1,7 +1,11 @@
+using UnityEngine;
+
 public class PassiveSkillBuffPlayer : PassiveSkill
 {
     protected StatKind statKind;
     protected int statBuff;
+
+    public PassiveSkillBuffPlayer(GameObject unit) : base(unit) { }
 
     public override void GetSkill()
     {

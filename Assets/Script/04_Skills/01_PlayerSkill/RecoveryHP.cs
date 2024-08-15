@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class RecoveryHP : ActiveSkillPlayer
 {
-    public override void Initialize()
+    public RecoveryHP(GameObject unit) : base(unit) { }
+
+    public override void GetSkill()
     {
         skillName = SkillName.KillRecoveryHP;
 
@@ -10,23 +13,20 @@ public class RecoveryHP : ActiveSkillPlayer
         coolTime = coolTimeMax;
     }
 
-    protected override void CountCoolTime()
+    protected override IEnumerator CountCoolTime()
     {
-        if (Player.Instance.GetIsFullHP() == true)
-        {
-            coolTime = coolTimeMax;
-            return;
-        }
+        coolTime = coolTimeMax;
 
-        if (coolTime > 0)
+        while (coolTime > 0)
         {
             coolTime -= Time.deltaTime;
-            return;
+            yield return null;
         }
 
         Player.Instance.ChangeCurrentHP(1);
 
-        coolTime = coolTimeMax;
+        if (Player.Instance.GetIsFullHP() == false)
+            unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 
     protected override void SkillMethod() { }

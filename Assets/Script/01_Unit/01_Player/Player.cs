@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
             AppendMaxHP trait = (AppendMaxHP)traitList.Find(trait => trait.GetType() == typeof(AppendMaxHP));
             if (trait == null)
             {
-                trait = new AppendMaxHP();
+                trait = new AppendMaxHP(this.gameObject);
                 traitList.Add(trait);
                 trait.GetSkill();
             }
@@ -76,14 +76,12 @@ public class Player : MonoBehaviour
 
         skillList = new List<ActiveSkillPlayer>
         {
-            new Attack(),
-            new Mark(),
-            new Dash(),
-            new Skill1(),
-            new Skill2()
+            new Attack(this.gameObject),
+            new Mark(this.gameObject),
+            new Dash(this.gameObject),
+            new Skill1(this.gameObject),
+            new Skill2(this.gameObject)
         };
-
-        foreach (var skill in skillList) skill.Initialize();
 
         SetPlayerStatus(PlayerStatus.Idle);
 
@@ -347,7 +345,7 @@ public class Player : MonoBehaviour
         switch (name)
         {
             case SkillName.AppendMaxHP:
-                trait = new AppendMaxHP();
+                trait = new AppendMaxHP(this.gameObject);
                 break;
         }
 

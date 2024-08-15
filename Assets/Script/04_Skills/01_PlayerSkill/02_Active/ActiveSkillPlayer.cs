@@ -5,6 +5,8 @@ public abstract class ActiveSkillPlayer : ActiveSkill
     protected KeyCode keyCode;
     protected PlayerStatus status;
 
+    protected ActiveSkillPlayer(GameObject unit) : base(unit) { }
+
     protected override void UseSkill()
     {
         Player.Instance.SetPlayerStatus(status);

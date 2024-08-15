@@ -22,6 +22,10 @@ public class Skill
         GetSkill();
     }
 
+    public virtual void GetSkill() { return; }
+
+    public virtual void RemoveSkill() { return; }
+
     public float GetCoolTime()
     {
         return coolTime;
@@ -61,8 +65,4 @@ public class Skill
     protected virtual void SkillMethod() { return; }
 
     protected virtual void CreateAttackPrefab() { return; }
-
-    public virtual void GetSkill() { return; }
-
-    public virtual void RemoveSkill() { return; }
 }

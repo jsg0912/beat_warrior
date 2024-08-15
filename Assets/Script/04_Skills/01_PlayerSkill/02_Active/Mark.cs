@@ -4,7 +4,9 @@ public class Mark : ActiveSkillPlayer
 {
     private GameObject MarkerPrefab;
 
-    public override void Initialize()
+    public Mark(GameObject unit) : base(unit) { }
+
+    public override void GetSkill()
     {
         skillName = SkillName.Mark;
         status = PlayerStatus.Mark;
