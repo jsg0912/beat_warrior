@@ -16,7 +16,7 @@ public class Unit
     public bool ChangeCurrentHP(int change)
     {
         int currentHP = unitStat.ChangeCurrentHP(change);
-        if (currentHP < 0)
+        if (currentHP <= 0)
         {
             isAlive = false;
         }
