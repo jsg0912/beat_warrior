@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     private ColliderController colliderController;
 
-    public PlayerStatus status;
+    private PlayerStatus status;
 
     private int direction;
     private int jumpCount;
@@ -106,11 +106,15 @@ public class Player : MonoBehaviour
         Initialize();
     }
 
-    public PlayerStatus GetPlayerStatus()
-    {
-        return status;
-    }
+    // GET Functions
+    public PlayerStatus GetPlayerStatus() { return status; }
+    public int GetDirection() { return direction; }
+    public bool GetIsFullHP() { return playerUnit.GetIsFUllHP(); }
+    public int GetCurrentHP() { return playerUnit.GetCurrentHP(); }
+    public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
+    public GameObject GetTargetInfo() { return targetInfo; }
 
+    // SET Functions
     public void SetPlayerStatus(PlayerStatus status)
     {
         this.status = status;
@@ -146,11 +150,6 @@ public class Player : MonoBehaviour
         if (IsUsingSkill() == true) StartCoroutine(UseSkill());
     }
 
-    public int GetDirection()
-    {
-        return direction;
-    }
-
     public void SetDirection(int dir)
     {
         direction = dir;
@@ -178,16 +177,6 @@ public class Player : MonoBehaviour
         _rigidbody.AddForce(force * direction * dir, ForceMode2D.Impulse);
     }
 
-    public int GetCurrentHP()
-    {
-        return playerUnit.GetCurrentHP();
-    }
-
-    public int GetFinalStat(StatKind statKind)
-    {
-        return playerUnit.unitStat.GetFinalStat(statKind);
-    }
-
     public bool ChangeCurrentHP(int hp)
     {
         return playerUnit.ChangeCurrentHP(hp);
@@ -200,6 +189,8 @@ public class Player : MonoBehaviour
         dash.SetTarget(obj);
     }
 
+    private void SetDead() { SetPlayerStatus(PlayerStatus.Dead); }
+
     public void CheckResetSkills(GameObject obj)
     {
         Dash dash = HaveSkill(SkillName.Dash) as Dash;
@@ -210,11 +201,6 @@ public class Player : MonoBehaviour
         {
             playerSkill.ResetCoolTime();
         }
-    }
-
-    public GameObject GetTargetInfo()
-    {
-        return targetInfo;
     }
 
     private void Move()
@@ -391,7 +377,7 @@ public class Player : MonoBehaviour
 
         if (isAlive == false)
         {
-            Die();
+            SetDead();
             return;
         }
 
@@ -408,10 +394,6 @@ public class Player : MonoBehaviour
         isInvincibility = false;
     }
 
-    private void Die()
-    {
-        SetPlayerStatus(PlayerStatus.Dead);
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
