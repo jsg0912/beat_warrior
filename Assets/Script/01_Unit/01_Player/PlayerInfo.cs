@@ -1,6 +1,6 @@
 public class PlayerInfo : UnitInfo
 {
-    public string playerName;
+    public string playerName; // User's Nickname
 
     public PlayerInfo(string playerName, string description = null)
     {
