@@ -97,7 +97,8 @@ public class Dash : ActiveSkillPlayer
     public void SetTarget(GameObject obj)
     {
         TargetMonster = obj;
-        coolTime = coolTimeMax;
+
+        unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 
     public GameObject GetTarget()
