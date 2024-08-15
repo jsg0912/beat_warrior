@@ -1,21 +1,24 @@
+using System.Collections;
 using UnityEngine;
 
 public class Attack : ActiveSkillPlayer
 {
     private int attackCount;
-    private int attackCountMax;
 
-    public override void Initialize()
+    private bool isCharging;
+
+    public override void GetSkill()
     {
         skillName = SkillName.Attack;
         status = PlayerStatus.Attack;
 
         damageMultiplier = PlayerSkillConstant.attackAtk;
         attackCount = PlayerSkillConstant.attackCountMax;
-        attackCountMax = PlayerSkillConstant.attackCountMax;
 
         coolTimeMax = PlayerSkillConstant.attackChargeTimeMax;
         coolTime = 0;
+
+        isCharging = false;
 
         EffectPrefab = Resources.Load(PlayerSkillConstant.attackPrefab) as GameObject;
     }
@@ -25,30 +28,27 @@ public class Attack : ActiveSkillPlayer
         return attackCount;
     }
 
-    protected override void CountCoolTime()
+    protected override IEnumerator CountCoolTime()
     {
-        if (coolTime > 0)
+        coolTime = coolTimeMax;
+
+        while (coolTime > 0)
         {
             coolTime -= Time.deltaTime;
-            return;
+            yield return null;
         }
 
-        if (attackCount == attackCountMax)
-        {
-            coolTime = 0;
-            return;
-        }
+        coolTime = 0;
 
         attackCount++;
-
-        coolTime = coolTimeMax;
     }
 
     protected override void TrySkill()
     {
         if (attackCount <= 0) return;
 
-        if (attackCount == attackCountMax) coolTime = coolTimeMax;
+        if (attackCount == Player.Instance.GetFinalStat(StatKind.AttackCount))
+            unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
 
         UseSkill();
     }

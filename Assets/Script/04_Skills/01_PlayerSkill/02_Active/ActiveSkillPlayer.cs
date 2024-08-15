@@ -13,7 +13,6 @@ public abstract class ActiveSkillPlayer : ActiveSkill
 
     public override void UpdateSkill()
     {
-        base.UpdateSkill();
         UpdateKey();
 
         if (Input.GetKeyDown(keyCode))

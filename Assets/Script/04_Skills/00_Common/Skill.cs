@@ -1,7 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class Skill
 {
+    protected GameObject unit;
     public SkillName skillName;
 
     // CoolTime
@@ -13,17 +15,29 @@ public class Skill
 
     protected GameObject EffectPrefab;
 
-    public virtual void Initialize() { return; }
+    public Skill(GameObject unit)
+    {
+        this.unit = unit;
+
+        GetSkill();
+    }
 
     public float GetCoolTime()
     {
         return coolTime;
     }
 
-    protected virtual void CountCoolTime()
+    protected virtual IEnumerator CountCoolTime()
     {
-        if (coolTime <= 0) return;
-        coolTime -= Time.deltaTime;
+        coolTime = coolTimeMax;
+
+        while (coolTime > 0)
+        {
+            coolTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        coolTime = 0;
     }
 
     public void ResetCoolTime()
@@ -31,17 +45,15 @@ public class Skill
         coolTime = 0;
     }
 
-    public virtual void UpdateSkill()
-    {
-        CountCoolTime();
-    }
+    public virtual void UpdateSkill() { }
 
     protected virtual void TrySkill()
     {
         if (coolTime > 0) return;
 
         UseSkill();
-        coolTime = coolTimeMax;
+
+        unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 
     protected virtual void UseSkill() { return; }
