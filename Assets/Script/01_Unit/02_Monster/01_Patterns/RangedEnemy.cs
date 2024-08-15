@@ -128,7 +128,6 @@ public class RangedEnemy : Pattern
         Arrow.GetComponent<Rigidbody2D>().velocity = direction.normalized * arrowSpeed;
 
         SetMove();
-
     }
 
     public override Pattern Copy()
