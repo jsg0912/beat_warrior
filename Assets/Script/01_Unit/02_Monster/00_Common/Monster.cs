@@ -48,11 +48,6 @@ public class Monster : MonoBehaviour
 
         bool isAlive = monsterUnit.ChangeCurrentHP(-dmg);
 
-        if (Player.Instance.HaveTrait(SkillName.Execution) != null)
-        {
-            if (monsterUnit.GetCurrentHP() == 1) isAlive = monsterUnit.ChangeCurrentHP(-1);
-        }
-
         if (isAlive == false)
         {
             Die();
@@ -62,16 +57,13 @@ public class Monster : MonoBehaviour
         Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetCurrentHP());
 
         anim.SetTrigger("hurt");
+
+        Player.Instance.HitMonsterFuncList(monsterUnit);
     }
 
     protected virtual void Die()
     {
         Player.Instance.CheckResetSkills(this.gameObject);
-        if (Player.Instance.HaveTrait(SkillName.KillRecoveryHP) != null)
-        {
-            Skill trait = Player.Instance.HaveTrait(SkillName.KillRecoveryHP);
-            (trait as KillRecoveryHP).CountkillMonster();
-        }
         anim.SetTrigger("die");
         Destroy(gameObject, 2.0f);
         Destroy(Target);

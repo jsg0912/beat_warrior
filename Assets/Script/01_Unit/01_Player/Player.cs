@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +18,16 @@ public class Player : MonoBehaviour
 
     private ColliderController colliderController;
 
-    private PlayerStatus status;
+    [SerializeField] private PlayerStatus status;
 
     private int direction;
     private int remainJumpCount;
     private bool isInvincibility;
 
     private GameObject targetInfo;
+
+    public delegate void HitMonsterFunc(MonsterUnit monster);
+    public HitMonsterFunc HitMonsterFuncList = null;
 
     void Start()
     {
