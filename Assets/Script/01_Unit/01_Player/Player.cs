@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (status != PlayerStatus.Dead) Move();
+        if (status != PlayerStatus.Dead) CheckMove();
     }
 
     void Update()
@@ -189,7 +189,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Move()
+    private void CheckMove()
     {
         if (IsMoveable() == false) return;
 
