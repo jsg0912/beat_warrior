@@ -10,10 +10,12 @@ public class PassiveSkillBuffPlayer : PassiveSkill
     public override void GetSkill()
     {
         Player.Instance.playerUnit.unitStat.SetBuffPlus(statKind, statBuff);
+        Player.Instance.UpdateStat();
     }
 
     public override void RemoveSkill()
     {
         Player.Instance.playerUnit.unitStat.ResetBuffPlus(statKind);
+        Player.Instance.UpdateStat();
     }
 }
