@@ -46,11 +46,11 @@ public class Monster : MonoBehaviour
     {
         if (monsterUnit.GetIsAlive() == false) return;
 
-        bool isAlive = monsterUnit.ChangeCurrentHP(-dmg);
+        monsterUnit.ChangeCurrentHP(-dmg);
 
         if (Player.Instance.HitMonsterFuncList != null) Player.Instance.HitMonsterFuncList(monsterUnit);
 
-        if (isAlive == false)
+        if (monsterUnit.GetIsAlive() == false)
         {
             Die();
             return;
