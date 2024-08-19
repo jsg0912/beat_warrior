@@ -56,6 +56,26 @@ public class Player : MonoBehaviour
         {
             AddOrRemoveTrait(SkillName.AppendMaxHP);
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            AddOrRemoveTrait(SkillName.DoubleJump);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            AddOrRemoveTrait(SkillName.Execution);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            AddOrRemoveTrait(SkillName.KillRecoveryHP);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            AddOrRemoveTrait(SkillName.AppendAttack);
+        }
     }
 
     private void Initialize()

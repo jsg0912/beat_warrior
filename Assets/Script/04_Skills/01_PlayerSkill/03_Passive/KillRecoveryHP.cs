@@ -10,7 +10,7 @@ public class KillRecoveryHP : PassiveSkill
     public override void GetSkill()
     {
         killMonsterCount = 0;
-        killMonsterCountMax = 10;
+        killMonsterCountMax = 3;
 
         Player.Instance.HitMonsterFuncList += CountkillMonster;
     }
