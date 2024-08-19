@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,18 +14,20 @@ public class Player : MonoBehaviour
     private Animator _animator;
 
     private List<ActiveSkillPlayer> skillList;
-    private List<Skill> traitList = new List<Skill>();
+    private List<Skill> traitList = new();
 
     private ColliderController colliderController;
 
-    private PlayerStatus status;
+    [SerializeField] private PlayerStatus status;
 
     private int direction;
     private int remainJumpCount;
-    private bool isMove;
     private bool isInvincibility;
 
     private GameObject targetInfo;
+
+    public delegate void HitMonsterFunc(MonsterUnit monster);
+    public HitMonsterFunc HitMonsterFuncList = null;
 
     void Start()
     {
@@ -83,7 +86,6 @@ public class Player : MonoBehaviour
 
         direction = 1;
         remainJumpCount = PlayerConstant.jumpCountMax;
-        isMove = true;
         isInvincibility = false;
     }
 
@@ -193,11 +195,19 @@ public class Player : MonoBehaviour
     {
         if (IsMoveable() == false) return;
 
-        isMove = true;
+        bool isMove = false;
 
-        if (Input.GetKey(KeySetting.keys[Action.Right])) SetDirection(1);
-        else if (Input.GetKey(KeySetting.keys[Action.Left])) SetDirection(-1);
-        else isMove = false;
+        if (Input.GetKey(KeySetting.keys[Action.Right]))
+        {
+            SetDirection(1);
+            isMove = true;
+        }
+        
+        if (Input.GetKey(KeySetting.keys[Action.Left]))
+        {
+            SetDirection(-1);
+            isMove = true;
+        }
 
         if (IsUsingSkill() == false && status != PlayerStatus.Jump) SetPlayerStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
 
@@ -215,7 +225,6 @@ public class Player : MonoBehaviour
             case PlayerStatus.Mark:
                 return true;
             default:
-                isMove = false;
                 return false;
         }
     }
@@ -384,7 +393,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(timer);
         isInvincibility = false;
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

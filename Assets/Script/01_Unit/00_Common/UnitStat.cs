@@ -8,10 +8,10 @@ public class UnitStat
     // Stat
     private bool isFullHP = true; // 속도 개선을 위해 존재함.
     private int currentHP;
-    private Dictionary<StatKind, int> stats = new Dictionary<StatKind, int>();
+    private Dictionary<StatKind, int> stats = new();
     // Buff
-    private Dictionary<StatKind, int> buffPlus = new Dictionary<StatKind, int>();
-    private Dictionary<StatKind, float> buffMultiply = new Dictionary<StatKind, float>();
+    private Dictionary<StatKind, int> buffPlus = new();
+    private Dictionary<StatKind, float> buffMultiply = new();
 
     public UnitStat(Dictionary<StatKind, int> stats)
     {
