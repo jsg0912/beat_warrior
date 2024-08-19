@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class Inventory
 {
-    private Essence essence = new Essence();
+    private Spirit spirit = new Spirit();
     private List<Item> items = new List<Item>();
 
     public void initialize()
@@ -20,13 +20,13 @@ public class Inventory
         return items.Find(item => item.GetType() == typeof(T));
     }
 
-    public int GetEssenceNumber()
+    public int GetSpiriteNumber()
     {
-        return essence.GetNumber();
+        return spirit.GetNumber();
     }
 
-    public void IncreaseEssence(int number)
+    public void IncreaseSpirit(int number)
     {
-        essence.Increase(number);
+        spirit.Increase(number);
     }
 }

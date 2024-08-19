@@ -14,7 +14,7 @@ public class KillRecoveryHP : PassiveSkill
         recoveryHP = 1;
 
         killMonsterCount = 0;
-        killMonsterCountMax = 3;
+        killMonsterCountMax = 10;
 
         Player.Instance.HitMonsterFuncList += CountkillMonster;
     }
