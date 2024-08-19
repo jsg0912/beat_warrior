@@ -48,6 +48,8 @@ public class Monster : MonoBehaviour
 
         bool isAlive = monsterUnit.ChangeCurrentHP(-dmg);
 
+        Player.Instance.HitMonsterFuncList(monsterUnit);
+
         if (isAlive == false)
         {
             Die();
@@ -57,8 +59,6 @@ public class Monster : MonoBehaviour
         Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetCurrentHP());
 
         anim.SetTrigger("hurt");
-
-        Player.Instance.HitMonsterFuncList(monsterUnit);
     }
 
     protected virtual void Die()
