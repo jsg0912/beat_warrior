@@ -368,12 +368,7 @@ public class Player : MonoBehaviour
 
     public Skill HaveTrait(SkillName name)
     {
-        foreach (var trait in traitList)
-        {
-            if (trait.skillName == name) return trait;
-        }
-
-        return null;
+        return traitList.Find(trait => trait.skillName == name);
     }
 
     public void AddOrRemoveTrait(SkillName name)
@@ -410,15 +405,7 @@ public class Player : MonoBehaviour
 
     public void RemoveTrait(SkillName name)
     {
-        foreach (var trait in traitList)
-        {
-            if (trait.skillName == name)
-            {
-                traitList.Remove(trait);
-                trait.RemoveSkill();
-                return;
-            }
-        }
+        traitList.RemoveAll(trait => trait.skillName == name);
     }
 
     public void GetDamaged(int dmg)
