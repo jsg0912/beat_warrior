@@ -404,7 +404,15 @@ public class Player : MonoBehaviour
 
     public void RemoveTrait(SkillName name)
     {
-        traitList.RemoveAll(trait => trait.skillName == name);
+        foreach (var trait in traitList)
+        {
+            if (trait.skillName == name)
+            {
+                traitList.Remove(trait);
+                trait.RemoveSkill();
+                return;
+            }
+        }
     }
 
     public void GetDamaged(int dmg)
