@@ -15,9 +15,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image DashImg;
     [SerializeField] private Image Skill1Img;
     [SerializeField] private Image Skill2Img;
+    [SerializeField] private Image AttackImg;
 
     public TextMeshProUGUI[] txt;
     public GameObject menuSet;
+
+    private void Awake()
+    {
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);
+
+        HPPrefab = Resources.Load("Prefab/HP") as GameObject;
+        HPList = new();
+    }
 
     private void Start()
     {
@@ -25,16 +35,12 @@ public class UIManager : MonoBehaviour
         {
             txt[i].text = KeySetting.keys[(Action)i].ToString();
         }
-
-        InitializeHP();
     }
 
     private void Update()
     {
-        UpdateHP();
         UpdateCoolTime();
         AppearGameSet();
-
 
         for (int i = 0; i < txt.Length; i++)
         {
@@ -42,49 +48,36 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void InitializeHP()
+    public void SetHPUI(int hp)
     {
-        Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-
-        HPPrefab = Resources.Load("Prefab/HP") as GameObject;
-        HPList = new List<Image>();
-
-        for (int i = 0; i < PlayerConstant.hpMax; i++)
+        HPList.Clear();
+        foreach (Transform child in HP.GetComponentInChildren<Transform>())
         {
-            AddHPUI();
+            Destroy(child.gameObject);
+        }
+
+        for (int i = 0; i < hp; i++)
+        {
+            GameObject hpui = Instantiate(HPPrefab);
+            hpui.transform.SetParent(HP.transform, false);
+            HPList.Add(hpui.transform.GetChild(0).GetComponent<Image>());
         }
     }
 
-    public void AddHPUI()
-    {
-        GameObject hp = Instantiate(HPPrefab);
-        hp.transform.SetParent(HP.transform, false);
-        HPList.Add(hp.transform.GetChild(0).GetComponent<Image>());
-    }
-
-    public void RemoveHPUI()
-    {
-        Destroy(HP.transform.GetChild(HPList.Count - 1).gameObject);
-        HPList.RemoveAt(HPList.Count - 1);
-    }
-
-    private void UpdateHP()
+    public void UpdateHPUI()
     {
         int hp = Player.Instance.GetCurrentHP();
 
-        if (hp == Player.Instance.GetFinalStat(StatKind.HP)) return;
-
         if (hp == 0)
         {
-            foreach (Image image in HPList) image.fillAmount = 1;
+            foreach (Image image in HPList) image.gameObject.SetActive(true);
             return;
         }
 
         for (int i = 0; i < Player.Instance.GetFinalStat(StatKind.HP); i++)
         {
-            if (i >= hp) HPList[i].gameObject.SetActive(true);
-            else HPList[i].gameObject.SetActive(false);
+            if (i < hp) HPList[i].gameObject.SetActive(false);
+            else HPList[i].gameObject.SetActive(true);
         }
     }
 
@@ -98,6 +91,8 @@ public class UIManager : MonoBehaviour
             = 1 - Player.Instance.GetSkillCoolTime(SkillName.Skill1) / PlayerSkillConstant.skill1CoolTimeMax;
         Skill2Img.GetComponent<Image>().fillAmount
             = 1 - Player.Instance.GetSkillCoolTime(SkillName.Skill2) / PlayerSkillConstant.skill2CoolTimeMax;
+        AttackImg.GetComponent<Image>().fillAmount
+            = 1 - Player.Instance.GetSkillCoolTime(SkillName.Attack) / PlayerSkillConstant.attackChargeTimeMax;
     }
 
     private void AppearGameSet()

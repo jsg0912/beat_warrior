@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerStatus status;
 
     private int direction;
+    private int maxJumpCount;
     private int remainJumpCount;
     private bool isInvincibility;
 
@@ -47,6 +48,8 @@ public class Player : MonoBehaviour
             Down();
             Skill();
         }
+
+        tt.text = GetFinalStat(StatKind.AttackCount).ToString();
 
         if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
 
@@ -82,9 +85,12 @@ public class Player : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
 
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
-        colliderController = GetComponent<ColliderController>();
+        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, PlayerConstant.hpMax},
+            {StatKind.ATK, PlayerConstant.atk},
+            {StatKind.JumpCount, PlayerConstant.jumpCountMax},
+            {StatKind.AttackCount, PlayerSkillConstant.attackCountMax}
+        }));
 
         skillList = new List<ActiveSkillPlayer>
         {
@@ -95,23 +101,32 @@ public class Player : MonoBehaviour
             new Skill2(this.gameObject)
         };
 
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        colliderController = GetComponent<ColliderController>();
+
         SetPlayerStatus(PlayerStatus.Idle);
 
-        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
-            {StatKind.HP, PlayerConstant.hpMax},
-            {StatKind.ATK, PlayerConstant.atk},
-            {StatKind.JumpCount, PlayerConstant.jumpCountMax},
-            {StatKind.AttackCount, PlayerSkillConstant.attackCountMax}
-        }));
-
         direction = 1;
-        remainJumpCount = PlayerConstant.jumpCountMax;
         isInvincibility = false;
+
+        UpdateStat();
     }
 
     public void RestartPlayer()
     {
         Initialize();
+    }
+
+    public void UpdateStat()
+    {
+        maxJumpCount = GetFinalStat(StatKind.JumpCount);
+        remainJumpCount = maxJumpCount;
+
+        UIManager.Instance.SetHPUI(GetFinalStat(StatKind.HP));
+        UIManager.Instance.UpdateHPUI();
+
+        (HaveSkill(SkillName.Attack) as Attack).CheckCoolTime();
     }
 
     // GET Functions
@@ -187,7 +202,11 @@ public class Player : MonoBehaviour
 
     public bool ChangeCurrentHP(int hp)
     {
-        return playerUnit.ChangeCurrentHP(hp);
+        bool currentHP = playerUnit.ChangeCurrentHP(hp);
+
+        UIManager.Instance.UpdateHPUI();
+
+        return currentHP;
     }
 
     public void SetTarget(GameObject obj)
@@ -366,6 +385,18 @@ public class Player : MonoBehaviour
             case SkillName.AppendMaxHP:
                 trait = new AppendMaxHP(this.gameObject);
                 break;
+            case SkillName.DoubleJump:
+                trait = new DoubleJump(this.gameObject);
+                break;
+            case SkillName.AppendAttack:
+                trait = new AppendMaxAttackCount(this.gameObject);
+                break;
+            case SkillName.Execution:
+                trait = new Execution(this.gameObject);
+                break;
+            case SkillName.KillRecoveryHP:
+                trait = new KillRecoveryHP(this.gameObject);
+                break;
         }
 
         traitList.Add(trait);
@@ -409,7 +440,7 @@ public class Player : MonoBehaviour
         {
             _animator.SetBool(PlayerConstant.jumpAnimBool, false);
             if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
-            remainJumpCount = PlayerConstant.jumpCountMax;
+            remainJumpCount = maxJumpCount;
             return;
         }
     }

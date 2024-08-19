@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class KillRecoveryHP : PassiveSkill
 {
+    private int recoveryHP;
+
     private int killMonsterCount;
     private int killMonsterCountMax;
 
@@ -9,6 +11,8 @@ public class KillRecoveryHP : PassiveSkill
 
     public override void GetSkill()
     {
+        recoveryHP = 1;
+
         killMonsterCount = 0;
         killMonsterCountMax = 3;
 
@@ -23,7 +27,7 @@ public class KillRecoveryHP : PassiveSkill
 
         if (killMonsterCount < killMonsterCountMax) return;
 
-        Player.Instance.ChangeCurrentHP(1);
+        Player.Instance.ChangeCurrentHP(recoveryHP);
         killMonsterCount = 0;
     }
 

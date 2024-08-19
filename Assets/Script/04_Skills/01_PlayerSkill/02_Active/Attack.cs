@@ -4,6 +4,7 @@ using UnityEngine;
 public class Attack : ActiveSkillPlayer
 {
     private int attackCount;
+    private bool isCharging;
 
     public Attack(GameObject unit) : base(unit) { }
 
@@ -14,6 +15,8 @@ public class Attack : ActiveSkillPlayer
 
         damageMultiplier = PlayerSkillConstant.attackAtk;
         attackCount = PlayerSkillConstant.attackCountMax;
+
+        isCharging = false;
 
         coolTimeMax = PlayerSkillConstant.attackChargeTimeMax;
         coolTime = 0;
@@ -29,6 +32,7 @@ public class Attack : ActiveSkillPlayer
     protected override IEnumerator CountCoolTime()
     {
         coolTime = coolTimeMax;
+        isCharging = true;
 
         while (coolTime > 0)
         {
@@ -37,21 +41,27 @@ public class Attack : ActiveSkillPlayer
         }
 
         coolTime = 0;
+        isCharging = false;
 
         attackCount++;
 
-        if (attackCount < Player.Instance.GetFinalStat(StatKind.AttackCount))
-            unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
+        CheckCoolTime();
     }
 
     protected override void TrySkill()
     {
         if (attackCount <= 0) return;
 
-        if (attackCount == Player.Instance.GetFinalStat(StatKind.AttackCount))
-            unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
-
         UseSkill();
+        CheckCoolTime();
+    }
+
+    public void CheckCoolTime()
+    {
+        if (isCharging == true) return;
+
+        if (attackCount < Player.Instance.GetFinalStat(StatKind.AttackCount))
+            unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 
     protected override void UpdateKey()
