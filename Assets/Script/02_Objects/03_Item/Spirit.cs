@@ -1,8 +1,8 @@
-public class Essence : Item
+public class Spirit : Item
 {
     private int number;
 
-    public Essence()
+    public Spirit()
     {
         number = 0;
     }
