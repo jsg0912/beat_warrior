@@ -29,9 +29,9 @@ public class Dash : ActiveSkillPlayer
         GhostPrefab = Resources.Load("Prefab/Ghost") as GameObject;
     }
 
-    public override void UpdateSkill()
+    public override void CheckInputKeyCode()
     {
-        base.UpdateSkill();
+        base.CheckInputKeyCode();
 
         Ghost();
     }

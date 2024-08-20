@@ -336,7 +336,7 @@ public class Player : MonoBehaviour
 
     private void Skill()
     {
-        foreach (var skill in skillList) skill.UpdateSkill();
+        foreach (var skill in skillList) skill.CheckInputKeyCode();
     }
 
     IEnumerator UseSkill()
