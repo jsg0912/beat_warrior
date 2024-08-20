@@ -1,15 +1,20 @@
+using System.Collections.Generic;
+
 public class PlayerSkillConstant
 {
     public const int attackCountMax = 2;
     public const float attackKnockbackRange = 3.0f;
     public const float skill2DashRange = 2.0f;
 
+    public static Dictionary<SkillName, float> SkillCoolTime = new() {
+        { SkillName.Attack, 4.0f },
+        { SkillName.Mark, 8.0f },
+        { SkillName.Dash, 8.0f },
+        { SkillName.Skill1, 8.0f },
+        { SkillName.Skill2, 8.0f }
+    };
+
     public const float recoveryHPTimeMax = 10.0f;
-    public const float attackChargeTimeMax = 4.0f;
-    public const float markCoolTimeMax = 8.0f;
-    public const float dashCoolTimeMax = 8.0f;
-    public const float skill1CoolTimeMax = 8.0f;
-    public const float skill2CoolTimeMax = 8.0f;
     public const float ghostDelayTimeMax = 0.05f;
 
     public const int attackAtk = 1;

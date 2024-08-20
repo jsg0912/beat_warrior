@@ -11,11 +11,10 @@ public class UIManager : MonoBehaviour
     private GameObject HPPrefab;
     private List<Image> HPList;
 
-    [SerializeField] private Image MarkImg;
-    [SerializeField] private Image DashImg;
-    [SerializeField] private Image Skill1Img;
-    [SerializeField] private Image Skill2Img;
-    [SerializeField] private Image AttackImg;
+    [SerializeField] private List<Image> SkillCoolTimeImgList;
+    private Dictionary<SkillName, Image> SkillCoolTimeImg = new();
+
+    [SerializeField] private TextMeshProUGUI SpiritText;
 
     public TextMeshProUGUI[] txt;
     public GameObject menuSet;
@@ -27,6 +26,12 @@ public class UIManager : MonoBehaviour
 
         HPPrefab = Resources.Load("Prefab/HP") as GameObject;
         HPList = new();
+
+        SkillCoolTimeImg.Add(SkillName.Mark, SkillCoolTimeImgList[0]);
+        SkillCoolTimeImg.Add(SkillName.Dash, SkillCoolTimeImgList[1]);
+        SkillCoolTimeImg.Add(SkillName.Skill1, SkillCoolTimeImgList[2]);
+        SkillCoolTimeImg.Add(SkillName.Skill2, SkillCoolTimeImgList[3]);
+        SkillCoolTimeImg.Add(SkillName.Attack, SkillCoolTimeImgList[4]);
     }
 
     private void Start()
@@ -89,16 +94,9 @@ public class UIManager : MonoBehaviour
 
     private void UpdateCoolTime()
     {
-        MarkImg.GetComponent<Image>().fillAmount
-            = 1 - Player.Instance.GetSkillCoolTime(SkillName.Mark) / PlayerSkillConstant.markCoolTimeMax;
-        DashImg.GetComponent<Image>().fillAmount
-            = 1 - Player.Instance.GetSkillCoolTime(SkillName.Dash) / PlayerSkillConstant.dashCoolTimeMax;
-        Skill1Img.GetComponent<Image>().fillAmount
-            = 1 - Player.Instance.GetSkillCoolTime(SkillName.Skill1) / PlayerSkillConstant.skill1CoolTimeMax;
-        Skill2Img.GetComponent<Image>().fillAmount
-            = 1 - Player.Instance.GetSkillCoolTime(SkillName.Skill2) / PlayerSkillConstant.skill2CoolTimeMax;
-        AttackImg.GetComponent<Image>().fillAmount
-            = 1 - Player.Instance.GetSkillCoolTime(SkillName.Attack) / PlayerSkillConstant.attackChargeTimeMax;
+        foreach(var skill in SkillCoolTimeImg)
+            skill.Value.fillAmount 
+                = 1 - Player.Instance.GetSkillCoolTime(skill.Key) / PlayerSkillConstant.SkillCoolTime[skill.Key];
     }
 
     private void AppearGameSet()

@@ -11,7 +11,7 @@ public class Skill1 : ActiveSkillPlayer
 
         damageMultiplier = PlayerSkillConstant.skill1Atk;
 
-        coolTimeMax = PlayerSkillConstant.skill1CoolTimeMax;
+        coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
         coolTime = 0;
 
         EffectPrefab = Resources.Load(PlayerSkillConstant.skill1Prefab) as GameObject;

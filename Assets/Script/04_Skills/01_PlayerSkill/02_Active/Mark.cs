@@ -11,7 +11,7 @@ public class Mark : ActiveSkillPlayer
         skillName = SkillName.Mark;
         status = PlayerStatus.Mark;
 
-        coolTimeMax = PlayerSkillConstant.dashCoolTimeMax;
+        coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
         coolTime = 0;
 
         MarkerPrefab = Resources.Load("Prefab/Marker") as GameObject;

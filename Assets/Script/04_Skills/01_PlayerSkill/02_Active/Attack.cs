@@ -16,7 +16,7 @@ public class Attack : ActiveSkillPlayer
 
         isCharging = false;
 
-        coolTimeMax = PlayerSkillConstant.attackChargeTimeMax;
+        coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
         coolTime = 0;
 
         EffectPrefab = Resources.Load(PlayerSkillConstant.attackPrefab) as GameObject;

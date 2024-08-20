@@ -9,7 +9,7 @@ public class RecoveryHP : ActiveSkillPlayer
     {
         skillName = SkillName.KillRecoveryHP;
 
-        coolTimeMax = PlayerSkillConstant.recoveryHPTimeMax;
+        //coolTimeMax = PlayerSkillConstant.recoveryHPTimeMax;
         coolTime = coolTimeMax;
     }
 

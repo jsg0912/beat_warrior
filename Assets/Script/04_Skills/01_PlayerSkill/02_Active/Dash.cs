@@ -19,7 +19,7 @@ public class Dash : ActiveSkillPlayer
         status = PlayerStatus.Dash;
 
         damageMultiplier = PlayerSkillConstant.dashAtk;
-        coolTimeMax = PlayerSkillConstant.dashCoolTimeMax;
+        coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
         coolTime = 0;
 
         DashTargetMonster = new List<GameObject>();

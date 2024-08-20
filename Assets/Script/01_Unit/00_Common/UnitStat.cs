@@ -56,8 +56,7 @@ public class UnitStat
     public void SetBuffPlus(StatKind statKind, int value)
     {
         buffPlus[statKind] = value;
-        currentStats[statKind] += value;
-    }
+        currentStats[statKind] += value;    }
 
     public void SetBuffMultiply(StatKind statKind, int value)
     {
