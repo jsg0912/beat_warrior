@@ -71,6 +71,7 @@ public class UnitStat
             currentStats[StatKind.HP] *= (1 + value);
         }
     }
+
     public bool GetIsFullStat(StatKind statKind) { return currentStats[statKind] == GetFinalStat(statKind); }
     public int GetCurrentStat(StatKind statKind) { return currentStats[statKind]; }
 
