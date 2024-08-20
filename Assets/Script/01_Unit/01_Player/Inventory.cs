@@ -20,7 +20,7 @@ public class Inventory
         return items.Find(item => item.GetType() == typeof(T));
     }
 
-    public int GetSpiriteNumber()
+    public int GetSpiritNumber()
     {
         return spirit.GetNumber();
     }
