@@ -12,6 +12,7 @@ public class Monster : MonoBehaviour
     private Vector3 TargetPos;
     private Vector3 HpPos;
     private GameObject Obj;
+    private GameObject SpiritPrefab;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class Monster : MonoBehaviour
 
         TargetPrefab = Resources.Load("Prefab/Target") as GameObject;
         HpPrefab = Resources.Load("Prefab/EnemyHeart") as GameObject;
+        SpiritPrefab = Resources.Load("Prefab/Spirit") as GameObject;
 
         Vector3 TargetPos = gameObject.transform.position + new Vector3(0, 2.8f, 0);
         Target = GameObject.Instantiate(TargetPrefab, TargetPos, Quaternion.identity);
@@ -64,11 +66,11 @@ public class Monster : MonoBehaviour
     protected virtual void Die()
     {
         Player.Instance.CheckResetSkills(this.gameObject);
+        Instantiate(SpiritPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
         anim.SetTrigger("die");
         Destroy(gameObject, 2.0f);
         Destroy(Target);
         Destroy(Hp);
-
     }
 
     protected virtual void ShowUI()
