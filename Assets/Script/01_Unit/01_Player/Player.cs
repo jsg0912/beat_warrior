@@ -121,7 +121,6 @@ public class Player : MonoBehaviour
     public void UpdateStat()
     {
         maxJumpCount = GetFinalStat(StatKind.JumpCount);
-        Debug.Log(maxJumpCount);
         remainJumpCount = maxJumpCount;
 
         UIManager.Instance.SetHPUI(GetFinalStat(StatKind.HP));
@@ -374,11 +373,7 @@ public class Player : MonoBehaviour
     public void AddOrRemoveTrait(SkillName name)
     {
         if (HaveTrait(name) == null) AddTrait(name);
-        else
-        {
-            RemoveTrait(name);
-            Debug.Log("제거");
-        }
+        else RemoveTrait(name);
     }
 
     public void AddTrait(SkillName name)

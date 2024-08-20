@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GetTraitButton : MonoBehaviour
 {
@@ -7,7 +8,5 @@ public class GetTraitButton : MonoBehaviour
     public void GetTrait()
     {
         Player.Instance.AddOrRemoveTrait(traitName);
-
-        Debug.Log(traitName);
     }
 }
