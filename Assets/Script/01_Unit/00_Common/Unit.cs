@@ -9,13 +9,13 @@ public class Unit
         return isAlive;
     }
 
-    public bool GetIsFullHP() { return unitStat.GetIsFullHP(); }
+    public bool GetIsFullStat(StatKind statKind) { return unitStat.GetIsFullStat(statKind); }
 
     public int GetCurrentHP() { return unitStat.GetCurrentStat(StatKind.HP); }
 
     public bool ChangeCurrentHP(int change)
     {
-        int currentHP = unitStat.ChangeCurrentHP(change);
+        int currentHP = unitStat.ChangeCurrentStat(StatKind.HP, change);
 
         if (currentHP <= 0) isAlive = false;
 
