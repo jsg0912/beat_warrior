@@ -119,7 +119,7 @@ public class UnitStat
         }
     }
 
-    public bool GetIsFUllHP() { return isFullHP; }
+    public bool GetIsFullHP() { return isFullHP; }
 
     public int ChangeCurrentHP(int change)
     {

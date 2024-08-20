@@ -9,7 +9,7 @@ public class Unit
         return isAlive;
     }
 
-    public bool GetIsFUllHP() { return unitStat.GetIsFUllHP(); }
+    public bool GetIsFullHP() { return unitStat.GetIsFullHP(); }
 
     public int GetCurrentHP() { return unitStat.GetCurrentStat(StatKind.HP); }
 

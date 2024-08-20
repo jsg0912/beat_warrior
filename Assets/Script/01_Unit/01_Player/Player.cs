@@ -133,7 +133,7 @@ public class Player : MonoBehaviour
     // GET Functions
     public PlayerStatus GetPlayerStatus() { return status; }
     public int GetDirection() { return direction; }
-    public bool GetIsFullHP() { return playerUnit.GetIsFUllHP(); }
+    public bool GetIsFullHP() { return playerUnit.GetIsFullHP(); }
     public int GetCurrentHP() { return playerUnit.GetCurrentHP(); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
     public GameObject GetTargetInfo() { return targetInfo; }
