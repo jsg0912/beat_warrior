@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Animator _animator;
 
-    private Inventory inventory = new Inventory();
+    public Inventory inventory = new Inventory();
     private List<ActiveSkillPlayer> skillList;
     private List<Skill> traitList = new();
 

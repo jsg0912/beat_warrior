@@ -14,10 +14,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<Image> SkillCoolTimeImgList;
     private Dictionary<SkillName, Image> SkillCoolTimeImg = new();
 
+    [SerializeField] private GameObject Altar;
     [SerializeField] private TextMeshProUGUI SpiritText;
 
     public TextMeshProUGUI[] txt;
     public GameObject menuSet;
+
+    private bool isAltarActive = false;
 
     private void Awake()
     {
@@ -45,12 +48,14 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         UpdateCoolTime();
-        AppearGameSet();
+        //AppearGameSet();
 
         for (int i = 0; i < txt.Length; i++)
         {
             txt[i].text = KeySetting.keys[(Action)i].ToString();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) SetAltarActive();
     }
 
     public void SetAndUpdateHPUI(int hp)
@@ -105,5 +110,13 @@ public class UIManager : MonoBehaviour
         {
             menuSet.SetActive(true);
         }
+    }
+
+    private void SetAltarActive()
+    {
+        isAltarActive = !isAltarActive;
+        Altar.SetActive(isAltarActive);
+
+        SpiritText.text = Player.Instance.inventory.GetSpiritNumber().ToString();
     }
 }
