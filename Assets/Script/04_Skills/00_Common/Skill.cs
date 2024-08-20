@@ -49,18 +49,5 @@ public abstract class Skill
         coolTime = 0;
     }
 
-    protected virtual void TrySkill()
-    {
-        if (coolTime > 0) return;
-
-        UseSkill();
-
-        unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
-    }
-
-    protected abstract void UseSkill();
-
-    protected abstract void SkillMethod();
-
     protected virtual void CreateAttackPrefab() { return; }
 }
