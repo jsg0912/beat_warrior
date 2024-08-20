@@ -20,13 +20,13 @@ public class Inventory
         return items.Find(item => item.GetType() == typeof(T));
     }
 
-    public int GetSpiriteNumber()
+    public int GetSpiritNumber()
     {
         return spirit.GetNumber();
     }
 
-    public void IncreaseSpirit(int number)
+    public int IncreaseSpirit(int number)
     {
-        spirit.Increase(number);
+        return spirit.Increase(number);
     }
 }

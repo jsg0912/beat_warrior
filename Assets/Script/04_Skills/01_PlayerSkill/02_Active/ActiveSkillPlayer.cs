@@ -13,7 +13,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
         SkillMethod();
     }
 
-    public override void UpdateSkill()
+    public virtual void CheckInputKeyCode()
     {
         UpdateKey();
 
