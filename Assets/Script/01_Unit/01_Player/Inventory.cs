@@ -25,8 +25,9 @@ public class Inventory
         return spirit.GetNumber();
     }
 
-    public void IncreaseSpirit(int number)
+    public int IncreaseSpirit(int number)
     {
         spirit.Increase(number);
+        return GetSpiritNumber();
     }
 }
