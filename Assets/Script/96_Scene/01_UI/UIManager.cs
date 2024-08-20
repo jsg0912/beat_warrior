@@ -48,6 +48,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void SetAndUpdateHPUI(int hp)
+    {
+        SetHPUI(hp);
+        UpdateHPUI();
+    }
+
     public void SetHPUI(int hp)
     {
         HPList.Clear();

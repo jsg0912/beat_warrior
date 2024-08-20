@@ -56,10 +56,7 @@ public class UnitStat
     public void SetBuffPlus(StatKind statKind, int value)
     {
         buffPlus[statKind] = value;
-        if (statKind == StatKind.HP)
-        {
-            currentStats[StatKind.HP] += value;
-        }
+        currentStats[statKind] += value;
     }
 
     public void SetBuffMultiply(StatKind statKind, int value)

@@ -21,8 +21,6 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerStatus status;
 
     private int direction;
-    private int maxJumpCount;
-    private int remainJumpCount;
     private bool isInvincibility;
 
     private GameObject targetInfo;
@@ -49,7 +47,7 @@ public class Player : MonoBehaviour
             Skill();
         }
 
-        tt.text = GetFinalStat(StatKind.AttackCount).ToString();
+        tt.text = playerUnit.unitStat.GetCurrentStat(StatKind.AttackCount).ToString();
 
         if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
 
@@ -110,23 +108,12 @@ public class Player : MonoBehaviour
         direction = 1;
         isInvincibility = false;
 
-        UpdateStat();
+        UIManager.Instance.SetAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }
 
     public void RestartPlayer()
     {
         Initialize();
-    }
-
-    public void UpdateStat()
-    {
-        maxJumpCount = GetFinalStat(StatKind.JumpCount);
-        remainJumpCount = maxJumpCount;
-
-        UIManager.Instance.SetHPUI(GetFinalStat(StatKind.HP));
-        UIManager.Instance.UpdateHPUI();
-
-        (HaveSkill(SkillName.Attack) as Attack).CheckCoolTime();
     }
 
     // GET Functions
@@ -294,13 +281,13 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        if (IsUsingSkill() == true || remainJumpCount == 0) return;
+        if (IsUsingSkill() == true || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
 
         if (Input.GetKeyDown(KeySetting.keys[Action.Jump]))
         {
             SetPlayerStatus(PlayerStatus.Jump);
 
-            remainJumpCount--;
+            playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
             _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
@@ -447,7 +434,7 @@ public class Player : MonoBehaviour
         {
             _animator.SetBool(PlayerConstant.jumpAnimBool, false);
             if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
-            remainJumpCount = maxJumpCount;
+            playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
             return;
         }
     }

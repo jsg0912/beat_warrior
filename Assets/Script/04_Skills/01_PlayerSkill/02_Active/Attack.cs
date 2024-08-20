@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Attack : ActiveSkillPlayer
 {
-    private int attackCount;
     private bool isCharging;
 
     public Attack(GameObject unit) : base(unit) { }
@@ -14,7 +13,6 @@ public class Attack : ActiveSkillPlayer
         status = PlayerStatus.Attack;
 
         damageMultiplier = PlayerSkillConstant.attackAtk;
-        attackCount = PlayerSkillConstant.attackCountMax;
 
         isCharging = false;
 
@@ -22,11 +20,6 @@ public class Attack : ActiveSkillPlayer
         coolTime = 0;
 
         EffectPrefab = Resources.Load(PlayerSkillConstant.attackPrefab) as GameObject;
-    }
-
-    public int GetAttackCount()
-    {
-        return attackCount;
     }
 
     protected override IEnumerator CountCoolTime()
@@ -43,14 +36,14 @@ public class Attack : ActiveSkillPlayer
         coolTime = 0;
         isCharging = false;
 
-        attackCount++;
+        Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, 1);
 
         CheckCoolTime();
     }
 
     protected override void TrySkill()
     {
-        if (attackCount <= 0) return;
+        if (Player.Instance.playerUnit.unitStat.GetCurrentStat(StatKind.AttackCount) <= 0) return;
 
         UseSkill();
         CheckCoolTime();
@@ -60,7 +53,7 @@ public class Attack : ActiveSkillPlayer
     {
         if (isCharging == true) return;
 
-        if (attackCount < Player.Instance.GetFinalStat(StatKind.AttackCount))
+        if (Player.Instance.playerUnit.GetIsFullStat(StatKind.AttackCount) == false)
             unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 
@@ -71,7 +64,7 @@ public class Attack : ActiveSkillPlayer
 
     protected override void SkillMethod()
     {
-        attackCount--;
+        Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, -1);
 
         CreateAttackPrefab();
     }
