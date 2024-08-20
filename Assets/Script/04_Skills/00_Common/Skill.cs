@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Skill
+public abstract class Skill
 {
     protected GameObject unit;
     public SkillName skillName;
@@ -49,8 +49,6 @@ public class Skill
         coolTime = 0;
     }
 
-    public virtual void UpdateSkill() { }
-
     protected virtual void TrySkill()
     {
         if (coolTime > 0) return;
@@ -60,9 +58,9 @@ public class Skill
         unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 
-    protected virtual void UseSkill() { return; }
+    protected abstract void UseSkill();
 
-    protected virtual void SkillMethod() { return; }
+    protected abstract void SkillMethod();
 
     protected virtual void CreateAttackPrefab() { return; }
 }
