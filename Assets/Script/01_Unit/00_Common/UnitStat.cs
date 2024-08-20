@@ -8,6 +8,7 @@ public class UnitStat
     private bool isFullHP = true; // 속도 개선을 위해 존재함.
     private int currentHP;
     private Dictionary<StatKind, int> stats = new();
+    private Dictionary<StatKind, int> currentConsumableStats = new();
     // Buff
     private Dictionary<StatKind, int> buffPlus = new();
     private Dictionary<StatKind, float> buffMultiply = new();
