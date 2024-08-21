@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 public class PopupSystem : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PopupSystem : MonoBehaviour
 
     public static PopupSystem instance { get; private set; }
 
-    public Text txtContennt;
+    public TextMeshProUGUI txtContent;
     Action onClickOkay, onClickCancel;
 
     private void Awake()
@@ -22,9 +23,10 @@ public class PopupSystem : MonoBehaviour
     public void OpenPopUp(string content, Action onClickOkay, Action onClickCancel)
     {
         
-        txtContennt.text = content;
+        txtContent.text = content;
         this.onClickOkay = onClickOkay;
         this.onClickCancel = onClickCancel;
+        popup.SetActive(true);
     }
 
     public void OnClickOkay()
