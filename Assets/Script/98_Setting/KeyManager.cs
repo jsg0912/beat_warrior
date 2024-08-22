@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public enum Action
 {
@@ -31,12 +29,14 @@ public class KeyManager : MonoBehaviour
     { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.Mouse1, KeyCode.Mouse0,
         KeyCode.Space, KeyCode.Q, KeyCode.E, KeyCode.F };
 
-    [SerializeField] private GameObject Setting;
-
     private List<TextMeshProUGUI> ActionText = new();
     private List<TextMeshProUGUI> KeyText = new();
 
     int key = -1;
+
+    KeyCode currentShortcutKey;
+
+    [SerializeField] private GameObject Setting;
 
 
     private void Awake()
@@ -45,6 +45,32 @@ public class KeyManager : MonoBehaviour
             KeySetting.keys.Add((Action)i, defaultKeys[i]);
 
         SetTextList();
+    }
+
+    private bool isListeningForInput = false; // 단축키 설정 모드인지 여부
+
+    void Update()
+    {
+        if (isListeningForInput)
+        {
+            ListenForInput();
+        }
+    }
+
+    private void ListenForInput()
+    {
+        // 키보드 입력 감지
+        foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
+            if (Input.GetKeyDown(keyCode)) currentShortcutKey = keyCode;
+
+        // 마우스 버튼 입력 감지
+        if (Input.GetMouseButtonDown(0)) currentShortcutKey = KeyCode.Mouse0;
+        else if (Input.GetMouseButtonDown(1)) currentShortcutKey = KeyCode.Mouse1;
+        else if (Input.GetMouseButtonDown(2)) currentShortcutKey = KeyCode.Mouse2;
+
+        isListeningForInput = false;
+        KeySetting.keys[(Action)key] = currentShortcutKey;
+        UpdateKeyText();
     }
 
     private void SetTextList()
@@ -78,15 +104,7 @@ public class KeyManager : MonoBehaviour
 
     private void OnGUI()
     {
-        Event keyEvent = Event.current;
-
-        if (keyEvent.isKey)
-        {
-            KeySetting.keys[(Action)key] = keyEvent.keyCode;
-            key = -1;
-        }
-
-        UpdateKeyText();
+        isListeningForInput = true;
     }
 
     public void ChangeKey(int num)
