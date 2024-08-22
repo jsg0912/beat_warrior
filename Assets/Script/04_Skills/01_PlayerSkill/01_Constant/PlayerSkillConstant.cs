@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public class PlayerSkillConstant
 {
     public const int attackCountMax = 2;
-    public const float attackKnockbackRange = 3.0f;
+    public const float attackKnockBackRange = 3.0f;
     public const float skill2DashRange = 2.0f;
 
     public static Dictionary<SkillName, float> SkillCoolTime = new() {
