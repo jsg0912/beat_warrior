@@ -11,7 +11,7 @@ public class AttackCollider : MonoBehaviour
 
     void Start()
     {
-        attackForce = PlayerSkillConstant.attackKnockbackRange;
+        attackForce = PlayerSkillConstant.attackKnockBackRange;
 
         TargetMonster = new List<GameObject>();
         Destroy(gameObject, 0.1f);
