@@ -8,6 +8,7 @@ public class MoveCamera : MonoBehaviour
     public Transform Target;
     public float speed;
     
+    
     public Vector2 center;
     public Vector2 size;
 
