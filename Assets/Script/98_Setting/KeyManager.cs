@@ -47,7 +47,7 @@ public class KeyManager : MonoBehaviour
         SetTextList();
     }
 
-    private bool isListeningForInput = false; // ´ÜÃàÅ° ¼³Á¤ ¸ðµåÀÎÁö ¿©ºÎ
+    private bool isListeningForInput = false;
 
     void Update()
     {
@@ -59,11 +59,11 @@ public class KeyManager : MonoBehaviour
 
     private void ListenForInput()
     {
-        // Å°º¸µå ÀÔ·Â °¨Áö
+        // Å°ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½
         foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
             if (Input.GetKeyDown(keyCode)) currentShortcutKey = keyCode;
 
-        // ¸¶¿ì½º ¹öÆ° ÀÔ·Â °¨Áö
+        // ï¿½ï¿½ï¿½ì½º ï¿½ï¿½Æ° ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (Input.GetMouseButtonDown(0)) currentShortcutKey = KeyCode.Mouse0;
         else if (Input.GetMouseButtonDown(1)) currentShortcutKey = KeyCode.Mouse1;
         else if (Input.GetMouseButtonDown(2)) currentShortcutKey = KeyCode.Mouse2;
