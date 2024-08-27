@@ -22,7 +22,7 @@ public class PopupSystem : MonoBehaviour
 
     public void OpenPopUp(string content, Action onClickOkay, Action onClickCancel)
     {
-        
+
         txtContent.text = content;
         this.onClickOkay = onClickOkay;
         this.onClickCancel = onClickCancel;
@@ -33,7 +33,7 @@ public class PopupSystem : MonoBehaviour
     {
         if (onClickOkay != null)
         {
-            onClickOkay();
+            // onClickOkay();
         }
 
         ClosePopup();
@@ -43,7 +43,7 @@ public class PopupSystem : MonoBehaviour
     {
         if (onClickCancel != null)
         {
-            onClickCancel();
+            // onClickCancel();
         }
 
         ClosePopup();
