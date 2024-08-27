@@ -32,22 +32,34 @@ public static class MonsterList
 
          new MonsterUnit(new MonsterInfo(MonsterName.DummySoldierHP4,
         "Prototype Test용 근접 쓰레기4"),
-        new UnitStat(4, 1),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 4},
+            {StatKind.ATK, 1},
+        }),
         new MeleeEnemy()),
 
          new MonsterUnit(new MonsterInfo(MonsterName.DummySoldierHP5,
         "Prototype Test용 근접 쓰레기5"),
-        new UnitStat(5, 1),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 5},
+            {StatKind.ATK, 1},
+        }),
         new MeleeEnemy()),
 
          new MonsterUnit(new MonsterInfo(MonsterName.DummySoldierHP6,
         "Prototype Test용 근접 쓰레기6"),
-        new UnitStat(6, 1),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 6},
+            {StatKind.ATK, 1},
+        }),
         new MeleeEnemy()),
 
          new MonsterUnit(new MonsterInfo(MonsterName.DummyArcherHP1,
         "Prototype Test용 원거리 쓰레기1"),
-        new UnitStat(1, 1),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 1},
+            {StatKind.ATK, 1},
+        }),
         new RangedEnemy()),
 
         new MonsterUnit(new MonsterInfo(MonsterName.DummyArcherHP2,
@@ -68,7 +80,10 @@ public static class MonsterList
 
          new MonsterUnit(new MonsterInfo(MonsterName.DummyArcherHP4,
         "Prototype Test용 원거리 쓰레기4"),
-        new UnitStat(4, 1),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 4},
+            {StatKind.ATK, 1},
+        }),
         new RangedEnemy()),
     };
 
