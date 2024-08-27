@@ -22,14 +22,39 @@ public static class MonsterList
         new UnitStat(3, 1),
         new MeleeEnemy()),
 
-        new MonsterUnit(new MonsterInfo(MonsterName.DummyArcher,
-        "Prototype Test용 원거리 쓰레기"),
+         new MonsterUnit(new MonsterInfo(MonsterName.DummySoldierHP4,
+        "Prototype Test용 근접 쓰레기4"),
+        new UnitStat(4, 1),
+        new MeleeEnemy()),
+
+         new MonsterUnit(new MonsterInfo(MonsterName.DummySoldierHP5,
+        "Prototype Test용 근접 쓰레기5"),
+        new UnitStat(5, 1),
+        new MeleeEnemy()),
+
+         new MonsterUnit(new MonsterInfo(MonsterName.DummySoldierHP6,
+        "Prototype Test용 근접 쓰레기6"),
+        new UnitStat(6, 1),
+        new MeleeEnemy()),
+
+         new MonsterUnit(new MonsterInfo(MonsterName.DummyArcherHP1,
+        "Prototype Test용 원거리 쓰레기1"),
+        new UnitStat(1, 1),
+        new RangedEnemy()),
+
+        new MonsterUnit(new MonsterInfo(MonsterName.DummyArcherHP2,
+        "Prototype Test용 원거리 쓰레기2"),
         new UnitStat(2, 1),
         new RangedEnemy()),
 
          new MonsterUnit(new MonsterInfo(MonsterName.DummyArcherHP3,
-        "Prototype Test용 원거리 쓰레기"),
+        "Prototype Test용 원거리 쓰레기3"),
         new UnitStat(3, 1),
+        new RangedEnemy()),
+
+         new MonsterUnit(new MonsterInfo(MonsterName.DummyArcherHP4,
+        "Prototype Test용 원거리 쓰레기4"),
+        new UnitStat(4, 1),
         new RangedEnemy()),
     };
 

@@ -3,6 +3,11 @@ public enum MonsterName
     DummySoldierHP1,
     DummySoldierHP2,
     DummySoldierHP3,
-    DummyArcher,
-    DummyArcherHP3
+    DummySoldierHP4,
+    DummySoldierHP5,
+    DummySoldierHP6,
+    DummyArcherHP1,
+    DummyArcherHP2,
+    DummyArcherHP3,
+    DummyArcherHP4,
 }
