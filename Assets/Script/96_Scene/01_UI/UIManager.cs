@@ -14,12 +14,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] private List<Image> SkillCoolTimeImgList;
     private Dictionary<SkillName, Image> SkillCoolTimeImg = new();
 
+    [SerializeField] private GameObject Setting;
     [SerializeField] private GameObject Altar;
     [SerializeField] private TextMeshProUGUI SpiritText;
 
     public TextMeshProUGUI[] txt;
-    public GameObject menuSet;
+    public GameObject Menu;
 
+    private bool isMenuActive = false;
+    private bool isSettingActive = false;
     private bool isAltarActive = false;
 
     private void Awake()
@@ -48,14 +51,12 @@ public class UIManager : MonoBehaviour
     private void Update()
     {
         UpdateCoolTime();
-        //AppearGameSet();
+        if (Input.GetKeyDown(KeyCode.Escape)) SetMenuActive();
 
         for (int i = 0; i < txt.Length; i++)
         {
             txt[i].text = KeySetting.keys[(Action)i].ToString();
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape)) SetAltarActive();
     }
 
     public void SetAndUpdateHPUI(int hp)
@@ -104,15 +105,24 @@ public class UIManager : MonoBehaviour
                 = 1 - Player.Instance.GetSkillCoolTime(skill.Key) / PlayerSkillConstant.SkillCoolTime[skill.Key];
     }
 
-    private void AppearGameSet()
+    private void SetMenuActive()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        isMenuActive = !isMenuActive;
+        Menu.SetActive(isMenuActive);
+
+        if (isMenuActive == false)
         {
-            menuSet.SetActive(true);
+            SetSettingActive();
         }
     }
 
-    private void SetAltarActive()
+    public void SetSettingActive()
+    {
+        isSettingActive = !isSettingActive;
+        Setting.SetActive(isSettingActive);
+    }
+
+    public void SetAltarActive()
     {
         isAltarActive = !isAltarActive;
         Altar.SetActive(isAltarActive);

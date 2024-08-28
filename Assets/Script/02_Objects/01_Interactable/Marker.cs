@@ -30,4 +30,9 @@ public class Marker : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void DestroyMarker()
+    {
+        Destroy(this.gameObject);
+    }
 }

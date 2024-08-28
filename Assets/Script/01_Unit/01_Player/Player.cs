@@ -133,9 +133,6 @@ public class Player : MonoBehaviour
 
         switch (status)
         {
-            case PlayerStatus.Idle:
-                _animator.SetTrigger(PlayerConstant.idleAnimTrigger);
-                break;
             case PlayerStatus.Attack:
                 _animator.SetTrigger(PlayerSkillConstant.attackAnimTrigger);
                 break;
