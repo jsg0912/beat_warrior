@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PopupButtonManager : MonoBehaviour
 {
     public void OnClickPopupButton()
     {
-        PopupSystem.instance.OpenPopUp("È®ÀÎÇÏ½Ã°Ú½À´Ï±î?",
+        PopupSystem.instance.OpenPopUp("È®ï¿½ï¿½ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½?",
             () => { Debug.Log("Okay"); },
             () => { Debug.Log("Cancel"); });
     }
