@@ -6,7 +6,7 @@ public class SpiritObject : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Inventory.Instance.ChangeSpiritNumber(100); // TODO: Monster Drop Value
+            Inventory.Instance.ChangeSpiritNumber(100); // TODO: Constant화 해야함
             Destroy(gameObject);
         }
     }
