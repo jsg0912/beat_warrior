@@ -20,7 +20,7 @@ public class Trap : MonoBehaviour
         {
             damaged = false;
             Player.Instance.GetDamaged(1);
-            InvincibleTime(1);
+            StartCoroutine(InvincibleTime(1));
         }
     }
     

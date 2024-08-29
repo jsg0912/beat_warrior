@@ -1185,7 +1185,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 770551502}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 666191375}
+        m_TargetAssemblyTypeName: PopupSystem, Assembly-CSharp
+        m_MethodName: OnClickOkay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &770551502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1888,7 +1900,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1267582115}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 666191375}
+        m_TargetAssemblyTypeName: PopupSystem, Assembly-CSharp
+        m_MethodName: OnClickCancel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1267582115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2275,6 +2299,7 @@ GameObject:
   - component: {fileID: 1695058981}
   - component: {fileID: 1695058980}
   - component: {fileID: 1695058979}
+  - component: {fileID: 1695058983}
   - component: {fileID: 1695058982}
   m_Layer: 5
   m_Name: ExitBtn
@@ -2350,6 +2375,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1695058982}
         m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
         m_MethodName: ChangeSceneBtn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1695058983}
+        m_TargetAssemblyTypeName: PopupButtonManager, Assembly-CSharp
+        m_MethodName: OnClickPopupButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2441,6 +2478,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1695058983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695058977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2513c0f01ba5ab47ac1e70f9911c730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1728045997
 GameObject:
   m_ObjectHideFlags: 0
