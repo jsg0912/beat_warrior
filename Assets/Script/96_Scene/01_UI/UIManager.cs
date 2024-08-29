@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    public Language language = Language.kr;
+
     [SerializeField] private GameObject HP;
     private GameObject HPPrefab;
     private List<Image> HPList;
