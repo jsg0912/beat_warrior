@@ -12,7 +12,7 @@ public class Spirit : Item
         number = 0;
     }
 
-    public int Increase(int gain)
+    public int Change(int gain)
     {
         number += gain;
         return number;

@@ -4,7 +4,6 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     private static Inventory _instance;
-
     public static Inventory Instance
     {
         get
@@ -24,6 +23,7 @@ public class Inventory : MonoBehaviour
     }
     private Spirit spirit = new Spirit();
     private List<Item> items = new List<Item>();
+    private static List<SkillName> mySkillList = new List<SkillName>();
 
     public void initialize()
     {
@@ -40,13 +40,18 @@ public class Inventory : MonoBehaviour
         return items.Find(item => item.GetType() == typeof(T));
     }
 
+    public void AddSkill(SkillName skill)
+    {
+        mySkillList.Add(skill);
+    }
+
     public int GetSpiritNumber()
     {
         return spirit.GetNumber();
     }
 
-    public int IncreaseSpirit(int number)
+    public int ChangeSpiritNumber(int number)
     {
-        return spirit.Increase(number);
+        return spirit.Change(number);
     }
 }

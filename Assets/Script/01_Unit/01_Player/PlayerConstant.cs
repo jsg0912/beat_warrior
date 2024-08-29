@@ -13,4 +13,6 @@ public class PlayerConstant
     public const string runAnimBool = "isRun";
     public const string jumpAnimBool = "isJump";
     public const string dieAnimTrigger = "die";
+
+    public const int MaxAdditionalSkillCount = 2;
 }
