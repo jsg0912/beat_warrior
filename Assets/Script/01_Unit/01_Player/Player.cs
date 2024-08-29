@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -117,6 +118,7 @@ public class Player : MonoBehaviour
     // GET Functions
     public PlayerStatus GetPlayerStatus() { return status; }
     public int GetDirection() { return direction; }
+    public SkillName[] GetTraits() { return traitList.Select(trait => trait.skillName).ToArray(); }
     public int GetCurrentHP() { return playerUnit.GetCurrentHP(); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
     public GameObject GetTargetInfo() { return targetInfo; }
@@ -346,18 +348,18 @@ public class Player : MonoBehaviour
         return null;
     }
 
-    public Skill HaveTrait(SkillName name)
+    public bool IsEquippedTrait(SkillName name)
     {
-        return traitList.Find(trait => trait.skillName == name);
+        return traitList.Exists(trait => trait.skillName == name);
     }
 
     public void AddOrRemoveTrait(SkillName name)
     {
-        if (HaveTrait(name) == null) AddTrait(name);
+        if (IsEquippedTrait(name)) EquipTrait(name);
         else RemoveTrait(name);
     }
 
-    public void AddTrait(SkillName name)
+    public void EquipTrait(SkillName name)
     {
         Skill trait = null;
 
@@ -381,6 +383,13 @@ public class Player : MonoBehaviour
         }
 
         traitList.Add(trait);
+    }
+
+    public void RemoveTraitByIndex(int index)
+    {
+        SkillName targetSkill = traitList[index].skillName;
+        RemoveTrait(targetSkill);
+        return;
     }
 
     public void RemoveTrait(SkillName name)
