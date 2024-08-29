@@ -19,7 +19,7 @@ public static class TraitPriceList
     public static void CheckTraitPriceListValidation()
     {
         SkillName[] skillNames = (SkillName[])Enum.GetValues(typeof(SkillName));
-        int start = (int)SkillName.AdditionalSkill + 1;
+        int start = (int)SkillName.TraitSkill + 1;
 
         for (int i = start; i < (int)SkillName.End; i++)
         {
