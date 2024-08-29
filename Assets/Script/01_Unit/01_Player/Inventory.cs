@@ -54,4 +54,9 @@ public class Inventory : MonoBehaviour
     {
         return spirit.Change(number);
     }
+
+    public bool IsPaidTrait(SkillName targetSkill)
+    {
+        return mySkillList.Exists(mySkill => mySkill == targetSkill);
+    }
 }
