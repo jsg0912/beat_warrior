@@ -5,15 +5,12 @@ public static class TraitPriceList
 {
     public static Dictionary<SkillName, int> Info = new Dictionary<SkillName, int>
     {
-        // {SkillName.AppendMaxHP, },
-        // {SkillName.SkillReset, },
-        // {SkillName.DoubleJump, },
-        // {SkillName.AddDmg, },
-        // {SkillName.Execution, },
-        // {SkillName.Resistance, },
-        // {SkillName.AppendAttack, },
-        // {SkillName.CounterAttack, },
-        // {SkillName.KillRecoveryHP, },
+        {SkillName.AppendMaxHP, 100},
+        {SkillName.SkillReset, 100},
+        {SkillName.DoubleJump, 100},
+        {SkillName.Execution, 100},
+        {SkillName.AppendAttack, 150},
+        {SkillName.KillRecoveryHP, 150},
     };
 
     public static void CheckTraitPriceListValidation()
@@ -25,7 +22,7 @@ public static class TraitPriceList
         {
             if (Info.ContainsKey(skillNames[i]) == false)
             {
-
+                throw new Exception($"No {skillNames[i]} is in TraitPriceList");
             }
         }
     }
