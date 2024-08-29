@@ -2,10 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using System.Linq;
 
 
-public class AbilityUI : MonoBehaviour
+public class AlterPopup : MonoBehaviour
 {
+    SkillName[] salesSkillList;
     int SpiritCount
     {
         get
@@ -13,8 +15,6 @@ public class AbilityUI : MonoBehaviour
             return Inventory.Instance.GetSpiritNumber();
         }
     }
-
-    Ability[] EquipList;
 
     int AbilityNum;
     int AbilityPrice;
@@ -27,38 +27,29 @@ public class AbilityUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Initianlize();
+        Initialize();
 
     }
 
-    void Initianlize()
+    void Initialize()
     {
-        EquipList = new Ability[2];
-
-
-        EquipList[0] = null;
-        EquipList[1] = null;
-
-        for (int i = 0; i < 7; i++)
+        salesSkillList = TraitPriceList.Info.Keys.ToArray();
+        for (int i = 0; i < salesSkillList.Length; i++)
         {
-            Button.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = ability[i].name;
+            Button.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = salesSkillList.ToString();
         }
 
     }
 
-    void AbilityListInitianlize()
-    {
-
-    }
-
     // Update is called once per frame
-    void Update()
+    public void UIUpdate()
     {
         PriceView.text = "My Price : " + Inventory.Instance.GetSpiritNumber().ToString();
 
+        SkillName[] equipTraitList = Player.Instance.GetTraits();
         for (int i = 0; i < PlayerConstant.MaxAdditionalSkillCount; i++)
         {
-            if (EquipList[i] == null)
+            if (equipTraitList.Length > i)
             {
                 EquipButton.transform.GetChild(i).GetComponent<Image>().color = Color.black;
 
@@ -71,14 +62,10 @@ public class AbilityUI : MonoBehaviour
 
         for (int i = 0; i < 7; i++)
         {
-
-            if (ability[i].islock == false)
+            SkillName targetSkill = salesSkillList[i];
+            if (Inventory.Instance.IsPaidTrait(targetSkill) == true)
             {
-                if (EquipList[0] == ability[i])
-                {
-                    Button.transform.GetChild(i).GetComponent<Image>().color = Color.black;
-                }
-                else if (EquipList[1] == ability[i])
+                if (Player.Instance.IsEquippedTrait(targetSkill))
                 {
                     Button.transform.GetChild(i).GetComponent<Image>().color = Color.black;
                 }
@@ -90,8 +77,6 @@ public class AbilityUI : MonoBehaviour
                 {
                     Button.transform.GetChild(i).GetComponent<Image>().color = Color.white;
                 }
-
-
             }
             else Button.transform.GetChild(i).GetComponent<Image>().color = Color.red;
         }
@@ -106,49 +91,53 @@ public class AbilityUI : MonoBehaviour
         {
             if (Button.transform.GetChild(i).name == clickObject)
             {
-
-                if (ability[i].islock == true)
+                SkillName targetSkill = salesSkillList[i];
+                if (Inventory.Instance.IsPaidTrait(targetSkill) == false)
                 {
                     AbilityNum = i;
-                    BuyPanel.transform.GetChild(0).GetComponent<TMP_Text>().text = "Price : " + ability[i].price.ToString();
-                    BuyPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = ability[i].description;
+                    BuyPanel.transform.GetChild(0).GetComponent<TMP_Text>().text = "Price : " + TraitPriceList.Info[targetSkill].ToString();
+                    BuyPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = GetTraitScript(targetSkill);
 
                     BuyPanel.SetActive(true);
                 }
-                else
-                {
-                    if (EquipList[0] == null)
-                    {
-                        EquipList[0] = ability[i];
-                        EquipButton.transform.GetChild(0).GetComponentInChildren<TMP_Text>().text = ability[i].name;
-
-                    }
-                    else if (EquipList[1] == null)
-                    {
-                        EquipList[1] = ability[i];
-                        EquipButton.transform.GetChild(1).GetComponentInChildren<TMP_Text>().text = ability[i].name;
-                    }
-                    else continue;
-                }
+                // else
+                // {
+                //     if (EquipList[0] == null)
+                //     {
+                //         EquipList[0] = ability[i];
+                //         EquipButton.transform.GetChild(0).GetComponentInChildren<TMP_Text>().text = ability[i].name;
+                //     }
+                //     else if (EquipList[1] == null)
+                //     {
+                //         EquipList[1] = ability[i];
+                //         EquipButton.transform.GetChild(1).GetComponentInChildren<TMP_Text>().text = ability[i].name;
+                //     }
+                //     else continue;
+                // }
             }
             else continue;
         }
+        UIUpdate();
     }
 
     public void BuyPanelYes()
     {
-        if (SpiritCount >= ability[AbilityNum].price)
+        SkillName targetSkillName = salesSkillList[AbilityNum];
+        int targetSkillPrice = TraitPriceList.Info[targetSkillName];
+        if (SpiritCount >= targetSkillPrice)
         {
-            Inventory.Instance.ChangeSpiritNumber(-(ability[AbilityNum].price));
-            ability[AbilityNum].islock = false;
+            Inventory.Instance.ChangeSpiritNumber(-targetSkillPrice);
+            Inventory.Instance.AddSkill(targetSkillName);
             BuyPanel.SetActive(false);
         }
-
+        UIUpdate();
     }
 
     public void BuyPanelno()
     {
         BuyPanel.SetActive(false);
+
+        UIUpdate();
     }
 
     public void RemoveEquipList()
@@ -159,16 +148,21 @@ public class AbilityUI : MonoBehaviour
         {
             if (EquipButton.transform.GetChild(i).name == clickObject)
             {
-                EquipList[i] = null;
+                Player.Instance.RemoveTraitByIndex(i);
             }
             else continue;
         }
 
+        UIUpdate();
+    }
+
+    public string GetTraitScript(SkillName skillName)
+    {
+        return UIScript.TraitUIScript[skillName][UIManager.Instance.language];
     }
 
     bool CheckFullEquip()
     {
-        if (EquipList[0] != null && EquipList[1] != null) return true;
-        else return false;
+        return Player.Instance.GetTraits().Length == PlayerConstant.MaxAdditionalSkillCount;
     }
 }
