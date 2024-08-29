@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,10 +10,9 @@ public class Player : MonoBehaviour
 
     public static Player Instance;
     public Unit playerUnit;
+    private CapsuleCollider2D _collider;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
-
-    public Inventory inventory = new Inventory();
     private List<ActiveSkillPlayer> skillList;
     private List<Skill> traitList = new();
 
@@ -99,6 +99,7 @@ public class Player : MonoBehaviour
             new Skill2(this.gameObject)
         };
 
+        _collider = GetComponent<CapsuleCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         colliderController = GetComponent<ColliderController>();
@@ -119,6 +120,7 @@ public class Player : MonoBehaviour
     // GET Functions
     public PlayerStatus GetPlayerStatus() { return status; }
     public int GetDirection() { return direction; }
+    public SkillName[] GetTraits() { return traitList.Select(trait => trait.skillName).ToArray(); }
     public int GetCurrentHP() { return playerUnit.GetCurrentHP(); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
     public GameObject GetTargetInfo() { return targetInfo; }
@@ -162,10 +164,15 @@ public class Player : MonoBehaviour
         transform.localScale = new Vector3(direction, 1, 1);
     }
 
-    public void SetGravity(bool gravity)
+    public void SetGravityScale(bool gravity)
     {
         _rigidbody.gravityScale = gravity ? PlayerConstant.gravityScale : 0;
         if (!gravity) _rigidbody.velocity = Vector3.zero;
+    }
+
+    public void SetColliderTrigger(bool isTrigger)
+    {
+        _collider.isTrigger = isTrigger;
     }
 
     public void SetPlayerAnimTrigger(string trigger)
@@ -300,9 +307,10 @@ public class Player : MonoBehaviour
     {
         int dir = end.x > transform.position.x ? 1 : -1;
 
-        SetGravity(false);
+        SetColliderTrigger(true);
+        SetGravityScale(false);
+        SetInvincibility(isInvincibility);
         if (changeDir == true) SetDirection(dir);
-        if (isInvincibility == true) SetInvincibility(true);
 
         while (Vector2.Distance(end, transform.position) >= 0.05f)
         {
@@ -312,9 +320,10 @@ public class Player : MonoBehaviour
 
         transform.position = end;
 
-        SetGravity(true);
+        SetColliderTrigger(false);
+        SetGravityScale(true);
+        SetInvincibility(false);
         if (changeDir == true) SetDirection(-dir);
-        if (isInvincibility == true) SetInvincibility(false);
     }
 
     private void Skill()
@@ -348,18 +357,18 @@ public class Player : MonoBehaviour
         return null;
     }
 
-    public Skill HaveTrait(SkillName name)
+    public bool IsEquippedTrait(SkillName name)
     {
-        return traitList.Find(trait => trait.skillName == name);
+        return traitList.Exists(trait => trait.skillName == name);
     }
 
     public void AddOrRemoveTrait(SkillName name)
     {
-        if (HaveTrait(name) == null) AddTrait(name);
+        if (IsEquippedTrait(name)) EquipTrait(name);
         else RemoveTrait(name);
     }
 
-    public void AddTrait(SkillName name)
+    public void EquipTrait(SkillName name)
     {
         Skill trait = null;
 
@@ -383,6 +392,13 @@ public class Player : MonoBehaviour
         }
 
         traitList.Add(trait);
+    }
+
+    public void RemoveTraitByIndex(int index)
+    {
+        SkillName targetSkill = traitList[index].skillName;
+        RemoveTrait(targetSkill);
+        return;
     }
 
     public void RemoveTrait(SkillName name)
