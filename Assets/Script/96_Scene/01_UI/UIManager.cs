@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    public Language language = Language.kr;
+
     [SerializeField] private GameObject HP;
     private GameObject HPPrefab;
     private List<Image> HPList;
@@ -100,8 +102,8 @@ public class UIManager : MonoBehaviour
 
     private void UpdateCoolTime()
     {
-        foreach(var skill in SkillCoolTimeImg)
-            skill.Value.fillAmount 
+        foreach (var skill in SkillCoolTimeImg)
+            skill.Value.fillAmount
                 = 1 - Player.Instance.GetSkillCoolTime(skill.Key) / PlayerSkillConstant.SkillCoolTime[skill.Key];
     }
 
@@ -110,10 +112,7 @@ public class UIManager : MonoBehaviour
         isMenuActive = !isMenuActive;
         Menu.SetActive(isMenuActive);
 
-        if (isMenuActive == false)
-        {
-            SetSettingActive();
-        }
+        if (isMenuActive == false && isSettingActive == true) SetSettingActive();
     }
 
     public void SetSettingActive()
@@ -127,6 +126,6 @@ public class UIManager : MonoBehaviour
         isAltarActive = !isAltarActive;
         Altar.SetActive(isAltarActive);
 
-        SpiritText.text = Player.Instance.inventory.GetSpiritNumber().ToString();
+        SpiritText.text = Inventory.Instance.GetSpiritNumber().ToString();
     }
 }

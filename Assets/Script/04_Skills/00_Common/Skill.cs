@@ -5,6 +5,7 @@ public abstract class Skill
 {
     protected GameObject unit;
     public SkillName skillName;
+    public string description;
 
     // CoolTime
     protected float coolTimeMax;
@@ -15,9 +16,10 @@ public abstract class Skill
 
     protected GameObject EffectPrefab;
 
-    public Skill(GameObject unit)
+    public Skill(GameObject unit, string description = "")
     {
         this.unit = unit;
+        this.description = description;
 
         GetSkill();
     }
