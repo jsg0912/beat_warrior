@@ -5,14 +5,15 @@ public enum SkillName
     Dash,
     Skill1,
     Skill2,
+    TraitSkill, // Standard Value: Belows are TraitSkill
     AppendMaxHP,
     SkillReset,
     DoubleJump,
-    AddDmg,
+    // AddDmg,
     Execution,
-    Resistance,
+    // Resistance,
     AppendAttack,
-    CounterAttack,
+    // CounterAttack,
     KillRecoveryHP,
-    Null
+    End
 }
