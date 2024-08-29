@@ -17,7 +17,7 @@ public class AlterPopup : MonoBehaviour
         }
     }
 
-    int abilityNum; // TODO: Question
+    int abilityNum; // TODO: 제거해야함
 
     public GameObject Button;
     public GameObject EquipButton;
