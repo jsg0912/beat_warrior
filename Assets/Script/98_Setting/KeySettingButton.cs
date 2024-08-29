@@ -1,10 +1,10 @@
 using TMPro;
 using UnityEngine;
+using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class KeySettingButton : MonoBehaviour
 {
     private bool isListeningForInput = false;
-    private KeyCode currentShortcutKey;
     private int idx;
 
     private TextMeshProUGUI ActionText;
@@ -20,25 +20,37 @@ public class KeySettingButton : MonoBehaviour
 
     private void ListenForInput()
     {
-        // 키보드 입력 감지
+        if (Input.GetMouseButtonDown(0))
+        {
+            SetKeyCode(KeyCode.Mouse0);
+            return;
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            SetKeyCode(KeyCode.Mouse1);
+            return;
+        }
+        if (Input.GetMouseButtonDown(2))
+        {
+            SetKeyCode(KeyCode.Mouse2);
+            return;
+        }
+
         foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
+        {
             if (Input.GetKeyDown(keyCode))
             {
-                currentShortcutKey = keyCode;
-                isListeningForInput = false;
-                KeySetting.keys[(Action)idx] = currentShortcutKey;
-                UpdateKeyText();
-                Debug.Log(currentShortcutKey);
+                SetKeyCode(keyCode);
                 return;
             }
+        }
+    }
 
-        // 마우스 버튼 입력 감지
-        if (Input.GetMouseButtonDown(0)) currentShortcutKey = KeyCode.Mouse0;
-        if (Input.GetMouseButtonDown(1)) currentShortcutKey = KeyCode.Mouse1;
-        if (Input.GetMouseButtonDown(2)) currentShortcutKey = KeyCode.Mouse2;
-        Debug.Log(currentShortcutKey);
+    void SetKeyCode(KeyCode keyCode)
+    {
         isListeningForInput = false;
-        KeySetting.keys[(Action)idx] = currentShortcutKey;
+
+        KeySetting.keys[(Action)idx] = keyCode;
         UpdateKeyText();
     }
 
@@ -49,6 +61,9 @@ public class KeySettingButton : MonoBehaviour
 
     public void UpdateKeyText()
     {
+        if (ActionText == null || KeyText == null)
+            return;
+
         ActionText.text = ((Action)idx).ToString();
         KeyText.text = KeySetting.keys[(Action)idx].ToString();
     }

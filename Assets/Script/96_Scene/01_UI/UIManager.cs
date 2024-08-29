@@ -110,10 +110,7 @@ public class UIManager : MonoBehaviour
         isMenuActive = !isMenuActive;
         Menu.SetActive(isMenuActive);
 
-        if (isMenuActive == false)
-        {
-            SetSettingActive();
-        }
+        if (isMenuActive == false && isSettingActive == true) SetSettingActive();
     }
 
     public void SetSettingActive()
