@@ -7,8 +7,8 @@ public class KeySettingButton : MonoBehaviour
     private bool isListeningForInput = false;
     private int idx;
 
-    private TextMeshProUGUI ActionText;
-    private TextMeshProUGUI KeyText;
+    [SerializeField] private TextMeshProUGUI ActionText;
+    [SerializeField] private TextMeshProUGUI KeyText;
 
     void Update()
     {
@@ -71,9 +71,6 @@ public class KeySettingButton : MonoBehaviour
     public void SetKey(int key)
     {
         this.idx = key;
-
-        ActionText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        KeyText = transform.GetChild(1).GetChild(0).GetComponent<TextMeshProUGUI>();
 
         UpdateKeyText();
     }
