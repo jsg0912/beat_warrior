@@ -21,12 +21,12 @@ public class AbilityUI : MonoBehaviour
     public GameObject EquipButton;
     public GameObject BuyPanel;
     public TMP_Text Price;
-   
+
     // Start is called before the first frame update
     void Start()
     {
         Initianlize();
-        
+
     }
 
     void Initianlize()
@@ -48,28 +48,27 @@ public class AbilityUI : MonoBehaviour
 
         EquipList[0] = null;
         EquipList[1] = null;
-        
+
         for (int i = 0; i < 7; i++)
         {
             Button.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = ability[i].name;
         }
-        
+
     }
 
     void AbilityListInitianlize()
     {
-        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Price.text = "My Price : " + MyPrice.ToString();
+        Price.text = "My Price : " + Inventory.Instance.GetSpiritNumber().ToString();
 
-        for(int i=0;i<2;i++)
+        for (int i = 0; i < 2; i++)
         {
-            if(EquipList[i] == null)
+            if (EquipList[i] == null)
             {
                 EquipButton.transform.GetChild(i).GetComponent<Image>().color = Color.black;
 
@@ -79,36 +78,36 @@ public class AbilityUI : MonoBehaviour
                 EquipButton.transform.GetChild(i).GetComponent<Image>().color = Color.white;
             }
         }
-        
+
         for (int i = 0; i < 7; i++)
         {
-            
+
             if (ability[i].islock == false)
             {
-               if(EquipList[0] == ability[i])
+                if (EquipList[0] == ability[i])
                 {
                     Button.transform.GetChild(i).GetComponent<Image>().color = Color.black;
                 }
-               else if(EquipList[1] == ability[i])
+                else if (EquipList[1] == ability[i])
                 {
                     Button.transform.GetChild(i).GetComponent<Image>().color = Color.black;
                 }
-               else if (CheckFullEquip())
+                else if (CheckFullEquip())
                 {
                     Button.transform.GetChild(i).GetComponent<Image>().color = Color.gray;
                 }
-               else
+                else
                 {
                     Button.transform.GetChild(i).GetComponent<Image>().color = Color.white;
                 }
-                
-                
+
+
             }
             else Button.transform.GetChild(i).GetComponent<Image>().color = Color.red;
         }
     }
 
-    
+
     public void ClickAbility()
     {
         string clickObject = EventSystem.current.currentSelectedGameObject.name;
@@ -117,7 +116,7 @@ public class AbilityUI : MonoBehaviour
         {
             if (Button.transform.GetChild(i).name == clickObject)
             {
-                
+
                 if (ability[i].islock == true)
                 {
                     AbilityNum = i;
@@ -132,7 +131,7 @@ public class AbilityUI : MonoBehaviour
                     {
                         EquipList[0] = ability[i];
                         EquipButton.transform.GetChild(0).GetComponentInChildren<TMP_Text>().text = ability[i].name;
-                        
+
                     }
                     else if (EquipList[1] == null)
                     {
@@ -148,9 +147,9 @@ public class AbilityUI : MonoBehaviour
 
     public void BuyPanelYes()
     {
-        if(MyPrice >= ability[AbilityNum].price)
+        if (MyPrice >= ability[AbilityNum].price)
         {
-            
+
             MyPrice -= ability[AbilityNum].price;
             ability[AbilityNum].islock = false;
             BuyPanel.SetActive(false);

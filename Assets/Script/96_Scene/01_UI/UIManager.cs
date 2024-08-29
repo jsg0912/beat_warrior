@@ -100,8 +100,8 @@ public class UIManager : MonoBehaviour
 
     private void UpdateCoolTime()
     {
-        foreach(var skill in SkillCoolTimeImg)
-            skill.Value.fillAmount 
+        foreach (var skill in SkillCoolTimeImg)
+            skill.Value.fillAmount
                 = 1 - Player.Instance.GetSkillCoolTime(skill.Key) / PlayerSkillConstant.SkillCoolTime[skill.Key];
     }
 
@@ -127,6 +127,6 @@ public class UIManager : MonoBehaviour
         isAltarActive = !isAltarActive;
         Altar.SetActive(isAltarActive);
 
-        SpiritText.text = Player.Instance.inventory.GetSpiritNumber().ToString();
+        SpiritText.text = Inventory.Instance.GetSpiritNumber().ToString();
     }
 }

@@ -6,7 +6,7 @@ public class SpiritObject : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Player.Instance.inventory.IncreaseSpirit(1);
+            Inventory.Instance.IncreaseSpirit(1);
             Destroy(gameObject);
         }
     }

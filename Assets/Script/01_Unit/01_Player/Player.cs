@@ -11,8 +11,6 @@ public class Player : MonoBehaviour
     public Unit playerUnit;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
-
-    public Inventory inventory = new Inventory();
     private List<ActiveSkillPlayer> skillList;
     private List<Skill> traitList = new();
 
