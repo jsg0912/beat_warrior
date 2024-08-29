@@ -166,3 +166,4 @@ public class AlterPopup : MonoBehaviour
         return Player.Instance.GetTraits().Length == PlayerConstant.MaxAdditionalSkillCount;
     }
 }
+*/
