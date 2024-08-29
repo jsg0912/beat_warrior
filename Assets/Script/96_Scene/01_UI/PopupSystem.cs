@@ -33,7 +33,7 @@ public class PopupSystem : MonoBehaviour
     {
         if (onClickOkay != null)
         {
-            onClickOkay();
+            //onClickOkay();
         }
 
         ClosePopup();
@@ -43,7 +43,7 @@ public class PopupSystem : MonoBehaviour
     {
         if (onClickCancel != null)
         {
-            onClickCancel();
+            //onClickCancel();
         }
 
         ClosePopup();
