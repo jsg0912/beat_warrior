@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 
     public static Player Instance;
     public Unit playerUnit;
+    private CapsuleCollider2D _collider;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private List<ActiveSkillPlayer> skillList;
@@ -97,6 +98,7 @@ public class Player : MonoBehaviour
             new Skill2(this.gameObject)
         };
 
+        _collider = GetComponent<CapsuleCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         colliderController = GetComponent<ColliderController>();
@@ -160,10 +162,15 @@ public class Player : MonoBehaviour
         transform.localScale = new Vector3(direction, 1, 1);
     }
 
-    public void SetGravity(bool gravity)
+    public void SetGravityScale(bool gravity)
     {
         _rigidbody.gravityScale = gravity ? PlayerConstant.gravityScale : 0;
         if (!gravity) _rigidbody.velocity = Vector3.zero;
+    }
+
+    public void SetColliderTrigger(bool isTrigger)
+    {
+        _collider.isTrigger = isTrigger;
     }
 
     public void SetPlayerAnimTrigger(string trigger)
@@ -298,9 +305,10 @@ public class Player : MonoBehaviour
     {
         int dir = end.x > transform.position.x ? 1 : -1;
 
-        SetGravity(false);
+        SetColliderTrigger(true);
+        SetGravityScale(false);
+        SetInvincibility(isInvincibility);
         if (changeDir == true) SetDirection(dir);
-        if (isInvincibility == true) SetInvincibility(true);
 
         while (Vector2.Distance(end, transform.position) >= 0.05f)
         {
@@ -310,9 +318,10 @@ public class Player : MonoBehaviour
 
         transform.position = end;
 
-        SetGravity(true);
+        SetColliderTrigger(false);
+        SetGravityScale(true);
+        SetInvincibility(false);
         if (changeDir == true) SetDirection(-dir);
-        if (isInvincibility == true) SetInvincibility(false);
     }
 
     private void Skill()

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-
+/*
 public class AbilityUI : MonoBehaviour
 {
     int SpiritCount
@@ -172,3 +172,4 @@ public class AbilityUI : MonoBehaviour
         else return false;
     }
 }
+*/
