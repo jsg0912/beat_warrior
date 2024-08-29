@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -8,9 +6,13 @@ using TMPro;
 
 public class AbilityUI : MonoBehaviour
 {
-    Ability[] ability;
-
-    int MyPrice;
+    int SpiritCount
+    {
+        get
+        {
+            return Inventory.Instance.GetSpiritNumber();
+        }
+    }
 
     Ability[] EquipList;
 
@@ -20,7 +22,7 @@ public class AbilityUI : MonoBehaviour
     public GameObject Button;
     public GameObject EquipButton;
     public GameObject BuyPanel;
-    public TMP_Text Price;
+    public TMP_Text PriceView;
 
     // Start is called before the first frame update
     void Start()
@@ -31,18 +33,6 @@ public class AbilityUI : MonoBehaviour
 
     void Initianlize()
     {
-        ability = new Ability[7];
-
-        ability[0] = new Ability("AblityName1", 100, "AbilityDescription1");
-        ability[1] = new Ability("AblityName2", 110, "AbilityDescription2");
-        ability[2] = new Ability("AblityName3", 120, "AbilityDescription3");
-        ability[3] = new Ability("AblityName4", 130, "AbilityDescription4");
-        ability[4] = new Ability("AblityName5", 140, "AbilityDescription5");
-        ability[5] = new Ability("AblityName6", 150, "AbilityDescription6");
-        ability[6] = new Ability("AblityName7", 160, "AbilityDescription7");
-
-        MyPrice = 120;
-
         EquipList = new Ability[2];
 
 
@@ -64,9 +54,9 @@ public class AbilityUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Price.text = "My Price : " + Inventory.Instance.GetSpiritNumber().ToString();
+        PriceView.text = "My Price : " + Inventory.Instance.GetSpiritNumber().ToString();
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < PlayerConstant.MaxAdditionalSkillCount; i++)
         {
             if (EquipList[i] == null)
             {
@@ -147,10 +137,9 @@ public class AbilityUI : MonoBehaviour
 
     public void BuyPanelYes()
     {
-        if (MyPrice >= ability[AbilityNum].price)
+        if (SpiritCount >= ability[AbilityNum].price)
         {
-
-            MyPrice -= ability[AbilityNum].price;
+            Inventory.Instance.ChangeSpiritNumber(-(ability[AbilityNum].price));
             ability[AbilityNum].islock = false;
             BuyPanel.SetActive(false);
         }
@@ -181,6 +170,5 @@ public class AbilityUI : MonoBehaviour
     {
         if (EquipList[0] != null && EquipList[1] != null) return true;
         else return false;
-
     }
 }
