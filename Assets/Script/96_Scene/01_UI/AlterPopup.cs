@@ -8,7 +8,7 @@ using System.Linq;
 public class AlterPopup : MonoBehaviour
 {
     SkillName[] salesSkillList;
-    int SpiritCount
+    int spiritCount
     {
         get
         {
@@ -16,8 +16,7 @@ public class AlterPopup : MonoBehaviour
         }
     }
 
-    int AbilityNum;
-    int AbilityPrice;
+    int abilityNum; // TODO: Question
 
     public GameObject Button;
     public GameObject EquipButton;
@@ -44,7 +43,7 @@ public class AlterPopup : MonoBehaviour
     // Update is called once per frame
     public void UIUpdate()
     {
-        PriceView.text = "My Price : " + Inventory.Instance.GetSpiritNumber().ToString();
+        PriceView.text = "My Price : " + spiritCount.ToString();
 
         SkillName[] equipTraitList = Player.Instance.GetTraits();
         for (int i = 0; i < PlayerConstant.MaxAdditionalSkillCount; i++)
@@ -60,7 +59,7 @@ public class AlterPopup : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < salesSkillList.Length; i++)
         {
             SkillName targetSkill = salesSkillList[i];
             if (Inventory.Instance.IsPaidTrait(targetSkill) == true)
@@ -87,14 +86,14 @@ public class AlterPopup : MonoBehaviour
     {
         string clickObject = EventSystem.current.currentSelectedGameObject.name;
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < salesSkillList.Length; i++)
         {
             if (Button.transform.GetChild(i).name == clickObject)
             {
                 SkillName targetSkill = salesSkillList[i];
                 if (Inventory.Instance.IsPaidTrait(targetSkill) == false)
                 {
-                    AbilityNum = i;
+                    abilityNum = i;
                     BuyPanel.transform.GetChild(0).GetComponent<TMP_Text>().text = "Price : " + TraitPriceList.Info[targetSkill].ToString();
                     BuyPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = GetTraitScript(targetSkill);
 
@@ -122,9 +121,9 @@ public class AlterPopup : MonoBehaviour
 
     public void BuyPanelYes()
     {
-        SkillName targetSkillName = salesSkillList[AbilityNum];
+        SkillName targetSkillName = salesSkillList[abilityNum];
         int targetSkillPrice = TraitPriceList.Info[targetSkillName];
-        if (SpiritCount >= targetSkillPrice)
+        if (spiritCount >= targetSkillPrice)
         {
             Inventory.Instance.ChangeSpiritNumber(-targetSkillPrice);
             Inventory.Instance.AddSkill(targetSkillName);
@@ -156,12 +155,17 @@ public class AlterPopup : MonoBehaviour
         UIUpdate();
     }
 
-    public string GetTraitScript(SkillName skillName)
+    public void OnClickPopupView()
+    {
+        this.gameObject.SetActive(true);
+    }
+
+    private string GetTraitScript(SkillName skillName)
     {
         return UIScript.TraitUIScript[skillName][UIManager.Instance.language];
     }
 
-    bool CheckFullEquip()
+    private bool CheckFullEquip()
     {
         return Player.Instance.GetTraits().Length == PlayerConstant.MaxAdditionalSkillCount;
     }
