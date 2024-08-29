@@ -18,4 +18,9 @@ public class Arrow : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    private void DestroyArrow()
+    {
+        Destroy(this.gameObject);
+    }
 }

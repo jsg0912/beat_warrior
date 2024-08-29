@@ -13,16 +13,19 @@ public class PopupSystem : MonoBehaviour
     public static PopupSystem instance { get; private set; }
 
     public TextMeshProUGUI txtContent;
-    Action onClickOkay, onClickCancel;
+
+    System.Action onClickOkay, onClickCancel;
+
+    
 
     private void Awake()
     {
         instance = this;
     }
 
-    public void OpenPopUp(string content, Action onClickOkay, Action onClickCancel)
+    public void OpenPopUp(string content, System.Action onClickOkay, System.Action onClickCancel)
     {
-        
+
         txtContent.text = content;
         this.onClickOkay = onClickOkay;
         this.onClickCancel = onClickCancel;
