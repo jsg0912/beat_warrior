@@ -8,6 +8,7 @@ using System.Linq;
 public class AlterPopup : MonoBehaviour
 {
     SkillName[] salesSkillList;
+    private bool isOn = false;
     int spiritCount
     {
         get
@@ -27,21 +28,31 @@ public class AlterPopup : MonoBehaviour
     void Start()
     {
         Initialize();
+        UpdateUI();
+    }
 
+    private void OnEnable()
+    {
+        if (salesSkillList == null)
+        {
+            Initialize();
+        }
+        UpdateUI();
     }
 
     void Initialize()
     {
+        isOn = false;
         salesSkillList = TraitPriceList.Info.Keys.ToArray();
         for (int i = 0; i < salesSkillList.Length; i++)
         {
-            Button.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = salesSkillList.ToString();
+            Button.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = salesSkillList[i].ToString();
         }
 
     }
 
     // Update is called once per frame
-    public void UIUpdate()
+    public void UpdateUI()
     {
         PriceView.text = "My Price : " + spiritCount.ToString();
 
@@ -116,7 +127,7 @@ public class AlterPopup : MonoBehaviour
             }
             else continue;
         }
-        UIUpdate();
+        UpdateUI();
     }
 
     public void BuyPanelYes()
@@ -129,21 +140,21 @@ public class AlterPopup : MonoBehaviour
             Inventory.Instance.AddSkill(targetSkillName);
             BuyPanel.SetActive(false);
         }
-        UIUpdate();
+        UpdateUI();
     }
 
     public void BuyPanelno()
     {
         BuyPanel.SetActive(false);
 
-        UIUpdate();
+        UpdateUI();
     }
 
     public void RemoveEquipList()
     {
         string clickObject = EventSystem.current.currentSelectedGameObject.name;
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < PlayerConstant.MaxAdditionalSkillCount; i++)
         {
             if (EquipButton.transform.GetChild(i).name == clickObject)
             {
@@ -152,12 +163,13 @@ public class AlterPopup : MonoBehaviour
             else continue;
         }
 
-        UIUpdate();
+        UpdateUI();
     }
 
     public void OnClickPopupView()
     {
-        this.gameObject.SetActive(true);
+        isOn = !isOn;
+        gameObject.SetActive(isOn);
     }
 
     private string GetTraitScript(SkillName skillName)
