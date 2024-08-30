@@ -7,11 +7,11 @@ public class Monster : MonoBehaviour
 
     protected Animator _animator;
 
-    private GameObject Target;
-    private GameObject TargetPrefab;
-
     private GameObject Hp;
     private GameObject HpPrefab;
+
+    private GameObject Target;
+    private GameObject TargetPrefab;
 
     private GameObject Obj;
     private GameObject SpiritPrefab;
@@ -31,7 +31,7 @@ public class Monster : MonoBehaviour
         Vector3 TargetPos = gameObject.transform.position + new Vector3(0, 2.8f, 0);
         Target = GameObject.Instantiate(TargetPrefab, TargetPos, Quaternion.identity);
 
-        Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetCurrentHP());
+        Hp.GetComponent<MonsterHPUI>().SetHP(monsterUnit.GetCurrentHP());
 
     }
 
@@ -59,7 +59,7 @@ public class Monster : MonoBehaviour
             return;
         }
 
-        Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetCurrentHP());
+        Hp.GetComponent<MonsterHPUI>().SetHP(monsterUnit.GetCurrentHP());
 
         _animator.SetTrigger("hurt");
     }
