@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Text tt;
-
     public static Player Instance;
     public Unit playerUnit;
     private CapsuleCollider2D _collider;
@@ -48,8 +45,6 @@ public class Player : MonoBehaviour
 
             _animator.SetFloat("velocity.y", _rigidbody.velocity.y);
         }
-
-        tt.text = playerUnit.unitStat.GetCurrentStat(StatKind.AttackCount).ToString();
 
         if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
 
@@ -123,7 +118,7 @@ public class Player : MonoBehaviour
     public PlayerStatus GetPlayerStatus() { return status; }
     public int GetDirection() { return direction; }
     public SkillName[] GetTraits() { return traitList.Select(trait => trait.skillName).ToArray(); }
-    public int GetCurrentHP() { return playerUnit.GetCurrentHP(); }
+    public int GetCurrentStat(StatKind statKind) { return playerUnit.unitStat.GetCurrentStat(statKind); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
     public GameObject GetTargetInfo() { return targetInfo; }
 
