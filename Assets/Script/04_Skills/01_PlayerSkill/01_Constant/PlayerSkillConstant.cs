@@ -2,9 +2,13 @@ using System.Collections.Generic;
 
 public class PlayerSkillConstant
 {
+    public const float SkillDelayInterval = 0.2f;
+
     public const int attackCountMax = 2;
     public const float attackKnockBackRange = 3.0f;
     public const float skill2DashRange = 2.0f;
+    public const float DashEndPointInterval = 1f;
+    public const float DashSpeed = 0.03f;
 
     public static Dictionary<SkillName, float> SkillCoolTime = new() {
         { SkillName.Attack, 4.0f },
