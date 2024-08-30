@@ -94,10 +94,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4995221350257575857}
   - component: {fileID: 91669623623006571}
-  - component: {fileID: 2992529123118445231}
-  - component: {fileID: 5763945809334877145}
   - component: {fileID: 6041718440705759031}
   - component: {fileID: 8169415079466050874}
+  - component: {fileID: 2992529123118445231}
+  - component: {fileID: 5763945809334877145}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -142,6 +142,31 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6041718440705759031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5025202593638704844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20fedda49ee730349a51dbfd780b3e87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status: 0
+--- !u!114 &8169415079466050874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5025202593638704844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dec4b6c88d0a9b4a9a1c10ee82c7b13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &2992529123118445231
 Rigidbody2D:
   serializedVersion: 4
@@ -204,29 +229,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.5}
   m_Size: {x: 0.3, y: 1}
   m_Direction: 0
---- !u!114 &6041718440705759031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5025202593638704844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20fedda49ee730349a51dbfd780b3e87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tt: {fileID: 0}
-  status: 0
---- !u!114 &8169415079466050874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5025202593638704844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dec4b6c88d0a9b4a9a1c10ee82c7b13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
