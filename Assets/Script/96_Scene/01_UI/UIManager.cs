@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject HP;
     private GameObject HPPrefab;
     private List<Image> HPList;
+    [SerializeField] Text AttackCountView;
 
     [SerializeField] private List<Image> SkillCoolTimeImgList;
     private Dictionary<SkillName, Image> SkillCoolTimeImg = new();
@@ -85,7 +86,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHPUI()
     {
-        int hp = Player.Instance.GetCurrentHP();
+        int hp = Player.Instance.GetCurrentStat(StatKind.HP);
 
         if (hp == 0)
         {
@@ -105,6 +106,9 @@ public class UIManager : MonoBehaviour
         foreach (var skill in SkillCoolTimeImg)
             skill.Value.fillAmount
                 = 1 - Player.Instance.GetSkillCoolTime(skill.Key) / PlayerSkillConstant.SkillCoolTime[skill.Key];
+
+
+        AttackCountView.text = Player.Instance.GetCurrentStat(StatKind.AttackCount).ToString();
     }
 
     private void SetMenuActive()

@@ -1,13 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Text tt;
-
     public static Player Instance;
     public Unit playerUnit;
     private CapsuleCollider2D _collider;
@@ -21,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerStatus status;
 
     private int direction;
+    private bool isOnBaseTile;
     private bool isInvincibility;
 
     private GameObject targetInfo;
@@ -42,12 +41,11 @@ public class Player : MonoBehaviour
     {
         if (status != PlayerStatus.Dead)
         {
+            GroundedCheck();
             Jump();
             Down();
             Skill();
         }
-
-        tt.text = playerUnit.unitStat.GetCurrentStat(StatKind.AttackCount).ToString();
 
         if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
 
@@ -107,6 +105,7 @@ public class Player : MonoBehaviour
         SetPlayerStatus(PlayerStatus.Idle);
 
         direction = 1;
+        isOnBaseTile = false;
         isInvincibility = false;
 
         UIManager.Instance.SetAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
@@ -115,13 +114,14 @@ public class Player : MonoBehaviour
     public void RestartPlayer()
     {
         Initialize();
+        _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
     }
 
     // GET Functions
     public PlayerStatus GetPlayerStatus() { return status; }
     public int GetDirection() { return direction; }
     public SkillName[] GetTraits() { return traitList.Select(trait => trait.skillName).ToArray(); }
-    public int GetCurrentHP() { return playerUnit.GetCurrentHP(); }
+    public int GetCurrentStat(StatKind statKind) { return playerUnit.unitStat.GetCurrentStat(statKind); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
     public GameObject GetTargetInfo() { return targetInfo; }
 
@@ -275,11 +275,11 @@ public class Player : MonoBehaviour
 
     private void Down()
     {
+        if (isOnBaseTile == true) return;
+
         if (Input.GetKeyDown(KeySetting.keys[Action.Down]))
         {
             colliderController.PassTile();
-
-            SetPlayerStatus(PlayerStatus.Jump);
         }
     }
 
@@ -312,9 +312,13 @@ public class Player : MonoBehaviour
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetDirection(dir);
 
-        while (Vector2.Distance(end, transform.position) >= 0.05f)
+        // TODO: 아래의 10은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
+        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 10;
+        int moveCount = 0;
+        while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
-            transform.position = Vector2.Lerp(transform.position, end, 0.03f);
+            transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
+            moveCount++;
             yield return null;
         }
 
@@ -333,7 +337,7 @@ public class Player : MonoBehaviour
 
     IEnumerator UseSkill()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(PlayerSkillConstant.SkillDelayInterval);
         if (status != PlayerStatus.Dead) SetPlayerStatus(PlayerStatus.Idle);
     }
 
@@ -439,16 +443,38 @@ public class Player : MonoBehaviour
         isInvincibility = false;
     }
 
+    private void GroundedCheck()
+    {
+        bool isGrounded = false;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.05f);
+        foreach (Collider2D obj in colliders) if (obj.CompareTag("Tile") || obj.CompareTag("Base")) isGrounded = true;
+
+        _animator.SetBool(PlayerConstant.groundedAnimBool, isGrounded);
+    }
+
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject obj = collision.gameObject;
 
         if (_rigidbody.velocity.y <= 0.5f && (obj.CompareTag("Tile") || obj.CompareTag("Base")))
         {
+            if (obj.CompareTag("Base")) isOnBaseTile = true;
             _animator.SetBool(PlayerConstant.jumpAnimBool, false);
             if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
             return;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        GameObject obj = collision.gameObject;
+
+        if ((obj.CompareTag("Tile") || obj.CompareTag("Base")))
+        {
+            if (obj.CompareTag("Base")) isOnBaseTile = false;
         }
     }
 }
