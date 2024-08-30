@@ -45,6 +45,8 @@ public class Player : MonoBehaviour
             Jump();
             Down();
             Skill();
+
+            _animator.SetFloat("velocity.y", _rigidbody.velocity.y);
         }
 
         tt.text = playerUnit.unitStat.GetCurrentStat(StatKind.AttackCount).ToString();
