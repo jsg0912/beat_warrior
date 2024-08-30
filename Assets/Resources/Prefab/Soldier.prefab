@@ -227,6 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monsterName: 0
+  UIHp: {fileID: 1879118689041543443}
 --- !u!1 &883184142575478506
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,6 +799,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d2ab41ea2df0884680d1e9febd0de39, type: 3}
+--- !u!114 &1879118689041543443 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8985435466600428485, guid: 2d2ab41ea2df0884680d1e9febd0de39, type: 3}
+  m_PrefabInstance: {fileID: 7395286135484990166}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6256fda82c492ef438ef5a66ffbfd02e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4456076355041836697 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6590591835117026383, guid: 2d2ab41ea2df0884680d1e9febd0de39, type: 3}
