@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -309,9 +310,13 @@ public class Player : MonoBehaviour
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetDirection(dir);
 
-        while (Vector2.Distance(end, transform.position) >= 0.05f)
+        // TODO: 아래의 10은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
+        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 10;
+        int moveCount = 0;
+        while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
-            transform.position = Vector2.Lerp(transform.position, end, 0.03f);
+            transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
+            moveCount++;
             yield return null;
         }
 
@@ -330,7 +335,7 @@ public class Player : MonoBehaviour
 
     IEnumerator UseSkill()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(PlayerSkillConstant.SkillDelayInterval);
         if (status != PlayerStatus.Dead) SetPlayerStatus(PlayerStatus.Idle);
     }
 
