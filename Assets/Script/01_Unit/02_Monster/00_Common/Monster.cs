@@ -2,33 +2,34 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
-    protected Animator anim;
     public MonsterName monsterName;
     public MonsterUnit monsterUnit;
-    private GameObject TargetPrefab;
+
+    protected Animator _animator;
+
     private GameObject Target;
-    private GameObject HpPrefab;
+    private GameObject TargetPrefab;
+
     private GameObject Hp;
-    private Vector3 TargetPos;
-    private Vector3 HpPos;
+    private GameObject HpPrefab;
+
     private GameObject Obj;
     private GameObject SpiritPrefab;
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
         monsterUnit = MonsterList.FindMonster(monsterName);
         monsterUnit.pattern.Initialize(gameObject);
 
+        Hp = transform.GetChild(0).transform.gameObject;
+
+        HpPrefab = Resources.Load("Prefab/MonsterHP") as GameObject;
         TargetPrefab = Resources.Load("Prefab/Target") as GameObject;
-        HpPrefab = Resources.Load("Prefab/EnemyHeart") as GameObject;
         SpiritPrefab = Resources.Load("Prefab/Spirit") as GameObject;
 
         Vector3 TargetPos = gameObject.transform.position + new Vector3(0, 2.8f, 0);
         Target = GameObject.Instantiate(TargetPrefab, TargetPos, Quaternion.identity);
-
-        Vector3 HpPos = gameObject.transform.position + new Vector3(0, -0.5f, 0);
-        Hp = GameObject.Instantiate(HpPrefab, HpPos, Quaternion.identity);
 
         Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetCurrentHP());
 
@@ -60,14 +61,14 @@ public class Monster : MonoBehaviour
 
         Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetCurrentHP());
 
-        anim.SetTrigger("hurt");
+        _animator.SetTrigger("hurt");
     }
 
     protected virtual void Die()
     {
         Player.Instance.CheckResetSkills(this.gameObject);
         Instantiate(SpiritPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
-        anim.SetTrigger("die");
+        _animator.SetTrigger("die");
         Destroy(gameObject, 2.0f);
         Destroy(Target);
         Destroy(Hp);
