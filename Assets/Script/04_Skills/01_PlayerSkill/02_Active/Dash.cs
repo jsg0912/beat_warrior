@@ -65,8 +65,7 @@ public class Dash : ActiveSkillPlayer
         Vector2 end = TargetMonster.transform.position;
 
         int dir = end.x > start.x ? 1 : -1;
-        end += new Vector2(dir, 0);
-
+        end += new Vector2(PlayerSkillConstant.DashEndPointInterval * dir, 0);
         Player.Instance.Dashing(end, true, true);
 
         Vector2 offset = new Vector2(0, 1.0f);
