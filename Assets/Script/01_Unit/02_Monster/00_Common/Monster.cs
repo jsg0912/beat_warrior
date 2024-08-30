@@ -10,7 +10,7 @@ public class Monster : MonoBehaviour
     private GameObject Target;
     private GameObject TargetPrefab;
 
-    private GameObject Hp;
+    [SerializeField] private EnemyHp UIHp;
     private GameObject HpPrefab;
 
     private GameObject Obj;
@@ -22,8 +22,6 @@ public class Monster : MonoBehaviour
         monsterUnit = MonsterList.FindMonster(monsterName);
         monsterUnit.pattern.Initialize(gameObject);
 
-        Hp = transform.GetChild(0).transform.gameObject;
-
         HpPrefab = Resources.Load("Prefab/MonsterHP") as GameObject;
         TargetPrefab = Resources.Load("Prefab/Target") as GameObject;
         SpiritPrefab = Resources.Load("Prefab/Spirit") as GameObject;
@@ -31,7 +29,7 @@ public class Monster : MonoBehaviour
         Vector3 TargetPos = gameObject.transform.position + new Vector3(0, 2.8f, 0);
         Target = GameObject.Instantiate(TargetPrefab, TargetPos, Quaternion.identity);
 
-        Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetCurrentHP());
+        UIHp.SetHp(monsterUnit.GetCurrentHP());
 
     }
 
@@ -59,7 +57,7 @@ public class Monster : MonoBehaviour
             return;
         }
 
-        Hp.GetComponent<EnemyHp>().SetHp(monsterUnit.GetCurrentHP());
+        UIHp.SetHp(monsterUnit.GetCurrentHP());
 
         _animator.SetTrigger("hurt");
     }
@@ -71,7 +69,7 @@ public class Monster : MonoBehaviour
         _animator.SetTrigger("die");
         Destroy(gameObject, 2.0f);
         Destroy(Target);
-        Destroy(Hp);
+        Destroy(UIHp.gameObject);
     }
 
     protected virtual void ShowUI()
@@ -88,7 +86,7 @@ public class Monster : MonoBehaviour
         }
 
         Target.GetComponent<Transform>().position = gameObject.transform.position + new Vector3(0, 2.8f, 0);
-        Hp.GetComponent<Transform>().position = gameObject.transform.position + new Vector3(0, -0.5f, 0);
+        UIHp.transform.position = gameObject.transform.position + new Vector3(0, -0.5f, 0);
 
     }
 }
