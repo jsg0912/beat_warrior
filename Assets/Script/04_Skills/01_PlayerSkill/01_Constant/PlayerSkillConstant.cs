@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class PlayerSkillConstant
 {
-    public const float SkillDelayInterval = 0.3f;
+    public const float SkillDelayInterval = 0.2f;
 
     public const int attackCountMax = 2;
     public const float attackKnockBackRange = 3.0f;
