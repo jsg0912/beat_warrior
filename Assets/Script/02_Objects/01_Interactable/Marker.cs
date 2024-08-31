@@ -27,6 +27,7 @@ public class Marker : MonoBehaviour
         if (obj.CompareTag("Monster") && obj.GetComponent<Monster>().monsterUnit.GetIsAlive())
         {
             Player.Instance.SetTarget(obj);
+            obj.GetComponent<Monster>().SetTarget();
             Destroy(this.gameObject);
         }
     }

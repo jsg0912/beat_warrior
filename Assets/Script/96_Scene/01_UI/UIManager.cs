@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
 
-        HPPrefab = Resources.Load("Prefab/HP") as GameObject;
+        HPPrefab = Resources.Load("Prefab/PlayerHP") as GameObject;
         HPList = new();
 
         SkillCoolTimeImg.Add(SkillName.Mark, SkillCoolTimeImgList[0]);
