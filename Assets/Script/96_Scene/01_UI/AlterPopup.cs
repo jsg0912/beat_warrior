@@ -9,8 +9,6 @@ public class AlterPopup : MonoBehaviour
 {
     SkillName[] salesSkillList;
     private bool isOn = false;
-
-    SkillName SelectTrait;
     int spiritCount
     {
         get
@@ -18,16 +16,13 @@ public class AlterPopup : MonoBehaviour
             return Inventory.Instance.GetSpiritNumber();
         }
     }
-    TraitSetButtonStatus InfoButton;
+
+    int abilityNum; // TODO: 제거해야함
 
     public GameObject Button;
+    public GameObject EquipButton;
+    public GameObject BuyPanel;
     public TMP_Text PriceView;
-
-    public GameObject Information;
-    //public Image InfoImage;
-    public TMP_Text InfoName;
-    public TMP_Text InfoDescription;
-    public Button InfoSetButton;
 
     // Start is called before the first frame update
     void Start()
@@ -49,12 +44,9 @@ public class AlterPopup : MonoBehaviour
     {
         isOn = false;
         salesSkillList = TraitPriceList.Info.Keys.ToArray();
-        SelectTrait = SkillName.End;
-        Information.SetActive(false);
         for (int i = 0; i < salesSkillList.Length; i++)
         {
-            Button.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = salesSkillList[i].ToString() + "\n" + TraitPriceList.Info[salesSkillList[i]];
-
+            Button.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = salesSkillList[i].ToString();
         }
 
     }
@@ -62,46 +54,22 @@ public class AlterPopup : MonoBehaviour
     // Update is called once per frame
     public void UpdateUI()
     {
-        PriceView.text = "Soul : " + spiritCount.ToString();
-        InfoName.text = SelectTrait.ToString();
-        if(CheckSelectInSales())InfoDescription.text = GetTraitScript(SelectTrait);
-        InfoSetButton.GetComponentInChildren<TMP_Text>().text = InfoButton.ToString();
+        PriceView.text = "My Price : " + spiritCount.ToString();
 
-            if (Inventory.Instance.IsPaidTrait(SelectTrait))
+        SkillName[] equipTraitList = Player.Instance.GetTraits();
+        for (int i = 0; i < PlayerConstant.MaxAdditionalSkillCount; i++)
+        {
+            if (equipTraitList.Length > i)
             {
-                if (Player.Instance.IsEquippedTrait(SelectTrait))
-                {
-                    InfoButton = TraitSetButtonStatus.Unequip;
-                    InfoSetButton.interactable = true;
-                }
-                else
-                {
-                    InfoButton = TraitSetButtonStatus.Equip;
-                    if (CheckFullEquip())
-                    {
-                        InfoSetButton.interactable = false;
-                    }
-                    else
-                    {
-                        InfoSetButton.interactable = true;
-                    }
-                }
+                EquipButton.transform.GetChild(i).GetComponent<Image>().color = Color.black;
+
             }
             else
             {
-                InfoButton = TraitSetButtonStatus.Buy;
-            if(CheckSelectInSales())
-            {
-                if (spiritCount >= TraitPriceList.Info[SelectTrait])
-                {
-                    InfoSetButton.interactable = true;
-                }
-                else
-                {
-                    InfoSetButton.interactable = false;
-                }
-            }}
-       
+                EquipButton.transform.GetChild(i).GetComponent<Image>().color = Color.white;
+            }
+        }
+
         for (int i = 0; i < salesSkillList.Length; i++)
         {
             SkillName targetSkill = salesSkillList[i];
@@ -125,7 +93,7 @@ public class AlterPopup : MonoBehaviour
     }
 
 
-    public void OnClickTrait()
+    public void ClickAbility()
     {
         string clickObject = EventSystem.current.currentSelectedGameObject.name;
 
@@ -134,42 +102,68 @@ public class AlterPopup : MonoBehaviour
             if (Button.transform.GetChild(i).name == clickObject)
             {
                 SkillName targetSkill = salesSkillList[i];
-                if (SelectTrait == targetSkill)
+                if (Inventory.Instance.IsPaidTrait(targetSkill) == false)
                 {
-                    Information.SetActive(false);
-                    SelectTrait = SkillName.End;
+                    abilityNum = i;
+                    BuyPanel.transform.GetChild(0).GetComponent<TMP_Text>().text = "Price : " + TraitPriceList.Info[targetSkill].ToString();
+                    BuyPanel.transform.GetChild(1).GetComponent<TMP_Text>().text = GetTraitScript(targetSkill);
+
+                    BuyPanel.SetActive(true);
                 }
-                else
-                {
-                    Information.SetActive(true);
-                    SelectTrait = targetSkill;
-                }
-                UpdateUI();
+                // else
+                // {
+                //     if (EquipList[0] == null)
+                //     {
+                //         EquipList[0] = ability[i];
+                //         EquipButton.transform.GetChild(0).GetComponentInChildren<TMP_Text>().text = ability[i].name;
+                //     }
+                //     else if (EquipList[1] == null)
+                //     {
+                //         EquipList[1] = ability[i];
+                //         EquipButton.transform.GetChild(1).GetComponentInChildren<TMP_Text>().text = ability[i].name;
+                //     }
+                //     else continue;
+                // }
             }
             else continue;
         }
         UpdateUI();
     }
 
-    public void OnClickConfirm()
+    public void BuyPanelYes()
     {
-        switch (InfoButton)
+        SkillName targetSkillName = salesSkillList[abilityNum];
+        int targetSkillPrice = TraitPriceList.Info[targetSkillName];
+        if (spiritCount >= targetSkillPrice)
         {
-            case TraitSetButtonStatus.Buy:
-                Inventory.Instance.ChangeSpiritNumber(-TraitPriceList.Info[SelectTrait]);
-                Inventory.Instance.AddSkill(SelectTrait);
-                UpdateUI();
-                break;
-            case TraitSetButtonStatus.Equip:
-                Player.Instance.AddOrRemoveTrait(SelectTrait);
-                UpdateUI();
-                break;
-            case TraitSetButtonStatus.Unequip:
-                Player.Instance.AddOrRemoveTrait(SelectTrait);
-                UpdateUI();
-                break;
-
+            Inventory.Instance.ChangeSpiritNumber(-targetSkillPrice);
+            Inventory.Instance.AddSkill(targetSkillName);
+            BuyPanel.SetActive(false);
         }
+        UpdateUI();
+    }
+
+    public void BuyPanelno()
+    {
+        BuyPanel.SetActive(false);
+
+        UpdateUI();
+    }
+
+    public void RemoveEquipList()
+    {
+        string clickObject = EventSystem.current.currentSelectedGameObject.name;
+
+        for (int i = 0; i < PlayerConstant.MaxAdditionalSkillCount; i++)
+        {
+            if (EquipButton.transform.GetChild(i).name == clickObject)
+            {
+                Player.Instance.RemoveTraitByIndex(i);
+            }
+            else continue;
+        }
+
+        UpdateUI();
     }
 
     public void OnClickPopupView()
@@ -186,14 +180,5 @@ public class AlterPopup : MonoBehaviour
     private bool CheckFullEquip()
     {
         return Player.Instance.GetTraits().Length == PlayerConstant.MaxAdditionalSkillCount;
-    }
-
-    private bool CheckSelectInSales()
-    {
-       for (int i = 0; i < salesSkillList.Length; i++)
-        {
-            if (salesSkillList[i] == SelectTrait) return true;
-        }
-        return false;
     }
 }
