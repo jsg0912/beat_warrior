@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Monster : MonoBehaviour
@@ -7,10 +8,9 @@ public class Monster : MonoBehaviour
 
     protected Animator _animator;
 
-    private GameObject Target;
-    private GameObject TargetPrefab;
 
     [SerializeField] private MonsterHPUI UIHp;
+    [SerializeField] private GameObject Target;
 
     private GameObject Obj;
     private GameObject SpiritPrefab;
@@ -21,11 +21,7 @@ public class Monster : MonoBehaviour
         monsterUnit = MonsterList.FindMonster(monsterName);
         monsterUnit.pattern.Initialize(gameObject);
 
-        TargetPrefab = Resources.Load("Prefab/Target") as GameObject;
         SpiritPrefab = Resources.Load("Prefab/Spirit") as GameObject;
-
-        Vector3 TargetPos = gameObject.transform.position + new Vector3(0, 2.8f, 0);
-        Target = GameObject.Instantiate(TargetPrefab, TargetPos, Quaternion.identity);
 
         UIHp.SetHP(monsterUnit.GetCurrentHP());
 
@@ -35,7 +31,6 @@ public class Monster : MonoBehaviour
     {
         if (monsterUnit.GetIsAlive() == true)
         {
-            ShowUI();
             monsterUnit.pattern.PlayPattern();
         }
 
@@ -49,13 +44,13 @@ public class Monster : MonoBehaviour
 
         if (Player.Instance.HitMonsterFuncList != null) Player.Instance.HitMonsterFuncList(monsterUnit);
 
+        UIHp.SetHP(monsterUnit.GetCurrentHP());
+
         if (monsterUnit.GetIsAlive() == false)
         {
             Die();
             return;
         }
-
-        UIHp.SetHP(monsterUnit.GetCurrentHP());
 
         _animator.SetTrigger("hurt");
     }
@@ -64,25 +59,28 @@ public class Monster : MonoBehaviour
     {
         Player.Instance.CheckResetSkills(this.gameObject);
         Instantiate(SpiritPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+
         _animator.SetTrigger("die");
         Destroy(gameObject, 2.0f);
-        Destroy(Target);
-        Destroy(UIHp.gameObject);
     }
 
-    protected virtual void ShowUI()
+    public void SetTarget()
     {
-        Obj = Player.Instance.GetTargetInfo();
+        StartCoroutine(ShowTargetUI());
+    }
 
-        if (Obj == gameObject)
+    protected IEnumerator ShowTargetUI()
+    {
+        Target.SetActive(true);
+
+        float timer = PlayerSkillConstant.SkillCoolTime[SkillName.Mark];
+
+        while (timer > 0 && monsterUnit.GetIsAlive() == true)
         {
-            Target.SetActive(true);
-        }
-        else
-        {
-            Target.SetActive(false);
+            timer -= Time.deltaTime;
+            yield return null;
         }
 
-        Target.GetComponent<Transform>().position = gameObject.transform.position + new Vector3(0, 2.8f, 0);
+        Target.SetActive(false);
     }
 }
