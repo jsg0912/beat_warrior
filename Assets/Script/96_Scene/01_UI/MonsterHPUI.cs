@@ -17,6 +17,7 @@ public class MonsterHPUI : MonoBehaviour
                 HP.transform.SetParent(this.transform, false);
             }
 
+            hpNow = hp;
             return;
         }
 
@@ -24,5 +25,7 @@ public class MonsterHPUI : MonoBehaviour
         {
             Destroy(transform.GetChild(0).gameObject);
         }
+
+        hpNow = hp;
     }
 }
