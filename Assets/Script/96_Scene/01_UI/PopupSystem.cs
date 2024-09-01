@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
-using UnityEngine.UI;
 using TMPro;
 
 public class PopupSystem : MonoBehaviour
@@ -16,7 +12,7 @@ public class PopupSystem : MonoBehaviour
 
     System.Action onClickOkay, onClickCancel;
 
-    
+
 
     private void Awake()
     {

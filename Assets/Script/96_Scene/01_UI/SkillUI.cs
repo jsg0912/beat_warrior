@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class SkillUI : MonoBehaviour
@@ -18,7 +16,7 @@ public class SkillUI : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
 
-        
+
         SkillCoolTimeImg.Add(SkillName.Mark, SkillCoolTimeImgList[0]);
         SkillCoolTimeImg.Add(SkillName.Dash, SkillCoolTimeImgList[1]);
         SkillCoolTimeImg.Add(SkillName.Skill1, SkillCoolTimeImgList[2]);
