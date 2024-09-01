@@ -10,14 +10,15 @@ public class AlterPopup : MonoBehaviour
     SkillName[] salesSkillList;
     private bool isOn = false;
 
-    SkillName SelectTrait;
-    int spiritCount
-    {
+
+    public SkillName SelectTrait;
+    int spiritCount;
+    /*{
         get
         {
             return Inventory.Instance.GetSpiritNumber();
         }
-    }
+    }*/
     TraitSetButtonStatus InfoButton;
 
     public GameObject Button;
@@ -47,6 +48,7 @@ public class AlterPopup : MonoBehaviour
 
     void Initialize()
     {
+        spiritCount = 1000;
         isOn = false;
         salesSkillList = TraitPriceList.Info.Keys.ToArray();
         SelectTrait = SkillName.End;
@@ -65,9 +67,8 @@ public class AlterPopup : MonoBehaviour
         PriceView.text = "Soul : " + spiritCount.ToString();
         InfoName.text = SelectTrait.ToString();
         if(CheckSelectInSales())InfoDescription.text = GetTraitScript(SelectTrait);
-        InfoSetButton.GetComponentInChildren<TMP_Text>().text = InfoButton.ToString();
 
-            if (Inventory.Instance.IsPaidTrait(SelectTrait))
+        if (Inventory.Instance.IsPaidTrait(SelectTrait))
             {
                 if (Player.Instance.IsEquippedTrait(SelectTrait))
                 {
@@ -101,7 +102,10 @@ public class AlterPopup : MonoBehaviour
                     InfoSetButton.interactable = false;
                 }
             }}
-       
+
+        InfoSetButton.GetComponentInChildren<TMP_Text>().text = InfoButton.ToString();
+
+
         for (int i = 0; i < salesSkillList.Length; i++)
         {
             SkillName targetSkill = salesSkillList[i];
@@ -144,7 +148,7 @@ public class AlterPopup : MonoBehaviour
                     Information.SetActive(true);
                     SelectTrait = targetSkill;
                 }
-                UpdateUI();
+                
             }
             else continue;
         }
@@ -161,11 +165,15 @@ public class AlterPopup : MonoBehaviour
                 UpdateUI();
                 break;
             case TraitSetButtonStatus.Equip:
-                Player.Instance.AddOrRemoveTrait(SelectTrait);
-                UpdateUI();
+                if(!CheckFullEquip())
+                {
+                    Player.Instance.EquipTrait(SelectTrait);
+                    UpdateUI();
+                    break;
+                }
                 break;
             case TraitSetButtonStatus.Unequip:
-                Player.Instance.AddOrRemoveTrait(SelectTrait);
+                Player.Instance.RemoveTrait(SelectTrait);
                 UpdateUI();
                 break;
 
@@ -195,5 +203,20 @@ public class AlterPopup : MonoBehaviour
             if (salesSkillList[i] == SelectTrait) return true;
         }
         return false;
+    }
+
+    public void test1()
+    {
+        SkillName[] a = new SkillName[Player.Instance.GetTraits().Length];
+        a = Player.Instance.GetTraits();
+
+        for (int i = 0; i < Player.Instance.GetTraits().Length; i++)
+        {
+            Debug.Log(a[i].ToString());
+        }
+    }
+
+    public void test2()
+    {
     }
 }
