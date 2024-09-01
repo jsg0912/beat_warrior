@@ -42,7 +42,7 @@ public class Monster : MonoBehaviour
 
         monsterUnit.ChangeCurrentHP(-dmg);
 
-        if (Player.Instance.HitMonsterFuncList != null) Player.Instance.HitMonsterFuncList(monsterUnit);
+        if (Player.Instance.hitMonsterFuncList != null) Player.Instance.hitMonsterFuncList(monsterUnit);
 
         UIHp.SetHP(monsterUnit.GetCurrentHP());
 
