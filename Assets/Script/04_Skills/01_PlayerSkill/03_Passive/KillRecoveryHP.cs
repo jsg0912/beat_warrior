@@ -11,6 +11,8 @@ public class KillRecoveryHP : PassiveSkill
 
     public override void GetSkill()
     {
+        skillName = SkillName.KillRecoveryHP;
+
         recoveryHP = 1;
 
         killMonsterCount = 0;

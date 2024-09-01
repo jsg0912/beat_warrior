@@ -404,6 +404,9 @@ public class Player : MonoBehaviour
             case SkillName.KillRecoveryHP:
                 trait = new KillRecoveryHP(this.gameObject);
                 break;
+            case SkillName.SkillReset:
+                trait = new SkillReset(this.gameObject);
+                break;
         }
 
         traitList.Add(trait);
