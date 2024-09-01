@@ -472,7 +472,7 @@ public class Player : MonoBehaviour
         {
             if (obj.CompareTag("Base")) isOnBaseTile = true;
             _animator.SetBool(PlayerConstant.groundedAnimBool, true);
-            if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
+            if (status == PlayerStatus.Jump || status == PlayerStatus.Fall) SetPlayerStatus(PlayerStatus.Idle);
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
             return;
         }
