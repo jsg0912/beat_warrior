@@ -11,7 +11,8 @@ public class PlayerConstant
     public const float invincibilityTime = 0.5f;
 
     public const string runAnimBool = "isRun";
-    public const string jumpAnimBool = "isJump";
+    public const string jumpAnimTrigger = "jump";
+    public const string fallAnimTrigger = "fall";
     public const string groundedAnimBool = "isGrounded";
     public const string dieAnimTrigger = "die";
     public const string restartAnimTrigger = "restart";

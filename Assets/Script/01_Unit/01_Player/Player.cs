@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -131,10 +132,17 @@ public class Player : MonoBehaviour
         this.status = status;
 
         _animator.SetBool(PlayerConstant.runAnimBool, status == PlayerStatus.Run);
-        _animator.SetBool(PlayerConstant.jumpAnimBool, status == PlayerStatus.Jump);
 
         switch (status)
         {
+            case PlayerStatus.Jump:
+                _animator.SetBool(PlayerConstant.groundedAnimBool, false);
+                _animator.SetTrigger(PlayerConstant.jumpAnimTrigger);
+                break;
+            case PlayerStatus.Fall:
+                _animator.SetBool(PlayerConstant.groundedAnimBool, false);
+                _animator.SetTrigger(PlayerConstant.fallAnimTrigger);
+                break;
             case PlayerStatus.Attack:
                 _animator.SetTrigger(PlayerSkillConstant.attackAnimTrigger);
                 break;
@@ -250,6 +258,7 @@ public class Player : MonoBehaviour
             case PlayerStatus.Idle:
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
+            case PlayerStatus.Fall:
             case PlayerStatus.Attack:
             case PlayerStatus.Mark:
                 return true;
@@ -279,6 +288,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeySetting.keys[Action.Down]))
         {
+            SetPlayerStatus(PlayerStatus.Fall);
+
             colliderController.PassTile();
         }
     }
@@ -450,9 +461,8 @@ public class Player : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.05f);
         foreach (Collider2D obj in colliders) if (obj.CompareTag("Tile") || obj.CompareTag("Base")) isGrounded = true;
 
-        _animator.SetBool(PlayerConstant.groundedAnimBool, isGrounded);
+        if (isGrounded == false) _animator.SetBool(PlayerConstant.groundedAnimBool, false);
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -461,7 +471,7 @@ public class Player : MonoBehaviour
         if (_rigidbody.velocity.y <= 0.5f && (obj.CompareTag("Tile") || obj.CompareTag("Base")))
         {
             if (obj.CompareTag("Base")) isOnBaseTile = true;
-            _animator.SetBool(PlayerConstant.jumpAnimBool, false);
+            _animator.SetBool(PlayerConstant.groundedAnimBool, true);
             if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
             return;
@@ -475,6 +485,7 @@ public class Player : MonoBehaviour
         if ((obj.CompareTag("Tile") || obj.CompareTag("Base")))
         {
             if (obj.CompareTag("Base")) isOnBaseTile = false;
+            _animator.SetBool(PlayerConstant.groundedAnimBool, false);
         }
     }
 }
