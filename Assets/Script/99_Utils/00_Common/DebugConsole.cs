@@ -8,6 +8,11 @@ public static class DebugConsole
         Debug.Log(message);
     }
 
+    public static void Log(float message)
+    {
+        Debug.Log(message);
+    }
+
     public static void Log(Vector2 vector)
     {
         Debug.Log(vector);
