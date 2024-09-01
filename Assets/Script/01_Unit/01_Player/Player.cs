@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -26,7 +25,9 @@ public class Player : MonoBehaviour
     private GameObject targetInfo;
 
     public delegate void HitMonsterFunc(MonsterUnit monster);
-    public HitMonsterFunc HitMonsterFuncList = null;
+    public delegate void UseSkillFunc(Skill skill);
+    public HitMonsterFunc hitMonsterFuncList = null;
+    public UseSkillFunc useSKillFuncList = null;
 
     void Start()
     {
