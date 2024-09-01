@@ -67,13 +67,20 @@ public class Dash : ActiveSkillPlayer
         RaycastHit2D[] hits;
 
         hits = Physics2D.RaycastAll(start, end - start, Vector2.Distance(start, end));
-        foreach (RaycastHit2D hit in hits) DashTargetMonster.Add(hit.collider.gameObject);
+        foreach (RaycastHit2D hit in hits)
+        {
+            DashTargetMonster.Add(hit.collider.gameObject);
+        }
 
         hits = Physics2D.RaycastAll(start + offset, end - start, Vector2.Distance(start, end));
-        foreach (RaycastHit2D hit in hits) DashTargetMonster.Add(hit.collider.gameObject);
+        foreach (RaycastHit2D hit in hits)
+        {
+            DashTargetMonster.Add(hit.collider.gameObject);
+        }
 
-        //Debug.DrawRay(start, end - start, Color.red, Vector2.Distance(start, end));
-        //Debug.DrawRay(start + offset, end - start, Color.red, Vector2.Distance(start, end));
+        // Dash시에 Player 머리와 발끝 경로가 보이는 Test용 코드 - 김민지, 20240901
+        Debug.DrawRay(start, end - start, Color.red, Vector2.Distance(start, end));
+        Debug.DrawRay(start + offset, end - start, Color.red, Vector2.Distance(start, end));
 
         DashTargetMonster = DashTargetMonster.Distinct().ToList();
 
