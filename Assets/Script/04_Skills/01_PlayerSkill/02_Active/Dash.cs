@@ -48,11 +48,6 @@ public class Dash : ActiveSkillPlayer
         if (coolTime <= 0) return;
 
         UseSkill();
-
-        if (Player.Instance.IsEquippedTrait(SkillName.SkillReset))
-        {
-            if (Random.Range(0, 10) == 0) coolTime = Player.Instance.GetSkillCoolTime(SkillName.Mark);
-        }
     }
 
     protected override void SkillMethod()
