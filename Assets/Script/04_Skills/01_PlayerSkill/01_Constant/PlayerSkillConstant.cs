@@ -9,6 +9,7 @@ public class PlayerSkillConstant
     public const float skill2DashRange = 2.0f;
     public const float DashEndPointInterval = 1f;
     public const float DashSpeed = 0.03f;
+    public const float SkillResetProbability = 0.5f;
 
     public static Dictionary<SkillName, float> SkillCoolTime = new() {
         { SkillName.Attack, 4.0f },
