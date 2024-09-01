@@ -16,7 +16,7 @@ public class AlterPopup : MonoBehaviour
     /*{
         get
         {
-            return Inventory.Instance.GetSpiritNumber();
+            return Inventory.Instance.GetSoulNumber();
         }
     }*/
     TraitSetButtonStatus InfoButton;
@@ -66,32 +66,32 @@ public class AlterPopup : MonoBehaviour
     {
         PriceView.text = "Soul : " + spiritCount.ToString();
         InfoName.text = SelectTrait.ToString();
-        if(CheckSelectInSales())InfoDescription.text = GetTraitScript(SelectTrait);
+        if (CheckSelectInSales()) InfoDescription.text = GetTraitScript(SelectTrait);
 
         if (Inventory.Instance.IsPaidTrait(SelectTrait))
+        {
+            if (Player.Instance.IsEquippedTrait(SelectTrait))
             {
-                if (Player.Instance.IsEquippedTrait(SelectTrait))
-                {
-                    InfoButton = TraitSetButtonStatus.Unequip;
-                    InfoSetButton.interactable = true;
-                }
-                else
-                {
-                    InfoButton = TraitSetButtonStatus.Equip;
-                    if (CheckFullEquip())
-                    {
-                        InfoSetButton.interactable = false;
-                    }
-                    else
-                    {
-                        InfoSetButton.interactable = true;
-                    }
-                }
+                InfoButton = TraitSetButtonStatus.Unequip;
+                InfoSetButton.interactable = true;
             }
             else
             {
-                InfoButton = TraitSetButtonStatus.Buy;
-            if(CheckSelectInSales())
+                InfoButton = TraitSetButtonStatus.Equip;
+                if (CheckFullEquip())
+                {
+                    InfoSetButton.interactable = false;
+                }
+                else
+                {
+                    InfoSetButton.interactable = true;
+                }
+            }
+        }
+        else
+        {
+            InfoButton = TraitSetButtonStatus.Buy;
+            if (CheckSelectInSales())
             {
                 if (spiritCount >= TraitPriceList.Info[SelectTrait])
                 {
@@ -101,7 +101,8 @@ public class AlterPopup : MonoBehaviour
                 {
                     InfoSetButton.interactable = false;
                 }
-            }}
+            }
+        }
 
         InfoSetButton.GetComponentInChildren<TMP_Text>().text = InfoButton.ToString();
 
@@ -148,7 +149,7 @@ public class AlterPopup : MonoBehaviour
                     Information.SetActive(true);
                     SelectTrait = targetSkill;
                 }
-                
+
             }
             else continue;
         }
@@ -160,12 +161,12 @@ public class AlterPopup : MonoBehaviour
         switch (InfoButton)
         {
             case TraitSetButtonStatus.Buy:
-                Inventory.Instance.ChangeSpiritNumber(-TraitPriceList.Info[SelectTrait]);
+                Inventory.Instance.ChangeSoulNumber(-TraitPriceList.Info[SelectTrait]);
                 Inventory.Instance.AddSkill(SelectTrait);
                 UpdateUI();
                 break;
             case TraitSetButtonStatus.Equip:
-                if(!CheckFullEquip())
+                if (!CheckFullEquip())
                 {
                     Player.Instance.EquipTrait(SelectTrait);
                     UpdateUI();
@@ -198,7 +199,7 @@ public class AlterPopup : MonoBehaviour
 
     private bool CheckSelectInSales()
     {
-       for (int i = 0; i < salesSkillList.Length; i++)
+        for (int i = 0; i < salesSkillList.Length; i++)
         {
             if (salesSkillList[i] == SelectTrait) return true;
         }

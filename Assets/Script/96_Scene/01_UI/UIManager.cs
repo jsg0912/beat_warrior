@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private GameObject Setting;
     [SerializeField] private GameObject Altar;
-    [SerializeField] private TextMeshProUGUI SpiritText;
+    [SerializeField] private TextMeshProUGUI SoulText;
 
     public TextMeshProUGUI[] txt;
     public GameObject Menu;
@@ -130,6 +130,6 @@ public class UIManager : MonoBehaviour
         isAltarActive = !isAltarActive;
         Altar.SetActive(isAltarActive);
 
-        SpiritText.text = Inventory.Instance.GetSpiritNumber().ToString();
+        SoulText.text = Inventory.Instance.GetSoulNumber().ToString();
     }
 }
