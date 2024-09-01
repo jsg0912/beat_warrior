@@ -375,7 +375,7 @@ public class Player : MonoBehaviour
     public void EquipTrait(SkillName name)
     {
         Skill trait = null;
-
+        DebugConsole.Log(name.ToString());
         switch (name)
         {
             case SkillName.AppendMaxHP:
@@ -395,7 +395,10 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        traitList.Add(trait);
+        if (trait == null)
+        {
+            throw new Exception("Trait 없어서 추가 실패!");
+        }
     }
 
     public void RemoveTraitByIndex(int index)
