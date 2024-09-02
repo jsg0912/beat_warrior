@@ -23,7 +23,7 @@ public class Monster : MonoBehaviour
 
         SoulPrefab = Resources.Load("Prefab/Soul") as GameObject;
 
-        UIHp.SetHP(monsterUnit.GetCurrentHP());
+        UIHp.SetMaxHP(monsterUnit.GetCurrentHP());
 
     }
 
