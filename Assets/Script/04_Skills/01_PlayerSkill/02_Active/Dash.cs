@@ -72,8 +72,8 @@ public class Dash : ActiveSkillPlayer
         hits = Physics2D.RaycastAll(start + offset, end - start, Vector2.Distance(start, end));
         foreach (RaycastHit2D hit in hits) DashTargetMonster.Add(hit.collider.gameObject);
 
-        //Debug.DrawRay(start, end - start, Color.red, Vector2.Distance(start, end));
-        //Debug.DrawRay(start + offset, end - start, Color.red, Vector2.Distance(start, end));
+        Debug.DrawRay(start, end - start, Color.red, Vector2.Distance(start, end));
+        Debug.DrawRay(start + offset, end - start, Color.red, Vector2.Distance(start, end));
 
         DashTargetMonster = DashTargetMonster.Distinct().ToList();
 
