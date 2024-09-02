@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     private int direction;
     private bool isOnBaseTile;
     private bool isInvincibility;
-    private bool checkIsGrounded;
     private BoxCollider2D tileCollider;
 
     private GameObject targetInfo;
@@ -111,7 +110,6 @@ public class Player : MonoBehaviour
         direction = 1;
         isOnBaseTile = false;
         isInvincibility = false;
-        checkIsGrounded = true;
 
         UIManager.Instance.SetAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }
@@ -291,7 +289,6 @@ public class Player : MonoBehaviour
             SetPlayerStatus(PlayerStatus.Fall);
 
             colliderController.PassTile(tileCollider);
-            StartCoroutine(GoDown());
         }
     }
 
@@ -308,13 +305,6 @@ public class Player : MonoBehaviour
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
             _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
         }
-    }
-
-    private IEnumerator GoDown()
-    {
-        checkIsGrounded = false;
-        yield return new WaitForSeconds(0.15f);
-        checkIsGrounded = true;
     }
 
     public void Dashing(Vector2 end, bool changeDir, bool isInvincibility)
