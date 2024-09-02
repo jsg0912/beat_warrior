@@ -4,42 +4,24 @@ using UnityEngine;
 public class ColliderController : MonoBehaviour
 {
     private CapsuleCollider2D playerCollider;
-    private GameObject tile;
 
     private void Start()
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
     }
 
-
-    public void PassTile()
+    public void SetColliderTrigger(bool isTrigger)
     {
-        if (tile != null)
-        {
-            StartCoroutine(DisableCollision());
-        }
+        playerCollider.isTrigger = isTrigger;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void PassTile(BoxCollider2D tileCollider)
     {
-        if (collision.gameObject.CompareTag("Tile"))
-        {
-            tile = collision.gameObject;
-        }
+        StartCoroutine(DisableCollision(tileCollider));
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private IEnumerator DisableCollision(BoxCollider2D tileCollider)
     {
-        if (collision.gameObject.CompareTag("Tile"))
-        {
-            tile = null;
-        }
-    }
-
-    private IEnumerator DisableCollision()
-    {
-        BoxCollider2D tileCollider = tile.GetComponent<BoxCollider2D>();
-
         Physics2D.IgnoreCollision(playerCollider, tileCollider);
         yield return new WaitForSeconds(0.25f);
         Physics2D.IgnoreCollision(playerCollider, tileCollider, false);
