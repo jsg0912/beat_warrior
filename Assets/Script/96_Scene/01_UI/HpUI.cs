@@ -14,7 +14,7 @@ public class HpUI : MonoBehaviour
     {
         Instance = this;
 
-        HPPrefab = Resources.Load("Prefab/HP") as GameObject;
+        HPPrefab = Resources.Load("Prefab/PlayerHP") as GameObject;
         HPList = new();
     }
 
