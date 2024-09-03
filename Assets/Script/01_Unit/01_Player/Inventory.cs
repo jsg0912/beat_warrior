@@ -21,7 +21,7 @@ public class Inventory : MonoBehaviour
             return _instance;
         }
     }
-    private Spirit spirit = new Spirit();
+    private Soul spirit = new Soul();
     private List<Item> items = new List<Item>();
     private static List<SkillName> mySkillList = new List<SkillName>();
 
@@ -45,12 +45,12 @@ public class Inventory : MonoBehaviour
         mySkillList.Add(skill);
     }
 
-    public int GetSpiritNumber()
+    public int GetSoulNumber()
     {
         return spirit.GetNumber();
     }
 
-    public int ChangeSpiritNumber(int number)
+    public int ChangeSoulNumber(int number)
     {
         return spirit.Change(number);
     }

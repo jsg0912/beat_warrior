@@ -10,6 +10,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
     protected override void UseSkill()
     {
         Player.Instance.SetPlayerStatus(status);
+        if (Player.Instance.useSKillFuncList != null) Player.Instance.useSKillFuncList(this);
         SkillMethod();
     }
 
@@ -22,11 +23,6 @@ public abstract class ActiveSkillPlayer : ActiveSkill
             if (Player.Instance.IsUsingSkill() == true) return;
 
             TrySkill();
-
-            if (Player.Instance.IsEquippedTrait(SkillName.SkillReset))
-            {
-                if (Random.Range(0, 10) == 0) coolTime = 0;
-            }
         }
     }
 

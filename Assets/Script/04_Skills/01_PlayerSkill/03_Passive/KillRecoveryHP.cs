@@ -11,15 +11,17 @@ public class KillRecoveryHP : PassiveSkill
 
     public override void GetSkill()
     {
+        skillName = SkillName.KillRecoveryHP;
+
         recoveryHP = 1;
 
         killMonsterCount = 0;
         killMonsterCountMax = 10;
 
-        Player.Instance.HitMonsterFuncList += CountkillMonster;
+        Player.Instance.hitMonsterFuncList += CountKillMonster;
     }
 
-    public void CountkillMonster(MonsterUnit monster)
+    public void CountKillMonster(MonsterUnit monster)
     {
         if (monster.GetIsAlive() == true) return;
 
@@ -33,6 +35,6 @@ public class KillRecoveryHP : PassiveSkill
 
     public override void RemoveSkill()
     {
-        Player.Instance.HitMonsterFuncList -= CountkillMonster;
+        Player.Instance.hitMonsterFuncList -= CountKillMonster;
     }
 }

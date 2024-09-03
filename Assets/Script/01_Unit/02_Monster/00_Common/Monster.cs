@@ -13,7 +13,7 @@ public class Monster : MonoBehaviour
     [SerializeField] private GameObject Target;
 
     private GameObject Obj;
-    private GameObject SpiritPrefab;
+    private GameObject SoulPrefab;
 
     void Start()
     {
@@ -21,7 +21,7 @@ public class Monster : MonoBehaviour
         monsterUnit = MonsterList.FindMonster(monsterName);
         monsterUnit.pattern.Initialize(gameObject);
 
-        SpiritPrefab = Resources.Load("Prefab/Spirit") as GameObject;
+        SoulPrefab = Resources.Load("Prefab/Soul") as GameObject;
 
         UIHp.SetHP(monsterUnit.GetCurrentHP());
 
@@ -42,7 +42,7 @@ public class Monster : MonoBehaviour
 
         monsterUnit.ChangeCurrentHP(-dmg);
 
-        if (Player.Instance.HitMonsterFuncList != null) Player.Instance.HitMonsterFuncList(monsterUnit);
+        if (Player.Instance.hitMonsterFuncList != null) Player.Instance.hitMonsterFuncList(monsterUnit);
 
         UIHp.SetHP(monsterUnit.GetCurrentHP());
 
@@ -58,7 +58,7 @@ public class Monster : MonoBehaviour
     protected virtual void Die()
     {
         Player.Instance.CheckResetSkills(this.gameObject);
-        Instantiate(SpiritPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        Instantiate(SoulPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
 
         _animator.SetTrigger("die");
         Destroy(gameObject, 2.0f);

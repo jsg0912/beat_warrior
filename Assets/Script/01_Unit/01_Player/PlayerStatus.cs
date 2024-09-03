@@ -3,6 +3,7 @@ public enum PlayerStatus
     Idle,
     Run,
     Jump,
+    Fall,
     Mark,
     Dash,
     Attack,
