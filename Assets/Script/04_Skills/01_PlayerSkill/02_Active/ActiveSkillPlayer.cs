@@ -10,8 +10,10 @@ public abstract class ActiveSkillPlayer : ActiveSkill
     protected override void UseSkill()
     {
         Player.Instance.SetPlayerStatus(status);
-        if (Player.Instance.useSKillFuncList != null) Player.Instance.useSKillFuncList(this);
+
         SkillMethod();
+
+        if (Player.Instance.useSKillFuncList != null) Player.Instance.useSKillFuncList(this);
     }
 
     public virtual void CheckInputKeyCode()

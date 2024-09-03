@@ -347,7 +347,11 @@ public class Player : MonoBehaviour
     IEnumerator UseSkill()
     {
         yield return new WaitForSeconds(PlayerSkillConstant.SkillDelayInterval);
-        if (status != PlayerStatus.Dead) SetPlayerStatus(PlayerStatus.Idle);
+        if (status != PlayerStatus.Dead)
+        {
+            if (_animator.GetBool(PlayerConstant.groundedAnimBool) == true) SetPlayerStatus(PlayerStatus.Idle);
+            else SetPlayerStatus(PlayerStatus.Fall);
+        }
     }
 
     public float GetSkillCoolTime(SkillName skillName)
