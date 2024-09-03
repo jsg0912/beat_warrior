@@ -48,6 +48,11 @@ public class Dash : ActiveSkillPlayer
         if (coolTime <= 0) return;
 
         UseSkill();
+
+        if (Player.Instance.IsEquippedTrait(SkillName.SkillReset))
+        {
+            if (Random.Range(0, 10) == 0) coolTime = Player.Instance.GetSkillCoolTime(SkillName.Mark);
+        }
     }
 
     protected override void SkillMethod()
@@ -56,29 +61,26 @@ public class Dash : ActiveSkillPlayer
 
         Transform playerTransform = Player.Instance.transform;
 
-        Vector2 playerBottom = playerTransform.position;
-        Vector2 playerMiddle = playerBottom + new Vector2(0, PlayerConstant.playerHeight / 2);
-        Vector2 playerTop = playerBottom + new Vector2(0, PlayerConstant.playerHeight);
-        Vector2 endPoint = TargetMonster.transform.position;
+        Vector2 start = playerTransform.position;
+        Vector2 end = TargetMonster.transform.position;
 
-        int offset = endPoint.x > playerBottom.x ? 1 : -1;
-        endPoint += new Vector2(PlayerSkillConstant.DashEndPointInterval * offset, 0);
+        int dir = end.x > start.x ? 1 : -1;
+        end += new Vector2(PlayerSkillConstant.DashEndPointInterval * dir, 0);
+        Player.Instance.Dashing(end, true, true);
 
-        Vector2 dir = endPoint - playerBottom;
-        float distance = Vector2.Distance(playerBottom, endPoint);
-        CheckMonsterHitBox(playerBottom, dir, distance);
-        CheckMonsterHitBox(playerMiddle, dir, distance);
-        CheckMonsterHitBox(playerTop, dir, distance);
+        Vector2 offset = new Vector2(0, 1.0f);
+        RaycastHit2D[] hits;
 
-        // Dash시에 Player 머리와 발끝 경로가 보이는 Test용 코드 - 김민지, 20240901
-        // Debug.DrawRay(playerBottom, dir, Color.red, distance);
-        // Debug.DrawRay(playerMiddle, dir, Color.red, distance);
-        // Debug.DrawRay(playerTop, dir, Color.red, distance);
+        hits = Physics2D.RaycastAll(start, end - start, Vector2.Distance(start, end));
+        foreach (RaycastHit2D hit in hits) DashTargetMonster.Add(hit.collider.gameObject);
 
-        // 중복 제거
+        hits = Physics2D.RaycastAll(start + offset, end - start, Vector2.Distance(start, end));
+        foreach (RaycastHit2D hit in hits) DashTargetMonster.Add(hit.collider.gameObject);
+
+        //Debug.DrawRay(start, end - start, Color.red, Vector2.Distance(start, end));
+        //Debug.DrawRay(start + offset, end - start, Color.red, Vector2.Distance(start, end));
+
         DashTargetMonster = DashTargetMonster.Distinct().ToList();
-
-        Player.Instance.Dashing(endPoint, true, true);
 
         foreach (GameObject obj in DashTargetMonster)
         {
@@ -89,14 +91,6 @@ public class Dash : ActiveSkillPlayer
         }
 
         DashTargetMonster.Clear();
-    }
-
-    private void CheckMonsterHitBox(Vector2 origin, Vector2 Direction, float distance)
-    {
-        foreach (RaycastHit2D hit in Physics2D.RaycastAll(origin, Direction, distance))
-        {
-            DashTargetMonster.Add(hit.collider.gameObject);
-        }
     }
 
     public void SetTarget(GameObject obj)

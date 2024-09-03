@@ -11,7 +11,7 @@ public class Execution : PassiveSkill
         skillName = SkillName.Execution;
         executionHP = 1;
 
-        Player.Instance.hitMonsterFuncList += ExecutionMonster;
+        Player.Instance.HitMonsterFuncList += ExecutionMonster;
     }
 
     public void ExecutionMonster(MonsterUnit monster)
@@ -22,6 +22,6 @@ public class Execution : PassiveSkill
 
     public override void RemoveSkill()
     {
-        Player.Instance.hitMonsterFuncList -= ExecutionMonster;
+        Player.Instance.HitMonsterFuncList -= ExecutionMonster;
     }
 }

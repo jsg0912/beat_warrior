@@ -25,9 +25,7 @@ public class Player : MonoBehaviour
     private GameObject targetInfo;
 
     public delegate void HitMonsterFunc(MonsterUnit monster);
-    public delegate void UseSkillFunc(Skill skill);
-    public HitMonsterFunc hitMonsterFuncList = null;
-    public UseSkillFunc useSKillFuncList = null;
+    public HitMonsterFunc HitMonsterFuncList = null;
 
     void Start()
     {
@@ -133,17 +131,10 @@ public class Player : MonoBehaviour
         this.status = status;
 
         _animator.SetBool(PlayerConstant.runAnimBool, status == PlayerStatus.Run);
+        _animator.SetBool(PlayerConstant.jumpAnimBool, status == PlayerStatus.Jump);
 
         switch (status)
         {
-            case PlayerStatus.Jump:
-                _animator.SetBool(PlayerConstant.groundedAnimBool, false);
-                _animator.SetTrigger(PlayerConstant.jumpAnimTrigger);
-                break;
-            case PlayerStatus.Fall:
-                _animator.SetBool(PlayerConstant.groundedAnimBool, false);
-                _animator.SetTrigger(PlayerConstant.fallAnimTrigger);
-                break;
             case PlayerStatus.Attack:
                 _animator.SetTrigger(PlayerSkillConstant.attackAnimTrigger);
                 break;
@@ -259,7 +250,6 @@ public class Player : MonoBehaviour
             case PlayerStatus.Idle:
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
-            case PlayerStatus.Fall:
             case PlayerStatus.Attack:
             case PlayerStatus.Mark:
                 return true;
@@ -289,8 +279,6 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeySetting.keys[Action.Down]))
         {
-            SetPlayerStatus(PlayerStatus.Fall);
-
             colliderController.PassTile();
         }
     }
@@ -380,14 +368,14 @@ public class Player : MonoBehaviour
 
     public void AddOrRemoveTrait(SkillName name)
     {
-        if (IsEquippedTrait(name) == false) EquipTrait(name);
+        if (IsEquippedTrait(name)) EquipTrait(name);
         else RemoveTrait(name);
     }
 
     public void EquipTrait(SkillName name)
     {
         Skill trait = null;
-        DebugConsole.Log(name.ToString());
+
         switch (name)
         {
             case SkillName.AppendMaxHP:
@@ -405,19 +393,9 @@ public class Player : MonoBehaviour
             case SkillName.KillRecoveryHP:
                 trait = new KillRecoveryHP(this.gameObject);
                 break;
-            case SkillName.SkillReset:
-                trait = new SkillReset(this.gameObject);
-                break;
-        }
-
-        if (trait == null)
-        {
-            throw new Exception("Trait 없어서 추가 실패!");
         }
 
         traitList.Add(trait);
-
-        DebugConsole.Log(traitList);
     }
 
     public void RemoveTraitByIndex(int index)
@@ -472,9 +450,10 @@ public class Player : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.05f);
         foreach (Collider2D obj in colliders) if (obj.CompareTag("Tile") || obj.CompareTag("Base")) isGrounded = true;
 
-        if (isGrounded == false) _animator.SetBool(PlayerConstant.groundedAnimBool, false);
+        _animator.SetBool(PlayerConstant.groundedAnimBool, isGrounded);
     }
 
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject obj = collision.gameObject;
@@ -482,8 +461,8 @@ public class Player : MonoBehaviour
         if (_rigidbody.velocity.y <= 0.5f && (obj.CompareTag("Tile") || obj.CompareTag("Base")))
         {
             if (obj.CompareTag("Base")) isOnBaseTile = true;
-            _animator.SetBool(PlayerConstant.groundedAnimBool, true);
-            if (status == PlayerStatus.Jump || status == PlayerStatus.Fall) SetPlayerStatus(PlayerStatus.Idle);
+            _animator.SetBool(PlayerConstant.jumpAnimBool, false);
+            if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
             return;
         }
@@ -496,7 +475,6 @@ public class Player : MonoBehaviour
         if ((obj.CompareTag("Tile") || obj.CompareTag("Base")))
         {
             if (obj.CompareTag("Base")) isOnBaseTile = false;
-            _animator.SetBool(PlayerConstant.groundedAnimBool, false);
         }
     }
 }
