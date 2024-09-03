@@ -368,7 +368,7 @@ public class Player : MonoBehaviour
 
     public void AddOrRemoveTrait(SkillName name)
     {
-        if (IsEquippedTrait(name) == false) EquipTrait(name);
+        if (IsEquippedTrait(name)) EquipTrait(name);
         else RemoveTrait(name);
     }
 
@@ -453,7 +453,7 @@ public class Player : MonoBehaviour
         _animator.SetBool(PlayerConstant.groundedAnimBool, isGrounded);
     }
 
-
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject obj = collision.gameObject;
