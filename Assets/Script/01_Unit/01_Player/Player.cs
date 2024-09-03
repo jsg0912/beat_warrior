@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private PlayerStatus status;
 
-    private int direction;
+    private Direction direction;
     private bool isOnBaseTile;
     private bool isInvincibility;
     private BoxCollider2D tileCollider;
@@ -107,7 +107,7 @@ public class Player : MonoBehaviour
 
         SetPlayerStatus(PlayerStatus.Idle);
 
-        direction = 1;
+        direction = Direction.Left;
         isOnBaseTile = false;
         isInvincibility = false;
 
@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
 
     // GET Functions
     public PlayerStatus GetPlayerStatus() { return status; }
-    public int GetDirection() { return direction; }
+    public int GetDirection() { return (int)direction; }
     public SkillName[] GetTraits() { return traitList.Select(trait => trait.skillName).ToArray(); }
     public int GetCurrentStat(StatKind statKind) { return playerUnit.unitStat.GetCurrentStat(statKind); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
@@ -168,10 +168,10 @@ public class Player : MonoBehaviour
         if (IsUsingSkill() == true) StartCoroutine(UseSkill());
     }
 
-    public void SetDirection(int dir)
+    public void SetDirection(Direction dir)
     {
         direction = dir;
-        transform.localScale = new Vector3(direction, 1, 1);
+        transform.localScale = new Vector3((int)direction, 1, 1);
     }
 
     public void SetGravityScale(bool gravity)
@@ -192,7 +192,7 @@ public class Player : MonoBehaviour
 
     public void PlayerAddForce(Vector2 force, int dir)
     {
-        _rigidbody.AddForce(force * direction * dir, ForceMode2D.Impulse);
+        _rigidbody.AddForce(force * (int)direction * dir, ForceMode2D.Impulse);
     }
 
     public bool ChangeCurrentHP(int hp)
@@ -233,19 +233,19 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeySetting.keys[Action.Right]))
         {
-            SetDirection(1);
+            SetDirection(Direction.Right);
             isMove = true;
         }
 
         if (Input.GetKey(KeySetting.keys[Action.Left]))
         {
-            SetDirection(-1);
+            SetDirection(Direction.Left);
             isMove = true;
         }
 
         if (IsUsingSkill() == false && status != PlayerStatus.Jump) SetPlayerStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
 
-        if (isMove == true) transform.position += new Vector3(direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
+        if (isMove == true) transform.position += new Vector3((int)direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
     private bool IsMoveable()
@@ -314,7 +314,7 @@ public class Player : MonoBehaviour
 
     private IEnumerator Dash(Vector2 end, bool changeDir, bool isInvincibility)
     {
-        int dir = end.x > transform.position.x ? 1 : -1;
+        Direction dir = end.x > transform.position.x ? Direction.Right : Direction.Left;
 
         colliderController.SetColliderTrigger(true);
         SetGravityScale(false);
@@ -336,7 +336,7 @@ public class Player : MonoBehaviour
         colliderController.SetColliderTrigger(false);
         SetGravityScale(true);
         SetInvincibility(false);
-        if (changeDir == true) SetDirection(-dir);
+        if (changeDir == true) SetDirection((Direction)(-1 * (int)dir));
     }
 
     private void Skill()
