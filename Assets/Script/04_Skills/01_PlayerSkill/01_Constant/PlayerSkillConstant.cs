@@ -20,12 +20,13 @@ public class PlayerSkillConstant
     };
 
     public const float recoveryHPTimeMax = 10.0f;
-    public const float ghostDelayTimeMax = 0.05f;
+    public const float ghostDelayTimeMax = 0.01f;
 
     public const int attackAtk = 1;
     public const int dashAtk = 1;
     public const int skill1Atk = 1;
     public const int skill2Atk = 1;
+    public const int KillRecoveryHPTrigger = 10;
 
     public const string attackAnimTrigger = "attack";
     public const string markAnimTrigger = "mark";

@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
     public Unit playerUnit;
-    private CapsuleCollider2D _collider;
+    private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private List<ActiveSkillPlayer> skillList;
@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     private ColliderController colliderController;
 
+    [SerializeField] private Transform PlayerSprite;
     [SerializeField] private PlayerStatus status;
 
     private Direction direction;
@@ -79,7 +80,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Initialize()
+    private void Initialize(Direction direction = Direction.Left)
     {
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
@@ -100,14 +101,14 @@ public class Player : MonoBehaviour
             new Skill2(this.gameObject)
         };
 
-        _collider = GetComponent<CapsuleCollider2D>();
+        _collider = GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         colliderController = GetComponent<ColliderController>();
 
         SetPlayerStatus(PlayerStatus.Idle);
 
-        direction = Direction.Left;
+        SetDirection(direction);
         isOnBaseTile = false;
         isInvincibility = false;
 
@@ -116,7 +117,7 @@ public class Player : MonoBehaviour
 
     public void RestartPlayer()
     {
-        Initialize();
+        Initialize(direction);
         _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
     }
 
@@ -171,7 +172,7 @@ public class Player : MonoBehaviour
     public void SetDirection(Direction dir)
     {
         direction = dir;
-        transform.localScale = new Vector3((int)direction, 1, 1);
+        PlayerSprite.localScale = new Vector3(-(int)direction, 1, 1);
     }
 
     public void SetGravityScale(bool gravity)
@@ -257,6 +258,7 @@ public class Player : MonoBehaviour
             case PlayerStatus.Jump:
             case PlayerStatus.Fall:
             case PlayerStatus.Attack:
+            case PlayerStatus.Skill1:
             case PlayerStatus.Mark:
                 return true;
             default:
@@ -316,7 +318,6 @@ public class Player : MonoBehaviour
     {
         Direction dir = end.x > transform.position.x ? Direction.Right : Direction.Left;
 
-        colliderController.SetColliderTrigger(true);
         SetGravityScale(false);
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetDirection(dir);
@@ -333,7 +334,6 @@ public class Player : MonoBehaviour
 
         transform.position = end;
 
-        colliderController.SetColliderTrigger(false);
         SetGravityScale(true);
         SetInvincibility(false);
         if (changeDir == true) SetDirection((Direction)(-1 * (int)dir));
@@ -416,6 +416,7 @@ public class Player : MonoBehaviour
             throw new Exception("Trait 없어서 추가 실패!");
         }
 
+        trait.GetSkill();
         traitList.Add(trait);
 
         DebugConsole.Log(traitList);
@@ -466,20 +467,25 @@ public class Player : MonoBehaviour
         isInvincibility = false;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        GameObject obj = collision.gameObject;
-
-        if ((obj.CompareTag("Tile") || obj.CompareTag("Base")))
+        if (other.CompareTag("Tile") || other.CompareTag("Base"))
         {
-            if (obj.CompareTag("Base")) isOnBaseTile = false;
+            if (other.CompareTag("Base")) isOnBaseTile = false;
             _animator.SetBool(PlayerConstant.groundedAnimBool, false);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
+        GameObject other = collision.gameObject;
+
         if (other.CompareTag("Base") == false && other.CompareTag("Tile") == false) return;
+
+        float collisionPoint = collision.GetContact(0).point.y;
+        float colliderBottom = _collider.bounds.center.y - _collider.bounds.size.y / 2;
+
+        if (collisionPoint > colliderBottom + 0.05f) return;
 
         tileCollider = other.GetComponent<BoxCollider2D>();
 

@@ -21,8 +21,6 @@ public abstract class Skill
     {
         this.unit = unit;
         this.description = description;
-
-        GetSkill();
     }
 
     public virtual void GetSkill() { return; }
@@ -52,7 +50,7 @@ public abstract class Skill
         coolTime = 0;
     }
 
-    public void ResetCoolTime()
+    public virtual void ResetCoolTime()
     {
         if (countCoolTime != null) unit.GetComponent<MonoBehaviour>().StopCoroutine(countCoolTime);
         coolTime = 0;
