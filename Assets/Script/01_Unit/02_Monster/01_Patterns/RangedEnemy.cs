@@ -5,13 +5,11 @@ public class RangedEnemy : Pattern
 {
     public float shootCoolTime;
     private float shootCoolMaxTime;
-    private float moveSpeed;
     private float arrowSpeed;
     private float FindRange;
     private LayerMask ObjectLayer;
-    public float direction;
     public bool alert;
-    public bool stop;
+    public bool canMove;
     private float tempDir;
 
     private GameObject ArrowPrefab;
@@ -26,10 +24,10 @@ public class RangedEnemy : Pattern
         ArrowPrefab = Resources.Load("Prefab/Arrow") as GameObject;
         ObjectLayer = LayerMask.GetMask("Player");
         anim = gameObject.GetComponent<Animator>();
-        direction = 1;
+        direction = Direction.Right;
         moveSpeed = 0.5f;
         alert = false;
-        stop = false;
+        canMove = false;
         tempDir = 1;
     }
     public override void PlayPattern()
@@ -46,19 +44,10 @@ public class RangedEnemy : Pattern
         else anim.SetBool("isWalk", true);
     }
 
-    private void SetStop()
+    protected override bool IsMoveable()
     {
-        tempDir = direction;
-        direction = 0;
-        stop = true;
+        return canMove;
     }
-
-    private void SetMove()
-    {
-        direction = tempDir;
-        stop = false;
-    }
-
 
     private void CheckCoolTime()
     {
@@ -75,10 +64,10 @@ public class RangedEnemy : Pattern
             gameObject.GetComponent<MonoBehaviour>().StartCoroutine(Shoot(collider));
             alert = true;
 
-            if (stop == false)
+            if (canMove == true)
             {
-                if (collider.transform.position.x > gameObject.transform.position.x) direction = 1;
-                else direction = -1;
+                if (collider.transform.position.x > gameObject.transform.position.x) direction = Direction.Right;
+                else direction = Direction.Left;
             }
 
         }
@@ -87,21 +76,21 @@ public class RangedEnemy : Pattern
             if (Physics2D.OverlapCircle(gameObject.transform.position, FindRange, ObjectLayer) == false)
             {
                 alert = false;
-                SetMove();
+                canMove = true;
             }
         }
-        RaycastHit2D rayHit = Physics2D.Raycast(gameObject.transform.position + new Vector3(direction, 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
+        RaycastHit2D rayHit = Physics2D.Raycast(gameObject.transform.position + new Vector3((int)direction, 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
         if (rayHit.collider == null)
         {
-            if (alert == true) SetStop();
-            else direction *= -1;
+            if (alert == true) canMove = false;
+            else direction = (Direction)(-1 * (int)direction);
         }
     }
 
     private IEnumerator Shoot(Collider2D player)
     {
         if (shootCoolTime > 0) yield break;
-        SetStop();
+        canMove = false;
         shootCoolTime = shootCoolMaxTime;
 
         anim.SetTrigger("attack");
@@ -118,7 +107,7 @@ public class RangedEnemy : Pattern
         Arrow.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, Quaternion.FromToRotation(Vector3.up, direction.normalized).eulerAngles.z);
         Arrow.GetComponent<Rigidbody2D>().velocity = direction.normalized * arrowSpeed;
 
-        SetMove();
+        canMove = true;
     }
 
     public override Pattern Copy()

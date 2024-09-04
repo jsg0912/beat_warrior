@@ -38,7 +38,7 @@ public class Monster : MonoBehaviour
 
     public void SetDirection(Direction direction)
     {
-        MonsterSprite.localScale = new Vector3((int)direction, 1, 1);
+        MonsterSprite.localScale = new Vector3(-(int)direction, 1, 1);
     }
 
     public virtual void GetDamaged(int dmg)
