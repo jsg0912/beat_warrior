@@ -416,6 +416,7 @@ public class Player : MonoBehaviour
             throw new Exception("Trait 없어서 추가 실패!");
         }
 
+        trait.GetSkill();
         traitList.Add(trait);
 
         DebugConsole.Log(traitList);
