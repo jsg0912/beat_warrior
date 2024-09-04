@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance;
     public Unit playerUnit;
-    private CapsuleCollider2D _collider;
+    private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private List<ActiveSkillPlayer> skillList;
@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
             new Skill2(this.gameObject)
         };
 
-        _collider = GetComponent<CapsuleCollider2D>();
+        _collider = GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         colliderController = GetComponent<ColliderController>();
@@ -476,10 +476,16 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D collision)
     {
+        GameObject other = collision.gameObject;
+
         if (other.CompareTag("Base") == false && other.CompareTag("Tile") == false) return;
-        if (_rigidbody.velocity.y > 0) return;
+
+        float collisionPoint = collision.GetContact(0).point.y;
+        float colliderBottom = _collider.bounds.center.y - _collider.bounds.size.y / 2;
+
+        if (colliderBottom - collisionPoint > 0.05f) return;
 
         tileCollider = other.GetComponent<BoxCollider2D>();
 

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class ColliderController : MonoBehaviour
 {
-    private CapsuleCollider2D playerCollider;
+    private BoxCollider2D playerCollider;
 
     private void Start()
     {
-        playerCollider = GetComponent<CapsuleCollider2D>();
+        playerCollider = GetComponent<BoxCollider2D>();
     }
 
     public void SetColliderTrigger(bool isTrigger)
