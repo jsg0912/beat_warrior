@@ -10,6 +10,7 @@ public class RangedEnemy : Pattern
     private LayerMask ObjectLayer;
     public bool alert;
     public bool canMove;
+    public bool shootAble; //TODO: shoot안쏘고 움직이기만 하는 Monster 재현을 위해 빠르게 추가한 방식으로 임시적인 것 - 신동환, 20240904
     private float tempDir;
 
     private GameObject ArrowPrefab;
@@ -28,6 +29,7 @@ public class RangedEnemy : Pattern
         moveSpeed = 0.5f;
         alert = false;
         canMove = false;
+        shootAble = false;
         tempDir = 1;
     }
     public override void PlayPattern()
@@ -89,7 +91,7 @@ public class RangedEnemy : Pattern
 
     private IEnumerator Shoot(Collider2D player)
     {
-        if (shootCoolTime > 0) yield break;
+        if (shootCoolTime > 0 || shootAble == false) yield break;
         canMove = false;
         shootCoolTime = shootCoolMaxTime;
 
