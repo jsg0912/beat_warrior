@@ -12,7 +12,7 @@ public class Monster : MonoBehaviour
     [SerializeField] private MonsterHPUI UIHp;
     [SerializeField] private GameObject Target;
 
-    protected Direction direction;
+
     private GameObject SoulPrefab;
 
     void Start()
@@ -36,9 +36,8 @@ public class Monster : MonoBehaviour
 
     }
 
-    protected void SetDirection(Direction dir)
+    public void SetDirection(Direction direction)
     {
-        direction = dir;
         MonsterSprite.localScale = new Vector3((int)direction, 1, 1);
     }
 

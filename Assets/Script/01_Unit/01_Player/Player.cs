@@ -481,6 +481,7 @@ public class Player : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Base") == false && other.CompareTag("Tile") == false) return;
+        if (_rigidbody.velocity.y > 0) return;
 
         tileCollider = other.GetComponent<BoxCollider2D>();
 

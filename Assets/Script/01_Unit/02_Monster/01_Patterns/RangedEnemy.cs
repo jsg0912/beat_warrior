@@ -40,15 +40,6 @@ public class RangedEnemy : Pattern
         Move();
     }
 
-    private void Move()
-    {
-        if (direction != 0)
-        {
-            gameObject.transform.localScale = new Vector3(-1 * direction, 1, 1);
-        }
-        gameObject.transform.position += new Vector3(direction * moveSpeed * Time.deltaTime, 0, 0);
-    }
-
     private void MoveAnim()
     {
         if (direction == 0) anim.SetBool("isWalk", false);
