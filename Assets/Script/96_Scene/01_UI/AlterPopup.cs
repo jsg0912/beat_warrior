@@ -12,13 +12,13 @@ public class AlterPopup : MonoBehaviour
 
 
     public SkillName SelectTrait;
-    int spiritCount;
-    /*{
+    int spiritCount
+    {
         get
         {
             return Inventory.Instance.GetSoulNumber();
         }
-    }*/
+    }
     TraitSetButtonStatus InfoButton;
 
     public GameObject Button;
@@ -48,7 +48,6 @@ public class AlterPopup : MonoBehaviour
 
     void Initialize()
     {
-        spiritCount = 1000;
         isOn = false;
         salesSkillList = TraitPriceList.Info.Keys.ToArray();
         SelectTrait = SkillName.End;
@@ -205,18 +204,4 @@ public class AlterPopup : MonoBehaviour
         return false;
     }
 
-    public void test1()
-    {
-        SkillName[] a = new SkillName[Player.Instance.GetTraits().Length];
-        a = Player.Instance.GetTraits();
-
-        for (int i = 0; i < Player.Instance.GetTraits().Length; i++)
-        {
-            Debug.Log(a[i].ToString());
-        }
-    }
-
-    public void test2()
-    {
-    }
 }
