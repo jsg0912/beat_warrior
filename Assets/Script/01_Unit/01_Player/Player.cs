@@ -469,7 +469,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if ((other.CompareTag("Tile") || other.CompareTag("Base")))
+        if (other.CompareTag("Tile") || other.CompareTag("Base"))
         {
             if (other.CompareTag("Base")) isOnBaseTile = false;
             _animator.SetBool(PlayerConstant.groundedAnimBool, false);
