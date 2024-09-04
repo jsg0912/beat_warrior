@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Initialize()
+    private void Initialize(Direction direction = Direction.Left)
     {
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
 
         SetPlayerStatus(PlayerStatus.Idle);
 
-        direction = Direction.Left;
+        SetDirection(direction);
         isOnBaseTile = false;
         isInvincibility = false;
 
@@ -117,7 +117,7 @@ public class Player : MonoBehaviour
 
     public void RestartPlayer()
     {
-        Initialize();
+        Initialize(direction);
         _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
     }
 
