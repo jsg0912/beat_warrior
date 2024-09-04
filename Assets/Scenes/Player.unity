@@ -2683,7 +2683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.68
+      value: -3.43
       objectReference: {fileID: 0}
     - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2989,6 +2989,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster1
       objectReference: {fileID: 0}
+    - target: {fileID: 6604740661846717948, guid: 82f84ee111ef32a46b5face440294a09, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3169,6 +3173,10 @@ PrefabInstance:
     - target: {fileID: 6842711473081470587, guid: 0e6b2370cf4dc59418b761401f91e28f, type: 3}
       propertyPath: m_Name
       value: Monster2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6842711473081470587, guid: 0e6b2370cf4dc59418b761401f91e28f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7803354727735405493, guid: 0e6b2370cf4dc59418b761401f91e28f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3685,6 +3693,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster4
       objectReference: {fileID: 0}
+    - target: {fileID: 2529686815831883854, guid: cba8c97d19a7fe548a3ed37e15e4c968, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3704,6 +3716,10 @@ PrefabInstance:
     - target: {fileID: 3691406545238830474, guid: d430e37bc710baa42bf7a825f50d1a57, type: 3}
       propertyPath: m_Name
       value: Monster5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3691406545238830474, guid: d430e37bc710baa42bf7a825f50d1a57, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7940497419679796278, guid: d430e37bc710baa42bf7a825f50d1a57, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3804,6 +3820,10 @@ PrefabInstance:
     - target: {fileID: 9122797684663958233, guid: 5a805b1ae41633e49a0ca7e28eeadf4b, type: 3}
       propertyPath: m_Name
       value: Monster3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122797684663958233, guid: 5a805b1ae41633e49a0ca7e28eeadf4b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4146,13 +4166,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster1
       objectReference: {fileID: 0}
+    - target: {fileID: 6604740661846717948, guid: 82f84ee111ef32a46b5face440294a09, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1003595227441986024, guid: 82f84ee111ef32a46b5face440294a09, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82f84ee111ef32a46b5face440294a09, type: 3}
 --- !u!1 &1193854670
 GameObject:
