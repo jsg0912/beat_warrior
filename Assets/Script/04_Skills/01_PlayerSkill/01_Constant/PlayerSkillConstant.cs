@@ -20,7 +20,7 @@ public class PlayerSkillConstant
     };
 
     public const float recoveryHPTimeMax = 10.0f;
-    public const float ghostDelayTimeMax = 0.05f;
+    public const float ghostDelayTimeMax = 0.01f;
 
     public const int attackAtk = 1;
     public const int dashAtk = 1;
