@@ -52,11 +52,10 @@ public class AlterPopup : MonoBehaviour
         isOn = false;
         salesSkillList = TraitPriceList.Info.Keys.ToArray();
         SelectTrait = SkillName.End;
-        Information.SetActive(false);
         for (int i = 0; i < salesSkillList.Length; i++)
         {
+            Button.transform.GetChild(i).GetComponent<Button>().gameObject.SetActive(true);
             Button.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = salesSkillList[i].ToString() + "\n" + TraitPriceList.Info[salesSkillList[i]];
-
         }
 
     }
