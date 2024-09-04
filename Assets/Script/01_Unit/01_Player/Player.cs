@@ -258,6 +258,7 @@ public class Player : MonoBehaviour
             case PlayerStatus.Jump:
             case PlayerStatus.Fall:
             case PlayerStatus.Attack:
+            case PlayerStatus.Skill1:
             case PlayerStatus.Mark:
                 return true;
             default:
