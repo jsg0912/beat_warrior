@@ -485,7 +485,7 @@ public class Player : MonoBehaviour
         float collisionPoint = collision.GetContact(0).point.y;
         float colliderBottom = _collider.bounds.center.y - _collider.bounds.size.y / 2;
 
-        if (colliderBottom - collisionPoint > 0.05f) return;
+        if (collisionPoint > colliderBottom + 0.05f) return;
 
         tileCollider = other.GetComponent<BoxCollider2D>();
 
