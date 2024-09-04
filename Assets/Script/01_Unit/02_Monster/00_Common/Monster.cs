@@ -8,11 +8,11 @@ public class Monster : MonoBehaviour
 
     protected Animator _animator;
 
-
+    [SerializeField] private Transform MonsterSprite;
     [SerializeField] private MonsterHPUI UIHp;
     [SerializeField] private GameObject Target;
 
-    private GameObject Obj;
+    protected Direction direction;
     private GameObject SoulPrefab;
 
     void Start()
@@ -34,6 +34,12 @@ public class Monster : MonoBehaviour
             monsterUnit.pattern.PlayPattern();
         }
 
+    }
+
+    protected void SetDirection(Direction dir)
+    {
+        direction = dir;
+        MonsterSprite.localScale = new Vector3((int)direction, 1, 1);
     }
 
     public virtual void GetDamaged(int dmg)
