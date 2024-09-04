@@ -467,13 +467,11 @@ public class Player : MonoBehaviour
         isInvincibility = false;
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        GameObject obj = collision.gameObject;
-
-        if ((obj.CompareTag("Tile") || obj.CompareTag("Base")))
+        if ((other.CompareTag("Tile") || other.CompareTag("Base")))
         {
-            if (obj.CompareTag("Base")) isOnBaseTile = false;
+            if (other.CompareTag("Base")) isOnBaseTile = false;
             _animator.SetBool(PlayerConstant.groundedAnimBool, false);
         }
     }
