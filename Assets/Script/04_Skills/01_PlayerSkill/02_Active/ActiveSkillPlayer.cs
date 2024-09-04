@@ -31,8 +31,12 @@ public abstract class ActiveSkillPlayer : ActiveSkill
     protected override void CreateAttackPrefab()
     {
         GameObject attackPrefab = GameObject.Instantiate(EffectPrefab);
+
         attackPrefab.transform.SetParent(Player.Instance.transform, false);
-        attackPrefab.GetComponent<AttackCollider>().SetAtk(damageMultiplier);
+        Vector3 Scale = attackPrefab.transform.localScale;
+        attackPrefab.transform.localScale = new Vector3(Scale.x * Player.Instance.GetDirection(), Scale.y, Scale.z);
+
+        attackPrefab.GetComponentInChildren<AttackCollider>().SetAtk(damageMultiplier);
     }
 
     protected abstract void UpdateKey();
