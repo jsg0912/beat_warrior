@@ -2,13 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public static Player Instance;
     public Unit playerUnit;
-    private CapsuleCollider2D _collider;
+    private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
     private List<ActiveSkillPlayer> skillList;
@@ -16,11 +17,13 @@ public class Player : MonoBehaviour
 
     private ColliderController colliderController;
 
+    [SerializeField] private Transform PlayerSprite;
     [SerializeField] private PlayerStatus status;
 
-    private int direction;
+    private Direction direction;
     private bool isOnBaseTile;
     private bool isInvincibility;
+    private BoxCollider2D tileCollider;
 
     private GameObject targetInfo;
 
@@ -41,7 +44,6 @@ public class Player : MonoBehaviour
     {
         if (status != PlayerStatus.Dead)
         {
-            GroundedCheck();
             Jump();
             Down();
             Skill();
@@ -76,7 +78,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Initialize()
+    private void Initialize(Direction direction = Direction.Left)
     {
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
@@ -97,14 +99,14 @@ public class Player : MonoBehaviour
             new Skill2(this.gameObject)
         };
 
-        _collider = GetComponent<CapsuleCollider2D>();
+        _collider = GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
         colliderController = GetComponent<ColliderController>();
 
         SetPlayerStatus(PlayerStatus.Idle);
 
-        direction = 1;
+        SetDirection(direction);
         isOnBaseTile = false;
         isInvincibility = false;
 
@@ -113,13 +115,13 @@ public class Player : MonoBehaviour
 
     public void RestartPlayer()
     {
-        Initialize();
+        Initialize(direction);
         _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
     }
 
     // GET Functions
     public PlayerStatus GetPlayerStatus() { return status; }
-    public int GetDirection() { return direction; }
+    public int GetDirection() { return (int)direction; }
     public SkillName[] GetTraits() { return traitList.Select(trait => trait.skillName).ToArray(); }
     public int GetCurrentStat(StatKind statKind) { return playerUnit.unitStat.GetCurrentStat(statKind); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
@@ -158,21 +160,16 @@ public class Player : MonoBehaviour
         if (IsUsingSkill() == true) StartCoroutine(UseSkill());
     }
 
-    public void SetDirection(int dir)
+    public void SetDirection(Direction dir)
     {
         direction = dir;
-        transform.localScale = new Vector3(direction, 1, 1);
+        PlayerSprite.localScale = new Vector3(-(int)direction, 1, 1);
     }
 
     public void SetGravityScale(bool gravity)
     {
         _rigidbody.gravityScale = gravity ? PlayerConstant.gravityScale : 0;
         if (!gravity) _rigidbody.velocity = Vector3.zero;
-    }
-
-    public void SetColliderTrigger(bool isTrigger)
-    {
-        _collider.isTrigger = isTrigger;
     }
 
     public void SetPlayerAnimTrigger(string trigger)
@@ -187,7 +184,7 @@ public class Player : MonoBehaviour
 
     public void PlayerAddForce(Vector2 force, int dir)
     {
-        _rigidbody.AddForce(force * direction * dir, ForceMode2D.Impulse);
+        _rigidbody.AddForce(force * (int)direction * dir, ForceMode2D.Impulse);
     }
 
     public bool ChangeCurrentHP(int hp)
@@ -228,19 +225,19 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeySetting.keys[Action.Right]))
         {
-            SetDirection(1);
+            SetDirection(Direction.Right);
             isMove = true;
         }
 
         if (Input.GetKey(KeySetting.keys[Action.Left]))
         {
-            SetDirection(-1);
+            SetDirection(Direction.Left);
             isMove = true;
         }
 
         if (IsUsingSkill() == false && status != PlayerStatus.Jump) SetPlayerStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
 
-        if (isMove == true) transform.position += new Vector3(direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
+        if (isMove == true) transform.position += new Vector3((int)direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
     private bool IsMoveable()
@@ -251,6 +248,7 @@ public class Player : MonoBehaviour
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
             case PlayerStatus.Attack:
+            case PlayerStatus.Skill1:
             case PlayerStatus.Mark:
                 return true;
             default:
@@ -276,10 +274,13 @@ public class Player : MonoBehaviour
     private void Down()
     {
         if (isOnBaseTile == true) return;
+        if (_animator.GetBool(PlayerConstant.groundedAnimBool) == false) return;
 
         if (Input.GetKeyDown(KeySetting.keys[Action.Down]))
         {
-            colliderController.PassTile();
+            SetPlayerStatus(PlayerStatus.Fall);
+
+            colliderController.PassTile(tileCollider);
         }
     }
 
@@ -305,9 +306,8 @@ public class Player : MonoBehaviour
 
     private IEnumerator Dash(Vector2 end, bool changeDir, bool isInvincibility)
     {
-        int dir = end.x > transform.position.x ? 1 : -1;
+        Direction dir = end.x > transform.position.x ? Direction.Right : Direction.Left;
 
-        SetColliderTrigger(true);
         SetGravityScale(false);
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetDirection(dir);
@@ -324,10 +324,9 @@ public class Player : MonoBehaviour
 
         transform.position = end;
 
-        SetColliderTrigger(false);
         SetGravityScale(true);
         SetInvincibility(false);
-        if (changeDir == true) SetDirection(-dir);
+        if (changeDir == true) SetDirection((Direction)(-1 * (int)dir));
     }
 
     private void Skill()
@@ -338,7 +337,11 @@ public class Player : MonoBehaviour
     IEnumerator UseSkill()
     {
         yield return new WaitForSeconds(PlayerSkillConstant.SkillDelayInterval);
-        if (status != PlayerStatus.Dead) SetPlayerStatus(PlayerStatus.Idle);
+        if (status != PlayerStatus.Dead)
+        {
+            if (_animator.GetBool(PlayerConstant.groundedAnimBool) == true) SetPlayerStatus(PlayerStatus.Idle);
+            else SetPlayerStatus(PlayerStatus.Fall);
+        }
     }
 
     public float GetSkillCoolTime(SkillName skillName)
@@ -393,8 +396,17 @@ public class Player : MonoBehaviour
             case SkillName.KillRecoveryHP:
                 trait = new KillRecoveryHP(this.gameObject);
                 break;
+            case SkillName.SkillReset:
+                trait = new SkillReset(this.gameObject);
+                break;
         }
 
+        if (trait == null)
+        {
+            throw new Exception("Trait 없어서 추가 실패!");
+        }
+
+        trait.GetSkill();
         traitList.Add(trait);
     }
 
@@ -443,38 +455,34 @@ public class Player : MonoBehaviour
         isInvincibility = false;
     }
 
-    private void GroundedCheck()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        bool isGrounded = false;
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.05f);
-        foreach (Collider2D obj in colliders) if (obj.CompareTag("Tile") || obj.CompareTag("Base")) isGrounded = true;
-
-        _animator.SetBool(PlayerConstant.groundedAnimBool, isGrounded);
-    }
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        GameObject obj = collision.gameObject;
-
-        if (_rigidbody.velocity.y <= 0.5f && (obj.CompareTag("Tile") || obj.CompareTag("Base")))
+        if (other.CompareTag("Tile") || other.CompareTag("Base"))
         {
-            if (obj.CompareTag("Base")) isOnBaseTile = true;
-            _animator.SetBool(PlayerConstant.jumpAnimBool, false);
-            if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
-            playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
-            return;
+            if (other.CompareTag("Base")) isOnBaseTile = false;
+            _animator.SetBool(PlayerConstant.groundedAnimBool, false);
         }
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        GameObject obj = collision.gameObject;
 
-        if ((obj.CompareTag("Tile") || obj.CompareTag("Base")))
-        {
-            if (obj.CompareTag("Base")) isOnBaseTile = false;
-        }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameObject other = collision.gameObject;
+
+        if (other.CompareTag("Base") == false && other.CompareTag("Tile") == false) return;
+
+        float collisionPoint = collision.GetContact(0).point.y;
+        float colliderBottom = _collider.bounds.center.y - _collider.bounds.size.y / 2;
+
+        if (collisionPoint > colliderBottom + 0.05f) return;
+
+        tileCollider = other.GetComponent<BoxCollider2D>();
+
+        if (other.CompareTag("Base")) isOnBaseTile = true;
+        _animator.SetBool(PlayerConstant.groundedAnimBool, true);
+
+        if (status == PlayerStatus.Jump || status == PlayerStatus.Fall) SetPlayerStatus(PlayerStatus.Idle);
+
+        playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
     }
 }

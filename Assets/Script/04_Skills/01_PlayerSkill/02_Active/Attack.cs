@@ -5,9 +5,7 @@ public class Attack : ActiveSkillPlayer
 {
     private bool isCharging;
 
-    public Attack(GameObject unit) : base(unit) { }
-
-    public override void GetSkill()
+    public Attack(GameObject unit) : base(unit)
     {
         skillName = SkillName.Attack;
         status = PlayerStatus.Attack;

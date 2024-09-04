@@ -9,15 +9,17 @@ public class AlterPopup : MonoBehaviour
 {
     SkillName[] salesSkillList;
     private bool isOn = false;
-    int spiritCount
+
+
+    public SkillName SelectTrait;
+    int spiritCount;
     {
         get
         {
             return Inventory.Instance.GetSpiritNumber();
         }
     }
-
-    int abilityNum; // TODO: 제거해야함
+    TraitSetButtonStatus InfoButton;
 
     public GameObject Button;
     public GameObject EquipButton;
@@ -44,9 +46,11 @@ public class AlterPopup : MonoBehaviour
     {
         isOn = false;
         salesSkillList = TraitPriceList.Info.Keys.ToArray();
+        SelectTrait = SkillName.End;
         for (int i = 0; i < salesSkillList.Length; i++)
         {
-            Button.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = salesSkillList[i].ToString();
+            Button.transform.GetChild(i).GetComponent<Button>().gameObject.SetActive(true);
+            Button.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = salesSkillList[i].ToString() + "\n" + TraitPriceList.Info[salesSkillList[i]];
         }
 
     }
@@ -181,4 +185,14 @@ public class AlterPopup : MonoBehaviour
     {
         return Player.Instance.GetTraits().Length == PlayerConstant.MaxAdditionalSkillCount;
     }
+
+    private bool CheckSelectInSales()
+    {
+        for (int i = 0; i < salesSkillList.Length; i++)
+        {
+            if (salesSkillList[i] == SelectTrait) return true;
+        }
+        return false;
+    }
+
 }

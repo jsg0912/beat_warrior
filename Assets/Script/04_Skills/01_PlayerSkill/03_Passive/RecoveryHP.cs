@@ -3,19 +3,15 @@ using UnityEngine;
 
 public class RecoveryHP : ActiveSkillPlayer
 {
-    public RecoveryHP(GameObject unit) : base(unit) { }
-
-    public override void GetSkill()
+    public RecoveryHP(GameObject unit) : base(unit)
     {
         skillName = SkillName.KillRecoveryHP;
-
-        //coolTimeMax = PlayerSkillConstant.recoveryHPTimeMax;
-        coolTime = coolTimeMax;
+        coolTime = PlayerSkillConstant.recoveryHPTimeMax;
     }
 
     protected override IEnumerator CountCoolTime()
     {
-        coolTime = coolTimeMax;
+        coolTime = PlayerSkillConstant.recoveryHPTimeMax;
 
         while (coolTime > 0)
         {

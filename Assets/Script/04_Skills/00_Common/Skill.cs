@@ -10,6 +10,7 @@ public abstract class Skill
     // CoolTime
     protected float coolTimeMax;
     protected float coolTime;
+    protected Coroutine countCoolTime;
 
     // Damage
     protected int damageMultiplier;
@@ -20,8 +21,6 @@ public abstract class Skill
     {
         this.unit = unit;
         this.description = description;
-
-        GetSkill();
     }
 
     public virtual void GetSkill() { return; }
@@ -31,6 +30,11 @@ public abstract class Skill
     public float GetCoolTime()
     {
         return coolTime;
+    }
+
+    public void StartCountCoolTime()
+    {
+        countCoolTime = unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 
     protected virtual IEnumerator CountCoolTime()
@@ -46,8 +50,9 @@ public abstract class Skill
         coolTime = 0;
     }
 
-    public void ResetCoolTime()
+    public virtual void ResetCoolTime()
     {
+        if (countCoolTime != null) unit.GetComponent<MonoBehaviour>().StopCoroutine(countCoolTime);
         coolTime = 0;
     }
 

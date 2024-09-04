@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -11,9 +12,7 @@ public class Dash : ActiveSkillPlayer
     private float ghostDelayTimeMax;
     private GameObject GhostPrefab;
 
-    public Dash(GameObject unit) : base(unit) { }
-
-    public override void GetSkill()
+    public Dash(GameObject unit) : base(unit)
     {
         skillName = SkillName.Dash;
         status = PlayerStatus.Dash;
@@ -91,6 +90,34 @@ public class Dash : ActiveSkillPlayer
         }
 
         DashTargetMonster.Clear();
+    }
+
+    protected override IEnumerator CountCoolTime()
+    {
+        coolTime = Player.Instance.GetSkillCoolTime(SkillName.Mark);
+
+        while (coolTime > 0)
+        {
+            coolTime -= Time.deltaTime;
+            yield return null;
+        }
+
+        coolTime = 0;
+    }
+
+    public override void ResetCoolTime()
+    {
+        if (countCoolTime != null) unit.GetComponent<MonoBehaviour>().StopCoroutine(countCoolTime);
+        coolTime = Player.Instance.GetSkillCoolTime(SkillName.Mark);
+    }
+
+
+    private void CheckMonsterHitBox(Vector2 origin, Vector2 Direction, float distance)
+    {
+        foreach (RaycastHit2D hit in Physics2D.RaycastAll(origin, Direction, distance))
+        {
+            DashTargetMonster.Add(hit.collider.gameObject);
+        }
     }
 
     public void SetTarget(GameObject obj)

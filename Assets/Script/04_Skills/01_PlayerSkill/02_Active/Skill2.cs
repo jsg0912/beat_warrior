@@ -4,9 +4,7 @@ public class Skill2 : ActiveSkillPlayer
 {
     private float dashRange;
 
-    public Skill2(GameObject unit) : base(unit) { }
-
-    public override void GetSkill()
+    public Skill2(GameObject unit) : base(unit)
     {
         skillName = SkillName.Skill2;
         status = PlayerStatus.Skill2;

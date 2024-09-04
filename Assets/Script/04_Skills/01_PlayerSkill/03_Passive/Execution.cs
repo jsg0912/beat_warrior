@@ -4,14 +4,15 @@ public class Execution : PassiveSkill
 {
     private int executionHP;
 
-    public Execution(GameObject unit) : base(unit) { }
-
-    public override void GetSkill()
+    public Execution(GameObject unit) : base(unit)
     {
         skillName = SkillName.Execution;
         executionHP = 1;
+    }
 
-        Player.Instance.HitMonsterFuncList += ExecutionMonster;
+    public override void GetSkill()
+    {
+        Player.Instance.hitMonsterFuncList += ExecutionMonster;
     }
 
     public void ExecutionMonster(MonsterUnit monster)

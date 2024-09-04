@@ -8,9 +8,9 @@ public abstract class ActiveSkill : Skill
     {
         if (coolTime > 0) return;
 
-        UseSkill();
+        StartCountCoolTime();
 
-        unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
+        UseSkill();
     }
 
     protected abstract void UseSkill();

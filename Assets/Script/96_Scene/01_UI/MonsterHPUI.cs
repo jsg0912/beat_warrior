@@ -2,28 +2,25 @@ using UnityEngine;
 
 public class MonsterHPUI : MonoBehaviour
 {
-    [SerializeField] private GameObject hpPrefab;
-    private int hpNow = 0;
+    [SerializeField] Transform hpTransform;
+    [SerializeField] TextMeshPro hpText;
+
+    private int hpMax;
+    private int hpNow;
+
+    public void SetMaxHP(int hpMax)
+    {
+        this.hpMax = hpMax;
+        hpNow = hpMax;
+
+        hpText.text = hpNow.ToString();
+    }
 
     public void SetHP(int hp)
     {
-        if (hp > hpNow)
-        {
-            for (int i = 0; i < hp - hpNow; i++)
-            {
-                GameObject HP = Instantiate(hpPrefab);
-                HP.transform.SetParent(this.transform, false);
-            }
-
-            hpNow = hp;
-            return;
-        }
-
-        for (int i = 0; i < hpNow - hp; i++)
-        {
-            Destroy(transform.GetChild(0).gameObject);
-        }
-
         hpNow = hp;
+
+        hpText.text = hpNow.ToString();
+        hpTransform.localScale = new Vector3((float)hpNow / hpMax, 0.1f, 1.0f);
     }
 }

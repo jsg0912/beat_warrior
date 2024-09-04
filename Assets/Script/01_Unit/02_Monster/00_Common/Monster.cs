@@ -8,12 +8,12 @@ public class Monster : MonoBehaviour
 
     protected Animator _animator;
 
-
+    [SerializeField] private Transform MonsterSprite;
     [SerializeField] private MonsterHPUI UIHp;
     [SerializeField] private GameObject Target;
 
-    private GameObject Obj;
-    private GameObject SpiritPrefab;
+
+    private GameObject SoulPrefab;
 
     void Start()
     {
@@ -23,7 +23,7 @@ public class Monster : MonoBehaviour
 
         SpiritPrefab = Resources.Load("Prefab/Spirit") as GameObject;
 
-        UIHp.SetHP(monsterUnit.GetCurrentHP());
+        UIHp.SetMaxHP(monsterUnit.GetCurrentHP());
 
     }
 
@@ -34,6 +34,11 @@ public class Monster : MonoBehaviour
             monsterUnit.pattern.PlayPattern();
         }
 
+    }
+
+    public void SetDirection(Direction direction)
+    {
+        MonsterSprite.localScale = new Vector3(-(int)direction, 1, 1);
     }
 
     public virtual void GetDamaged(int dmg)
