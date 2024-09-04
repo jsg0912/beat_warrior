@@ -317,7 +317,6 @@ public class Player : MonoBehaviour
     {
         Direction dir = end.x > transform.position.x ? Direction.Right : Direction.Left;
 
-        colliderController.SetColliderTrigger(true);
         SetGravityScale(false);
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetDirection(dir);
@@ -334,7 +333,6 @@ public class Player : MonoBehaviour
 
         transform.position = end;
 
-        colliderController.SetColliderTrigger(false);
         SetGravityScale(true);
         SetInvincibility(false);
         if (changeDir == true) SetDirection((Direction)(-1 * (int)dir));
