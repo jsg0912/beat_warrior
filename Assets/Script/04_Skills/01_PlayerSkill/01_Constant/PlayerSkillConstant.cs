@@ -26,6 +26,7 @@ public class PlayerSkillConstant
     public const int dashAtk = 1;
     public const int skill1Atk = 1;
     public const int skill2Atk = 1;
+    public const int KillRecoveryHPTrigger = 10;
 
     public const string attackAnimTrigger = "attack";
     public const string markAnimTrigger = "mark";
