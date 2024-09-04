@@ -7,17 +7,18 @@ public class KillRecoveryHP : PassiveSkill
     private int killMonsterCount;
     private int killMonsterCountMax;
 
-    public KillRecoveryHP(GameObject unit) : base(unit) { }
-
-    public override void GetSkill()
+    public KillRecoveryHP(GameObject unit) : base(unit)
     {
         skillName = SkillName.KillRecoveryHP;
 
         recoveryHP = 1;
 
         killMonsterCount = 0;
-        killMonsterCountMax = 10;
+        killMonsterCountMax = PlayerSkillConstant.KillRecoveryHPTrigger;
+    }
 
+    public override void GetSkill()
+    {
         Player.Instance.hitMonsterFuncList += CountKillMonster;
     }
 

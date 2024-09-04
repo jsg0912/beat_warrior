@@ -3,24 +3,23 @@ using UnityEngine;
 
 public class AppendMaxHP : PassiveSkillBuffPlayer
 {
-    public AppendMaxHP(GameObject unit) : base(unit) { }
-
-    public override void GetSkill()
+    public AppendMaxHP(GameObject unit) : base(unit)
     {
         skillName = SkillName.AppendMaxHP;
 
         statKind = StatKind.HP;
         statBuff = 1;
+    }
 
+    public override void GetSkill()
+    {
         base.GetSkill();
-
         UIManager.Instance.SetAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }
 
     public override void RemoveSkill()
     {
         base.RemoveSkill();
-
         UIManager.Instance.SetAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }
 }
