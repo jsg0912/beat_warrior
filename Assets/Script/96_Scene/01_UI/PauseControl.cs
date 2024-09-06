@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class PauseControl : MonoBehaviour
 {
-    private bool isPauseActive = false;
+    private bool isPauseActive;
 
     public static PauseControl instance;
 
     private void Start()
     {
         instance = this;
+        isPauseActive = false;
     }
 
 
@@ -33,8 +34,10 @@ public class PauseControl : MonoBehaviour
 
     public void SetPauseActive()
     {
-        if (!isPauseActive) PauseActive();
-        else ResumeActive();
+
+        if (isPauseActive == false) { PauseActive(); }
+        else { ResumeActive(); }
+
     }
 
 
