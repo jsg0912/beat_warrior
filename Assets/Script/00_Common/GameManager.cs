@@ -26,4 +26,11 @@ public class GameManager : MonoBehaviour
     {
         TraitPriceList.CheckTraitPriceListValidation();
     }
+
+    public void RestartGame()
+    {
+        Player.Instance.RestartPlayer();
+
+        HpUI.Instance.SetAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+    }
 }
