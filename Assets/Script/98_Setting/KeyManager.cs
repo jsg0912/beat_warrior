@@ -7,8 +7,7 @@ public enum Action
     Down,
     Left,
     Right,
-    Mark,
-    Dash,
+    Mark_Dash,
     Attack,
     Skill1,
     Skill2,
@@ -24,7 +23,7 @@ public static class KeySetting
 public class KeyManager : MonoBehaviour
 {
     private KeyCode[] defaultKeys = new KeyCode[]
-    { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.Mouse1, KeyCode.Mouse0,
+    { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.Mouse1,
         KeyCode.Space, KeyCode.Q, KeyCode.E, KeyCode.F };
 
     [SerializeField] private GameObject KeyButtons;

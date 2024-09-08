@@ -14,14 +14,10 @@ public class UIManager : MonoBehaviour
     private List<Image> HPList;
     [SerializeField] Text AttackCountView;
 
-    [SerializeField] private List<Image> SkillCoolTimeImgList;
-    private Dictionary<SkillName, Image> SkillCoolTimeImg = new();
-
     [SerializeField] private GameObject Setting;
     [SerializeField] private GameObject Altar;
     [SerializeField] private TextMeshProUGUI SoulText;
 
-    public TextMeshProUGUI[] txt;
     public GameObject Menu;
 
     private bool isMenuActive = false;
@@ -35,31 +31,12 @@ public class UIManager : MonoBehaviour
 
         HPPrefab = Resources.Load("Prefab/PlayerHP") as GameObject;
         HPList = new();
-
-        SkillCoolTimeImg.Add(SkillName.Mark, SkillCoolTimeImgList[0]);
-        SkillCoolTimeImg.Add(SkillName.Dash, SkillCoolTimeImgList[1]);
-        SkillCoolTimeImg.Add(SkillName.Skill1, SkillCoolTimeImgList[2]);
-        SkillCoolTimeImg.Add(SkillName.Skill2, SkillCoolTimeImgList[3]);
-        SkillCoolTimeImg.Add(SkillName.Attack, SkillCoolTimeImgList[4]);
-    }
-
-    private void Start()
-    {
-        for (int i = 0; i < txt.Length; i++)
-        {
-            txt[i].text = KeySetting.keys[(Action)i].ToString();
-        }
     }
 
     private void Update()
     {
         UpdateCoolTime();
         if (Input.GetKeyDown(KeyCode.Escape)) SetMenuActive();
-
-        for (int i = 0; i < txt.Length; i++)
-        {
-            txt[i].text = KeySetting.keys[(Action)i].ToString();
-        }
     }
 
     public void SetAndUpdateHPUI(int hp)
@@ -103,11 +80,6 @@ public class UIManager : MonoBehaviour
 
     private void UpdateCoolTime()
     {
-        foreach (var skill in SkillCoolTimeImg)
-            skill.Value.fillAmount
-                = 1 - Player.Instance.GetSkillCoolTime(skill.Key) / PlayerSkillConstant.SkillCoolTime[skill.Key];
-
-
         AttackCountView.text = Player.Instance.GetCurrentStat(StatKind.AttackCount).ToString();
     }
 
