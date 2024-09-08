@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class RangedEnemy : Pattern
+public class RangedMonster : Pattern
 {
     public float shootCoolTime;
     private float shootCoolMaxTime;
@@ -11,7 +11,6 @@ public class RangedEnemy : Pattern
     public bool alert;
     public bool canMove;
     public bool shootAble; //TODO: shoot안쏘고 움직이기만 하는 Monster 재현을 위해 빠르게 추가한 방식으로 임시적인 것 - 신동환, 20240904
-    private float tempDir;
 
     private GameObject ArrowPrefab;
 
@@ -30,7 +29,6 @@ public class RangedEnemy : Pattern
         alert = false;
         canMove = false;
         shootAble = false;
-        tempDir = 1;
     }
     public override void PlayPattern()
     {
@@ -85,7 +83,7 @@ public class RangedEnemy : Pattern
         if (rayHit.collider == null)
         {
             if (alert == true) canMove = false;
-            else direction = (Direction)(-1 * (int)direction);
+            else ChangeDirection();
         }
     }
 
@@ -114,6 +112,6 @@ public class RangedEnemy : Pattern
 
     public override Pattern Copy()
     {
-        return new RangedEnemy();
+        return new RangedMonster();
     }
 }

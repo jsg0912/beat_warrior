@@ -60,7 +60,7 @@ public static class MonsterList
             {StatKind.HP, 1},
             {StatKind.ATK, 1},
         }),
-        new RangedEnemy()),
+        new RangedMonster()),
 
         new MonsterUnit(new MonsterInfo(MonsterName.DummyArcherHP2,
         "Prototype Test용 원거리 쓰레기2"),
@@ -68,7 +68,7 @@ public static class MonsterList
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
         }),
-        new RangedEnemy()),
+        new RangedMonster()),
 
          new MonsterUnit(new MonsterInfo(MonsterName.DummyArcherHP3,
         "Prototype Test용 원거리 쓰레기3"),
@@ -76,7 +76,7 @@ public static class MonsterList
             {StatKind.HP, 3},
             {StatKind.ATK, 1},
         }),
-        new RangedEnemy()),
+        new RangedMonster()),
 
          new MonsterUnit(new MonsterInfo(MonsterName.DummyArcherHP4,
         "Prototype Test용 원거리 쓰레기4"),
@@ -84,7 +84,7 @@ public static class MonsterList
             {StatKind.HP, 4},
             {StatKind.ATK, 1},
         }),
-        new RangedEnemy()),
+        new RangedMonster()),
     };
 
     public static MonsterUnit FindMonster(MonsterName name)

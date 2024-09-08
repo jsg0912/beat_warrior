@@ -26,5 +26,10 @@ public abstract class Pattern
 
     public abstract void PlayPattern();
 
+    protected void ChangeDirection()
+    {
+        direction = (Direction)(-1 * (int)direction);
+    }
+
     public abstract Pattern Copy();
 }
