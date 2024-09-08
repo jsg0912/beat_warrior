@@ -61,7 +61,8 @@ public class MiniMap : MonoBehaviour
         {
             for (int i = 0; i < monsterInMap.Length; i++)
             {
-                if (monsterInMap[i] == null) continue;
+                if (monsterInMap[i] == null) break;
+                else if(icon[i] == null) break;
                 icon[i].GetComponent<MiniMapIcon>().GetHp(monsterInMap[i].GetComponent<Monster>().monsterUnit.GetCurrentHP());
                 icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterInMap[i].transform.position);
 
@@ -75,7 +76,7 @@ public class MiniMap : MonoBehaviour
     {
         if (target == null) return false;
         Vector3 screenPoint = MiniMapCamera.WorldToViewportPoint(target.transform.position);
-        bool onMiniMap = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
+        bool onMiniMap = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1.5 && screenPoint.y > 0 && screenPoint.y < 1;
 
         return onMiniMap;
     }
