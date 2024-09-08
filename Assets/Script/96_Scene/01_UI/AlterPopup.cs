@@ -183,6 +183,7 @@ public class AlterPopup : MonoBehaviour
     {
         isOn = !isOn;
         gameObject.SetActive(isOn);
+        //PauseControl.instance.SetPauseActive();
     }
 
     private string GetTraitScript(SkillName skillName)
