@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -56,7 +57,7 @@ public class Player : MonoBehaviour
 
     private void Initialize(Direction direction = Direction.Left)
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
         DontDestroyOnLoad(this.gameObject);
 
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{

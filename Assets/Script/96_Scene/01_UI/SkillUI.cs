@@ -14,7 +14,6 @@ public class SkillUI : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()
