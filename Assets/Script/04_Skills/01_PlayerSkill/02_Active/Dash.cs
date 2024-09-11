@@ -105,7 +105,7 @@ public class Dash : ActiveSkillPlayer
 
     public override void ResetCoolTime()
     {
-        if (countCoolTime != null) unit.GetComponent<MonoBehaviour>().StopCoroutine(countCoolTime);
+        if (countCoolTime != null) monoBehaviour.StopCoroutine(countCoolTime);
         coolTime = Player.Instance.GetSkillCoolTime(SkillName.Mark);
     }
 
@@ -122,7 +122,7 @@ public class Dash : ActiveSkillPlayer
     {
         TargetMonster = obj;
 
-        unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
+        monoBehaviour.StartCoroutine(CountCoolTime());
     }
 
     public GameObject GetTarget()
