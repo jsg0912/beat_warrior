@@ -8,6 +8,7 @@ public class SkillCoolTimeUI : MonoBehaviour
     [SerializeField] Image CoolTimeImg;
     [SerializeField] TextMeshProUGUI SkillName;
     [SerializeField] TextMeshProUGUI CoolTimeText;
+    [SerializeField] Text AttackCountView;
 
     void Start()
     {
@@ -20,5 +21,11 @@ public class SkillCoolTimeUI : MonoBehaviour
         CoolTimeImg.fillAmount = 1 - coolTime / PlayerSkillConstant.SkillCoolTime[skillName];
         CoolTimeText.gameObject.SetActive(coolTime != 0);
         CoolTimeText.text = Mathf.Ceil(coolTime).ToString();
+        ViewAttackCount();
+    }
+
+    private void ViewAttackCount()
+    {
+        AttackCountView.text = Player.Instance.GetCurrentStat(StatKind.AttackCount).ToString();
     }
 }
