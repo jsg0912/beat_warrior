@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class Pattern
 {
-    protected Animator anim;
+    protected Animator _animator;
     protected GameObject gameObject;
     protected Monster monster;
     protected Direction direction;
