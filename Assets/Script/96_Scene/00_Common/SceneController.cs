@@ -3,11 +3,24 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    public static SceneController instance;
+    private static SceneController _instance;
 
-    public SceneController() : base()
+    public static SceneController Instance
     {
-        instance = this;
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<SceneController>();
+                if (_instance == null)
+                {
+                    GameObject go = new GameObject("SceneController");
+                    _instance = go.AddComponent<SceneController>();
+                    DontDestroyOnLoad(go);
+                }
+            }
+            return _instance;
+        }
     }
 
     public void ChangeScene(SceneName sceneName)
@@ -16,6 +29,9 @@ public class SceneController : MonoBehaviour
         {
             case SceneName.Player:
                 SceneManager.LoadScene("Player");
+                break;
+            case SceneName.ProtoType:
+                SceneManager.LoadScene("ProtoType");
                 break;
             case SceneName.Tittle:
                 SceneManager.LoadScene("Tittle");
