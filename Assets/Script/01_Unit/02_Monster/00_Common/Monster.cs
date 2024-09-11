@@ -8,6 +8,7 @@ public class Monster : MonoBehaviour
     public MonsterUnit monsterUnit;
 
     protected Animator _animator;
+    protected Direction direction;
 
     [SerializeField] private Transform MonsterSprite;
     [SerializeField] private MonsterHPUI UIHp;
@@ -37,9 +38,27 @@ public class Monster : MonoBehaviour
 
     }
 
+    public void SetAnimation(string status = "")
+    {
+        _animator.SetBool("isWalk", direction != 0);
+
+        if (status == "Attack") _animator.SetTrigger("attack");
+        if (status == "Hurt") _animator.SetTrigger("hurt");
+        if (status == "Die") _animator.SetTrigger("die");
+    }
+
+    public int GetDirection() { return (int)direction; }
+
     public void SetDirection(Direction direction)
     {
-        MonsterSprite.localScale = new Vector3(-(int)direction, 1, 1);
+        this.direction = direction;
+        if (direction != 0) MonsterSprite.localScale = new Vector3(-(int)direction, 1, 1);
+    }
+
+    public void ChangeDirection()
+    {
+        this.direction = (Direction)(-1 * (int)direction);
+        SetDirection(direction);
     }
 
     public virtual void GetDamaged(int dmg)

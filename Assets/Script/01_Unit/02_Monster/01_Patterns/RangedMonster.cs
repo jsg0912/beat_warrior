@@ -17,31 +17,19 @@ public class RangedMonster : Pattern
     public override void Initialize(GameObject gameObject)
     {
         base.Initialize(gameObject);
-        shootCoolMaxTime = 3f;
-        shootCoolTime = 3f;
         arrowSpeed = 5f;
         FindRange = 5f;
         ArrowPrefab = Resources.Load("Prefab/Arrow") as GameObject;
         ObjectLayer = LayerMask.GetMask("Player");
-        _animator = gameObject.GetComponent<Animator>();
-        direction = Direction.Right;
-        moveSpeed = 0.5f;
         alert = false;
-        canMove = false;
+        canMove = true;
         shootAble = false;
     }
     public override void PlayPattern()
     {
-        MoveAnim();
         CheckCoolTime();
         CheckCollision();
         Move();
-    }
-
-    private void MoveAnim()
-    {
-        if (direction == 0) _animator.SetBool("isWalk", false);
-        else _animator.SetBool("isWalk", true);
     }
 
     protected override bool IsMoveable()
@@ -66,8 +54,8 @@ public class RangedMonster : Pattern
 
             if (canMove == true)
             {
-                if (collider.transform.position.x > gameObject.transform.position.x) direction = Direction.Right;
-                else direction = Direction.Left;
+                if (collider.transform.position.x > gameObject.transform.position.x) SetDirection(Direction.Right);
+                else SetDirection(Direction.Left);
             }
 
         }
@@ -79,7 +67,7 @@ public class RangedMonster : Pattern
                 canMove = true;
             }
         }
-        RaycastHit2D rayHit = Physics2D.Raycast(gameObject.transform.position + new Vector3((int)direction, 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
+        RaycastHit2D rayHit = Physics2D.Raycast(gameObject.transform.position + new Vector3(direction(), 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
         if (rayHit.collider == null)
         {
             if (alert == true) canMove = false;
@@ -93,7 +81,7 @@ public class RangedMonster : Pattern
         canMove = false;
         shootCoolTime = shootCoolMaxTime;
 
-        _animator.SetTrigger("attack");
+        monster.SetAnimation("Attack");
 
         yield return new WaitForSeconds(0.55f);
 

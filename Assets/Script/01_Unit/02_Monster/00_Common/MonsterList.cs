@@ -85,6 +85,14 @@ public static class MonsterList
             {StatKind.ATK, 1},
         }),
         new RangedMonster()),
+
+        new MonsterUnit(new MonsterInfo(MonsterName.Monster2,
+        "Prototype Test용 원거리 쓰레기2"),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 2},
+            {StatKind.ATK, 1},
+        }),
+        new RangedMonster()),
     };
 
     public static MonsterUnit FindMonster(MonsterName name)
