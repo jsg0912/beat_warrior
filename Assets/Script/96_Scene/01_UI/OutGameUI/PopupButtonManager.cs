@@ -4,7 +4,7 @@ public class PopupButtonManager : MonoBehaviour
 {
     public void OnClickPopupButton()
     {
-        PopupSystem.instance.OpenPopUp("Ȯ���Ͻðڽ��ϱ�?",
+        PopupSystem.instance.OpenPopUp("",
             () => { Debug.Log("Okay"); },
             () => { Debug.Log("Cancel"); });
     }
