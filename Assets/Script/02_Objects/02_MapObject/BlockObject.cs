@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BlockObject : MonoBehaviour
@@ -11,7 +9,7 @@ public class BlockObject : MonoBehaviour
         {
             Marker.Destroy(collision.gameObject);
         }
-        else if(collision.gameObject.name == "Arrow(Clone)")
+        else if (collision.gameObject.name == "Arrow(Clone)")
         {
             Arrow.Destroy(collision.gameObject);
         }
