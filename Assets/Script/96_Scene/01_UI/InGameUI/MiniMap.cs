@@ -19,6 +19,8 @@ public class MiniMap : MonoBehaviour
 
     int CountMapMonster;
 
+    int MonsterInMapCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,23 +48,25 @@ public class MiniMap : MonoBehaviour
         PlayerMapIcon.transform.position = Player.Instance.transform.position;
         CountObjectInMiniMap();
 
-        if(CountMapMonster != monsterInMap.Length)
+        if (CountMapMonster != MonsterInMapCount)
         {
-            for (int i = 0; i < monsterInMap.Length; i++)
+            for(int i = 0; i< monster.Length; i++)
+            {
+                if (icon[i] == null) continue;
+                icon[i].GetComponent<MiniMapIcon>().GetHp(0);
+
+            }
+            for (int i = 0; i < MonsterInMapCount; i++)
             {
                 icon[i] = ObjectPoolManager.instance.Pool.Get();
             }
-            for (int j = monsterInMap.Length; j < monster.Length; j++)
-            {
-                icon[j].GetComponent<MiniMapIcon>().GetHp(0);
-            }
-            CountMapMonster = monsterInMap.Length;
+            CountMapMonster = MonsterInMapCount;
         }
         {
             for (int i = 0; i < monsterInMap.Length; i++)
             {
                 if (monsterInMap[i] == null) break;
-                else if(icon[i] == null) break;
+                else if (icon[i] == null) break;
                 icon[i].GetComponent<MiniMapIcon>().GetHp(monsterInMap[i].GetComponent<Monster>().monsterUnit.GetCurrentHP());
                 icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterInMap[i].transform.position);
 
@@ -76,21 +80,22 @@ public class MiniMap : MonoBehaviour
     {
         if (target == null) return false;
         Vector3 screenPoint = MiniMapCamera.WorldToViewportPoint(target.transform.position);
-        bool onMiniMap = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1.5 && screenPoint.y > 0 && screenPoint.y < 1;
+        bool onMiniMap = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
 
         return onMiniMap;
     }
 
     private void CountObjectInMiniMap()
     {
-        int count = 0;
+        int Count = 0;
         for (int i = 0; i<monster.Length; i++)
         {
             if (CheckObjectInMiniMap(monster[i]))
             {
-                monsterInMap[count++] = monster[i];
+                monsterInMap[Count++] = monster[i];
             }
             else continue;
         }
+        MonsterInMapCount = Count;
     }
 }
