@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    // Hierarchy 상에서 monster Object의 이름을 정해주면 자동으로 같은 이름의 능력치가 할당 됨 - Tony, 2024.09.11
     public MonsterName monsterName;
     public MonsterUnit monsterUnit;
 
