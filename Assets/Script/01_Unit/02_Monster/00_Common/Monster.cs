@@ -26,7 +26,6 @@ public class Monster : MonoBehaviour
         SoulPrefab = Resources.Load("Prefab/Soul") as GameObject;
 
         UIHp.SetMaxHP(monsterUnit.GetCurrentHP());
-
     }
 
     void Update()
@@ -35,9 +34,9 @@ public class Monster : MonoBehaviour
         {
             monsterUnit.pattern.PlayPattern();
         }
-
     }
 
+    // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
     public void SetAnimation(string status = "")
     {
         _animator.SetBool("isWalk", direction != 0);

@@ -1,5 +1,3 @@
-using System.Xml.Serialization;
-using UnityEditor;
 using UnityEngine;
 
 public abstract class Pattern
@@ -31,11 +29,10 @@ public abstract class Pattern
         gameObject.transform.position += new Vector3(direction() * moveSpeed * Time.deltaTime, 0, 0);
     }
 
+    // Move 관련 함수
     protected virtual bool IsMoveable() { return false; }
-
     protected int direction() { return monster.GetDirection(); }
     protected void SetDirection(Direction direction) { monster.SetDirection(direction); }
-
     protected void ChangeDirection() { monster.ChangeDirection(); }
 
     public abstract void PlayPattern();
