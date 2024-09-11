@@ -57,7 +57,8 @@ public class Player : MonoBehaviour
 
     private void Initialize(Direction direction = Direction.Left)
     {
-        if (Instance == null) Instance = this;
+        if (Instance != null) Destroy(this.gameObject);
+        Instance = this;
         DontDestroyOnLoad(this.gameObject);
 
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
