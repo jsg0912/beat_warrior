@@ -63,10 +63,10 @@ public class MiniMap : MonoBehaviour
             CountMapMonster = MonsterInMapCount;
         }
         {
-            for (int i = 0; i < monsterInMap.Length; i++)
+            for (int i = 0; i < MonsterInMapCount; i++)
             {
                 if (monsterInMap[i] == null) break;
-                else if (icon[i] == null) break;
+                if (icon[i] == null) break;
                 icon[i].GetComponent<MiniMapIcon>().GetHp(monsterInMap[i].GetComponent<Monster>().monsterUnit.GetCurrentHP());
                 icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterInMap[i].transform.position);
 
