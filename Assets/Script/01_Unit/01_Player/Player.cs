@@ -51,33 +51,8 @@ public class Player : MonoBehaviour
             Skill();
         }
 
+        // TODO: 임시 부활 코드
         if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
-
-        // TODO: 임시 코드(추가특성 장착 및 해제)
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            AddOrRemoveTrait(SkillName.AppendMaxHP);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            AddOrRemoveTrait(SkillName.DoubleJump);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            AddOrRemoveTrait(SkillName.Execution);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            AddOrRemoveTrait(SkillName.KillRecoveryHP);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            AddOrRemoveTrait(SkillName.AppendAttack);
-        }
     }
 
     private void Initialize(Direction direction = Direction.Left)
