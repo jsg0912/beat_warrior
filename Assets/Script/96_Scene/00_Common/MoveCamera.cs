@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class MoveCamera : MonoBehaviour
 {
     public Transform Target;
     public float speed;
-    
-    
+
+
     public Vector2 center;
     public Vector2 size;
 
@@ -18,7 +15,7 @@ public class MoveCamera : MonoBehaviour
     private void Start()
     {
         height = Camera.main.orthographicSize;
-        width = height*Screen.width/Screen.height;
+        width = height * Screen.width / Screen.height;
     }
     private void OnDrawGizmos()
     {
@@ -30,7 +27,7 @@ public class MoveCamera : MonoBehaviour
     {
         cameraMovement();
         maxCameraMovement();
-        
+
     }
 
     private void cameraMovement()
