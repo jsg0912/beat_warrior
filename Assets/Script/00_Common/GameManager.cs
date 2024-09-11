@@ -31,6 +31,6 @@ public class GameManager : MonoBehaviour
     {
         Player.Instance.RestartPlayer();
 
-        HpUI.Instance.SetAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+        HpUI.Instance.CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }
 }

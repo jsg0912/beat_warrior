@@ -18,7 +18,7 @@ public class HpUI : MonoBehaviour
         HPList = new();
     }
 
-    public void SetAndUpdateHPUI(int hp)
+    public void CreateAndUpdateHPUI(int hp)
     {
         SetHPUI(hp);
         UpdateHPUI();
