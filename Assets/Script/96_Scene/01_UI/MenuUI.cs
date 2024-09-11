@@ -44,6 +44,11 @@ public class MenuUI : MonoBehaviour
         Setting.SetActive(isSettingActive);
     }
 
+    public void OnClickReStart()
+    {
+        GameManager.Instance.RestartGame();
+    }
+
     public void ResumeButton()
     {
         SetMenuActive();
