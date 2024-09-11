@@ -8,6 +8,7 @@ public class Monster : MonoBehaviour
     public MonsterUnit monsterUnit;
 
     protected Animator _animator;
+    protected Direction direction;
 
     [SerializeField] private Transform MonsterSprite;
     [SerializeField] private MonsterHPUI UIHp;
@@ -25,7 +26,6 @@ public class Monster : MonoBehaviour
         SoulPrefab = Resources.Load("Prefab/Soul") as GameObject;
 
         UIHp.SetMaxHP(monsterUnit.GetCurrentHP());
-
     }
 
     void Update()
@@ -34,12 +34,30 @@ public class Monster : MonoBehaviour
         {
             monsterUnit.pattern.PlayPattern();
         }
-
     }
+
+    // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
+    public void SetAnimation(string status = "")
+    {
+        _animator.SetBool("isWalk", direction != 0);
+
+        if (status == "Attack") _animator.SetTrigger("attack");
+        if (status == "Hurt") _animator.SetTrigger("hurt");
+        if (status == "Die") _animator.SetTrigger("die");
+    }
+
+    public int GetDirection() { return (int)direction; }
 
     public void SetDirection(Direction direction)
     {
-        MonsterSprite.localScale = new Vector3(-(int)direction, 1, 1);
+        this.direction = direction;
+        if (direction != 0) MonsterSprite.localScale = new Vector3(-(int)direction, 1, 1);
+    }
+
+    public void ChangeDirection()
+    {
+        this.direction = (Direction)(-1 * (int)direction);
+        SetDirection(direction);
     }
 
     public virtual void GetDamaged(int dmg)
