@@ -6,9 +6,11 @@ public class ObjectPoolManager : MonoBehaviour
 
     public static ObjectPoolManager instance;
 
-    public int defaultCapacity = 6;
-    public int maxPoolSize = 15;
+    public int defaultCapacity = 10;
+    public int maxPoolSize = 20;
+
     public GameObject IconPrefab;
+    public GameObject IconSpawnPoint;
 
     public IObjectPool<GameObject> Pool { get; private set; }
 
@@ -37,7 +39,7 @@ public class ObjectPoolManager : MonoBehaviour
 
     private GameObject CreatePooledItem()
     {
-        GameObject poolGo = Instantiate(IconPrefab);
+        GameObject poolGo = Instantiate(IconPrefab, IconSpawnPoint.transform);
         poolGo.GetComponent<MiniMapIcon>().Pool = this.Pool;
         return poolGo;
     }

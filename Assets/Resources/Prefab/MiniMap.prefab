@@ -317,6 +317,7 @@ RectTransform:
   - {fileID: 7414741696814705438}
   - {fileID: 8303993082212394152}
   - {fileID: 2459019924381607737}
+  - {fileID: 3027255372941150885}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
@@ -394,6 +395,38 @@ MonoBehaviour:
   defaultCapacity: 6
   maxPoolSize: 15
   IconPrefab: {fileID: 3067871860596314453, guid: 99f3ba5f72e624f49b60a9e7cf5e910a, type: 3}
+  IconSpawnPoint: {fileID: 6010825359251294856}
+--- !u!1 &6010825359251294856
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3027255372941150885}
+  m_Layer: 0
+  m_Name: Icon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3027255372941150885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6010825359251294856}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1908.3535, y: -1087.9642, z: 3.2640004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3895346290008597364}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8358172037887852291
 GameObject:
   m_ObjectHideFlags: 0
