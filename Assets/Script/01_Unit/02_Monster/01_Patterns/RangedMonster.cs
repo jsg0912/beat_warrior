@@ -23,7 +23,7 @@ public class RangedMonster : Pattern
         FindRange = 5f;
         ArrowPrefab = Resources.Load("Prefab/Arrow") as GameObject;
         ObjectLayer = LayerMask.GetMask("Player");
-        anim = gameObject.GetComponent<Animator>();
+        _animator = gameObject.GetComponent<Animator>();
         direction = Direction.Right;
         moveSpeed = 0.5f;
         alert = false;
@@ -40,8 +40,8 @@ public class RangedMonster : Pattern
 
     private void MoveAnim()
     {
-        if (direction == 0) anim.SetBool("isWalk", false);
-        else anim.SetBool("isWalk", true);
+        if (direction == 0) _animator.SetBool("isWalk", false);
+        else _animator.SetBool("isWalk", true);
     }
 
     protected override bool IsMoveable()
@@ -93,7 +93,7 @@ public class RangedMonster : Pattern
         canMove = false;
         shootCoolTime = shootCoolMaxTime;
 
-        anim.SetTrigger("attack");
+        _animator.SetTrigger("attack");
 
         yield return new WaitForSeconds(0.55f);
 
