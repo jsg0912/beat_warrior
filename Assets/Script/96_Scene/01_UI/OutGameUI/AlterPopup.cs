@@ -70,7 +70,7 @@ public class AlterPopup : MonoBehaviour
         {
             if (Player.Instance.IsEquippedTrait(SelectTrait))
             {
-                InfoButton = TraitSetButtonStatus.Unequip;
+                InfoButton = TraitSetButtonStatus.UnEquip;
                 InfoSetButton.interactable = true;
             }
             else
@@ -171,7 +171,7 @@ public class AlterPopup : MonoBehaviour
                     break;
                 }
                 break;
-            case TraitSetButtonStatus.Unequip:
+            case TraitSetButtonStatus.UnEquip:
                 Player.Instance.RemoveTrait(SelectTrait);
                 UpdateUI();
                 break;
