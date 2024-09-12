@@ -14,9 +14,9 @@ public class RangedMonster : Pattern
 
     private GameObject ArrowPrefab;
 
-    public override void Initialize(GameObject gameObject)
+    public override void Initialize(Monster monster)
     {
-        base.Initialize(gameObject);
+        base.Initialize(monster);
         arrowSpeed = 5f;
         FindRange = 5f;
         ArrowPrefab = Resources.Load("Prefab/Arrow") as GameObject;
@@ -45,29 +45,29 @@ public class RangedMonster : Pattern
 
     private void CheckCollision()
     {
-        Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(gameObject.transform.position, FindRange, ObjectLayer);
+        Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(monster.gameObject.transform.position, FindRange, ObjectLayer);
 
         foreach (Collider2D collider in collider2Ds)
         {
-            gameObject.GetComponent<MonoBehaviour>().StartCoroutine(Shoot(collider));
+            monster.gameObject.GetComponent<MonoBehaviour>().StartCoroutine(Shoot(collider));
             alert = true;
 
             if (isMoveable == true)
             {
-                if (collider.transform.position.x > gameObject.transform.position.x) monster.SetDirection(Direction.Right);
+                if (collider.transform.position.x > monster.gameObject.transform.position.x) monster.SetDirection(Direction.Right);
                 else monster.SetDirection(Direction.Left);
             }
 
         }
         if (alert == true)
         {
-            if (Physics2D.OverlapCircle(gameObject.transform.position, FindRange, ObjectLayer) == false)
+            if (Physics2D.OverlapCircle(monster.gameObject.transform.position, FindRange, ObjectLayer) == false)
             {
                 alert = false;
                 isMoveable = true;
             }
         }
-        RaycastHit2D rayHit = Physics2D.Raycast(gameObject.transform.position + new Vector3(monster.GetDirection(), 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
+        RaycastHit2D rayHit = Physics2D.Raycast(monster.gameObject.transform.position + new Vector3(monster.GetDirection(), 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
         if (rayHit.collider == null)
         {
             if (alert == true) isMoveable = false;
@@ -85,7 +85,7 @@ public class RangedMonster : Pattern
 
         yield return new WaitForSeconds(0.55f);
 
-        Vector3 start = gameObject.transform.position + new Vector3(0, 0.8f, 0);
+        Vector3 start = monster.gameObject.transform.position + new Vector3(0, 0.8f, 0);
         Vector3 end = player.transform.position;
         Vector3 direction = end - start;
 
