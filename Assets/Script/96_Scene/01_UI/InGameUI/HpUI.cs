@@ -18,6 +18,11 @@ public class HpUI : MonoBehaviour
         HPList = new();
     }
 
+    private void Start()
+    {
+        HpInitialize();
+    }
+
     public void CreateAndUpdateHPUI(int hp)
     {
         SetHPUI(hp);
@@ -55,5 +60,10 @@ public class HpUI : MonoBehaviour
             if (i < hp) HPList[i].gameObject.SetActive(false);
             else HPList[i].gameObject.SetActive(true);
         }
+    }
+
+    public void HpInitialize()
+    {
+        CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }
 }

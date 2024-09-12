@@ -111,14 +111,13 @@ public class Player : MonoBehaviour
         SetDirection(direction);
         isOnBaseTile = false;
         isInvincibility = false;
-
-        HpUI.Instance.CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }
 
-    public void RestartPlayer()
+    public void RestartPlayer()//TODO: GameManager로 옮기기 - 이정대 20240912
     {
         Initialize(direction);
         _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
+        HpUI.Instance.HpInitialize();
     }
 
     // GET Functions
