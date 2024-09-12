@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
         isOnBaseTile = false;
         isInvincibility = false;
 
-        HpUI.Instance.CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+        HpUI.Instance.HpInitialize();
     }
 
     public void RestartPlayer()

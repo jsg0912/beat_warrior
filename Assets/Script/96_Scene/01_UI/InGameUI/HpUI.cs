@@ -56,4 +56,9 @@ public class HpUI : MonoBehaviour
             else HPList[i].gameObject.SetActive(true);
         }
     }
+
+    public void HpInitialize()
+    {
+        CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+    }
 }
