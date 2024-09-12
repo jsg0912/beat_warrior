@@ -11,8 +11,5 @@ public abstract class Strategy
 
     public virtual void PlayStrategy() { }
 
-    protected Vector3 CurrentPos()
-    {
-        return monster.gameObject.transform.position;
-    }
+    protected Vector3 CurrentPos() { return monster.gameObject.transform.position; }
 }

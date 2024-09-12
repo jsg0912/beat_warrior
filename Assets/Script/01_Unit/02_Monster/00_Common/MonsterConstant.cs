@@ -1,8 +1,13 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class MonsterConstant
 {
     public const float moveSpeed = 1.0f;
+
+    public const string PlayerLayer = "Player";
+    public const float RangedRecognizeRange = 5.0f;
+    public const float MeleeRecognizeRange = 5.0f;
 
     public static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
         { MonsterName.Monster1, 1.1f },

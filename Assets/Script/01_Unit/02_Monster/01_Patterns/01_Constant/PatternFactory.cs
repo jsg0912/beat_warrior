@@ -6,8 +6,6 @@ public static class PatternFactory
         {
             case PatternName.MeleeEnemy:
                 return new MeleeEnemy();
-            case PatternName.RangedMonster:
-                return new RangedMonster();
         }
 
         throw new System.Exception($"{patternName} is not exist");
