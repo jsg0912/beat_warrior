@@ -105,6 +105,6 @@ public class Monster : MonoBehaviour
             yield return null;
         }
 
-        Target.SetActive(false);
+        if (Target != null) Target.SetActive(false);
     }
 }

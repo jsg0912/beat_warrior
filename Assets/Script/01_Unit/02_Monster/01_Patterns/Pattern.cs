@@ -6,8 +6,6 @@ public abstract class Pattern
     protected Monster monster;
 
     protected float moveSpeed;
-    protected float attackCoolTimeMax;
-    protected float attackCoolTime;
 
     public virtual void Initialize(GameObject gameObject)
     {
@@ -15,8 +13,6 @@ public abstract class Pattern
         monster = gameObject.GetComponent<Monster>();
 
         moveSpeed = MonsterConstant.MoveSpeed[monster.monsterName];
-        attackCoolTimeMax = MonsterConstant.AttackSpeed[monster.monsterName];
-        attackCoolTime = attackCoolTimeMax;
 
         // 초기 방향 랜덤 설정
         monster.SetDirection(Random.Range(0, 1) == 0 ? Direction.Right : Direction.Left);
@@ -35,7 +31,7 @@ public abstract class Pattern
     protected void SetDirection(Direction direction) { monster.SetDirection(direction); }
     protected void ChangeDirection() { monster.ChangeDirection(); }
 
-    public abstract void PlayPattern();
+    public virtual void PlayPattern() { }
 
-    public abstract Pattern Copy();
+    public virtual Pattern Copy() { return this; }
 }
