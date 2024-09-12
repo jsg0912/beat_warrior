@@ -18,6 +18,11 @@ public class HpUI : MonoBehaviour
         HPList = new();
     }
 
+    private void Start()
+    {
+        HpInitialize();
+    }
+
     public void CreateAndUpdateHPUI(int hp)
     {
         SetHPUI(hp);
