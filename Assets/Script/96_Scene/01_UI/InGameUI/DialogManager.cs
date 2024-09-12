@@ -25,7 +25,14 @@ public class DialogManager : MonoBehaviour
 
     public string GetDialog(int DialogNum, int DialogIndex)
     {
-        return DialogData[DialogNum][DialogIndex];
+        if (DialogIndex == DialogData[DialogNum].Length)
+        {
+            return null;
+        }
+        else
+        {
+            return DialogData[DialogNum][DialogIndex];
+        }
     }
 
 }

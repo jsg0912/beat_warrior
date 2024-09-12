@@ -8,24 +8,28 @@ public class DialogTrigger : MonoBehaviour
     public GameObject DialogPanel;
     public bool isAction;
     public int dialogIndex;
-    //public TMPro.TextMeshPro DialogText;
     public TMPro.TextMeshProUGUI DialogText;
 
     public void OnClickStartDialog()
     {
-        if(isAction) isAction = false;
-        else
-        {
-            isAction = true;
-            DialogManager = DialogManager.GetComponent<DialogManager>();
-            StartDialog(DialogManager.DialogNumber);
-        }
+        
+        DialogManager = DialogManager.GetComponent<DialogManager>();
+        StartDialog(DialogManager.DialogNumber);
+        
         DialogPanel.SetActive(isAction);
     }
     public void StartDialog(int dialogNum)
     {
         string dialogDate = DialogManager.GetDialog(dialogNum, dialogIndex);
 
+        if(dialogDate == null)
+        {
+            isAction = false;
+            dialogIndex = 0;
+            return;
+        }
         DialogText.text = dialogDate;
+        isAction = true;
+        dialogIndex++;
     }
 }
