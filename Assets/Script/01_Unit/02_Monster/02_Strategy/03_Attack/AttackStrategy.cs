@@ -1,7 +1,6 @@
-using System.Collections;
 using UnityEngine;
 
-public class AttackPattern : Pattern
+public class AttackStrategy : Strategy
 {
     protected float attackCoolTimeMax;
     protected float attackCoolTime;

@@ -6,6 +6,7 @@ public class Monster : MonoBehaviour
     // Hierarchy 상에서 monster Object의 이름을 정해주면 자동으로 같은 이름의 능력치가 할당 됨 - Tony, 2024.09.11
     public MonsterName monsterName;
     public MonsterUnit monsterUnit;
+    public Pattern pattern;
 
     protected Animator _animator;
     protected Direction direction;
@@ -21,7 +22,9 @@ public class Monster : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         monsterUnit = MonsterList.FindMonster(monsterName);
-        monsterUnit.pattern.Initialize(gameObject);
+        pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
+        pattern.Initialize(gameObject);
+        pattern.SetMonster(this);
 
         SoulPrefab = Resources.Load("Prefab/Soul") as GameObject;
 
@@ -32,7 +35,7 @@ public class Monster : MonoBehaviour
     {
         if (monsterUnit.GetIsAlive() == true)
         {
-            monsterUnit.pattern.PlayPattern();
+            pattern.PlayPattern();
         }
     }
 

@@ -9,7 +9,7 @@ public class RangedMonster : Pattern
     private float FindRange;
     private LayerMask ObjectLayer;
     public bool alert;
-    public bool canMove;
+    public bool isMoveable;
     public bool shootAble; //TODO: shoot안쏘고 움직이기만 하는 Monster 재현을 위해 빠르게 추가한 방식으로 임시적인 것 - 신동환, 20240904
 
     private GameObject ArrowPrefab;
@@ -22,19 +22,19 @@ public class RangedMonster : Pattern
         ArrowPrefab = Resources.Load("Prefab/Arrow") as GameObject;
         ObjectLayer = LayerMask.GetMask("Player");
         alert = false;
-        canMove = true;
+        isMoveable = true;
         shootAble = false;
     }
     public override void PlayPattern()
     {
         CheckCoolTime();
         CheckCollision();
-        Move();
+        // Move();
     }
 
-    protected override bool IsMoveable()
+    protected bool GetIsMoveable()
     {
-        return canMove;
+        return isMoveable;
     }
 
     private void CheckCoolTime()
@@ -52,10 +52,10 @@ public class RangedMonster : Pattern
             gameObject.GetComponent<MonoBehaviour>().StartCoroutine(Shoot(collider));
             alert = true;
 
-            if (canMove == true)
+            if (isMoveable == true)
             {
-                if (collider.transform.position.x > gameObject.transform.position.x) SetDirection(Direction.Right);
-                else SetDirection(Direction.Left);
+                if (collider.transform.position.x > gameObject.transform.position.x) monster.SetDirection(Direction.Right);
+                else monster.SetDirection(Direction.Left);
             }
 
         }
@@ -64,21 +64,21 @@ public class RangedMonster : Pattern
             if (Physics2D.OverlapCircle(gameObject.transform.position, FindRange, ObjectLayer) == false)
             {
                 alert = false;
-                canMove = true;
+                isMoveable = true;
             }
         }
-        RaycastHit2D rayHit = Physics2D.Raycast(gameObject.transform.position + new Vector3(direction(), 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
+        RaycastHit2D rayHit = Physics2D.Raycast(gameObject.transform.position + new Vector3(monster.GetDirection(), 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
         if (rayHit.collider == null)
         {
-            if (alert == true) canMove = false;
-            else ChangeDirection();
+            if (alert == true) isMoveable = false;
+            else monster.ChangeDirection();
         }
     }
 
     private IEnumerator Shoot(Collider2D player)
     {
         if (shootCoolTime > 0 || shootAble == false) yield break;
-        canMove = false;
+        isMoveable = false;
         shootCoolTime = shootCoolMaxTime;
 
         monster.SetAnimation("Attack");
@@ -95,10 +95,10 @@ public class RangedMonster : Pattern
         Arrow.GetComponent<Transform>().rotation = Quaternion.Euler(0, 0, Quaternion.FromToRotation(Vector3.up, direction.normalized).eulerAngles.z);
         Arrow.GetComponent<Rigidbody2D>().velocity = direction.normalized * arrowSpeed;
 
-        canMove = true;
+        isMoveable = true;
     }
 
-    public override Pattern Copy()
+    public RangedMonster Copy()
     {
         return new RangedMonster();
     }
