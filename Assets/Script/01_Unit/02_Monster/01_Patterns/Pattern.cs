@@ -2,24 +2,17 @@ using UnityEngine;
 
 public class Pattern
 {
-    protected GameObject gameObject;
     protected Monster monster;
 
     protected RecognizeStrategy Recognize;
     protected MoveStrategy Move;
     protected AttackStrategy Attack;
 
-    public virtual void Initialize(GameObject gameObject)
+    public virtual void Initialize(Monster monster)
     {
-        this.gameObject = gameObject;
-        Recognize.Initialize(gameObject);
-        Move.Initialize(gameObject);
-        Attack.Initialize(gameObject);
-    }
-
-    public void SetMonster(Monster monster)
-    {
-        this.monster = monster;
+        Recognize.Initialize(monster);
+        Move.Initialize(monster);
+        Attack.Initialize(monster);
     }
 
     public void Play()

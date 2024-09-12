@@ -23,8 +23,7 @@ public class Monster : MonoBehaviour
         _animator = GetComponent<Animator>();
         monsterUnit = MonsterList.FindMonster(monsterName);
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
-        pattern.Initialize(gameObject);
-        pattern.SetMonster(this);
+        pattern.Initialize(this);
 
         SoulPrefab = Resources.Load("Prefab/Soul") as GameObject;
 

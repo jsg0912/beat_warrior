@@ -5,10 +5,9 @@ public class AttackStrategy : Strategy
     protected float attackCoolTimeMax;
     protected float attackCoolTime;
 
-    public override void Initialize(GameObject gameObject)
+    public override void Initialize(Monster monster)
     {
-        this.gameObject = gameObject;
-        monster = gameObject.GetComponent<Monster>();
+        base.Initialize(monster);
 
         attackCoolTimeMax = MonsterConstant.AttackSpeed[monster.monsterName];
         attackCoolTime = attackCoolTimeMax;
