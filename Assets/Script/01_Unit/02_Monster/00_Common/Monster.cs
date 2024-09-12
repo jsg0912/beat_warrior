@@ -71,7 +71,7 @@ public class Monster : MonoBehaviour
 
         if (Player.Instance.hitMonsterFuncList != null) Player.Instance.hitMonsterFuncList(monsterUnit);
 
-        UIHp.SetHP(monsterUnit.GetCurrentHP());
+        UIHp.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
         if (monsterUnit.GetIsAlive() == false)
         {
