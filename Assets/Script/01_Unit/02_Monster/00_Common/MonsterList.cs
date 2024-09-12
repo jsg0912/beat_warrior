@@ -92,7 +92,7 @@ public static class MonsterList
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
         }),
-        PatternName.RangedMonster),
+        PatternName.Monster2),
     };
 
     public static MonsterUnit FindMonster(MonsterName name)

@@ -1,5 +1,6 @@
 public enum PatternName
 {
     MeleeEnemy,
-    RangedMonster
+    RangedMonster,
+    Monster2
 }

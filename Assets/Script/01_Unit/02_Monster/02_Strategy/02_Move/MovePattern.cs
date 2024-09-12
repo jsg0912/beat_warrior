@@ -26,7 +26,7 @@ public class MoveStrategy : Strategy
         monster.gameObject.transform.position += new Vector3(direction() * moveSpeed * Time.deltaTime, 0, 0);
     }
 
-    protected virtual bool IsMoveable() { return false; }
+    protected virtual bool IsMoveable() { return true; }
     protected int direction() { return monster.GetDirection(); }
     protected void SetDirection(Direction direction) { monster.SetDirection(direction); }
     protected void ChangeDirection() { monster.ChangeDirection(); }

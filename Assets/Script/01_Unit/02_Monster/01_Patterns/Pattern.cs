@@ -10,20 +10,15 @@ public class Pattern
 
     public virtual void Initialize(Monster monster)
     {
-        Recognize.Initialize(monster);
-        Move.Initialize(monster);
-        Attack.Initialize(monster);
-    }
-
-    public void Play()
-    {
-        Recognize.PlayStrategy();
-        Move.PlayStrategy();
-        Attack.PlayStrategy();
+        if (Recognize != null) Recognize.Initialize(monster);
+        if (Move != null) Move.Initialize(monster);
+        if (Attack != null) Attack.Initialize(monster);
     }
 
     public virtual void PlayPattern()
     {
-
+        if (Recognize != null) Recognize.PlayStrategy();
+        if (Move != null) Move.PlayStrategy();
+        if (Attack != null) Attack.PlayStrategy();
     }
 }
