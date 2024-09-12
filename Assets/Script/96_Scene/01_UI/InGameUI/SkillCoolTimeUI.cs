@@ -20,8 +20,5 @@ public class SkillCoolTimeUI : MonoBehaviour
         CoolTimeImg.fillAmount = 1 - coolTime / PlayerSkillConstant.SkillCoolTime[skillName];
         CoolTimeText.gameObject.SetActive(coolTime != 0);
         CoolTimeText.text = Mathf.Ceil(coolTime).ToString();
-        
     }
-
-    
 }
