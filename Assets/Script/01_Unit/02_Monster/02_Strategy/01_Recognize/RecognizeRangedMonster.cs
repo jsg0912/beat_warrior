@@ -8,7 +8,6 @@ public class RecognizeRangedMonster : RecognizeStrategy
         base.Initialize(monster);
 
         RecognizeRange = MonsterConstant.RangedRecognizeRange;
-        TargetLayer = LayerMask.GetMask(MonsterConstant.PlayerLayer);
     }
 
     public override void PlayStrategy()
@@ -20,9 +19,12 @@ public class RecognizeRangedMonster : RecognizeStrategy
     {
         Collider2D collider = Physics2D.OverlapCircle(CurrentPos(), RecognizeRange, TargetLayer);
 
-        if (collider == null) return;
+        if (collider == null)
+        {
+            if (monster.GetStatus() == MonsterStatus.Chase) monster.SetStatus(MonsterStatus.Normal);
+            return;
+        }
 
-        if (collider.transform.position.x > CurrentPos().x) monster.SetDirection(Direction.Right);
-        else monster.SetDirection(Direction.Left);
+        monster.SetStatus(MonsterStatus.Chase);
     }
 }

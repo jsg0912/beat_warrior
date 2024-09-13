@@ -8,7 +8,7 @@ public class Monster : MonoBehaviour
     public MonsterUnit monsterUnit;
     public Pattern pattern;
 
-    protected MonsterStatus status;
+    [SerializeField] protected MonsterStatus status;
     protected Animator _animator;
     protected Direction direction;
 

@@ -3,7 +3,7 @@ public class Monster2Pattern : Pattern
     public Monster2Pattern()
     {
         Recognize = new RecognizeRangedMonster();
-        Move = new MoveStrategy();
+        MoveNormal = new MoveNormal();
         //Attack.Initialize(monster);
     }
 }
