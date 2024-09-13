@@ -56,13 +56,12 @@ public class Monster : MonoBehaviour
     public void SetDirection(Direction direction)
     {
         this.direction = direction;
-        if (direction != 0) MonsterSprite.localScale = new Vector3(-(int)direction, 1, 1);
+        MonsterSprite.localScale = new Vector3(-(int)direction, 1, 1);
     }
 
     public void ChangeDirection()
     {
-        if (direction == 0) direction = Direction.Left;
-        else this.direction = (Direction)(-1 * (int)direction);
+        this.direction = (Direction)(-1 * (int)direction);
 
         SetDirection(direction);
     }

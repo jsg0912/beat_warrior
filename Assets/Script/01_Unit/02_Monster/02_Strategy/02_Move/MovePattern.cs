@@ -48,8 +48,7 @@ public class MoveStrategy : Strategy
     {
         if (isEndOfGround == false) return;
 
-        if (monster.GetMonsterStatus() == MonsterStatus.Chase) monster.SetDirection(Direction.Stop);
-        else ChangeDirection();
+        if (monster.GetMonsterStatus() != MonsterStatus.Chase) ChangeDirection();
     }
 
     protected virtual bool IsMoveable() { return isEndOfGround == false; }
