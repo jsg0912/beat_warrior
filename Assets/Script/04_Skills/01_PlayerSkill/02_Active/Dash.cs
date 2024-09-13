@@ -25,7 +25,7 @@ public class Dash : ActiveSkillPlayer
 
         ghostDelayTime = 0;
         ghostDelayTimeMax = PlayerSkillConstant.ghostDelayTimeMax;
-        GhostPrefab = Resources.Load("Prefab/Ghost") as GameObject;
+        GhostPrefab = Resources.Load(PrefabRouter.GhostPrefab) as GameObject;
     }
 
     public override void CheckInputKeyCode()

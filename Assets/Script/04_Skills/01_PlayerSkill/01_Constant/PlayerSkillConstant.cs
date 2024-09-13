@@ -34,8 +34,4 @@ public class PlayerSkillConstant
     public const string dashAnimTrigger = "dash";
     public const string skill1AnimTrigger = "skill1";
     public const string skill2AnimTrigger = "skill2";
-
-    public const string attackPrefab = "Prefab/AttackCollider";
-    public const string skill1Prefab = "Prefab/Skill1Collider";
-    public const string skill2Prefab = "Prefab/Skill2Collider";
 }
