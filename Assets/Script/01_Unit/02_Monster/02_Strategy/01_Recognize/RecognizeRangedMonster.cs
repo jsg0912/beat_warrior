@@ -9,32 +9,20 @@ public class RecognizeRangedMonster : RecognizeStrategy
 
         RecognizeRange = MonsterConstant.RangedRecognizeRange;
         TargetLayer = LayerMask.GetMask(MonsterConstant.PlayerLayer);
-        alert = false;
     }
 
     public override void PlayStrategy()
     {
-        CheckCollision();
+        CheckTarget();
     }
 
-    private void CheckCollision()
+    private void CheckTarget()
     {
-        Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(CurrentPos(), RecognizeRange, TargetLayer);
+        Collider2D collider = Physics2D.OverlapCircle(CurrentPos(), RecognizeRange, TargetLayer);
 
-        foreach (Collider2D collider in collider2Ds)
-        {
-            alert = true;
+        if (collider == null) return;
 
-            if (collider.transform.position.x > CurrentPos().x) monster.SetDirection(Direction.Right);
-            else monster.SetDirection(Direction.Left);
-
-        }
-        if (alert == true)
-        {
-            if (Physics2D.OverlapCircle(CurrentPos(), RecognizeRange, TargetLayer) == false)
-            {
-                alert = false;
-            }
-        }
+        if (collider.transform.position.x > CurrentPos().x) monster.SetDirection(Direction.Right);
+        else monster.SetDirection(Direction.Left);
     }
 }
