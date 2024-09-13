@@ -8,9 +8,6 @@ public class SkillUI : MonoBehaviour
 
     [SerializeField] Text AttackCountView;
 
-    [SerializeField] private List<Image> SkillCoolTimeImgList;
-    private Dictionary<SkillName, Image> SkillCoolTimeImg = new();
-
     private void Awake()
     {
         Instance = this;
