@@ -40,17 +40,25 @@ public class Monster : MonoBehaviour
     }
 
     // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
-    public void SetAnimation(string status = "")
+    public void PlayAnimation(MonsterStatus status)
     {
-        _animator.SetBool("isWalk", direction != 0);
-
-        if (status == "Attack") _animator.SetTrigger("attack");
-        if (status == "Hurt") _animator.SetTrigger("hurt");
-        if (status == "Die") _animator.SetTrigger("die");
+        switch (status)
+        {
+            case MonsterStatus.Attack:
+                _animator.SetTrigger(MonsterConstant.attackAnimTrigger);
+                break;
+            case MonsterStatus.Hurt:
+                _animator.SetTrigger(MonsterConstant.hurtAnimTrigger);
+                break;
+            case MonsterStatus.Dead:
+                _animator.SetTrigger(MonsterConstant.dieAnimTrigger);
+                break;
+        }
     }
 
-    public MonsterStatus GetMonsterStatus() { return status; }
-
+    public void IsWalking(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
+    public MonsterStatus GetStatus() { return status; }
+    public void SetStatus(MonsterStatus status) { this.status = status; }
     public int GetDirection() { return (int)direction; }
 
     public void SetDirection(Direction direction)
@@ -62,7 +70,6 @@ public class Monster : MonoBehaviour
     public void ChangeDirection()
     {
         this.direction = (Direction)(-1 * (int)direction);
-
         SetDirection(direction);
     }
 

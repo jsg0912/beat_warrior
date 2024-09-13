@@ -17,7 +17,7 @@ public class MoveStrategy : Strategy
         isEndOfGround = false;
 
         // 초기 방향 랜덤 설정
-        monster.SetDirection(Random.Range(0, 1) == 0 ? Direction.Right : Direction.Left);
+        SetDirection(Random.Range(0, 2) == 0 ? Direction.Right : Direction.Left);
     }
 
     public override void PlayStrategy()
@@ -32,7 +32,7 @@ public class MoveStrategy : Strategy
         if (IsMoveable() == false) return;
 
         monster.gameObject.transform.position += new Vector3(direction() * moveSpeed * Time.deltaTime, 0, 0);
-        monster.SetAnimation();
+        monster.IsWalking(true);
     }
 
     protected virtual void CheckGround()
@@ -40,7 +40,11 @@ public class MoveStrategy : Strategy
         Vector3 offset = new Vector3(monster.GetDirection(), 0, 0);
         RaycastHit2D rayHit = Physics2D.Raycast(CurrentPos() + offset, Vector3.down, 0.5f, GroundLayer);
 
-        if (rayHit.collider == null) isEndOfGround = true;
+        if (rayHit.collider == null)
+        {
+            isEndOfGround = true;
+            monster.IsWalking(false);
+        }
         else isEndOfGround = false;
     }
 
@@ -48,7 +52,7 @@ public class MoveStrategy : Strategy
     {
         if (isEndOfGround == false) return;
 
-        if (monster.GetMonsterStatus() != MonsterStatus.Chase) ChangeDirection();
+        if (monster.GetStatus() != MonsterStatus.Chase) ChangeDirection();
     }
 
     protected virtual bool IsMoveable() { return isEndOfGround == false; }
