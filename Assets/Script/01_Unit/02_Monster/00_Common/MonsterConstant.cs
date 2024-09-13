@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class MonsterConstant
 {
+    public const string walkAnimBool = "isWalk";
+    public const string attackAnimTrigger = "attack";
+    public const string hurtAnimTrigger = "hurt";
+    public const string dieAnimTrigger = "die";
+
     public const float moveSpeed = 1.0f;
 
     public const string PlayerLayer = "Player";
