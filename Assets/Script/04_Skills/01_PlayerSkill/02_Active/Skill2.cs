@@ -15,7 +15,7 @@ public class Skill2 : ActiveSkillPlayer
         coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
         coolTime = 0;
 
-        EffectPrefab = Resources.Load(PlayerSkillConstant.skill2Prefab) as GameObject;
+        EffectPrefab = Resources.Load(PrefabRouter.skill2Prefab) as GameObject;
     }
 
     protected override void UpdateKey()
@@ -25,7 +25,7 @@ public class Skill2 : ActiveSkillPlayer
 
     protected override void SkillMethod()
     {
-        CreateAttackPrefab();
+        CreateEffectPrefab();
 
         Vector2 start = Player.Instance.transform.position;
         Vector2 end = start += new Vector2(dashRange, 0.0f) * Player.Instance.GetDirection();
