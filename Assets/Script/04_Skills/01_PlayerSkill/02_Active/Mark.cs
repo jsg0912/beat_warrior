@@ -12,7 +12,7 @@ public class Mark : ActiveSkillPlayer
         coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
         coolTime = 0;
 
-        MarkerPrefab = Resources.Load("Prefab/Marker") as GameObject;
+        MarkerPrefab = Resources.Load(PrefabRouter.MarkerPrefab) as GameObject;
     }
 
     protected override void UpdateKey()

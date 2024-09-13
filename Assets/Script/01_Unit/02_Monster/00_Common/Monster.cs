@@ -26,7 +26,7 @@ public class Monster : MonoBehaviour
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
 
-        SoulPrefab = Resources.Load("Prefab/Soul") as GameObject;
+        SoulPrefab = Resources.Load(PrefabRouter.SoulPrefab) as GameObject;
 
         UIHp.SetMaxHP(monsterUnit.GetCurrentHP());
     }
