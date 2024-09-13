@@ -1,12 +1,7 @@
 using UnityEngine;
 
-public class MoveStrategy : Strategy
+public class MoveNormal : MoveStrategy
 {
-    protected float moveSpeed;
-
-    protected LayerMask GroundLayer;
-    protected bool isEndOfGround;
-
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
@@ -24,7 +19,6 @@ public class MoveStrategy : Strategy
     {
         Move();
         CheckGround();
-        DecideDirection();
     }
 
     protected virtual void Move()
@@ -40,23 +34,6 @@ public class MoveStrategy : Strategy
         Vector3 offset = new Vector3(monster.GetDirection(), 0, 0);
         RaycastHit2D rayHit = Physics2D.Raycast(CurrentPos() + offset, Vector3.down, 0.5f, GroundLayer);
 
-        if (rayHit.collider == null)
-        {
-            isEndOfGround = true;
-            monster.IsWalking(false);
-        }
-        else isEndOfGround = false;
+        if (rayHit.collider == null) ChangeDirection();
     }
-
-    protected void DecideDirection()
-    {
-        if (isEndOfGround == false) return;
-
-        if (monster.GetStatus() != MonsterStatus.Chase) ChangeDirection();
-    }
-
-    protected virtual bool IsMoveable() { return isEndOfGround == false; }
-    protected int direction() { return monster.GetDirection(); }
-    protected void SetDirection(Direction direction) { monster.SetDirection(direction); }
-    protected void ChangeDirection() { monster.ChangeDirection(); }
 }

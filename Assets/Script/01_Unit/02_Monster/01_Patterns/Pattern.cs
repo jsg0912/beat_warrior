@@ -1,11 +1,10 @@
-using UnityEngine;
-
 public class Pattern
 {
     protected Monster monster;
 
     protected RecognizeStrategy Recognize;
-    protected MoveStrategy Move;
+    protected MoveStrategy MoveNormal;
+    protected MoveStrategy MoveChase;
     protected AttackStrategy Attack;
 
     public virtual void Initialize(Monster monster)
