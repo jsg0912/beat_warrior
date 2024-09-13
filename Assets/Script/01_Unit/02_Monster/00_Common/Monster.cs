@@ -35,7 +35,7 @@ public class Monster : MonoBehaviour
     {
         if (monsterUnit.GetIsAlive() == true)
         {
-            pattern.PlayPattern();
+            pattern?.PlayPattern();
         }
     }
 

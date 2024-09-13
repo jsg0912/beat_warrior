@@ -19,9 +19,9 @@ public class Pattern
 
     public virtual void PlayPattern()
     {
-        if (Recognize != null) Recognize.PlayStrategy();
-        if (MoveNormal != null && monster.GetStatus() == MonsterStatus.Normal) MoveNormal.PlayStrategy();
-        if (MoveChase != null && monster.GetStatus() == MonsterStatus.Chase) MoveChase.PlayStrategy();
-        if (Attack != null) Attack.PlayStrategy();
+        Recognize?.PlayStrategy();
+        MoveNormal?.PlayStrategy();
+        MoveChase?.PlayStrategy();
+        Attack?.PlayStrategy();
     }
 }
