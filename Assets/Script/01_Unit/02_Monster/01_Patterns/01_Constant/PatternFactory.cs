@@ -10,6 +10,8 @@ public static class PatternFactory
                 return new MeleeEnemy();
             case PatternName.Monster2:
                 return new Monster2Pattern();
+            case PatternName.Monster3:
+                return new Monster3Pattern();
         }
 
         throw new System.Exception($"{patternName} is not exist");

@@ -93,6 +93,14 @@ public static class MonsterList
             {StatKind.ATK, 1},
         }),
         PatternName.Monster2),
+
+        new MonsterUnit(new MonsterInfo(MonsterName.Monster3,
+        "Prototype Test용 원거리 쓰레기2"),
+        new UnitStat(new Dictionary<StatKind, int>{
+            {StatKind.HP, 2},
+            {StatKind.ATK, 1},
+        }),
+        PatternName.Monster3),
     };
 
     public static MonsterUnit FindMonster(MonsterName name)
