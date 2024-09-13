@@ -9,6 +9,8 @@ public class Pattern
 
     public virtual void Initialize(Monster monster)
     {
+        this.monster = monster;
+
         if (Recognize != null) Recognize.Initialize(monster);
         if (MoveNormal != null) MoveNormal.Initialize(monster);
         if (MoveChase != null) MoveChase.Initialize(monster);

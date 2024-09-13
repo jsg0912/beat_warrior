@@ -4,6 +4,6 @@ public class Monster2Pattern : Pattern
     {
         Recognize = new RecognizeRangedMonster();
         MoveNormal = new MoveNormal();
-        //Attack.Initialize(monster);
+        MoveChase = new MoveChase();
     }
 }
