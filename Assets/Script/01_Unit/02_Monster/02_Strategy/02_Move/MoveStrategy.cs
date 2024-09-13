@@ -19,7 +19,13 @@ public class MoveStrategy : Strategy
         Move();
     }
 
-    protected virtual void Move() { }
+    protected virtual void Move()
+    {
+        if (IsMoveable() == false) return;
+
+        monster.gameObject.transform.position += new Vector3(direction() * moveSpeed * Time.deltaTime, 0, 0);
+        monster.IsWalking(true);
+    }
 
     protected virtual bool IsMoveable() { return true; }
     protected int direction() { return monster.GetDirection(); }
