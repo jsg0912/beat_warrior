@@ -59,5 +59,5 @@ public abstract class Skill
         coolTime = 0;
     }
 
-    protected virtual void CreateAttackPrefab() { return; }
+    protected virtual void CreateEffectPrefab() { return; }
 }
