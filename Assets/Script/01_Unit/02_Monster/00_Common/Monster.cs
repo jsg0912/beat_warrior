@@ -8,6 +8,7 @@ public class Monster : MonoBehaviour
     public MonsterUnit monsterUnit;
     public Pattern pattern;
 
+    protected MonsterStatus status;
     protected Animator _animator;
     protected Direction direction;
 
@@ -48,6 +49,8 @@ public class Monster : MonoBehaviour
         if (status == "Die") _animator.SetTrigger("die");
     }
 
+    public MonsterStatus GetMonsterStatus() { return status; }
+
     public int GetDirection() { return (int)direction; }
 
     public void SetDirection(Direction direction)
@@ -58,7 +61,9 @@ public class Monster : MonoBehaviour
 
     public void ChangeDirection()
     {
-        this.direction = (Direction)(-1 * (int)direction);
+        if (direction == 0) direction = Direction.Left;
+        else this.direction = (Direction)(-1 * (int)direction);
+
         SetDirection(direction);
     }
 

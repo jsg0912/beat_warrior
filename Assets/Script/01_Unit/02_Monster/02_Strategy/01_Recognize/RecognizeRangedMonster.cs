@@ -36,10 +36,5 @@ public class RecognizeRangedMonster : RecognizeStrategy
                 alert = false;
             }
         }
-        RaycastHit2D rayHit = Physics2D.Raycast(CurrentPos() + new Vector3(monster.GetDirection(), 0, 0), Vector3.down, 1, LayerMask.GetMask("Tile"));
-        if (rayHit.collider == null)
-        {
-            monster.ChangeDirection();
-        }
     }
 }
