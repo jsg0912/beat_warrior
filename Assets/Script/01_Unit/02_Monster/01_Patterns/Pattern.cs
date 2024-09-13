@@ -10,14 +10,16 @@ public class Pattern
     public virtual void Initialize(Monster monster)
     {
         Recognize?.Initialize(monster);
-        Move?.Initialize(monster);
+        MoveNormal?.Initialize(monster);
+        MoveChase?.Initialize(monster);
         Attack?.Initialize(monster);
     }
 
     public virtual void PlayPattern()
     {
         Recognize?.PlayStrategy();
-        Move?.PlayStrategy();
+        MoveNormal?.PlayStrategy();
+        MoveChase?.PlayStrategy();
         Attack?.PlayStrategy();
     }
 }
