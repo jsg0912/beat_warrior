@@ -10,7 +10,6 @@ public abstract class RecognizeStrategy : Strategy
     }
 
     protected int direction() { return monster.GetDirection(); }
-    protected Vector3 PlayerPos() { return Player.Instance.transform.position; }
     protected virtual bool isLookingTarget() { return direction() * (PlayerPos().x - CurrentPos().x) > 0; }
 
     protected abstract void CheckTarget();
