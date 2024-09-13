@@ -32,8 +32,16 @@ public class Player : MonoBehaviour
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
 
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(this);
+    }
+
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
+
         Initialize();
     }
 
@@ -57,10 +65,6 @@ public class Player : MonoBehaviour
 
     private void Initialize(Direction direction = Direction.Left)
     {
-        if (Instance != null) Destroy(this.gameObject);
-        Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, PlayerConstant.hpMax},
             {StatKind.ATK, PlayerConstant.atk},
