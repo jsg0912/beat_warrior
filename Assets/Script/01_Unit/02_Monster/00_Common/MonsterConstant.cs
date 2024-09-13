@@ -10,7 +10,6 @@ public class MonsterConstant
 
     public const float moveSpeed = 1.0f;
 
-    public const string PlayerLayer = "Player";
     public const string GroundLayer = "Tile";
     public const float RangedRecognizeRange = 5.0f;
     public const float MeleeRecognizeRange = 5.0f;
