@@ -11,10 +11,10 @@ public class Pattern
     {
         this.monster = monster;
 
-        if (Recognize != null) Recognize.Initialize(monster);
-        if (MoveNormal != null) MoveNormal.Initialize(monster);
-        if (MoveChase != null) MoveChase.Initialize(monster);
-        if (Attack != null) Attack.Initialize(monster);
+        Recognize?.Initialize(monster);
+        MoveNormal?.Initialize(monster);
+        MoveChase?.Initialize(monster);
+        Attack?.Initialize(monster);
     }
 
     public virtual void PlayPattern()
