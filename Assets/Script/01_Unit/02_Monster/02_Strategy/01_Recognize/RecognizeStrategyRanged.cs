@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RecognizeRanged : RecognizeStrategy
+public class RecognizeStrategyRanged : RecognizeStrategy
 {
     public override void Initialize(Monster monster)
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoveNormal : MoveStrategy
+public class MoveStrategyNormal : MoveStrategy
 {
     public override void Initialize(Monster monster)
     {
