@@ -8,6 +8,7 @@ public class PlayerSkillConstant
     public const float attackKnockBackRange = 3.0f;
     public const float skill2DashRange = 2.0f;
     public const float DashEndPointInterval = 1f;
+    public const float DashEndYOffset = 0.1f;
     public const float DashSpeed = 0.03f;
     public const float SkillResetProbability = 0.9f; // TODO: 임시로 테스트를 위해 50%로 함 - 신동환, 20240901
 

@@ -60,14 +60,13 @@ public class Dash : ActiveSkillPlayer
         Vector2 playerTop = playerBottom + new Vector2(0, PlayerConstant.playerHeight);
         Vector2 endPoint = TargetMonster.transform.position;
 
-        int offset = endPoint.x > playerBottom.x ? 1 : -1;
-        endPoint += new Vector2(PlayerSkillConstant.DashEndPointInterval * offset, 0);
+        Vector2 direction = (endPoint - playerBottom).normalized;
+        endPoint += new Vector2(PlayerSkillConstant.DashEndPointInterval * direction.x, PlayerSkillConstant.DashEndYOffset);
 
-        Vector2 dir = endPoint - playerBottom;
         float distance = Vector2.Distance(playerBottom, endPoint);
-        CheckMonsterHitBox(playerBottom, dir, distance);
-        CheckMonsterHitBox(playerMiddle, dir, distance);
-        CheckMonsterHitBox(playerTop, dir, distance);
+        CheckMonsterHitBox(playerBottom, direction, distance);
+        CheckMonsterHitBox(playerMiddle, direction, distance);
+        CheckMonsterHitBox(playerTop, direction, distance);
 
         // Dash시에 Player 머리와 발끝 경로가 보이는 Test용 코드 - 김민지, 20240901
         // Debug.DrawRay(playerBottom, dir, Color.red, distance);
