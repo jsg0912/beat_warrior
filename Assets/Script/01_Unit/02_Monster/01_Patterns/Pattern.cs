@@ -20,8 +20,8 @@ public class Pattern
     public virtual void PlayPattern()
     {
         Recognize?.PlayStrategy();
-        MoveNormal?.PlayStrategy();
-        MoveChase?.PlayStrategy();
+        if (monster.GetStatus() == MonsterStatus.Normal) MoveNormal?.PlayStrategy();
+        if (monster.GetStatus() == MonsterStatus.Chase) MoveChase?.PlayStrategy();
         Attack?.PlayStrategy();
     }
 }
