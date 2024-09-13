@@ -2,7 +2,7 @@ public class Monster2Pattern : Pattern
 {
     public Monster2Pattern()
     {
-        Recognize = new RecognizeRangedMonster();
+        Recognize = new RecognizeRanged();
         MoveNormal = new MoveNormal();
         MoveChase = new MoveChase();
     }

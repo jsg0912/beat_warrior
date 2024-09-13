@@ -1,14 +1,21 @@
 using UnityEngine;
 
-public class RecognizeStrategy : Strategy
+public abstract class RecognizeStrategy : Strategy
 {
-    protected float RecognizeRange;
-    protected LayerMask TargetLayer;
+    protected float recognizeRange;
 
-    public override void Initialize(Monster monster)
+    public override void PlayStrategy()
     {
-        base.Initialize(monster);
+        if (isLookingTarget() == true) CheckTarget();
+    }
 
-        TargetLayer = LayerMask.GetMask(MonsterConstant.PlayerLayer);
+    protected int direction() { return monster.GetDirection(); }
+    protected Vector3 PlayerPos() { return Player.Instance.transform.position; }
+    protected virtual bool isLookingTarget() { return direction() * (PlayerPos().x - CurrentPos().x) > 0; }
+
+    protected abstract void CheckTarget();
+    protected void ReleaseChase()
+    {
+        if (monster.GetStatus() == MonsterStatus.Chase) monster.SetStatus(MonsterStatus.Normal);
     }
 }
