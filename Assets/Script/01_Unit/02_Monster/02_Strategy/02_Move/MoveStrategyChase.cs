@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class MoveStrategyChase : MoveStrategy
 {
+    private const float STOPOFFSET = 1f;
+    private const float GROUNDCHECKRAY = 0.5f;
+
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
@@ -22,7 +25,7 @@ public class MoveStrategyChase : MoveStrategy
     protected void CheckGround()
     {
         Vector3 offset = new Vector3(direction(), 0, 0);
-        RaycastHit2D rayHit = Physics2D.Raycast(CurrentPos() + offset, Vector3.down, 0.5f, GroundLayer);
+        RaycastHit2D rayHit = Physics2D.Raycast(CurrentPos() + offset, Vector3.down, GROUNDCHECKRAY, GroundLayer);
 
         if (rayHit.collider == null) isEndOfGround = true;
         else isEndOfGround = false;
@@ -41,7 +44,7 @@ public class MoveStrategyChase : MoveStrategy
 
     protected override bool IsMoveable()
     {
-        if (isEndOfGround == true || Mathf.Abs(TargetPos().x - CurrentPos().x) < 0.1f)
+        if (isEndOfGround == true || Mathf.Abs(TargetPos().x - CurrentPos().x) < STOPOFFSET)
         {
             monster.IsWalking(false);
             return false;
