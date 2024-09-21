@@ -20,7 +20,7 @@ public class DialogTrigger : MonoBehaviour
     }
     public void StartDialog(DialogName dialogName)
     {
-        string dialogDate = DialogManager.GetDialog(dialogName, dialogIndex);
+        string dialogDate = DialogManager.GetDialog(dialogName, UIManager.Instance.language ,dialogIndex);
 
         if (dialogDate == null)
         {

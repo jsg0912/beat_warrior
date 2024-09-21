@@ -2689,7 +2689,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ca4b5b9e217edff4084a99dfdcad5d96, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -2753,7 +2753,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &519928860
@@ -4531,7 +4531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b052987e1d10f543b249db9df0cfb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialogNumber: 100
+  dialogName: 1
 --- !u!114 &905257800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12847,6 +12847,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 54977390104854700, guid: 3efa8dbc77855e144a79534b860af321, type: 3}
+      propertyPath: language
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 720739624316194238, guid: 3efa8dbc77855e144a79534b860af321, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
