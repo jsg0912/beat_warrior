@@ -6,32 +6,32 @@ using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
-    public int DialogNumber;
+    public DialogName dialogName;
 
-    Dictionary<int, string[]> DialogData;
+    Dictionary<DialogName, string[]> DialogData;
 
 
     private void Awake()
     {
-        DialogData = new Dictionary<int, string[]>();
+        DialogData = new Dictionary<DialogName, string[]>();
         GenerateData();
     }
 
     private void GenerateData()
     {
-        DialogData.Add(100, new string[] { "hello", "How are you" });
-        DialogData.Add(200, new string[] { "hello", "How are you" });
+        DialogData.Add(DialogName.Act1, new string[] { "hello", "How are you" });
+        DialogData.Add(DialogName.Act2, new string[] { "hello", "How are you" });
     }
 
-    public string GetDialog(int DialogNum, int DialogIndex)
+    public string GetDialog(DialogName dialogName, int DialogIndex)
     {
-        if (DialogIndex == DialogData[DialogNum].Length)
+        if (DialogIndex == DialogData[dialogName].Length)
         {
             return null;
         }
         else
         {
-            return DialogData[DialogNum][DialogIndex];
+            return DialogData[dialogName][DialogIndex];
         }
     }
 

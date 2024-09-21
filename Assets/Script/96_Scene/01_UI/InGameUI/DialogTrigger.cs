@@ -12,17 +12,17 @@ public class DialogTrigger : MonoBehaviour
 
     public void OnClickStartDialog()
     {
-        
+
         DialogManager = DialogManager.GetComponent<DialogManager>();
-        StartDialog(DialogManager.DialogNumber);
-        
+        StartDialog(DialogManager.dialogName);
+
         DialogPanel.SetActive(isAction);
     }
-    public void StartDialog(int dialogNum)
+    public void StartDialog(DialogName dialogName)
     {
-        string dialogDate = DialogManager.GetDialog(dialogNum, dialogIndex);
+        string dialogDate = DialogManager.GetDialog(dialogName, dialogIndex);
 
-        if(dialogDate == null)
+        if (dialogDate == null)
         {
             isAction = false;
             dialogIndex = 0;
