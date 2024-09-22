@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 	 
 public class SettingResolution : MonoBehaviour
 {
-	public Dropdown resolutionDropdown;
+	public TMP_Dropdown resolutionDropdown;
 
 	private List<Resolution> resolutions = new List<Resolution>();
 	private int optimalResolutionIndex = 0;
@@ -31,7 +31,6 @@ public class SettingResolution : MonoBehaviour
 		for (int i = 0; i < resolutions.Count; i++)
 		{
 			string option = resolutions[i].width + " x " + resolutions[i].height;
-			// 가장 적합한 해상도에 별표를 표기합니다.
 			if (resolutions[i].width == Screen.currentResolution.width &&
 				resolutions[i].height == Screen.currentResolution.height)
 			{
@@ -45,7 +44,7 @@ public class SettingResolution : MonoBehaviour
 		resolutionDropdown.value = optimalResolutionIndex;
 		resolutionDropdown.RefreshShownValue();
 
-		// 게임이 가장 적합한 해상도로 시작되도록 설정합니다.
+
 		SetResolution(optimalResolutionIndex);
 	}
 
