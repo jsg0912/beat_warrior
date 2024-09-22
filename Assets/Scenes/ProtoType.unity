@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 98734575}
   m_Layer: 0
   m_Name: Thorn
-  m_TagString: Trap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -806,7 +806,7 @@ GameObject:
   - component: {fileID: 144033070}
   m_Layer: 0
   m_Name: Laser
-  m_TagString: Trap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2641,7 +2641,7 @@ GameObject:
   - component: {fileID: 519928858}
   - component: {fileID: 519928860}
   - component: {fileID: 519928859}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4428,9 +4428,9 @@ GameObject:
   - component: {fileID: 905257796}
   - component: {fileID: 905257800}
   - component: {fileID: 905257799}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: DiarogUI
-  m_TagString: UI
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4836,7 +4836,7 @@ GameObject:
   - component: {fileID: 970663241}
   - component: {fileID: 970663243}
   - component: {fileID: 970663242}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7457,7 +7457,7 @@ GameObject:
   - component: {fileID: 1396510053}
   m_Layer: 5
   m_Name: MiniMapUI
-  m_TagString: UI
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7698,7 +7698,7 @@ GameObject:
   - component: {fileID: 1429105161}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8169,7 +8169,7 @@ GameObject:
   - component: {fileID: 1461192218}
   m_Layer: 0
   m_Name: Thorn
-  m_TagString: Trap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8513,7 +8513,7 @@ GameObject:
   - component: {fileID: 1505407763}
   - component: {fileID: 1505407765}
   - component: {fileID: 1505407764}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9014,7 +9014,7 @@ GameObject:
   - component: {fileID: 1542670764}
   m_Layer: 0
   m_Name: Thorn
-  m_TagString: Trap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11191,7 +11191,7 @@ GameObject:
   - component: {fileID: 1938574323}
   m_Layer: 0
   m_Name: Laser
-  m_TagString: Trap
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11374,7 +11374,7 @@ GameObject:
   - component: {fileID: 1948885494}
   - component: {fileID: 1948885493}
   - component: {fileID: 1948885492}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12887,10 +12887,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1097282682290407658, guid: 3efa8dbc77855e144a79534b860af321, type: 3}
-      propertyPath: m_TagString
-      value: UI
-      objectReference: {fileID: 0}
     - target: {fileID: 1557709407150651175, guid: 3efa8dbc77855e144a79534b860af321, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -13202,10 +13198,6 @@ PrefabInstance:
     - target: {fileID: 6377681098098614165, guid: 3efa8dbc77855e144a79534b860af321, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7052400289740697377, guid: 3efa8dbc77855e144a79534b860af321, type: 3}
-      propertyPath: m_TagString
-      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 7237923658073834918, guid: 3efa8dbc77855e144a79534b860af321, type: 3}
       propertyPath: m_AnchorMax.y
