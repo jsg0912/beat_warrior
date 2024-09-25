@@ -86,7 +86,7 @@ public static class MonsterList
         }),
         PatternName.RangedMonster),
 
-        new MonsterUnit(new MonsterInfo(MonsterName.Monster2,
+        new MonsterUnit(new MonsterInfo(MonsterName.Ibkkugi,
         "Prototype Test용 원거리 쓰레기2"),
         new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
@@ -94,7 +94,7 @@ public static class MonsterList
         }),
         PatternName.Monster2),
 
-        new MonsterUnit(new MonsterInfo(MonsterName.Monster3,
+        new MonsterUnit(new MonsterInfo(MonsterName.Koppulso,
         "Prototype Test용 원거리 쓰레기2"),
         new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
