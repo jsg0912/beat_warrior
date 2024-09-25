@@ -11,6 +11,8 @@ public abstract class AttackStrategy : Strategy
     protected float attackDelay;
     protected float animationDelay;
 
+    protected bool isAttacking = false;
+
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
@@ -25,26 +27,29 @@ public abstract class AttackStrategy : Strategy
 
     public override void PlayStrategy()
     {
+        if (monster.GetStatus() != MonsterStatus.Chase) return;
+        if (isAttacking == true) return;
+
         CheckCoolTime();
         TrySkill();
     }
 
     protected void CheckCoolTime()
     {
-        if (monster.GetStatus() != MonsterStatus.Chase) return;
-
         if (attackCoolTime >= 0) attackCoolTime -= Time.deltaTime;
     }
 
     protected void TrySkill()
     {
-        if (monster.GetStatus() != MonsterStatus.Chase || attackCoolTime >= 0) return;
+        if (attackCoolTime >= 0) return;
 
         monoBehaviour.StartCoroutine(UseSkill());
     }
 
     protected virtual IEnumerator UseSkill()
     {
+        isAttacking = true;
+
         monster.SetIsMoveable(false);
         yield return new WaitForSeconds(attackDelay);
 
@@ -52,6 +57,8 @@ public abstract class AttackStrategy : Strategy
         yield return new WaitForSeconds(animationDelay);
 
         monster.SetIsMoveable(true);
+
+        isAttacking = false;
         attackCoolTime = attackCoolTimeMax;
     }
 
