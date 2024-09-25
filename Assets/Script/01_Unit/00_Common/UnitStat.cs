@@ -95,9 +95,4 @@ public class UnitStat
 
         return currentStats[statKind];
     }
-
-    public UnitStat Copy()
-    {
-        return new UnitStat(stats);
-    }
 }
