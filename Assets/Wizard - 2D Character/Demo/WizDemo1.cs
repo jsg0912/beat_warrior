@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using ClearSky;
+﻿using UnityEngine;
 
 namespace ClearSky
 {

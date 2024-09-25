@@ -3,15 +3,19 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour
 {
+    // Hierarchy 상에서 monster Object의 이름을 정해주면 자동으로 같은 이름의 능력치가 할당 됨 - Tony, 2024.09.11
     public MonsterName monsterName;
     public MonsterUnit monsterUnit;
+    public Pattern pattern;
 
+    [SerializeField] protected MonsterStatus status;
     protected Animator _animator;
+    protected Direction direction;
+    protected bool isMoveable = true;
 
     [SerializeField] private Transform MonsterSprite;
     [SerializeField] private MonsterHPUI UIHp;
     [SerializeField] private GameObject Target;
-
 
     private GameObject SoulPrefab;
 
@@ -19,26 +23,63 @@ public class Monster : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         monsterUnit = MonsterList.FindMonster(monsterName);
-        monsterUnit.pattern.Initialize(gameObject);
+        pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
+        pattern.Initialize(this);
 
-        SoulPrefab = Resources.Load("Prefab/Soul") as GameObject;
+        SoulPrefab = Resources.Load(PrefabRouter.SoulPrefab) as GameObject;
 
         UIHp.SetMaxHP(monsterUnit.GetCurrentHP());
-
     }
 
     void Update()
     {
         if (monsterUnit.GetIsAlive() == true)
         {
-            monsterUnit.pattern.PlayPattern();
+            pattern?.PlayPattern();
         }
-
     }
+
+    // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
+    public void PlayAnimation(MonsterStatus status)
+    {
+        switch (status)
+        {
+            case MonsterStatus.Attack:
+                _animator.SetTrigger(MonsterConstant.attackAnimTrigger);
+                StartCoroutine(Attacking());
+                break;
+            case MonsterStatus.Hurt:
+                _animator.SetTrigger(MonsterConstant.hurtAnimTrigger);
+                break;
+            case MonsterStatus.Dead:
+                _animator.SetTrigger(MonsterConstant.dieAnimTrigger);
+                break;
+        }
+    }
+    protected IEnumerator Attacking()
+    {
+        SetIsMoveable(false);
+        yield return new WaitForSeconds(0.5f);
+        SetIsMoveable(true);
+    }
+
+    public void IsWalking(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
+    public MonsterStatus GetStatus() { return status; }
+    public void SetStatus(MonsterStatus status) { this.status = status; }
+    public int GetDirection() { return (int)direction; }
+    public bool GetIsMoveable() { return isMoveable; }
+    public void SetIsMoveable(bool isMoveable) { this.isMoveable = isMoveable; }
 
     public void SetDirection(Direction direction)
     {
+        this.direction = direction;
         MonsterSprite.localScale = new Vector3(-(int)direction, 1, 1);
+    }
+
+    public void ChangeDirection()
+    {
+        this.direction = (Direction)(-1 * (int)direction);
+        SetDirection(direction);
     }
 
     public virtual void GetDamaged(int dmg)
@@ -49,7 +90,7 @@ public class Monster : MonoBehaviour
 
         if (Player.Instance.hitMonsterFuncList != null) Player.Instance.hitMonsterFuncList(monsterUnit);
 
-        UIHp.SetHP(monsterUnit.GetCurrentHP());
+        UIHp.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
         if (monsterUnit.GetIsAlive() == false)
         {
@@ -86,6 +127,6 @@ public class Monster : MonoBehaviour
             yield return null;
         }
 
-        Target.SetActive(false);
+        if (Target != null) Target.SetActive(false);
     }
 }

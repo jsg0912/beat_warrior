@@ -8,6 +8,7 @@ public class PlayerSkillConstant
     public const float attackKnockBackRange = 3.0f;
     public const float skill2DashRange = 2.0f;
     public const float DashEndPointInterval = 1f;
+    public const float DashEndYOffset = 0.1f;
     public const float DashSpeed = 0.03f;
     public const float SkillResetProbability = 0.9f; // TODO: 임시로 테스트를 위해 50%로 함 - 신동환, 20240901
 
@@ -33,8 +34,4 @@ public class PlayerSkillConstant
     public const string dashAnimTrigger = "dash";
     public const string skill1AnimTrigger = "skill1";
     public const string skill2AnimTrigger = "skill2";
-
-    public const string attackPrefab = "Prefab/AttackCollider";
-    public const string skill1Prefab = "Prefab/Skill1Collider";
-    public const string skill2Prefab = "Prefab/Skill2Collider";
 }

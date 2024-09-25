@@ -1,11 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    
+
     private bool damaged;
 
     private void Start()
@@ -23,7 +21,7 @@ public class Trap : MonoBehaviour
             StartCoroutine(InvincibleTime(1));
         }
     }
-    
+
     IEnumerator InvincibleTime(int time)
     {
         yield return new WaitForSeconds(time);

@@ -7,14 +7,13 @@ public class HpUI : MonoBehaviour
     public static HpUI Instance;
 
     [SerializeField] private GameObject HP;
-    private GameObject HPPrefab;
+    [SerializeField] private GameObject HPPrefab;
     private List<Image> HPList;
 
     private void Awake()
     {
         Instance = this;
 
-        HPPrefab = Resources.Load("Prefab/PlayerHP") as GameObject;
         HPList = new();
     }
 

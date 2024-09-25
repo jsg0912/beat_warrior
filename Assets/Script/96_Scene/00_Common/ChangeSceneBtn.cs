@@ -7,13 +7,13 @@ public class ChangeSceneBtn : Button
         switch (this.gameObject.name)
         {
             case "PlayBtn":
-                SceneController.instance.ChangeScene(SceneName.Player);
+                SceneController.Instance.ChangeScene(SceneName.Player);
                 break;
             case "SettingBtn":
-                SceneController.instance.ChangeScene(SceneName.Setting);
+                SceneController.Instance.ChangeScene(SceneName.Setting);
                 break;
             case "TittleBtn":
-                SceneController.instance.ChangeScene(SceneName.Tittle);
+                SceneController.Instance.ChangeScene(SceneName.Tittle);
                 break;
             case "ExitBtn":
                 Application.Quit();

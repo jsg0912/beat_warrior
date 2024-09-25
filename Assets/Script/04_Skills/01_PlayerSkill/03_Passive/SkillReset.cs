@@ -27,20 +27,15 @@ public class SkillReset : PassiveSkill
 
     public void TryReset(Skill skill)
     {
-        DebugConsole.Log("TryReset");
         if (ResetTargetSkills.Contains(skill.skillName) == false)
         {
             return;
         }
-        DebugConsole.Log("Skill in Target");
 
         float probability = Random.Range(0.0f, 1.0f);
-
-        DebugConsole.Log(probability);
         if (probability < PlayerSkillConstant.SkillResetProbability)
         {
             skill.ResetCoolTime();
-            DebugConsole.Log("Reset Success");
         }
     }
 }

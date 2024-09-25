@@ -32,8 +32,16 @@ public class Player : MonoBehaviour
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
 
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(this);
+    }
+
     void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
+
         Initialize();
     }
 
@@ -51,40 +59,12 @@ public class Player : MonoBehaviour
             Skill();
         }
 
+        // TODO: 임시 부활 코드
         if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
-
-        // TODO: 임시 코드(추가특성 장착 및 해제)
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            AddOrRemoveTrait(SkillName.AppendMaxHP);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            AddOrRemoveTrait(SkillName.DoubleJump);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            AddOrRemoveTrait(SkillName.Execution);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            AddOrRemoveTrait(SkillName.KillRecoveryHP);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            AddOrRemoveTrait(SkillName.AppendAttack);
-        }
     }
 
     private void Initialize(Direction direction = Direction.Left)
     {
-        Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, PlayerConstant.hpMax},
             {StatKind.ATK, PlayerConstant.atk},
@@ -387,7 +367,6 @@ public class Player : MonoBehaviour
     public void EquipTrait(SkillName name)
     {
         Skill trait = null;
-        DebugConsole.Log(name.ToString());
         switch (name)
         {
             case SkillName.AppendMaxHP:
@@ -417,8 +396,6 @@ public class Player : MonoBehaviour
 
         trait.GetSkill();
         traitList.Add(trait);
-
-        DebugConsole.Log(traitList);
     }
 
     public void RemoveTraitByIndex(int index)
