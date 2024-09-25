@@ -34,8 +34,8 @@ public class UnitStat
     {
         foreach (StatKind statKind in Enum.GetValues(typeof(StatKind)))
         {
-            ResetBuffPlus(statKind);
-            ResetBuffMultiply(statKind);
+            buffPlus.Add(statKind, 0);
+            buffMultiply.Add(statKind, 0);
         }
     }
 
