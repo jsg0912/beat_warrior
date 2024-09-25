@@ -27,7 +27,7 @@ public class MoveStrategy : Strategy
         monster.IsWalking(true);
     }
 
-    protected virtual bool IsMoveable() { return true; }
+    protected virtual bool IsMoveable() { return monster.GetIsMoveable(); }
     protected void SetDirection(Direction direction) { monster.SetDirection(direction); }
     protected void ChangeDirection() { monster.ChangeDirection(); }
 }

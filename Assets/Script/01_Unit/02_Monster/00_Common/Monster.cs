@@ -11,11 +11,11 @@ public class Monster : MonoBehaviour
     [SerializeField] protected MonsterStatus status;
     protected Animator _animator;
     protected Direction direction;
+    protected bool isMoveable = true;
 
     [SerializeField] private Transform MonsterSprite;
     [SerializeField] private MonsterHPUI UIHp;
     [SerializeField] private GameObject Target;
-
 
     private GameObject SoulPrefab;
 
@@ -60,6 +60,8 @@ public class Monster : MonoBehaviour
     public MonsterStatus GetStatus() { return status; }
     public void SetStatus(MonsterStatus status) { this.status = status; }
     public int GetDirection() { return (int)direction; }
+    public bool GetIsMoveable() { return isMoveable; }
+    public void SetIsMoveable(bool isMoveable) { this.isMoveable = isMoveable; }
 
     public void SetDirection(Direction direction)
     {

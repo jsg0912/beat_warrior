@@ -49,6 +49,7 @@ public class MoveStrategyChase : MoveStrategy
             monster.IsWalking(false);
             return false;
         }
-        return true;
+
+        return monster.GetIsMoveable();
     }
 }
