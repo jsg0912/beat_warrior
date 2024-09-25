@@ -9,9 +9,7 @@ public abstract class RecognizeStrategy : Strategy
         if (isLookingTarget() == true) CheckTarget();
     }
 
-    protected int direction() { return monster.GetDirection(); }
     protected virtual bool isLookingTarget() { return direction() * (PlayerPos().x - CurrentPos().x) > 0; }
-
     protected abstract void CheckTarget();
     protected void ReleaseChase()
     {

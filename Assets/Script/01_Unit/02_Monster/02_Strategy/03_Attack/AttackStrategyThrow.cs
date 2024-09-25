@@ -8,7 +8,7 @@ public class AttackStrategyThrow : AttackStrategy
     {
         base.Initialize(monster);
 
-        obj = Resources.Load(MonsterConstant.AttackPrefab[monster.monsterName]) as GameObject;
+        obj = Resources.Load(PrefabRouter.AttackPrefab[monster.monsterName]) as GameObject;
     }
 
     protected override void UseSkill()

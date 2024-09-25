@@ -41,10 +41,4 @@ public class MonsterConstant
         { MonsterName.Giljjugi, 7.0f },
         { MonsterName.Ismomi, 1.2f }
     };
-
-    public static Dictionary<MonsterName, string> AttackPrefab = new() {
-        { MonsterName.Ibkkugi, "Prefabs/dd" },
-        { MonsterName.Jiljili, "Prefabs/dd" },
-        { MonsterName.Ismomi, "Prefabs/dd" },
-    };
 }
