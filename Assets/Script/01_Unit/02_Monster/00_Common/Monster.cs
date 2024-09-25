@@ -46,7 +46,6 @@ public class Monster : MonoBehaviour
         {
             case MonsterStatus.Attack:
                 _animator.SetTrigger(MonsterConstant.attackAnimTrigger);
-                StartCoroutine(Attacking());
                 break;
             case MonsterStatus.Hurt:
                 _animator.SetTrigger(MonsterConstant.hurtAnimTrigger);
@@ -55,12 +54,6 @@ public class Monster : MonoBehaviour
                 _animator.SetTrigger(MonsterConstant.dieAnimTrigger);
                 break;
         }
-    }
-    protected IEnumerator Attacking()
-    {
-        SetIsMoveable(false);
-        yield return new WaitForSeconds(0.5f);
-        SetIsMoveable(true);
     }
 
     public void IsWalking(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }

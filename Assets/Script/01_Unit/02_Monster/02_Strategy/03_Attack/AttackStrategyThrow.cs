@@ -12,11 +12,10 @@ public class AttackStrategyThrow : AttackStrategy
         obj = Resources.Load(PrefabRouter.AttackPrefab[monster.monsterName]) as GameObject;
     }
 
-    protected override void UseSkill()
+    protected override void SkillMethod()
     {
         Vector3 offset = new Vector3(0, 0.5f, 0);
         GameObject throwObj = GameObject.Instantiate(obj, monster.transform.position + offset, quaternion.identity);
         throwObj.GetComponent<MonsterAttackCollider>().Initiate(monster);
-        attackCoolTime = attackCoolTimeMax;
     }
 }

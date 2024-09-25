@@ -41,4 +41,22 @@ public class MonsterConstant
         { MonsterName.Giljjugi, 7.0f },
         { MonsterName.Ismomi, 1.2f }
     };
+
+    public static Dictionary<MonsterName, float> AttackDelay = new() {
+        { MonsterName.Ippali, 0.5f },
+        { MonsterName.Ibkkugi, 0.5f },
+        { MonsterName.Koppulso, 0.5f },
+        { MonsterName.Jiljili, 0.5f },
+        { MonsterName.Giljjugi, 0.5f },
+        { MonsterName.Ismomi, 0.5f }
+    };
+
+    public static Dictionary<MonsterName, float> AnimationDelay = new() {
+        { MonsterName.Ippali, 0.5f },
+        { MonsterName.Ibkkugi, 0.5f },
+        { MonsterName.Koppulso, 0.5f },
+        { MonsterName.Jiljili, 0.5f },
+        { MonsterName.Giljjugi, 0.5f },
+        { MonsterName.Ismomi, 0.5f }
+    };
 }

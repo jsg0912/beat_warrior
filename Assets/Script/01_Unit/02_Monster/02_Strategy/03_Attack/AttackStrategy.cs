@@ -1,16 +1,26 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class AttackStrategy : Strategy
 {
+    protected MonoBehaviour monoBehaviour;
+
     protected float attackCoolTimeMax;
     protected float attackCoolTime;
+
+    protected float attackDelay;
+    protected float animationDelay;
 
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
+        monoBehaviour = monster.GetComponent<MonoBehaviour>();
 
         attackCoolTimeMax = MonsterConstant.AttackSpeed[monster.monsterName];
         attackCoolTime = attackCoolTimeMax;
+
+        attackDelay = MonsterConstant.AttackDelay[monster.monsterName];
+        animationDelay = MonsterConstant.AnimationDelay[monster.monsterName];
     }
 
     public override void PlayStrategy()
@@ -30,10 +40,22 @@ public abstract class AttackStrategy : Strategy
     {
         if (monster.GetStatus() != MonsterStatus.Chase || attackCoolTime >= 0) return;
 
-        UseSkill();
+        monoBehaviour.StartCoroutine(UseSkill());
     }
 
-    protected abstract void UseSkill();
+    protected virtual IEnumerator UseSkill()
+    {
+        monster.SetIsMoveable(false);
+        yield return new WaitForSeconds(attackDelay);
+
+        SkillMethod();
+        yield return new WaitForSeconds(animationDelay);
+
+        monster.SetIsMoveable(true);
+        attackCoolTime = attackCoolTimeMax;
+    }
+
+    protected abstract void SkillMethod();
 
     protected void CheckGround()
     {
