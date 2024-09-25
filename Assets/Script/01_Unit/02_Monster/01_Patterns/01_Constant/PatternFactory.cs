@@ -14,6 +14,8 @@ public static class PatternFactory
                 return new Monster3Pattern();
             case PatternName.Ibkkugi:
                 return new IbkkugiPattern();
+            case PatternName.Jiljili:
+                return new JiljiliPattern();
         }
 
         throw new System.Exception($"{patternName} is not exist");
