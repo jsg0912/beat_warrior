@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
     private void Initialize(Direction direction = Direction.Left)
     {
         Instance = this;
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
 
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, PlayerConstant.hpMax},
