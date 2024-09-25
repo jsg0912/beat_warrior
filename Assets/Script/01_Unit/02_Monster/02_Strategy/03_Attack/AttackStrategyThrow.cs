@@ -6,6 +6,6 @@ public class AttackStrategyThrow : AttackStrategy
 
     protected override void UseSkill()
     {
-        Instantiate(obj);
+        GameObject.Instantiate(obj);
     }
 }
