@@ -10,8 +10,6 @@ public class AttackStrategyThrow : AttackStrategy
         base.Initialize(monster);
 
         obj = Resources.Load(PrefabRouter.AttackPrefab[monster.monsterName]) as GameObject;
-
-        Debug.Log(obj.name);
     }
 
     protected override void SkillMethod()
