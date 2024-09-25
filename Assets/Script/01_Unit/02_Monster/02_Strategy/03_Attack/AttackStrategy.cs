@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AttackStrategy : Strategy
+public abstract class AttackStrategy : Strategy
 {
     protected float attackCoolTimeMax;
     protected float attackCoolTime;
@@ -13,10 +13,27 @@ public class AttackStrategy : Strategy
         attackCoolTime = attackCoolTimeMax;
     }
 
-    private void CheckCoolTime()
+    public override void PlayStrategy()
     {
+        CheckCoolTime();
+        TrySkill();
+    }
+
+    protected void CheckCoolTime()
+    {
+        if (monster.GetStatus() != MonsterStatus.Chase) return;
+
         if (attackCoolTime >= 0) attackCoolTime -= Time.deltaTime;
     }
+
+    protected void TrySkill()
+    {
+        if (monster.GetStatus() != MonsterStatus.Chase || attackCoolTime >= 0) return;
+
+        UseSkill();
+    }
+
+    protected abstract void UseSkill();
 
     protected void CheckGround()
     {
