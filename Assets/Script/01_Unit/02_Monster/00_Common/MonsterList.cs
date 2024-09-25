@@ -92,7 +92,7 @@ public static class MonsterList
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
         },
-        PatternName.Monster2),
+        PatternName.Ibkkugi),
 
         new MonsterJSON(MonsterName.Koppulso,
         "Prototype Test용 원거리 쓰레기2",

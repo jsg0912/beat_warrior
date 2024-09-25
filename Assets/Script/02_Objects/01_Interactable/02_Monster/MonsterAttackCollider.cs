@@ -13,6 +13,6 @@ public abstract class MonsterAttackCollider : MonoBehaviour
     public abstract void OnTriggerEnter2D(Collider2D other);
     protected int PlayerDirection()
     {
-        return Player.Instance.transform.position.y > monster.transform.position.y ? 1 : -1;
+        return Player.Instance.transform.position.x > monster.transform.position.x ? 1 : -1;
     }
 }

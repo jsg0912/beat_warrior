@@ -7,7 +7,7 @@ public class AttackColliderIbkkugi : MonsterAttackCollider
     public override void Initiate(Monster monster)
     {
         base.Initiate(monster);
-        GetComponent<Rigidbody2D>().AddForce(new Vector3(PlayerDirection(), 2, 0));
+        GetComponent<Rigidbody2D>().AddForce(new Vector3(PlayerDirection() * 5, 5, 0), ForceMode2D.Impulse);
     }
 
     public override void OnTriggerEnter2D(Collider2D other)
