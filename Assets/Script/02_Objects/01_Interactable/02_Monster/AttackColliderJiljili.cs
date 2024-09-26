@@ -7,8 +7,9 @@ public class AttackColliderJiljili : MonsterAttackCollider
     public override void Initiate(Monster monster)
     {
         base.Initiate(monster);
-        GetComponent<Rigidbody2D>().velocity = new Vector3(PlayerDirection() * 5, 0, 0);
-        //Destroy(this.gameObject, 5.0f);
+        GetComponent<Rigidbody2D>().velocity
+         = new Vector3(PlayerDirection(), 0, 0) * MonsterConstant.AttackThrowSpeed[monster.monsterName];
+        Destroy(this.gameObject, 5.0f);
     }
 
     public override void OnTriggerEnter2D(Collider2D other)
