@@ -82,8 +82,7 @@ public class Player : MonoBehaviour
 
     private void Initialize(Direction direction = Direction.Left)
     {
-        Instance = this;
-        //DontDestroyOnLoad(this.gameObject);
+        CheckInstance();
 
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, PlayerConstant.hpMax},
@@ -494,5 +493,12 @@ public class Player : MonoBehaviour
         if (status == PlayerStatus.Jump || status == PlayerStatus.Fall) SetPlayerStatus(PlayerStatus.Idle);
 
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
+    }
+
+    private void CheckInstance()
+    {
+        if (Instance != null && Instance != this) Destroy(Instance.gameObject);
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);
     }
 }

@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,11 +8,10 @@ public class UIManager : MonoBehaviour
     public Language language = Language.kr;
 
 
-    private void Awake()
+    private void Start()
     {
+        //CheckInstance();
         Instance = this;
-        //DontDestroyOnLoad(this.gameObject);
-
     }
 
     private void Update()
@@ -29,6 +27,11 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-
+    private void CheckInstance()
+    {
+        if (Instance != null && Instance != this) Destroy(Instance.gameObject);
+        Instance = this;
+        DontDestroyOnLoad(this.gameObject);
+    }
 }
 
