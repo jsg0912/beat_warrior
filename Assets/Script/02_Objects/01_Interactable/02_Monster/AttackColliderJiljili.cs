@@ -8,7 +8,7 @@ public class AttackColliderJiljili : MonsterAttackCollider
     {
         base.Initiate(monster);
         GetComponent<Rigidbody2D>().velocity
-         = new Vector3(PlayerDirection(), 0, 0) * MonsterConstant.AttackThrowSpeed[monster.monsterName];
+         = new Vector3(GetPlayerDirection(), 0, 0) * MonsterConstant.AttackThrowSpeed[monster.monsterName];
         Destroy(this.gameObject, 5.0f);
     }
 
