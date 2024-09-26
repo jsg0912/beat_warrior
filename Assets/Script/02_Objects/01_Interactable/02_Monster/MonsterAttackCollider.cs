@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class MonsterAttackCollider : MonoBehaviour
@@ -11,7 +8,7 @@ public abstract class MonsterAttackCollider : MonoBehaviour
         this.monster = monster;
     }
     public abstract void OnTriggerEnter2D(Collider2D other);
-    protected int PlayerDirection()
+    protected int GetPlayerDirection()
     {
         return Player.Instance.transform.position.x > monster.transform.position.x ? 1 : -1;
     }
