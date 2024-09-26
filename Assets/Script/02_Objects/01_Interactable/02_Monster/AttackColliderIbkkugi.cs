@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackColliderIbkkugi : MonsterAttackCollider
@@ -7,7 +5,13 @@ public class AttackColliderIbkkugi : MonsterAttackCollider
     public override void Initiate(Monster monster)
     {
         base.Initiate(monster);
-        GetComponent<Rigidbody2D>().AddForce(new Vector3(PlayerDirection() * 5, 5, 0), ForceMode2D.Impulse);
+        float gravity = Physics2D.gravity.y;
+        // 포물선 운동 시간 공식
+        float time = Mathf.Sqrt(-8 * MonsterConstant.IbkkugiMaxHeight / gravity);
+        float distance = Player.Instance.transform.position.x - monster.transform.position.x - MonsterConstant.ThrowObjectYOffset * GetPlayerDirection();
+        Vector3 velocity = new Vector3(distance / time, -gravity * time / 2, 0);
+        DebugConsole.Log(new string[6]{"Time: ", time.ToString(), ", distance: ", distance.ToString(), "velocity.x: ", velocity.x.ToString()});
+        GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
     public override void OnTriggerEnter2D(Collider2D other)
