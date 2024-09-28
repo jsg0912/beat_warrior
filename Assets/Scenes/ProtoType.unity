@@ -573,7 +573,7 @@ GameObject:
   - component: {fileID: 230348497}
   m_Layer: 6
   m_Name: Base (9)
-  m_TagString: Tile
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -795,7 +795,7 @@ GameObject:
   - component: {fileID: 436839386}
   m_Layer: 6
   m_Name: Base (5)
-  m_TagString: Tile
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1126,7 +1126,7 @@ GameObject:
   - component: {fileID: 525597714}
   m_Layer: 6
   m_Name: Base (3)
-  m_TagString: Tile
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2661,7 +2661,7 @@ GameObject:
   - component: {fileID: 1082526358}
   m_Layer: 6
   m_Name: Base (4)
-  m_TagString: Tile
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2948,11 +2948,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 12.742296}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 133882429}
-  - {fileID: 268417829}
-  - {fileID: 515995678}
-  m_Father: {fileID: 624889647}
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -3000,11 +2997,11 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1115632049}
-  m_Template: {fileID: 515995678}
-  m_CaptionText: {fileID: 133882430}
+  m_Template: {fileID: 0}
+  m_CaptionText: {fileID: 0}
   m_CaptionImage: {fileID: 0}
   m_Placeholder: {fileID: 0}
-  m_ItemText: {fileID: 1298780975}
+  m_ItemText: {fileID: 0}
   m_ItemImage: {fileID: 0}
   m_Value: 0
   m_Options:
@@ -3018,7 +3015,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 624889649}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SettingResolution, Assembly-CSharp
         m_MethodName: SetResolution
         m_Mode: 0
@@ -3097,10 +3094,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -2.7483459}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 168517425}
-  - {fileID: 624889647}
-  m_Father: {fileID: 1664540663}
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3147,7 +3142,7 @@ GameObject:
   - component: {fileID: 1160340296}
   m_Layer: 6
   m_Name: Base (10)
-  m_TagString: Tile
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3607,7 +3602,7 @@ GameObject:
   - component: {fileID: 1385640772}
   m_Layer: 6
   m_Name: Base (1)
-  m_TagString: Tile
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3923,7 +3918,7 @@ GameObject:
   - component: {fileID: 1447075425}
   m_Layer: 6
   m_Name: Base (7)
-  m_TagString: Tile
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4958,7 +4953,7 @@ GameObject:
   - component: {fileID: 1671889123}
   m_Layer: 6
   m_Name: Base (8)
-  m_TagString: Tile
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5352,7 +5347,7 @@ GameObject:
   - component: {fileID: 1743655067}
   m_Layer: 6
   m_Name: Base (6)
-  m_TagString: Tile
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6345,7 +6340,7 @@ GameObject:
   - component: {fileID: 2064712460}
   m_Layer: 6
   m_Name: Base (2)
-  m_TagString: Tile
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7048,7 +7043,7 @@ GameObject:
   - component: {fileID: 2138257910}
   m_Layer: 6
   m_Name: Base
-  m_TagString: Tile
+  m_TagString: Base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7333,7 +7328,8 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5938745959388550051, guid: 466598f652549c74a85fbeb8311f46eb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -7347,3 +7343,6 @@ SceneRoots:
   - {fileID: 1223527360}
   - {fileID: 1380462026}
   - {fileID: 711696433}
+  - {fileID: 7687717452220939336}
+  - {fileID: 1115632047}
+  - {fileID: 1154363090}
