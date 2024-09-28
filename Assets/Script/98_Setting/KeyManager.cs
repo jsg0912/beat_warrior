@@ -32,12 +32,16 @@ public class KeyManager : MonoBehaviour
     private void Awake()
     {
         for (int i = 0; i < defaultKeys.Length; i++)
-            KeySetting.keys.Add((Action)i, defaultKeys[i]);
+        {
+            if (KeySetting.keys.ContainsKey((Action)i) ==  false)
+                KeySetting.keys.Add((Action)i, defaultKeys[i]);
+        }
 
         KeySettingButtonPrefab = Resources.Load("Prefab/KeySettingButton") as GameObject;
 
         CreateKeySettingButtons();
     }
+
 
     private void CreateKeySettingButtons()
     {
