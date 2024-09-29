@@ -10,7 +10,6 @@ public class AttackColliderIbkkugi : MonsterAttackCollider
         float time = Mathf.Sqrt(-8 * MonsterConstant.IbkkugiMaxHeight / gravity);
         float distance = Player.Instance.transform.position.x - monster.transform.position.x - MonsterConstant.ThrowObjectYOffset * GetPlayerDirection();
         Vector3 velocity = new Vector3(distance / time, -gravity * time / 2, 0);
-        DebugConsole.Log(new string[6]{"Time: ", time.ToString(), ", distance: ", distance.ToString(), "velocity.x: ", velocity.x.ToString()});
         GetComponent<Rigidbody2D>().velocity = velocity;
     }
 
