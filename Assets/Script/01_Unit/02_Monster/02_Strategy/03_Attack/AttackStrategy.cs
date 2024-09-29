@@ -27,7 +27,6 @@ public abstract class AttackStrategy : Strategy
 
     public override void PlayStrategy()
     {
-        if (monster.GetStatus() != MonsterStatus.Chase) return;
         if (isAttacking == true) return;
 
         CheckCoolTime();
@@ -63,11 +62,4 @@ public abstract class AttackStrategy : Strategy
     }
 
     protected abstract void SkillMethod();
-
-    protected void CheckGround()
-    {
-        Vector3 offset = new Vector3(0, 1.0f, 0);
-        RaycastHit2D rayHit = Physics2D.Raycast(CurrentPos() + offset, Vector3.right * direction(), 1.5f, TargetLayer);
-
-    }
 }

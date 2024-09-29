@@ -9,7 +9,7 @@ public class MoveStrategyFly : MoveStrategy
     {
         base.Initialize(monster);
 
-        OriginPos = CurrentPos();
+        OriginPos = GetMonsterPos();
         moveRange = 3.0f;
         moveSpeed = MonsterConstant.MoveSpeed[monster.monsterName];
 
@@ -26,6 +26,6 @@ public class MoveStrategyFly : MoveStrategy
 
     protected void CheckRange()
     {
-        if (Vector3.Distance(OriginPos, CurrentPos()) > moveRange) ChangeDirection();
+        if (Vector3.Distance(OriginPos, GetMonsterPos()) > moveRange) ChangeDirection();
     }
 }

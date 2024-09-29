@@ -13,7 +13,7 @@ public abstract class Strategy
 
     public virtual void PlayStrategy() { }
 
-    protected Vector3 PlayerPos() { return Player.Instance.transform.position; }
-    protected Vector3 CurrentPos() { return monster.gameObject.transform.position; }
-    protected int direction() { return monster.GetDirection(); }
+    protected Vector3 GetPlayerPos() { return Player.Instance.transform.position; }
+    protected Vector3 GetMonsterPos() { return monster.gameObject.transform.position; }
+    protected int GetDirection() { return monster.GetDirection(); }
 }
