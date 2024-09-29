@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         TraitPriceList.CheckTraitPriceListValidation();
+        Player.CreatePlayer();
         DontDestroyOnLoad(this);
     }
 

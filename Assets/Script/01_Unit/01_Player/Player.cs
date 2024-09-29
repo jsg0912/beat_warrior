@@ -17,9 +17,7 @@ public class Player : MonoBehaviour
                 _instance = FindObjectOfType<Player>();
                 if (_instance == null)
                 {
-                    GameObject player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
-                    player.GetComponent<Player>().Initialize();
-                    DontDestroyOnLoad(player);
+                    CreatePlayer();
                 }
             }
             return _instance;
@@ -70,6 +68,13 @@ public class Player : MonoBehaviour
 
         // TODO: 임시 부활 코드
         if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
+    }
+
+    public static void CreatePlayer()
+    {
+        GameObject player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
+        player.GetComponent<Player>().Initialize();
+        DontDestroyOnLoad(player);
     }
 
     private void Initialize(Direction direction = Direction.Left)
