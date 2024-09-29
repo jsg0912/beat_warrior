@@ -24,11 +24,11 @@ public class HpUI : MonoBehaviour
 
     public void CreateAndUpdateHPUI(int hp)
     {
-        SetHPUI(hp);
+        CreateHPUI(hp);
         UpdateHPUI();
     }
 
-    public void SetHPUI(int hp)
+    public void CreateHPUI(int hp)
     {
         HPList.Clear();
         foreach (Transform child in HP.GetComponentInChildren<Transform>())
