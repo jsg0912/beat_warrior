@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class MonsterAttackCollider : MonoBehaviour
+public abstract class MonsterAttackCollider : PhysicalObject
 {
     protected Monster monster;
     public virtual void Initiate(Monster monster)
