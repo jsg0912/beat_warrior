@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -61,7 +59,7 @@ namespace MyPooler
         {
             if (!poolDictionary.ContainsKey(tag))
             {
-                if(isDebug)
+                if (isDebug)
                     Debug.Log("Pool tag not found!");
                 return null;
             }
@@ -73,20 +71,10 @@ namespace MyPooler
             }
             else
             {
-                Pool currentPool = null;
-                float extensionLimit = 0f;
-                bool shouldExpandPool = false;
-                foreach (Pool p in pools)
-                {
-                    if (p.tag == tag)
-                    {
-                        currentPool = p;
-                        extensionLimit = p.extensionLimit;
-                        shouldExpandPool = p.shouldExpandPool;
-                        break;
-                    }
-                }
-                if (shouldExpandPool)
+                Pool currentPool = pools.Find(pool => pool.tag == tag);
+                float extensionLimit = currentPool.extensionLimit;
+
+                if (currentPool.shouldExpandPool)
                 {
                     if (extensionLimit > 0)
                     {
@@ -150,7 +138,7 @@ namespace MyPooler
             activeObjects[tag].Remove(o);
             poolDictionary[tag].Enqueue(o);
             o.SetActive(false);
-            if(onResetPools != null) onResetPools -= o.GetComponent<IPooledObject>().DiscardToPool;
+            if (onResetPools != null) onResetPools -= o.GetComponent<IPooledObject>().DiscardToPool;
         }
 
         /// <summary>
