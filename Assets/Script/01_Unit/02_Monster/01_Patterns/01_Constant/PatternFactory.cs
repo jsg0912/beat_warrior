@@ -12,6 +12,12 @@ public static class PatternFactory
                 return new Monster2Pattern();
             case PatternName.Monster3:
                 return new Monster3Pattern();
+            case PatternName.Ibkkugi:
+                return new IbkkugiPattern();
+            case PatternName.Jiljili:
+                return new JiljiliPattern();
+            case PatternName.RangedMonster: // TODO: 임시
+                return new IbkkugiPattern();
         }
 
         throw new System.Exception($"{patternName} is not exist");

@@ -11,7 +11,7 @@ public class RecognizeStrategyRanged : RecognizeStrategy
 
     protected override void CheckTarget()
     {
-        if (Vector3.Distance(PlayerPos(), CurrentPos()) < recognizeRange)
+        if (Vector3.Distance(GetPlayerPos(), GetMonsterPos()) < recognizeRange)
         {
             monster.SetStatus(MonsterStatus.Chase);
             return;

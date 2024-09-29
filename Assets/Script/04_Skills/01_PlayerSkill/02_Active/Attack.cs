@@ -17,7 +17,7 @@ public class Attack : ActiveSkillPlayer
         coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
         coolTime = 0;
 
-        EffectPrefab = Resources.Load(PrefabRouter.AttackPrefab) as GameObject;
+        EffectPrefab = Resources.Load(PrefabRouter.PlayerAttackPrefab) as GameObject;
     }
 
     protected override IEnumerator CountCoolTime()

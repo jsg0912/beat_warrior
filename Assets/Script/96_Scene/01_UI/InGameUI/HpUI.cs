@@ -8,13 +8,11 @@ public class HpUI : MonoBehaviour
 
     [SerializeField] private GameObject HP;
     [SerializeField] private GameObject HPPrefab;
-    private List<Image> HPList;
+    private List<Image> HPList = new();
 
     private void Awake()
     {
         Instance = this;
-
-        HPList = new();
     }
 
     private void Start()

@@ -21,8 +21,8 @@ public class MoveStrategyNormal : MoveStrategy
 
     protected void CheckGround()
     {
-        Vector3 offset = new Vector3(direction(), 0, 0);
-        RaycastHit2D rayHit = Physics2D.Raycast(CurrentPos() + offset, Vector3.down, 0.5f, GroundLayer);
+        Vector3 offset = new Vector3(GetDirection(), 0, 0);
+        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterPos() + offset, Vector3.down, 0.5f, GroundLayer);
 
         if (rayHit.collider == null) ChangeDirection();
     }

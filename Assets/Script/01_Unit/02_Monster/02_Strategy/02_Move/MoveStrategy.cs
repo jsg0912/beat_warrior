@@ -23,8 +23,8 @@ public class MoveStrategy : Strategy
     {
         if (IsMoveable() == false) return;
 
-        monster.gameObject.transform.position += new Vector3(direction() * moveSpeed * Time.deltaTime, 0, 0);
-        monster.IsWalking(true);
+        monster.gameObject.transform.position += new Vector3(GetDirection() * moveSpeed * Time.deltaTime, 0, 0);
+        monster.SetIsWalking(true);
     }
 
     protected virtual bool IsMoveable() { return monster.GetIsMoveable(); }

@@ -1,12 +1,11 @@
-// 모든 물리적 오브젝트에 붙을 Class
 using UnityEngine;
 
-public class CommonObject
+public class CommonObject : MonoBehaviour
 {
     protected Sprite sprtie;
     private bool isCollision;
 
-    protected void SetIsCollision(bool isCollision )
+    protected void SetIsCollision(bool isCollision)
     {
         this.isCollision = isCollision;
     }

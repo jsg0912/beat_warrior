@@ -7,7 +7,24 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public static Player Instance;
+    private static Player _instance;
+    public static Player Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<Player>();
+                if (_instance == null)
+                {
+                    GameObject player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
+                    player.GetComponent<Player>().Initialize();
+                    DontDestroyOnLoad(player);
+                }
+            }
+            return _instance;
+        }
+    }
     public Unit playerUnit;
     private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
@@ -32,16 +49,8 @@ public class Player : MonoBehaviour
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
 
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(this);
-    }
-
     void Start()
     {
-        DontDestroyOnLoad(this.gameObject);
-
         Initialize();
     }
 
@@ -151,7 +160,7 @@ public class Player : MonoBehaviour
     public void SetDirection(Direction dir)
     {
         direction = dir;
-        PlayerSprite.localScale = new Vector3(-(int)direction, 1, 1);
+        PlayerSprite.localScale = new Vector3((int)direction, 1, 1);
     }
 
     public void SetGravityScale(bool gravity)

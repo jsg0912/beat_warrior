@@ -1,17 +1,13 @@
-using UnityEngine;
-
 public abstract class RecognizeStrategy : Strategy
 {
     protected float recognizeRange;
 
     public override void PlayStrategy()
     {
-        if (isLookingTarget() == true) CheckTarget();
+        if (IsLookingTarget() == true) CheckTarget();
     }
 
-    protected int direction() { return monster.GetDirection(); }
-    protected virtual bool isLookingTarget() { return direction() * (PlayerPos().x - CurrentPos().x) > 0; }
-
+    protected virtual bool IsLookingTarget() { return GetDirection() * (GetPlayerPos().x - GetMonsterPos().x) > 0; }
     protected abstract void CheckTarget();
     protected void ReleaseChase()
     {

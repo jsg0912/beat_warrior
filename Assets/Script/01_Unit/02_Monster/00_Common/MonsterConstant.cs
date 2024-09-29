@@ -12,33 +12,60 @@ public class MonsterConstant
 
     public const string GroundLayer = "Tile";
     public const string PlayerLayer = "Player";
-    public const float RangedRecognizeRange = 5.0f;
-    public const float MeleeRecognizeRange = 5.0f;
+    public const float RangedRecognizeRange = 10.0f;
+    public const float MeleeRecognizeRange = 10.0f;
+
+    public const float IbkkugiMaxHeight = 1f;
+    public const float ThrowObjectYOffset = 0.5f;
+
 
     public static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
-        { MonsterName.Monster1, 1.1f },
-        { MonsterName.Monster2, 1.0f },
-        { MonsterName.Monster3, 1.6f },
-        { MonsterName.Monster4, 0.4f },
-        { MonsterName.Monster5, 0.7f },
-        { MonsterName.Monster6, 1.2f }
+        { MonsterName.Ippali, 1.1f },
+        { MonsterName.Ibkkugi, 1.0f },
+        { MonsterName.Koppulso, 1.6f },
+        { MonsterName.Jiljili, 0.4f },
+        { MonsterName.Giljjugi, 0.7f },
+        { MonsterName.Ismomi, 1.2f }
     };
 
     public static Dictionary<MonsterName, float> MoveSpeed = new() {
-        { MonsterName.Monster1, moveSpeed * MoveSpeedRatio[MonsterName.Monster1] },
-        { MonsterName.Monster2, moveSpeed * MoveSpeedRatio[MonsterName.Monster2] },
-        { MonsterName.Monster3, moveSpeed * MoveSpeedRatio[MonsterName.Monster3] },
-        { MonsterName.Monster4, moveSpeed * MoveSpeedRatio[MonsterName.Monster4] },
-        { MonsterName.Monster5, moveSpeed * MoveSpeedRatio[MonsterName.Monster5] },
-        { MonsterName.Monster6, moveSpeed * MoveSpeedRatio[MonsterName.Monster6] },
+        { MonsterName.Ippali, moveSpeed * MoveSpeedRatio[MonsterName.Ippali] },
+        { MonsterName.Ibkkugi, moveSpeed * MoveSpeedRatio[MonsterName.Ibkkugi] },
+        { MonsterName.Koppulso, moveSpeed * MoveSpeedRatio[MonsterName.Koppulso] },
+        { MonsterName.Jiljili, moveSpeed * MoveSpeedRatio[MonsterName.Jiljili] },
+        { MonsterName.Giljjugi, moveSpeed * MoveSpeedRatio[MonsterName.Giljjugi] },
+        { MonsterName.Ismomi, moveSpeed * MoveSpeedRatio[MonsterName.Ismomi] },
     };
 
     public static Dictionary<MonsterName, float> AttackSpeed = new() {
-        { MonsterName.Monster1, 2.0f },
-        { MonsterName.Monster2, 2.8f },
-        { MonsterName.Monster3, 3.0f },
-        { MonsterName.Monster4, 4.0f },
-        { MonsterName.Monster5, 7.0f },
-        { MonsterName.Monster6, 1.2f }
+        { MonsterName.Ippali, 2.0f },
+        { MonsterName.Ibkkugi, 2.8f },
+        { MonsterName.Koppulso, 3.0f },
+        { MonsterName.Jiljili, 4.0f },
+        { MonsterName.Giljjugi, 7.0f },
+        { MonsterName.Ismomi, 1.2f }
+    };
+
+    public static Dictionary<MonsterName, float> AttackThrowSpeed = new() {
+        { MonsterName.Ibkkugi, 0.5f },
+        { MonsterName.Jiljili, 25.0f },
+    };
+
+    public static Dictionary<MonsterName, float> AttackDelay = new() {
+        { MonsterName.Ippali, 0.5f },
+        { MonsterName.Ibkkugi, 0.5f },
+        { MonsterName.Koppulso, 0.5f },
+        { MonsterName.Jiljili, 0.5f },
+        { MonsterName.Giljjugi, 0.5f },
+        { MonsterName.Ismomi, 0.5f }
+    };
+
+    public static Dictionary<MonsterName, float> AnimationDelay = new() {
+        { MonsterName.Ippali, 0.5f },
+        { MonsterName.Ibkkugi, 0.5f },
+        { MonsterName.Koppulso, 0.5f },
+        { MonsterName.Jiljili, 0.5f },
+        { MonsterName.Giljjugi, 0.5f },
+        { MonsterName.Ismomi, 0.5f }
     };
 }

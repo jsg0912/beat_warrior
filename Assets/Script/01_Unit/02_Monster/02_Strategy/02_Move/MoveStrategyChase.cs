@@ -24,8 +24,8 @@ public class MoveStrategyChase : MoveStrategy
 
     protected void CheckGround()
     {
-        Vector3 offset = new Vector3(direction(), 0, 0);
-        RaycastHit2D rayHit = Physics2D.Raycast(CurrentPos() + offset, Vector3.down, GROUNDCHECKRAY, GroundLayer);
+        Vector3 offset = new Vector3(GetDirection(), 0, 0);
+        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterPos() + offset, Vector3.down, GROUNDCHECKRAY, GroundLayer);
 
         if (rayHit.collider == null) isEndOfGround = true;
         else isEndOfGround = false;
@@ -38,15 +38,15 @@ public class MoveStrategyChase : MoveStrategy
 
     protected void ChaseTarget()
     {
-        if (TargetPos().x > CurrentPos().x) SetDirection(Direction.Right);
+        if (TargetPos().x > GetMonsterPos().x) SetDirection(Direction.Right);
         else SetDirection(Direction.Left);
     }
 
     protected override bool IsMoveable()
     {
-        if (isEndOfGround == true || Mathf.Abs(TargetPos().x - CurrentPos().x) < STOPOFFSET)
+        if (isEndOfGround == true || Mathf.Abs(TargetPos().x - GetMonsterPos().x) < STOPOFFSET)
         {
-            monster.IsWalking(false);
+            monster.SetIsWalking(false);
             return false;
         }
 
