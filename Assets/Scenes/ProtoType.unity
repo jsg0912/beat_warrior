@@ -1636,11 +1636,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1696325841222784602, guid: c964187e9f3a38346a90ad9969af6cfe, type: 3}
       propertyPath: pools.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1696325841222784602, guid: c964187e9f3a38346a90ad9969af6cfe, type: 3}
       propertyPath: pools.Array.data[0].tag
       value: EnemyMiniMapIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696325841222784602, guid: c964187e9f3a38346a90ad9969af6cfe, type: 3}
+      propertyPath: pools.Array.data[1].tag
+      value: IbkkugiThrow
       objectReference: {fileID: 0}
     - target: {fileID: 1696325841222784602, guid: c964187e9f3a38346a90ad9969af6cfe, type: 3}
       propertyPath: pools.Array.data[0].amount
@@ -1651,7 +1655,19 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3067871860596314453, guid: 99f3ba5f72e624f49b60a9e7cf5e910a, type: 3}
     - target: {fileID: 1696325841222784602, guid: c964187e9f3a38346a90ad9969af6cfe, type: 3}
+      propertyPath: pools.Array.data[1].amount
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696325841222784602, guid: c964187e9f3a38346a90ad9969af6cfe, type: 3}
+      propertyPath: pools.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 3333117564831544836, guid: 9a4d0deb0f5b1d34d95e81e50dc31051, type: 3}
+    - target: {fileID: 1696325841222784602, guid: c964187e9f3a38346a90ad9969af6cfe, type: 3}
       propertyPath: pools.Array.data[0].shouldExpandPool
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1696325841222784602, guid: c964187e9f3a38346a90ad9969af6cfe, type: 3}
+      propertyPath: pools.Array.data[1].shouldExpandPool
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1696325841222784603, guid: c964187e9f3a38346a90ad9969af6cfe, type: 3}
@@ -3295,11 +3311,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: d430e37bc710baa42bf7a825f50d1a57, type: 3}
---- !u!4 &1312022910 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7843971779422453318, guid: f826aa65999748f4b8b194514d8682d2, type: 3}
-  m_PrefabInstance: {fileID: 1380462026}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1348944421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7940497419679796278, guid: d430e37bc710baa42bf7a825f50d1a57, type: 3}
@@ -3695,7 +3706,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972559357dbf0c142ad8df95d9bca89a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 1312022910}
+  Target: {fileID: 0}
   speed: 4
   center: {x: 23.5, y: -15.1}
   size: {x: 70, y: 40.2}
@@ -7029,7 +7040,7 @@ PrefabInstance:
     - target: {fileID: 1716408496594784282, guid: 466598f652549c74a85fbeb8311f46eb, type: 3}
       propertyPath: Target
       value: 
-      objectReference: {fileID: 1312022910}
+      objectReference: {fileID: 0}
     - target: {fileID: 2632557855450721589, guid: 466598f652549c74a85fbeb8311f46eb, type: 3}
       propertyPath: MainCamera
       value: 

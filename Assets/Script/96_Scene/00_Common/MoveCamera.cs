@@ -16,6 +16,7 @@ public class MoveCamera : MonoBehaviour
     {
         height = Camera.main.orthographicSize;
         width = height * Screen.width / Screen.height;
+        Target = Player.Instance.transform;
     }
     private void OnDrawGizmos()
     {
