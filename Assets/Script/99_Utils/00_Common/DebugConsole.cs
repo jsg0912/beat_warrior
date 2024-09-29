@@ -3,9 +3,11 @@ using UnityEngine;
 
 public static class DebugConsole
 {
-    public static void Log(string[] messages) {
+    public static void Log(string[] messages)
+    {
         string totalMessage = "";
-        foreach(string message in messages) {
+        foreach (string message in messages)
+        {
             totalMessage += message;
         }
         Debug.Log(totalMessage);
@@ -17,6 +19,11 @@ public static class DebugConsole
     }
 
     public static void Log(float message)
+    {
+        Debug.Log(message);
+    }
+
+    public static void Log(bool message)
     {
         Debug.Log(message);
     }
