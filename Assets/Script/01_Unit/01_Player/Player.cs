@@ -481,11 +481,4 @@ public class Player : MonoBehaviour
 
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
     }
-
-    private void CheckInstance()
-    {
-        if (Instance != null && Instance != this) Destroy(Instance.gameObject);
-        Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-    }
 }
