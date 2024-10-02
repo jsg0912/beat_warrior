@@ -14,8 +14,7 @@ public class AttackStrategyThrow : AttackStrategy
 
     protected override void SkillMethod()
     {
-        Vector3 offset = new Vector3(0, MonsterConstant.ThrowObjectYOffset, 0);
-        GameObject throwObj = GameObject.Instantiate(obj, monster.transform.position + offset, quaternion.identity);
+        GameObject throwObj = GameObject.Instantiate(obj);
         throwObj.GetComponent<MonsterAttackCollider>().Initiate(monster);
     }
 }
