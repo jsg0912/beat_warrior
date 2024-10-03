@@ -3,16 +3,28 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance;
-
     public Language language = Language.kr;
+    public static UIManager Instance;
+    public GameObject UIPrefab;
 
-
-    private void Start()
+    private void Awake()
     {
-        //CheckInstance();
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
+        
+        if (UIPrefab != null)
+        {
+            GameObject UI = Instantiate(UIPrefab);
+            DontDestroyOnLoad (UI);
+        }
     }
+
+    
 
     private void Update()
     {
@@ -27,11 +39,6 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void CheckInstance()
-    {
-        if (Instance != null && Instance != this) Destroy(Instance.gameObject);
-        Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-    }
+    
 }
 
