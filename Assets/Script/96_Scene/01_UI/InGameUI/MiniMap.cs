@@ -4,8 +4,6 @@ using TMPro;
 public class MiniMap : MonoBehaviour
 {
     public TMP_Text ReamaingMonster;
-
-    public Camera MainCamera;
     public Camera MiniMapCamera;
 
     public GameObject PlayerMapIconFrefab;
@@ -24,9 +22,7 @@ public class MiniMap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
 
-        MainCamera.cullingMask = ~(1 << LayerMask.NameToLayer("MiniMap"));
 
         MiniMapCamera.cullingMask = 0;
         MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer("MiniMap");
@@ -44,10 +40,6 @@ public class MiniMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        MainCamera.cullingMask = ~(1 << LayerMask.NameToLayer("MiniMap"));
-        //[TODO].MainCamera에서 재시작 시 MiniMap아이콘을 보지 않도록 하기위한 작업 유지보수 필요
-
         monster = GameObject.FindGameObjectsWithTag("Monster");
         ReamaingMonster.text = "Monster : " + monster.Length.ToString();
 
