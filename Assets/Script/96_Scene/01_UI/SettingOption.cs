@@ -28,12 +28,6 @@ public class SettingOption : MonoBehaviour
             int id = info.buttonID;
             btn.onClick.AddListener(() => OnButtonClick(id));
         }
-
-
-        foreach (var info in buttonPanelInfos)
-        {
-            info.panel.SetActive(false);
-        }
     }
 
     public void OnButtonClick(int buttonID)
