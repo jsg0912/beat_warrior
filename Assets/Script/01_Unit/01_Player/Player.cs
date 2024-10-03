@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -17,9 +16,7 @@ public class Player : MonoBehaviour
                 _instance = FindObjectOfType<Player>();
                 if (_instance == null)
                 {
-                    GameObject player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
-                    player.GetComponent<Player>().Initialize();
-                    DontDestroyOnLoad(player);
+                    CreatePlayer();
                 }
             }
             return _instance;
@@ -72,6 +69,13 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
     }
 
+    public static void CreatePlayer()
+    {
+        GameObject player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
+        player.GetComponent<Player>().Initialize();
+        DontDestroyOnLoad(player);
+    }
+
     private void Initialize(Direction direction = Direction.Left)
     {
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
@@ -100,11 +104,10 @@ public class Player : MonoBehaviour
         SetDirection(direction);
         isOnBaseTile = false;
         isInvincibility = false;
-
-        HpUI.Instance.SetAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+        HpUI.Instance.HpInitialize();
     }
 
-    public void RestartPlayer()
+    public void RestartPlayer()//TODO: GameManager로 옮기기 - 이정대 20240912
     {
         Initialize(direction);
         _animator.SetTrigger(PlayerConstant.restartAnimTrigger);

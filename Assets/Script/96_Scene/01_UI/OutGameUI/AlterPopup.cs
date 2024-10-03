@@ -8,7 +8,7 @@ using System.Linq;
 public class AlterPopup : MonoBehaviour
 {
     SkillName[] salesSkillList;
-    private bool isOn = false;
+    private bool isOn;
 
 
     public SkillName SelectTrait;
@@ -48,7 +48,7 @@ public class AlterPopup : MonoBehaviour
 
     void Initialize()
     {
-        isOn = false;
+        isOn = true;
         salesSkillList = TraitPriceList.Info.Keys.ToArray();
         SelectTrait = SkillName.End;
         for (int i = 0; i < salesSkillList.Length; i++)
@@ -70,7 +70,7 @@ public class AlterPopup : MonoBehaviour
         {
             if (Player.Instance.IsEquippedTrait(SelectTrait))
             {
-                InfoButton = TraitSetButtonStatus.Unequip;
+                InfoButton = TraitSetButtonStatus.UnEquip;
                 InfoSetButton.interactable = true;
             }
             else
@@ -171,7 +171,7 @@ public class AlterPopup : MonoBehaviour
                     break;
                 }
                 break;
-            case TraitSetButtonStatus.Unequip:
+            case TraitSetButtonStatus.UnEquip:
                 Player.Instance.RemoveTrait(SelectTrait);
                 UpdateUI();
                 break;

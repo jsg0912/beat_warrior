@@ -1,24 +1,15 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillUI : MonoBehaviour
+public class AttackCountUI : MonoBehaviour
 {
-    public static SkillUI Instance;
-
     [SerializeField] Text AttackCountView;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Update()
     {
-        UpdateCoolTime();
+        ViewAttackCount();
     }
-
-    private void UpdateCoolTime()
+    private void ViewAttackCount()
     {
         AttackCountView.text = Player.Instance.GetCurrentStat(StatKind.AttackCount).ToString();
     }

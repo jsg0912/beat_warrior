@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿// UI에서 언어 설정에 따라 보이는 글씨의 내용을 적는 곳 - 신동환, 2024.08
+using System.Collections.Generic;
 
 public static class UIScript
 {

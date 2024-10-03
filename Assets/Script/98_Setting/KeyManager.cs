@@ -32,10 +32,14 @@ public class KeyManager : MonoBehaviour
     private void Awake()
     {
         for (int i = 0; i < defaultKeys.Length; i++)
-            KeySetting.keys.Add((Action)i, defaultKeys[i]);
+        {
+            if (KeySetting.keys.ContainsKey((Action)i) ==  false)
+                KeySetting.keys.Add((Action)i, defaultKeys[i]);
+        }
 
         CreateKeySettingButtons();
     }
+
 
     private void CreateKeySettingButtons()
     {

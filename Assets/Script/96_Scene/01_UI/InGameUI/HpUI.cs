@@ -7,21 +7,31 @@ public class HpUI : MonoBehaviour
     public static HpUI Instance;
 
     [SerializeField] private GameObject HP;
-    [SerializeField] private GameObject HPPrefab;
-    private List<Image> HPList = new();
+    private GameObject HPPrefab;
+    private List<Image> HPList;
+    private Player player;
 
     private void Awake()
     {
         Instance = this;
+
+        HPPrefab = Resources.Load("Prefab/03_UI/PlayerHP") as GameObject;
+        HPList = new();
+        player = GetComponent<Player>();
     }
 
-    public void SetAndUpdateHPUI(int hp)
+    private void Start()
     {
-        SetHPUI(hp);
+        HpInitialize();
+    }
+
+    public void CreateAndUpdateHPUI(int hp)
+    {
+        CreateHPUI(hp);
         UpdateHPUI();
     }
 
-    public void SetHPUI(int hp)
+    public void CreateHPUI(int hp)
     {
         HPList.Clear();
         foreach (Transform child in HP.GetComponentInChildren<Transform>())
@@ -52,5 +62,10 @@ public class HpUI : MonoBehaviour
             if (i < hp) HPList[i].gameObject.SetActive(false);
             else HPList[i].gameObject.SetActive(true);
         }
+    }
+
+    public void HpInitialize()
+    {
+        CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }
 }
