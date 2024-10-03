@@ -1,11 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public enum PoolTag
-{
-    EnemyMiniMapIcon,
-    IbkkugiThrow
-}
 
 namespace MyPooler
 {
