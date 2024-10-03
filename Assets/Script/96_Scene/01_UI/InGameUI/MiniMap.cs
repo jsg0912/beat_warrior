@@ -22,8 +22,6 @@ public class MiniMap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-
         MiniMapCamera.cullingMask = 0;
         MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer("MiniMap");
         MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Tile");

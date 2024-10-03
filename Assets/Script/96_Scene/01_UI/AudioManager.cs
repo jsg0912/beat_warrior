@@ -7,7 +7,7 @@ public class VolumeControl
 {
     public Slider volumeSlider;
     public Toggle muteToggle; 
-    public string exposedParameter; 
+    public AudioList exposedParameter; 
 
     [HideInInspector] public float volume = 1f; 
 }
@@ -16,6 +16,13 @@ public class AudioSet
 {
     public bool mute;
     public float volume;
+}
+
+public enum AudioList
+{
+    Master,
+    BGM,
+    SFX
 }
 
 public class AudioManager : MonoBehaviour
@@ -28,9 +35,9 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        masterControl.exposedParameter = "Master";
-        bgmControl.exposedParameter = "BGM";
-        sfxControl.exposedParameter = "SFX";
+        masterControl.exposedParameter = AudioList.Master;
+        bgmControl.exposedParameter = AudioList.BGM;
+        sfxControl.exposedParameter = AudioList.SFX;
 
         InitializeVolumeControl(masterControl);
         InitializeVolumeControl(bgmControl);
@@ -57,6 +64,6 @@ public class AudioManager : MonoBehaviour
     {
         float finalVolume = control.muteToggle.isOn ? -80f : Mathf.Log10(control.volume) * 20f;  
 
-        audioMixer.SetFloat(control.exposedParameter, finalVolume);
+        audioMixer.SetFloat(control.exposedParameter.ToString(), finalVolume);
     }
 }

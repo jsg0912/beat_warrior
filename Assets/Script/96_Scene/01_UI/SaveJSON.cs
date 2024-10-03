@@ -15,7 +15,6 @@ public class SaveJSON
     public string[] audioName;
     public bool[] audioMute;
     public float[] audioValue;
-    public Action[] keyAction;
     public KeyCode[] keyCode;
 
     public SaveJSON(int soul, SkillName[] mySkill)
@@ -30,15 +29,26 @@ public class SaveJSON
         this.hp = hp;
     }
 
-    public SaveJSON(Resolution resolution, Dictionary<string, AudioSet> audio, Dictionary<Action, KeyCode> keys)
+    public SaveJSON(Resolution resolution, Dictionary<AudioList, AudioSet> audio, KeyCode[] keys)
     {
         this.resolution = resolution;
         audioName = new string[audio.Count];
         audioMute = new bool[audio.Count];
         audioValue = new float[audio.Count];
+        int index = 0;
+        foreach(KeyValuePair<AudioList, AudioSet>entry in audio)
+        {
+            audioName[index] = entry.Key.ToString();
+            audioMute[index] = entry.Value.mute;
+            audioValue[index] = entry.Value.volume;
+            index++;
+        }
 
-        keyAction = new Action[keys.Count];
-        keyCode = new KeyCode[keys.Count];
+        keyCode = new KeyCode[keys.Length];
+        for(int i =0; i<keys.Length; i++)
+        {
+            keyCode[i] = keys[i];
+        }
 
     }
 }
