@@ -26,8 +26,9 @@ namespace MyPooler
                     _instance = FindObjectOfType<ObjectPooler>();
                     if (_instance == null)
                     {
-                        GameObject go = Resources.Load(PrefabRouter.ObjectPooler) as GameObject;
+                        GameObject go = Instantiate(Resources.Load(PrefabRouter.ObjectPooler) as GameObject);
                         _instance = go.GetComponent<ObjectPooler>();
+                        DontDestroyOnLoad(go);
                     }
                 }
                 return _instance;
@@ -59,8 +60,9 @@ namespace MyPooler
         /// <param name="position"></param>
         /// <param name="rotation"></param>
         /// <returns></returns>
-        public GameObject GetFromPool(string tag, Vector3 position, Quaternion rotation)
+        public GameObject GetFromPool(PoolTag poolTag, Vector3 position, Quaternion rotation)
         {
+            string tag = poolTag.ToString();
             if (!poolDictionary.ContainsKey(tag))
             {
                 if (isDebug)
