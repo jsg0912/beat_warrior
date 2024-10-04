@@ -6,88 +6,8 @@ public static class MonsterList
 {
     public static List<MonsterJSON> monsterList = new List<MonsterJSON>()
     {
-        new MonsterJSON(MonsterName.DummySoldierHP1,
-        "Prototype Test용 근접 쓰레기1",
-        new Dictionary<StatKind, int>{
-            {StatKind.HP, 1},
-            {StatKind.ATK, 1},
-        },
-        PatternName.MeleeEnemy),
-
-         new MonsterJSON(MonsterName.DummySoldierHP2,
-        "Prototype Test용 근접 쓰레기2",
-        new Dictionary<StatKind, int>{
-            {StatKind.HP, 2},
-            {StatKind.ATK, 1},
-        },
-        PatternName.MeleeEnemy),
-
-         new MonsterJSON(MonsterName.DummySoldierHP3,
-        "Prototype Test용 근접 쓰레기3",
-        new Dictionary<StatKind, int>{
-            {StatKind.HP, 3},
-            {StatKind.ATK, 1},
-        },
-        PatternName.MeleeEnemy),
-
-         new MonsterJSON(MonsterName.DummySoldierHP4,
-        "Prototype Test용 근접 쓰레기4",
-        new Dictionary<StatKind, int>{
-            {StatKind.HP, 4},
-            {StatKind.ATK, 1},
-        },
-        PatternName.MeleeEnemy),
-
-         new MonsterJSON(MonsterName.DummySoldierHP5,
-        "Prototype Test용 근접 쓰레기5",
-        new Dictionary<StatKind, int>{
-            {StatKind.HP, 5},
-            {StatKind.ATK, 1},
-        },
-        PatternName.MeleeEnemy),
-
-         new MonsterJSON(MonsterName.DummySoldierHP6,
-        "Prototype Test용 근접 쓰레기6",
-        new Dictionary<StatKind, int>{
-            {StatKind.HP, 6},
-            {StatKind.ATK, 1},
-        },
-        PatternName.MeleeEnemy),
-
-         new MonsterJSON(MonsterName.DummyArcherHP1,
-        "Prototype Test용 원거리 쓰레기1",
-        new Dictionary<StatKind, int>{
-            {StatKind.HP, 1},
-            {StatKind.ATK, 1},
-        },
-        PatternName.RangedMonster),
-
-        new MonsterJSON(MonsterName.DummyArcherHP2,
-        "Prototype Test용 원거리 쓰레기2",
-        new Dictionary<StatKind, int>{
-            {StatKind.HP, 2},
-            {StatKind.ATK, 1},
-        },
-        PatternName.RangedMonster),
-
-         new MonsterJSON(MonsterName.DummyArcherHP3,
-        "Prototype Test용 원거리 쓰레기3",
-        new Dictionary<StatKind, int>{
-            {StatKind.HP, 3},
-            {StatKind.ATK, 1},
-        },
-        PatternName.RangedMonster),
-
-         new MonsterJSON(MonsterName.DummyArcherHP4,
-        "Prototype Test용 원거리 쓰레기4",
-        new Dictionary<StatKind, int>{
-            {StatKind.HP, 4},
-            {StatKind.ATK, 1},
-        },
-        PatternName.RangedMonster),
-
         new MonsterJSON(MonsterName.Ibkkugi,
-        "Prototype Test용 원거리 쓰레기2",
+        "입꾹이",
         new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
@@ -95,15 +15,15 @@ public static class MonsterList
         PatternName.Ibkkugi),
 
          new MonsterJSON(MonsterName.Jiljili,
-        "Prototype Test용 원거리 쓰레기2",
+        "질질이",
         new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
         },
         PatternName.Jiljili),
 
-        new MonsterJSON(MonsterName.Ismomi,
-        "Prototype Test용 원거리 쓰레기2",
+        new MonsterJSON(MonsterName.Itmomi,
+        "잇몸이",
         new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
@@ -111,7 +31,21 @@ public static class MonsterList
         PatternName.Ismomi),
 
         new MonsterJSON(MonsterName.Koppulso,
-        "Prototype Test용 원거리 쓰레기2",
+        "코뿔소",
+        new Dictionary<StatKind, int>{
+            {StatKind.HP, 2},
+            {StatKind.ATK, 1},
+        },
+        PatternName.Monster3),
+        new MonsterJSON(MonsterName.Giljjugi,
+        "길쭉이",
+        new Dictionary<StatKind, int>{
+            {StatKind.HP, 2},
+            {StatKind.ATK, 1},
+        },
+        PatternName.Monster3),
+        new MonsterJSON(MonsterName.Ippali,
+        "이빨이",
         new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
