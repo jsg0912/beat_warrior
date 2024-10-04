@@ -25,7 +25,7 @@ public class MonsterConstant
         { MonsterName.Koppulso, 1.6f },
         { MonsterName.Jiljili, 0.4f },
         { MonsterName.Giljjugi, 0.7f },
-        { MonsterName.Ismomi, 1.2f }
+        { MonsterName.Itmomi, 1.2f }
     };
 
     public static Dictionary<MonsterName, float> MoveSpeed = new() {
@@ -34,7 +34,7 @@ public class MonsterConstant
         { MonsterName.Koppulso, moveSpeed * MoveSpeedRatio[MonsterName.Koppulso] },
         { MonsterName.Jiljili, moveSpeed * MoveSpeedRatio[MonsterName.Jiljili] },
         { MonsterName.Giljjugi, moveSpeed * MoveSpeedRatio[MonsterName.Giljjugi] },
-        { MonsterName.Ismomi, moveSpeed * MoveSpeedRatio[MonsterName.Ismomi] },
+        { MonsterName.Itmomi, moveSpeed * MoveSpeedRatio[MonsterName.Itmomi] },
     };
 
     public static Dictionary<MonsterName, float> AttackSpeed = new() {
@@ -43,7 +43,7 @@ public class MonsterConstant
         { MonsterName.Koppulso, 3.0f },
         { MonsterName.Jiljili, 4.0f },
         { MonsterName.Giljjugi, 7.0f },
-        { MonsterName.Ismomi, 1.2f }
+        { MonsterName.Itmomi, 1.2f }
     };
 
     public static Dictionary<MonsterName, float> AttackThrowSpeed = new() {
@@ -57,7 +57,7 @@ public class MonsterConstant
         { MonsterName.Koppulso, 0.5f },
         { MonsterName.Jiljili, 0.5f },
         { MonsterName.Giljjugi, 0.5f },
-        { MonsterName.Ismomi, 0.5f }
+        { MonsterName.Itmomi, 0.5f }
     };
 
     public static Dictionary<MonsterName, float> AnimationDelay = new() {
@@ -66,6 +66,6 @@ public class MonsterConstant
         { MonsterName.Koppulso, 0.5f },
         { MonsterName.Jiljili, 0.5f },
         { MonsterName.Giljjugi, 0.5f },
-        { MonsterName.Ismomi, 0.5f }
+        { MonsterName.Itmomi, 0.5f }
     };
 }
