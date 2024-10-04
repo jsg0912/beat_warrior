@@ -23,8 +23,12 @@ namespace MyPooler
             {
                 if (_instance == null)
                 {
-                    GameObject go = new GameObject("ObjectPooler");
-                    go.AddComponent<ObjectPooler>();
+                    _instance = FindObjectOfType<ObjectPooler>();
+                    if (_instance == null)
+                    {
+                        GameObject go = Resources.Load(PrefabRouter.ObjectPooler) as GameObject;
+                        _instance = go.GetComponent<ObjectPooler>();
+                    }
                 }
                 return _instance;
             }
