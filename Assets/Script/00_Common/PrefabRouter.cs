@@ -14,6 +14,6 @@ public class PrefabRouter
     public static Dictionary<MonsterName, string> AttackPrefab = new() {
         { MonsterName.Ibkkugi, "Prefab/02_Object/IbkkugiThrow" },
         { MonsterName.Jiljili, "Prefab/02_Object/JiljiliThrow" },
-        { MonsterName.Ismomi, "Prefab/dd" },
+        { MonsterName.Ismomi, "Prefab/02_Object/IsmomiThrow" },
     };
 }

@@ -5,6 +5,10 @@ public class AttackColliderIbkkugi : MonsterAttackCollider
     public override void Initiate(Monster monster)
     {
         base.Initiate(monster);
+
+        Vector3 offset = new Vector3(0, MonsterConstant.ThrowObjectYOffset, 0);
+        transform.position = monster.transform.position + offset;
+
         float gravity = Physics2D.gravity.y;
         // 포물선 운동 시간 공식
         float time = Mathf.Sqrt(-8 * MonsterConstant.IbkkugiMaxHeight / gravity);

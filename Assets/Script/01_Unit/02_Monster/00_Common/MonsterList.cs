@@ -102,6 +102,14 @@ public static class MonsterList
         },
         PatternName.Jiljili),
 
+        new MonsterJSON(MonsterName.Ismomi,
+        "Prototype Test용 원거리 쓰레기2",
+        new Dictionary<StatKind, int>{
+            {StatKind.HP, 2},
+            {StatKind.ATK, 1},
+        },
+        PatternName.Ismomi),
+
         new MonsterJSON(MonsterName.Koppulso,
         "Prototype Test용 원거리 쓰레기2",
         new Dictionary<StatKind, int>{
