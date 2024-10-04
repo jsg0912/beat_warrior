@@ -9,7 +9,7 @@ namespace MyPooler
         [System.Serializable]
         public class Pool
         {
-            public string tag;
+            public PoolTag tag;
             public GameObject prefab;
             public int amount;
             public bool shouldExpandPool = true;
@@ -23,8 +23,13 @@ namespace MyPooler
             {
                 if (_instance == null)
                 {
-                    GameObject go = new GameObject("ObjectPooler");
-                    go.AddComponent<ObjectPooler>();
+                    _instance = FindObjectOfType<ObjectPooler>();
+                    if (_instance == null)
+                    {
+                        GameObject go = Instantiate(Resources.Load(PrefabRouter.ObjectPooler) as GameObject);
+                        _instance = go.GetComponent<ObjectPooler>();
+                        DontDestroyOnLoad(go);
+                    }
                 }
                 return _instance;
             }
@@ -55,8 +60,9 @@ namespace MyPooler
         /// <param name="position"></param>
         /// <param name="rotation"></param>
         /// <returns></returns>
-        public GameObject GetFromPool(string tag, Vector3 position, Quaternion rotation)
+        public GameObject GetFromPool(PoolTag poolTag, Vector3 position, Quaternion rotation)
         {
+            string tag = poolTag.ToString();
             if (!poolDictionary.ContainsKey(tag))
             {
                 if (isDebug)
@@ -71,7 +77,7 @@ namespace MyPooler
             }
             else
             {
-                Pool currentPool = pools.Find(pool => pool.tag == tag);
+                Pool currentPool = pools.Find(pool => pool.tag.ToString() == tag);
                 float extensionLimit = currentPool.extensionLimit;
 
                 if (currentPool.shouldExpandPool)
@@ -178,10 +184,10 @@ namespace MyPooler
 
             foreach (Pool pool in pools)
             {
-                GameObject poolObject = new GameObject(pool.tag + "_Pool");
+                GameObject poolObject = new GameObject(pool.tag.ToString() + "_Pool");
                 poolObject.transform.SetParent(this.transform);
-                parents.Add(pool.tag, poolObject.transform);
-                activeObjects.Add(pool.tag, new List<GameObject>());
+                parents.Add(pool.tag.ToString(), poolObject.transform);
+                activeObjects.Add(pool.tag.ToString(), new List<GameObject>());
                 Queue<GameObject> objectPool = new Queue<GameObject>();
                 for (int i = 0; i < pool.amount; i++)
                 {
@@ -190,7 +196,7 @@ namespace MyPooler
                     objectPool.Enqueue(o);
                     o.transform.SetParent(poolObject.transform);
                 }
-                poolDictionary.Add(pool.tag, objectPool);
+                poolDictionary.Add(pool.tag.ToString(), objectPool);
             }
         }
 
@@ -198,8 +204,8 @@ namespace MyPooler
         {
             GameObject objectToIncrement = p.prefab;
             GameObject obj = Instantiate(objectToIncrement);
-            obj.transform.SetParent(parents[p.tag]);
-            activeObjects[p.tag].Add(obj);
+            obj.transform.SetParent(parents[p.tag.ToString()]);
+            activeObjects[p.tag.ToString()].Add(obj);
             return obj;
         }
     }

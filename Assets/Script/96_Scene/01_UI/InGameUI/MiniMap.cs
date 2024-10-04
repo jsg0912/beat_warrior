@@ -4,8 +4,6 @@ using TMPro;
 public class MiniMap : MonoBehaviour
 {
     public TMP_Text ReamaingMonster;
-
-    public Camera MainCamera;
     public Camera MiniMapCamera;
 
     public GameObject PlayerMapIconFrefab;
@@ -24,8 +22,6 @@ public class MiniMap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MainCamera.cullingMask = ~(1 << LayerMask.NameToLayer("MiniMap"));
-
         MiniMapCamera.cullingMask = 0;
         MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer("MiniMap");
         MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Tile");
@@ -36,7 +32,7 @@ public class MiniMap : MonoBehaviour
 
         CountMapMonster = 0;
 
-        PlayerMapIcon = Instantiate(PlayerMapIconFrefab);
+        PlayerMapIcon = Instantiate(PlayerMapIconFrefab, gameObject.transform);
     }
 
     // Update is called once per frame
@@ -46,11 +42,12 @@ public class MiniMap : MonoBehaviour
         ReamaingMonster.text = "Monster : " + monster.Length.ToString();
 
         PlayerMapIcon.transform.position = Player.Instance.transform.position;
+
         CountObjectInMiniMap();
 
         if (CountMapMonster != MonsterInMapCount)
         {
-            
+
             if (CountMapMonster > MonsterInMapCount)
             {
                 for (int i = MonsterInMapCount; i < CountMapMonster; i++)
@@ -63,7 +60,7 @@ public class MiniMap : MonoBehaviour
             {
                 for (int i = CountMapMonster; i < MonsterInMapCount; i++)
                 {
-                    icon[i] = MyPooler.ObjectPooler.Instance.GetFromPool("EnemyMiniMapIcon", monsterInMap[i].transform.position, Quaternion.identity);
+                    icon[i] = MyPooler.ObjectPooler.Instance.GetFromPool(PoolTag.EnemyMiniMapIcon, monsterInMap[i].transform.position, Quaternion.identity);
                 }
             }
 
@@ -78,7 +75,7 @@ public class MiniMap : MonoBehaviour
                 icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterInMap[i].transform.position);
 
             }
-            
+
         }
 
     }
@@ -95,7 +92,7 @@ public class MiniMap : MonoBehaviour
     private void CountObjectInMiniMap()
     {
         int Count = 0;
-        for (int i = 0; i<monster.Length; i++)
+        for (int i = 0; i < monster.Length; i++)
         {
             if (CheckObjectInMiniMap(monster[i]))
             {

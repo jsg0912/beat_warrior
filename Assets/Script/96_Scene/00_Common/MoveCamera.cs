@@ -26,6 +26,7 @@ public class MoveCamera : MonoBehaviour
 
     private void LateUpdate()
     {
+        Target = Player.Instance.transform;
         cameraMovement();
         maxCameraMovement();
 
