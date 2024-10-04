@@ -47,7 +47,7 @@ public class MiniMap : MonoBehaviour
 
         if (CountMapMonster != MonsterInMapCount)
         {
-            
+
             if (CountMapMonster > MonsterInMapCount)
             {
                 for (int i = MonsterInMapCount; i < CountMapMonster; i++)
@@ -60,7 +60,7 @@ public class MiniMap : MonoBehaviour
             {
                 for (int i = CountMapMonster; i < MonsterInMapCount; i++)
                 {
-                    icon[i] = MyPooler.ObjectPooler.Instance.GetFromPool("EnemyMiniMapIcon", monsterInMap[i].transform.position, Quaternion.identity);
+                    icon[i] = MyPooler.ObjectPooler.Instance.GetFromPool(PoolTag.EnemyMiniMapIcon, monsterInMap[i].transform.position, Quaternion.identity);
                 }
             }
 
@@ -75,7 +75,7 @@ public class MiniMap : MonoBehaviour
                 icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterInMap[i].transform.position);
 
             }
-            
+
         }
 
     }
@@ -92,7 +92,7 @@ public class MiniMap : MonoBehaviour
     private void CountObjectInMiniMap()
     {
         int Count = 0;
-        for (int i = 0; i<monster.Length; i++)
+        for (int i = 0; i < monster.Length; i++)
         {
             if (CheckObjectInMiniMap(monster[i]))
             {
