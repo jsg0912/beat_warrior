@@ -1,7 +1,7 @@
 public class PlayerConstant
 {
     public const int atk = 1;
-    public const int hpMax = 3;
+    public const int hpMax = 300;
     public const int jumpCountMax = 1;
 
     public const float gravityScale = 5.0f;
