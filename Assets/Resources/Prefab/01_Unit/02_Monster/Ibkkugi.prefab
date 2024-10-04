@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f598578a1b8dba944b2a03235e8d216c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 25f8aabd56575c04c9d8d4d9b4ea0290, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 29716057721496312}
   - component: {fileID: 70396055461806091}
   m_Layer: 7
-  m_Name: Monster1
+  m_Name: Ibkkugi
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,7 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5833a4c1f2adea741ac0d28befbb471a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterName: 11
+  monsterName: 1
+  status: 0
   MonsterSprite: {fileID: 4281136444186291539}
   UIHp: {fileID: 8578074991791701901}
   Target: {fileID: 9219120353875685645}
