@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
 
 public class KeySettingButton : MonoBehaviour
 {

@@ -25,6 +25,6 @@ public class Unit
     public Unit(UnitInfo unitInfo, UnitStat unitStat)
     {
         this.unitInfo = unitInfo;
-        this.unitStat = unitStat.Copy();
+        this.unitStat = unitStat;
     }
 }

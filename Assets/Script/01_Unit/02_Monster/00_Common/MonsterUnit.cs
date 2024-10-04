@@ -1,10 +1,10 @@
 
 public class MonsterUnit : Unit
 {
-    public Pattern pattern;
+    public PatternName patternName;
 
-    public MonsterUnit(MonsterInfo monsterInfo, UnitStat unitStat, Pattern pattern) : base(monsterInfo, unitStat)
+    public MonsterUnit(MonsterInfo monsterInfo, UnitStat unitStat, PatternName patternName) : base(monsterInfo, unitStat)
     {
-        this.pattern = pattern;
+        this.patternName = patternName;
     }
 }

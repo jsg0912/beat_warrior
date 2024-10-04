@@ -10,4 +10,10 @@ public enum MonsterName
     DummyArcherHP2,
     DummyArcherHP3,
     DummyArcherHP4,
+    Ippali,
+    Ibkkugi,
+    Koppulso,
+    Jiljili,
+    Giljjugi,
+    Ismomi
 }

@@ -1,7 +1,8 @@
-public enum SceneName {
+public enum SceneName
+{
     Tittle,
     Setting,
-    Player,
+    Player, ProtoType, // TODO: 임시 씬 이름 - 신동환, 2024.09.11
     Enhance,
     Village1, Village2, Village3, Village4, Village5, Village6,
     LowerPart1, LowerPart2, LowerPart3, LowerPart4, LowerPart5, LowerPart6,

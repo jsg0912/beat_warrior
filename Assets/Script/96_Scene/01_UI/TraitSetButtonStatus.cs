@@ -1,6 +1,6 @@
 public enum TraitSetButtonStatus
 {
-    Unequip,
+    UnEquip,
     Equip,
     Buy
 }

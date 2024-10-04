@@ -27,17 +27,19 @@ public class KeyManager : MonoBehaviour
         KeyCode.Space, KeyCode.Q, KeyCode.E, KeyCode.F };
 
     [SerializeField] private GameObject KeyButtons;
-    private GameObject KeySettingButtonPrefab;
+    [SerializeField] private GameObject KeySettingButtonPrefab;
 
     private void Awake()
     {
         for (int i = 0; i < defaultKeys.Length; i++)
-            KeySetting.keys.Add((Action)i, defaultKeys[i]);
-
-        KeySettingButtonPrefab = Resources.Load("Prefab/KeySettingButton") as GameObject;
+        {
+            if (KeySetting.keys.ContainsKey((Action)i) ==  false)
+                KeySetting.keys.Add((Action)i, defaultKeys[i]);
+        }
 
         CreateKeySettingButtons();
     }
+
 
     private void CreateKeySettingButtons()
     {

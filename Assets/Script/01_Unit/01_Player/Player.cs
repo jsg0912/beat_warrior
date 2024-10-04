@@ -2,12 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public static Player Instance;
+    private static Player _instance;
+    public static Player Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<Player>();
+                if (_instance == null)
+                {
+                    CreatePlayer();
+                }
+            }
+            return _instance;
+        }
+    }
     public Unit playerUnit;
     private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
@@ -51,40 +65,19 @@ public class Player : MonoBehaviour
             Skill();
         }
 
+        // TODO: 임시 부활 코드
         if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
+    }
 
-        // TODO: 임시 코드(추가특성 장착 및 해제)
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            AddOrRemoveTrait(SkillName.AppendMaxHP);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            AddOrRemoveTrait(SkillName.DoubleJump);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            AddOrRemoveTrait(SkillName.Execution);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            AddOrRemoveTrait(SkillName.KillRecoveryHP);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            AddOrRemoveTrait(SkillName.AppendAttack);
-        }
+    public static void CreatePlayer()
+    {
+        GameObject player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
+        player.GetComponent<Player>().Initialize();
+        DontDestroyOnLoad(player);
     }
 
     private void Initialize(Direction direction = Direction.Left)
     {
-        Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, PlayerConstant.hpMax},
             {StatKind.ATK, PlayerConstant.atk},
@@ -111,11 +104,10 @@ public class Player : MonoBehaviour
         SetDirection(direction);
         isOnBaseTile = false;
         isInvincibility = false;
-
-        HpUI.Instance.SetAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+        HpUI.Instance.HpInitialize();
     }
 
-    public void RestartPlayer()
+    public void RestartPlayer()//TODO: GameManager로 옮기기 - 이정대 20240912
     {
         Initialize(direction);
         _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
@@ -172,7 +164,7 @@ public class Player : MonoBehaviour
     public void SetDirection(Direction dir)
     {
         direction = dir;
-        PlayerSprite.localScale = new Vector3(-(int)direction, 1, 1);
+        PlayerSprite.localScale = new Vector3((int)direction, 1, 1);
     }
 
     public void SetGravityScale(bool gravity)
@@ -388,7 +380,6 @@ public class Player : MonoBehaviour
     public void EquipTrait(SkillName name)
     {
         Skill trait = null;
-        DebugConsole.Log(name.ToString());
         switch (name)
         {
             case SkillName.AppendMaxHP:
@@ -418,8 +409,6 @@ public class Player : MonoBehaviour
 
         trait.GetSkill();
         traitList.Add(trait);
-
-        DebugConsole.Log(traitList);
     }
 
     public void RemoveTraitByIndex(int index)

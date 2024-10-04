@@ -28,7 +28,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
         }
     }
 
-    protected override void CreateAttackPrefab()
+    protected override void CreateEffectPrefab()
     {
         GameObject attackPrefab = GameObject.Instantiate(EffectPrefab);
 

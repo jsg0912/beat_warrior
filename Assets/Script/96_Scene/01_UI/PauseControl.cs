@@ -39,8 +39,4 @@ public class PauseControl : MonoBehaviour
         else { ResumeActive(); }
 
     }
-
-
-
-
 }

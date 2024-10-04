@@ -4,6 +4,8 @@ using UnityEngine;
 public abstract class Skill
 {
     protected GameObject unit;
+    protected MonoBehaviour monoBehaviour;
+
     public SkillName skillName;
     public string description;
 
@@ -21,6 +23,7 @@ public abstract class Skill
     {
         this.unit = unit;
         this.description = description;
+        monoBehaviour = unit.GetComponent<MonoBehaviour>();
     }
 
     public virtual void GetSkill() { return; }
@@ -34,7 +37,7 @@ public abstract class Skill
 
     public void StartCountCoolTime()
     {
-        countCoolTime = unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
+        countCoolTime = monoBehaviour.StartCoroutine(CountCoolTime());
     }
 
     protected virtual IEnumerator CountCoolTime()
@@ -52,9 +55,9 @@ public abstract class Skill
 
     public virtual void ResetCoolTime()
     {
-        if (countCoolTime != null) unit.GetComponent<MonoBehaviour>().StopCoroutine(countCoolTime);
+        if (countCoolTime != null) monoBehaviour.StopCoroutine(countCoolTime);
         coolTime = 0;
     }
 
-    protected virtual void CreateAttackPrefab() { return; }
+    protected virtual void CreateEffectPrefab() { return; }
 }
