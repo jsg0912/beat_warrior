@@ -104,7 +104,6 @@ public class Player : MonoBehaviour
         SetDirection(direction);
         isOnBaseTile = false;
         isInvincibility = false;
-        HpUI.Instance.HpInitialize();
     }
 
     public void RestartPlayer()//TODO: GameManager로 옮기기 - 이정대 20240912
