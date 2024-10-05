@@ -1078,9 +1078,9 @@ RectTransform:
   - {fileID: 3907358292264608629}
   m_Father: {fileID: 2328968758943920451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.886627, y: -80.81702}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 630, y: -10}
   m_SizeDelta: {x: 300, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3401842325285164796
@@ -1328,17 +1328,17 @@ MonoBehaviour:
   masterControl:
     volumeSlider: {fileID: 3401842325285164796}
     muteToggle: {fileID: 8049235454771958178}
-    exposedParameter: 
+    exposedParameter: 0
     volume: 1
   bgmControl:
     volumeSlider: {fileID: 5636855116486199985}
     muteToggle: {fileID: 8760311217656736168}
-    exposedParameter: 
+    exposedParameter: 0
     volume: 1
   sfxControl:
     volumeSlider: {fileID: 6859217647329463151}
     muteToggle: {fileID: 9129949273420011563}
-    exposedParameter: 
+    exposedParameter: 0
     volume: 1
 --- !u!1 &2735935781253454987
 GameObject:
@@ -2775,7 +2775,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4035991609524767855
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2932,9 +2932,9 @@ RectTransform:
   - {fileID: 6833316342439877929}
   m_Father: {fileID: 2191774440321799486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.886475, y: 119.183044}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 630, y: -10}
   m_SizeDelta: {x: 300, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6859217647329463151
@@ -3567,9 +3567,9 @@ RectTransform:
   - {fileID: 2487252854677748090}
   m_Father: {fileID: 1996664295765188757}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 14.886475, y: 19.183044}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 630, y: -10}
   m_SizeDelta: {x: 300, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5636855116486199985
@@ -3639,7 +3639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &95988593053729848
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4367,6 +4367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   KeyButtons: {fileID: 6447305915130115077}
+  KeySettingButtonPrefab: {fileID: 0}
 --- !u!114 &6601386613665928768
 MonoBehaviour:
   m_ObjectHideFlags: 0
