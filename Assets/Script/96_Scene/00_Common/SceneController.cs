@@ -39,6 +39,9 @@ public class SceneController : MonoBehaviour
             case SceneName.Setting:
                 SceneManager.LoadScene("Setting");
                 break;
+            case SceneName.ProtoType2:
+                SceneManager.LoadScene("ProtoType2");
+                break;
         }
     }
 }
