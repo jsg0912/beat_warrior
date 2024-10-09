@@ -10,7 +10,7 @@ public class Portal : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                SceneController.Instance.ChangeScene(SceneName.ProtoType2);
+                SceneController.Instance.ChangeScene((SceneName)(SceneController.Instance.CurrentScene + 1));
             }
         }
     }
