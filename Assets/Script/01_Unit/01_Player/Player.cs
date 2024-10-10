@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
     {
         if (status != PlayerStatus.Dead)
         {
-            if(!PauseControl.instance.GetPause())
+            if (!PauseControl.instance.GetPause())
             {
                 Jump();
                 Down();
@@ -110,6 +110,8 @@ public class Player : MonoBehaviour
         SetDirection(direction);
         isOnBaseTile = false;
         isInvincibility = false;
+
+        ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
     }
 
     public void RestartPlayer()//TODO: GameManager로 옮기기 - 이정대 20240912
