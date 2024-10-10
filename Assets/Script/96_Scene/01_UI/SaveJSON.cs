@@ -20,9 +20,7 @@ public class SaveJSON
     public float[] audioValue = new float[3] {1f, 1f, 1f};
     public string[] keyCode;
 
-    private KeyCode[] defaultKeys = new KeyCode[]
-    { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.Mouse1,
-        KeyCode.Space, KeyCode.Q, KeyCode.E, KeyCode.F };
+    private KeyCode[] defaultKeys = new KeyCode[] { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.Mouse1, KeyCode.Space, KeyCode.Q, KeyCode.E, KeyCode.F };
     private string[] temp;
 
 
@@ -93,7 +91,9 @@ public class SaveJSON
         this.resolutionHeight = previousData?.resolutionHeight ?? Screen.currentResolution.height;
         this.audioName = previousData?.audioName ?? Enum.GetNames(typeof(AudioList));
         this.audioValue = previousData?.audioValue ?? new float[3] { 1f, 1f, 1f };
-        
+
+        temp = new string[defaultKeys.Length];
+
         for(int i = 0; i< defaultKeys.Length; i++)
         {
             temp[i] = defaultKeys[i].ToString();
