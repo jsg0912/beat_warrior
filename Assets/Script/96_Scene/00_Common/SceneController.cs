@@ -5,6 +5,8 @@ public class SceneController : MonoBehaviour
 {
     private static SceneController _instance;
 
+    public int CurrentScene = (int)SceneName.ProtoType;
+
     public static SceneController Instance
     {
         get
@@ -29,15 +31,23 @@ public class SceneController : MonoBehaviour
         {
             case SceneName.Player:
                 SceneManager.LoadScene("Player");
+                CurrentScene = (int)SceneName.Player;
                 break;
             case SceneName.ProtoType:
                 SceneManager.LoadScene("ProtoType");
+                CurrentScene = (int)(SceneName.ProtoType);
                 break;
             case SceneName.Tittle:
                 SceneManager.LoadScene("Tittle");
+                CurrentScene = (int)SceneName.Tittle;
                 break;
             case SceneName.Setting:
                 SceneManager.LoadScene("Setting");
+                CurrentScene = (int)SceneName.Setting;
+                break;
+            case SceneName.ProtoType2:
+                SceneManager.LoadScene("ProtoType2");
+                CurrentScene = (int)SceneName.ProtoType2;
                 break;
         }
     }

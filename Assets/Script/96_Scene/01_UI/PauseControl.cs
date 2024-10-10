@@ -40,5 +40,5 @@ public class PauseControl : MonoBehaviour
 
     }
 
-    public bool GetPause() { return isPauseActive; }  
+    public bool GetPause() { return isPauseActive; }
 }
