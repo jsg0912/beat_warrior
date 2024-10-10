@@ -3,8 +3,8 @@ using System.Collections;
 
 public class SoulObject : MonoBehaviour
 {
-    public float floatHeight = 0.01f; // 떠오르는 높이
-    public float floatSpeed = 1f; // 떠오르는 속도
+    private float floatHeight = 0.2f; // 떠오르는 높이
+    private float floatSpeed = 1f; // 떠오르는 속도
 
     private Vector3 startPosition;
 
