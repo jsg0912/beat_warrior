@@ -12,12 +12,6 @@ public class VolumeControl
     [HideInInspector] public float volume = 1f; 
 }
 
-public class AudioSet
-{
-    public bool mute;
-    public float volume;
-}
-
 public enum AudioList
 {
     Master,
