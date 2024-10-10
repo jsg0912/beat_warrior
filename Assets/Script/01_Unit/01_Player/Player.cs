@@ -77,8 +77,16 @@ public class Player : MonoBehaviour
 
     public static void CreatePlayer()
     {
-        Portal portal = FindObjectOfType<Portal>(); // TODO: Portal이 어디선가 관리되어야 함 UI 쪽에서 작업 필요 - Tony, 20241010
-        GameObject player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject, portal.gameObject.transform.position, Quaternion.identity);
+        Portal portal = FindObjectOfType<Portal>(); // TODO: Portal이 어디선가 관리되어야 함 UI 쪽에서 작업 필요 - 신동환, 20241010
+        GameObject player;
+        if (portal == null) // 실제에서는 웬만하면 Portal이 존재해야함, 혹시 모를 때를 대비한 방어코드 - 신동환, 20241010
+        {
+            player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
+        }
+        else
+        {
+            player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject, portal.gameObject.transform.position, Quaternion.identity);
+        }
         player.GetComponent<Player>().Initialize();
         DontDestroyOnLoad(player);
     }
