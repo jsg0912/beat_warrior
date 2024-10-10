@@ -53,16 +53,22 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (status != PlayerStatus.Dead) CheckMove();
+        if (!PauseControl.instance.GetPause())
+        {
+            if (status != PlayerStatus.Dead) CheckMove();
+        }
     }
 
     void Update()
     {
         if (status != PlayerStatus.Dead)
         {
-            Jump();
-            Down();
-            Skill();
+            if(!PauseControl.instance.GetPause())
+            {
+                Jump();
+                Down();
+                Skill();
+            }
         }
 
         // TODO: 임시 부활 코드
