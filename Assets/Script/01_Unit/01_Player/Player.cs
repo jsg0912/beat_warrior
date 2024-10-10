@@ -77,7 +77,8 @@ public class Player : MonoBehaviour
 
     public static void CreatePlayer()
     {
-        GameObject player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
+        Portal portal = FindObjectOfType<Portal>(); // TODO: Portal이 어디선가 관리되어야 함 UI 쪽에서 작업 필요 - Tony, 20241010
+        GameObject player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject, portal.gameObject.transform.position, Quaternion.identity);
         player.GetComponent<Player>().Initialize();
         DontDestroyOnLoad(player);
     }
