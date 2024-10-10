@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
     public DialogName dialogName;
 
-    public string GetDialog(DialogName dialogName, Language language,int DialogIndex)
+    public string GetDialog(DialogName dialogName, Language language, int DialogIndex)
     {
-        if(DialogIndex == DialogScript.DialogData[dialogName][language].Length)
+        if (DialogIndex == DialogScript.DialogData[dialogName][language].Length)
         {
             return null;
         }
