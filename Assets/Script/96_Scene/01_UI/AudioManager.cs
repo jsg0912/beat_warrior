@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class VolumeControl
 {
     public Slider volumeSlider;
-    public Toggle muteToggle; 
     public AudioList exposedParameter; 
 
     [HideInInspector] public float volume = 1f; 
@@ -49,14 +48,11 @@ public class AudioManager : MonoBehaviour
             UpdateAudioVolume(control);
         });
 
-        control.muteToggle.onValueChanged.AddListener((isMuted) => {
-            UpdateAudioVolume(control);
-        });
     }
 
     private void UpdateAudioVolume(VolumeControl control)
     {
-        float finalVolume = control.muteToggle.isOn ? -80f : Mathf.Log10(control.volume) * 20f;  
+        float finalVolume =  Mathf.Log10(control.volume) * 20f;  
 
         audioMixer.SetFloat(control.exposedParameter.ToString(), finalVolume);
     }
