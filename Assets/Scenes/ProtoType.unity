@@ -405,7 +405,7 @@ RectTransform:
   m_Children:
   - {fileID: 2113627186}
   - {fileID: 1918425873}
-  m_Father: {fileID: 916926825}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1571,7 +1571,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 342597409}
-  - {fileID: 916926825}
   - {fileID: 1657200191}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2612,7 +2611,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1767632872}
-  m_Father: {fileID: 916926825}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -3704,7 +3703,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 916926825}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4001,7 +4000,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 5, y: 5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4051,7 +4050,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f726ce67c721ead4f915298b5e245706, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4396,7 +4395,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 519928858}
-  m_Father: {fileID: 905257795}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -4730,6 +4729,7 @@ Transform:
   - {fileID: 1160340295}
   - {fileID: 1743655066}
   - {fileID: 1671889122}
+  - {fileID: 2138257909}
   m_Father: {fileID: 793586012}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1037212255 stripped
@@ -9306,7 +9306,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1505407763}
-  m_Father: {fileID: 905257795}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9357,7 +9357,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 905257800}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: DialogTrigger, Assembly-CSharp
         m_MethodName: OnClickStartDialog
         m_Mode: 1
@@ -10952,8 +10952,12 @@ SceneRoots:
   - {fileID: 786490190}
   - {fileID: 44261556}
   - {fileID: 354208626}
-  - {fileID: 905257795}
   - {fileID: 969760806}
   - {fileID: 1396510052}
   - {fileID: 793586012}
   - {fileID: 1666231824}
+  - {fileID: 84809896}
+  - {fileID: 641455816}
+  - {fileID: 834327374}
+  - {fileID: 970663241}
+  - {fileID: 1948885490}
