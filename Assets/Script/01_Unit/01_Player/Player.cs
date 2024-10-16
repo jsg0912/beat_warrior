@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
                 Jump();
                 Down();
                 Skill();
+                Interaction();
             }
         }
 
@@ -314,6 +315,17 @@ public class Player : MonoBehaviour
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
             _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
+        }
+    }
+
+    private void Interaction()
+    {
+        if (Input.GetKeyDown(KeySetting.keys[Action.Interaction]))
+        {
+            if(Portal.Instance.IsTriggerPortal == true)
+            {
+                SceneController.Instance.ChangeScene((SceneName)(SceneController.Instance.CurrentScene + 1));
+            }
         }
     }
 

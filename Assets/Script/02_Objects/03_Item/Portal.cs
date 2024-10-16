@@ -2,14 +2,23 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-    private void OnTriggerStay2D(Collider2D collision)
+    public static Portal Instance;
+    public bool IsTriggerPortal;
+
+    private void Start()
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            if (Input.GetKeyDown(KeySetting.keys[Action.Interaction]))
-            {
-                SceneController.Instance.ChangeScene((SceneName)(SceneController.Instance.CurrentScene + 1));
-            }
-        }
+        IsTriggerPortal = false;
+        Instance = this;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player") IsTriggerPortal = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player") IsTriggerPortal= false;
+    }
+    
 }
