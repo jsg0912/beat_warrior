@@ -8,6 +8,16 @@ public class SaveJSON
     public SaveGamePlay saveGamePlay;
     public SaveSetting saveSetting;
 
+
+    public SaveJSON()
+    {
+        SaveJSON previousData = LoadPreviousData();
+
+        this.saveRecord = previousData?.saveRecord ?? new SaveRecord();
+        this.saveGamePlay = previousData?.saveGamePlay ?? new SaveGamePlay();
+        this.saveSetting = previousData?.saveSetting ?? new SaveSetting();
+    }
+
     public SaveJSON(SaveRecord record)
     {
         SaveJSON previousData = LoadPreviousData();

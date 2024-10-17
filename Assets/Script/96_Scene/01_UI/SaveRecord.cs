@@ -1,5 +1,6 @@
 using System;
 
+[System.Serializable]
 public class SaveRecord
 {
     public int soul;

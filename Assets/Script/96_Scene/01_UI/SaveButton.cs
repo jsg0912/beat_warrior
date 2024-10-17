@@ -6,17 +6,18 @@ public class SaveButton : MonoBehaviour
 {
     public void OnClickSave()
     {
-        SkillName[] mySkill = { SkillName.KillRecoveryHP, SkillName.AppendAttack};
-        //SaveJSON newSave = new SaveJSON;
-        //SaveLoadManager.instance.SaveData(newSave);
+        SaveJSON newSave = new SaveJSON();
+
+        newSave.saveRecord.soul = Inventory.Instance.GetSoulNumber();
+
+        SaveLoadManager.instance.SaveData(newSave);
     }
 
     public void OnClickLoad()
     {
         SaveJSON loadedData = SaveLoadManager.instance.LoadMostRecentData();
 
-        //Debug.Log(loadedData.soul);
-        //Debug.Log(loadedData.chapterName);
-        //Debug.Log(loadedData.resolutionWidth);
+        Debug.Log(loadedData.saveRecord.soul);
+        Debug.Log(loadedData.saveSetting.resolutionWidth);
     }
 }

@@ -1,5 +1,6 @@
 using System;
 
+[System.Serializable]
 public class SaveGamePlay
 {
     public string currentChapterName;
