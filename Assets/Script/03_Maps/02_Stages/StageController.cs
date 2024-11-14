@@ -4,11 +4,6 @@ public class StageController : MonoBehaviour
 {
     private int monsters;
     public bool Cleared { get; private set; }
-    public Transform Spawner;
-
-    private void Start()
-    {
-    }
 
     public void InitializeStage(int monsterCount)
     {
@@ -31,8 +26,4 @@ public class StageController : MonoBehaviour
         }
     }
 
-    public void MovePlayerToSpawner()
-    {
-        Player.Instance.transform.position = Spawner.position;
-    }
 }
