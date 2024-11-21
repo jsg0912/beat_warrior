@@ -4,6 +4,7 @@ public class MoveCamera : MonoBehaviour
 {
     public Transform Target;
     public float speed;
+    public float z = 10f;
 
 
     public Vector2 center;
@@ -35,7 +36,7 @@ public class MoveCamera : MonoBehaviour
     private void cameraMovement()
     {
         transform.position = Vector3.Lerp(transform.position, Target.position, Time.deltaTime * speed);
-        transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
+        transform.position = new Vector3(transform.position.x, transform.position.y, z);
     }
 
     private void maxCameraMovement()
@@ -46,7 +47,7 @@ public class MoveCamera : MonoBehaviour
         float ly = size.y * 0.5f - height;
         float clampY = Mathf.Clamp(transform.position.y, -ly + center.y, ly + center.y);
 
-        transform.position = new Vector3(clampX, clampY, -10f);
+        transform.position = new Vector3(clampX, clampY, z);
     }
 
 }
