@@ -16,13 +16,14 @@ public class Monster : MonoBehaviour
     [SerializeField] private Transform MonsterSprite;
     [SerializeField] private MonsterHPUI HPUI;
     [SerializeField] private GameObject Target;
+    [SerializeField] private int AnotherHPValue = 0;
 
     private GameObject SoulPrefab;
 
     void Start()
     {
         _animator = GetComponent<Animator>();
-        monsterUnit = MonsterList.FindMonster(monsterName);
+        monsterUnit = MonsterList.FindMonster(monsterName, AnotherHPValue);
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
 
