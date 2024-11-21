@@ -31,8 +31,8 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        // TODO: Player Scene은 임시로 이동함 - 신동환, 2024.09.11
-        SceneController.Instance.ChangeScene(SceneName.ProtoType);
+        // TODO: Title Scene으로 시작하도록 변경함 - 신동환, 2024.11.21
+        SceneController.Instance.ChangeScene(SceneName.Tittle);
     }
 
     public void RestartGame()

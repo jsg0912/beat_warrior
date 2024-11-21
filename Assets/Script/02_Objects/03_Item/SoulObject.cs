@@ -32,7 +32,7 @@ public class SoulObject : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Inventory.Instance.ChangeSoulNumber(100); // TODO: Constant화 해야함
+            Inventory.Instance.ChangeSoulNumber(ObjectConstant.SoulIdleMotionSpeed);
             Destroy(gameObject);
         }
     }
