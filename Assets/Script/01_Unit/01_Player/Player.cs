@@ -68,6 +68,7 @@ public class Player : MonoBehaviour
                 Jump();
                 Down();
                 Skill();
+                Interaction();
             }
         }
 
@@ -77,16 +78,8 @@ public class Player : MonoBehaviour
 
     public static void CreatePlayer()
     {
-        Portal portal = FindObjectOfType<Portal>(); // TODO: Spawner에서 Spawn되도록 수정해야함- 신동환, 20241010
         GameObject player;
-        if (portal == null) // 실제에서는 웬만하면 Spawner가 존재해야함, 혹시 모를 때를 대비한 방어코드 - 신동환, 20241010
-        {
-            player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
-        }
-        else
-        {
-            player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject, portal.gameObject.transform.position, Quaternion.identity);
-        }
+        player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
         player.GetComponent<Player>().Initialize();
         DontDestroyOnLoad(player);
     }
@@ -121,6 +114,7 @@ public class Player : MonoBehaviour
         isInvincibility = false;
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
+        Spawner.Instance.MovePlayerToSpawner();
     }
 
     public void RestartPlayer()//TODO: GameManager로 옮기기 - 이정대 20240912
@@ -314,6 +308,17 @@ public class Player : MonoBehaviour
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
             _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
+        }
+    }
+
+    private void Interaction()
+    {
+        if (Input.GetKeyDown(KeySetting.keys[Action.Interaction]))
+        {
+            if(Portal.Instance.IsTriggerPortal == true)
+            {
+                SceneController.Instance.ChangeScene((SceneName)(SceneController.Instance.CurrentScene + 1));
+            }
         }
     }
 

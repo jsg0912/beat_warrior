@@ -14,21 +14,22 @@ public class Monster : MonoBehaviour
     protected bool isMoveable = true;
 
     [SerializeField] private Transform MonsterSprite;
-    [SerializeField] private MonsterHPUI UIHp;
+    [SerializeField] private MonsterHPUI HPUI;
     [SerializeField] private GameObject Target;
+    [SerializeField] private int AnotherHPValue = 0;
 
     private GameObject SoulPrefab;
 
     void Start()
     {
         _animator = GetComponent<Animator>();
-        monsterUnit = MonsterList.FindMonster(monsterName);
+        monsterUnit = MonsterList.FindMonster(monsterName, AnotherHPValue);
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
 
         SoulPrefab = Resources.Load(PrefabRouter.SoulPrefab) as GameObject;
 
-        UIHp.SetMaxHP(monsterUnit.GetCurrentHP());
+        HPUI.SetMaxHP(monsterUnit.GetCurrentHP());
     }
 
     void Update()
@@ -83,7 +84,7 @@ public class Monster : MonoBehaviour
 
         if (Player.Instance.hitMonsterFuncList != null) Player.Instance.hitMonsterFuncList(monsterUnit);
 
-        UIHp.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
+        HPUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
         if (monsterUnit.GetIsAlive() == false)
         {

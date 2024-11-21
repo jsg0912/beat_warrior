@@ -53,7 +53,7 @@ public static class MonsterList
         PatternName.Monster3),
     };
 
-    public static MonsterUnit FindMonster(MonsterName name)
+    public static MonsterUnit FindMonster(MonsterName name, int anotherHPValue = 0)
     {
         MonsterJSON target = monsterList.Find(monster => monster.monsterName == name.ToString());
         if (target == null)
@@ -61,10 +61,10 @@ public static class MonsterList
             throw new Exception($"Monster가 List에 없음 {name.ToString()}");
         }
 
-        return GetMonsterFromJSON(target);
+        return GetMonsterFromJSON(target, anotherHPValue);
     }
 
-    public static MonsterUnit GetMonsterFromJSON(MonsterJSON monsterJSON)
+    public static MonsterUnit GetMonsterFromJSON(MonsterJSON monsterJSON, int anotherHPValue = 0)
     {
         MonsterName monsterName = Util.ParseEnumFromString<MonsterName>(monsterJSON.monsterName);
         PatternName patternName = Util.ParseEnumFromString<PatternName>(monsterJSON.patternName);
@@ -74,6 +74,11 @@ public static class MonsterList
         {
             StatKind statKind = Util.ParseEnumFromString<StatKind>(monsterJSON.statKinds[i]);
             monsterStats.Add(statKind, monsterJSON.statValues[i]);
+        }
+
+        if (anotherHPValue != 0)
+        {
+            monsterStats[StatKind.HP] = anotherHPValue;
         }
 
         return new MonsterUnit(
