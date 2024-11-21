@@ -5,7 +5,7 @@ public class SceneController : MonoBehaviour
 {
     private static SceneController _instance;
 
-    public int CurrentScene = (int)SceneName.ProtoType;
+    public int CurrentScene;
 
     public static SceneController Instance
     {
@@ -23,6 +23,12 @@ public class SceneController : MonoBehaviour
             }
             return _instance;
         }
+    }
+
+    private void Awake()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        CurrentScene = currentScene.buildIndex;
     }
 
     public void ChangeScene(SceneName sceneName)
@@ -47,6 +53,14 @@ public class SceneController : MonoBehaviour
                 break;
             case SceneName.ProtoType2:
                 SceneManager.LoadScene("ProtoType2");
+                CurrentScene = (int)SceneName.ProtoType2;
+                break;
+            case SceneName.Village1:
+                SceneManager.LoadScene("Village1");
+                CurrentScene = (int)SceneName.ProtoType2;
+                break;
+            case SceneName.Village2:
+                SceneManager.LoadScene("Village2");
                 CurrentScene = (int)SceneName.ProtoType2;
                 break;
         }
