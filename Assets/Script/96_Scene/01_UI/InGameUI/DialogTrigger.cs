@@ -1,33 +1,62 @@
 using UnityEngine;
+using TMPro;
 
 public class DialogTrigger : MonoBehaviour
 {
     public DialogManager DialogManager;
-    public GameObject DialogPanel;
-    public bool isAction;
-    public int dialogIndex;
-    public TMPro.TextMeshProUGUI DialogText;
+    public GameObject dialogPanelPrefab; 
+    public DialogName dialogName; 
 
-    public void OnClickStartDialog()
+    private GameObject dialogPanel;
+    private TextMeshProUGUI dialogText;
+    public bool isPlayerInTrigger = false; 
+    private int dialogIndex = 0; 
+
+    private void Start()
     {
-
-        DialogManager = DialogManager.GetComponent<DialogManager>();
-        StartDialog(DialogManager.dialogName);
-
-        DialogPanel.SetActive(isAction);
+        dialogPanel = Instantiate(dialogPanelPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
+        dialogPanel.SetActive(false);
+        dialogText = dialogPanel.GetComponentInChildren<TextMeshProUGUI>();
     }
-    public void StartDialog(DialogName dialogName)
-    {
-        string dialogDate = DialogManager.GetDialog(dialogName, UIManager.Instance.language, dialogIndex);
 
-        if (dialogDate == null)
+    private void Update()
+    {
+        if (isPlayerInTrigger && Input.GetKeyDown(KeySetting.keys[Action.Interaction]))
         {
-            isAction = false;
+            StartDialog();
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerInTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            isPlayerInTrigger = false;
             dialogIndex = 0;
+            dialogPanel.SetActive(false);
+        }
+    }
+
+    public void StartDialog()
+    {
+        string dialogData = DialogManager.GetDialog(dialogName, UIManager.Instance.language, dialogIndex);
+
+        if (dialogData == null)
+        {
+            dialogIndex = 0; 
+            dialogPanel.SetActive(false); 
             return;
         }
-        DialogText.text = dialogDate;
-        isAction = true;
+
+        dialogPanel.SetActive(true);
+        dialogText.text = dialogData;
         dialogIndex++;
     }
 }
