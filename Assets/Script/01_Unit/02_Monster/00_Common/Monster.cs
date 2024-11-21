@@ -91,6 +91,7 @@ public class Monster : MonoBehaviour
             return;
         }
 
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(-5.0f, 0.5f) * (int)direction, ForceMode2D.Impulse);
         _animator.SetTrigger("hurt");
     }
 
