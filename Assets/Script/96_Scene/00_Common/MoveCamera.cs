@@ -4,7 +4,7 @@ public class MoveCamera : MonoBehaviour
 {
     public Transform Target;
     public float speed;
-    public float z = 10f;
+    public float z = -10f;
 
 
     public Vector2 center;
