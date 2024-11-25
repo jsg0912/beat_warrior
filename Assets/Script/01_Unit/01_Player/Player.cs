@@ -315,7 +315,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeySetting.keys[Action.Interaction]))
         {
-            if(Portal.Instance.IsTriggerPortal == true)
+            if (Portal.Instance.IsTriggerPortal == true)
             {
                 SceneController.Instance.ChangeScene((SceneName)(SceneController.Instance.CurrentScene + 1));
             }
