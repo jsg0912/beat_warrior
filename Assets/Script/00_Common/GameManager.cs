@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     {
         TraitPriceList.CheckTraitPriceListValidation();
         Player.CreatePlayer();
+        // TODO: UI 만드는 과정 옮기기 - 이정대, 20241126 
         DontDestroyOnLoad(this);
     }
 
@@ -41,6 +42,6 @@ public class GameManager : MonoBehaviour
 
         Player.Instance.RestartPlayer();
 
-        HpUI.Instance.CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+        HpUI.Instance.HpInitialize();
     }
 }
