@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,8 +26,8 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         TraitPriceList.CheckTraitPriceListValidation();
+        UIManager.CreateUI();
         Player.CreatePlayer();
-        // TODO: UI 만드는 과정 옮기기 - 이정대, 20241126 
         DontDestroyOnLoad(this);
     }
 
