@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HpUI : MonoBehaviour
+public class PlayerHpUI : MonoBehaviour
 {
-    public static HpUI Instance;
+    public static PlayerHpUI Instance;
 
     [SerializeField] private GameObject HP;
     private GameObject HPPrefab;

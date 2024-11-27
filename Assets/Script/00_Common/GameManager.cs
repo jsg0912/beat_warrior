@@ -43,6 +43,6 @@ public class GameManager : MonoBehaviour
 
         Player.Instance.RestartPlayer();
 
-        HpUI.Instance.HpInitialize();
+        PlayerHpUI.Instance.HpInitialize();
     }
 }
