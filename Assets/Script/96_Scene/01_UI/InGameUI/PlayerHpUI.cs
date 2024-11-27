@@ -47,18 +47,18 @@ public class PlayerHpUI : MonoBehaviour
 
     public void UpdateHPUI()
     {
-        int hp = Player.Instance.GetCurrentStat(StatKind.HP);
+        int maxHP = Player.Instance.GetFinalStat(StatKind.HP);
+        int currentHP = Player.Instance.GetCurrentStat(StatKind.HP);
 
-        if (hp == 0)
+        if (HPList.Count != maxHP)
         {
-            foreach (Image image in HPList) image.gameObject.SetActive(true);
+            HpInitialize();
             return;
         }
 
-        for (int i = 0; i < Player.Instance.GetFinalStat(StatKind.HP); i++)
+        for (int i = 0; i < maxHP; i++)
         {
-            if (i < hp) HPList[i].gameObject.SetActive(false);
-            else HPList[i].gameObject.SetActive(true);
+            HPList[i].gameObject.SetActive(i >= currentHP);
         }
     }
 
