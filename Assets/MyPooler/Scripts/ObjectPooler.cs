@@ -62,11 +62,20 @@ namespace MyPooler
         /// <returns></returns>
         public GameObject GetFromPool(PoolTag poolTag, Vector3 position, Quaternion rotation)
         {
+            // 태그 제한 확인
+            if (!SceneTagManager.Instance.IsTagAllowed(poolTag))
+            {
+                if (isDebug)
+                    Debug.LogWarning($"PoolTag '{poolTag}' is not allowed in the current scene.");
+                return null;
+            }
+
             string tag = poolTag.ToString();
+
             if (!poolDictionary.ContainsKey(tag))
             {
                 if (isDebug)
-                    Debug.Log("Pool tag not found!");
+                    Debug.LogError($"Pool tag '{tag}' not found!");
                 return null;
             }
 
@@ -77,47 +86,26 @@ namespace MyPooler
             }
             else
             {
-                Pool currentPool = pools.Find(pool => pool.tag.ToString() == tag);
-                float extensionLimit = currentPool.extensionLimit;
-
-                if (currentPool.shouldExpandPool)
+                Pool currentPool = pools.Find(pool => pool.tag == poolTag);
+                if (currentPool != null && currentPool.shouldExpandPool)
                 {
-                    if (extensionLimit > 0)
-                    {
-                        if (extensionSize < extensionLimit)
-                        {
-                            o = IncrementPool(currentPool);
-                            if (isDebug)
-                                Debug.Log(tag + " pool incremented!");
-                            extensionSize++;
-                        }
-                        else
-                        {
-                            if (isDebug)
-                                Debug.Log("You have no room left for extension on your pool: " + tag + ".");
-                            return null;
-                        }
-                    }
-                    else
-                    {
-                        o = IncrementPool(currentPool);
-                        if (isDebug)
-                            Debug.Log(tag + " pool incremented!");
-                        extensionSize++;
-                    }
+                    o = IncrementPool(currentPool);
+                    if (isDebug)
+                        Debug.Log($"Pool '{tag}' incremented.");
                 }
                 else
                 {
                     if (isDebug)
-                        Debug.Log("You have no object left on your pool: " + tag + ".");
+                        Debug.LogError($"No objects left in pool '{tag}' and expansion is not allowed.");
                     return null;
                 }
             }
+
             o.SetActive(true);
             o.transform.position = position;
             o.transform.rotation = rotation;
-            IPooledObject pooledObj = o.GetComponent<IPooledObject>();
 
+            IPooledObject pooledObj = o.GetComponent<IPooledObject>();
             if (pooledObj != null)
             {
                 pooledObj.OnRequestedFromPool();
@@ -128,45 +116,32 @@ namespace MyPooler
             return o;
         }
 
+
         /// <summary>
         /// Return an object to a pool
         /// </summary>
         /// <param name="tag"></param>
         /// <param name="o"></param>
-        public void ReturnToPool(string tag, GameObject o)
+        public void ReturnToPool(PoolTag poolTag, GameObject o)
         {
+            string tag = poolTag.ToString();
+
             if (!poolDictionary.ContainsKey(tag))
             {
                 if (isDebug)
-                    Debug.Log("Pool tag not found!");
+                    Debug.LogError($"Pool tag '{tag}' not found!");
                 return;
             }
+
             activeObjects[tag].Remove(o);
             poolDictionary[tag].Enqueue(o);
             o.SetActive(false);
-            if (onResetPools != null) onResetPools -= o.GetComponent<IPooledObject>().DiscardToPool;
+
+            IPooledObject pooledObj = o.GetComponent<IPooledObject>();
+            if (pooledObj != null)
+                onResetPools -= pooledObj.DiscardToPool;
         }
 
-        /// <summary>
-        /// Reset a entire pool 
-        /// </summary>
-        /// <param name="tag"></param>
-        public void ResetPool(string tag)
-        {
-            if (!poolDictionary.ContainsKey(tag))
-            {
-                if (isDebug)
-                    Debug.Log("Couldn't reset the pool '" + tag + "': Pool tag not found!");
-                return;
-            }
-
-            List<GameObject> currentList = new List<GameObject>(activeObjects[tag]);
-            foreach (GameObject go in currentList)
-            {
-                go.GetComponent<IPooledObject>().DiscardToPool();
-            }
-            currentList.Clear();
-        }
 
         /// <summary>
         /// Reset all pools
