@@ -10,6 +10,7 @@ public class PrefabRouter
     public const string SoulPrefab = "Prefab/02_Object/Soul";
     public const string GhostPrefab = "Prefab/01_Unit/01_Player/Ghost";
     public const string MarkerPrefab = "Prefab/02_Object/Marker";
+    public const string UIPrefab = "Prefab/03_UI/UI";
     public const string ObjectPooler = "Prefab/02_Object/ObjectPooler";
 
     public static Dictionary<MonsterName, string> AttackPrefab = new() {

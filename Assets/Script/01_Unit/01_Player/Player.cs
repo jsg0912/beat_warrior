@@ -202,7 +202,7 @@ public class Player : MonoBehaviour
     {
         bool currentHP = playerUnit.ChangeCurrentHP(hp);
 
-        HpUI.Instance.UpdateHPUI();
+        PlayerHpUI.Instance.UpdateHPUI();
 
         return currentHP;
     }
