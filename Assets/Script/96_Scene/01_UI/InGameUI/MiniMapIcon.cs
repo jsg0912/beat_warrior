@@ -7,7 +7,7 @@ public class MiniMapIcon : MonoBehaviour
     public TMP_Text hpText;
     public int hp;
 
-    private string poolTag = "EnemyMiniMapIcon";
+    private PoolTag poolTag = PoolTag.EnemyMiniMapIcon;
 
     Vector3 Target;
 
