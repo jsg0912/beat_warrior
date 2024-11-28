@@ -67,7 +67,7 @@ public class Monster : MonoBehaviour
     public void SetDirection(Direction direction)
     {
         this.direction = direction;
-        MonsterSprite.localScale = new Vector3(-(int)direction, 1, 1);
+        MonsterSprite.localScale = new Vector3((int)direction, 1, 1);
     }
 
     public void ChangeDirection()
