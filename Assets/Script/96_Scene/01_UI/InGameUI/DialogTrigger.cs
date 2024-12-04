@@ -5,7 +5,6 @@ public class DialogTrigger : MonoBehaviour
 {
     public DialogManager DialogManager;
     public GameObject dialogPanelPrefab; 
-    public DialogName dialogName; 
 
     private GameObject dialogPanel;
     private TextMeshProUGUI dialogText;
@@ -46,7 +45,7 @@ public class DialogTrigger : MonoBehaviour
 
     public void StartDialog()
     {
-        string dialogData = DialogManager.GetDialog(dialogName, UIManager.Instance.language, dialogIndex);
+        string dialogData = DialogManager.GetDialog(DialogManager.dialogName, UIManager.Instance.language, dialogIndex);
 
         if (dialogData == null)
         {
