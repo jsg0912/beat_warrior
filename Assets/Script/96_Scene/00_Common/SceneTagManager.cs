@@ -2,8 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// TODO: MonoBehaviour? - SDH, 20241204
 public class SceneTagManager : MonoBehaviour
 {
+    public static List<PoolTag> poolTagDefault = new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow };
     // �̱��� ����
     public static SceneTagManager Instance { get; private set; }
 
@@ -48,7 +50,8 @@ public class SceneTagManager : MonoBehaviour
         }
         else
         {
-            allowedTagsInScene.Clear();
+            // TODO: Default Setting for test, whole process should be refactored - SDH, 20241204
+            allowedTagsInScene = poolTagDefault;
         }
     }
 
