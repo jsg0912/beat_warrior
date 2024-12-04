@@ -51,12 +51,14 @@ public class DialogTrigger : MonoBehaviour
         if (dialogData == null)
         {
             dialogIndex = 0; 
-            dialogPanel.SetActive(false); 
+            dialogPanel.SetActive(false);
+            PauseControl.instance.ResumeActive();
             return;
         }
 
         dialogPanel.SetActive(true);
         dialogText.text = dialogData;
         dialogIndex++;
+        PauseControl.instance.PauseActive();
     }
 }
