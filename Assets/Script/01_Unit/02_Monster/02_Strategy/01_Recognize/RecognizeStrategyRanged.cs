@@ -5,18 +5,28 @@ public class RecognizeStrategyRanged : RecognizeStrategy
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
-
+        TargetLayer = LayerMask.GetMask(MonsterConstant.PlayerLayer, MonsterConstant.GroundLayer);
         recognizeRange = MonsterConstant.RangedRecognizeRange;
     }
 
     protected override void CheckTarget()
     {
-        if (Vector3.Distance(GetPlayerPos(), GetMonsterPos()) < recognizeRange)
+        Vector3 offset = new Vector3(0, 1.0f, 0);
+        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterPos() + offset, Vector3.right * GetDirection(), recognizeRange, TargetLayer);
+        if (rayHit.collider != null)
         {
-            monster.SetStatus(MonsterStatus.Chase);
-            return;
+            if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer(MonsterConstant.GroundLayer))
+            {
+                ReleaseChase();
+            }
+            else if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer(MonsterConstant.PlayerLayer))
+            {
+                StartChase();
+            }
         }
-
-        ReleaseChase();
+        else
+        {
+            ReleaseChase();
+        }
     }
 }

@@ -2,7 +2,7 @@ public class JiljiliPattern : Pattern
 {
     public JiljiliPattern()
     {
-        Recognize = new RecognizeStrategyRanged();
+        Recognize = new RecognizeStrategyMelee();
         MoveNormal = new MoveStrategyNormal();
         MoveChase = new MoveStrategyChase();
         Attack = new AttackStrategyThrow();
