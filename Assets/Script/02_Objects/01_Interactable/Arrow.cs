@@ -12,7 +12,7 @@ public class Arrow : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
 
-        if (obj.CompareTag("Player"))
+        if (CompareTag(TagConstant.Player))
         {
             Player.Instance.GetDamaged(1);
             Destroy(this.gameObject);

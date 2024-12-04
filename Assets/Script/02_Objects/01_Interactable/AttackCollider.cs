@@ -32,7 +32,7 @@ public class AttackCollider : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
 
-        if (!obj.CompareTag("Monster")) return;
+        if (!obj.CompareTag(TagConstant.Monster)) return;
 
         if (TargetMonster.Contains(obj)) return;
 

@@ -80,7 +80,7 @@ public class Dash : ActiveSkillPlayer
 
         foreach (GameObject obj in DashTargetMonster)
         {
-            if (obj.CompareTag("Monster"))
+            if (obj.CompareTag(TagConstant.Monster))
             {
                 obj.GetComponent<Monster>().GetDamaged(damageMultiplier);
             }

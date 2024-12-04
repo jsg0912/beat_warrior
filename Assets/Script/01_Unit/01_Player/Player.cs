@@ -479,9 +479,9 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Tile") || other.CompareTag("Base"))
+        if (other.CompareTag(TagConstant.Tile) || other.CompareTag(TagConstant.Base))
         {
-            if (other.CompareTag("Base")) isOnBaseTile = false;
+            if (other.CompareTag(TagConstant.Base)) isOnBaseTile = false;
             _animator.SetBool(PlayerConstant.groundedAnimBool, false);
         }
     }
@@ -490,7 +490,7 @@ public class Player : MonoBehaviour
     {
         GameObject other = collision.gameObject;
 
-        if (other.CompareTag("Base") == false && other.CompareTag("Tile") == false) return;
+        if (other.CompareTag(TagConstant.Base) == false && other.CompareTag(TagConstant.Tile) == false) return;
 
         float collisionPoint = collision.GetContact(0).point.y;
         float colliderBottom = _collider.bounds.center.y - _collider.bounds.size.y / 2;
@@ -499,7 +499,7 @@ public class Player : MonoBehaviour
 
         tileCollider = other.GetComponent<BoxCollider2D>();
 
-        if (other.CompareTag("Base")) isOnBaseTile = true;
+        if (other.CompareTag(TagConstant.Base)) isOnBaseTile = true;
         _animator.SetBool(PlayerConstant.groundedAnimBool, true);
 
         if (status == PlayerStatus.Jump || status == PlayerStatus.Fall) SetPlayerStatus(PlayerStatus.Idle);

@@ -14,7 +14,7 @@ public class MiniMapIcon : MonoBehaviour
     private void Update()
     {
         this.transform.position = Target;
-        if(hp == 0) MyPooler.ObjectPooler.Instance.ReturnToPool(poolTag, this.gameObject);
+        if (hp == 0) MyPooler.ObjectPooler.Instance.ReturnToPool(poolTag, this.gameObject);
     }
 
     public void GetHp(int unitHp)
