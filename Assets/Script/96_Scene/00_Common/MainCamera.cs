@@ -21,7 +21,6 @@ public class MainCamera : MonoBehaviour
     void Start()
     {
         main = GetComponent<Camera>();
-        main.cullingMask = ~(1 << LayerMask.NameToLayer("MiniMap"));
     }
 
 }
