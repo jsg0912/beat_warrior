@@ -3992,6 +3992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59bf18ea7d84fb249966f95943e87a6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsTriggerPortal: 0
 --- !u!58 &912744372
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -6459,6 +6460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   speed: 4
+  z: -10
   center: {x: 23.5, y: -15.1}
   size: {x: 70, y: 40.2}
 --- !u!114 &1429105162
