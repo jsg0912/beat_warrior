@@ -5,25 +5,28 @@ public class UIManager : MonoBehaviour
 {
     public Language language = Language.kr;
     public static UIManager Instance;
-    public GameObject UIPrefab;
 
     private void Awake()
     {
-        if (Instance != null)
+        if(Instance == null) 
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
         {
             Destroy(gameObject);
             return;
         }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
         
-        if (UIPrefab != null)
-        {
-            GameObject UI = Instantiate(UIPrefab);
-            DontDestroyOnLoad (UI);
-        }
+        
     }
 
+    public static void CreateUI()
+    {
+        GameObject UI = Instantiate(Resources.Load<GameObject>(PrefabRouter.UIPrefab));
+        DontDestroyOnLoad(UI);
+    }
     
 
     private void Update()

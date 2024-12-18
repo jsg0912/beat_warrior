@@ -11,7 +11,7 @@ public class MoveStrategy : Strategy
     {
         base.Initialize(monster);
 
-        GroundLayer = LayerMask.GetMask(MonsterConstant.GroundLayer);
+        GroundLayer = LayerMask.GetMask(LayerConstant.Tile);
     }
 
     public override void PlayStrategy()

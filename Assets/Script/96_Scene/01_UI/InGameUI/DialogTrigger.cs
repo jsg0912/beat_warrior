@@ -4,13 +4,13 @@ using TMPro;
 public class DialogTrigger : MonoBehaviour
 {
     public DialogManager DialogManager;
-    public GameObject dialogPanelPrefab; 
-    public DialogName dialogName; 
+    public GameObject dialogPanelPrefab;
+    public DialogName dialogName;
 
     private GameObject dialogPanel;
     private TextMeshProUGUI dialogText;
-    public bool isPlayerInTrigger = false; 
-    private int dialogIndex = 0; 
+    public bool isPlayerInTrigger = false;
+    private int dialogIndex = 0;
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class DialogTrigger : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag(TagConstant.Player))
         {
             isPlayerInTrigger = true;
         }
@@ -36,7 +36,7 @@ public class DialogTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag(TagConstant.Player))
         {
             isPlayerInTrigger = false;
             dialogIndex = 0;
@@ -50,8 +50,8 @@ public class DialogTrigger : MonoBehaviour
 
         if (dialogData == null)
         {
-            dialogIndex = 0; 
-            dialogPanel.SetActive(false); 
+            dialogIndex = 0;
+            dialogPanel.SetActive(false);
             return;
         }
 

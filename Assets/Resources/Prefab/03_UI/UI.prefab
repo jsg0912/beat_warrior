@@ -219,6 +219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 594262821334061776}
+  - component: {fileID: 2391930212018938715}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -244,6 +245,19 @@ Transform:
   - {fileID: 4430686503666084468}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2391930212018938715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7070629379121185445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b9df7d599cddc54b825afbc00080476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  language: 0
 --- !u!1001 &2569332970003446074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -914,6 +928,10 @@ PrefabInstance:
     - target: {fileID: 6669882506638048853, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6698299672893407081, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
+      propertyPath: m_Name
+      value: PlayerHPLIst
       objectReference: {fileID: 0}
     - target: {fileID: 7038939918521461796, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
       propertyPath: m_Sprite

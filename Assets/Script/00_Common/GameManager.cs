@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         TraitPriceList.CheckTraitPriceListValidation();
+        UIManager.CreateUI();
         Player.CreatePlayer();
         DontDestroyOnLoad(this);
     }
@@ -41,6 +43,6 @@ public class GameManager : MonoBehaviour
 
         Player.Instance.RestartPlayer();
 
-        HpUI.Instance.CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+        PlayerHpUI.Instance.HpInitialize();
     }
 }

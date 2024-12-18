@@ -14,7 +14,7 @@ public class Trap : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
 
-        if (obj.CompareTag("Player") && damaged == true)
+        if (CompareTag(TagConstant.Player) && damaged == true)
         {
             damaged = false;
             Player.Instance.GetDamaged(1);

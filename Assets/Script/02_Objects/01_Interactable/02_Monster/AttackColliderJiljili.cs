@@ -19,7 +19,7 @@ public class AttackColliderJiljili : MonsterAttackCollider
     public override void OnTriggerEnter2D(Collider2D other)
     {
         GameObject obj = other.gameObject;
-        if (obj.CompareTag("Player"))
+        if (CompareTag(TagConstant.Player))
         {
             Player.Instance.GetDamaged(1);
             Destroy(this.gameObject);

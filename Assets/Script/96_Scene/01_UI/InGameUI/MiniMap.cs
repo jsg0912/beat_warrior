@@ -23,14 +23,18 @@ public class MiniMap : MonoBehaviour
     void Start()
     {
         MiniMapCamera.cullingMask = 0;
-        MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer("MiniMap");
-        MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer("Tile");
+        MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.MiniMap);
+        MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.Tile);
 
-        monster = GameObject.FindGameObjectsWithTag("Monster");
+        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
         icon = new GameObject[monster.Length];
         monsterInMap = new GameObject[monster.Length];
 
         CountMapMonster = 0;
+
+        // TODO: Main Camera를 Inspector상에서 끌어놓거나, 없을 때를 대비한 코드 필요 - 신동환, 20241204
+        MainCamera[] mainCameras = FindObjectsOfType<MainCamera>();
+        mainCameras[0].GetComponent<Camera>().cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
 
         PlayerMapIcon = Instantiate(PlayerMapIconFrefab, gameObject.transform);
     }
@@ -38,7 +42,7 @@ public class MiniMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        monster = GameObject.FindGameObjectsWithTag("Monster");
+        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
         ReamaingMonster.text = "Monster : " + monster.Length.ToString();
 
         PlayerMapIcon.transform.position = Player.Instance.transform.position;

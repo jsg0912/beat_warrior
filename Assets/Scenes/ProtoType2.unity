@@ -193,7 +193,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1330026790}
   - component: {fileID: 1330026789}
-  - component: {fileID: 1330026788}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -201,20 +200,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1330026788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1330026787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b9df7d599cddc54b825afbc00080476, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  language: 0
-  UIPrefab: {fileID: 7070629379121185445, guid: 466598f652549c74a85fbeb8311f46eb, type: 3}
 --- !u!114 &1330026789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   speed: 4
+  z: -10
   center: {x: 0, y: 0}
   size: {x: 26.1, y: 15}
 --- !u!1001 &397712593900702276
