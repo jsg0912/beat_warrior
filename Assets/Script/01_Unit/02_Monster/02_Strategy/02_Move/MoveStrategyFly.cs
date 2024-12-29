@@ -11,7 +11,7 @@ public class MoveStrategyFly : MoveStrategy
 
         OriginPos = GetMonsterPos();
         moveRange = 3.0f;
-        moveSpeed = MonsterConstant.MoveSpeed[monster.monsterName];
+        moveSpeed = 0;
 
         // 초기 방향 랜덤 설정
         SetDirection(Random.Range(0, 2) == 0 ? Direction.Right : Direction.Left);

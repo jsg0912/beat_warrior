@@ -12,7 +12,7 @@ public static class MonsterList
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
         },
-        PatternName.Ibkkugi),
+        PatternName.Monster3),
 
          new MonsterJSON(MonsterName.Jiljili,
         "질질이",
