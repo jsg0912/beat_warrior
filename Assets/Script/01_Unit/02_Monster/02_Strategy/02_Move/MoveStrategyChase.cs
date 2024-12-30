@@ -9,7 +9,7 @@ public class MoveStrategyChase : MoveStrategy
     {
         base.Initialize(monster);
 
-        moveSpeed = 0;
+        moveSpeed = MonsterConstant.MoveSpeed[monster.monsterName];
 
         isEndOfGround = false;
     }

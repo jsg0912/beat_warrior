@@ -8,7 +8,7 @@ public class MoveStrategyNormal : MoveStrategy
     {
         base.Initialize(monster);
 
-        moveSpeed = 0;
+        moveSpeed = MonsterConstant.MoveSpeed[monster.monsterName];
         colliderSize = monster.gameObject.GetComponent<BoxCollider2D>().size.x / 2;
 
         // 초기 방향 랜덤 설정
