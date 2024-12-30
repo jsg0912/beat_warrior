@@ -28,7 +28,7 @@ public static class MonsterList
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
         },
-        PatternName.Ismomi),
+        PatternName.Itmomi),
 
         new MonsterJSON(MonsterName.Koppulso,
         "코뿔소",

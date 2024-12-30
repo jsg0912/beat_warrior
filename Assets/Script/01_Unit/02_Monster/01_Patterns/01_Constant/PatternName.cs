@@ -9,5 +9,5 @@ public enum PatternName
     Koppulso,
     Jiljili,
     Giljjugi,
-    Ismomi
+    Itmomi
 }
