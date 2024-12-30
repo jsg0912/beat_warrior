@@ -13,7 +13,7 @@ public class MiniMapIcon : MonoBehaviour
 
     private void Update()
     {
-        this.transform.position = Target;
+        this.transform.position = Target + Vector3.up * 0.7f;
         if(hp == 0) MyPooler.ObjectPooler.Instance.ReturnToPool(poolTag, this.gameObject);
     }
 
