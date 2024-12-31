@@ -26,11 +26,16 @@ public class MoveStrategyNormal : MoveStrategy
         CheckGround();
     }
 
-    protected void CheckGround()
+    protected override Vector3 GetRayStartPoint()
     {
         Vector3 offset = new Vector3(GetDirection() * colliderSizeX, -colliderSizeY, 0);
-        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterPos() + offset, Vector3.down, 0.1f, GroundLayer);
-        //Debug.DrawLine(GetMonsterPos() + offset, GetMonsterPos() + offset + Vector3.down * 0.1f, Color.red);
+        return GetMonsterPos() + offset;
+    }
+
+    protected void CheckGround()
+    {
+        RaycastHit2D rayHit = Physics2D.Raycast(GetRayStartPoint(), Vector3.down, 0.1f, GroundLayer);
+        //Debug.DrawLine(GetRayStartPoint(), GetMonsterPos() + offset + Vector3.down * 0.1f, Color.red);
 
         if (rayHit.collider == null) ChangeDirection();
     }
