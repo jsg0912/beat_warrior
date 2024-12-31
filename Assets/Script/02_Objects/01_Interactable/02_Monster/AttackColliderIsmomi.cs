@@ -6,12 +6,8 @@ public class AttackColliderIsmomi : MonsterAttackCollider
     [SerializeField] private GameObject Warning;
     [SerializeField] private GameObject Thorn;
 
-    public override void Initiate(Monster monster)
+    public override void Initiate()
     {
-        base.Initiate(monster);
-
-        transform.position = new Vector3(Player.Instance.transform.position.x, monster.transform.position.y, 0);
-
         StartCoroutine(enumerator());
     }
 
@@ -21,17 +17,17 @@ public class AttackColliderIsmomi : MonsterAttackCollider
         Warning.SetActive(false);
         Thorn.SetActive(true);
         yield return new WaitForSeconds(0.5f);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
         GameObject obj = other.gameObject;
-        if (CompareTag(TagConstant.Player))
+        if (obj.CompareTag(TagConstant.Player))
         {
             Player.Instance.GetDamaged(1);
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

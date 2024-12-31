@@ -7,7 +7,7 @@ public abstract class RecognizeStrategy : Strategy
         if (IsLookingTarget() == true) CheckTarget();
     }
 
-    protected virtual bool IsLookingTarget() { return GetDirection() * (GetPlayerPos().x - GetMonsterPos().x) > 0; }
+    protected virtual bool IsLookingTarget() { return GetDirection() == GetPlayerDirection(); }
     protected abstract void CheckTarget();
 
     protected void StartChase()

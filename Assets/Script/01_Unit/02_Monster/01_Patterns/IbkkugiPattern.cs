@@ -5,6 +5,6 @@ public class IbkkugiPattern : Pattern
         Recognize = new RecognizeStrategyRanged();
         MoveNormal = new MoveStrategyNormal();
         MoveChase = new MoveStrategyChase();
-        Attack = new AttackStrategyThrow();
+        Attack = new SttackStrategyThrowIbkkugi();
     }
 }

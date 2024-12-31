@@ -16,4 +16,5 @@ public abstract class Strategy
     protected Vector3 GetPlayerPos() { return Player.Instance.transform.position; }
     protected Vector3 GetMonsterPos() { return monster.gameObject.transform.position; }
     protected int GetDirection() { return monster.GetDirection(); }
+    protected int GetPlayerDirection() { return Player.Instance.transform.position.x > monster.transform.position.x ? 1 : -1; }
 }

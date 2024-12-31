@@ -1,20 +1,21 @@
-using Unity.Mathematics;
 using UnityEngine;
 
-public class AttackStrategyThrow : AttackStrategy
+public class AttackStrategyThrow : AttackStrategyCreate
 {
-    protected GameObject obj;
+    protected MonsterAttackCollider monsterAttackCollider;
 
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
 
-        obj = Resources.Load(PrefabRouter.AttackPrefab[monster.monsterName]) as GameObject;
+        prefab = Resources.Load(PrefabRouter.AttackPrefab[monster.monsterName]) as GameObject;
     }
 
     protected override void SkillMethod()
     {
-        GameObject throwObj = GameObject.Instantiate(obj);
-        throwObj.GetComponent<MonsterAttackCollider>().Initiate(monster);
+        base.SkillMethod();
+
+        monsterAttackCollider = obj.GetComponent<MonsterAttackCollider>();
+        monsterAttackCollider.Initiate();
     }
 }
