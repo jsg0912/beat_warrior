@@ -22,10 +22,15 @@ public class MoveStrategyChase : MoveStrategy
         ChaseTarget();
     }
 
-    protected void CheckGround()
+    protected override Vector3 GetRayStartPoint()
     {
         Vector3 offset = new Vector3(GetDirection(), 0, 0);
-        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterPos() + offset, Vector3.down, GROUNDCHECKRAY, GroundLayer);
+        return GetMonsterPos() + offset;
+    }
+
+    protected void CheckGround()
+    {
+        RaycastHit2D rayHit = Physics2D.Raycast(GetRayStartPoint(), Vector3.down, GROUNDCHECKRAY, GroundLayer);
 
         if (rayHit.collider == null) isEndOfGround = true;
         else isEndOfGround = false;

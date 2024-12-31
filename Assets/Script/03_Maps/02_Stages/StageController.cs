@@ -21,7 +21,7 @@ public class StageController : MonoBehaviour
         if (monsters == 0)
         {
             Cleared = true;
-            Debug.Log("Stage cleared!");
+            Debug.Log("Stage Cleared!");
             ChapterManager.Instance.CompleteStage();
         }
     }

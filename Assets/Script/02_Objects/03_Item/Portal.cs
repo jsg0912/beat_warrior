@@ -13,12 +13,12 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player") IsTriggerPortal = true;
+        if (collision.gameObject.CompareTag(TagConstant.Player)) IsTriggerPortal = true;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player") IsTriggerPortal= false;
+        if (collision.gameObject.CompareTag(TagConstant.Player)) IsTriggerPortal = false;
     }
-    
+
 }

@@ -11,7 +11,7 @@ public class MoveStrategy : Strategy
     {
         base.Initialize(monster);
 
-        GroundLayer = LayerMask.GetMask(MonsterConstant.GroundLayer);
+        GroundLayer = LayerMask.GetMask(LayerConstant.Tile);
     }
 
     public override void PlayStrategy()
@@ -30,4 +30,5 @@ public class MoveStrategy : Strategy
     protected virtual bool IsMoveable() { return monster.GetIsMoveable(); }
     protected void SetDirection(Direction direction) { monster.SetDirection(direction); }
     protected void ChangeDirection() { monster.ChangeDirection(); }
+    protected virtual Vector3 GetRayStartPoint() { return GetMonsterPos(); }
 }

@@ -8,7 +8,7 @@ public abstract class Strategy
     public virtual void Initialize(Monster monster)
     {
         this.monster = monster;
-        TargetLayer = LayerMask.GetMask(MonsterConstant.PlayerLayer);
+        TargetLayer = LayerMask.GetMask(LayerConstant.Player);
     }
 
     public virtual void PlayStrategy() { }

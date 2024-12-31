@@ -2,15 +2,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// TODO: MonoBehaviour? - SDH, 20241204
 public class SceneTagManager : MonoBehaviour
 {
-    // ½Ì±ÛÅæ ±¸Çö
+    public static List<PoolTag> poolTagDefault = new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow };
+    // ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public static SceneTagManager Instance { get; private set; }
 
-    // ¾À°ú Çã¿ëµÈ PoolTag ¸ÅÇÎ
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ PoolTag ï¿½ï¿½ï¿½ï¿½
     private Dictionary<string, List<PoolTag>> sceneTagRestrictions = new Dictionary<string, List<PoolTag>>();
 
-    // ÇöÀç ¾À¿¡¼­ »ç¿ë °¡´ÉÇÑ PoolTag ¸ñ·Ï
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ PoolTag ï¿½ï¿½ï¿½
     private List<PoolTag> allowedTagsInScene = new List<PoolTag>();
 
     private void Awake()
@@ -31,8 +33,9 @@ public class SceneTagManager : MonoBehaviour
 
     private void InitializeSceneTagRestrictions()
     {
-        // °¢ ¾À¿¡ ´ëÇØ Çã¿ëµÈ PoolTag ¼³Á¤
-        sceneTagRestrictions.Add("TitleScene", new List<PoolTag> {  });
+        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ PoolTag ï¿½ï¿½ï¿½ï¿½
+        // TODO: Fix SceneName Hard Coding - SDH, 20241204
+        sceneTagRestrictions.Add("TitleScene", new List<PoolTag> { });
         sceneTagRestrictions.Add("ProtoType", new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow });
         sceneTagRestrictions.Add("ShopScene", new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow });
     }
@@ -47,7 +50,8 @@ public class SceneTagManager : MonoBehaviour
         }
         else
         {
-            allowedTagsInScene.Clear();
+            // TODO: Default Setting for test, whole process should be refactored - SDH, 20241204
+            allowedTagsInScene = poolTagDefault;
         }
     }
 

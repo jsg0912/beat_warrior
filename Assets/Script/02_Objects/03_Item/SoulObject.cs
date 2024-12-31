@@ -30,7 +30,7 @@ public class SoulObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag(TagConstant.Player))
         {
             Inventory.Instance.ChangeSoulNumber(ObjectConstant.SoulIdleMotionSpeed);
             Destroy(gameObject);

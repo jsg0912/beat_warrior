@@ -18,7 +18,7 @@ public static class PatternFactory
                 return new JiljiliPattern();
             case PatternName.RangedMonster: // TODO: 임시
                 return new IbkkugiPattern();
-            case PatternName.Ismomi: // TODO: 임시
+            case PatternName.Itmomi: // TODO: 임시
                 return new IsmomiPattern();
         }
 
