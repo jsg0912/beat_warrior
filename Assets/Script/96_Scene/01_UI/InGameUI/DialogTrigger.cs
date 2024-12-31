@@ -46,17 +46,19 @@ public class DialogTrigger : MonoBehaviour
 
     public void StartDialog()
     {
-        string dialogData = DialogManager.GetDialog(dialogName, UIManager.Instance.language, dialogIndex);
+        string dialogData = DialogManager.GetDialog(DialogManager.dialogName, UIManager.Instance.language, dialogIndex);
 
         if (dialogData == null)
         {
             dialogIndex = 0;
             dialogPanel.SetActive(false);
+            PauseControl.instance.ResumeActive();
             return;
         }
 
         dialogPanel.SetActive(true);
         dialogText.text = dialogData;
         dialogIndex++;
+        PauseControl.instance.PauseActive();
     }
 }

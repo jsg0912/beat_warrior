@@ -45,7 +45,7 @@ public class MiniMap : MonoBehaviour
         monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
         ReamaingMonster.text = "Monster : " + monster.Length.ToString();
 
-        PlayerMapIcon.transform.position = Player.Instance.transform.position;
+        PlayerMapIcon.transform.position = Player.Instance.transform.position + Vector3.up * 0.7f;
 
         CountObjectInMiniMap();
 
