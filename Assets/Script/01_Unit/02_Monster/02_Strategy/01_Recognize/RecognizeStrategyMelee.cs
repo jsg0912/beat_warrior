@@ -11,9 +11,8 @@ public class RecognizeStrategyMelee : RecognizeStrategy
 
     protected override void CheckTarget()
     {
-        Vector3 offset = new Vector3(0, 1.0f, 0);
-        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterPos() + offset, Vector3.right * GetDirection(), recognizeRange, TargetLayer);
-        //Debug.DrawLine(GetMonsterPos() + offset, GetMonsterPos() + offset + Vector3.right * GetDirection() * recognizeRange, Color.red);
+        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterMiddlePos(), Vector3.right * GetDirection(), recognizeRange, TargetLayer);
+        //Debug.DrawLine(GetMonsterMiddlePos(), GetMonsterMiddlePos() + Vector3.right * GetDirection() * recognizeRange, Color.red);
 
         if (rayHit.collider != null)
         {
