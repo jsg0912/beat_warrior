@@ -50,7 +50,7 @@ public static class MonsterList
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
         },
-        PatternName.Monster3),
+        PatternName.Ippali),
     };
 
     public static MonsterUnit FindMonster(MonsterName name, int anotherHPValue = 0)

@@ -20,6 +20,8 @@ public static class PatternFactory
                 return new IbkkugiPattern();
             case PatternName.Itmomi: // TODO: 임시
                 return new IsmomiPattern();
+            case PatternName.Ippali:
+                return new IppaliPattern();
         }
 
         throw new System.Exception($"{patternName} is not exist");
