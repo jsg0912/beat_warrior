@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class AttackColliderIbkkugi : MonsterAttackCollider
+public class MonsterAttackColliderIbkkugi : MonsterAttackCollider
 {
     public override void OnTriggerEnter2D(Collider2D other)
     {
         GameObject obj = other.gameObject;
-        if (CompareTag(TagConstant.Player))
+        if (obj.CompareTag(TagConstant.Player))
         {
             Player.Instance.GetDamaged(1);
             Destroy(gameObject);

@@ -2,7 +2,7 @@ public class IbkkugiPattern : Pattern
 {
     public IbkkugiPattern()
     {
-        Recognize = new RecognizeStrategyMelee();
+        Recognize = new RecognizeStrategyRanged();
         MoveNormal = new MoveStrategyNormal();
         MoveChase = new MoveStrategyChase();
         Attack = new AttackStrategyThrowIbkkugi();
