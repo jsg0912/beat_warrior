@@ -93,7 +93,7 @@ public class Monster : MonoBehaviour
         }
 
         GetComponent<Rigidbody2D>().AddForce(new Vector2(-5.0f, 0.5f) * (int)direction, ForceMode2D.Impulse);
-        _animator.SetTrigger("hurt");
+        PlayAnimation(MonsterStatus.Hurt);
     }
 
     protected virtual void Die()
@@ -101,7 +101,7 @@ public class Monster : MonoBehaviour
         Player.Instance.CheckResetSkills(this.gameObject);
         Instantiate(SoulPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
 
-        _animator.SetTrigger("die");
+        PlayAnimation(MonsterStatus.Dead);
         Destroy(gameObject, 2.0f);
     }
 

@@ -5,6 +5,6 @@ public class IppaliPattern : Pattern
         Recognize = new RecognizeStrategyMelee();
         MoveNormal = new MoveStrategyNormal();
         MoveChase = new MoveStrategyChase();
-        Attack = new AttackStrategyThrow();
+        Attack = new AttackStrategyMelee();
     }
 }

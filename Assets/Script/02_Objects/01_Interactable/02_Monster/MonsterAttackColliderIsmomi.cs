@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackColliderIsmomi : MonsterAttackCollider
+public class MonsterAttackColliderIsmomi : MonsterAttackCollider
 {
     [SerializeField] private GameObject Warning;
     [SerializeField] private GameObject Thorn;

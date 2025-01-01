@@ -10,7 +10,7 @@ public class MonsterConstant
 
     public const float moveSpeed = 1.0f;
 
-    public const float RangedRecognizeRange = 3.0f;
+    public const float RangedRecognizeRange = 10.0f;
     public const float MeleeRecognizeRange = 3.0f;
 
     public const float IbkkugiMaxHeight = 1f;
