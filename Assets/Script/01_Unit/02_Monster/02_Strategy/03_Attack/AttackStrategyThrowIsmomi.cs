@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SttackStrategyThrowIsmomi : AttackStrategyThrow
+public class AttackStrategyThrowIsmomi : AttackStrategyThrow
 {
     protected override void SkillMethod()
     {

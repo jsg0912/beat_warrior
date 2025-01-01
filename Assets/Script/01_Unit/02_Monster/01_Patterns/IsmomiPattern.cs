@@ -5,6 +5,6 @@ public class IsmomiPattern : Pattern
         Recognize = new RecognizeStrategyRanged();
         MoveNormal = new MoveStrategyNormal();
         MoveChase = new MoveStrategyChase();
-        Attack = new SttackStrategyThrowIsmomi();
+        Attack = new AttackStrategyThrowIsmomi();
     }
 }
