@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     {
         TraitPriceList.CheckTraitPriceListValidation();
         UIManager.CreateUI();
-        Player.CreatePlayer();
+        Player.TryCreatePlayer();
         DontDestroyOnLoad(this);
     }
 

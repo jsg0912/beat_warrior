@@ -5,6 +5,6 @@ public class IbkkugiPattern : Pattern
         Recognize = new RecognizeStrategyMelee();
         MoveNormal = new MoveStrategyNormal();
         MoveChase = new MoveStrategyChase();
-        Attack = new SttackStrategyThrowIbkkugi();
+        Attack = new AttackStrategyThrowIbkkugi();
     }
 }

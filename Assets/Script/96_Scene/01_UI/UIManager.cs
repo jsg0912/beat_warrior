@@ -8,7 +8,7 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null) 
+        if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
@@ -18,8 +18,8 @@ public class UIManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        
-        
+
+
     }
 
     public static void CreateUI()
@@ -27,11 +27,11 @@ public class UIManager : MonoBehaviour
         GameObject UI = Instantiate(Resources.Load<GameObject>(PrefabRouter.UIPrefab));
         DontDestroyOnLoad(UI);
     }
-    
+
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.M))
+        if (Input.GetKeyUp(KeyCode.M))
         {
             SceneReset();
         }
@@ -42,6 +42,6 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    
+
 }
 
