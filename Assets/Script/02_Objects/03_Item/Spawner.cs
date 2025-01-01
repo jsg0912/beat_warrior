@@ -1,20 +1,20 @@
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Spawner : MonoBehaviour
 {
-    public static Spawner Instance;
-
-    private void Awake()
+    private void OnEnable()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
+        Player.OnPlayerCreated += MovePlayerToSpawner;
+    }
+
+    private void OnDisable()
+    {
+        Player.OnPlayerCreated -= MovePlayerToSpawner;
+    }
+
+    private void OnSceneLoaded()
+    {
+
     }
     public void MovePlayerToSpawner()
     {

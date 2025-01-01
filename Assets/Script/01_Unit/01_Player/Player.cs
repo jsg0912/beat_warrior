@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public delegate void PlayerCreateDelegate();
 public class Player : MonoBehaviour
 {
     private static Player _instance;
@@ -45,6 +46,8 @@ public class Player : MonoBehaviour
     public delegate void UseSkillFunc(Skill skill);
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
+
+    public static event PlayerCreateDelegate OnPlayerCreated;
 
     void Start()
     {
@@ -115,7 +118,7 @@ public class Player : MonoBehaviour
         isInvincibility = false;
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
-        Spawner.Instance.MovePlayerToSpawner();
+        OnPlayerCreated?.Invoke();
     }
 
     public void RestartPlayer()//TODO: GameManager로 옮기기 - 이정대 20240912
