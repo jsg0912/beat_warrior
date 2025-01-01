@@ -12,14 +12,7 @@ public class Player : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<Player>();
-                if (_instance == null)
-                {
-                    CreatePlayer();
-                }
-            }
+            TryCreatePlayer();
             return _instance;
         }
     }
@@ -79,11 +72,24 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
     }
 
-    public static void CreatePlayer()
+    public static void TryCreatePlayer()
+    {
+        if (_instance == null)
+        {
+            _instance = FindObjectOfType<Player>();
+            if (_instance == null)
+            {
+                CreatePlayer();
+            }
+        }
+    }
+
+    private static void CreatePlayer()
     {
         GameObject player;
         player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
         player.GetComponent<Player>().Initialize();
+        _instance = player.GetComponent<Player>();
         DontDestroyOnLoad(player);
     }
 
