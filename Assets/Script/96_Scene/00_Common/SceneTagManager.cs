@@ -6,13 +6,10 @@ using UnityEngine.SceneManagement;
 public class SceneTagManager : MonoBehaviour
 {
     public static List<PoolTag> poolTagDefault = new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow };
-    // �̱��� ����
     public static SceneTagManager Instance { get; private set; }
 
-    // ���� ���� PoolTag ����
     private Dictionary<string, List<PoolTag>> sceneTagRestrictions = new Dictionary<string, List<PoolTag>>();
 
-    // ���� ������ ��� ������ PoolTag ���
     private List<PoolTag> allowedTagsInScene = new List<PoolTag>();
 
     private void Awake()
@@ -33,11 +30,7 @@ public class SceneTagManager : MonoBehaviour
 
     private void InitializeSceneTagRestrictions()
     {
-        // �� ���� ���� ���� PoolTag ����
-        // TODO: Fix SceneName Hard Coding - SDH, 20241204
-        sceneTagRestrictions.Add("TitleScene", new List<PoolTag> { });
-        sceneTagRestrictions.Add("ProtoType", new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow });
-        sceneTagRestrictions.Add("ShopScene", new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow });
+        sceneTagRestrictions.Add(SceneName.ProtoType.ToString(), new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow });
     }
 
     private void UpdateAllowedTags()

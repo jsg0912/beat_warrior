@@ -40,7 +40,20 @@ namespace MyPooler
             _instance = this;
             if (!shouldDestroyOnLoad)
                 DontDestroyOnLoad(this);
-
+            pools.Add(new Pool
+            {
+                tag = PoolTag.EnemyMiniMapIcon,
+                prefab = Resources.Load<GameObject>(PrefabRouter.MapMonsterIcon),
+                amount = 5,
+                shouldExpandPool = true,
+            });
+            pools.Add(new Pool
+            {
+                tag = PoolTag.IbkkugiThrow,
+                prefab = Resources.Load<GameObject>(PrefabRouter.IbkkugiThrow),
+                amount = 10,
+                shouldExpandPool = true,
+            });
             CreatePools();
         }
 
