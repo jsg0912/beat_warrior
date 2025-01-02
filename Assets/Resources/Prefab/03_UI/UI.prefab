@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   language: 0
+  AltarPrefab: {fileID: 6077838008984798511}
 --- !u!1001 &2569332970003446074
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1131,6 +1132,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AltarUI
       objectReference: {fileID: 0}
+    - target: {fileID: 7732701801295346070, guid: cc20a4f925f2c22489f6b014fbb9bd3f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2511215603419696, guid: cc20a4f925f2c22489f6b014fbb9bd3f, type: 3}
@@ -1143,6 +1148,11 @@ PrefabInstance:
 --- !u!224 &346271166223635671 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4307396092517623918, guid: cc20a4f925f2c22489f6b014fbb9bd3f, type: 3}
+  m_PrefabInstance: {fileID: 4542093693537189049}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6077838008984798511 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7732701801295346070, guid: cc20a4f925f2c22489f6b014fbb9bd3f, type: 3}
   m_PrefabInstance: {fileID: 4542093693537189049}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &6424876376798603747 stripped

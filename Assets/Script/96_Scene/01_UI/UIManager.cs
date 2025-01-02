@@ -5,6 +5,7 @@ public class UIManager : MonoBehaviour
 {
     public Language language = Language.kr;
     public static UIManager Instance;
+    public GameObject AltarPrefab;
 
     private void Awake()
     {
@@ -41,7 +42,5 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-
 }
 
