@@ -9,5 +9,4 @@ public static class LayerConstant
     public const string Tile = "Tile";
     public const string Monster = "Monster";
     public const string MiniMap = "MiniMap";
-
 }
