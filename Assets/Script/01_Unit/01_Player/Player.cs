@@ -40,8 +40,6 @@ public class Player : MonoBehaviour
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
 
-    public static event PlayerCreateDelegate OnPlayerCreated;
-
     void Start()
     {
         Initialize();
@@ -124,7 +122,6 @@ public class Player : MonoBehaviour
         isInvincibility = false;
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
-        OnPlayerCreated?.Invoke();
     }
 
     public void RestartPlayer()//TODO: GameManager로 옮기기 - 이정대 20240912
