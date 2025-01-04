@@ -94,7 +94,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5155676937497846769}
   - component: {fileID: 6063938171360921237}
-  - component: {fileID: 2409003926008601529}
   - component: {fileID: 5149482880112887792}
   - component: {fileID: 2570453178756025363}
   m_Layer: 0
@@ -164,19 +163,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2409003926008601529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4974422184525696391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93eb7ed9b80b8904e8d29ec63642e40c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockBack: 0
 --- !u!212 &5149482880112887792
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -265,6 +251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1966806040305183728}
+  - component: {fileID: 8451481059755504689}
   m_Layer: 0
   m_Name: AttackCollider
   m_TagString: Untagged
@@ -289,3 +276,16 @@ Transform:
   - {fileID: 4272944006485759831}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8451481059755504689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6825953215269136302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93eb7ed9b80b8904e8d29ec63642e40c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBack: 0
