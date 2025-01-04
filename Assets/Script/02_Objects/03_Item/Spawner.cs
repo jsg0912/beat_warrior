@@ -2,19 +2,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Spawner : MonoBehaviour
 {
+    public static Spawner Instance;
     private void OnEnable()
     {
-        Player.OnPlayerCreated += MovePlayerToSpawner;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnDisable()
     {
-        Player.OnPlayerCreated -= MovePlayerToSpawner;
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-
+        MovePlayerToSpawner();
     }
     public void MovePlayerToSpawner()
     {

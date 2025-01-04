@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class SceneController : MonoBehaviour
 {
     private static SceneController _instance;
 
     public int CurrentScene;
-
     public static SceneController Instance
     {
         get
