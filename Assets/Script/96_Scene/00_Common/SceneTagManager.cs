@@ -1,48 +1,29 @@
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 
-// TODO: MonoBehaviour? - SDH, 20241204
-public class SceneTagManager : MonoBehaviour
+public class SceneTagManager
 {
-    public static List<PoolTag> poolTagDefault = new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow };
-    // �̱��� ����
-    public static SceneTagManager Instance { get; private set; }
+    public static List<PoolTag> PoolTagDefault { get; } = new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow };
+    private static SceneTagManager _instance;
+    public static SceneTagManager Instance => _instance ??= new SceneTagManager();
 
-    // ���� ���� PoolTag ����
-    private Dictionary<string, List<PoolTag>> sceneTagRestrictions = new Dictionary<string, List<PoolTag>>();
+    private readonly Dictionary<string, List<PoolTag>> sceneTagRestrictions = new Dictionary<string, List<PoolTag>>();
 
-    // ���� ������ ��� ������ PoolTag ���
     private List<PoolTag> allowedTagsInScene = new List<PoolTag>();
 
-    private void Awake()
+    private SceneTagManager()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(this);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
         InitializeSceneTagRestrictions();
         UpdateAllowedTags();
     }
 
     private void InitializeSceneTagRestrictions()
     {
-        // �� ���� ���� ���� PoolTag ����
-        // TODO: Fix SceneName Hard Coding - SDH, 20241204
-        sceneTagRestrictions.Add("TitleScene", new List<PoolTag> { });
-        sceneTagRestrictions.Add("ProtoType", new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow });
-        sceneTagRestrictions.Add("ShopScene", new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow });
+        sceneTagRestrictions.Add(SceneName.ProtoType.ToString(), new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow });
     }
 
     private void UpdateAllowedTags()
     {
-        string currentScene = SceneManager.GetActiveScene().name;
+        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
         if (sceneTagRestrictions.ContainsKey(currentScene))
         {
@@ -50,8 +31,7 @@ public class SceneTagManager : MonoBehaviour
         }
         else
         {
-            // TODO: Default Setting for test, whole process should be refactored - SDH, 20241204
-            allowedTagsInScene = poolTagDefault;
+            allowedTagsInScene = PoolTagDefault ?? new List<PoolTag>();
         }
     }
 
