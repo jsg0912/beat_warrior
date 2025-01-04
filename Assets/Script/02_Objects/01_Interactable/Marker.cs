@@ -11,7 +11,7 @@ public class Marker : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Rotate(new Vector3(0, 0, -1) * Time.deltaTime * 500);
+        //transform.Rotate(new Vector3(0, 0, -1) * Time.deltaTime * 500);
     }
 
     public void SetVelocity(Vector2 start, Vector2 end)

@@ -29,6 +29,10 @@ public class Mark : ActiveSkillPlayer
 
         GameObject Marker = GameObject.Instantiate(MarkerPrefab, start, Quaternion.identity);
 
+        Vector2 direction = end - start;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Marker.transform.rotation = Quaternion.Euler(0, 0, angle);
+
         Marker.GetComponent<Marker>().SetVelocity(start, end);
     }
 }
