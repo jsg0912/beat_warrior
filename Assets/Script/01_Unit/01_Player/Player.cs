@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public delegate void PlayerCreateDelegate();
+public delegate void PlayerCreateDelegate(); // [Code Review - KMJ] No ref? - SDH, 20250106
 public class Player : MonoBehaviour
 {
     private static Player _instance;
