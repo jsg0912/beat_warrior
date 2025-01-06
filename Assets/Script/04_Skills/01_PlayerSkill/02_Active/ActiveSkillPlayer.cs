@@ -4,6 +4,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
 {
     protected KeyCode keyCode;
     protected PlayerStatus status;
+    protected AttackCollider attackCollider; // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
 
     protected ActiveSkillPlayer(GameObject unit) : base(unit) { }
 
@@ -28,6 +29,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
         }
     }
 
+    // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
     protected override void CreateEffectPrefab()
     {
         GameObject attackPrefab = GameObject.Instantiate(EffectPrefab);
@@ -36,7 +38,14 @@ public abstract class ActiveSkillPlayer : ActiveSkill
         Vector3 Scale = attackPrefab.transform.localScale;
         attackPrefab.transform.localScale = new Vector3(Scale.x * Player.Instance.GetDirection(), Scale.y, Scale.z);
 
-        attackPrefab.GetComponentInChildren<AttackCollider>().SetAtk(damageMultiplier);
+        attackCollider = attackPrefab.GetComponentInChildren<AttackCollider>();
+
+        if (attackCollider == null)
+        {
+            DebugConsole.Log("no attack collider " + this.GetType().Name);
+            return;
+        }
+        attackCollider.SetAtk(damageMultiplier);
     }
 
     protected abstract void UpdateKey();
