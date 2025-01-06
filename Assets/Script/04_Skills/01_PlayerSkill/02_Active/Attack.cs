@@ -4,6 +4,7 @@ using UnityEngine;
 public class Attack : ActiveSkillPlayer
 {
     private bool isCharging;
+    private KnockBack knockBack;
 
     public Attack(GameObject unit) : base(unit)
     {
@@ -18,6 +19,7 @@ public class Attack : ActiveSkillPlayer
         coolTime = 0;
 
         EffectPrefab = Resources.Load(PrefabRouter.PlayerAttackPrefab) as GameObject;
+        knockBack = new KnockBack(PlayerSkillConstant.attackKnockBackDistance);
     }
 
     protected override IEnumerator CountCoolTime()
@@ -55,6 +57,12 @@ public class Attack : ActiveSkillPlayer
             unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 
+    protected override void CreateEffectPrefab()
+    {
+        base.CreateEffectPrefab();
+        attackCollider.SetAdditionalEffect(knockBack);
+    }
+
     protected override void UpdateKey()
     {
         keyCode = KeySetting.keys[Action.Attack];
@@ -63,7 +71,6 @@ public class Attack : ActiveSkillPlayer
     protected override void SkillMethod()
     {
         Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, -1);
-
-        CreateEffectPrefab();
+        CreateEffectPrefab(); // [Code Review - KMJ] Do not create new prefab every time, just use one obj and use activate/inactivate - SDH, 20250106
     }
 }

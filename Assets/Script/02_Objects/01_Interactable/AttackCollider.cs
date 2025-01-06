@@ -3,16 +3,12 @@ using UnityEngine;
 
 public class AttackCollider : MonoBehaviour
 {
-    [SerializeField] private bool knockBack;
-
     protected int atk;
-    private float attackForce;
     protected List<GameObject> TargetMonster;
+    public List<AdditionalEffect> additionalEffects;
 
     void Start()
     {
-        attackForce = PlayerSkillConstant.attackKnockBackRange;
-
         TargetMonster = new List<GameObject>();
         Destroy(gameObject, 0.1f);
     }
@@ -22,10 +18,13 @@ public class AttackCollider : MonoBehaviour
         this.atk = atk;
     }
 
-    private void KnockBack(GameObject obj)
+    public void SetAdditionalEffect(AdditionalEffect additionalEffect)
     {
-        int dir = Player.Instance.transform.position.x < obj.transform.position.x ? 1 : -1;
-        obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * attackForce, 0.0f), ForceMode2D.Impulse);
+        if (additionalEffects == null)
+        {
+            additionalEffects = new List<AdditionalEffect>();
+        }
+        additionalEffects.Add(additionalEffect);
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)
@@ -35,8 +34,7 @@ public class AttackCollider : MonoBehaviour
         if (!obj.CompareTag(TagConstant.Monster)) return;
 
         if (TargetMonster.Contains(obj)) return;
-
-        if (knockBack) KnockBack(obj);
+        additionalEffects.ForEach(additionalEffect => additionalEffect.work(obj));
 
         obj.GetComponent<Monster>().GetDamaged(atk);
         TargetMonster.Add(obj);
