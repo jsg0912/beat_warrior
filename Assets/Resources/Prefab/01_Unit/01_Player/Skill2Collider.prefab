@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3022264222887718446}
+  - component: {fileID: 7324830104075311750}
   m_Layer: 0
   m_Name: Skill2Collider
   m_TagString: Untagged
@@ -33,6 +34,19 @@ Transform:
   - {fileID: 1296569349868737764}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7324830104075311750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2959792131699980608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93eb7ed9b80b8904e8d29ec63642e40c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBack: 0
 --- !u!1 &3987263661118806564
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +141,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1024969107417582926}
   - component: {fileID: 7871753241158099882}
-  - component: {fileID: 1720934332864620199}
   - component: {fileID: 8477470507052737775}
   - component: {fileID: 3325356559441809169}
   m_Layer: 0
@@ -197,19 +210,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1720934332864620199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9034851891355461688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93eb7ed9b80b8904e8d29ec63642e40c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockBack: 0
 --- !u!212 &8477470507052737775
 SpriteRenderer:
   m_ObjectHideFlags: 0
