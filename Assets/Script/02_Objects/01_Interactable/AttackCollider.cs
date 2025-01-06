@@ -34,7 +34,7 @@ public class AttackCollider : MonoBehaviour
         if (!obj.CompareTag(TagConstant.Monster)) return;
 
         if (TargetMonster.Contains(obj)) return;
-        additionalEffects.ForEach(additionalEffect => additionalEffect.work(obj));
+        additionalEffects?.ForEach(additionalEffect => additionalEffect.work(obj));
 
         obj.GetComponent<Monster>().GetDamaged(atk);
         TargetMonster.Add(obj);
