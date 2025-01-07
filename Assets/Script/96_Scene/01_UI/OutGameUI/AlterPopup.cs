@@ -29,6 +29,7 @@ public class AlterPopup : MonoBehaviour
     public TMP_Text InfoName;
     public TMP_Text InfoDescription;
     public Button InfoSetButton;
+    public AudioClip EquipClip;
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +73,8 @@ public class AlterPopup : MonoBehaviour
             {
                 InfoButton = TraitSetButtonStatus.UnEquip;
                 InfoSetButton.interactable = true;
+
+                SoundManager.instance.SFXPlay("Equip", EquipClip);
             }
             else
             {
@@ -100,6 +103,7 @@ public class AlterPopup : MonoBehaviour
                     InfoSetButton.interactable = false;
                 }
             }
+
         }
 
         InfoSetButton.GetComponentInChildren<TMP_Text>().text = InfoButton.ToString();

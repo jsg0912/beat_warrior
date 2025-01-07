@@ -4,7 +4,7 @@ public class Soul : Item
 
     public Soul()
     {
-        number = 0;
+        number = 100;
     }
 
     public void Initialize()
