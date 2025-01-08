@@ -118,8 +118,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 4281136444186291539}
   - {fileID: 5516039373964110103}
+  - {fileID: 4281136444186291539}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &8736510760140231857
@@ -158,7 +158,7 @@ MonoBehaviour:
   monsterName: 1
   status: 0
   MonsterSprite: {fileID: 4281136444186291539}
-  HPUI: {fileID: 0}
+  HPUI: {fileID: 3219088139619967221}
   Target: {fileID: 0}
   AnotherHPValue: 0
 --- !u!50 &29716057721496312
@@ -342,6 +342,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
+--- !u!114 &3219088139619967221 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2693013487634828656, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
+  m_PrefabInstance: {fileID: 717197021818645893}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6256fda82c492ef438ef5a66ffbfd02e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5516039373964110103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5007745989193565330, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
