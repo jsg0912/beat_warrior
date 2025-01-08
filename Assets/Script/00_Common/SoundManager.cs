@@ -23,14 +23,30 @@ public class SoundManager : MonoBehaviour
 
     public void BackGroundVolume(float val)
     {
+        if(val == 0f)
+        {
+            mixer.SetFloat("BackGroundSound", -80);
+            return;
+        }
         mixer.SetFloat("BackGroundSound", Mathf.Log10(val) * 20);
     }
     public void SFPVolume(float val)
     {
+        if(val == 0f)
+        {
+            mixer.SetFloat("SFX", -80f);
+            return;
+        }
         mixer.SetFloat("SFX", Mathf.Log10(val) * 20);
     }
     public void MasterVolume(float val)
     {
+        if(val == 0f)
+        {
+            mixer.SetFloat("SFX", -80f);
+            mixer.SetFloat("BackGroundSound", -80f);
+            return;
+        }
         mixer.SetFloat("SFX", Mathf.Log10(val) * 20);
         mixer.SetFloat("BackGroundSound", Mathf.Log10(val) * 20);
     }
