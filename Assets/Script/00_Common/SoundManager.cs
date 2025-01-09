@@ -7,6 +7,9 @@ public class SoundManager : MonoBehaviour
     public AudioSource backGroundSound;
     public AudioClip backGroundClip;
     public AudioMixer mixer;
+    private float sfxVolume;
+    private float backgroundVolume;
+    private float masterVolume;
     private void Awake()
     {
         if(instance == null)
@@ -23,32 +26,35 @@ public class SoundManager : MonoBehaviour
 
     public void BackGroundVolume(float val)
     {
+        backgroundVolume = val;
         if(val == 0f)
         {
             mixer.SetFloat("BackGroundSound", -80);
             return;
         }
-        mixer.SetFloat("BackGroundSound", Mathf.Log10(val) * 20);
+        mixer.SetFloat("BackGroundSound", Mathf.Log10(masterVolume * backgroundVolume) * 20);
     }
-    public void SFPVolume(float val)
+    public void SFXVolume(float val)
     {
+        sfxVolume = val;
         if(val == 0f)
         {
             mixer.SetFloat("SFX", -80f);
             return;
         }
-        mixer.SetFloat("SFX", Mathf.Log10(val) * 20);
+        mixer.SetFloat("SFX", Mathf.Log10(masterVolume * sfxVolume) * 20);
     }
     public void MasterVolume(float val)
     {
+        masterVolume = val;
         if(val == 0f)
         {
             mixer.SetFloat("SFX", -80f);
             mixer.SetFloat("BackGroundSound", -80f);
             return;
         }
-        mixer.SetFloat("SFX", Mathf.Log10(val) * 20);
-        mixer.SetFloat("BackGroundSound", Mathf.Log10(val) * 20);
+        mixer.SetFloat("SFX", Mathf.Log10(masterVolume * sfxVolume) * 20);
+        mixer.SetFloat("BackGroundSound", Mathf.Log10(masterVolume * backgroundVolume) * 20);
     }
     public void SFXPlay(string name, AudioClip clip)
     {
