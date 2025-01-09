@@ -22,18 +22,18 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public bool isInGame = false;
+
     public void Awake()
     {
-        TraitPriceList.CheckTraitPriceListValidation();
-        UIManager.CreateUI();
-        Player.TryCreatePlayer();
+        ValidationChecker.Check();
         DontDestroyOnLoad(this);
     }
 
     public void StartGame()
     {
-        // TODO: Title Scene으로 시작하도록 변경함 - 신동환, 2024.11.21
-        SceneController.Instance.ChangeScene(SceneName.Tittle);
+        SceneController.Instance.ChangeScene(SceneName.Tutorial2);
+        InGameManager.TryCreateInGameManager();
     }
 
     public void RestartGame()

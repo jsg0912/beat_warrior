@@ -59,9 +59,16 @@ public class SceneController : MonoBehaviour
                 SceneManager.LoadScene("Tutorial");
                 CurrentScene = (int)SceneName.Tutorial;
                 break;
+            case SceneName.Tutorial2:
+                SceneManager.LoadScene("Tutorial2");
+                CurrentScene = (int)SceneName.Tutorial2;
+                break;
             case SceneName.Village2:
                 SceneManager.LoadScene("Village2");
                 CurrentScene = (int)SceneName.Village2;
+                break;
+            default:
+                DebugConsole.Error($"{sceneName} does not have any match case!!");
                 break;
         }
     }
