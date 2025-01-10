@@ -63,6 +63,10 @@ public class SceneController : MonoBehaviour
                 SceneManager.LoadScene("Tutorial2");
                 CurrentScene = (int)SceneName.Tutorial2;
                 break;
+            case SceneName.Village2:
+                SceneManager.LoadScene("Village2");
+                CurrentScene = (int)SceneName.Village2;
+                break;
         }
     }
 }

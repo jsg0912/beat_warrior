@@ -3,6 +3,10 @@ using UnityEngine;
 
 public static class DebugConsole
 {
+    public static void Error(string message)
+    {
+        Debug.LogError(message);
+    }
     public static void Log(string[] messages)
     {
         string totalMessage = "";

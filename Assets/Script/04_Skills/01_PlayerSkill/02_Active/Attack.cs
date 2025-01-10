@@ -39,6 +39,7 @@ public class Attack : ActiveSkillPlayer
         Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, 1);
 
         CheckCoolTime();
+        AttackCountUI.Instance.UpdateUI();
     }
 
     protected override void TrySkill()
@@ -71,6 +72,7 @@ public class Attack : ActiveSkillPlayer
     protected override void SkillMethod()
     {
         Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, -1);
+        AttackCountUI.Instance.UpdateUI();
         CreateEffectPrefab(); // [Code Review - KMJ] Do not create new prefab every time, just use one obj and use activate/inactivate - SDH, 20250106
     }
 }
