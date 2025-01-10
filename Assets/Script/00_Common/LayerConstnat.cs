@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public static class LayerConstant
 {
     public const string Default = "Default";
@@ -9,4 +11,9 @@ public static class LayerConstant
     public const string Tile = "Tile";
     public const string Monster = "Monster";
     public const string MiniMap = "MiniMap";
+
+    public static bool IsBlockedLayer(GameObject gameObject)
+    {
+        return gameObject.layer == LayerMask.NameToLayer(Tile);
+    }
 }

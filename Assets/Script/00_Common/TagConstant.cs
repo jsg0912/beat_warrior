@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public static class TagConstant
 {
     public const string Untagged = "Untagged";
@@ -15,4 +17,9 @@ public static class TagConstant
     public const string Wall = "Wall";
     public const string Base = "Base";
     public const string Background = "Background";
+
+    public static bool IsMapObject(GameObject gameObject)
+    {
+        return gameObject.CompareTag(Base) || gameObject.CompareTag(Tile) || gameObject.CompareTag(Wall);
+    }
 }
