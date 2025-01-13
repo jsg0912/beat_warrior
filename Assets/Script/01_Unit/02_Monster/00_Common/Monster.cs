@@ -34,10 +34,9 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (monsterUnit.GetIsAlive() == true)
-        {
-            pattern?.PlayPattern();
-        }
+        if (monsterUnit.GetIsAlive() == false) return;
+
+        pattern?.PlayPattern();
     }
 
     // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
@@ -98,6 +97,8 @@ public class Monster : MonoBehaviour
 
     protected virtual void Die()
     {
+        monsterUnit.SetDead();
+
         Player.Instance.CheckResetSkills(this.gameObject);
         Instantiate(SoulPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
 
