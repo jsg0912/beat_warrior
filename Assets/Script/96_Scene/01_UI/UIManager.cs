@@ -5,7 +5,11 @@ public class UIManager : MonoBehaviour
 {
     public Language language = Language.kr;
     public static UIManager Instance;
-    public GameObject AltarPrefab;
+    public bool isTriggerAltar = false;
+    public GameObject altarPrefab;
+    private AlterPopup alterPopup;
+    public GameObject menuPrefab;
+    private MenuUI menuUI;
 
     private void Awake()
     {
@@ -23,6 +27,13 @@ public class UIManager : MonoBehaviour
 
     }
 
+    private void Start()
+    {
+        alterPopup = altarPrefab.GetComponent<AlterPopup>();
+        menuUI = menuPrefab.GetComponent<MenuUI>();
+    }
+
+
     public static void CreateUI()
     {
         GameObject UI = Instantiate(Resources.Load<GameObject>(PrefabRouter.UIPrefab));
@@ -36,11 +47,35 @@ public class UIManager : MonoBehaviour
         {
             SceneReset();
         }
+        if (Input.GetKeyDown(KeySetting.keys[Action.Interaction]))
+        {
+            UIInteraction();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(alterPopup.isOn == true && menuUI.GetMenuActive() == false)
+            {
+                alterPopup.HideAltarPopup();
+            }
+            else if(alterPopup.isOn == false)
+            {
+                menuUI.SetMenuActive();
+                PauseControl.instance.SetPauseActive();
+            }
+        }
     }
 
     private void SceneReset()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void UIInteraction()
+    {
+        if (isTriggerAltar == true && menuUI.GetMenuActive() == false)
+        {
+            alterPopup.ShowAltarPopup();
+        }
     }
 }
 
