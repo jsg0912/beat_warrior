@@ -8,7 +8,7 @@ using System.Linq;
 public class AlterPopup : MonoBehaviour
 {
     SkillName[] salesSkillList;
-    private bool isOn;
+    public bool isOn;
 
 
     public SkillName SelectTrait;
@@ -187,7 +187,7 @@ public class AlterPopup : MonoBehaviour
     {
         isOn = !isOn;
         gameObject.SetActive(isOn);
-        //PauseControl.instance.SetPauseActive();
+        PauseControl.instance.SetPauseActive();
     }
 
     private string GetTraitScript(SkillName skillName)
@@ -209,4 +209,19 @@ public class AlterPopup : MonoBehaviour
         return false;
     }
 
+    public bool IsAltarPopupOn() { return isOn; }
+
+    public void ShowAltarPopup()
+    {
+        isOn = true;
+        gameObject.SetActive(isOn);
+        PauseControl.instance.PauseActive();
+    }
+
+    public void HideAltarPopup()
+    {
+        isOn = false;
+        gameObject.SetActive(isOn);
+        PauseControl.instance.ResumeActive();
+    }
 }

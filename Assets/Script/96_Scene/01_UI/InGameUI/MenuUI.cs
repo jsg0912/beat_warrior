@@ -19,18 +19,14 @@ public class MenuUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SetMenuActive();
-            PauseControl.instance.SetPauseActive();
-        }
+        
         for (int i = 0; i < txt.Length; i++)
         {
             txt[i].text = KeySetting.keys[(Action)i].ToString();
         }
     }
 
-    private void SetMenuActive()
+    public void SetMenuActive()
     {
         isMenuActive = !isMenuActive;
         Menu.SetActive(isMenuActive);
@@ -53,5 +49,10 @@ public class MenuUI : MonoBehaviour
     {
         SetMenuActive();
         PauseControl.instance.ResumeActive();
+    }
+
+    public bool GetMenuActive()
+    {
+        return isMenuActive;
     }
 }
