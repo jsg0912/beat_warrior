@@ -44,7 +44,6 @@ public class MoveStrategyRandom : MoveStrategy
                 isStop = false;
                 break;
         }
-        Debug.Log(monster.name + " " + dest);
 
         changeDestTime = 3 + Random.value * 2;
     }
