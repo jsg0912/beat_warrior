@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MiniMap : MonoBehaviour
 {
@@ -18,6 +19,16 @@ public class MiniMap : MonoBehaviour
     int CountMapMonster;
 
     int MonsterInMapCount;
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded; // 이벤트 등록
+    }
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded; // 이벤트 해제
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -105,5 +116,14 @@ public class MiniMap : MonoBehaviour
             else continue;
         }
         MonsterInMapCount = Count;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        PlayerMapIcon = Instantiate(PlayerMapIconFrefab, gameObject.transform);
+
+        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
+        icon = new GameObject[monster.Length];
+        monsterInMap = new GameObject[monster.Length];
     }
 }
