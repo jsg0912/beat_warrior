@@ -208,8 +208,6 @@ public class AlterPopup : MonoBehaviour
         }
         return false;
     }
-    
-    public bool IsAltarPopupOn() { return isOn; }
 
     public bool IsAltarPopupOn() { return isOn; }
 
