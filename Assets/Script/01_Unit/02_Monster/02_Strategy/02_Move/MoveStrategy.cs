@@ -21,7 +21,11 @@ public class MoveStrategy : Strategy
 
     protected virtual void Move()
     {
-        if (IsMoveable() == false) return;
+        if (IsMoveable() == false)
+        {
+            monster.SetIsWalking(false);
+            return;
+        }
 
         monster.gameObject.transform.position += new Vector3(GetDirection() * moveSpeed * Time.deltaTime, 0, 0);
         monster.SetIsWalking(true);

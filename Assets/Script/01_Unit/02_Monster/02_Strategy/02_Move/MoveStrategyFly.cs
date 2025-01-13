@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoveStrategyFly : MoveStrategy
+public class MoveStrategyFly : MoveStrategyRandom
 {
     protected Vector3 OriginPos;
     protected float moveRange;

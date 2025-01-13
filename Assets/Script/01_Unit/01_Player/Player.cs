@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
             if (!PauseControl.instance.GetPause())
             {
                 Jump();
+                Fall();
                 Down();
                 Skill();
                 Interaction();
@@ -150,10 +151,6 @@ public class Player : MonoBehaviour
             case PlayerStatus.Jump:
                 _animator.SetBool(PlayerConstant.groundedAnimBool, false);
                 _animator.SetTrigger(PlayerConstant.jumpAnimTrigger);
-                break;
-            case PlayerStatus.Fall:
-                _animator.SetBool(PlayerConstant.groundedAnimBool, false);
-                _animator.SetTrigger(PlayerConstant.fallAnimTrigger);
                 break;
             case PlayerStatus.Attack:
                 _animator.SetTrigger(PlayerSkillConstant.attackAnimTrigger);
@@ -265,7 +262,6 @@ public class Player : MonoBehaviour
             case PlayerStatus.Idle:
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
-            case PlayerStatus.Fall:
             case PlayerStatus.Attack:
             case PlayerStatus.Skill1:
             case PlayerStatus.Mark:
@@ -295,12 +291,14 @@ public class Player : MonoBehaviour
         if (isOnBaseTile == true) return;
         if (_animator.GetBool(PlayerConstant.groundedAnimBool) == false) return;
 
-        if (Input.GetKeyDown(KeySetting.keys[Action.Down]))
-        {
-            SetPlayerStatus(PlayerStatus.Fall);
+        if (Input.GetKeyDown(KeySetting.keys[Action.Down])) colliderController.PassTile(tileCollider);
+    }
 
-            colliderController.PassTile(tileCollider);
-        }
+    private void Fall()
+    {
+        if (isOnBaseTile == true) return;
+
+        _animator.SetBool(PlayerConstant.groundedAnimBool, _rigidbody.velocity.y >= -0.05f);
     }
 
     private void Jump()
@@ -370,7 +368,7 @@ public class Player : MonoBehaviour
         if (status != PlayerStatus.Dead)
         {
             if (_animator.GetBool(PlayerConstant.groundedAnimBool) == true) SetPlayerStatus(PlayerStatus.Idle);
-            else SetPlayerStatus(PlayerStatus.Fall);
+            else SetPlayerStatus(PlayerStatus.Jump);
         }
     }
 
@@ -486,11 +484,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag(TagConstant.Tile) || other.CompareTag(TagConstant.Base))
-        {
-            if (other.CompareTag(TagConstant.Base)) isOnBaseTile = false;
-            _animator.SetBool(PlayerConstant.groundedAnimBool, false);
-        }
+        if (other.CompareTag(TagConstant.Base)) isOnBaseTile = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -509,7 +503,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag(TagConstant.Base)) isOnBaseTile = true;
         _animator.SetBool(PlayerConstant.groundedAnimBool, true);
 
-        if (status == PlayerStatus.Jump || status == PlayerStatus.Fall) SetPlayerStatus(PlayerStatus.Idle);
+        if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
 
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
     }
