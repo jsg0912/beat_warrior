@@ -9,6 +9,8 @@ public class Unit
         return isAlive;
     }
 
+    public void SetDead() { isAlive = false; }
+
     public bool GetIsFullStat(StatKind statKind) { return unitStat.GetIsFullStat(statKind); }
 
     public int GetCurrentHP() { return unitStat.GetCurrentStat(StatKind.HP); }
