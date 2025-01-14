@@ -31,7 +31,7 @@ public class MenuUI : MonoBehaviour
         }
     }
 
-    private void SetMenuActive()
+    public void SetMenuActive()
     {
         isMenuActive = !isMenuActive;
         Menu.SetActive(isMenuActive);
@@ -54,5 +54,10 @@ public class MenuUI : MonoBehaviour
     {
         SetMenuActive();
         PauseControl.instance.ResumeActive();
+    }
+
+    public bool GetMenuActive()
+    {
+        return isMenuActive;
     }
 }

@@ -503,7 +503,7 @@ public class Player : MonoBehaviour
     {
         GameObject other = collision.gameObject;
 
-        if (other.CompareTag(TagConstant.Base) == false && other.CompareTag(TagConstant.Tile) == false) return;
+        if (TagConstant.IsBlockTag(other) == false) return;
 
         float collisionPoint = collision.GetContact(0).point.y;
         float colliderBottom = _collider.bounds.center.y - _collider.bounds.size.y / 2;

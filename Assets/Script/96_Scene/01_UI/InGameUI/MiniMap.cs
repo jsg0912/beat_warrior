@@ -44,8 +44,8 @@ public class MiniMap : MonoBehaviour
         CountMapMonster = 0;
 
         // TODO: Main Camera를 Inspector상에서 끌어놓거나, 없을 때를 대비한 코드 필요 - 신동환, 20241204
-        MainCamera[] mainCameras = FindObjectsOfType<MainCamera>();
-        mainCameras[0].GetComponent<Camera>().cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
+        // MainCamera[] mainCameras = FindObjectsOfType<MainCamera>();
+        // mainCameras[0].GetComponent<Camera>().cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
 
         PlayerMapIcon = Instantiate(PlayerMapIconFrefab, gameObject.transform);
     }
@@ -90,7 +90,6 @@ public class MiniMap : MonoBehaviour
                 icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterInMap[i].transform.position);
 
             }
-
         }
 
     }
