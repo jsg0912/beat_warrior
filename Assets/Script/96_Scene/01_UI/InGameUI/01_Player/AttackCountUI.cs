@@ -8,7 +8,7 @@ public class AttackCountUI : MonoBehaviour
     [SerializeField] Text AttackCountView;
     [SerializeField] Image AttackChargeGauge;
     [SerializeField] List<Sprite> Max2ChargeImages = new List<Sprite>();
-    [SerializeField] List<Sprite> Max3ChargeImages = new List<Sprite>(); // 나중에 Attack을 3번까지로 늘어나면 사용
+    [SerializeField] List<Sprite> Max3ChargeImages = new List<Sprite>(); // TODO: 나중에 Attack을 3번까지로 늘어나면 사용
 
     public void Awake()
     {

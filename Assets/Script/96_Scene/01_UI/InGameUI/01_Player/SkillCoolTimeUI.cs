@@ -16,36 +16,42 @@ public class SkillCoolTimeUI : MonoBehaviour
         SkillName.text = skillName.ToString();
     }
 
+    // [Code Review - KMJ] Using Coroutine, not Update - SDH, 20250114
     void Update()
     {
         float coolTime = Player.Instance.GetSkillCoolTime(skillName);
         if (coolTime > 0)
         {
-            if (isFirstCoolTime == true)
-            {
-                Util.SetActive(SkillIconUILight.gameObject, true);
-                Util.SetActive(CoolTimeText.gameObject, true);
-                StartSkillIconLightAnimation();
-
-                isFirstCoolTime = true;
-            }
+            TryTurnOnSkillCoolTimeUI();
             CoolTimeImg.fillAmount = 1 - coolTime / PlayerSkillConstant.SkillCoolTime[skillName];
-            CoolTimeText.gameObject.SetActive(coolTime != 0);
             CoolTimeText.text = Mathf.Ceil(coolTime).ToString();
         }
-        else
-        {
-            if (isFirstCoolTime == false)
-            {
-                Util.SetActive(SkillIconUILight.gameObject, false);
-                Util.SetActive(CoolTimeText.gameObject, false);
+        else TryTurnOffSkillCoolTimeUI();
+    }
 
-                isFirstCoolTime = true;
-            }
+    private void TryTurnOnSkillCoolTimeUI()
+    {
+        if (isFirstCoolTime == true)
+        {
+            isFirstCoolTime = false;
+            Util.SetActive(SkillIconUILight.gameObject, true);
+            Util.SetActive(CoolTimeText.gameObject, true);
+            StartSkillIconLightAnimation();
         }
     }
 
-    public void StartSkillIconLightAnimation()
+    private void TryTurnOffSkillCoolTimeUI()
+    {
+        if (isFirstCoolTime == false)
+        {
+            isFirstCoolTime = true;
+            Util.SetActive(SkillIconUILight.gameObject, false);
+            Util.SetActive(CoolTimeText.gameObject, false);
+            CoolTimeImg.fillAmount = 1;
+        }
+    }
+
+    private void StartSkillIconLightAnimation()
     {
         if (SkillIconUILight != null)
         {

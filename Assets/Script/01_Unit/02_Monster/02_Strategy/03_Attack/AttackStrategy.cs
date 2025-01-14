@@ -64,5 +64,5 @@ public abstract class AttackStrategy : Strategy
     }
 
     protected abstract void SkillMethod();
-    public void StopAttack() { monoBehaviour.StopCoroutine(attackCoroutine); }
+    public void StopAttack() { if (attackCoroutine != null) monoBehaviour.StopCoroutine(attackCoroutine); }
 }

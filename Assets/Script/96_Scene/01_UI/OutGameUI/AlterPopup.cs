@@ -54,7 +54,7 @@ public class AlterPopup : MonoBehaviour
         SelectTrait = SkillName.End;
         for (int i = 0; i < salesSkillList.Length; i++)
         {
-            Button.transform.GetChild(i).GetComponent<Button>().gameObject.SetActive(true);
+            Util.SetActive(Button.transform.GetChild(i).GetComponent<Button>().gameObject, true);
             Button.transform.GetChild(i).GetComponentInChildren<TMP_Text>().text = salesSkillList[i].ToString() + "\n" + TraitPriceList.Info[salesSkillList[i]];
         }
 
@@ -143,12 +143,12 @@ public class AlterPopup : MonoBehaviour
                 SkillName targetSkill = salesSkillList[i];
                 if (SelectTrait == targetSkill)
                 {
-                    Information.SetActive(false);
+                    Util.SetActive(Information, false);
                     SelectTrait = SkillName.End;
                 }
                 else
                 {
-                    Information.SetActive(true);
+                    Util.SetActive(Information, true);
                     SelectTrait = targetSkill;
                 }
 
@@ -186,7 +186,7 @@ public class AlterPopup : MonoBehaviour
     public void OnClickPopupView()
     {
         isOn = !isOn;
-        gameObject.SetActive(isOn);
+        Util.SetActive(gameObject, isOn);
         PauseControl.instance.SetPauseActive();
     }
 
@@ -213,15 +213,23 @@ public class AlterPopup : MonoBehaviour
 
     public void ShowAltarPopup()
     {
-        isOn = true;
-        gameObject.SetActive(isOn);
+        TurnOn();
         PauseControl.instance.PauseActive();
     }
 
     public void HideAltarPopup()
     {
-        isOn = false;
-        gameObject.SetActive(isOn);
+        TurnOff();
         PauseControl.instance.ResumeActive();
+    }
+
+    private void TurnOn()
+    {
+        Util.SetActive(gameObject, true);
+    }
+
+    private void TurnOff()
+    {
+        Util.SetActive(gameObject, false);
     }
 }

@@ -31,12 +31,22 @@ public class AttackCollider : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
 
-        if (!obj.CompareTag(TagConstant.Monster)) return;
+        if (CheckAttackAbleCollision(obj))
+        {
+            obj.GetComponent<Monster>().GetDamaged(atk);
+            additionalEffects?.ForEach(additionalEffect => additionalEffect.work(obj));
+            TargetMonster.Add(obj);
+        }
+    }
 
-        if (TargetMonster.Contains(obj)) return;
-        additionalEffects?.ForEach(additionalEffect => additionalEffect.work(obj));
+    private bool CheckAttackAbleCollision(GameObject gameObject)
+    {
+        // Alive Monster Check
+        if (!gameObject.CompareTag(TagConstant.Monster)) return false;
+        if (gameObject.GetComponent<Monster>().GetIsAlive() == false) return false;
 
-        obj.GetComponent<Monster>().GetDamaged(atk);
-        TargetMonster.Add(obj);
+        // Check duplication
+        if (TargetMonster.Contains(gameObject)) return false;
+        return true;
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class MenuUI : MonoBehaviour
 {
+    // [Code Review - LJD] Variables Naming Irregular: UpperCase&LowerCase - SDH, 20250114
     public GameObject Menu;
     private bool isMenuActive = false;
     private bool isSettingActive = false;
@@ -25,6 +26,7 @@ public class MenuUI : MonoBehaviour
             SetMenuActive();
             PauseControl.instance.SetPauseActive();
         }
+        // [Code Review - LJD] Do not use update for one-time event - SDH, 20250114
         for (int i = 0; i < txt.Length; i++)
         {
             txt[i].text = KeySetting.keys[(Action)i].ToString();
@@ -34,15 +36,16 @@ public class MenuUI : MonoBehaviour
     public void SetMenuActive()
     {
         isMenuActive = !isMenuActive;
-        Menu.SetActive(isMenuActive);
+        Util.SetActive(Menu, isMenuActive);
 
+        // [Code Review - LJD] cannot understand why this condition is correct - SDH, 20250114
         if (isMenuActive == false && isSettingActive == true) SetSettingActive();
     }
 
     public void SetSettingActive()
     {
         isSettingActive = !isSettingActive;
-        Setting.SetActive(isSettingActive);
+        Util.SetActive(Setting, isSettingActive);
     }
 
     public void OnClickReStart()

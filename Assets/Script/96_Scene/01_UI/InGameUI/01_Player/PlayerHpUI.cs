@@ -8,19 +8,17 @@ public class PlayerHpUI : MonoBehaviour
 
     [SerializeField] private GameObject HP;
     private GameObject HPPrefab;
-    private List<Image> HPList;
+    private List<Image> HPList = new();
 
     private void Awake()
     {
         Instance = this;
-
         HPPrefab = Resources.Load("Prefab/03_UI/PlayerHP") as GameObject;
-        HPList = new();
     }
 
     private void Start()
     {
-        HpInitialize();
+        Initialize();
     }
 
     public void CreateAndUpdateHPUI(int hp)
@@ -52,17 +50,17 @@ public class PlayerHpUI : MonoBehaviour
 
         if (HPList.Count != maxHP)
         {
-            HpInitialize();
+            Initialize();
             return;
         }
 
         for (int i = 0; i < maxHP; i++)
         {
-            HPList[i].gameObject.SetActive(i >= currentHP);
+            Util.SetActive(HPList[i].gameObject, i >= currentHP);
         }
     }
 
-    public void HpInitialize()
+    public void Initialize()
     {
         CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }

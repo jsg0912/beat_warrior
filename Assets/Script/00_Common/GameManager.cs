@@ -45,9 +45,6 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         StartGame();
-
         Player.Instance.RestartPlayer();
-
-        PlayerHpUI.Instance.HpInitialize();
     }
 }

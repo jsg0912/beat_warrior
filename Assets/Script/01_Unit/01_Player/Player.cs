@@ -129,6 +129,7 @@ public class Player : MonoBehaviour
     {
         Initialize(direction);
         _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
+        PlayerUIController.Instance.Initialize();
     }
 
     // GET Functions

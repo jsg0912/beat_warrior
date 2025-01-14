@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public GameObject settingPrefab;
     private bool isSettingActive = false;
 
+    // [Code Review - LJD] Make PopupSystem Queue for "ESC" Process - SDH, 20250114
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        // [Code Review - LJD] just declare the component variable, not gameobject var - SDH, 20250114
         alterPopup = altarPrefab.GetComponent<AlterPopup>();
         menuUI = menuPrefab.GetComponent<MenuUI>();
     }
@@ -57,11 +59,11 @@ public class UIManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(alterPopup.isOn == true && menuUI.GetMenuActive() == false)
+            if (alterPopup.isOn == true && menuUI.GetMenuActive() == false)
             {
                 alterPopup.HideAltarPopup();
             }
-            else if(alterPopup.isOn == false)
+            else if (alterPopup.isOn == false)
             {
                 menuUI.SetMenuActive();
                 PauseControl.instance.SetPauseActive();
@@ -84,21 +86,22 @@ public class UIManager : MonoBehaviour
 
     public void SetInGameUIActive(bool active)
     {
-        inGameUIPrefab.SetActive(active);
+        Util.SetActive(inGameUIPrefab, active);
     }
 
     public void SetSettingActive()
     {
         isSettingActive = !isSettingActive;
-        if (isSettingActive) 
+        // [Code Review - LJD] ?????? unnecessary if-else statement - SDH, 20250114 
+        if (isSettingActive)
         {
-            menuPrefab.SetActive(isSettingActive);
-            settingPrefab.SetActive(isSettingActive);
+            Util.SetActive(menuPrefab, isSettingActive);
+            Util.SetActive(settingPrefab, isSettingActive);
         }
         else
         {
-            settingPrefab.SetActive(isSettingActive);
-            menuPrefab.SetActive(isSettingActive);
+            Util.SetActive(settingPrefab, isSettingActive);
+            Util.SetActive(menuPrefab, isSettingActive);
         }
     }
 }
