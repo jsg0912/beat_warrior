@@ -149,7 +149,6 @@ public class Player : MonoBehaviour
         switch (status)
         {
             case PlayerStatus.Jump:
-                _animator.SetBool(PlayerConstant.groundedAnimBool, false);
                 _animator.SetTrigger(PlayerConstant.jumpAnimTrigger);
                 break;
             case PlayerStatus.Attack:
@@ -327,12 +326,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Dashing(Vector2 end, bool changeDir, bool isInvincibility)
+    public void Dashing(Vector2 end, bool changeDir, bool isInvincibility, bool passWall = true)
     {
-        StartCoroutine(Dash(end, changeDir, isInvincibility));
+        StartCoroutine(Dash(end, changeDir, isInvincibility, passWall));
     }
 
-    private IEnumerator Dash(Vector2 end, bool changeDir, bool isInvincibility)
+    private IEnumerator Dash(Vector2 end, bool changeDir, bool isInvincibility, bool passWall = true)
     {
         Direction dir = end.x > transform.position.x ? Direction.Right : Direction.Left;
 
@@ -345,17 +344,30 @@ public class Player : MonoBehaviour
         int moveCount = 0;
         while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
+            if (passWall == false)
+            {
+                Vector3 start = GetMonsterMiddlePos() + new Vector3(GetPlayerSize().x / 2, 0, 0) * GetDirection();
+                Vector3 direction = Vector3.right * GetDirection();
+
+                RaycastHit2D rayHit = Physics2D.Raycast(start, direction, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
+                if (rayHit.collider != null && rayHit.collider.CompareTag("Base")) break;
+            }
+
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
             moveCount++;
             yield return null;
         }
 
-        transform.position = end;
+        if (passWall == true) transform.position = end;
 
         SetGravityScale(true);
         SetInvincibility(false);
         if (changeDir == true) SetDirection((Direction)(-1 * (int)dir));
     }
+
+    public Vector3 GetPlayerSize() { return new Vector3(_collider.size.x, _collider.size.y, 0); }
+    protected Vector3 GetMonsterMiddlePos() { return transform.position + new Vector3(_collider.offset.x, _collider.offset.y, 0); }
+    public Vector3 GetPlayerBottomPos() { return transform.position + new Vector3(_collider.offset.x, _collider.offset.y - _collider.size.y / 2, 0); }
 
     private void Skill()
     {
@@ -365,11 +377,7 @@ public class Player : MonoBehaviour
     IEnumerator UseSkill()
     {
         yield return new WaitForSeconds(PlayerSkillConstant.SkillDelayInterval);
-        if (status != PlayerStatus.Dead)
-        {
-            if (_animator.GetBool(PlayerConstant.groundedAnimBool) == true) SetPlayerStatus(PlayerStatus.Idle);
-            else SetPlayerStatus(PlayerStatus.Jump);
-        }
+        if (status != PlayerStatus.Dead) SetPlayerStatus(PlayerStatus.Idle);
     }
 
     public float GetSkillCoolTime(SkillName skillName)
@@ -484,7 +492,11 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag(TagConstant.Base)) isOnBaseTile = false;
+        if (other.CompareTag(TagConstant.Base))
+        {
+            isOnBaseTile = false;
+            _animator.SetBool(PlayerConstant.groundedAnimBool, false);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
