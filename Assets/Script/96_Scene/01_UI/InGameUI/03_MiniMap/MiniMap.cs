@@ -86,7 +86,7 @@ public class MiniMap : MonoBehaviour
             {
                 if (monsterInMap[i] == null) break;
                 if (icon[i] == null) break;
-                icon[i].GetComponent<MiniMapIcon>().GetHp(monsterInMap[i].GetComponent<Monster>().monsterUnit.GetCurrentHP());
+                icon[i].GetComponent<MiniMapIcon>().GetHp(monsterInMap[i].GetComponent<Monster>().GetCurrentHP());
                 icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterInMap[i].transform.position);
 
             }

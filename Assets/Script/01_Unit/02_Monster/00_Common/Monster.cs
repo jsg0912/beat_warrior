@@ -5,7 +5,7 @@ public class Monster : MonoBehaviour
 {
     // Hierarchy 상에서 monster Object의 이름을 정해주면 자동으로 같은 이름의 능력치가 할당 됨 - Tony, 2024.09.11
     public MonsterName monsterName;
-    public MonsterUnit monsterUnit;
+    private MonsterUnit monsterUnit;
     public Pattern pattern;
 
     [SerializeField] protected MonsterStatus status;
@@ -67,6 +67,8 @@ public class Monster : MonoBehaviour
     public void SetStatus(MonsterStatus status) { this.status = status; }
     public int GetDirection() { return (int)direction; }
     public bool GetIsMoveable() { return isMoveable; }
+    public bool GetIsAlive() { return monsterUnit.GetIsAlive(); }
+    public int GetCurrentHP() { return monsterUnit.GetCurrentHP(); }
     public void SetIsMoveable(bool isMoveable) { this.isMoveable = isMoveable; }
 
     public void SetDirection(Direction direction)
@@ -83,8 +85,6 @@ public class Monster : MonoBehaviour
 
     public virtual void GetDamaged(int dmg)
     {
-        if (monsterUnit.GetIsAlive() == false) return;
-
         monsterUnit.ChangeCurrentHP(-dmg);
 
         if (Player.Instance.hitMonsterFuncList != null) Player.Instance.hitMonsterFuncList(monsterUnit);
