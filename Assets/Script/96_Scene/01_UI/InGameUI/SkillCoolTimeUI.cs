@@ -21,19 +21,28 @@ public class SkillCoolTimeUI : MonoBehaviour
         float coolTime = Player.Instance.GetSkillCoolTime(skillName);
         if (coolTime > 0)
         {
-            if (isFirstCoolTime == true)
-            {
-                Util.SetActive(SkillIconUILight.gameObject, true);
-                Util.SetActive(CoolTimeText.gameObject, true);
-                StartSkillIconLightAnimation();
-
-                isFirstCoolTime = false;
-            }
+            TryTurnOnSkillCoolTimeUI();
             CoolTimeImg.fillAmount = 1 - coolTime / PlayerSkillConstant.SkillCoolTime[skillName];
-            CoolTimeText.gameObject.SetActive(coolTime != 0);
             CoolTimeText.text = Mathf.Ceil(coolTime).ToString();
         }
-        else
+        else TryTurnOffSkillCoolTimeUI();
+    }
+
+    private void TryTurnOnSkillCoolTimeUI()
+    {
+        if (isFirstCoolTime == true)
+        {
+            Util.SetActive(SkillIconUILight.gameObject, true);
+            Util.SetActive(CoolTimeText.gameObject, true);
+            StartSkillIconLightAnimation();
+
+            isFirstCoolTime = false;
+        }
+    }
+
+    private void TryTurnOffSkillCoolTimeUI()
+    {
+        if (isFirstCoolTime == true)
         {
             if (isFirstCoolTime == false)
             {
@@ -45,7 +54,7 @@ public class SkillCoolTimeUI : MonoBehaviour
         }
     }
 
-    public void StartSkillIconLightAnimation()
+    private void StartSkillIconLightAnimation()
     {
         if (SkillIconUILight != null)
         {

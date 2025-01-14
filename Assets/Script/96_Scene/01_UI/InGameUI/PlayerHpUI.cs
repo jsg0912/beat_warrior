@@ -13,9 +13,7 @@ public class PlayerHpUI : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
         HPPrefab = Resources.Load("Prefab/03_UI/PlayerHP") as GameObject;
-        HPList = new();
     }
 
     private void Start()
@@ -58,12 +56,13 @@ public class PlayerHpUI : MonoBehaviour
 
         for (int i = 0; i < maxHP; i++)
         {
-            HPList[i].gameObject.SetActive(i >= currentHP);
+            Util.SetActive(HPList[i].gameObject, i >= currentHP);
         }
     }
 
     public void HpInitialize()
     {
+        HPList = new();
         CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }
 }
