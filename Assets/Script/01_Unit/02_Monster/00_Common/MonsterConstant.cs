@@ -49,7 +49,7 @@ public class MonsterConstant
         { MonsterName.Jiljili, 25.0f },
     };
 
-    public static Dictionary<MonsterName, float> AttackDelay = new() {
+    public static Dictionary<MonsterName, float> AttackStartDelays = new() {
         { MonsterName.Ippali, 1.0f },
         { MonsterName.Ibkkugi, 0.5f },
         { MonsterName.Koppulso, 0.5f },
@@ -58,7 +58,7 @@ public class MonsterConstant
         { MonsterName.Itmomi, 0.5f }
     };
 
-    public static Dictionary<MonsterName, float> AnimationDelay = new() {
+    public static Dictionary<MonsterName, float> AttackActionIntervals = new() {
         { MonsterName.Ippali, 0.5f },
         { MonsterName.Ibkkugi, 0.5f },
         { MonsterName.Koppulso, 0.5f },
