@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
     public bool isTriggerAltar = false;
     public GameObject altarPrefab;
-    private AlterPopup alterPopup;
+    private AltarPopup AltarPopup;
     public GameObject menuPrefab;
     private MenuUI menuUI;
     public GameObject inGameUIPrefab;
@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         // [Code Review - LJD] just declare the component variable, not gameobject var - SDH, 20250114
-        alterPopup = altarPrefab.GetComponent<AlterPopup>();
+        AltarPopup = altarPrefab.GetComponent<AltarPopup>();
         menuUI = menuPrefab.GetComponent<MenuUI>();
     }
 
@@ -59,11 +59,11 @@ public class UIManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (alterPopup.isOn == true && menuUI.GetMenuActive() == false)
+            if (AltarPopup.isOn == true && menuUI.GetMenuActive() == false)
             {
-                alterPopup.HideAltarPopup();
+                AltarPopup.HideAltarPopup();
             }
-            else if (alterPopup.isOn == false)
+            else if (AltarPopup.isOn == false)
             {
                 menuUI.SetMenuActive();
                 PauseControl.instance.SetPauseActive();
@@ -80,7 +80,7 @@ public class UIManager : MonoBehaviour
     {
         if (isTriggerAltar == true && menuUI.GetMenuActive() == false)
         {
-            alterPopup.ShowAltarPopup();
+            AltarPopup.ShowAltarPopup();
         }
     }
 
