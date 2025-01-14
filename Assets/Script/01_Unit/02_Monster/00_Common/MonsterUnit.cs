@@ -1,4 +1,3 @@
-
 public class MonsterUnit : Unit
 {
     public PatternName patternName;

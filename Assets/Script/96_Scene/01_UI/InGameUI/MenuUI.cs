@@ -8,6 +8,7 @@ public class MenuUI : MonoBehaviour
     private bool isSettingActive = false;
     [SerializeField] private GameObject Setting;
     public TextMeshProUGUI[] txt;
+    public AlterPopup alterPopup;
 
     private void Start()
     {
@@ -19,7 +20,7 @@ public class MenuUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && alterPopup.IsAltarPopupOn() == false)
         {
             SetMenuActive();
             PauseControl.instance.SetPauseActive();
@@ -30,7 +31,7 @@ public class MenuUI : MonoBehaviour
         }
     }
 
-    private void SetMenuActive()
+    public void SetMenuActive()
     {
         isMenuActive = !isMenuActive;
         Menu.SetActive(isMenuActive);
@@ -53,5 +54,10 @@ public class MenuUI : MonoBehaviour
     {
         SetMenuActive();
         PauseControl.instance.ResumeActive();
+    }
+
+    public bool GetMenuActive()
+    {
+        return isMenuActive;
     }
 }

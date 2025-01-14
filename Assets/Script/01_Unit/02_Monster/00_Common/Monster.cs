@@ -34,10 +34,16 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (monsterUnit.GetIsAlive() == false) return;
+        if (monsterUnit.GetIsAlive() == false)
+        {
+            StopAttack();
+            return;
+        }
 
         pattern?.PlayPattern();
     }
+
+    public void StopAttack() { pattern?.StopAttack(); }
 
     // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
     public void PlayAnimation(MonsterStatus status)

@@ -4,12 +4,13 @@ using UnityEngine;
 public abstract class AttackStrategy : Strategy
 {
     protected MonoBehaviour monoBehaviour;
+    protected Coroutine attackCoroutine;
 
     protected float attackCoolTimeMax;
     protected float attackCoolTime;
 
-    protected float attackDelay;
-    protected float animationDelay;
+    protected float attackStartDelay;
+    protected float attackActionInterval;
 
     protected bool isAttacking = false;
 
@@ -21,8 +22,8 @@ public abstract class AttackStrategy : Strategy
         attackCoolTimeMax = MonsterConstant.AttackSpeed[monster.monsterName];
         attackCoolTime = attackCoolTimeMax;
 
-        attackDelay = MonsterConstant.AttackDelay[monster.monsterName];
-        animationDelay = MonsterConstant.AnimationDelay[monster.monsterName];
+        attackStartDelay = MonsterConstant.AttackStartDelays[monster.monsterName];
+        attackActionInterval = MonsterConstant.AttackActionIntervals[monster.monsterName];
     }
 
     public override void PlayStrategy()
@@ -42,7 +43,7 @@ public abstract class AttackStrategy : Strategy
     {
         if (attackCoolTime >= 0) return;
 
-        monoBehaviour.StartCoroutine(UseSkill());
+        attackCoroutine = monoBehaviour.StartCoroutine(UseSkill());
     }
 
     protected virtual IEnumerator UseSkill()
@@ -50,11 +51,11 @@ public abstract class AttackStrategy : Strategy
         isAttacking = true;
 
         monster.SetIsMoveable(false);
-        yield return new WaitForSeconds(attackDelay);
+        yield return new WaitForSeconds(attackStartDelay);
 
-        SkillMethod();
         monster.PlayAnimation(MonsterStatus.Attack);
-        yield return new WaitForSeconds(animationDelay);
+        yield return new WaitForSeconds(attackActionInterval);
+        SkillMethod();
 
         monster.SetIsMoveable(true);
 
@@ -63,4 +64,5 @@ public abstract class AttackStrategy : Strategy
     }
 
     protected abstract void SkillMethod();
+    public void StopAttack() { monoBehaviour.StopCoroutine(attackCoroutine); }
 }

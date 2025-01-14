@@ -4,17 +4,17 @@ public class Altar : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if(collision.CompareTag(TagConstant.Player))
         {
-            UIManager.Instance.AltarPrefab.SetActive(true);
+            UIManager.Instance.isTriggerAltar = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.CompareTag(TagConstant.Player))
         {
-            UIManager.Instance.AltarPrefab.SetActive(false);
+            UIManager.Instance.isTriggerAltar = false;
         }
     }
 }

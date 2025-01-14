@@ -18,7 +18,7 @@ public static class TagConstant
     public const string Base = "Base";
     public const string Background = "Background";
 
-    public static bool IsMapObject(GameObject gameObject)
+    public static bool IsBlockTag(GameObject gameObject)
     {
         return gameObject.CompareTag(Base) || gameObject.CompareTag(Tile) || gameObject.CompareTag(Wall);
     }
