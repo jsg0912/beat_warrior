@@ -10,6 +10,8 @@ public class UIManager : MonoBehaviour
     private AlterPopup alterPopup;
     public GameObject menuPrefab;
     private MenuUI menuUI;
+    public GameObject inGameUIPrefab;
+
 
     private void Awake()
     {
@@ -76,6 +78,11 @@ public class UIManager : MonoBehaviour
         {
             alterPopup.ShowAltarPopup();
         }
+    }
+
+    public void SetInGameUIActive(bool active)
+    {
+        inGameUIPrefab.SetActive(active);
     }
 }
 
