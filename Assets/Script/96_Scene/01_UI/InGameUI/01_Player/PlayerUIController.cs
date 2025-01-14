@@ -20,7 +20,6 @@ public class PlayerUIController : MonoBehaviour
         // {
         //     skillCoolTimeUI.initialize();
         // }
-        DebugConsole.Log(Player.Instance.GetCurrentStat(StatKind.AttackCount));
         attackCountUI.UpdateUI();
     }
 }
