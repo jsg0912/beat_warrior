@@ -16,6 +16,7 @@ public class SkillCoolTimeUI : MonoBehaviour
         SkillName.text = skillName.ToString();
     }
 
+    // [Code Review - KMJ] Using Coroutine, not Update - SDH, 20250114
     void Update()
     {
         float coolTime = Player.Instance.GetSkillCoolTime(skillName);
