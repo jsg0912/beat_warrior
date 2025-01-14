@@ -10,6 +10,10 @@ public class UIManager : MonoBehaviour
     private AlterPopup alterPopup;
     public GameObject menuPrefab;
     private MenuUI menuUI;
+    public GameObject inGameUIPrefab;
+    public GameObject settingPrefab;
+    private bool isSettingActive = false;
+
 
     private void Awake()
     {
@@ -75,6 +79,26 @@ public class UIManager : MonoBehaviour
         if (isTriggerAltar == true && menuUI.GetMenuActive() == false)
         {
             alterPopup.ShowAltarPopup();
+        }
+    }
+
+    public void SetInGameUIActive(bool active)
+    {
+        inGameUIPrefab.SetActive(active);
+    }
+
+    public void SetSettingActive()
+    {
+        isSettingActive = !isSettingActive;
+        if (isSettingActive) 
+        {
+            menuPrefab.SetActive(isSettingActive);
+            settingPrefab.SetActive(isSettingActive);
+        }
+        else
+        {
+            settingPrefab.SetActive(isSettingActive);
+            menuPrefab.SetActive(isSettingActive);
         }
     }
 }

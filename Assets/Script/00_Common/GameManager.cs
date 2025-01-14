@@ -30,10 +30,16 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
+    public void Start()
+    {
+        UIManager.CreateUI();
+    }
+
     public void StartGame()
     {
         SceneController.Instance.ChangeScene(SceneName.Tutorial2);
         InGameManager.TryCreateInGameManager();
+        UIManager.Instance.SetInGameUIActive(true);
     }
 
     public void RestartGame()
