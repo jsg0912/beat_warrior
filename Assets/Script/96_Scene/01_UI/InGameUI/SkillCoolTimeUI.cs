@@ -19,19 +19,22 @@ public class SkillCoolTimeUI : MonoBehaviour
     void Update()
     {
         float coolTime = Player.Instance.GetSkillCoolTime(skillName);
-        if (coolTime != 0)
+        if (coolTime > 0)
         {
-            if (SkillIconUILight != null && SkillIconUILight.IsActive())
+            if (SkillIconUILight != null && SkillIconUILight.IsActive() == false)
             {
-                SkillIconUILight.gameObject.SetActive(false);
+                SkillIconUILight.gameObject.SetActive(true);
+                Animator animator = SkillIconUILight.GetComponent<Animator>();
+                animator.SetTrigger("Start");
+                animator.speed = 1 / PlayerSkillConstant.SkillCoolTime[skillName];
             }
             CoolTimeImg.fillAmount = 1 - coolTime / PlayerSkillConstant.SkillCoolTime[skillName];
             CoolTimeText.gameObject.SetActive(coolTime != 0);
             CoolTimeText.text = Mathf.Ceil(coolTime).ToString();
         }
-        if (SkillIconUILight != null && SkillIconUILight.IsActive() == false)
+        else if (SkillIconUILight != null && SkillIconUILight.IsActive() == true)
         {
-            SkillIconUILight.gameObject.SetActive(true);
+            SkillIconUILight.gameObject.SetActive(false);
         }
     }
 }

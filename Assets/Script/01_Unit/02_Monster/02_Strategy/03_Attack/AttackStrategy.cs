@@ -53,9 +53,9 @@ public abstract class AttackStrategy : Strategy
         monster.SetIsMoveable(false);
         yield return new WaitForSeconds(attackDelay);
 
-        SkillMethod();
         monster.PlayAnimation(MonsterStatus.Attack);
         yield return new WaitForSeconds(animationDelay);
+        SkillMethod();
 
         monster.SetIsMoveable(true);
 
