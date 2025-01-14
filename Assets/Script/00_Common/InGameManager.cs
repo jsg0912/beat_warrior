@@ -30,7 +30,6 @@ public class InGameManager : MonoBehaviour
     }
     public void Start()
     {
-        UIManager.CreateUI();
         Player.TryCreatePlayer();
     }
 }
