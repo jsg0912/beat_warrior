@@ -16,8 +16,6 @@ public class PopupSystem : MonoBehaviour
 
     System.Action onClickOkay, onClickCancel;
 
-    
-
     private void Awake()
     {
         instance = this;
@@ -29,7 +27,7 @@ public class PopupSystem : MonoBehaviour
         txtContent.text = content;
         this.onClickOkay = onClickOkay;
         this.onClickCancel = onClickCancel;
-        popup.SetActive(true);
+        Util.SetActive(popup, true);
     }
 
     public void OnClickOkay()
@@ -54,6 +52,6 @@ public class PopupSystem : MonoBehaviour
 
     private void ClosePopup()
     {
-        gameObject.SetActive(false);
+        Util.SetActive(gameObject, false);
     }
 }

@@ -15,7 +15,8 @@ public class DialogTrigger : MonoBehaviour
     private void Start()
     {
         dialogPanel = Instantiate(dialogPanelPrefab, transform.position + Vector3.up * 2, Quaternion.identity);
-        dialogPanel.SetActive(false);
+
+        Util.SetActive(dialogPanel, false);
         dialogText = dialogPanel.GetComponentInChildren<TextMeshProUGUI>();
     }
 
@@ -40,7 +41,7 @@ public class DialogTrigger : MonoBehaviour
         {
             isPlayerInTrigger = false;
             dialogIndex = 0;
-            dialogPanel.SetActive(false);
+            Util.SetActive(dialogPanel, false);
         }
     }
 
@@ -51,12 +52,12 @@ public class DialogTrigger : MonoBehaviour
         if (dialogData == null)
         {
             dialogIndex = 0;
-            dialogPanel.SetActive(false);
+            Util.SetActive(dialogPanel, false);
             PauseControl.instance.ResumeActive();
             return;
         }
 
-        dialogPanel.SetActive(true);
+        Util.SetActive(dialogPanel, true);
         dialogText.text = dialogData;
         dialogIndex++;
         PauseControl.instance.PauseActive();

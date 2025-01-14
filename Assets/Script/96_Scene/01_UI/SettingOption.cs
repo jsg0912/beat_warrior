@@ -38,13 +38,8 @@ public class SettingOption : MonoBehaviour
             if (info.buttonID == buttonID)
             {
 
-                if (activePanel != null)
-                {
-                    activePanel.SetActive(false);
-                }
-
-
-                info.panel.SetActive(true);
+                Util.SetActive(activePanel, false);
+                Util.SetActive(info.panel, true);
                 activePanel = info.panel;
                 CurrentID = info.buttonID;
                 break;

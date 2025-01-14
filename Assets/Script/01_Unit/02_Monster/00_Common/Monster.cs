@@ -119,7 +119,7 @@ public class Monster : MonoBehaviour
 
     protected IEnumerator ShowTargetUI()
     {
-        Target.SetActive(true);
+        Util.SetActive(Target, true);
 
         float timer = PlayerSkillConstant.SkillCoolTime[SkillName.Mark];
 
@@ -129,6 +129,6 @@ public class Monster : MonoBehaviour
             yield return null;
         }
 
-        if (Target != null) Target.SetActive(false);
+        Util.SetActive(Target, false);
     }
 }
