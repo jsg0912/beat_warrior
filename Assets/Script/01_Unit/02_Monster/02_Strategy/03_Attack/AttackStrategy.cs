@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class AttackStrategy : Strategy
 {
     protected MonoBehaviour monoBehaviour;
+    protected Coroutine attackCoroutine;
 
     protected float attackCoolTimeMax;
     protected float attackCoolTime;
@@ -42,7 +43,7 @@ public abstract class AttackStrategy : Strategy
     {
         if (attackCoolTime >= 0) return;
 
-        monoBehaviour.StartCoroutine(UseSkill());
+        attackCoroutine = monoBehaviour.StartCoroutine(UseSkill());
     }
 
     protected virtual IEnumerator UseSkill()
@@ -63,4 +64,5 @@ public abstract class AttackStrategy : Strategy
     }
 
     protected abstract void SkillMethod();
+    public void StopAttack() { monoBehaviour.StopCoroutine(attackCoroutine); }
 }

@@ -30,4 +30,6 @@ public class Pattern
             Attack?.PlayStrategy();
         }
     }
+
+    public void StopAttack() { Attack?.StopAttack(); }
 }

@@ -34,7 +34,11 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        if (monsterUnit.GetIsAlive() == false) return;
+        if (monsterUnit.GetIsAlive() == false)
+        {
+            pattern?.StopAttack();
+            return;
+        }
 
         pattern?.PlayPattern();
     }
