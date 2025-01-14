@@ -27,6 +27,8 @@ public class Skill2 : ActiveSkillPlayer
     {
         CreateEffectPrefab();
 
+        //Player.Instance.PlayerAddForce(new Vector2(15, 1), 1);
+
         Vector2 start = Player.Instance.transform.position;
         Vector2 end = start += new Vector2(dashRange, 0.0f) * Player.Instance.GetDirection();
 

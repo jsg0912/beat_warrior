@@ -17,8 +17,9 @@ public abstract class Strategy
 
     protected Vector3 GetPlayerPos() { return Player.Instance.transform.position; }
     protected Vector3 GetMonsterPos() { return monster.gameObject.transform.position; }
-    protected Vector3 GetMonsterMiddlePos() { return GetMonsterPos() + new Vector3(0, collider.offset.y, 0); }
-    protected Vector3 GetMonsterBottomPos() { return GetMonsterPos() + new Vector3(0, collider.offset.y - collider.size.y / 2, 0); }
+    protected Vector2 GetMonsterSize() { return new Vector2(collider.size.x, collider.size.y); }
+    protected Vector3 GetMonsterMiddlePos() { return GetMonsterPos() + new Vector3(collider.offset.x, collider.offset.y, 0); }
+    protected Vector3 GetMonsterBottomPos() { return GetMonsterPos() + new Vector3(collider.offset.x, collider.offset.y - collider.size.y / 2, 0); }
     protected int GetDirection() { return monster.GetDirection(); }
     protected int GetPlayerDirection() { return Player.Instance.transform.position.x > monster.transform.position.x ? 1 : -1; }
 }
