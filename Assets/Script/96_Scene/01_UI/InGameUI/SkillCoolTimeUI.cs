@@ -33,11 +33,10 @@ public class SkillCoolTimeUI : MonoBehaviour
     {
         if (isFirstCoolTime == true)
         {
+            isFirstCoolTime = false;
             Util.SetActive(SkillIconUILight.gameObject, true);
             Util.SetActive(CoolTimeText.gameObject, true);
             StartSkillIconLightAnimation();
-
-            isFirstCoolTime = false;
         }
     }
 
@@ -47,10 +46,9 @@ public class SkillCoolTimeUI : MonoBehaviour
         {
             if (isFirstCoolTime == false)
             {
+                isFirstCoolTime = true;
                 Util.SetActive(SkillIconUILight.gameObject, false);
                 Util.SetActive(CoolTimeText.gameObject, false);
-
-                isFirstCoolTime = true;
             }
         }
     }
