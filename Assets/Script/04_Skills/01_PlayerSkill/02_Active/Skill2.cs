@@ -30,6 +30,6 @@ public class Skill2 : ActiveSkillPlayer
         Vector2 start = Player.Instance.transform.position;
         Vector2 end = start += new Vector2(dashRange, 0.0f) * Player.Instance.GetDirection();
 
-        Player.Instance.Dashing(end, false, false);
+        Player.Instance.Dashing(end, false, false, false);
     }
 }

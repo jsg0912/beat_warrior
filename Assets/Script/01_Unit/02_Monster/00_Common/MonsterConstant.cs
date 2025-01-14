@@ -60,7 +60,7 @@ public class MonsterConstant
 
     public static Dictionary<MonsterName, float> AttackActionIntervals = new() {
         { MonsterName.Ippali, 0.5f },
-        { MonsterName.Ibkkugi, 0.5f },
+        { MonsterName.Ibkkugi, 0.8f },
         { MonsterName.Koppulso, 0.5f },
         { MonsterName.Jiljili, 0.5f },
         { MonsterName.Giljjugi, 0.5f },
