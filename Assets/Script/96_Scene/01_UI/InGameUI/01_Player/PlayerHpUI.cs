@@ -18,7 +18,7 @@ public class PlayerHpUI : MonoBehaviour
 
     private void Start()
     {
-        HpInitialize();
+        Initialize();
     }
 
     public void CreateAndUpdateHPUI(int hp)
@@ -50,7 +50,7 @@ public class PlayerHpUI : MonoBehaviour
 
         if (HPList.Count != maxHP)
         {
-            HpInitialize();
+            Initialize();
             return;
         }
 
@@ -60,7 +60,7 @@ public class PlayerHpUI : MonoBehaviour
         }
     }
 
-    public void HpInitialize()
+    public void Initialize()
     {
         CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }

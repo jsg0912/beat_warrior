@@ -197,6 +197,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 3
   CoolTimeImg: {fileID: 894631033719194191}
+  SkillIconUILight: {fileID: 0}
   SkillName: {fileID: 8881916301215753854}
   CoolTimeText: {fileID: 6056645505391152093}
 --- !u!1 &1856463932286498635
@@ -416,6 +417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 4
   CoolTimeImg: {fileID: 2140344273883172410}
+  SkillIconUILight: {fileID: 0}
   SkillName: {fileID: 4151737181343608483}
   CoolTimeText: {fileID: 2816674844272412602}
 --- !u!1 &2142838645165451612
@@ -715,6 +717,7 @@ GameObject:
   - component: {fileID: 8001978819251050093}
   - component: {fileID: 2667226835610801677}
   - component: {fileID: 7860014629566978456}
+  - component: {fileID: 3016062957645751389}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -819,6 +822,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: {fileID: 6698299672893407081}
+--- !u!114 &3016062957645751389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2335633658880510028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef357f8bcc5b2542b67dac77ee30f01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHpUI: {fileID: 7860014629566978456}
+  skillCoolTimeUIs:
+  - {fileID: 639966960574828629}
+  - {fileID: 5529516264062601518}
+  - {fileID: 2662925559456600727}
+  - {fileID: 6847192553530734099}
+  - {fileID: 820430162955520481}
+  attackCountUI: {fileID: 2243086762723870987}
 --- !u!1 &2445784075852270518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1016,6 +1039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 1
   CoolTimeImg: {fileID: 7038939918521461796}
+  SkillIconUILight: {fileID: 0}
   SkillName: {fileID: 1332257252267785693}
   CoolTimeText: {fileID: 2782841908987139829}
 --- !u!1 &3250203315265428207
@@ -1650,6 +1674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 0
   CoolTimeImg: {fileID: 7678729578663466066}
+  SkillIconUILight: {fileID: 0}
   SkillName: {fileID: 1486288898647715639}
   CoolTimeText: {fileID: 3506932254366702874}
 --- !u!114 &2243086762723870987
@@ -1665,6 +1690,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackCountView: {fileID: 5987668106122478503}
+  AttackChargeGauge: {fileID: 0}
+  Max2ChargeImages: []
+  Max3ChargeImages: []
 --- !u!1 &4918767456682393281
 GameObject:
   m_ObjectHideFlags: 0
@@ -2476,6 +2504,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: 2
   CoolTimeImg: {fileID: 6247730021383674625}
+  SkillIconUILight: {fileID: 0}
   SkillName: {fileID: 6770486454016819734}
   CoolTimeText: {fileID: 3714319211158357041}
 --- !u!1 &7938211335916067344
