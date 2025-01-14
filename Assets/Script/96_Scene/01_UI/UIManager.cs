@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     public GameObject settingPrefab;
     private bool isSettingActive = false;
 
+    // [Code Review - LJD] Make PopupSystem Queue for "ESC" Process - SDH, 20250114
 
     private void Awake()
     {
