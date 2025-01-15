@@ -12,18 +12,18 @@ public class AttackStrategyRush : AttackStrategy
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
-        SetRushDirection();
         GroundLayer = LayerMask.GetMask(LayerConstant.Tile);
     }
     protected override void SkillMethod()
     {
-        Rush();
         base.monoBehaviour.StartCoroutine(RushCoroutine());
     }
 
     protected IEnumerator RushCoroutine()
     {
     float elapsedTime = 0f;
+    SetRushDirection();
+    
     while (elapsedTime < dashDuration)
     {
         elapsedTime += Time.deltaTime;
@@ -40,8 +40,10 @@ public class AttackStrategyRush : AttackStrategy
     }
     protected virtual void Rush()
     {
+        monster.SetDirection(RushDirection);
         CheckWall();
         CheckGround();
+        
         monster.gameObject.transform.position += new Vector3((int)RushDirection * rushSpeed * Time.deltaTime, 0, 0);
     }
     protected virtual void CheckWall()
@@ -59,18 +61,15 @@ public class AttackStrategyRush : AttackStrategy
 
     protected Vector3 GetRayStartPoint()
     {
-        Vector3 offset = new Vector3((int)RushDirection, 0, 0);
-        return GetMonsterPos() + offset;
+        return GetMonsterBottomPos() + new Vector3((int)RushDirection * collider.size.x / 2, 0, 0);
     }
 
     protected void CheckGround()
     {
         RaycastHit2D rayHit = Physics2D.Raycast(GetRayStartPoint(), Vector3.down, 0.1f, GroundLayer);
+        //Debug.DrawLine(GetRayStartPoint(), GetMonsterPos() + offset + Vector3.down * 0.1f, Color.red);
 
-        if (rayHit.collider == null) 
-        {
-            ChangeDir();
-        }
+        if (rayHit.collider == null) ChangeDir();
     }
 
     protected void ChangeDir()
