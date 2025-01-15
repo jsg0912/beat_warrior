@@ -5,7 +5,7 @@ using TMPro;
 using System.Linq;
 
 // TODO: AlterManager로 바꿔서 Hierarchy에서도 AltarUI로 수정 - 정성균, 20241126
-public class AlterPopup : MonoBehaviour
+public class AltarPopup : MonoBehaviour
 {
     SkillName[] salesSkillList;
     public bool isOn;

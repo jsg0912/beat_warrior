@@ -9,7 +9,7 @@ public class MenuUI : MonoBehaviour
     private bool isSettingActive = false;
     [SerializeField] private GameObject Setting;
     public TextMeshProUGUI[] txt;
-    public AlterPopup alterPopup;
+    public AltarPopup altarPopup;
 
     private void Start()
     {
@@ -21,7 +21,7 @@ public class MenuUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && alterPopup.IsAltarPopupOn() == false)
+        if (Input.GetKeyDown(KeyCode.Escape) && altarPopup.IsAltarPopupOn() == false)
         {
             SetMenuActive();
             PauseControl.instance.SetPauseActive();
