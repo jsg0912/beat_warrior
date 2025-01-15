@@ -226,10 +226,12 @@ public class AltarPopup : MonoBehaviour
     private void TurnOn()
     {
         Util.SetActive(gameObject, true);
+        isOn = true;
     }
 
     private void TurnOff()
     {
         Util.SetActive(gameObject, false);
+        isOn = false;
     }
 }

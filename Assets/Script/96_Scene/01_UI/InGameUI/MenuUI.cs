@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MenuUI : MonoBehaviour
 {
-    // [Code Review - LJD] Variables Naming Irregular: UpperCase&LowerCase - SDH, 20250114
     public GameObject menu;
     private bool isMenuActive = false;
     private bool isSettingActive = false;

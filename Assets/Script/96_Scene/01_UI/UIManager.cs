@@ -6,10 +6,8 @@ public class UIManager : MonoBehaviour
     public Language language = Language.kr;
     public static UIManager Instance;
     public bool isTriggerAltar = false;
-    public GameObject altarPrefab;
-    private AltarPopup altarPopup;
-    public GameObject menuPrefab;
-    private MenuUI menuUI;
+    public AltarPopup altarPopup;
+    public MenuUI menuUI;
     public GameObject inGameUIPrefab;
     public GameObject settingPrefab;
     private bool isSettingActive = false;
@@ -32,12 +30,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        // [Code Review - LJD] just declare the component variable, not gameobject var - SDH, 20250114
-        altarPopup = altarPrefab.GetComponent<AltarPopup>();
-        menuUI = menuPrefab.GetComponent<MenuUI>();
-    }
 
 
     public static void CreateUI()
@@ -89,7 +81,7 @@ public class UIManager : MonoBehaviour
         Util.SetActive(inGameUIPrefab, active);
     }
 
-    public void SetSettingActive()
+    /*public void SetSettingActive()
     {
         isSettingActive = !isSettingActive;
         // [Code Review - LJD] ?????? unnecessary if-else statement - SDH, 20250114 
@@ -103,6 +95,6 @@ public class UIManager : MonoBehaviour
             Util.SetActive(settingPrefab, isSettingActive);
             Util.SetActive(menuPrefab, isSettingActive);
         }
-    }
+    }*/
 }
 
