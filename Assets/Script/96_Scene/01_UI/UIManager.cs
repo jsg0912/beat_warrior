@@ -9,7 +9,6 @@ public class UIManager : MonoBehaviour
     public AltarPopup altarPopup;
     public MenuUI menuUI;
     public GameObject inGameUIPrefab;
-    public GameObject settingPrefab;
     private bool isSettingActive = false;
 
     // [Code Review - LJD] Make PopupSystem Queue for "ESC" Process - SDH, 20250114
@@ -61,6 +60,11 @@ public class UIManager : MonoBehaviour
                 PauseControl.instance.SetPauseActive();
             }
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.Log("asd");
+            SetSettingActive();
+        }
     }
 
     private void SceneReset()
@@ -81,20 +85,13 @@ public class UIManager : MonoBehaviour
         Util.SetActive(inGameUIPrefab, active);
     }
 
-    /*public void SetSettingActive()
+    public void SetSettingActive()
     {
-        isSettingActive = !isSettingActive;
-        // [Code Review - LJD] ?????? unnecessary if-else statement - SDH, 20250114 
-        if (isSettingActive)
-        {
-            Util.SetActive(menuPrefab, isSettingActive);
-            Util.SetActive(settingPrefab, isSettingActive);
-        }
-        else
-        {
-            Util.SetActive(settingPrefab, isSettingActive);
-            Util.SetActive(menuPrefab, isSettingActive);
-        }
-    }*/
+        isSettingActive = !isSettingActive; 
+        
+        menuUI.SetSettingActive();
+        menuUI.SetMenuActive();
+        PauseControl.instance.SetPauseActive(isSettingActive);
+    }
 }
 
