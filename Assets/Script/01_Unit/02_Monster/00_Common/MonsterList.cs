@@ -36,7 +36,7 @@ public static class MonsterList
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
         },
-        PatternName.Monster3),
+        PatternName.Koppulso),
         new MonsterJSON(MonsterName.Giljjugi,
         "길쭉이",
         new Dictionary<StatKind, int>{
