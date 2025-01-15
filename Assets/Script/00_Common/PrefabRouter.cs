@@ -19,5 +19,6 @@ public class PrefabRouter
         { MonsterName.Ibkkugi, "Prefab/02_Object/IbkkugiThrow" },
         { MonsterName.Jiljili, "Prefab/02_Object/JiljiliThrow" },
         { MonsterName.Itmomi, "Prefab/02_Object/IsmomiThrow" },
+        { MonsterName.Koppulso, "Prefab/02_Object/KoppulsoDashCollider" },
     };
 }

@@ -8,14 +8,20 @@ public class AttackStrategyRush : AttackStrategy
     protected float dashDuration;
     protected Coroutine rushCoroutine;
     protected LayerMask GroundLayer;
+    protected GameObject prefab;
+    protected GameObject obj;
+    protected MonsterAttackCollider monsterAttackCollider;
+
 
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
         GroundLayer = LayerMask.GetMask(LayerConstant.Tile);
+        prefab = Resources.Load(PrefabRouter.AttackPrefab[monster.monsterName]) as GameObject;
     }
     protected override void SkillMethod()
     {
+        obj = GameObject.Instantiate(prefab);
         base.monoBehaviour.StartCoroutine(RushCoroutine());
     }
 
@@ -31,6 +37,7 @@ public class AttackStrategyRush : AttackStrategy
         Rush();
         yield return null;
     }
+    UnityEngine.Object.Destroy(obj);
     }
 
     protected virtual void SetRushDirection()
@@ -41,10 +48,13 @@ public class AttackStrategyRush : AttackStrategy
     protected virtual void Rush()
     {
         monster.SetDirection(RushDirection);
+
         CheckWall();
         CheckGround();
-        
+
+
         monster.gameObject.transform.position += new Vector3((int)RushDirection * rushSpeed * Time.deltaTime, 0, 0);
+        obj.transform.position = monster.gameObject.transform.position + new Vector3(0, 2.3f, 0);;
     }
     protected virtual void CheckWall()
     {
