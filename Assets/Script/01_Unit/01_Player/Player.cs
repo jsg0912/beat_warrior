@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
     private void Initialize(Direction direction = Direction.Left)
     {
-        // TODO: Alternate real user nickname than "playerName" - SDH, 20241204
+        // TODO: Altarnate real user nickname than "playerName" - SDH, 20241204
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, PlayerConstant.hpMax},
             {StatKind.ATK, PlayerConstant.atk},
