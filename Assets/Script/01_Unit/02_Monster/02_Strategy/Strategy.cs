@@ -13,7 +13,7 @@ public abstract class Strategy
         collider = monster.gameObject.GetComponent<BoxCollider2D>();
     }
 
-    public virtual void PlayStrategy() { }
+    public virtual bool PlayStrategy() { return false; } // it returns whether the strategy plays or not.
 
     protected Vector3 GetPlayerPos() { return Player.Instance.transform.position; }
     protected Vector3 GetMonsterPos() { return monster.gameObject.transform.position; }

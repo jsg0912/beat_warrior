@@ -3,49 +3,40 @@ using UnityEngine;
 
 public class MenuUI : MonoBehaviour
 {
-    // [Code Review - LJD] Variables Naming Irregular: UpperCase&LowerCase - SDH, 20250114
-    public GameObject Menu;
+    public GameObject menu;
     private bool isMenuActive = false;
     private bool isSettingActive = false;
-    [SerializeField] private GameObject Setting;
+    [SerializeField] private GameObject setting;
     public TextMeshProUGUI[] txt;
-    public AlterPopup alterPopup;
+    public AltarPopup altarPopup;
 
     private void Start()
     {
-        for (int i = 0; i < txt.Length; i++)
-        {
-            txt[i].text = KeySetting.keys[(Action)i].ToString();
-        }
+        UpdateKeySettingUI();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && alterPopup.IsAltarPopupOn() == false)
+        if (Input.GetKeyDown(KeyCode.Escape) && altarPopup.IsAltarPopupOn() == false)
         {
             SetMenuActive();
+            UpdateKeySettingUI();
             PauseControl.instance.SetPauseActive();
-        }
-        // [Code Review - LJD] Do not use update for one-time event - SDH, 20250114
-        for (int i = 0; i < txt.Length; i++)
-        {
-            txt[i].text = KeySetting.keys[(Action)i].ToString();
         }
     }
 
     public void SetMenuActive()
     {
         isMenuActive = !isMenuActive;
-        Util.SetActive(Menu, isMenuActive);
+        Util.SetActive(menu, isMenuActive);
 
-        // [Code Review - LJD] cannot understand why this condition is correct - SDH, 20250114
         if (isMenuActive == false && isSettingActive == true) SetSettingActive();
     }
 
     public void SetSettingActive()
     {
         isSettingActive = !isSettingActive;
-        Util.SetActive(Setting, isSettingActive);
+        Util.SetActive(setting, isSettingActive);
     }
 
     public void OnClickReStart()
@@ -62,5 +53,13 @@ public class MenuUI : MonoBehaviour
     public bool GetMenuActive()
     {
         return isMenuActive;
+    }
+
+    private void UpdateKeySettingUI()
+    {
+        for (int i = 0; i < txt.Length; i++)
+        {
+            txt[i].text = KeySetting.keys[(Action)i].ToString();
+        }
     }
 }

@@ -2,9 +2,10 @@ public abstract class RecognizeStrategy : Strategy
 {
     protected float recognizeRange;
 
-    public override void PlayStrategy()
+    public override bool PlayStrategy()
     {
         if (IsLookingTarget() == true) CheckTarget();
+        return true;
     }
 
     protected virtual bool IsLookingTarget() { return GetDirection() == GetPlayerDirection(); }
@@ -12,7 +13,7 @@ public abstract class RecognizeStrategy : Strategy
 
     protected void StartChase()
     {
-        if (monster.GetStatus() == MonsterStatus.Normal)
+        if (monster.GetStatus() == MonsterStatus.Idle)
         {
             // DebugConsole.Log("StartChase");
             monster.SetStatus(MonsterStatus.Chase);
@@ -23,7 +24,7 @@ public abstract class RecognizeStrategy : Strategy
         if (monster.GetStatus() == MonsterStatus.Chase)
         {
             // DebugConsole.Log("ReleaseChase");
-            monster.SetStatus(MonsterStatus.Normal);
+            monster.SetStatus(MonsterStatus.Idle);
         }
     }
 }

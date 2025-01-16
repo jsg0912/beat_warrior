@@ -12,11 +12,12 @@ public class MoveStrategyNormal : MoveStrategyRandom
         SetDirection(Random.Range(0, 2) == 0 ? Direction.Right : Direction.Left);
     }
 
-    public override void PlayStrategy()
+    public override bool PlayStrategy()
     {
         base.PlayStrategy();
 
         CheckGround();
+        return true;
     }
 
     protected override Vector3 GetRayStartPoint()

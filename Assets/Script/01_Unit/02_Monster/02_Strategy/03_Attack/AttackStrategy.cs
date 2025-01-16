@@ -26,24 +26,24 @@ public abstract class AttackStrategy : Strategy
         attackActionInterval = MonsterConstant.AttackActionIntervals[monster.monsterName];
     }
 
-    public override void PlayStrategy()
+    public override bool PlayStrategy()
     {
-        if (isAttacking == true) return;
+        if (isAttacking == true) return true;
 
-        CheckCoolTime();
-        TrySkill();
+        return TrySkill();
     }
 
-    protected void CheckCoolTime()
+    public void UpdateCoolTime()
     {
         if (attackCoolTime >= 0) attackCoolTime -= Time.deltaTime;
     }
 
-    protected void TrySkill()
+    protected bool TrySkill()
     {
-        if (attackCoolTime >= 0) return;
+        if (attackCoolTime >= 0) return false;
 
         attackCoroutine = monoBehaviour.StartCoroutine(UseSkill());
+        return true;
     }
 
     protected virtual IEnumerator UseSkill()
