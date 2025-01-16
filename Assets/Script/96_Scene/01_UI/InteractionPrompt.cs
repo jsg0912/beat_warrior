@@ -8,6 +8,10 @@ public class InteractionPrompt : MonoBehaviour
     private Dictionary<string, string> interactionMessages;
     private bool isInitialized = false;
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L)) { UpdateInteractionMessages(); }
+    }
     private void Initialize()
     {
         if (isInitialized) return;
@@ -16,13 +20,16 @@ public class InteractionPrompt : MonoBehaviour
         KeyCode interactionKey = KeySetting.keys[Action.Interaction];
         interactionMessages = new Dictionary<string, string>()
         {
-            {"Sign", $"Press [{interactionKey}]" }
+            {"Sign", $"Press [{interactionKey}]" },
+            {"Altar", $"Press [{interactionKey}]"}
         };
     }
     public void ShowPrompt(string interactionType)
     {
         Initialize();
+        UpdateInteractionMessages();
         Util.SetActive(gameObject, true);
+        
         if (interactionMessages.ContainsKey(interactionType))
         {
             promptText.text = interactionMessages[interactionType];
@@ -30,4 +37,12 @@ public class InteractionPrompt : MonoBehaviour
     }
 
     public void HidePrompt() { Util.SetActive(gameObject, false); }
+
+    public void UpdateInteractionMessages()
+    {
+        KeyCode interactionKey = KeySetting.keys[Action.Interaction];
+
+        interactionMessages["Sign"] = $"Press [{interactionKey}]";
+        interactionMessages["Altar"] = $"Press[{interactionKey}]";
+    }
 }

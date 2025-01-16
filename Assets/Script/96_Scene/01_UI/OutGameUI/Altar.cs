@@ -8,7 +8,7 @@ public class Altar : MonoBehaviour
         if(collision.CompareTag(TagConstant.Player))
         {
             UIManager.Instance.isTriggerAltar = true;
-            interactionPrompt.ShowPrompt(PromptConstant.Sign);
+            interactionPrompt.ShowPrompt(PromptConstant.Altar);
         }
     }
 
