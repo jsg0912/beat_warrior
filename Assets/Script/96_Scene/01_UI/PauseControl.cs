@@ -40,5 +40,11 @@ public class PauseControl : MonoBehaviour
 
     }
 
+    public void SetPauseActive(bool paused)
+    {
+        if (paused == true) { PauseActive(); }
+        else { ResumeActive(); }
+    }
+
     public bool GetPause() { return isPauseActive; }
 }

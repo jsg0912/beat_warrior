@@ -1,14 +1,16 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Altar : MonoBehaviour
+public class Sign : MonoBehaviour
 {
     public InteractionPrompt interactionPrompt;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag(TagConstant.Player))
+        if (collision.CompareTag(TagConstant.Player))
         {
-            UIManager.Instance.isTriggerAltar = true;
-            interactionPrompt.ShowPrompt(PromptConstant.Altar);
+            
+            interactionPrompt.ShowPrompt(PromptConstant.Sign);
         }
     }
 
@@ -16,7 +18,7 @@ public class Altar : MonoBehaviour
     {
         if (collision.CompareTag(TagConstant.Player))
         {
-            UIManager.Instance.isTriggerAltar = false;
+            
             interactionPrompt.HidePrompt();
         }
     }

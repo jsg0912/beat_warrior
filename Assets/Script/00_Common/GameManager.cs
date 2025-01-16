@@ -47,4 +47,9 @@ public class GameManager : MonoBehaviour
         StartGame();
         Player.Instance.RestartPlayer();
     }
+
+    public void TitleSetting()
+    {
+        UIManager.Instance.SetSettingActive();
+    }
 }
