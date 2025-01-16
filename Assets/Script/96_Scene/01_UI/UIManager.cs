@@ -6,10 +6,8 @@ public class UIManager : MonoBehaviour
     public Language language = Language.kr;
     public static UIManager Instance;
     public bool isTriggerAltar = false;
-    public GameObject altarPrefab;
-    private AltarPopup AltarPopup;
-    public GameObject menuPrefab;
-    private MenuUI menuUI;
+    public AltarPopup altarPopup;
+    public MenuUI menuUI;
     public GameObject inGameUIPrefab;
     private bool isSettingActive = false;
 
@@ -31,12 +29,6 @@ public class UIManager : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        // [Code Review - LJD] just declare the component variable, not gameobject var - SDH, 20250114
-        AltarPopup = altarPrefab.GetComponent<AltarPopup>();
-        menuUI = menuPrefab.GetComponent<MenuUI>();
-    }
 
 
     public static void CreateUI()
@@ -58,11 +50,11 @@ public class UIManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (AltarPopup.isOn == true && menuUI.GetMenuActive() == false)
+            if (altarPopup.isOn == true && menuUI.GetMenuActive() == false)
             {
-                AltarPopup.HideAltarPopup();
+                altarPopup.HideAltarPopup();
             }
-            else if (AltarPopup.isOn == false)
+            else if (altarPopup.isOn == false)
             {
                 menuUI.SetMenuActive();
                 PauseControl.instance.SetPauseActive();
@@ -84,7 +76,7 @@ public class UIManager : MonoBehaviour
     {
         if (isTriggerAltar == true && menuUI.GetMenuActive() == false)
         {
-            AltarPopup.ShowAltarPopup();
+            altarPopup.ShowAltarPopup();
         }
     }
 
@@ -95,11 +87,10 @@ public class UIManager : MonoBehaviour
 
     public void SetSettingActive()
     {
-        isSettingActive = !isSettingActive;
-
+        isSettingActive = !isSettingActive; 
+        
         menuUI.SetSettingActive();
         menuUI.SetMenuActive();
         PauseControl.instance.SetPauseActive(isSettingActive);
     }
 }
-
