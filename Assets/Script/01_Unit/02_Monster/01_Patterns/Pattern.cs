@@ -25,7 +25,7 @@ public class Pattern
 
         switch (monster.GetStatus())
         {
-            case MonsterStatus.Normal:
+            case MonsterStatus.Idle:
                 MoveBasic?.PlayStrategy();
                 break;
             case MonsterStatus.Chase:

@@ -13,7 +13,7 @@ public abstract class RecognizeStrategy : Strategy
 
     protected void StartChase()
     {
-        if (monster.GetStatus() == MonsterStatus.Normal)
+        if (monster.GetStatus() == MonsterStatus.Idle)
         {
             // DebugConsole.Log("StartChase");
             monster.SetStatus(MonsterStatus.Chase);
@@ -24,7 +24,7 @@ public abstract class RecognizeStrategy : Strategy
         if (monster.GetStatus() == MonsterStatus.Chase)
         {
             // DebugConsole.Log("ReleaseChase");
-            monster.SetStatus(MonsterStatus.Normal);
+            monster.SetStatus(MonsterStatus.Idle);
         }
     }
 }
