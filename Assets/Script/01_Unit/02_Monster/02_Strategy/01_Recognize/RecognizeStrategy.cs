@@ -2,9 +2,10 @@ public abstract class RecognizeStrategy : Strategy
 {
     protected float recognizeRange;
 
-    public override void PlayStrategy()
+    public override bool PlayStrategy()
     {
         if (IsLookingTarget() == true) CheckTarget();
+        return true;
     }
 
     protected virtual bool IsLookingTarget() { return GetDirection() == GetPlayerDirection(); }

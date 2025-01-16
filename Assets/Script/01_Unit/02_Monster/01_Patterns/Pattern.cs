@@ -17,17 +17,23 @@ public class Pattern
         Attack?.Initialize(monster);
     }
 
+    // It called at every Update.
     public virtual void PlayPattern()
     {
         Recognize?.PlayStrategy();
-        if (monster.GetStatus() == MonsterStatus.Normal)
+        Attack?.UpdateCoolTime();
+
+        switch (monster.GetStatus())
         {
-            MoveNormal?.PlayStrategy();
-        }
-        else if (monster.GetStatus() == MonsterStatus.Chase)
-        {
-            MoveChase?.PlayStrategy();
-            Attack?.PlayStrategy();
+            case MonsterStatus.Normal:
+                MoveNormal?.PlayStrategy();
+                break;
+            case MonsterStatus.Chase:
+                if (Attack?.PlayStrategy() == false)
+                {
+                    MoveChase?.PlayStrategy();
+                }
+                break;
         }
     }
 

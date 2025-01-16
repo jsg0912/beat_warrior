@@ -5,21 +5,22 @@ public class MoveStrategyRandom : MoveStrategy
     protected bool isStop = false;
     protected float changeDestTime = 0;
 
-    public override void PlayStrategy()
+    public override bool PlayStrategy()
     {
         base.PlayStrategy();
         ChangeDest();
+        return true;
     }
 
-    protected override void Move()
+    protected override bool Move()
     {
         if (isStop == true)
         {
             monster.SetIsWalking(false);
-            return;
+            return false;
         }
 
-        base.Move();
+        return base.Move();
     }
 
     protected void ChangeDest()
