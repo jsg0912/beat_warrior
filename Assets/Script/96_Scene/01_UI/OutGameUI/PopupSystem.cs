@@ -3,7 +3,6 @@ using TMPro;
 
 public class PopupSystem : MonoBehaviour
 {
-    // Start is called before the first frame update
     public GameObject popup;
 
     public static PopupSystem instance { get; private set; }
@@ -28,20 +27,14 @@ public class PopupSystem : MonoBehaviour
 
     public void OnClickOkay()
     {
-        if (onClickOkay != null)
-        {
-            //onClickOkay();
-        }
+        onClickOkay?.Invoke();
 
         ClosePopup();
     }
 
     public void OnClickCancel()
     {
-        if (onClickCancel != null)
-        {
-            //onClickCancel();
-        }
+        onClickCancel?.Invoke();
 
         ClosePopup();
     }

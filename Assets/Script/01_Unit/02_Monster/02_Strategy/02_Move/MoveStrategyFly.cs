@@ -17,11 +17,12 @@ public class MoveStrategyFly : MoveStrategyRandom
         SetDirection(Random.Range(0, 2) == 0 ? Direction.Right : Direction.Left);
     }
 
-    public override void PlayStrategy()
+    public override bool PlayStrategy()
     {
         base.PlayStrategy();
 
         CheckRange();
+        return true;
     }
 
     protected void CheckRange()

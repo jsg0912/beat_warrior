@@ -14,23 +14,24 @@ public class MoveStrategy : Strategy
         GroundLayer = LayerMask.GetMask(LayerConstant.Tile);
     }
 
-    public override void PlayStrategy()
+    public override bool PlayStrategy()
     {
-        Move();
+        return Move();
     }
 
-    protected virtual void Move()
+    protected virtual bool Move()
     {
         if (IsMoveable() == false)
         {
             monster.SetIsWalking(false);
-            return;
+            return false;
         }
 
         CheckWall();
 
         monster.gameObject.transform.position += new Vector3(GetDirection() * moveSpeed * Time.deltaTime, 0, 0);
         monster.SetIsWalking(true);
+        return true;
     }
     protected virtual void CheckWall()
     {

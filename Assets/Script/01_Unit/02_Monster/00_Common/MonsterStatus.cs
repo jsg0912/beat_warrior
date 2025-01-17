@@ -1,6 +1,6 @@
 public enum MonsterStatus
 {
-    Normal,
+    Idle,
     Chase,
     Attack,
     Hurt,

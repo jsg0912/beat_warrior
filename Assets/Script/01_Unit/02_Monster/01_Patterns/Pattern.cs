@@ -3,7 +3,7 @@ public class Pattern
     protected Monster monster;
 
     protected RecognizeStrategy Recognize;
-    protected MoveStrategy MoveNormal;
+    protected MoveStrategy MoveBasic;
     protected MoveStrategy MoveChase;
     protected AttackStrategy Attack;
 
@@ -12,22 +12,28 @@ public class Pattern
         this.monster = monster;
 
         Recognize?.Initialize(monster);
-        MoveNormal?.Initialize(monster);
+        MoveBasic?.Initialize(monster);
         MoveChase?.Initialize(monster);
         Attack?.Initialize(monster);
     }
 
+    // It called at every Update.
     public virtual void PlayPattern()
     {
         Recognize?.PlayStrategy();
-        if (monster.GetStatus() == MonsterStatus.Normal)
+        Attack?.UpdateCoolTime();
+
+        switch (monster.GetStatus())
         {
-            MoveNormal?.PlayStrategy();
-        }
-        else if (monster.GetStatus() == MonsterStatus.Chase)
-        {
-            MoveChase?.PlayStrategy();
-            Attack?.PlayStrategy();
+            case MonsterStatus.Idle:
+                MoveBasic?.PlayStrategy();
+                break;
+            case MonsterStatus.Chase:
+                if (Attack?.PlayStrategy() == false)
+                {
+                    MoveChase?.PlayStrategy();
+                }
+                break;
         }
     }
 
