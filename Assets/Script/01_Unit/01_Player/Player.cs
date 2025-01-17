@@ -179,7 +179,8 @@ public class Player : MonoBehaviour
     public void SetDirection(Direction dir)
     {
         direction = dir;
-        PlayerSprite.localScale = new Vector3((int)direction, 1, 1);
+        Vector3 scale = PlayerSprite.localScale;
+        PlayerSprite.localScale = new Vector3(scale.x * (int)direction, scale.y, 1);
     }
 
     public void SetGravityScale(bool gravity)
