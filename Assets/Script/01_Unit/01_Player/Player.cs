@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 public delegate void PlayerCreateDelegate(); // [Code Review - KMJ] No ref? - SDH, 20250106
-public class Player : MonoBehaviour
+public class Player : DirectionalGameObject
 {
     private static Player _instance;
     public static Player Instance
@@ -24,12 +24,8 @@ public class Player : MonoBehaviour
     private List<Skill> traitList = new();
 
     private ColliderController colliderController;
-
-    [SerializeField] private Transform PlayerSprite;
     [SerializeField] private PlayerStatus status;
 
-    private Direction direction;
-    private Direction playerSpriteDirection = Direction.Right; // Graphic draws player sprite that directs right; - SDH, 20250119
     private bool isOnBaseTile;
     private bool isOnTile;
     private bool isInvincibility;
@@ -94,7 +90,7 @@ public class Player : MonoBehaviour
 
         SetPlayerStatus(PlayerStatus.Idle);
 
-        SetDirection(direction);
+        SetMovingDirection(direction);
         isOnBaseTile = false;
         isInvincibility = false;
 
@@ -103,14 +99,13 @@ public class Player : MonoBehaviour
 
     public void RestartPlayer()//TODO: GameManager로 옮기기 - 이정대 20240912
     {
-        Initialize(direction);
+        Initialize();
         _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
         PlayerUIController.Instance.Initialize();
     }
 
     // GET Functions
     public PlayerStatus GetPlayerStatus() { return status; }
-    public int GetDirection() { return (int)direction; }
     public SkillName[] GetTraits() { return traitList.Select(trait => trait.skillName).ToArray(); }
     public int GetCurrentStat(StatKind statKind) { return playerUnit.unitStat.GetCurrentStat(statKind); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
@@ -151,22 +146,6 @@ public class Player : MonoBehaviour
         if (IsUsingSkill() == true) StartCoroutine(UseSkill());
     }
 
-    public void SetDirection(Direction dir)
-    {
-        direction = dir;
-        if (playerSpriteDirection != direction)
-        {
-            FlipPlayerSprite();
-            playerSpriteDirection = direction;
-        }
-    }
-
-    public void FlipPlayerSprite()
-    {
-        Vector3 scale = PlayerSprite.localScale;
-        PlayerSprite.localScale = new Vector3(scale.x * (-1), scale.y, 1);
-    }
-
     public void SetGravityScale(bool gravity)
     {
         _rigidbody.gravityScale = gravity ? PlayerConstant.gravityScale : 0;
@@ -185,7 +164,7 @@ public class Player : MonoBehaviour
 
     public void PlayerAddForce(Vector2 force, int dir)
     {
-        _rigidbody.AddForce(force * (int)direction * dir, ForceMode2D.Impulse);
+        _rigidbody.AddForce(force * (int)objectDirection * dir, ForceMode2D.Impulse);
     }
 
     public bool ChangeCurrentHP(int hp)
@@ -226,19 +205,19 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeySetting.keys[PlayerAction.Right]))
         {
-            SetDirection(Direction.Right);
+            SetMovingDirection(Direction.Right);
             isMove = true;
         }
 
         if (Input.GetKey(KeySetting.keys[PlayerAction.Left]))
         {
-            SetDirection(Direction.Left);
+            SetMovingDirection(Direction.Left);
             isMove = true;
         }
 
         if (IsUsingSkill() == false && status != PlayerStatus.Jump) SetPlayerStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
 
-        if (isMove == true) transform.position += new Vector3((int)direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
+        if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
     public void CheckPlayerCommand()
@@ -335,7 +314,7 @@ public class Player : MonoBehaviour
 
         SetGravityScale(false);
         SetInvincibility(isInvincibility);
-        if (changeDir == true) SetDirection(dir);
+        if (changeDir == true) SetMovingDirection(dir);
 
         // TODO: 아래의 10은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
         int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 10;
@@ -344,8 +323,9 @@ public class Player : MonoBehaviour
         {
             if (passWall == false)
             {
-                Vector3 start = GetMonsterMiddlePos() + new Vector3(GetPlayerSize().x / 2, 0, 0) * GetDirection();
-                Vector3 direction = Vector3.right * GetDirection();
+                float movingDir = GetMovingDirectionFloat();
+                Vector3 start = GetMonsterMiddlePos() + new Vector3(GetPlayerSize().x / 2, 0, 0) * movingDir;
+                Vector3 direction = Vector3.right * movingDir;
 
                 RaycastHit2D rayHit = Physics2D.Raycast(start, direction, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
                 if (rayHit.collider != null && rayHit.collider.CompareTag("Base")) break;
@@ -360,7 +340,7 @@ public class Player : MonoBehaviour
 
         SetGravityScale(true);
         SetInvincibility(false);
-        if (changeDir == true) SetDirection((Direction)(-1 * (int)dir));
+        if (changeDir == true) SetMovingDirection((Direction)(-1 * (int)dir));
     }
 
     public Vector3 GetPlayerSize() { return new Vector3(_collider.size.x, _collider.size.y, 0); }
