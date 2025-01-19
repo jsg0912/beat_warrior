@@ -66,7 +66,7 @@ public class Attack : ActiveSkillPlayer
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[Action.Attack];
+        keyCode = KeySetting.keys[PlayerAction.Attack];
     }
 
     protected override void SkillMethod()

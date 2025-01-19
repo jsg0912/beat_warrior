@@ -49,7 +49,7 @@ public class KeySettingButton : MonoBehaviour
     {
         isListeningForInput = false;
 
-        KeySetting.keys[(Action)idx] = keyCode;
+        KeySetting.keys[(PlayerAction)idx] = keyCode;
         UpdateKeyText();
     }
 
@@ -63,8 +63,8 @@ public class KeySettingButton : MonoBehaviour
         if (ActionText == null || KeyText == null)
             return;
 
-        ActionText.text = ((Action)idx).ToString();
-        KeyText.text = KeySetting.keys[(Action)idx].ToString();
+        ActionText.text = ((PlayerAction)idx).ToString();
+        KeyText.text = KeySetting.keys[(PlayerAction)idx].ToString();
     }
 
     public void SetKey(int key)

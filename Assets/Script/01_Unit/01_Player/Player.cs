@@ -45,32 +45,6 @@ public class Player : MonoBehaviour
         Initialize();
     }
 
-    private void FixedUpdate()
-    {
-        if (!PauseControl.instance.GetPause())
-        {
-            if (status != PlayerStatus.Dead) CheckMove();
-        }
-    }
-
-    void Update()
-    {
-        if (status != PlayerStatus.Dead)
-        {
-            if (!PauseControl.instance.GetPause())
-            {
-                Jump();
-                Fall();
-                Down();
-                Skill();
-                Interaction();
-            }
-        }
-
-        // TODO: 임시 부활 코드
-        if (Input.GetKeyDown(KeyCode.B)) RestartPlayer();
-    }
-
     public static void TryCreatePlayer()
     {
         if (_instance == null)
@@ -232,19 +206,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void CheckMove()
+    public void CheckIsMove()
     {
         if (IsMoveable() == false) return;
 
         bool isMove = false;
 
-        if (Input.GetKey(KeySetting.keys[Action.Right]))
+        if (Input.GetKey(KeySetting.keys[PlayerAction.Right]))
         {
             SetDirection(Direction.Right);
             isMove = true;
         }
 
-        if (Input.GetKey(KeySetting.keys[Action.Left]))
+        if (Input.GetKey(KeySetting.keys[PlayerAction.Left]))
         {
             SetDirection(Direction.Left);
             isMove = true;
@@ -255,6 +229,17 @@ public class Player : MonoBehaviour
         if (isMove == true) transform.position += new Vector3((int)direction * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
+    public void CheckPlayerCommand()
+    {
+        if (status != PlayerStatus.Dead)
+        {
+            Jump();
+            Fall();
+            Down();
+            Skill();
+            Interaction();
+        }
+    }
     private bool IsMoveable()
     {
         switch (status)
@@ -291,7 +276,7 @@ public class Player : MonoBehaviour
         if (isOnBaseTile == true) return;
         if (_animator.GetBool(PlayerConstant.groundedAnimBool) == false) return;
 
-        if (Input.GetKeyDown(KeySetting.keys[Action.Down])) colliderController.PassTile(tileCollider);
+        if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Down])) colliderController.PassTile(tileCollider);
     }
 
     private void Fall()
@@ -305,7 +290,7 @@ public class Player : MonoBehaviour
     {
         if (IsUsingSkill() == true || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
 
-        if (Input.GetKeyDown(KeySetting.keys[Action.Jump]))
+        if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Jump]))
         {
             SetPlayerStatus(PlayerStatus.Jump);
 
@@ -318,7 +303,7 @@ public class Player : MonoBehaviour
 
     private void Interaction()
     {
-        if (Input.GetKeyDown(KeySetting.keys[Action.Interaction]))
+        if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Interaction]))
         {
             if (Portal.Instance.IsTriggerPortal == true)
             {

@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public Language language = Language.kr;
     public static UIManager Instance;
+    public Language language = Language.kr;
     public bool isTriggerAltar = false;
     public AltarPopup altarPopup;
     public MenuUI menuUI;
@@ -38,13 +38,13 @@ public class UIManager : MonoBehaviour
     }
 
 
-    private void Update()
+    public void CheckCommand()
     {
         if (Input.GetKeyUp(KeyCode.M))
         {
             SceneReset();
         }
-        if (Input.GetKeyDown(KeySetting.keys[Action.Interaction]))
+        if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Interaction]))
         {
             UIInteraction();
         }
@@ -87,8 +87,8 @@ public class UIManager : MonoBehaviour
 
     public void SetSettingActive()
     {
-        isSettingActive = !isSettingActive; 
-        
+        isSettingActive = !isSettingActive;
+
         menuUI.SetSettingActive();
         menuUI.SetMenuActive();
         PauseControl.instance.SetPauseActive(isSettingActive);

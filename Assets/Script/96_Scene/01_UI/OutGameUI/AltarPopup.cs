@@ -10,7 +10,6 @@ public class AltarPopup : MonoBehaviour
     SkillName[] salesSkillList;
     public bool isOn;
 
-
     public SkillName SelectTrait;
     int spiritCount
     {

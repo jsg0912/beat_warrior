@@ -17,7 +17,7 @@ public class Mark : ActiveSkillPlayer
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[Action.Mark_Dash];
+        keyCode = KeySetting.keys[PlayerAction.Mark_Dash];
     }
 
     protected override void SkillMethod()

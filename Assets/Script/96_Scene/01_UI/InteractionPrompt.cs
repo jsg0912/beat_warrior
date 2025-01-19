@@ -17,7 +17,7 @@ public class InteractionPrompt : MonoBehaviour
         if (isInitialized) return;
         isInitialized = true;
 
-        KeyCode interactionKey = KeySetting.keys[Action.Interaction];
+        KeyCode interactionKey = KeySetting.keys[PlayerAction.Interaction];
         interactionMessages = new Dictionary<string, string>()
         {
             {"Sign", $"Press [{interactionKey}]" },
@@ -29,7 +29,7 @@ public class InteractionPrompt : MonoBehaviour
         Initialize();
         UpdateInteractionMessages();
         Util.SetActive(gameObject, true);
-        
+
         if (interactionMessages.ContainsKey(interactionType))
         {
             promptText.text = interactionMessages[interactionType];
@@ -40,7 +40,7 @@ public class InteractionPrompt : MonoBehaviour
 
     public void UpdateInteractionMessages()
     {
-        KeyCode interactionKey = KeySetting.keys[Action.Interaction];
+        KeyCode interactionKey = KeySetting.keys[PlayerAction.Interaction];
 
         interactionMessages["Sign"] = $"Press [{interactionKey}]";
         interactionMessages["Altar"] = $"Press[{interactionKey}]";

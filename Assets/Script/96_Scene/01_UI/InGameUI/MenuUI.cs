@@ -15,16 +15,6 @@ public class MenuUI : MonoBehaviour
         UpdateKeySettingUI();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && altarPopup.IsAltarPopupOn() == false)
-        {
-            SetMenuActive();
-            UpdateKeySettingUI();
-            PauseControl.instance.SetPauseActive();
-        }
-    }
-
     public void SetMenuActive()
     {
         isMenuActive = !isMenuActive;
@@ -55,11 +45,11 @@ public class MenuUI : MonoBehaviour
         return isMenuActive;
     }
 
-    private void UpdateKeySettingUI()
+    public void UpdateKeySettingUI()
     {
         for (int i = 0; i < txt.Length; i++)
         {
-            txt[i].text = KeySetting.keys[(Action)i].ToString();
+            txt[i].text = KeySetting.keys[(PlayerAction)i].ToString();
         }
     }
 }

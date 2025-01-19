@@ -8,7 +8,7 @@ public class KeySettingUI : MonoBehaviour
     {
         for (int i = 0; i < txt.Length; i++)
         {
-            txt[i].text = KeySetting.keys[(Action)i].ToString();
+            txt[i].text = KeySetting.keys[(PlayerAction)i].ToString();
         }
     }
 
@@ -16,7 +16,7 @@ public class KeySettingUI : MonoBehaviour
     {
         for (int i = 0; i < txt.Length; i++)
         {
-            txt[i].text = KeySetting.keys[(Action)i].ToString();
+            txt[i].text = KeySetting.keys[(PlayerAction)i].ToString();
         }
     }
 }

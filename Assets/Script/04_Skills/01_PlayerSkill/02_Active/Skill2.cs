@@ -20,7 +20,7 @@ public class Skill2 : ActiveSkillPlayer
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[Action.Skill2];
+        keyCode = KeySetting.keys[PlayerAction.Skill2];
     }
 
     protected override void SkillMethod()
