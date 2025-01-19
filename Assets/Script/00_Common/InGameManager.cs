@@ -3,17 +3,12 @@ using UnityEngine;
 public class InGameManager : MonoBehaviour
 {
     private static InGameManager _instance;
+    public static InGameManager Instance => TryCreateInGameManager();
 
-    public static InGameManager Instance
-    {
-        get
-        {
-            TryCreateInGameManager();
-            return _instance;
-        }
-    }
+    private GameObject SoulPrefab;
+    private Vector3 SoulPositionOffset = new Vector3(0, 0.5f, 0);
 
-    public static void TryCreateInGameManager()
+    public static InGameManager TryCreateInGameManager()
     {
         if (_instance == null)
         {
@@ -25,9 +20,16 @@ public class InGameManager : MonoBehaviour
                 DontDestroyOnLoad(go);
             }
         }
+        return _instance;
     }
     public void Start()
     {
         Player.TryCreatePlayer();
+        SoulPrefab = Resources.Load(PrefabRouter.SoulPrefab) as GameObject;
+    }
+
+    public void CreateSoul(Vector3 position)
+    {
+        Instantiate(SoulPrefab, position + SoulPositionOffset, Quaternion.identity);
     }
 }
