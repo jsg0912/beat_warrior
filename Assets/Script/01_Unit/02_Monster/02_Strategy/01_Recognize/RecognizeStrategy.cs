@@ -8,7 +8,7 @@ public abstract class RecognizeStrategy : Strategy
         return true;
     }
 
-    protected virtual bool IsLookingTarget() { return GetDirection() == GetPlayerDirection(); }
+    protected virtual bool IsLookingTarget() { return GetMovingDirection() == GetRelativePlayerDirection(); }
     protected abstract void CheckTarget();
 
     protected void StartChase()

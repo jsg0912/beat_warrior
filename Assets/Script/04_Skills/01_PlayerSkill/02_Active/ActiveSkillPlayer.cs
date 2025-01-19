@@ -36,7 +36,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
 
         attackPrefab.transform.SetParent(Player.Instance.transform, false);
         Vector3 Scale = attackPrefab.transform.localScale;
-        attackPrefab.transform.localScale = new Vector3(Scale.x * Player.Instance.GetDirection(), Scale.y, Scale.z);
+        attackPrefab.transform.localScale = new Vector3(Scale.x * Player.Instance.GetMovingDirectionFloat(), Scale.y, Scale.z);
 
         attackCollider = attackPrefab.GetComponentInChildren<AttackCollider>();
 

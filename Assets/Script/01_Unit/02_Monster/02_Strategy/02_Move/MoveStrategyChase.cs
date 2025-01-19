@@ -26,7 +26,7 @@ public class MoveStrategyChase : MoveStrategy
 
     protected override Vector3 GetRayStartPoint()
     {
-        Vector3 offset = new Vector3(GetDirection(), 0, 0);
+        Vector3 offset = new Vector3(GetMovingDirectionFloat(), 0, 0);
         return GetMonsterPos() + offset;
     }
 
@@ -45,8 +45,7 @@ public class MoveStrategyChase : MoveStrategy
 
     protected void ChaseTarget()
     {
-        if (TargetPos().x > GetMonsterPos().x) SetDirection(Direction.Right);
-        else SetDirection(Direction.Left);
+        SetMovingDirection(GetRelativePlayerDirection());
     }
 
     protected override bool IsMoveable()

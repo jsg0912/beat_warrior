@@ -28,7 +28,7 @@ public class Skill2 : ActiveSkillPlayer
         CreateEffectPrefab();
 
         Vector2 start = Player.Instance.transform.position;
-        Vector2 end = start += new Vector2(dashRange, 0.0f) * Player.Instance.GetDirection();
+        Vector2 end = start += new Vector2(dashRange, 0.0f) * Player.Instance.GetMovingDirectionFloat();
 
         Player.Instance.Dashing(end, false, false, false);
     }
