@@ -6,7 +6,7 @@ public class AttackStrategyRushKoppulso : AttackStrategyRush
 {
     protected override void SkillMethod()
     {
-        dashDuration = 3.0f;
+        dashDuration = 10.0f;
         rushSpeed = 10.0f;
         base.SkillMethod();
     }
