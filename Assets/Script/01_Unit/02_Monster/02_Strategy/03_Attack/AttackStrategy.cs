@@ -48,6 +48,7 @@ public abstract class AttackStrategy : Strategy
 
     protected virtual IEnumerator UseSkill()
     {
+        // [Code Review - KMJ]: Implement Attack Range Check Process - SHD, 20250119
         isAttacking = true;
 
         monster.SetIsMoveable(false);
