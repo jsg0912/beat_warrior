@@ -20,7 +20,7 @@ public class MonsterAttackColliderJiljili : MonsterAttackCollider
         GameObject obj = other.gameObject;
         if (obj.CompareTag(TagConstant.Player))
         {
-            Player.Instance.GetDamaged(GetMonsterAtk());
+            Player.Instance.GetDamaged(damage);
             Destroy(this.gameObject);
         }
     }

@@ -2,10 +2,11 @@ using UnityEngine;
 
 public abstract class MonsterAttackCollider : PhysicalObject
 {
-    [SerializeField] protected Monster monster;
     [SerializeField] public Rigidbody2D rb;
+    [SerializeField] protected Collider2D col;
+    protected int damage;
 
     public virtual void Initiate() { }
-    protected int GetMonsterAtk() { return monster.GetCurrentStat(StatKind.ATK); }
+    public void SetMonsterAtk(int damage) { this.damage = damage; }
     public abstract void OnTriggerEnter2D(Collider2D other);
 }

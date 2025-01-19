@@ -26,7 +26,7 @@ public class MonsterAttackColliderIsmomi : MonsterAttackCollider
         GameObject obj = other.gameObject;
         if (obj.CompareTag(TagConstant.Player))
         {
-            Player.Instance.GetDamaged(GetMonsterAtk());
+            Player.Instance.GetDamaged(damage);
             Destroy(gameObject);
         }
     }
