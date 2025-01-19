@@ -15,7 +15,8 @@ public class MonsterConstant
 
     public const float IbkkugiMaxHeight = 1f;
     public const float ThrowObjectYOffset = 0.5f;
-
+    public const float KoppulosoRushSpeed = 10.0f;
+    public const float KoppulosoRushDuration = 10.0f;
 
     public static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
         { MonsterName.Ippali, 1.1f },

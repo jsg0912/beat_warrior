@@ -13,6 +13,11 @@ public class AttackStrategyRush : AttackStrategy
     protected MonsterAttackCollider monsterAttackCollider;
     protected bool isStop = false;
 
+    public AttackStrategyRush(float rushSpeed, float dashDuration)
+    {
+        this.rushSpeed = rushSpeed;
+        this.dashDuration = dashDuration;
+    }
 
     public override void Initialize(Monster monster)
     {
@@ -41,7 +46,7 @@ public class AttackStrategyRush : AttackStrategy
         }
 
         monster.PlayAnimation("attackEnd");
-        UnityEngine.Object.Destroy(obj);
+        Object.Destroy(obj);
     }
 
     protected virtual void SetRushDirection()
@@ -54,7 +59,7 @@ public class AttackStrategyRush : AttackStrategy
     {
         if (isStop) return;
 
-        monster.SetDirection(RushDirection);
+        monster.SetMovingDirection(RushDirection);
 
         CheckWall();
         CheckGround();
@@ -78,7 +83,7 @@ public class AttackStrategyRush : AttackStrategy
 
     protected Vector3 GetRayStartPoint()
     {
-        return GetMonsterBottomPos() + new Vector3((int)RushDirection * collider.size.x / 2, 0, 0);
+        return GetMonsterBottomPos() + new Vector3((int)RushDirection * GetMonsterSize().x / 2, 0, 0);
     }
 
     protected void CheckGround()
