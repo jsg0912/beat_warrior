@@ -62,6 +62,8 @@ public class Monster : MonoBehaviour
         }
     }
 
+    public void PlayAnimation(string trigger) { _animator.SetTrigger(trigger); }
+
     public void SetIsWalking(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
     public MonsterStatus GetStatus() { return status; }
     public void SetStatus(MonsterStatus status) { this.status = status; }

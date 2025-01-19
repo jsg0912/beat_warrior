@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
 
     private Direction direction;
     private bool isOnBaseTile;
+    private bool isOnTile;
     private bool isInvincibility;
     private BoxCollider2D tileCollider;
 
@@ -78,11 +79,11 @@ public class Player : MonoBehaviour
 
         skillList = new List<ActiveSkillPlayer>
         {
-            new Attack(this.gameObject),
-            new Mark(this.gameObject),
-            new Dash(this.gameObject),
-            new Skill1(this.gameObject),
-            new Skill2(this.gameObject)
+            new Attack(gameObject),
+            new Mark(gameObject),
+            new Dash(gameObject),
+            new Skill1(gameObject),
+            new Skill2(gameObject)
         };
 
         _collider = GetComponent<BoxCollider2D>();
@@ -152,7 +153,8 @@ public class Player : MonoBehaviour
     public void SetDirection(Direction dir)
     {
         direction = dir;
-        PlayerSprite.localScale = new Vector3((int)direction, 1, 1);
+        Vector3 scale = PlayerSprite.localScale;
+        PlayerSprite.localScale = new Vector3(scale.x * (int)direction, scale.y, 1);
     }
 
     public void SetGravityScale(bool gravity)
@@ -273,7 +275,7 @@ public class Player : MonoBehaviour
 
     private void Down()
     {
-        if (isOnBaseTile == true) return;
+        if (isOnTile == false) return;
         if (_animator.GetBool(PlayerConstant.groundedAnimBool) == false) return;
 
         if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Down])) colliderController.PassTile(tileCollider);
@@ -483,6 +485,8 @@ public class Player : MonoBehaviour
             isOnBaseTile = false;
             _animator.SetBool(PlayerConstant.groundedAnimBool, false);
         }
+
+        if (other.CompareTag(TagConstant.Tile)) isOnTile = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -499,6 +503,7 @@ public class Player : MonoBehaviour
         tileCollider = other.GetComponent<BoxCollider2D>();
 
         if (other.CompareTag(TagConstant.Base)) isOnBaseTile = true;
+        if (other.CompareTag(TagConstant.Tile)) isOnTile = true;
         _animator.SetBool(PlayerConstant.groundedAnimBool, true);
 
         if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
