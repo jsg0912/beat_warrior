@@ -12,4 +12,89 @@ public static class Util
     {
         if (gameObject != null && gameObject.activeSelf != isOn) gameObject.SetActive(isOn);
     }
+
+    public static Vector2 GetSizeBoxCollider2D(BoxCollider2D boxCollider2D)
+    {
+        return new Vector2(boxCollider2D.size.x, boxCollider2D.size.y); ;
+    }
+
+    public static Vector3 GetMiddlePosBoxCollider2D(BoxCollider2D boxCollider2D)
+    {
+        return new Vector3(boxCollider2D.transform.position.x + boxCollider2D.offset.x, boxCollider2D.transform.position.y + boxCollider2D.offset.y, 0);
+    }
+
+    public static Vector3 GetBottomPosBoxCollider2D(BoxCollider2D boxCollider2D)
+    {
+        return new Vector3(boxCollider2D.transform.position.x + boxCollider2D.offset.x, boxCollider2D.transform.position.y + boxCollider2D.offset.y - boxCollider2D.size.y / 2, 0);
+    }
+
+    public static Vector2 GetSizePolygonCollider2D(PolygonCollider2D polygonCollider2D)
+    {
+        if (polygonCollider2D == null || polygonCollider2D.points.Length == 0)
+        {
+            Debug.LogError("PolygonCollider2D is null or has no points!");
+            return Vector2.zero;
+        }
+
+        // 초기값 설정
+        float minX = float.MaxValue, maxX = float.MinValue;
+        float minY = float.MaxValue, maxY = float.MinValue;
+
+        // 각 점을 순회하며 최소값과 최대값 계산
+        foreach (Vector2 point in polygonCollider2D.points)
+        {
+            // Local Space를 World Space로 변환
+            Vector2 worldPoint = polygonCollider2D.transform.TransformPoint(point);
+
+            // X 값 비교
+            if (worldPoint.x < minX) minX = worldPoint.x;
+            if (worldPoint.x > maxX) maxX = worldPoint.x;
+
+            // Y 값 비교
+            if (worldPoint.y < minY) minY = worldPoint.y;
+            if (worldPoint.y > maxY) maxY = worldPoint.y;
+        }
+
+        // 가장 먼 X 거리와 Y 거리 계산
+        float xDistance = maxX - minX;
+        float yDistance = maxY - minY;
+
+        // 결과 반환
+        return new Vector2(xDistance, yDistance);
+    }
+
+    public static Vector3 GetMiddlePosPolygonCollider2D(PolygonCollider2D polygonCollider2D)
+    {
+        Vector2[] points = polygonCollider2D.points;
+
+        if (points.Length == 0)
+        {
+            Debug.LogError("PolygonCollider2D is null or has no points!");
+            return Vector3.zero;
+        }
+
+        Vector2 sum = Vector2.zero;
+
+        foreach (Vector2 point in points)
+        {
+            sum += point;
+        }
+
+        return sum / points.Length + polygonCollider2D.offset + (Vector2)polygonCollider2D.transform.position;
+    }
+
+    public static Vector3 GetBottomPosPolygonCollider2D(PolygonCollider2D polygonCollider2D)
+    {
+        Vector3 middlePos = GetMiddlePosPolygonCollider2D(polygonCollider2D);
+        Vector2 size = GetSizePolygonCollider2D(polygonCollider2D);
+
+        return new Vector3(middlePos.x, middlePos.y - size.y / 2, 0f);
+    }
+
+    public static void FlipLocalScaleX(GameObject gameObject)
+    {
+        Vector3 scale = gameObject.transform.localScale;
+        scale.x = -scale.x; // x 값의 부호 반전
+        gameObject.transform.localScale = scale;
+    }
 }

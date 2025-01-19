@@ -12,7 +12,7 @@ public class AttackStrategyThrowIbkkugi : AttackStrategyThrow
         float gravity = Physics2D.gravity.y;
         // 포물선 운동 시간 공식
         float time = Mathf.Sqrt(-8 * MonsterConstant.IbkkugiMaxHeight / gravity);
-        float distance = GetPlayerPos().x - GetMonsterPos().x - MonsterConstant.ThrowObjectYOffset * GetPlayerDirection();
+        float distance = GetPlayerPos().x - GetMonsterPos().x - MonsterConstant.ThrowObjectYOffset * GetRelativePlayerDirectionFloat();
         Vector3 velocity = new Vector3(distance / time, -gravity * time / 2, 0);
         monsterAttackCollider.rb.velocity = velocity;
     }

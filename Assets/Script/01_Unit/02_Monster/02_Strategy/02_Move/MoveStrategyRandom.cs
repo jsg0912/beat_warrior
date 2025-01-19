@@ -35,7 +35,7 @@ public class MoveStrategyRandom : MoveStrategy
         switch (dest)
         {
             case 0:
-                ChangeDirection();
+                FlipDirection();
                 isStop = false;
                 break;
             case 1:
