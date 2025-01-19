@@ -3,8 +3,8 @@ using UnityEngine;
 public abstract class DirectionalGameObject : MonoBehaviour
 {
     // Graphic draws every sprite that is right direction; - SDH, 20250119;
-    protected Direction movingDirection = Direction.Right;
-    protected Direction objectDirection = Direction.Right;
+    [SerializeField] protected Direction movingDirection = Direction.Right;
+    [SerializeField] protected Direction objectDirection = Direction.Right;
 
     public Direction GetMovingDirection() { return movingDirection; }
     public float GetMovingDirectionFloat() { return (float)movingDirection; }
@@ -14,12 +14,18 @@ public abstract class DirectionalGameObject : MonoBehaviour
         movingDirection = dir;
         if (objectDirection != movingDirection)
         {
-            FlipDirection();
+            FlipObjectScaleX();
             objectDirection = dir;
         }
     }
 
     public void FlipDirection()
+    {
+        if (movingDirection == Direction.Right) SetMovingDirection(Direction.Left);
+        else SetMovingDirection(Direction.Right);
+    }
+
+    private void FlipObjectScaleX()
     {
         Util.FlipLocalScaleX(gameObject);
     }

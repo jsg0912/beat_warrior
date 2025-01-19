@@ -5,6 +5,6 @@ public class KoppulsoPattern : Pattern
         Recognize = new RecognizeStrategyMelee();
         MoveBasic = new MoveStrategyNormal();
         MoveChase = new MoveStrategyChase();
-        Attack = new AttackStrategyRush(MonsterConstant.KoppulosoRushSpeed, MonsterConstant.KoppulosoRushDuration);
+        Attack = new AttackStrategyRush(MonsterConstant.KoppulsoRushSpeed, MonsterConstant.KoppulsoRushDuration);
     }
 }

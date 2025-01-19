@@ -16,7 +16,7 @@ public class MoveStrategyRandom : MoveStrategy
     {
         if (isStop == true)
         {
-            monster.SetIsWalking(false);
+            monster.SetWalkingAnimation(false);
             return false;
         }
 

@@ -23,16 +23,17 @@ public class MoveStrategy : Strategy
     {
         if (IsMoveable() == false)
         {
-            monster.SetIsWalking(false);
+            monster.SetWalkingAnimation(false);
             return false;
         }
 
         CheckWall();
 
         monster.gameObject.transform.position += new Vector3(GetMovingDirectionFloat() * moveSpeed * Time.deltaTime, 0, 0);
-        monster.SetIsWalking(true);
+        monster.SetWalkingAnimation(true);
         return true;
     }
+
     protected virtual void CheckWall()
     {
         float movingDirection = GetMovingDirectionFloat();

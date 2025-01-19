@@ -97,4 +97,26 @@ public static class Util
         scale.x = -scale.x; // x 값의 부호 반전
         gameObject.transform.localScale = scale;
     }
+
+    public static T FindComponentInHierarchy<T>(GameObject root) where T : Component
+    {
+        // 현재 GameObject에서 컴포넌트 찾기
+        T component = root.GetComponent<T>();
+        if (component != null)
+        {
+            return component;
+        }
+
+        // 자식 오브젝트에서 재귀적으로 탐색
+        foreach (Transform child in root.transform)
+        {
+            component = FindComponentInHierarchy<T>(child.gameObject);
+            if (component != null)
+            {
+                return component;
+            }
+        }
+
+        return null; // 컴포넌트를 찾지 못한 경우
+    }
 }

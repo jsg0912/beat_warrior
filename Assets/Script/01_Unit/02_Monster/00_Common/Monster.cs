@@ -8,9 +8,9 @@ public class Monster : DirectionalGameObject
     private MonsterUnit monsterUnit;
     public Pattern pattern;
 
-    [SerializeField] protected MonsterStatus status;
+    [SerializeField] private MonsterStatus status;
     protected Animator _animator;
-    protected bool isMoveable = true;
+    public bool isTackleAble = false; // If it is true, then the monster can tackle the player.
 
     [SerializeField] private MonsterHPUI HPUI;
     [SerializeField] private GameObject Target;
@@ -22,7 +22,6 @@ public class Monster : DirectionalGameObject
         monsterUnit = MonsterList.FindMonster(monsterName, AnotherHPValue);
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
-
 
         HPUI.SetMaxHP(monsterUnit.GetCurrentHP()); // Customizing HP Code - SDH, 20250119
     }
@@ -59,14 +58,37 @@ public class Monster : DirectionalGameObject
 
     public void PlayAnimation(string trigger) { _animator.SetTrigger(trigger); }
 
-    public void SetIsWalking(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
+    public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
     public MonsterStatus GetStatus() { return status; }
+    public bool GetIsNotAttacking() { return status != MonsterStatus.Attack || status != MonsterStatus.AttackCharge || status != MonsterStatus.AttackEnd; }
     public void SetStatus(MonsterStatus status) { this.status = status; }
-    public bool GetIsMoveable() { return isMoveable; }
+    public void SetIsTackleAble(bool isTackleAble)
+    {
+        Debug.Log("SetIsTackleAble: " + isTackleAble);
+        this.isTackleAble = isTackleAble;
+    }
+    public bool GetIsMoveable()
+    {
+        {
+            switch (status)
+            {
+                case MonsterStatus.Idle:
+                case MonsterStatus.Chase:
+                    return true;
+                case MonsterStatus.AttackCharge:
+                case MonsterStatus.Attack:
+                case MonsterStatus.AttackEnd:
+                case MonsterStatus.Hurt:
+                case MonsterStatus.Dead:
+                default:
+                    return false;
+            }
+        }
+    }
+    public bool GetIsTackleAble() { return isTackleAble; }
     public bool GetIsAlive() { return monsterUnit.GetIsAlive(); }
     public int GetCurrentHP() { return monsterUnit.GetCurrentHP(); }
-    public void SetIsMoveable(bool isMoveable) { this.isMoveable = isMoveable; }
-
+    public int GetCurrentStat(StatKind statKind) { return monsterUnit.unitStat.GetCurrentStat(statKind); }
     public virtual void GetDamaged(int dmg)
     {
         monsterUnit.ChangeCurrentHP(-dmg);
@@ -88,8 +110,9 @@ public class Monster : DirectionalGameObject
     protected virtual void Die()
     {
         monsterUnit.SetDead();
+        SetStatus(MonsterStatus.Dead);
 
-        Player.Instance.CheckResetSkills(this.gameObject);
+        Player.Instance.CheckResetSkills(gameObject);
 
         InGameManager.Instance.CreateSoul(transform.position);
 
@@ -115,5 +138,19 @@ public class Monster : DirectionalGameObject
         }
 
         Util.SetActive(Target, false);
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(GetIsTackleAble());
+        if (GetIsTackleAble())
+        {
+            Debug.Log("Tackle");
+            GameObject obj = collision.gameObject;
+            if (obj.CompareTag(TagConstant.Player))
+            {
+                Player.Instance.GetDamaged(GetCurrentStat(StatKind.ATK));
+            }
+        }
     }
 }

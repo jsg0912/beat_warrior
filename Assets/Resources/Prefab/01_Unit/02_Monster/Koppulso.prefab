@@ -70,9 +70,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5833a4c1f2adea741ac0d28befbb471a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingDirection: 1
+  objectDirection: 1
   monsterName: 2
   status: 0
-  MonsterSprite: {fileID: 3637404684887225049}
+  isTackleAble: 0
   HPUI: {fileID: 979130385225277069}
   Target: {fileID: 0}
   AnotherHPValue: 0
