@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         UIManager.CreateUI();
+        isInGame = true;
     }
 
     public void StartGame()
@@ -48,8 +49,8 @@ public class GameManager : MonoBehaviour
         Player.Instance.RestartPlayer();
     }
 
-    public void TitleSetting()
-    {
-        UIManager.Instance.SetSettingActive();
-    }
+    // public void TitleSetting()
+    // {
+    //     UIManager.Instance.SetSettingActive();
+    // }
 }

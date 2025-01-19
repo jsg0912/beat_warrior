@@ -688,7 +688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8294608511852472267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1327,17 +1327,14 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 32a0e05c2674c3b45ad331564e9c78a6, type: 2}
   masterControl:
     volumeSlider: {fileID: 3401842325285164796}
-    muteToggle: {fileID: 8049235454771958178}
     exposedParameter: 0
     volume: 1
   bgmControl:
     volumeSlider: {fileID: 5636855116486199985}
-    muteToggle: {fileID: 8760311217656736168}
     exposedParameter: 0
     volume: 1
   sfxControl:
     volumeSlider: {fileID: 6859217647329463151}
-    muteToggle: {fileID: 9129949273420011563}
     exposedParameter: 0
     volume: 1
 --- !u!1 &2735935781253454987
@@ -4351,9 +4348,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770d8636fdf4faf469f077c9c6ce49bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Menu: {fileID: 1518987396824996991}
-  Setting: {fileID: 5147192929202758489}
+  okayButton: {fileID: 0}
+  cancelButton: {fileID: 0}
+  menu: {fileID: 1518987396824996991}
+  setting: {fileID: 5147192929202758489}
   txt: []
+  altarPopup: {fileID: 3879883905087048207, guid: d2dfe4bf9bbac214eb5cd5de138cce1b, type: 3}
 --- !u!114 &8891590422801716203
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CommandManager : MonoBehaviour
 {
     public static CommandManager Instance;
+    public List<PopupSystem> popupSystemStack = new();
 
     void Awake()
     {
@@ -11,7 +13,7 @@ public class CommandManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!PauseControl.instance.GetPause())
+        if (!PauseController.instance.GetPause())
         {
             Player.Instance.CheckIsMove();
         }
@@ -21,13 +23,30 @@ public class CommandManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            PauseControl.instance.SetPauseActive();
+            if (popupSystemStack.Count == 0)
+            {
+                PauseController.instance.PauseGame();
+                MenuUI.Instance.TurnOnPopup();
+            }
+            else
+            {
+                popupSystemStack[popupSystemStack.Count - 1].TurnOffPopup();
+                popupSystemStack.RemoveAt(popupSystemStack.Count - 1);
+                if (popupSystemStack.Count == 0)
+                {
+                    PauseController.instance.ResumeGame();
+                }
+            }
         }
 
-        UIManager.Instance.CheckCommand();
+        if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Interaction]))
+        {
+            // TODO: UIManager에서 AltarPopup을 키는 것이 아님 + 주변에 InteractionPressPrompt가 있는지 확인해야 함. - SDH, 20250117
+            UIManager.Instance.TurnOnAltarPopup();
+        }
 
         // When we paused the game, we don't want to check below commands.
-        if (!PauseControl.instance.GetPause())
+        if (!PauseController.instance.GetPause())
         {
             Player.Instance.CheckPlayerCommand();
         }

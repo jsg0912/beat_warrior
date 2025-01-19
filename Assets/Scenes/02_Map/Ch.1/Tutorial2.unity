@@ -1485,6 +1485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c87c80cc86d88d64d80b11a8fdc20428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  main: {fileID: 0}
 --- !u!114 &335796368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6231,7 +6232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2059763324}
   - component: {fileID: 2059763321}
-  - component: {fileID: 2059763325}
+  - component: {fileID: 2059763326}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -6267,7 +6268,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2059763325
+--- !u!114 &2059763326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6276,10 +6277,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2059763320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 806a3cfc9c9a9074da7f3b45605f4226, type: 3}
+  m_Script: {fileID: 11500000, guid: f8defdbdb7a27204ba1c695d2a592b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isInGame: 0
+  popupSystemStack: []
 --- !u!4 &2074241456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 279783439887903701, guid: 82f84ee111ef32a46b5face440294a09, type: 3}
@@ -6760,7 +6761,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 513116729}
-  - {fileID: 2059763324}
   - {fileID: 993862944}
   - {fileID: 1976003799}
   - {fileID: 458375102}
@@ -6773,3 +6773,5 @@ SceneRoots:
   - {fileID: 799195329}
   - {fileID: 1583369781}
   - {fileID: 248583107}
+  - {fileID: 1135555386}
+  - {fileID: 2059763324}

@@ -1,25 +1,13 @@
+using System.Linq;
 using UnityEngine;
 
 public class MainCamera : MonoBehaviour
 {
-    // public static MainCamera _instance;
-    // public static MainCamera Instance
-    // {
-    //     get
-    //     {
-    //         if (_instance == null)
-    //         {
-    //             _instance = FindFirstObjectByType();
-    //         }
-    //         return _instance;
-    //     }
-
-    // }
-
-
-    Camera main;
-    void Start()
+    public static MainCamera Instance;
+    public Camera main;
+    void Awake()
     {
+        Instance = this;
         main = GetComponent<Camera>();
     }
 
