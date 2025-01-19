@@ -29,6 +29,7 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerStatus status;
 
     private Direction direction;
+    private Direction playerSpriteDirection = Direction.Right; // Graphic draws player sprite that directs right; - SDH, 20250119
     private bool isOnBaseTile;
     private bool isOnTile;
     private bool isInvincibility;
@@ -153,8 +154,17 @@ public class Player : MonoBehaviour
     public void SetDirection(Direction dir)
     {
         direction = dir;
+        if (playerSpriteDirection != direction)
+        {
+            FlipPlayerSprite();
+            playerSpriteDirection = direction;
+        }
+    }
+
+    public void FlipPlayerSprite()
+    {
         Vector3 scale = PlayerSprite.localScale;
-        PlayerSprite.localScale = new Vector3(scale.x * (int)direction, scale.y, 1);
+        PlayerSprite.localScale = new Vector3(scale.x * (-1), scale.y, 1);
     }
 
     public void SetGravityScale(bool gravity)
