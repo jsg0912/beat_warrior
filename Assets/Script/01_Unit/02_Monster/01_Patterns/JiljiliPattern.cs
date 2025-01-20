@@ -5,6 +5,6 @@ public class JiljiliPattern : Pattern
         Recognize = new RecognizeStrategyMelee();
         MoveBasic = new MoveStrategyNormal();
         MoveChase = new MoveStrategyChase();
-        Attack = new AttackStrategyThrow();
+        Attack = new AttackStrategyThrow(MonsterConstant.JiljiliThrowSpeed, MonsterConstant.JiljiliMaxHeight);
     }
 }

@@ -8,28 +8,40 @@ public class AttackStrategyRush : AttackStrategy
     protected float dashDuration;
     protected Coroutine rushCoroutine;
     protected LayerMask GroundLayer;
-    protected GameObject prefab;
-    protected GameObject obj;
-    protected MonsterAttackCollider monsterAttackCollider;
     protected bool isStop = false;
 
+    public AttackStrategyRush(float rushSpeed, float dashDuration)
+    {
+        this.rushSpeed = rushSpeed;
+        this.dashDuration = dashDuration;
+    }
 
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
         GroundLayer = LayerMask.GetMask(LayerConstant.Tile);
-        prefab = Resources.Load(PrefabRouter.AttackPrefab[monster.monsterName]) as GameObject;
+    }
+
+    protected override IEnumerator UseSkill()
+    {
+        monster.SetStatus(MonsterStatus.Attack);
+        yield return new WaitForSeconds(attackStartDelay);
+
+        // monster.PlayAnimation(MonsterStatus.AttackCharge);
+        yield return new WaitForSeconds(attackActionInterval);
+        monster.PlayAnimation(MonsterStatus.Attack);
+        SkillMethod();
     }
 
     protected override void SkillMethod()
     {
-        obj = GameObject.Instantiate(prefab);
         monoBehaviour.StartCoroutine(RushCoroutine());
     }
 
     protected IEnumerator RushCoroutine()
     {
         float elapsedTime = 0f;
+        monster.SetIsTackleAble(true);
         SetRushDirection();
 
         while (elapsedTime < dashDuration)
@@ -41,7 +53,9 @@ public class AttackStrategyRush : AttackStrategy
         }
 
         monster.PlayAnimation("attackEnd");
-        UnityEngine.Object.Destroy(obj);
+        monster.SetIsTackleAble(false);
+        attackCoolTime = attackCoolTimeMax;
+        monster.SetStatus(MonsterStatus.Idle);
     }
 
     protected virtual void SetRushDirection()
@@ -54,13 +68,12 @@ public class AttackStrategyRush : AttackStrategy
     {
         if (isStop) return;
 
-        monster.SetDirection(RushDirection);
+        monster.SetMovingDirection(RushDirection);
 
         CheckWall();
         CheckGround();
 
         monster.gameObject.transform.position += new Vector3((int)RushDirection * rushSpeed * Time.deltaTime, 0, 0);
-        obj.transform.position = monster.gameObject.transform.position + new Vector3(0, 2.3f, 0); ;
     }
 
     protected virtual void CheckWall()
@@ -78,7 +91,7 @@ public class AttackStrategyRush : AttackStrategy
 
     protected Vector3 GetRayStartPoint()
     {
-        return GetMonsterBottomPos() + new Vector3((int)RushDirection * collider.size.x / 2, 0, 0);
+        return GetMonsterBottomPos() + new Vector3((int)RushDirection * GetMonsterSize().x / 2, 0, 0);
     }
 
     protected void CheckGround()
@@ -92,6 +105,7 @@ public class AttackStrategyRush : AttackStrategy
     protected IEnumerator ChangeDir()
     {
         RushDirection = (Direction)(-1 * (int)RushDirection);
+        monster.SetMovingDirection(RushDirection);
         monster.PlayAnimation("turn");
         isStop = true;
         yield return new WaitForSeconds(0.33f);

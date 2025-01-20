@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 456465478712555554}
   - component: {fileID: 8287533014884112381}
   - component: {fileID: 253407559418872431}
-  - component: {fileID: 4664767875766874366}
+  - component: {fileID: 4197257420134809941}
   m_Layer: 7
   m_Name: Koppulso
   m_TagString: Monster
@@ -31,7 +31,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7905513804609263471}
   - {fileID: 3637404684887225049}
@@ -70,9 +70,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5833a4c1f2adea741ac0d28befbb471a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingDirection: 1
+  objectDirection: 1
   monsterName: 2
   status: 0
-  MonsterSprite: {fileID: 3637404684887225049}
+  isTackleAble: 0
   HPUI: {fileID: 979130385225277069}
   Target: {fileID: 0}
   AnotherHPValue: 0
@@ -103,8 +105,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &4664767875766874366
-BoxCollider2D:
+--- !u!60 &4197257420134809941
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -135,7 +137,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.12, y: 2.3}
+  m_Offset: {x: 0, y: 2.39}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -145,9 +147,14 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 2.5, y: 1.6}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.18, y: 0.64}
+      - {x: -0.66, y: 0.30901697}
+      - {x: -1.04, y: -0.80901706}
+      - {x: 1.22, y: -0.80901694}
+      - {x: 0.77, y: 0.30901712}
+  m_UseDelaunayMesh: 0
 --- !u!1 &7863959799796572547
 GameObject:
   m_ObjectHideFlags: 0

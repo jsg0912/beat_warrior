@@ -16,7 +16,7 @@ public class MoveStrategyChase : MoveStrategy
 
     public override bool PlayStrategy()
     {
-        bool success = base.PlayStrategy();
+        if (base.PlayStrategy() == false) return false;
 
         // [Code Review - KMJ] 위 base.PlayStrategy()가 false를 반환하면 아래 코드를 실행하지 않아야 하는지 확인 필요 - SDH, 20250116s
         CheckGround();
@@ -26,7 +26,7 @@ public class MoveStrategyChase : MoveStrategy
 
     protected override Vector3 GetRayStartPoint()
     {
-        Vector3 offset = new Vector3(GetDirection(), 0, 0);
+        Vector3 offset = new Vector3(GetMovingDirectionFloat(), 0, 0);
         return GetMonsterPos() + offset;
     }
 
@@ -45,15 +45,14 @@ public class MoveStrategyChase : MoveStrategy
 
     protected void ChaseTarget()
     {
-        if (TargetPos().x > GetMonsterPos().x) SetDirection(Direction.Right);
-        else SetDirection(Direction.Left);
+        SetMovingDirection(GetRelativePlayerDirection());
     }
 
     protected override bool IsMoveable()
     {
         if (isEndOfGround == true || Mathf.Abs(TargetPos().x - GetMonsterPos().x) < STOPOFFSET)
         {
-            monster.SetIsWalking(false);
+            monster.SetWalkingAnimation(false);
             return false;
         }
 

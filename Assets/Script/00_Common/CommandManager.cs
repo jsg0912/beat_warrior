@@ -45,6 +45,12 @@ public class CommandManager : MonoBehaviour
             UIManager.Instance.TurnOnAltarPopup();
         }
 
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            // TODO: 임시 재시작(부활) 코드
+            GameManager.Instance.RestartGame();
+        }
+
         // When we paused the game, we don't want to check below commands.
         if (!PauseController.instance.GetPause())
         {

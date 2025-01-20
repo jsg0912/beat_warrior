@@ -18,5 +18,6 @@ public class AttackStrategyCreate : AttackStrategy
 
         monsterAttackCollider = obj.GetComponent<MonsterAttackCollider>();
         monsterAttackCollider.Initiate();
+        monsterAttackCollider.SetMonsterAtk(monster.GetCurrentStat(StatKind.ATK));
     }
 }

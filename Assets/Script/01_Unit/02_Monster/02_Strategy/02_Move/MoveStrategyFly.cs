@@ -14,7 +14,7 @@ public class MoveStrategyFly : MoveStrategyRandom
         moveSpeed = MonsterConstant.MoveSpeed[monster.monsterName];
 
         // 초기 방향 랜덤 설정
-        SetDirection(Random.Range(0, 2) == 0 ? Direction.Right : Direction.Left);
+        SetMovingDirection(Random.Range(0, 2) == 0 ? Direction.Right : Direction.Left);
     }
 
     public override bool PlayStrategy()
@@ -27,6 +27,6 @@ public class MoveStrategyFly : MoveStrategyRandom
 
     protected void CheckRange()
     {
-        if (Vector3.Distance(OriginPos, GetMonsterPos()) > moveRange) ChangeDirection();
+        if (Vector3.Distance(OriginPos, GetMonsterPos()) > moveRange) FlipDirection();
     }
 }

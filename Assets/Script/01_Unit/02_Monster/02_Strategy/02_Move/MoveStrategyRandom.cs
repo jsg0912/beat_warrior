@@ -16,7 +16,7 @@ public class MoveStrategyRandom : MoveStrategy
     {
         if (isStop == true)
         {
-            monster.SetIsWalking(false);
+            monster.SetWalkingAnimation(false);
             return false;
         }
 
@@ -35,7 +35,7 @@ public class MoveStrategyRandom : MoveStrategy
         switch (dest)
         {
             case 0:
-                ChangeDirection();
+                FlipDirection();
                 isStop = false;
                 break;
             case 1:

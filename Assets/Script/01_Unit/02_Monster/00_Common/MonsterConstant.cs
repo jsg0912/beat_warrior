@@ -11,11 +11,21 @@ public class MonsterConstant
     public const float moveSpeed = 1.0f;
 
     public const float RangedRecognizeRange = 10.0f;
-    public const float MeleeRecognizeRange = 3.0f;
+    public const float MeleeRecognizeRange = 10.0f;
 
-    public const float IbkkugiMaxHeight = 1f;
     public const float ThrowObjectYOffset = 0.5f;
 
+    // Ibkkugi
+    public const float IbkkugiThrowSpeed = 3f;
+    public const float IbkkugiMaxHeight = 1.5f;
+
+    // Jiljili
+    public const float JiljiliThrowSpeed = 3f;
+    public const float JiljiliMaxHeight = 1f;
+
+    // Koppulso
+    public const float KoppulsoRushSpeed = 10.0f;
+    public const float KoppulsoRushDuration = 10.0f;
 
     public static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
         { MonsterName.Ippali, 1.1f },
