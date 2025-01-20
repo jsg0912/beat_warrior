@@ -45,6 +45,12 @@ public class Monster : DirectionalGameObject
             case MonsterStatus.Attack:
                 _animator.SetTrigger(MonsterConstant.attackAnimTrigger);
                 break;
+            case MonsterStatus.AttackCharge:
+                _animator.SetTrigger(MonsterConstant.attackChargeAnimTrigger);
+                break;
+            case MonsterStatus.AttackEnd:
+                _animator.SetTrigger(MonsterConstant.attackEndAnimTrigger);
+                break;
             case MonsterStatus.Hurt:
                 _animator.SetTrigger(MonsterConstant.hurtAnimTrigger);
                 break;

@@ -4,7 +4,10 @@ using UnityEngine;
 public class MonsterConstant
 {
     public const string walkAnimBool = "isWalk";
+    public const string attackChargeAnimTrigger = "charge";
     public const string attackAnimTrigger = "attack";
+    public const string attackEndAnimTrigger = "attack end";
+
     public const string hurtAnimTrigger = "hurt";
     public const string dieAnimTrigger = "die";
 
@@ -71,7 +74,7 @@ public class MonsterConstant
     public static Dictionary<MonsterName, float> AttackActionIntervals = new() {
         { MonsterName.Ippali, 0.5f },
         { MonsterName.Ibkkugi, 0.8f },
-        { MonsterName.Koppulso, 0.5f },
+        { MonsterName.Koppulso, 2f },
         { MonsterName.Jiljili, 0.5f },
         { MonsterName.Giljjugi, 0.5f },
         { MonsterName.Itmomi, 0.5f }
