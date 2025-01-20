@@ -60,7 +60,7 @@ public class Monster : DirectionalGameObject
 
     public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
     public MonsterStatus GetStatus() { return status; }
-    public bool GetIsNotAttacking() { return status != MonsterStatus.Attack || status != MonsterStatus.AttackCharge || status != MonsterStatus.AttackEnd; }
+    public bool GetIsAttacking() { return status == MonsterStatus.Attack || status == MonsterStatus.AttackCharge || status == MonsterStatus.AttackEnd; }
     public void SetStatus(MonsterStatus status) { this.status = status; }
     public void SetIsTackleAble(bool isTackleAble)
     {

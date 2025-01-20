@@ -26,13 +26,13 @@ public abstract class AttackStrategy : Strategy
 
     public override bool PlayStrategy()
     {
-        if (monster.GetStatus() == MonsterStatus.Attack) return true;
+        if (monster.GetIsAttacking()) return true;
         return TrySkill();
     }
 
     public void UpdateCoolTime()
     {
-        if (attackCoolTime > 0 && monster.GetIsNotAttacking())
+        if (attackCoolTime > 0 && monster.GetIsAttacking() == false)
         {
             attackCoolTime -= Time.deltaTime;
         }
