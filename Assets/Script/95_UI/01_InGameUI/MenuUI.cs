@@ -7,7 +7,6 @@ public class MenuUI : PopupSystem
     public GameObject menu;
     [SerializeField] private GameObject setting;
     public TextMeshProUGUI[] txt;
-    public AltarPopup altarPopup;
 
     public override void Awake()
     {
