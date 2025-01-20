@@ -30,14 +30,12 @@ public class Monster : DirectionalGameObject
     {
         if (monsterUnit.GetIsAlive() == false)
         {
-            StopAttack();
+            pattern?.StopAttack();
             return;
         }
 
         pattern?.PlayPattern();
     }
-
-    public void StopAttack() { pattern?.StopAttack(); }
 
     // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
     public void PlayAnimation(MonsterStatus status)
@@ -58,14 +56,18 @@ public class Monster : DirectionalGameObject
 
     public void PlayAnimation(string trigger) { _animator.SetTrigger(trigger); }
 
-    public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
     public MonsterStatus GetStatus() { return status; }
-    public bool GetIsAttacking() { return status == MonsterStatus.Attack || status == MonsterStatus.AttackCharge || status == MonsterStatus.AttackEnd; }
-    public void SetStatus(MonsterStatus status) { this.status = status; }
-    public void SetIsTackleAble(bool isTackleAble)
+    public bool GetIsAttacking()
     {
-        Debug.Log("SetIsTackleAble: " + isTackleAble);
-        this.isTackleAble = isTackleAble;
+        switch (status)
+        {
+            case MonsterStatus.Attack:
+            case MonsterStatus.AttackCharge:
+            case MonsterStatus.AttackEnd:
+                return true;
+            default:
+                return false;
+        }
     }
     public bool GetIsMoveable()
     {
@@ -105,6 +107,14 @@ public class Monster : DirectionalGameObject
 
         // GetComponent<Rigidbody2D>().AddForce(new Vector2(-5.0f, 0.5f) * (int)direction, ForceMode2D.Impulse);
         PlayAnimation(MonsterStatus.Hurt);
+    }
+
+    public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
+    public void SetStatus(MonsterStatus status) { this.status = status; }
+    public void SetIsTackleAble(bool isTackleAble)
+    {
+        Debug.Log("SetIsTackleAble: " + isTackleAble);
+        this.isTackleAble = isTackleAble;
     }
 
     protected virtual void Die()
