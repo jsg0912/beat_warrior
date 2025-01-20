@@ -41,6 +41,6 @@ public abstract class Strategy
     }
     protected Direction GetMovingDirection() { return monster.GetMovingDirection(); }
     protected float GetMovingDirectionFloat() { return monster.GetMovingDirectionFloat(); }
-    protected Direction GetRelativePlayerDirection() { return Player.Instance.transform.position.x > monster.transform.position.x ? Direction.Right : Direction.Left; }
+    protected Direction GetRelativeDirectionToPlayer() { return Player.Instance.transform.position.x > monster.transform.position.x ? Direction.Right : Direction.Left; }
     protected float GetRelativePlayerDirectionFloat() { return Player.Instance.transform.position.x > monster.transform.position.x ? 1.0f : -1.0f; }
 }

@@ -45,7 +45,7 @@ public class MoveStrategyChase : MoveStrategy
 
     protected void ChaseTarget()
     {
-        SetMovingDirection(GetRelativePlayerDirection());
+        SetMovingDirection(GetRelativeDirectionToPlayer());
     }
 
     protected override bool IsMoveable()
