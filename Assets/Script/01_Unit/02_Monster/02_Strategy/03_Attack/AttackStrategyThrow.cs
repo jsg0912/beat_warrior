@@ -1,15 +1,36 @@
 using UnityEngine;
+using System.Collections;
 
 public class AttackStrategyThrow : AttackStrategyCreate
 {
     private float throwSpeed;
     private float maxHeight;
     private float gravity = Physics2D.gravity.y;
+    protected Vector3 targetPosition;
 
     public AttackStrategyThrow(float throwSpeed, float maxHeight)
     {
         this.throwSpeed = throwSpeed;
         this.maxHeight = maxHeight;
+    }
+
+    protected override IEnumerator UseSkill()
+    {
+        monster.SetStatus(MonsterStatus.Attack);
+        yield return new WaitForSeconds(attackStartDelay);
+
+        monster.PlayAnimation(MonsterStatus.Attack);
+        yield return new WaitForSeconds(attackActionInterval);
+        SetTargetPosition();
+        SkillMethod();
+
+        attackCoolTime = attackCoolTimeMax;
+        monster.SetStatus(MonsterStatus.Idle);
+    }
+
+    private void SetTargetPosition()
+    {
+        targetPosition = GetPlayerPos();
     }
 
     protected override void SkillMethod()
@@ -19,7 +40,7 @@ public class AttackStrategyThrow : AttackStrategyCreate
         Vector3 offset = new Vector3(0, MonsterConstant.ThrowObjectYOffset, 0);
         obj.transform.position = monster.transform.position + offset;
 
-        float distance = GetPlayerPos().x - GetMonsterPos().x - MonsterConstant.ThrowObjectYOffset * GetRelativePlayerDirectionFloat();
+        float distance = targetPosition.x - GetMonsterPos().x - MonsterConstant.ThrowObjectYOffset * GetRelativePlayerDirectionFloat();
 
         monsterAttackCollider.rb.velocity = GetVelocityConstantFlyTime(distance);
     }
