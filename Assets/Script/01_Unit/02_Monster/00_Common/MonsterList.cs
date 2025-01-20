@@ -87,4 +87,19 @@ public static class MonsterList
             patternName
         );
     }
+
+    public static void CheckValidStat()
+    {
+        foreach (MonsterJSON monsterJSON in monsterList)
+        {
+            Dictionary<StatKind, int> monsterStats = new Dictionary<StatKind, int>();
+
+            for (int i = 0; i < monsterJSON.statKinds.Length; i++)
+            {
+                StatKind statKind = Util.ParseEnumFromString<StatKind>(monsterJSON.statKinds[i]);
+                monsterStats.Add(statKind, monsterJSON.statValues[i]);
+            }
+            new UnitStat(monsterStats).CheckValidStats();
+        }
+    }
 }
