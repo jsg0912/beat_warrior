@@ -1293,7 +1293,6 @@ GameObject:
   m_Component:
   - component: {fileID: 687332392}
   - component: {fileID: 687332391}
-  - component: {fileID: 687332390}
   - component: {fileID: 687332389}
   m_Layer: 0
   m_Name: LightRayEffectCamera
@@ -1346,14 +1345,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &687332390
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 687332388}
-  m_Enabled: 1
 --- !u!20 &687332391
 Camera:
   m_ObjectHideFlags: 0
