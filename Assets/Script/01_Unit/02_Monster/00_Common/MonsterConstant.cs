@@ -17,7 +17,7 @@ public class MonsterConstant
 
     // Ibkkugi
     public const float IbkkugiThrowSpeed = 3f;
-    public const float IbkkugiMaxHeight = 1f;
+    public const float IbkkugiMaxHeight = 1.5f;
 
     // Jiljili
     public const float JiljiliThrowSpeed = 3f;
