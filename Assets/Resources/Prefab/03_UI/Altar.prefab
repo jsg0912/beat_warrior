@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8757766528606838011}
   - component: {fileID: 4981651976865805121}
   - component: {fileID: 916924152230926720}
-  - component: {fileID: 6762075814397278112}
+  - component: {fileID: 5412650820042607305}
   m_Layer: 0
   m_Name: Altar
   m_TagString: Untagged
@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.43, y: -1.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.28, y: 0.28, z: 0.28}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5879482112928423512}
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 1686646113
   m_SortingLayer: 4
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 78e55da52430e0e49947df7fc6e2866b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 39d91a0f2ca4a0e4d989cc49beee7b30, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   promptText: {fileID: 4129941567581711369}
---- !u!61 &6762075814397278112
+--- !u!61 &5412650820042607305
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,21 +129,21 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 5.12}
+    oldSize: {x: 20, y: 20}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 20, y: 20}
   m_EdgeRadius: 0
 --- !u!1001 &4524986304906479488
 PrefabInstance:
