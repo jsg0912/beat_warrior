@@ -122,6 +122,81 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &46120864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 46120865}
+  - component: {fileID: 46120867}
+  - component: {fileID: 46120866}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &46120865
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46120864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 21.4, y: 12.1, z: 11.41}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 695329074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &46120866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46120864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7019608}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: fd1c43b592f04334991c430a56a06933, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &46120867
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46120864}
+  m_CullTransparentMesh: 1
 --- !u!1 &77055964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,7 +1142,7 @@ Material:
     - _Skew: 0.02
     - _Speed: 0.2
     m_Colors:
-    - _Color1: {r: 0.37888914, g: 0.5471698, b: 0.43498272, a: 0.3529412}
+    - _Color1: {r: 0, g: 0, b: 0, a: 0.50980395}
     - _Color2: {r: 0, g: 0.45999968, b: 1, a: 0}
   m_BuildTextureStacks: []
 --- !u!1 &666191373
@@ -1513,6 +1588,7 @@ RectTransform:
   - {fileID: 77055965}
   - {fileID: 734600301}
   - {fileID: 544236941}
+  - {fileID: 46120865}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2063,7 +2139,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 390a8d8fdc3d0f84d878114abd1c4fc1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0e02077619cd5fa47aaf971d99906269, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7850,15 +7926,19 @@ PrefabInstance:
       objectReference: {fileID: 664060715}
     - target: {fileID: 291346259247480719, guid: 888f924606c3c88419c2978db86c4e5a, type: 3}
       propertyPath: color1.a
-      value: 0.3529412
+      value: 0.50980395
       objectReference: {fileID: 0}
     - target: {fileID: 291346259247480719, guid: 888f924606c3c88419c2978db86c4e5a, type: 3}
       propertyPath: color1.b
-      value: 0.43498272
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 291346259247480719, guid: 888f924606c3c88419c2978db86c4e5a, type: 3}
+      propertyPath: color1.g
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 291346259247480719, guid: 888f924606c3c88419c2978db86c4e5a, type: 3}
       propertyPath: color1.r
-      value: 0.37888914
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2669858309907322131, guid: 888f924606c3c88419c2978db86c4e5a, type: 3}
       propertyPath: m_Name
