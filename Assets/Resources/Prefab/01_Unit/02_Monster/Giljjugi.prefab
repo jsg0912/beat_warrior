@@ -159,8 +159,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 1220593941234673828}
   monsterName: 4
   status: 0
-  isTackleAble: 0
-  HPUI: {fileID: 0}
+  HpUI: {fileID: 1649727570667360246}
   Target: {fileID: 0}
   AnotherHPValue: 0
 --- !u!50 &7007219103791619030
@@ -296,6 +295,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
+--- !u!114 &1649727570667360246 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2693013487634828656, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
+  m_PrefabInstance: {fileID: 3727435692926861958}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6256fda82c492ef438ef5a66ffbfd02e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8558410985814197780 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5007745989193565330, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
