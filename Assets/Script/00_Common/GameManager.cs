@@ -3,6 +3,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
+    public Texture2D cursorIcon;
 
     public static GameManager Instance
     {
@@ -34,6 +35,11 @@ public class GameManager : MonoBehaviour
     {
         UIManager.CreateUI();
         isInGame = true;
+    }
+
+    private void SetMouseCursor()
+    {
+        if (cursorIcon != null) Cursor.SetCursor(cursorIcon, Vector2.zero, CursorMode.Auto);
     }
 
     public void StartGame()
