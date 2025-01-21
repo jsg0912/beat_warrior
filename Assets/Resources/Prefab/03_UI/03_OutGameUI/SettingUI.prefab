@@ -1375,6 +1375,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9066185351675451499}
   - component: {fileID: 6738681146198489613}
+  - component: {fileID: 845998820419642311}
   m_Layer: 0
   m_Name: SettingUI
   m_TagString: Untagged
@@ -1412,6 +1413,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KeyButtons: {fileID: 3069679693534733873}
   KeySettingButtonPrefab: {fileID: 358752537456444213, guid: de5f201e7ced0ee469b2741df3595578, type: 3}
+--- !u!114 &845998820419642311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189675000843793547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2845846935fa8104abd64b0e3280828d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  okayButton: {fileID: 0}
+  cancelButton: {fileID: 0}
+  setting: {fileID: 7952822424652993591}
 --- !u!1 &2240262085796149137
 GameObject:
   m_ObjectHideFlags: 0

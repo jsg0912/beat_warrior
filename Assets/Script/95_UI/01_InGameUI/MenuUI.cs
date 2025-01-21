@@ -27,7 +27,7 @@ public class MenuUI : PopupSystem
 
     public void OnClickSetting()
     {
-        Util.SetActive(setting, true);
+        SettingUI.Instance.TurnOnPopup();
     }
 
     public void OnClickReStart()
