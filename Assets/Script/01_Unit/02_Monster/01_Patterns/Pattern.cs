@@ -1,4 +1,4 @@
-public class Pattern
+public abstract class Pattern
 {
     protected Monster monster;
 
@@ -20,15 +20,16 @@ public class Pattern
     // It called at every Update.
     public virtual void PlayPattern()
     {
-        Recognize?.PlayStrategy();
         Attack?.UpdateCoolTime();
 
         switch (monster.GetStatus())
         {
             case MonsterStatus.Idle:
+                Recognize?.PlayStrategy();
                 MoveBasic?.PlayStrategy();
                 break;
             case MonsterStatus.Chase:
+                Recognize?.PlayStrategy();
                 if (Attack?.PlayStrategy() == false)
                 {
                     MoveChase?.PlayStrategy();

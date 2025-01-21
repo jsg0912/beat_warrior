@@ -9,7 +9,7 @@ public class KnockBack : AdditionalEffect
     }
     public override void work(GameObject obj)
     {
-        int dir = Player.Instance.GetDirection();
+        float dir = Player.Instance.GetMovingDirectionFloat();
         obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * knockBackDistance, 0.0f), ForceMode2D.Impulse);
     }
 }

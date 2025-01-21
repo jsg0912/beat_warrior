@@ -753,8 +753,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554831686}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 292.00946, y: 942.4195, z: -1.3817667}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 292.00952, y: 942.4195, z: -1.3817667}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1079,8 +1079,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 666191374}
-  - component: {fileID: 666191375}
   - component: {fileID: 666191376}
+  - component: {fileID: 666191377}
   m_Layer: 5
   m_Name: PopupSystem
   m_TagString: Untagged
@@ -1108,20 +1108,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &666191375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666191373}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e34add83cde5a94f9638c2310cbd8e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popup: {fileID: 474973284}
-  txtContent: {fileID: 1573041059}
 --- !u!114 &666191376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1148,6 +1134,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &666191377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666191373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e52e77b5273cf24abcb2e25c23ac732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  okayButton: {fileID: 770551501}
+  cancelButton: {fileID: 1267582114}
+  txtContent: {fileID: 1573041059}
 --- !u!1 &673720248
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,7 +1293,6 @@ GameObject:
   m_Component:
   - component: {fileID: 687332392}
   - component: {fileID: 687332391}
-  - component: {fileID: 687332390}
   - component: {fileID: 687332389}
   m_Layer: 0
   m_Name: LightRayEffectCamera
@@ -1345,14 +1345,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &687332390
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 687332388}
-  m_Enabled: 1
 --- !u!20 &687332391
 Camera:
   m_ObjectHideFlags: 0
@@ -1626,7 +1618,7 @@ GameObject:
   - component: {fileID: 770551502}
   - component: {fileID: 770551501}
   m_Layer: 5
-  m_Name: Button
+  m_Name: OkButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1696,7 +1688,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 666191375}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PopupSystem, Assembly-CSharp
         m_MethodName: OnClickOkay
         m_Mode: 1
@@ -2292,7 +2284,7 @@ GameObject:
   - component: {fileID: 1267582115}
   - component: {fileID: 1267582114}
   m_Layer: 5
-  m_Name: Button
+  m_Name: CancelButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2362,7 +2354,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 666191375}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PopupSystem, Assembly-CSharp
         m_MethodName: OnClickCancel
         m_Mode: 1
@@ -7406,7 +7398,6 @@ GameObject:
   - component: {fileID: 1695058981}
   - component: {fileID: 1695058980}
   - component: {fileID: 1695058979}
-  - component: {fileID: 1695058983}
   - component: {fileID: 1695058982}
   m_Layer: 5
   m_Name: ExitBtn
@@ -7478,31 +7469,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1695058980}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1695058982}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: ChangeSceneBtn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1695058983}
-        m_TargetAssemblyTypeName: PopupButtonManager, Assembly-CSharp
-        m_MethodName: OnClickPopupButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1695058980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7585,18 +7552,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1695058983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1695058977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2513c0f01ba5ab47ac1e70f9911c730, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1728045997
 GameObject:
   m_ObjectHideFlags: 0
@@ -8004,6 +7959,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 656783687}
   - {fileID: 695329074}
-  - {fileID: 554831688}
   - {fileID: 1360070268742560062}
   - {fileID: 687332392}
+  - {fileID: 554831688}

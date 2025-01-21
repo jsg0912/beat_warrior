@@ -5,6 +5,6 @@ public class IbkkugiPattern : Pattern
         Recognize = new RecognizeStrategyRanged();
         MoveBasic = new MoveStrategyNormal();
         MoveChase = new MoveStrategyChase();
-        Attack = new AttackStrategyThrowIbkkugi();
+        Attack = new AttackStrategyThrow(MonsterConstant.IbkkugiThrowSpeed, MonsterConstant.IbkkugiMaxHeight);
     }
 }

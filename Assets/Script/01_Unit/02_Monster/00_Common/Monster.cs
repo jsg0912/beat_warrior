@@ -1,24 +1,20 @@
 using System.Collections;
 using UnityEngine;
 
-public class Monster : MonoBehaviour
+public class Monster : DirectionalGameObject
 {
     // Hierarchy 상에서 monster Object의 이름을 정해주면 자동으로 같은 이름의 능력치가 할당 됨 - Tony, 2024.09.11
     public MonsterName monsterName;
     private MonsterUnit monsterUnit;
     public Pattern pattern;
 
-    [SerializeField] protected MonsterStatus status;
+    [SerializeField] private MonsterStatus status;
     protected Animator _animator;
-    protected Direction direction;
-    protected bool isMoveable = true;
+    public bool isTackleAble = false; // If it is true, then the monster can tackle the player.
 
-    [SerializeField] private Transform MonsterSprite;
     [SerializeField] private MonsterHPUI HPUI;
     [SerializeField] private GameObject Target;
     [SerializeField] private int AnotherHPValue = 0;
-
-    private GameObject SoulPrefab;
 
     void Start()
     {
@@ -27,23 +23,19 @@ public class Monster : MonoBehaviour
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
 
-        SoulPrefab = Resources.Load(PrefabRouter.SoulPrefab) as GameObject;
-
-        HPUI.SetMaxHP(monsterUnit.GetCurrentHP());
+        HPUI.SetMaxHP(monsterUnit.GetCurrentHP()); // Customizing HP Code - SDH, 20250119
     }
 
     void Update()
     {
         if (monsterUnit.GetIsAlive() == false)
         {
-            StopAttack();
+            pattern?.StopAttack();
             return;
         }
 
         pattern?.PlayPattern();
     }
-
-    public void StopAttack() { pattern?.StopAttack(); }
 
     // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
     public void PlayAnimation(MonsterStatus status)
@@ -52,6 +44,12 @@ public class Monster : MonoBehaviour
         {
             case MonsterStatus.Attack:
                 _animator.SetTrigger(MonsterConstant.attackAnimTrigger);
+                break;
+            case MonsterStatus.AttackCharge:
+                _animator.SetTrigger(MonsterConstant.attackChargeAnimTrigger);
+                break;
+            case MonsterStatus.AttackEnd:
+                _animator.SetTrigger(MonsterConstant.attackEndAnimTrigger);
                 break;
             case MonsterStatus.Hurt:
                 _animator.SetTrigger(MonsterConstant.hurtAnimTrigger);
@@ -62,27 +60,43 @@ public class Monster : MonoBehaviour
         }
     }
 
-    public void SetIsWalking(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
+    public void PlayAnimation(string trigger) { _animator.SetTrigger(trigger); }
+
     public MonsterStatus GetStatus() { return status; }
-    public void SetStatus(MonsterStatus status) { this.status = status; }
-    public int GetDirection() { return (int)direction; }
-    public bool GetIsMoveable() { return isMoveable; }
+    public bool GetIsAttacking()
+    {
+        switch (status)
+        {
+            case MonsterStatus.Attack:
+            case MonsterStatus.AttackCharge:
+            case MonsterStatus.AttackEnd:
+                return true;
+            default:
+                return false;
+        }
+    }
+    public bool GetIsMoveable()
+    {
+        {
+            switch (status)
+            {
+                case MonsterStatus.Idle:
+                case MonsterStatus.Chase:
+                    return true;
+                case MonsterStatus.AttackCharge:
+                case MonsterStatus.Attack:
+                case MonsterStatus.AttackEnd:
+                case MonsterStatus.Hurt:
+                case MonsterStatus.Dead:
+                default:
+                    return false;
+            }
+        }
+    }
+    public bool GetIsTackleAble() { return isTackleAble; }
     public bool GetIsAlive() { return monsterUnit.GetIsAlive(); }
     public int GetCurrentHP() { return monsterUnit.GetCurrentHP(); }
-    public void SetIsMoveable(bool isMoveable) { this.isMoveable = isMoveable; }
-
-    public void SetDirection(Direction direction)
-    {
-        this.direction = direction;
-        MonsterSprite.localScale = new Vector3((int)direction, 1, 1);
-    }
-
-    public void ChangeDirection()
-    {
-        this.direction = (Direction)(-1 * (int)direction);
-        SetDirection(direction);
-    }
-
+    public int GetCurrentStat(StatKind statKind) { return monsterUnit.unitStat.GetCurrentStat(statKind); }
     public virtual void GetDamaged(int dmg)
     {
         monsterUnit.ChangeCurrentHP(-dmg);
@@ -101,12 +115,22 @@ public class Monster : MonoBehaviour
         PlayAnimation(MonsterStatus.Hurt);
     }
 
+    public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
+    public void SetStatus(MonsterStatus status) { this.status = status; }
+    public void SetIsTackleAble(bool isTackleAble)
+    {
+        Debug.Log("SetIsTackleAble: " + isTackleAble);
+        this.isTackleAble = isTackleAble;
+    }
+
     protected virtual void Die()
     {
         monsterUnit.SetDead();
+        SetStatus(MonsterStatus.Dead);
 
-        Player.Instance.CheckResetSkills(this.gameObject);
-        Instantiate(SoulPrefab, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity);
+        Player.Instance.CheckResetSkills(gameObject);
+
+        InGameManager.Instance.CreateSoul(transform.position);
 
         PlayAnimation(MonsterStatus.Dead);
         Destroy(gameObject, 2.0f);
@@ -130,5 +154,19 @@ public class Monster : MonoBehaviour
         }
 
         Util.SetActive(Target, false);
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(GetIsTackleAble());
+        if (GetIsTackleAble())
+        {
+            Debug.Log("Tackle");
+            GameObject obj = collision.gameObject;
+            if (obj.CompareTag(TagConstant.Player))
+            {
+                Player.Instance.GetDamaged(GetCurrentStat(StatKind.ATK));
+            }
+        }
     }
 }

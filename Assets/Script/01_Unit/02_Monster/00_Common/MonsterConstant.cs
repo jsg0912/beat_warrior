@@ -4,18 +4,31 @@ using UnityEngine;
 public class MonsterConstant
 {
     public const string walkAnimBool = "isWalk";
+    public const string attackChargeAnimTrigger = "charge";
     public const string attackAnimTrigger = "attack";
+    public const string attackEndAnimTrigger = "attack end";
+
     public const string hurtAnimTrigger = "hurt";
     public const string dieAnimTrigger = "die";
 
     public const float moveSpeed = 1.0f;
 
     public const float RangedRecognizeRange = 10.0f;
-    public const float MeleeRecognizeRange = 3.0f;
+    public const float MeleeRecognizeRange = 10.0f;
 
-    public const float IbkkugiMaxHeight = 1f;
     public const float ThrowObjectYOffset = 0.5f;
 
+    // Ibkkugi
+    public const float IbkkugiThrowSpeed = 3f;
+    public const float IbkkugiMaxHeight = 1.5f;
+
+    // Jiljili
+    public const float JiljiliThrowSpeed = 3f;
+    public const float JiljiliMaxHeight = 1f;
+
+    // Koppulso
+    public const float KoppulsoRushSpeed = 10.0f;
+    public const float KoppulsoRushDuration = 10.0f;
 
     public static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
         { MonsterName.Ippali, 1.1f },
@@ -38,7 +51,7 @@ public class MonsterConstant
     public static Dictionary<MonsterName, float> AttackSpeed = new() {
         { MonsterName.Ippali, 2.0f },
         { MonsterName.Ibkkugi, 2.8f },
-        { MonsterName.Koppulso, 10.0f },
+        { MonsterName.Koppulso, 7.0f },
         { MonsterName.Jiljili, 4.0f },
         { MonsterName.Giljjugi, 7.0f },
         { MonsterName.Itmomi, 1.2f }
@@ -61,7 +74,7 @@ public class MonsterConstant
     public static Dictionary<MonsterName, float> AttackActionIntervals = new() {
         { MonsterName.Ippali, 0.5f },
         { MonsterName.Ibkkugi, 0.8f },
-        { MonsterName.Koppulso, 0.5f },
+        { MonsterName.Koppulso, 2f },
         { MonsterName.Jiljili, 0.5f },
         { MonsterName.Giljjugi, 0.5f },
         { MonsterName.Itmomi, 0.5f }

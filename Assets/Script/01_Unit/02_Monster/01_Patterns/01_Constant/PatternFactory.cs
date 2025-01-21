@@ -22,6 +22,9 @@ public static class PatternFactory
                 return new IsmomiPattern();
             case PatternName.Ippali:
                 return new IppaliPattern();
+            case PatternName.Koppulso:
+                return new KoppulsoPattern();
+            
         }
 
         throw new System.Exception($"{patternName} is not exist");

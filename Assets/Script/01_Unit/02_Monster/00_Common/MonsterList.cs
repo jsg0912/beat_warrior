@@ -36,7 +36,7 @@ public static class MonsterList
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
         },
-        PatternName.Monster3),
+        PatternName.Koppulso),
         new MonsterJSON(MonsterName.Giljjugi,
         "길쭉이",
         new Dictionary<StatKind, int>{
@@ -86,5 +86,20 @@ public static class MonsterList
             new UnitStat(monsterStats),
             patternName
         );
+    }
+
+    public static void CheckValidStat()
+    {
+        foreach (MonsterJSON monsterJSON in monsterList)
+        {
+            Dictionary<StatKind, int> monsterStats = new Dictionary<StatKind, int>();
+
+            for (int i = 0; i < monsterJSON.statKinds.Length; i++)
+            {
+                StatKind statKind = Util.ParseEnumFromString<StatKind>(monsterJSON.statKinds[i]);
+                monsterStats.Add(statKind, monsterJSON.statValues[i]);
+            }
+            new UnitStat(monsterStats).CheckValidStats();
+        }
     }
 }

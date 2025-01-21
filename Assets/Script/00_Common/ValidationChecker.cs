@@ -5,5 +5,6 @@ public static class ValidationChecker
     public static void Check()
     {
         TraitPriceList.CheckTraitPriceListValidation();
+        MonsterList.CheckValidStat();
     }
 }
