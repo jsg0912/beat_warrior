@@ -10,7 +10,7 @@ public class Monster : DirectionalGameObject
 
     [SerializeField] private MonsterStatus status;
     protected Animator _animator;
-    public bool isTackleAble = false; // If it is true, then the monster can tackle the player.
+    private bool isFixedAnimation = false;
 
     [SerializeField] private MonsterHPUI HPUI;
     [SerializeField] private GameObject Target;
@@ -28,18 +28,13 @@ public class Monster : DirectionalGameObject
 
     void Update()
     {
-        if (monsterUnit.GetIsAlive() == false)
-        {
-            pattern?.StopAttack();
-            return;
-        }
-
         pattern?.PlayPattern();
     }
 
     // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
     public void PlayAnimation(MonsterStatus status)
     {
+        if (isFixedAnimation) return;
         switch (status)
         {
             case MonsterStatus.Attack:
@@ -60,7 +55,11 @@ public class Monster : DirectionalGameObject
         }
     }
 
-    public void PlayAnimation(string trigger) { _animator.SetTrigger(trigger); }
+    public void PlayAnimation(string trigger)
+    {
+        if (isFixedAnimation) return;
+        _animator.SetTrigger(trigger);
+    }
 
     public MonsterStatus GetStatus() { return status; }
     public bool GetIsAttacking()
@@ -75,6 +74,7 @@ public class Monster : DirectionalGameObject
                 return false;
         }
     }
+
     public bool GetIsMoveable()
     {
         {
@@ -93,19 +93,30 @@ public class Monster : DirectionalGameObject
             }
         }
     }
-    public bool GetIsTackleAble() { return isTackleAble; }
-    public bool GetIsAlive() { return monsterUnit.GetIsAlive(); }
+
+    public bool GetIsKnockBackAble() { return monsterUnit.isKnockBackAble; }
+    public bool GetIsTackleAble() { return monsterUnit.isTackleAble; }
+    public bool GetIsAlive() { return status != MonsterStatus.Dead; }
+    public bool CheckIsAlive()
+    {
+        if (GetCurrentHP() <= 0)
+        {
+            SetStatus(MonsterStatus.Dead);
+            return false;
+        }
+        return true;
+    }
     public int GetCurrentHP() { return monsterUnit.GetCurrentHP(); }
     public int GetCurrentStat(StatKind statKind) { return monsterUnit.unitStat.GetCurrentStat(statKind); }
     public virtual void GetDamaged(int dmg)
     {
         monsterUnit.ChangeCurrentHP(-dmg);
 
-        if (Player.Instance.hitMonsterFuncList != null) Player.Instance.hitMonsterFuncList(monsterUnit);
+        if (Player.Instance.hitMonsterFuncList != null) Player.Instance.hitMonsterFuncList(this);
 
         HPUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
-        if (monsterUnit.GetIsAlive() == false)
+        if (CheckIsAlive() == false)
         {
             Die();
             return;
@@ -116,20 +127,21 @@ public class Monster : DirectionalGameObject
     }
 
     public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
-    public void SetStatus(MonsterStatus status) { this.status = status; }
-    public void SetIsTackleAble(bool isTackleAble)
+    public void SetStatus(MonsterStatus status)
     {
-        Debug.Log("SetIsTackleAble: " + isTackleAble);
-        this.isTackleAble = isTackleAble;
+        if (status == MonsterStatus.Dead)
+        {
+            SetIsFixedAnimation(false);
+        }
+        this.status = status;
     }
-
+    public void SetIsTackleAble(bool isTackleAble) { monsterUnit.isTackleAble = isTackleAble; }
+    public void SetIsKnockBackAble(bool isKnockBackAble) { monsterUnit.isKnockBackAble = isKnockBackAble; }
+    public void SetIsFixedAnimation(bool isFixedAnimation) { this.isFixedAnimation = isFixedAnimation; }
     protected virtual void Die()
     {
-        monsterUnit.SetDead();
-        SetStatus(MonsterStatus.Dead);
-
+        pattern?.StopAttack();
         Player.Instance.CheckResetSkills(gameObject);
-
         InGameManager.Instance.CreateSoul(transform.position);
 
         PlayAnimation(MonsterStatus.Dead);
@@ -147,7 +159,7 @@ public class Monster : DirectionalGameObject
 
         float timer = PlayerSkillConstant.SkillCoolTime[SkillName.Mark];
 
-        while (timer > 0 && monsterUnit.GetIsAlive() == true)
+        while (timer > 0 && GetIsAlive())
         {
             timer -= Time.deltaTime;
             yield return null;

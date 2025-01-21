@@ -38,5 +38,9 @@ public abstract class Pattern
         }
     }
 
-    public void StopAttack() { Attack?.StopAttack(); }
+    public void StopAttack()
+    {
+        DebugConsole.Log("StopAttack Pattern");
+        Attack?.StopAttack();
+    }
 }

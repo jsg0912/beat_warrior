@@ -15,10 +15,10 @@ public class Execution : PassiveSkill
         Player.Instance.hitMonsterFuncList += ExecutionMonster;
     }
 
-    public void ExecutionMonster(MonsterUnit monster)
+    public void ExecutionMonster(Monster monster)
     {
         int currentHP = monster.GetCurrentHP();
-        if (currentHP <= executionHP) monster.ChangeCurrentHP(-currentHP);
+        if (currentHP <= executionHP) monster.GetDamaged(currentHP);
     }
 
     public override void RemoveSkill()

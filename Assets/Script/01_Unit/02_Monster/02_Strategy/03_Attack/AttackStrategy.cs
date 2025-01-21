@@ -62,10 +62,6 @@ public abstract class AttackStrategy : Strategy
     protected abstract void SkillMethod();
     public void StopAttack()
     {
-        if (attackCoroutine != null)
-        {
-            monoBehaviour.StopCoroutine(attackCoroutine);
-            monster.SetStatus(MonsterStatus.Idle);
-        }
+        monoBehaviour.StopAllCoroutines();
     }
 }

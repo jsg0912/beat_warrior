@@ -8,7 +8,7 @@ public class AttackStrategyRush : AttackStrategy
     protected float dashDuration;
     protected Coroutine rushCoroutine;
     protected LayerMask GroundLayer;
-    protected bool isStop = false;
+    protected bool isChangingDir = false;
 
     public AttackStrategyRush(float rushSpeed, float dashDuration)
     {
@@ -35,25 +35,28 @@ public class AttackStrategyRush : AttackStrategy
 
     protected override void SkillMethod()
     {
-        monoBehaviour.StartCoroutine(RushCoroutine());
+        attackCoroutine = monoBehaviour.StartCoroutine(RushCoroutine());
     }
 
     protected IEnumerator RushCoroutine()
     {
         float elapsedTime = 0f;
         monster.SetIsTackleAble(true);
+        monster.SetIsKnockBackAble(false);
+        monster.SetIsFixedAnimation(true);
         SetRushDirection();
 
         while (elapsedTime < dashDuration)
         {
             elapsedTime += Time.deltaTime;
-
             Rush();
             yield return null;
         }
 
         monster.PlayAnimation(MonsterStatus.AttackEnd);
         monster.SetIsTackleAble(false);
+        monster.SetIsKnockBackAble(true);
+        monster.SetIsFixedAnimation(false);
         attackCoolTime = attackCoolTimeMax;
         monster.SetStatus(MonsterStatus.Idle);
     }
@@ -66,7 +69,7 @@ public class AttackStrategyRush : AttackStrategy
 
     protected virtual void Rush()
     {
-        if (isStop) return;
+        if (isChangingDir) return;
 
         monster.SetMovingDirection(RushDirection);
 
@@ -106,9 +109,11 @@ public class AttackStrategyRush : AttackStrategy
     {
         RushDirection = (Direction)(-1 * (int)RushDirection);
         monster.SetMovingDirection(RushDirection);
-        monster.PlayAnimation("turn");
-        isStop = true;
+        monster.SetIsFixedAnimation(false);
+        monster.PlayAnimation(MonsterConstant.turnAnimTrigger);
+        monster.SetIsFixedAnimation(true);
+        isChangingDir = true;
         yield return new WaitForSeconds(0.33f);
-        isStop = false;
+        isChangingDir = false;
     }
 }
