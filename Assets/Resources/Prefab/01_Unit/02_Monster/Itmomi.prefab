@@ -70,9 +70,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5833a4c1f2adea741ac0d28befbb471a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingDirection: 1
+  objectDirection: 1
+  spriteRenderer: {fileID: 3353338847850064151}
   monsterName: 5
   status: 0
-  MonsterSprite: {fileID: 2693979295720383395}
+  isTackleAble: 0
   HPUI: {fileID: 8121129461690677475}
   Target: {fileID: 0}
   AnotherHPValue: 0
@@ -135,7 +138,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0152923465, y: -0.04638195}
+  m_Offset: {x: -0.0152923465, y: -0.12}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -174,7 +177,7 @@ Transform:
   m_GameObject: {fileID: 9162318648507243343}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.103, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -246,11 +249,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5007745989193565330, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.39
+      value: -0.212
       objectReference: {fileID: 0}
     - target: {fileID: 5007745989193565330, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.971
+      value: 0.893
       objectReference: {fileID: 0}
     - target: {fileID: 5007745989193565330, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
       propertyPath: m_LocalPosition.z
