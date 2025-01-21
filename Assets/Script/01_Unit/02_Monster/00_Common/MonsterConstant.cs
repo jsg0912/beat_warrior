@@ -8,6 +8,8 @@ public class MonsterConstant
     public const string attackAnimTrigger = "attack";
     public const string attackEndAnimTrigger = "attack end";
 
+    public const string turnAnimTrigger = "turn";
+
     public const string hurtAnimTrigger = "hurt";
     public const string dieAnimTrigger = "die";
 
