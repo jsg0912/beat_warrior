@@ -12,7 +12,7 @@ public class Monster : DirectionalGameObject
     protected Animator _animator;
     private bool isFixedAnimation = false;
 
-    [SerializeField] private MonsterHPUI HPUI;
+    [SerializeField] private MonsterHPUI HpUI;
     [SerializeField] private GameObject Target;
     [SerializeField] private int AnotherHPValue = 0;
 
@@ -23,7 +23,7 @@ public class Monster : DirectionalGameObject
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
 
-        HPUI.SetMaxHP(monsterUnit.GetCurrentHP()); // Customizing HP Code - SDH, 20250119
+        HpUI.SetMaxHP(monsterUnit.GetCurrentHP()); // Customizing HP Code - SDH, 20250119
     }
 
     void Update()
@@ -105,22 +105,23 @@ public class Monster : DirectionalGameObject
     }
     public int GetCurrentHP() { return monsterUnit.GetCurrentHP(); }
     public int GetCurrentStat(StatKind statKind) { return monsterUnit.unitStat.GetCurrentStat(statKind); }
+    public void AttackedByPlayer(int playerATK)
+    {
+        GetDamaged(playerATK);
+        if (Player.Instance.hitMonsterFuncList != null) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
+        PlayAnimation(MonsterConstant.hurtAnimTrigger);
+    }
     public virtual void GetDamaged(int dmg)
     {
         monsterUnit.ChangeCurrentHP(-dmg);
 
-        if (Player.Instance.hitMonsterFuncList != null) Player.Instance.hitMonsterFuncList(this);
-
-        HPUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
+        HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
         if (CheckIsAlive() == false)
         {
             Die();
             return;
         }
-
-        // GetComponent<Rigidbody2D>().AddForce(new Vector2(-5.0f, 0.5f) * (int)direction, ForceMode2D.Impulse);
-        PlayAnimation(MonsterConstant.hurtAnimTrigger);
     }
 
     public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
@@ -139,15 +140,24 @@ public class Monster : DirectionalGameObject
     {
         StopAttack();
         Player.Instance.CheckResetSkills(gameObject);
-        InGameManager.Instance.CreateSoul(transform.position);
+
+        monsterUnit.ResetIsKnockBackAble();
+        monsterUnit.ResetIsTackleAble();
+        SetIsFixedAnimation(false);
 
         PlayAnimation(MonsterStatus.Dead);
+
+        InGameManager.Instance.CreateSoul(transform.position);
+
         Destroy(gameObject, 2.0f);
     }
 
     public void StopAttack()
     {
-        if (GetIsAttacking()) pattern?.StopAttack();
+        if (GetIsAttacking() || GetIsAlive() == false)
+        {
+            pattern?.StopAttack();
+        }
     }
 
     public void SetTarget()

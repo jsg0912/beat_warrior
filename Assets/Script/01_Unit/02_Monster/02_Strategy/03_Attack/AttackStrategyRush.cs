@@ -117,12 +117,4 @@ public class AttackStrategyRush : AttackStrategy
         yield return new WaitForSeconds(0.33f);
         isChangingDir = false;
     }
-
-    public override void StopAttack()
-    {
-        base.StopAttack();
-        monster.SetIsFixedAnimation(false);
-        monster.SetIsTackleAble(false);
-        monster.SetIsKnockBackAble(true);
-    }
 }

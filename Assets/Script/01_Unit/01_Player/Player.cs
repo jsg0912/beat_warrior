@@ -169,11 +169,11 @@ public class Player : DirectionalGameObject
 
     public bool ChangeCurrentHP(int hp)
     {
-        bool currentHP = playerUnit.ChangeCurrentHP(hp);
+        bool isAlive = playerUnit.ChangeCurrentHP(hp);
 
         PlayerHpUI.Instance.UpdateHPUI();
 
-        return currentHP;
+        return isAlive;
     }
 
     public void SetTarget(GameObject obj)
