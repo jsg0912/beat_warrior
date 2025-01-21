@@ -38,19 +38,16 @@ public class Monster : DirectionalGameObject
         switch (status)
         {
             case MonsterStatus.Attack:
-                _animator.SetTrigger(MonsterConstant.attackAnimTrigger);
+                PlayAnimation(MonsterConstant.attackAnimTrigger);
                 break;
             case MonsterStatus.AttackCharge:
-                _animator.SetTrigger(MonsterConstant.attackChargeAnimTrigger);
+                PlayAnimation(MonsterConstant.attackChargeAnimTrigger);
                 break;
             case MonsterStatus.AttackEnd:
-                _animator.SetTrigger(MonsterConstant.attackEndAnimTrigger);
-                break;
-            case MonsterStatus.Hurt:
-                _animator.SetTrigger(MonsterConstant.hurtAnimTrigger);
+                PlayAnimation(MonsterConstant.attackEndAnimTrigger);
                 break;
             case MonsterStatus.Dead:
-                _animator.SetTrigger(MonsterConstant.dieAnimTrigger);
+                PlayAnimation(MonsterConstant.dieAnimTrigger);
                 break;
         }
     }
@@ -123,7 +120,7 @@ public class Monster : DirectionalGameObject
         }
 
         // GetComponent<Rigidbody2D>().AddForce(new Vector2(-5.0f, 0.5f) * (int)direction, ForceMode2D.Impulse);
-        PlayAnimation(MonsterStatus.Hurt);
+        PlayAnimation(MonsterConstant.hurtAnimTrigger);
     }
 
     public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
@@ -140,12 +137,17 @@ public class Monster : DirectionalGameObject
     public void SetIsFixedAnimation(bool isFixedAnimation) { this.isFixedAnimation = isFixedAnimation; }
     protected virtual void Die()
     {
-        pattern?.StopAttack();
+        StopAttack();
         Player.Instance.CheckResetSkills(gameObject);
         InGameManager.Instance.CreateSoul(transform.position);
 
         PlayAnimation(MonsterStatus.Dead);
         Destroy(gameObject, 2.0f);
+    }
+
+    public void StopAttack()
+    {
+        if (GetIsAttacking()) pattern?.StopAttack();
     }
 
     public void SetTarget()
