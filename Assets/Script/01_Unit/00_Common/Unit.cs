@@ -1,15 +1,7 @@
 public class Unit
 {
-    private bool isAlive = true;
     public UnitInfo unitInfo;
     public UnitStat unitStat;
-
-    public bool GetIsAlive()
-    {
-        return isAlive;
-    }
-
-    public void SetDead() { isAlive = false; }
 
     public bool GetIsFullStat(StatKind statKind) { return unitStat.GetIsFullStat(statKind); }
 
@@ -18,10 +10,7 @@ public class Unit
     public bool ChangeCurrentHP(int change)
     {
         int currentHP = unitStat.ChangeCurrentStat(StatKind.HP, change);
-
-        if (currentHP <= 0) isAlive = false;
-
-        return isAlive;
+        return currentHP > 0;
     }
 
     public Unit(UnitInfo unitInfo, UnitStat unitStat)

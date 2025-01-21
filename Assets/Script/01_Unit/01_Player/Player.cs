@@ -33,7 +33,7 @@ public class Player : DirectionalGameObject
 
     private GameObject targetInfo;
 
-    public delegate void HitMonsterFunc(MonsterUnit monster);
+    public delegate void HitMonsterFunc(Monster monster);
     public delegate void UseSkillFunc(Skill skill);
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
@@ -445,7 +445,7 @@ public class Player : DirectionalGameObject
 
     public void GetDamaged(int dmg)
     {
-        if (isInvincibility || playerUnit.GetIsAlive() == false) return;
+        if (isInvincibility || status == PlayerStatus.Dead) return;
 
         bool isAlive = ChangeCurrentHP(-dmg);
 

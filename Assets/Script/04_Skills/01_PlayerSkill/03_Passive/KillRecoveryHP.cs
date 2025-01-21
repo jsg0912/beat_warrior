@@ -22,7 +22,7 @@ public class KillRecoveryHP : PassiveSkill
         Player.Instance.hitMonsterFuncList += CountKillMonster;
     }
 
-    public void CountKillMonster(MonsterUnit monster)
+    public void CountKillMonster(Monster monster)
     {
         if (monster.GetIsAlive() == true) return;
 
