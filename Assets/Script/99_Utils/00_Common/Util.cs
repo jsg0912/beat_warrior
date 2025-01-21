@@ -93,9 +93,14 @@ public static class Util
 
     public static void FlipLocalScaleX(GameObject gameObject)
     {
-        Vector3 scale = gameObject.transform.localScale;
+        FlipLocalScaleX(gameObject.transform);
+    }
+
+    public static void FlipLocalScaleX(Transform transform)
+    {
+        Vector3 scale = transform.localScale;
         scale.x = -scale.x; // x 값의 부호 반전
-        gameObject.transform.localScale = scale;
+        transform.localScale = scale;
     }
 
     public static T FindComponentInHierarchy<T>(GameObject root) where T : Component
