@@ -168,7 +168,7 @@ public class Monster : DirectionalGameObject
         Util.SetActive(Target, false);
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(GetIsTackleAble());
         if (GetIsTackleAble())
