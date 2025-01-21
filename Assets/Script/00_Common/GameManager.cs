@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     {
         SceneController.Instance.ChangeScene(SceneName.Tutorial2);
         InGameManager.TryCreateInGameManager();
-        UIManager.Instance.SetInGameUIActive(true);
+        //UIManager.Instance.SetInGameUIActive(true);
     }
 
     public void RestartGame()
