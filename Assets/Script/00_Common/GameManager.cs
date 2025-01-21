@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        SetMouseCursor();
         UIManager.CreateUI();
         isInGame = true;
     }
