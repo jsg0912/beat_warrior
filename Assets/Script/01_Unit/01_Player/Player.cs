@@ -48,7 +48,7 @@ public class Player : DirectionalGameObject
         if (_instance == null)
         {
             _instance = FindObjectOfType<Player>();
-            if (_instance == null)
+            if (_instance == null && GameManager.Instance.isInGame == true)
             {
                 CreatePlayer();
             }

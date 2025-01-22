@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     {
         SetMouseCursor();
         UIManager.CreateUI();
-        isInGame = true;
+        isInGame = false;
     }
 
     private void SetMouseCursor()
@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         SceneController.Instance.ChangeScene(SceneName.Tutorial2);
         InGameManager.TryCreateInGameManager();
         UIManager.Instance.SetInGameUIActive(true);
+        isInGame = true;
     }
 
     public void RestartGame()

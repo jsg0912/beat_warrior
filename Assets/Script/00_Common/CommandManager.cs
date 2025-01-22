@@ -13,7 +13,7 @@ public class CommandManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!PauseController.instance.GetPause())
+        if (!PauseController.instance.GetPause() && Player.Instance != null)
         {
             Player.Instance.CheckIsMove();
         }
@@ -52,7 +52,7 @@ public class CommandManager : MonoBehaviour
         }
 
         // When we paused the game, we don't want to check below commands.
-        if (!PauseController.instance.GetPause())
+        if (!PauseController.instance.GetPause() && Player.Instance != null)
         {
             Player.Instance.CheckPlayerCommand();
         }
