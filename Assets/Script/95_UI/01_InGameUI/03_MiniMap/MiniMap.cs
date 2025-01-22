@@ -7,10 +7,8 @@ public class MiniMap : MonoBehaviour
     public TMP_Text ReamaingMonster;
     public Camera MiniMapCamera;
 
-    public GameObject PlayerMapIconFrefab;
+    public GameObject PlayerMapIconPrefab;
     GameObject PlayerMapIcon;
-
-    public GameObject MonsterMapIconFrefab;
 
     GameObject[] monster;
     GameObject[] icon;
@@ -47,7 +45,7 @@ public class MiniMap : MonoBehaviour
         // MainCamera[] mainCameras = FindObjectsOfType<MainCamera>();
         // mainCameras[0].GetComponent<Camera>().cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
 
-        PlayerMapIcon = Instantiate(PlayerMapIconFrefab, gameObject.transform);
+        TryCreatePlayerMapIcon();
     }
 
     // Update is called once per frame
@@ -119,10 +117,15 @@ public class MiniMap : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        PlayerMapIcon = Instantiate(PlayerMapIconFrefab, gameObject.transform);
+        TryCreatePlayerMapIcon();
 
         monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
         icon = new GameObject[monster.Length];
         monsterInMap = new GameObject[monster.Length];
+    }
+
+    private void TryCreatePlayerMapIcon()
+    {
+        if (PlayerMapIcon == null) PlayerMapIcon = Instantiate(PlayerMapIconPrefab, gameObject.transform);
     }
 }
