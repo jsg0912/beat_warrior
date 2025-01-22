@@ -7,15 +7,7 @@ using UnityEngine;
 public delegate void PlayerCreateDelegate(); // [Code Review - KMJ] No ref? - SDH, 20250106
 public class Player : DirectionalGameObject
 {
-    private static Player _instance;
-    public static Player Instance
-    {
-        get
-        {
-            TryCreatePlayer();
-            return _instance;
-        }
-    }
+    public static Player Instance;
     public Unit playerUnit;
     private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
@@ -38,17 +30,12 @@ public class Player : DirectionalGameObject
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
 
-    void Start()
-    {
-        Initialize();
-    }
-
     public static void TryCreatePlayer()
     {
-        if (_instance == null)
+        if (Instance == null)
         {
-            _instance = FindObjectOfType<Player>();
-            if (_instance == null && GameManager.Instance.isInGame == true)
+            Instance = FindObjectOfType<Player>();
+            if (Instance == null && GameManager.Instance.isInGame == true)
             {
                 CreatePlayer();
             }
@@ -59,14 +46,15 @@ public class Player : DirectionalGameObject
     {
         GameObject player;
         player = Instantiate(Resources.Load(PrefabRouter.PlayerPrefab) as GameObject);
-        player.GetComponent<Player>().Initialize();
-        _instance = player.GetComponent<Player>();
+        Instance = player.GetComponent<Player>();
         DontDestroyOnLoad(player);
+
+        player.GetComponent<Player>().Initialize();
     }
 
     private void Initialize(Direction direction = Direction.Left)
     {
-        // TODO: Altarnate real user nickname than "playerName" - SDH, 20241204
+        // TODO: Alternate real user nickname than "playerName" - SDH, 20241204
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
             {StatKind.HP, PlayerConstant.hpMax},
             {StatKind.ATK, PlayerConstant.atk},
@@ -97,7 +85,7 @@ public class Player : DirectionalGameObject
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
     }
 
-    public void RestartPlayer()//TODO: GameManager로 옮기기 - 이정대 20240912
+    public void RestartPlayer()
     {
         Initialize();
         _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
@@ -170,9 +158,7 @@ public class Player : DirectionalGameObject
     public bool ChangeCurrentHP(int hp)
     {
         bool isAlive = playerUnit.ChangeCurrentHP(hp);
-
         PlayerHpUI.Instance.UpdateHPUI();
-
         return isAlive;
     }
 
