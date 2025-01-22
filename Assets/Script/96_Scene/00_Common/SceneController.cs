@@ -36,35 +36,43 @@ public class SceneController : MonoBehaviour
         switch (sceneName)
         {
             case SceneName.Player:
-                SceneManager.LoadScene("Player");
+                LoadingSceneManager.LoadScene("Player");
+                //SceneManager.LoadScene("Player");
                 CurrentScene = (int)SceneName.Player;
                 break;
             case SceneName.ProtoType:
-                SceneManager.LoadScene("ProtoType");
+                LoadingSceneManager.LoadScene("ProtoType");
+                //SceneManager.LoadScene("ProtoType");
                 CurrentScene = (int)(SceneName.ProtoType);
                 break;
-            case SceneName.Title:
-                SceneManager.LoadScene("Title");
-                CurrentScene = (int)SceneName.Title;
+            case SceneName.Tittle:
+                LoadingSceneManager.LoadScene("Tittle");
+                //SceneManager.LoadScene("Tittle");
+                CurrentScene = (int)SceneName.Tittle;
                 break;
             case SceneName.Setting:
-                SceneManager.LoadScene("Setting");
+                LoadingSceneManager.LoadScene("Setting");
+                //SceneManager.LoadScene("Setting");
                 CurrentScene = (int)SceneName.Setting;
                 break;
             case SceneName.ProtoType2:
-                SceneManager.LoadScene("ProtoType2");
+                LoadingSceneManager.LoadScene("ProtoType2");
+                //SceneManager.LoadScene("ProtoType2");
                 CurrentScene = (int)SceneName.ProtoType2;
                 break;
             case SceneName.Tutorial1:
-                SceneManager.LoadScene("Tutorial1");
+                LoadingSceneManager.LoadScene("Tutorial1");
+                //SceneManager.LoadScene("Tutorial1");
                 CurrentScene = (int)SceneName.Tutorial1;
                 break;
             case SceneName.Tutorial2:
-                SceneManager.LoadScene("Tutorial2");
+                LoadingSceneManager.LoadScene("Tutorial2");
+                //SceneManager.LoadScene("Tutorial2");
                 CurrentScene = (int)SceneName.Tutorial2;
                 break;
             case SceneName.Village2:
-                SceneManager.LoadScene("Village2");
+                LoadingSceneManager.LoadScene("Village2");
+                //SceneManager.LoadScene("Village2");
                 CurrentScene = (int)SceneName.Village2;
                 break;
         }
