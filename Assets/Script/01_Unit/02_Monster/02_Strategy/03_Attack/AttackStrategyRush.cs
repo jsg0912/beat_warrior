@@ -53,11 +53,12 @@ public class AttackStrategyRush : AttackStrategy
             yield return null;
         }
 
-        monster.PlayAnimation(MonsterStatus.AttackEnd);
+        monster.SetIsFixedAnimation(false);
         monster.SetIsTackleAble(false);
         monster.SetIsKnockBackAble(true);
-        monster.SetIsFixedAnimation(false);
         attackCoolTime = attackCoolTimeMax;
+
+        monster.PlayAnimation(MonsterStatus.AttackEnd);
         monster.SetStatus(MonsterStatus.Idle);
     }
 

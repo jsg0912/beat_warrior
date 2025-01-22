@@ -38,6 +38,11 @@ public abstract class AttackStrategy : Strategy
         }
     }
 
+    public void SetMaxAttackCoolTime()
+    {
+        attackCoolTime = attackCoolTimeMax;
+    }
+
     protected bool TrySkill()
     {
         if (attackCoolTime > 0) return false;
@@ -55,13 +60,14 @@ public abstract class AttackStrategy : Strategy
         yield return new WaitForSeconds(attackActionInterval);
         SkillMethod();
 
-        attackCoolTime = attackCoolTimeMax;
+        SetMaxAttackCoolTime();
         monster.SetStatus(MonsterStatus.Idle);
     }
 
     protected abstract void SkillMethod();
-    public void StopAttack()
+    public virtual void StopAttack()
     {
         monoBehaviour.StopAllCoroutines();
+        SetMaxAttackCoolTime();
     }
 }

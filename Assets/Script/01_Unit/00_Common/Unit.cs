@@ -10,7 +10,9 @@ public class Unit
     public bool ChangeCurrentHP(int change)
     {
         int currentHP = unitStat.ChangeCurrentStat(StatKind.HP, change);
-        return currentHP > 0;
+
+        bool isAlive = currentHP > 0;
+        return isAlive;
     }
 
     public Unit(UnitInfo unitInfo, UnitStat unitStat)

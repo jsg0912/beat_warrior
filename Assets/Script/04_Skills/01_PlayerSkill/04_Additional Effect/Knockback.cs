@@ -9,7 +9,13 @@ public class KnockBack : AdditionalEffect
     }
     public override void work(GameObject obj)
     {
-        if (obj.GetComponent<Monster>().GetIsKnockBackAble() == false) return;
+        Monster monster = obj.GetComponent<Monster>();
+        if (monster != null)
+        {
+            if (monster.GetIsKnockBackAble() == false) return;
+            monster.StopAttack();
+            monster.SetStatus(MonsterStatus.Idle);
+        }
         float dir = Player.Instance.GetMovingDirectionFloat();
         obj.GetComponent<Rigidbody2D>().AddForce(new Vector2(dir * knockBackDistance, 0.0f), ForceMode2D.Impulse);
     }
