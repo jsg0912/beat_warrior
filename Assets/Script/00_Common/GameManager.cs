@@ -43,22 +43,12 @@ public class GameManager : MonoBehaviour
         if (cursorIcon != null) Cursor.SetCursor(cursorIcon, Vector2.zero, CursorMode.Auto);
     }
 
-    public void StartGame()
-    {
-        SceneController.Instance.ChangeScene(SceneName.Tutorial2);
-        InGameManager.TryCreateInGameManager();
-        UIManager.Instance.SetInGameUIActive(true);
-        isInGame = true;
-    }
 
     public void RestartGame()
     {
-        StartGame();
+        TitleManager.Instance.StartGame();
         Player.Instance.RestartPlayer();
     }
 
-    public void TitleSetting()
-    {
-        SettingUI.Instance.TurnOnPopup();
-    }
+    
 }

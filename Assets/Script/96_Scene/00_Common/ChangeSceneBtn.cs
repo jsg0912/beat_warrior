@@ -13,7 +13,7 @@ public class ChangeSceneBtn : Button
                 SceneController.Instance.ChangeScene(SceneName.Setting);
                 break;
             case "TittleBtn":
-                SceneController.Instance.ChangeScene(SceneName.Tittle);
+                SceneController.Instance.ChangeScene(SceneName.Title);
                 break;
             case "ExitBtn":
                 Application.Quit();

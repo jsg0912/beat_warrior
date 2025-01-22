@@ -43,9 +43,9 @@ public class SceneController : MonoBehaviour
                 SceneManager.LoadScene("ProtoType");
                 CurrentScene = (int)(SceneName.ProtoType);
                 break;
-            case SceneName.Tittle:
+            case SceneName.Title:
                 SceneManager.LoadScene("Tittle");
-                CurrentScene = (int)SceneName.Tittle;
+                CurrentScene = (int)SceneName.Title;
                 break;
             case SceneName.Setting:
                 SceneManager.LoadScene("Setting");
