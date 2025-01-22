@@ -8,16 +8,6 @@ public class StageController
     public void SetMonsterCount(int monsterCount)
     {
         this.monsterCount = monsterCount;
-        Debug.Log($"Found {this.monsterCount} monsters in the stage");
-
-        if (monsterCount > 0)
-        {
-            Debug.Log($"{monsterCount} monsters remaining");
-        }
-        if (monsterCount == 0)
-        {
-            Debug.Log("Stage Cleared!");
-        }
     }
 
     public void KillMonster() { monsterCount--; }
