@@ -22,8 +22,6 @@ public class StageController : MonoBehaviour
         {
             Cleared = true;
             Debug.Log("Stage Cleared!");
-            ChapterManager.Instance.CompleteStage();
         }
     }
-
 }

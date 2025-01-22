@@ -148,6 +148,7 @@ public class Monster : DirectionalGameObject
         PlayAnimation(MonsterStatus.Dead);
 
         InGameManager.Instance.CreateSoul(transform.position);
+        ChapterManager.Instance.AlarmMonsterKilled(monsterName);
 
         Destroy(gameObject, 2.0f);
     }
