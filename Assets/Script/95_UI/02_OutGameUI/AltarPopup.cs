@@ -190,7 +190,7 @@ public class AltarPopup : PopupSystem
 
     private string GetTraitScript(SkillName skillName)
     {
-        return ScriptPool.TraitUIScript[skillName][UIManager.Instance.language];
+        return ScriptPool.TraitUIScript[skillName][GameManager.Instance.language];
     }
 
     private bool CheckFullEquip()

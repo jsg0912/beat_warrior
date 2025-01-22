@@ -47,7 +47,7 @@ public class DialogTrigger : MonoBehaviour
 
     public void StartDialog()
     {
-        string dialogData = DialogManager.GetDialog(DialogManager.dialogName, UIManager.Instance.language, dialogIndex);
+        string dialogData = DialogManager.GetDialog(DialogManager.dialogName, GameManager.Instance.language, dialogIndex);
 
         if (dialogData == null)
         {

@@ -3,6 +3,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
+    private Language _language = Language.en;
+    public Language language => _language;
     public Texture2D cursorIcon;
 
     public static GameManager Instance
@@ -37,11 +39,15 @@ public class GameManager : MonoBehaviour
         isInGame = false;
     }
 
+    public void SetLanguage(Language language)
+    {
+        _language = language;
+    }
+
     private void SetMouseCursor()
     {
         if (cursorIcon != null) Cursor.SetCursor(cursorIcon, Vector2.zero, CursorMode.Auto);
     }
-
 
     public void StartGame()
     {
