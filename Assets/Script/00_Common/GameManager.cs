@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     public void Awake()
     {
-        ValidationChecker.Check();
+        // ValidationChecker.Check();
         DontDestroyOnLoad(this);
     }
 
