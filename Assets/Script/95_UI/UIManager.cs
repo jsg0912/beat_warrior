@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
     public MenuUI menuUI;
     public GameObject inGameUIPrefab;
 
-    // [Code Review - LJD] Make PopupSystem Queue for "ESC" Process - SDH, 20250114
     private void Awake()
     {
         if (Instance == null)
