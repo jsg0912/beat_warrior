@@ -13,8 +13,6 @@ public class KeyManager : MonoBehaviour
     { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.Mouse1,
         KeyCode.Space, KeyCode.Q, KeyCode.E, KeyCode.F };
 
-    [SerializeField] private GameObject KeyButtons;
-    [SerializeField] private GameObject KeySettingButtonPrefab;
 
     private void Awake()
     {
@@ -24,18 +22,7 @@ public class KeyManager : MonoBehaviour
             if (KeySetting.keys.ContainsKey((PlayerAction)i) == false)
                 KeySetting.keys.Add((PlayerAction)i, defaultKeys[i]);
         }
-
-        CreateKeySettingButtons();
     }
 
-
-    private void CreateKeySettingButtons()
-    {
-        for (int i = 0; i < defaultKeys.Length; i++)
-        {
-            GameObject KeySettingButton = Instantiate(KeySettingButtonPrefab);
-            KeySettingButton.transform.SetParent(KeyButtons.transform, false);
-            KeySettingButton.GetComponent<KeySettingButton>().SetKey(i);
-        }
-    }
+    public KeyCode[] GetKeyCodes() { return defaultKeys; }
 }

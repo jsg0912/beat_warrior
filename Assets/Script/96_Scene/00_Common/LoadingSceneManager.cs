@@ -16,7 +16,7 @@ public class LoadingSceneManager : MonoBehaviour
     public static void LoadScene(string sceneName)
     {
         nextScene = sceneName;
-        SceneManager.LoadScene("Loading");
+        SceneController.Instance.ChangeScene(SceneName.Loading);
     }
 
     IEnumerator LoadScene()

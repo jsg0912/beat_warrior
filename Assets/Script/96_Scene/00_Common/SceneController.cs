@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
 
 public class SceneController : MonoBehaviour
 {
@@ -31,6 +30,11 @@ public class SceneController : MonoBehaviour
         CurrentScene = currentScene.buildIndex;
     }
 
+    public void ChangeSceneWithLoading(SceneName sceneName)
+    {
+
+    }
+
     public void ChangeScene(SceneName sceneName)
     {
         switch (sceneName)
@@ -39,6 +43,9 @@ public class SceneController : MonoBehaviour
                 LoadingSceneManager.LoadScene("Player");
                 //SceneManager.LoadScene("Player");
                 CurrentScene = (int)SceneName.Player;
+                break;
+            case SceneName.Loading:
+                SceneManager.LoadScene("Loading");
                 break;
             case SceneName.ProtoType:
                 LoadingSceneManager.LoadScene("ProtoType");

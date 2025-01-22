@@ -23,12 +23,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public static void CreateUI()
-    {
-        GameObject UI = Instantiate(Resources.Load<GameObject>(PrefabRouter.UIPrefab));
-        DontDestroyOnLoad(UI);
-    }
-
     public void TurnOnAltarPopup()
     {
         altarPopup.TurnOnPopup();

@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         SetMouseCursor();
-        UIManager.CreateUI();
         isInGame = false;
     }
 
@@ -44,11 +43,16 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void RestartGame()
+    public void StartGame()
     {
-        TitleManager.Instance.StartGame();
-        Player.Instance.RestartPlayer();
+        isInGame = true;
+        SceneController.Instance.ChangeScene(SceneName.Tutorial2);
+        InGameManager.TryCreateInGameManager();
     }
 
-    
+    public void RestartGame()
+    {
+        StartGame();
+        Player.Instance.RestartPlayer();
+    }
 }
