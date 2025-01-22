@@ -16,6 +16,7 @@ public class SettingUI : PopupSystem
     {
         base.TurnOnPopup();
         Util.SetActive(setting, true);
+        setting.transform.SetAsLastSibling();
     }
 
     public void OnClickClose()

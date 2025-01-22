@@ -18,6 +18,7 @@ public class MenuUI : PopupSystem
     {
         base.TurnOnPopup();
         Util.SetActive(menu, true);
+        menu.transform.SetAsLastSibling();
     }
 
     public void OnClickClose()
