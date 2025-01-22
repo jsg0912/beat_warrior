@@ -31,7 +31,7 @@ public abstract class PopupSystem : MonoBehaviour
         }
         Util.SetActive(gameObject, true);
         CommandManager.Instance.popupSystemStack.Add(this);
-        Debug.Log($"Popup added: {this.name}, Stack Count: {CommandManager.Instance.popupSystemStack.Count}");
+        // Debug.Log($"Popup added: {this.name}, Stack Count: {CommandManager.Instance.popupSystemStack.Count}");
     }
 
     public virtual void TurnOffPopup()
