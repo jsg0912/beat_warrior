@@ -27,10 +27,10 @@ public class ChapterManager : MonoBehaviour
     public Dictionary<ChapterName, Chapter> chapters = new();
 
     private Chapter currentChapter;
-    private StageController currentStage => currentChapter.stages[currentStageIndex];
+    private StageController CurrentStage => currentChapter.stages[currentStageIndex];
     private int currentStageIndex;
     private bool tutorialCompleted = true; // TODO: 임시로 true임 - 신동환, 20250123
-    private bool isCurrentStageCompleted => currentChapter.stages[currentStageIndex].Cleared;
+    private bool IsCurrentStageCompleted => CurrentStage.Cleared;
 
     private void Awake()
     {
@@ -54,6 +54,13 @@ public class ChapterManager : MonoBehaviour
         {
             if (chapter != ChapterName.End) chapters.Add(chapter, new Chapter(chapter));
         }
+    }
+
+    public int GetMonsterCount() => CurrentStage.monsterCount;
+
+    public void SetMonsterCount(int monsterCount)
+    {
+        CurrentStage.SetMonsterCount(monsterCount);
     }
 
     public void SetTutorialComplete(bool tutorialCompleted)
@@ -92,7 +99,7 @@ public class ChapterManager : MonoBehaviour
 
     public void MoveToNextStage()
     {
-        if (isCurrentStageCompleted)
+        if (IsCurrentStageCompleted)
         {
             if (++currentStageIndex == currentChapter.stages.Length)
             {
@@ -109,10 +116,15 @@ public class ChapterManager : MonoBehaviour
     public void AlarmMonsterKilled(MonsterName monsterName)
     {
         // TODO: monsterName으로 통계 쌓기 - SDH, 20250123
-        currentStage.KillMonster();
+
+        // TODO: currentStage의 MonsterCount Initialize 방법을 찾은 후에 아래 코드 활성화 필요.
+        //currentStage.KillMonster();
     }
 
-    private void LoadStageScene() { SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapter.name][currentStageIndex]); }
+    private void LoadStageScene()
+    {
+        SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapter.name][currentStageIndex]);
+    }
 
     private void MoveToNextChapter()
     {

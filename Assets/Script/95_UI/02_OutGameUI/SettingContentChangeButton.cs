@@ -19,6 +19,6 @@ public class SettingContentChangeButton : MonoBehaviour
 
     private void SetSettingButtonText()
     {
-        buttonText.text = ScriptPool.SettingsContentTitles[settingContentIndex][GameManager.Instance.language];
+        buttonText.text = ScriptPool.SettingsContentTitles[settingContentIndex][GameManager.Instance.Language];
     }
 }

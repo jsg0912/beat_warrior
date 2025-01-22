@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    private Language _language = Language.en;
-    public Language language => _language;
+    private Language language = Language.en;
+    public Language Language => language;
     public Texture2D cursorIcon;
-    public bool isLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();
+    public bool IsLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();
     public SceneName currentScene;
 
     public static GameManager Instance
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     public void SetLanguage(Language language)
     {
-        _language = language;
+        this.language = language;
     }
 
     private void SetMouseCursor()
