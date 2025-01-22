@@ -158,7 +158,7 @@ public class Player : DirectionalGameObject
     public bool ChangeCurrentHP(int hp)
     {
         bool isAlive = playerUnit.ChangeCurrentHP(hp);
-        PlayerHpUI.Instance.UpdateHPUI();
+        PlayerHpUI.Instance?.UpdateHPUI();
         return isAlive;
     }
 
@@ -284,7 +284,7 @@ public class Player : DirectionalGameObject
         {
             if (Portal.Instance.IsTriggerPortal == true)
             {
-                SceneController.Instance.ChangeScene((SceneName)(SceneController.Instance.CurrentScene + 1));
+                ChapterManager.Instance.MoveToNextStage();
             }
         }
     }

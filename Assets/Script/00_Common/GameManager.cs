@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,6 +8,8 @@ public class GameManager : MonoBehaviour
     private Language _language = Language.en;
     public Language language => _language;
     public Texture2D cursorIcon;
+    public bool isLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();
+    public SceneName currentScene;
 
     public static GameManager Instance
     {
@@ -37,6 +41,7 @@ public class GameManager : MonoBehaviour
     {
         SetMouseCursor();
         isInGame = false;
+        Enum.TryParse(SceneManager.GetActiveScene().name, true, out currentScene);
     }
 
     public void SetLanguage(Language language)
@@ -52,8 +57,8 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isInGame = true;
-        SceneController.Instance.ChangeScene(SceneName.Tutorial2);
         InGameManager.TryCreateInGameManager();
+        ChapterManager.Instance.StartNewGame();
     }
 
     public void RestartGame()

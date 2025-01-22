@@ -649,6 +649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorIcon: {fileID: 2800000, guid: b8ff371d31f19c348ae351b898f5cb38, type: 3}
+  currentScene: 0
   isInGame: 0
 --- !u!4 &554831688
 Transform:
@@ -1486,7 +1487,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57038f4c42140c24ab6643d388ab1d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentScene: 0
 --- !u!1 &734600300
 GameObject:
   m_ObjectHideFlags: 0
@@ -8097,7 +8097,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2035784663098362505, guid: 2c339035d7386124b936021c39101669, type: 3}
       propertyPath: m_Name
-      value: PlayBtn
+      value: PlayButton
       objectReference: {fileID: 0}
     - target: {fileID: 5399804278181557449, guid: 2c339035d7386124b936021c39101669, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
