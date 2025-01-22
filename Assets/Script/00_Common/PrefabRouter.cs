@@ -12,7 +12,7 @@ public class PrefabRouter
     public const string MarkerPrefab = "Prefab/02_Object/Marker";
     public const string UIPrefab = "Prefab/03_UI/UI";
     public const string ObjectPooler = "Prefab/02_Object/ObjectPooler";
-    public const string MapMonsterIcon = "Prefab/03_UI/MapMonsterIcon";
+    public const string MapMonsterIcon = "Prefab/03_UI/02_InGameUI/02_MiniMapUI/MapMonsterIcon";
     public const string IbkkugiThrow = "Prefab/02_Object/IbkkugiThrow";
 
     public static Dictionary<MonsterName, string> AttackPrefab = new() {

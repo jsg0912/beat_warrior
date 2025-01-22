@@ -43,7 +43,7 @@ public class LoadingSceneManager : MonoBehaviour
                 if (progressBar.fillAmount == 1.0f)
                 {
                     op.allowSceneActivation = true;
-                    UIManager.Instance.SetInGameUIActive(true);
+                    UIManager.Instance.SetInGameUIActive(GameManager.Instance.isInGame);
                     yield break;
                 }
             }
