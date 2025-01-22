@@ -7,5 +7,9 @@ public class Chapter
     {
         this.name = name;
         stages = new StageController[StageCount.GetStageCount(name)];
+        for (int i = 0; i < stages.Length; i++)
+        {
+            stages[i] = new StageController();
+        }
     }
 }
