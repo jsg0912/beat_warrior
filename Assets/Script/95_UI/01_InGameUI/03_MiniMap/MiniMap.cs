@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class MiniMap : MonoBehaviour
 {
-    public TMP_Text ReamaingMonster;
+    public TMP_Text RemainMonster;
     public Camera MiniMapCamera;
 
     public GameObject PlayerMapIconPrefab;
@@ -35,7 +35,7 @@ public class MiniMap : MonoBehaviour
         MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.MiniMap);
         MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.Tile);
 
-        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
+        UpdateMonsterInfo();
         icon = new GameObject[monster.Length];
         monsterInMap = new GameObject[monster.Length];
 
@@ -51,8 +51,7 @@ public class MiniMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
-        ReamaingMonster.text = "Monster : " + monster.Length.ToString();
+        UpdateMonsterInfo();
 
         PlayerMapIcon.transform.position = Player.Instance.transform.position + Vector3.up * 0.7f;
 
@@ -86,10 +85,16 @@ public class MiniMap : MonoBehaviour
                 if (i >= icon.Length) break;
                 icon[i].GetComponent<MiniMapIcon>().GetHp(monsterInMap[i].GetComponent<Monster>().GetCurrentHP());
                 icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterInMap[i].transform.position);
-
             }
         }
+    }
 
+    private void UpdateMonsterInfo()
+    {
+        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
+        // MiniMap에서 Monster 실시간 위치를 파악하기 위해 반드시 위치를 찾아야하다보니, 이왕 찾는거 ChapterManager의 SetMonsterCount()를 여기서 호출해 줌.
+        ChapterManager.Instance.SetMonsterCount(monster.Length);
+        RemainMonster.text = "Monster : " + monster.Length.ToString();
     }
 
     private bool CheckObjectInMiniMap(GameObject target)
