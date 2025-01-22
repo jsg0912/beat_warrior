@@ -26,16 +26,17 @@ public abstract class PopupSystem : MonoBehaviour
     {
         if (CommandManager.Instance == null)
         {
-        Debug.LogError("CommandManager.Instance is null!");
-        return;
+            Debug.LogError("CommandManager.Instance is null!");
+            return;
         }
+        Util.SetActive(gameObject, true);
         CommandManager.Instance.popupSystemStack.Add(this);
-         Debug.Log($"Popup added: {this.name}, Stack Count: {CommandManager.Instance.popupSystemStack.Count}");
-        Util.SetActive(this.gameObject, true);
+        Debug.Log($"Popup added: {this.name}, Stack Count: {CommandManager.Instance.popupSystemStack.Count}");
     }
 
     public virtual void TurnOffPopup()
     {
         Util.SetActive(gameObject, false);
+        CommandManager.Instance.PopPopupSystem();
     }
 }

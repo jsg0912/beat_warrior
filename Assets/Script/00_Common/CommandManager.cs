@@ -33,7 +33,6 @@ public class CommandManager : MonoBehaviour
                 else
                 {
                     popupSystemStack[popupSystemStack.Count - 1].TurnOffPopup();
-                    popupSystemStack.RemoveAt(popupSystemStack.Count - 1);
                     if (popupSystemStack.Count == 0)
                     {
                         PauseController.instance.ResumeGame();
@@ -59,5 +58,11 @@ public class CommandManager : MonoBehaviour
                 Player.Instance.CheckPlayerCommand();
             }
         }
+    }
+
+    public void PopPopupSystem()
+    {
+        if (popupSystemStack.Count == 0) return;
+        popupSystemStack.RemoveAt(popupSystemStack.Count - 1);
     }
 }
