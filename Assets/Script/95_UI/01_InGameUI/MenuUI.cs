@@ -5,7 +5,6 @@ public class MenuUI : PopupSystem
 {
     public static MenuUI Instance;
     public GameObject menu;
-    [SerializeField] private GameObject setting;
     public TextMeshProUGUI[] txt;
 
     public override void Awake()
@@ -28,7 +27,7 @@ public class MenuUI : PopupSystem
 
     public void OnClickSetting()
     {
-        SettingUI.Instance.TurnOnPopup();
+        SettingUIManager.Instance.TurnOnSettingUI();
     }
 
     public void OnClickReStart()

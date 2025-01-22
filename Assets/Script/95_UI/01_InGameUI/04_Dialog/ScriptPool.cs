@@ -84,4 +84,20 @@ public static class ScriptPool
                 Language.en, "Stamina absorption: 1 recovery in stamina when you treat 10 animals."
             }}},
     };
+
+    public static Dictionary<SettingContentIndex, Dictionary<Language, string>> SettingsContentTitles = new Dictionary<SettingContentIndex, Dictionary<Language, string>>
+    {
+        {SettingContentIndex.KeySetting, new Dictionary<Language, string>{
+            { Language.kr, "키설정"},
+            { Language.en, "Key Setting"},
+        }},
+        {SettingContentIndex.ScreenSetting, new Dictionary<Language, string>{
+            { Language.kr, "화면"},
+            { Language.en, "Screen"},
+         } },
+        {SettingContentIndex.SoundSetting, new Dictionary<Language, string>{
+            { Language.kr, "사운드"},
+            { Language.en, "Sound"},
+        } },
+    };
 }

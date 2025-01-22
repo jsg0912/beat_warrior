@@ -95,7 +95,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8294608511852472267
 RectTransform:
   m_ObjectHideFlags: 0
@@ -542,7 +542,6 @@ MonoBehaviour:
   menu: {fileID: 1518987396824996991}
   setting: {fileID: 0}
   txt: []
-  altarPopup: {fileID: 3879883905087048207, guid: d2dfe4bf9bbac214eb5cd5de138cce1b, type: 3}
 --- !u!114 &6601386613665928768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -947,7 +946,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6275315559849409502}
         m_TargetAssemblyTypeName: MenuUI, Assembly-CSharp
-        m_MethodName: SetSettingActive
+        m_MethodName: OnClickSetting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1124,8 +1123,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7083635844633068569}
-        m_TargetAssemblyTypeName: ChangeScene, Assembly-CSharp
-        m_MethodName: ChangeSceneBtn
+        m_TargetAssemblyTypeName: ChangeSceneBtn, Assembly-CSharp
+        m_MethodName: ChangeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
