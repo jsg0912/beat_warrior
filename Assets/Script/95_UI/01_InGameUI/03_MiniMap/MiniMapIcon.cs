@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Pool;
 using TMPro;
 
 public class MiniMapIcon : MonoBehaviour

@@ -6,5 +6,6 @@ public static class ValidationChecker
     {
         TraitPriceList.CheckTraitPriceListValidation();
         MonsterList.CheckValidStat();
+        ChapterInfo.CheckValid();
     }
 }

@@ -26,8 +26,8 @@ public class UIManager : MonoBehaviour
         altarPopup.TurnOnPopup();
     }
 
-    public void SetInGameUIActive(bool active)
+    public void SetInGameUIActive()
     {
-        Util.SetActive(inGameUIPrefab, active);
+        Util.SetActive(inGameUIPrefab, GameManager.Instance.isInGame);
     }
 }

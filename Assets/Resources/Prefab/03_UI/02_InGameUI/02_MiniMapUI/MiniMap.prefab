@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 8277902250194135694}
   - component: {fileID: 2825251304038617767}
   m_Layer: 5
-  m_Name: ReamanigMonster
+  m_Name: RemainMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,6 +379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
   speed: 4
+  z: -10
   center: {x: 20, y: 70}
   size: {x: 200, y: 200}
 --- !u!1 &5724445759619011056
@@ -442,7 +443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c7f0cab859b9648a642f28de99a88b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ReamaingMonster: {fileID: 2825251304038617767}
+  RemainMonster: {fileID: 2825251304038617767}
   MiniMapCamera: {fileID: 5648066235180841058}
-  PlayerMapIconFrefab: {fileID: 8712156559033278768, guid: f0a6b8c850d553846a0e4f3e3851a60c, type: 3}
-  MonsterMapIconFrefab: {fileID: 3067871860596314453, guid: 99f3ba5f72e624f49b60a9e7cf5e910a, type: 3}
+  PlayerMapIconPrefab: {fileID: 8712156559033278768, guid: f0a6b8c850d553846a0e4f3e3851a60c, type: 3}
