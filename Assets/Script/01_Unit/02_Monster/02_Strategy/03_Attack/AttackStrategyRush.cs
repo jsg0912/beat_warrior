@@ -44,6 +44,7 @@ public class AttackStrategyRush : AttackStrategy
         monster.SetIsTackleAble(true);
         monster.SetIsKnockBackAble(false);
         monster.SetIsFixedAnimation(true);
+        monster.attackCollider.SetActive(true);
         SetRushDirection();
 
         while (elapsedTime < dashDuration)
@@ -56,6 +57,7 @@ public class AttackStrategyRush : AttackStrategy
         monster.SetIsFixedAnimation(false);
         monster.SetIsTackleAble(false);
         monster.SetIsKnockBackAble(true);
+        monster.attackCollider.SetActive(false);
         attackCoolTime = attackCoolTimeMax;
 
         monster.PlayAnimation(MonsterStatus.AttackEnd);
