@@ -117,6 +117,7 @@ public class Player : DirectionalGameObject
         this.status = status;
 
         _animator.SetBool(PlayerConstant.runAnimBool, status == PlayerStatus.Run);
+        _animator.SetFloat("Speed", status == PlayerStatus.Run ? 1 : 0);
 
         switch (status)
         {
