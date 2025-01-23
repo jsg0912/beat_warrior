@@ -259,8 +259,6 @@ public class Player : DirectionalGameObject
 
     private void Fall()
     {
-        if (isOnBaseTile == true) return;
-
         _animator.SetBool(PlayerConstant.groundedAnimBool, _rigidbody.velocity.y >= -0.05f);
     }
 
@@ -457,12 +455,7 @@ public class Player : DirectionalGameObject
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag(TagConstant.Base))
-        {
-            isOnBaseTile = false;
-            _animator.SetBool(PlayerConstant.groundedAnimBool, false);
-        }
-
+        if (other.CompareTag(TagConstant.Base)) isOnBaseTile = false;
         if (other.CompareTag(TagConstant.Tile)) isOnTile = false;
     }
 
@@ -481,7 +474,6 @@ public class Player : DirectionalGameObject
 
         if (other.CompareTag(TagConstant.Base)) isOnBaseTile = true;
         if (other.CompareTag(TagConstant.Tile)) isOnTile = true;
-        _animator.SetBool(PlayerConstant.groundedAnimBool, true);
 
         if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
 
