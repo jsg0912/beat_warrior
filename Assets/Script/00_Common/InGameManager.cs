@@ -22,9 +22,9 @@ public class InGameManager : MonoBehaviour
         }
         return _instance;
     }
+
     public void Start()
     {
-        Player.TryCreatePlayer();
         SoulPrefab = Resources.Load(PrefabRouter.SoulPrefab) as GameObject;
     }
 

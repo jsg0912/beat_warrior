@@ -4,13 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class MiniMap : MonoBehaviour
 {
-    public TMP_Text ReamaingMonster;
+    public TMP_Text RemainMonster;
     public Camera MiniMapCamera;
 
-    public GameObject PlayerMapIconFrefab;
+    public GameObject PlayerMapIconPrefab;
     GameObject PlayerMapIcon;
-
-    public GameObject MonsterMapIconFrefab;
 
     GameObject[] monster;
     GameObject[] icon;
@@ -37,7 +35,7 @@ public class MiniMap : MonoBehaviour
         MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.MiniMap);
         MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.Tile);
 
-        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
+        UpdateMonsterInfo();
         icon = new GameObject[monster.Length];
         monsterInMap = new GameObject[monster.Length];
 
@@ -47,14 +45,13 @@ public class MiniMap : MonoBehaviour
         // MainCamera[] mainCameras = FindObjectsOfType<MainCamera>();
         // mainCameras[0].GetComponent<Camera>().cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
 
-        PlayerMapIcon = Instantiate(PlayerMapIconFrefab, gameObject.transform);
+        TryCreatePlayerMapIcon();
     }
 
     // Update is called once per frame
     void Update()
     {
-        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
-        ReamaingMonster.text = "Monster : " + monster.Length.ToString();
+        UpdateMonsterInfo();
 
         PlayerMapIcon.transform.position = Player.Instance.transform.position + Vector3.up * 0.7f;
 
@@ -67,7 +64,7 @@ public class MiniMap : MonoBehaviour
             {
                 for (int i = MonsterInMapCount; i < CountMapMonster; i++)
                 {
-                    if (icon[i] == null) continue;
+                    if (i >= icon.Length) continue;
                     icon[i].GetComponent<MiniMapIcon>().GetHp(0);
                 }
             }
@@ -84,14 +81,20 @@ public class MiniMap : MonoBehaviour
         {
             for (int i = 0; i < MonsterInMapCount; i++)
             {
-                if (monsterInMap[i] == null) break;
-                if (icon[i] == null) break;
+                if (i >= monsterInMap.Length) break;
+                if (i >= icon.Length) break;
                 icon[i].GetComponent<MiniMapIcon>().GetHp(monsterInMap[i].GetComponent<Monster>().GetCurrentHP());
                 icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterInMap[i].transform.position);
-
             }
         }
+    }
 
+    private void UpdateMonsterInfo()
+    {
+        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
+        // MiniMap에서 Monster 실시간 위치를 파악하기 위해 반드시 위치를 찾아야하다보니, 이왕 찾는거 ChapterManager의 SetMonsterCount()를 여기서 호출해 줌.
+        ChapterManager.Instance.SetMonsterCount(monster.Length);
+        RemainMonster.text = "Monster : " + monster.Length.ToString();
     }
 
     private bool CheckObjectInMiniMap(GameObject target)
@@ -119,10 +122,15 @@ public class MiniMap : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        PlayerMapIcon = Instantiate(PlayerMapIconFrefab, gameObject.transform);
+        TryCreatePlayerMapIcon();
 
         monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
         icon = new GameObject[monster.Length];
         monsterInMap = new GameObject[monster.Length];
+    }
+
+    private void TryCreatePlayerMapIcon()
+    {
+        if (PlayerMapIcon == null) PlayerMapIcon = Instantiate(PlayerMapIconPrefab, gameObject.transform);
     }
 }

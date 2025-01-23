@@ -1,29 +1,14 @@
 using UnityEngine;
 
-public class StageController : MonoBehaviour
+public class StageController
 {
-    private int monsters;
-    public bool Cleared { get; private set; }
+    public int monsterCount { get; private set; }
+    public bool Cleared => monsterCount == 0;
 
-    public void InitializeStage(int monsterCount)
+    public void SetMonsterCount(int monsterCount)
     {
-        monsters = monsterCount;
-        Cleared = false;
+        this.monsterCount = monsterCount;
     }
 
-    public void KillMonster()
-    {
-        if (monsters > 0)
-        {
-            monsters--;
-            Debug.Log($"{monsters} monsters remaining");
-        }
-        if (monsters == 0)
-        {
-            Cleared = true;
-            Debug.Log("Stage Cleared!");
-            ChapterManager.Instance.CompleteStage();
-        }
-    }
-
+    public void KillMonster() { monsterCount--; }
 }

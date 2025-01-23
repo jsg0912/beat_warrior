@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,11 +24,13 @@ public class ChapterManager : MonoBehaviour
         }
     }
 
-    public Dictionary<ChapterName, Chapter> chapters;
+    public Dictionary<ChapterName, Chapter> chapters = new();
 
     private Chapter currentChapter;
-    private int currentStage;
-    private bool tutorialCompleted;
+    private StageController CurrentStage => currentChapter.stages[currentStageIndex];
+    private int currentStageIndex;
+    private bool tutorialCompleted = true; // TODO: 임시로 true임 - 신동환, 20250123
+    private bool IsCurrentStageCompleted => CurrentStage.Cleared;
 
     private void Awake()
     {
@@ -41,24 +44,34 @@ public class ChapterManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        InitializeChapters();
+        InitializeChaptersForNewGame();
     }
 
-    private void InitializeChapters()
+    private void InitializeChaptersForNewGame()
     {
-        // 챕터 초기화 (예시로 하드코딩)
-        chapters = new Dictionary<ChapterName, Chapter>
+        chapters.Clear();
+        foreach (ChapterName chapter in Enum.GetValues(typeof(ChapterName)))
         {
-            { ChapterName.Tutorial, new Chapter(ChapterName.Tutorial, StageCount.TUTORIAL) },
-            { ChapterName.Ch1, new Chapter(ChapterName.Ch1, StageCount.CH1) },
-            { ChapterName.Ch2, new Chapter(ChapterName.Ch1, StageCount.CH2) },
-            { ChapterName.Ch3, new Chapter(ChapterName.Ch1, StageCount.CH3) },
-            { ChapterName.Ch4, new Chapter(ChapterName.Ch1, StageCount.CH4) }
-        };
+            if (chapter != ChapterName.End) chapters.Add(chapter, new Chapter(chapter));
+        }
+    }
+
+    public int GetMonsterCount() => CurrentStage.monsterCount;
+
+    public void SetMonsterCount(int monsterCount)
+    {
+        CurrentStage.SetMonsterCount(monsterCount);
+    }
+
+    public void SetTutorialComplete(bool tutorialCompleted)
+    {
+        this.tutorialCompleted = tutorialCompleted;
+        if (this.tutorialCompleted) Debug.Log("Tutorial completed!");
     }
 
     public void StartNewGame()
     {
+        InitializeChaptersForNewGame();
         if (!tutorialCompleted)
         {
             StartChapter(ChapterName.Tutorial);
@@ -67,6 +80,7 @@ public class ChapterManager : MonoBehaviour
         {
             StartChapter(ChapterName.Ch1);
         }
+        Player.TryCreatePlayer();
     }
 
     public void StartChapter(ChapterName chapterName)
@@ -74,8 +88,8 @@ public class ChapterManager : MonoBehaviour
         if (chapters.ContainsKey(chapterName))
         {
             currentChapter = chapters[chapterName];
-            currentStage = 1;
-            Debug.Log($"Started {chapterName}");
+            currentStageIndex = 0;
+            LoadStageScene();
         }
         else
         {
@@ -83,25 +97,33 @@ public class ChapterManager : MonoBehaviour
         }
     }
 
-    public void CompleteStage()
+    public void MoveToNextStage()
     {
-        if (currentChapter != null)
+        if (IsCurrentStageCompleted)
         {
-            if (currentStage < currentChapter.stages.Length)
-            {
-                currentStage++;
-                Debug.Log($"Proceeding to Stage {currentStage} in {currentChapter.name}");
-            }
-            else
+            if (++currentStageIndex == currentChapter.stages.Length)
             {
                 Debug.Log($"{currentChapter.name} completed!");
                 MoveToNextChapter();
             }
+            else
+            {
+                LoadStageScene();
+            }
         }
-        else
-        {
-            Debug.LogError("No chapter is currently active");
-        }
+    }
+
+    public void AlarmMonsterKilled(MonsterName monsterName)
+    {
+        // TODO: monsterName으로 통계 쌓기 - SDH, 20250123
+
+        // TODO: currentStage의 MonsterCount Initialize 방법을 찾은 후에 아래 코드 활성화 필요.
+        //currentStage.KillMonster();
+    }
+
+    private void LoadStageScene()
+    {
+        SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapter.name][currentStageIndex]);
     }
 
     private void MoveToNextChapter()
@@ -114,6 +136,7 @@ public class ChapterManager : MonoBehaviour
         else
         {
             Debug.Log("All chapters completed!");
+            // TODO: End시 뭐함? - SDH, 20250123
         }
     }
 
@@ -126,11 +149,4 @@ public class ChapterManager : MonoBehaviour
         }
         return ChapterName.End;
     }
-
-    public void CompleteTutorial()
-    {
-        tutorialCompleted = true;
-        Debug.Log("Tutorial completed!");
-    }
 }
-
