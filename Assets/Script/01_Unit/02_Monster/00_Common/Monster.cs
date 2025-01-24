@@ -16,6 +16,8 @@ public class Monster : DirectionalGameObject
     [SerializeField] private GameObject Target;
     [SerializeField] private int AnotherHPValue = 0;
 
+    [SerializeField] public GameObject attackCollider;
+
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -186,7 +188,6 @@ public class Monster : DirectionalGameObject
         Debug.Log(GetIsTackleAble());
         if (GetIsTackleAble())
         {
-            Debug.Log("Tackle");
             GameObject obj = collision.gameObject;
             if (obj.CompareTag(TagConstant.Player))
             {

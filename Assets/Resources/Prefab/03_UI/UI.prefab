@@ -5172,7 +5172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9df7d599cddc54b825afbc00080476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  language: 0
   altarPopup: {fileID: 2677894671377590777}
   menuUI: {fileID: 7714310037807935593}
   inGameUIPrefab: {fileID: 3500340461339598338}
@@ -6925,6 +6924,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1251130421295728658, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1518987396824996991, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -7473,7 +7476,9 @@ PrefabInstance:
       propertyPath: KeySettingButtonPrefab
       value: 
       objectReference: {fileID: 358752537456444213, guid: de5f201e7ced0ee469b2741df3595578, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5442295547573655144, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
+    - {fileID: 7083635844633068569, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
