@@ -64,7 +64,7 @@ public class MiniMap : MonoBehaviour
             {
                 for (int i = MonsterInMapCount; i < CountMapMonster; i++)
                 {
-                    if (i >= icon.Length) continue;
+                    if (i >= icon.Length) break;
                     icon[i].GetComponent<MiniMapIcon>().GetHp(0);
                 }
             }
@@ -122,6 +122,11 @@ public class MiniMap : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        for (int i = 0; i < CountMapMonster; i++)
+        {
+            if (i >= icon.Length) break;
+            icon[i].GetComponent<MiniMapIcon>().GetHp(0);
+        }
         TryCreatePlayerMapIcon();
 
         monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
