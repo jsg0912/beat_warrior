@@ -286,6 +286,7 @@ public class Player : DirectionalGameObject
                 ChapterManager.Instance.MoveToNextStage();
             }
         }
+        // TODO: ObjectWithInteractionPrompt과 상호작용 관련 로직 추가해야 함 - 신동환, 20250124
     }
 
     public void Dashing(Vector2 end, bool changeDir, bool isInvincibility, bool passWall = true)
@@ -313,7 +314,7 @@ public class Player : DirectionalGameObject
                 Vector3 direction = Vector3.right * movingDir;
 
                 RaycastHit2D rayHit = Physics2D.Raycast(start, direction, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
-                if (rayHit.collider != null && rayHit.collider.CompareTag("Base")) break;
+                if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base)) break;
             }
 
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
@@ -441,6 +442,7 @@ public class Player : DirectionalGameObject
         }
 
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
+
 
         _animator.SetTrigger("hurt");
         PlayerAddForce(new Vector2(5.0f, 1.0f), -1);
