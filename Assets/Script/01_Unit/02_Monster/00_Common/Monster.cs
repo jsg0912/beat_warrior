@@ -185,7 +185,6 @@ public class Monster : DirectionalGameObject
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(GetIsTackleAble());
         if (GetIsTackleAble())
         {
             GameObject obj = collision.gameObject;

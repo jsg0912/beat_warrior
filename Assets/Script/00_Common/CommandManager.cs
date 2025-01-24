@@ -28,13 +28,10 @@ public class CommandManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                Debug.Log($"Escape Key Pressed: {popupSystemStack.Count}");
                 if (popupSystemStack.Count > 0)
                 {
                     popupSystemStack[popupSystemStack.Count - 1].TurnOffPopup();
-                    if (isInGame && popupSystemStack.Count == 0)
-                    {
-                        PauseController.instance.ResumeGame();
-                    }
                 }
                 if (isInGame)
                 {
@@ -71,7 +68,13 @@ public class CommandManager : MonoBehaviour
 
     public void PopPopupSystem()
     {
-        if (popupSystemStack.Count == 0) return;
-        popupSystemStack.RemoveAt(popupSystemStack.Count - 1);
+        if (popupSystemStack.Count > 0)
+        {
+            popupSystemStack.RemoveAt(popupSystemStack.Count - 1);
+            if (GameManager.Instance.isInGame && popupSystemStack.Count == 0)
+            {
+                PauseController.instance.ResumeGame();
+            }
+        }
     }
 }

@@ -8,9 +8,15 @@ public static class Util
         return (T)Enum.Parse(typeof(T), value);
     }
 
-    public static void SetActive(GameObject gameObject, bool isOn)
+    public static bool SetActive(GameObject gameObject, bool isOn)
     {
-        if (gameObject != null && gameObject.activeSelf != isOn) gameObject.SetActive(isOn);
+        if (gameObject != null && gameObject.activeSelf != isOn)
+        {
+            gameObject.SetActive(isOn);
+            DebugConsole.Log($"{gameObject.name} is set to {isOn}");
+            return true;
+        }
+        return false;
     }
 
     public static Vector2 GetSizeBoxCollider2D(BoxCollider2D boxCollider2D)
