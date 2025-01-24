@@ -15,23 +15,30 @@ public class MenuUI : PopupSystem
 
     public override void TurnOnPopup()
     {
-        base.TurnOnPopup();
-        Util.SetActive(menu, true);
-        menu.transform.SetAsLastSibling();
+        DebugConsole.Log("turn off menuUI: " + menu.name);
+        bool success = Util.SetActive(menu, true);
+        if (success) CommandManager.Instance?.popupSystemStack.Add(this);
     }
 
-    public void OnClickClose()
+    public override void TurnOffPopup()
+    {
+        DebugConsole.Log("turn off menuUI: " + menu.name);
+        bool success = Util.SetActive(menu, false);
+        if (success) CommandManager.Instance.PopPopupSystem();
+    }
+
+    public void OnClickContinue()
     {
         TurnOffPopup();
     }
 
-    public void OnClickSetting()
+    public void OnClickOption()
     {
         SettingUIManager.Instance.TurnOnSettingUI();
     }
 
-    public void OnClickReStart()
+    public void OnClickQuit()
     {
-        GameManager.Instance.RestartGame();
+        SceneController.Instance.LoadTitle();
     }
 }
