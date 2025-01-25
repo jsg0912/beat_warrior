@@ -94,7 +94,7 @@ public class MiniMap : MonoBehaviour
         monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
         // MiniMap에서 Monster 실시간 위치를 파악하기 위해 반드시 위치를 찾아야하다보니, 이왕 찾는거 ChapterManager의 SetMonsterCount()를 여기서 호출해 줌.
         ChapterManager.Instance.SetMonsterCount(monster.Length);
-        RemainMonster.text = "Monster : " + monster.Length.ToString();
+        RemainMonster.text = " Monster : " + monster.Length.ToString();
     }
 
     private bool CheckObjectInMiniMap(GameObject target)
