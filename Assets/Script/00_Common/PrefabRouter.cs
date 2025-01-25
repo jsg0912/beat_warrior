@@ -14,7 +14,7 @@ public class PrefabRouter
     public const string GhostPrefab = PlayerPrefabRoute + "Ghost";
 
     public const string SoulPrefab = ObjectPrefabRoute + "Soul";
-    public const string MarkerPrefab = "Prefab/06_Effect/Flash2";
+    public const string MarkerPrefab = "Prefab/02_Object/Marker";
     public const string ObjectPooler = ObjectPrefabRoute + "ObjectPooler";
 
     public const string UIPrefab = "Prefab/03_UI/UI";
