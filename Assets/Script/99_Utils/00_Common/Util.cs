@@ -12,8 +12,8 @@ public static class Util
     {
         if (gameObject != null && gameObject.activeSelf != isOn)
         {
+            DebugConsole.Log($"SetActive {gameObject.name}: {isOn}");
             gameObject.SetActive(isOn);
-            DebugConsole.Log($"{gameObject.name} is set to {isOn}");
             return true;
         }
         return false;

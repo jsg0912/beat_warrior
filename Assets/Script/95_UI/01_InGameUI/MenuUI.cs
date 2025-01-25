@@ -15,15 +15,15 @@ public class MenuUI : PopupSystem
 
     public override void TurnOnPopup()
     {
-        DebugConsole.Log("turn off menuUI: " + menu.name);
         bool success = Util.SetActive(menu, true);
+        DebugConsole.Log($"turn on {menu.name}: {success}");
         if (success) CommandManager.Instance?.popupSystemStack.Add(this);
     }
 
     public override void TurnOffPopup()
     {
-        DebugConsole.Log("turn off menuUI: " + menu.name);
         bool success = Util.SetActive(menu, false);
+        DebugConsole.Log($"turn off {menu.name}: {success}");
         if (success) CommandManager.Instance.PopPopupSystem();
     }
 
