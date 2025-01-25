@@ -17,6 +17,7 @@ public class PlayerConstant
     public const string groundedAnimBool = "isGrounded";
     public const string dieAnimTrigger = "die";
     public const string restartAnimTrigger = "restart";
+    public const string reviveAnimTrigger = "revive";
 
     public const int MaxAdditionalSkillCount = 2;
 }

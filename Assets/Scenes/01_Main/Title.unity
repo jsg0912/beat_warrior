@@ -629,6 +629,7 @@ GameObject:
   - component: {fileID: 554831687}
   - component: {fileID: 554831689}
   - component: {fileID: 554831690}
+  - component: {fileID: 554831691}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -689,6 +690,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de88ea3a469e0654283c0bb1b84ad545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &554831691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554831686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57038f4c42140c24ab6643d388ab1d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &620035297
@@ -857,7 +870,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 695329075}
+    - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnExitClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TitleManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5399804278181557449, guid: 2c339035d7386124b936021c39101669, type: 3}
@@ -1396,7 +1425,7 @@ GameObject:
   - component: {fileID: 695329071}
   - component: {fileID: 695329075}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1501,7 +1530,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 695329070}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57038f4c42140c24ab6643d388ab1d63, type: 3}
+  m_Script: {fileID: 11500000, guid: da38f798f73440c49a92ec8bd19e79ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &734600300
@@ -7908,10 +7937,14 @@ PrefabInstance:
     - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 554831687}
+      objectReference: {fileID: 695329075}
     - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: TitleSetting
+      value: OnSettingClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TitleManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5399804278181557449, guid: 2c339035d7386124b936021c39101669, type: 3}
@@ -8310,7 +8343,15 @@ PrefabInstance:
     - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 554831687}
+      objectReference: {fileID: 695329075}
+    - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPlayClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TitleManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5399804278181557449, guid: 2c339035d7386124b936021c39101669, type: 3}
     m_RemovedGameObjects: []
