@@ -29,7 +29,7 @@ public class AttackCollider : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject obj = collision.gameObject;
+        GameObject obj = Util.GetMonsterGameObject(collision);
 
         if (CheckAttackAbleCollision(obj))
         {
@@ -42,7 +42,8 @@ public class AttackCollider : MonoBehaviour
     private bool CheckAttackAbleCollision(GameObject gameObject)
     {
         // Alive Monster Check
-        if (!gameObject.CompareTag(TagConstant.Monster)) return false;
+        if (gameObject == null) return false;
+        if (gameObject.CompareTag(TagConstant.Monster) == false) return false;
         if (gameObject.GetComponent<Monster>().GetIsAlive() == false) return false;
 
         // Check duplication
