@@ -19,7 +19,7 @@ public class PrefabRouter
 
     public const string UIPrefab = "Prefab/03_UI/UI";
     public const string MapMonsterIcon = MiniMapUIPrefabRoute + "MapMonsterIcon";
-    public const string MiniMapIconIppali = MiniMapUIPrefabRoute + "MapMonsterIcon";
+    public const string MiniMapIconIppali = MiniMapUIPrefabRoute + "MiniMapMonsterIconIppali";
     public const string MiniMapIconIbkkugi = MiniMapUIPrefabRoute + "MiniMapMonsterIconIbkkugi";
     public const string MiniMapIconKoppulso = MiniMapUIPrefabRoute + "MiniMapMonsterIconKoppulso";
     public const string IbkkugiThrow = "Prefab/02_Object/IbkkugiThrow";
