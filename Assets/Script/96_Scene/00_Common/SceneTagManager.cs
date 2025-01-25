@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class SceneTagManager
 {
-    public static List<PoolTag> PoolTagDefault { get; } = new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow };
+    public static List<PoolTag> PoolTagDefault { get; } = new List<PoolTag> { PoolTag.EnemyMiniMapIcon, PoolTag.IbkkugiThrow, PoolTag.MiniMapIconIppali, PoolTag.MiniMapIconIbkkugi, PoolTag.MiniMapIconKoppulso };
     private static SceneTagManager _instance;
     public static SceneTagManager Instance => _instance ??= new SceneTagManager();
 
