@@ -16,10 +16,10 @@ public class MoveStrategyChase : MoveStrategy
 
     public override bool PlayStrategy()
     {
+        CheckGround();
         if (base.PlayStrategy() == false) return false;
 
         // [Code Review - KMJ] 위 base.PlayStrategy()가 false를 반환하면 아래 코드를 실행하지 않아야 하는지 확인 필요 - SDH, 20250116s
-        CheckGround();
         ChaseTarget();
         return true;
     }
@@ -52,7 +52,6 @@ public class MoveStrategyChase : MoveStrategy
     {
         if (isEndOfGround == true || Mathf.Abs(TargetPos().x - GetMonsterPos().x) < STOPOFFSET)
         {
-            monster.SetWalkingAnimation(false);
             return false;
         }
 

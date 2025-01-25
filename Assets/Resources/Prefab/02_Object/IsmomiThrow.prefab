@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1450942546324498585}
   - component: {fileID: 4430601789815917071}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5027562995204616723}
   - component: {fileID: 9046093803089679919}
   - component: {fileID: 3270036155811436391}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: IsmomiThrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3270036155811436391}
+  col: {fileID: 0}
   Warning: {fileID: 6107398668151699291}
   Thorn: {fileID: 6759985743127205421}
 --- !u!50 &3270036155811436391
@@ -170,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6392277599042010892}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Warning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +206,7 @@ GameObject:
   - component: {fileID: 1139577634187536218}
   - component: {fileID: 5795038060296230007}
   - component: {fileID: 8421846768009601822}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Thorn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3695207736826861519}
   - component: {fileID: 1695085919489872873}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
