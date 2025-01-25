@@ -24,7 +24,13 @@ public class MiniMap : MonoBehaviour
         { MonsterName.Itmomi, PoolTag.MiniMapIconIppali },
     };
 
-    private PoolTag GetEnemyIconPoolTag(MonsterName monsterName) { return enemyIcons.ContainsKey(monsterName) ? enemyIcons[monsterName] : PoolTag.MiniMapIconIppali; }
+    private PoolTag GetEnemyIconPoolTag(MonsterName monsterName)
+    {
+        // return PoolTag.EnemyMiniMapIcon;
+        return enemyIcons.ContainsKey(monsterName) ? enemyIcons[monsterName] : PoolTag.MiniMapIconIppali;
+    }
+
+
 
     int CountMapMonster;
 
@@ -63,7 +69,7 @@ public class MiniMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMapIcon.transform.position = Player.Instance.transform.position + Vector3.up * Util.GetLocalSize(PlayerMapIcon.GetComponent<SpriteRenderer>()).y / 4;
+        PlayerMapIcon.transform.position = Player.Instance.transform.position + Vector3.up * 0.7f;
 
         UpdateMonsterInfo();
         CountObjectInMiniMap();
