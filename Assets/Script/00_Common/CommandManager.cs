@@ -67,7 +67,6 @@ public class CommandManager : MonoBehaviour
     {
         if (popupSystemStack.Count > 0)
         {
-            DebugConsole.Log($"pop {popupSystemStack.Count - 1}th popup system {popupSystemStack[popupSystemStack.Count - 1].name}");
             popupSystemStack.RemoveAt(popupSystemStack.Count - 1);
             if (GameManager.Instance.isInGame && popupSystemStack.Count == 0)
             {
