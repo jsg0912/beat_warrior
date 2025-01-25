@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class MiniMap : MonoBehaviour
 {
@@ -13,6 +14,17 @@ public class MiniMap : MonoBehaviour
     GameObject[] monster;
     GameObject[] icon;
     GameObject[] monsterInMap;
+
+    Dictionary<MonsterName, PoolTag> enemyIcons = new() {
+        { MonsterName.Koppulso, PoolTag.MiniMapIconKoppulso },
+        { MonsterName.Ippali, PoolTag.MiniMapIconIppali },
+        { MonsterName.Ibkkugi, PoolTag.MiniMapIconIbkkugi },
+        { MonsterName.Jiljili, PoolTag.MiniMapIconIppali },
+        { MonsterName.Giljjugi, PoolTag.MiniMapIconIppali },
+        { MonsterName.Itmomi, PoolTag.MiniMapIconIppali },
+    };
+
+    private PoolTag GetEnemyIconPoolTag(MonsterName monsterName) { return enemyIcons.ContainsKey(monsterName) ? enemyIcons[monsterName] : PoolTag.MiniMapIconIppali; }
 
     int CountMapMonster;
 
@@ -51,15 +63,21 @@ public class MiniMap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PlayerMapIcon.transform.position = Player.Instance.transform.position + Vector3.up * Util.GetLocalSize(PlayerMapIcon.GetComponent<SpriteRenderer>()).y / 4;
+
         UpdateMonsterInfo();
-
-        PlayerMapIcon.transform.position = Player.Instance.transform.position + Vector3.up * 0.7f;
-
         CountObjectInMiniMap();
+    }
+
+    private void UpdateMonsterInfo()
+    {
+        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
+        // MiniMap에서 Monster 실시간 위치를 파악하기 위해 반드시 위치를 찾아야하다보니, 이왕 찾는거 ChapterManager의 SetMonsterCount()를 여기서 호출해 줌.
+        ChapterManager.Instance.SetMonsterCount(monster.Length);
+        RemainMonster.text = "Monster : " + monster.Length.ToString();
 
         if (CountMapMonster != MonsterInMapCount)
         {
-
             if (CountMapMonster > MonsterInMapCount)
             {
                 for (int i = MonsterInMapCount; i < CountMapMonster; i++)
@@ -72,7 +90,7 @@ public class MiniMap : MonoBehaviour
             {
                 for (int i = CountMapMonster; i < MonsterInMapCount; i++)
                 {
-                    icon[i] = MyPooler.ObjectPooler.Instance.GetFromPool(PoolTag.EnemyMiniMapIcon, monsterInMap[i].transform.position, Quaternion.identity);
+                    icon[i] = MyPooler.ObjectPooler.Instance.GetFromPool(GetEnemyIconPoolTag(monsterInMap[i].GetComponent<Monster>().monsterName), monsterInMap[i].transform.position, Quaternion.identity);
                 }
             }
 
@@ -89,14 +107,6 @@ public class MiniMap : MonoBehaviour
         }
     }
 
-    private void UpdateMonsterInfo()
-    {
-        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
-        // MiniMap에서 Monster 실시간 위치를 파악하기 위해 반드시 위치를 찾아야하다보니, 이왕 찾는거 ChapterManager의 SetMonsterCount()를 여기서 호출해 줌.
-        ChapterManager.Instance.SetMonsterCount(monster.Length);
-        RemainMonster.text = " Monster : " + monster.Length.ToString();
-    }
-
     private bool CheckObjectInMiniMap(GameObject target)
     {
         if (target == null) return false;
@@ -105,6 +115,8 @@ public class MiniMap : MonoBehaviour
 
         return onMiniMap;
     }
+
+
 
     private void CountObjectInMiniMap()
     {
@@ -131,6 +143,10 @@ public class MiniMap : MonoBehaviour
 
     private void TryCreatePlayerMapIcon()
     {
-        if (PlayerMapIcon == null) PlayerMapIcon = Instantiate(PlayerMapIconPrefab, gameObject.transform);
+        if (PlayerMapIcon == null)
+        {
+            PlayerMapIcon = Instantiate(PlayerMapIconPrefab, gameObject.transform);
+        }
+        PlayerMapIcon?.gameObject.transform.SetParent(Player.Instance.gameObject.transform);
     }
 }
