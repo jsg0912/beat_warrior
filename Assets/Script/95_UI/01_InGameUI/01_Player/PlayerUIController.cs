@@ -4,7 +4,11 @@ public class PlayerUIController : MonoBehaviour
 {
     public static PlayerUIController Instance;
     [SerializeField] private PlayerHpUI playerHpUI;
-    [SerializeField] private SkillCoolTimeUI[] skillCoolTimeUIs;
+    [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIMark;
+    [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIDash;
+    [SerializeField] private SkillCoolTimeUI SkillCoolTimeUISpecialBlade;
+    [SerializeField] private SkillCoolTimeUI SkillCoolTimeUISweepingBlade;
+    [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIHollyBlade;
     [SerializeField] private AttackCountUI attackCountUI;
 
     void Awake()

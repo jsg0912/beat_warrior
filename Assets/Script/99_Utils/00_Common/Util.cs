@@ -144,4 +144,9 @@ public static class Util
         Debug.LogError("SpriteRenderer or Sprite is null!");
         return Vector2.zero;
     }
+
+    public static GameObject GetMonsterGameObject(Collider2D collision)
+    {
+        return collision.gameObject.transform.parent?.gameObject;
+    }
 }
