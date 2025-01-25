@@ -52,14 +52,12 @@ public class MiniMap : MonoBehaviour
     void Update()
     {
         UpdateMonsterInfo();
-
-        PlayerMapIcon.transform.position = Player.Instance.transform.position + Vector3.up * 0.7f;
+        PlayerMapIcon.transform.position = Player.Instance.transform.position + Vector3.up * Util.GetLocalSize(PlayerMapIcon.GetComponent<SpriteRenderer>()).y / 4;
 
         CountObjectInMiniMap();
 
         if (CountMapMonster != MonsterInMapCount)
         {
-
             if (CountMapMonster > MonsterInMapCount)
             {
                 for (int i = MonsterInMapCount; i < CountMapMonster; i++)
@@ -105,6 +103,8 @@ public class MiniMap : MonoBehaviour
 
         return onMiniMap;
     }
+
+
 
     private void CountObjectInMiniMap()
     {
