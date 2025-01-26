@@ -149,4 +149,9 @@ public static class Util
     {
         return collision.gameObject.transform.parent?.gameObject;
     }
+
+    public static int Round(int p, int q)
+    {
+        return (p + q - 1) / q;
+    }
 }

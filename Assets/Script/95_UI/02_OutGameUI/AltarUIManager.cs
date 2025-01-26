@@ -1,8 +1,71 @@
+using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class AltarUIManager : MonoBehaviour
 {
+    public static AltarUIManager Instance;
+
     public AltarPopup altarPopup;
     public AltarDetailPopup altarDetailPopup;
+    public TMP_Text PlayerSoulView;
+    public AudioClip EquipClip;
 
+    public SkillName[] salesSkillList;
+    int spiritCount => Inventory.Instance.GetSoulNumber();
+
+    public void Awake()
+    {
+        Instance = this;
+    }
+
+    void Start()
+    {
+        salesSkillList = TraitPriceList.Info.Keys.ToArray();
+    }
+
+    public void TurnOnAltarUI()
+    {
+        altarPopup.TurnOnPopup();
+    }
+
+    public bool CheckInSales(SkillName skillName)
+    {
+        return salesSkillList.Contains(skillName);
+    }
+
+    public void PlayEquipSound()
+    {
+        SoundManager.instance.SFXPlay("Equip", EquipClip);
+    }
+
+    public void UpdatePlayerSoulView() => PlayerSoulView.text = "Soul : " + spiritCount.ToString();
+
+    public void ShowSkillDetail(SkillName skillName)
+    {
+        altarDetailPopup.TurnOnPopup();
+        altarDetailPopup.ShowSkillDetail(skillName);
+    }
+
+    public void OnClickTraitSelect(SkillName traitName)
+    {
+        switch (Inventory.Instance.GetTraitStatus(traitName))
+        {
+            case TraitSetButtonStatus.Buyable:
+                Inventory.Instance.ChangeSoulNumber(-TraitPriceList.Info[traitName]);
+                Inventory.Instance.AddSkill(traitName);
+                break;
+            case TraitSetButtonStatus.EquipAble:
+                if (Player.Instance.CheckFullEquipTrait() == false)
+                {
+                    Player.Instance.EquipTrait(traitName);
+                    break;
+                }
+                break;
+            case TraitSetButtonStatus.Equipped:
+                Player.Instance.RemoveTrait(traitName);
+                break;
+        }
+        altarPopup.Refresh();
+    }
 }

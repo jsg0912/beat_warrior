@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class MiniMap : MonoBehaviour
 {
+    public static MiniMap Instance;
     public TMP_Text RemainMonster;
     public Camera MiniMapCamera;
 
@@ -30,8 +31,6 @@ public class MiniMap : MonoBehaviour
         return enemyIcons.ContainsKey(monsterName) ? enemyIcons[monsterName] : PoolTag.MiniMapIconIppali;
     }
 
-
-
     int CountMapMonster;
 
     int MonsterInMapCount;
@@ -45,6 +44,10 @@ public class MiniMap : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded; // 이벤트 해제
     }
 
+    void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()

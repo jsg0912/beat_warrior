@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
-    private Language language = Language.en;
+    private Language language = Language.kr;
     public Language Language => language;
     public Texture2D cursorIcon;
     public bool IsLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();

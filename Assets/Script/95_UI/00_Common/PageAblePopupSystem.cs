@@ -4,12 +4,19 @@ using UnityEngine.UI;
 
 public abstract class PageAblePopupSystem : PopupSystem
 {
-    [SerializeField] protected TMP_Text pageText;
+    [SerializeField] protected TMP_Text pageIndexView;
     [SerializeField] protected Button prevButton;
     [SerializeField] protected Button nextButton;
+    [SerializeField] protected TMP_Dropdown sortOptions; // TODO: 기능구현해야함 - 신동환, 2025.01.27
 
     protected int maxPage;
     protected int currentPage = 1;
+    protected int pageIndex => currentPage - 1;
+
+    protected virtual void Start()
+    {
+        ShowCurrentPageText();
+    }
 
     public void OnPrevButtonClicked()
     {
@@ -18,7 +25,7 @@ public abstract class PageAblePopupSystem : PopupSystem
             currentPage = 1;
         }
 
-        if (SetCurrentPage(currentPage)) ChangePage(currentPage - 1);
+        if (SetCurrentPage(currentPage)) UpdatePage();
     }
 
     public void OnNextButtonClicked()
@@ -28,17 +35,15 @@ public abstract class PageAblePopupSystem : PopupSystem
             currentPage = maxPage;
         }
 
-        if (SetCurrentPage(currentPage)) ChangePage(currentPage - 1);
+        if (SetCurrentPage(currentPage)) UpdatePage();
     }
-
-    protected abstract void ChangePage(int index);
 
     public void SetMaxPage(int maxPage)
     {
         this.maxPage = maxPage;
     }
 
-    private bool SetCurrentPage(int currentPage)
+    protected bool SetCurrentPage(int currentPage)
     {
         bool success = this.currentPage != currentPage;
         if (success)
@@ -49,8 +54,10 @@ public abstract class PageAblePopupSystem : PopupSystem
         return success;
     }
 
-    private void ShowCurrentPageText()
+    protected void ShowCurrentPageText()
     {
-        pageText.text = currentPage + " / " + maxPage;
+        pageIndexView.text = currentPage + " / " + maxPage;
     }
+
+    protected abstract void UpdatePage();
 }

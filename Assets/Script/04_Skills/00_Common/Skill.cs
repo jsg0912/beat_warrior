@@ -8,7 +8,7 @@ public abstract class Skill
 
     public SkillName skillName;
     public string description;
-    public SkillTier tier;
+    public SkillTier tier => TraitTierList.GetTier(skillName);
 
     // CoolTime
     protected float coolTimeMax;
@@ -28,8 +28,6 @@ public abstract class Skill
     }
 
     public virtual void GetSkill() { return; }
-
-    public SkillTier GetTier() { return tier; }
 
     public virtual void RemoveSkill() { return; }
 
