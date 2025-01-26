@@ -26,6 +26,11 @@ public class AttackCollider : MonoBehaviour
         additionalEffects.Add(additionalEffect);
     }
 
+    public void ResetTargetMonster()
+    {
+        TargetMonster.Clear();
+    }
+
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject obj = Util.GetMonsterGameObject(collision);

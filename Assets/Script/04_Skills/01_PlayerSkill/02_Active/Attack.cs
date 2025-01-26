@@ -35,7 +35,6 @@ public class Attack : ActiveSkillPlayer
 
         coolTime = 0;
         isCharging = false;
-        Util.SetActive(attackCollider.gameObject, false);
 
         Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, 1);
 
