@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7eee35f2c0e845545a0fe7f785bd4aba
+guid: dd8c4085e1470c64591246209097a8a2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Attack_0
+      name: Die2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 240
-        height: 160
+        width: 1500
+        height: 1200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 872ade5520fdceb419686c9782dacd5d
-      internalID: -578394545
+      spriteID: 8c7569d0386cb034baedcf24e2464693
+      internalID: -1842349414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_1
+      name: Die2_1
       rect:
         serializedVersion: 2
-        x: 240
+        x: 1500
         y: 0
-        width: 240
-        height: 160
+        width: 1500
+        height: 1200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2515009d3e51fe5458321c8c65d56c55
-      internalID: -668544986
+      spriteID: 2c657b50be4239941a9fd690d3ea265d
+      internalID: -219010927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_2
+      name: Die2_2
       rect:
         serializedVersion: 2
-        x: 480
+        x: 3000
         y: 0
-        width: 240
-        height: 160
+        width: 1500
+        height: 1200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b598ef1ef304b6f4383553f3c4da517d
-      internalID: 1201898251
+      spriteID: ce5e3ccee7468ca46aa27e0aeaabbfce
+      internalID: 1598214306
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_3
+      name: Die2_3
       rect:
         serializedVersion: 2
-        x: 720
+        x: 4500
         y: 0
-        width: 240
-        height: 160
+        width: 1500
+        height: 1200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08b5f503119ffbe46a5493bfcc3685c5
-      internalID: 465883251
+      spriteID: ab476c9905df39345b0899cf07a13b1e
+      internalID: -202602957
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_4
+      name: Die2_4
       rect:
         serializedVersion: 2
-        x: 960
+        x: 6000
         y: 0
-        width: 240
-        height: 160
+        width: 1500
+        height: 1200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f180088e8a7caf04b8f949d73eb5b1a3
-      internalID: 547387655
+      spriteID: bf7574d951b412f4baf3509892b94775
+      internalID: 986242140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack_5
+      name: Die2_5
       rect:
         serializedVersion: 2
-        x: 1200
+        x: 7500
         y: 0
-        width: 240
-        height: 160
+        width: 1500
+        height: 1200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,92 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61401c5f3fdc17142bfc8fcdbadbd004
-      internalID: -894085676
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_6
-      rect:
-        serializedVersion: 2
-        x: 1440
-        y: 0
-        width: 240
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4f3fbe92379e180489fe0f0e0d64fa9e
-      internalID: -1168534073
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_7
-      rect:
-        serializedVersion: 2
-        x: 1680
-        y: 0
-        width: 240
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 09d870d325dc2864cbdaa653238d9815
-      internalID: -769536420
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_8
-      rect:
-        serializedVersion: 2
-        x: 1920
-        y: 0
-        width: 240
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 593a64b32b374cc45af9abd544e7b7eb
-      internalID: 492488638
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack_9
-      rect:
-        serializedVersion: 2
-        x: 2160
-        y: 0
-        width: 240
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f02b0e2ca4405fe44b9b69a049b9fec1
-      internalID: 959599705
+      spriteID: bf040724682b0be4f85fc2e0f500a61f
+      internalID: -1412018115
       vertices: []
       indices: 
       edges: []
@@ -330,16 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Attack_0: -578394545
-      Attack_1: -668544986
-      Attack_2: 1201898251
-      Attack_3: 465883251
-      Attack_4: 547387655
-      Attack_5: -894085676
-      Attack_6: -1168534073
-      Attack_7: -769536420
-      Attack_8: 492488638
-      Attack_9: 959599705
+      Die2_0: -1842349414
+      Die2_1: -219010927
+      Die2_2: 1598214306
+      Die2_3: -202602957
+      Die2_4: 986242140
+      Die2_5: -1412018115
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

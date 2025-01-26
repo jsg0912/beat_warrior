@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class MonsterAttackColliderIsmomi : MonsterAttackCollider
 {
@@ -16,18 +17,14 @@ public class MonsterAttackColliderIsmomi : MonsterAttackCollider
         yield return new WaitForSeconds(1.0f);
         Util.SetActive(Warning, false);
         Util.SetActive(Thorn, true);
-        yield return new WaitForSeconds(0.5f);
+        Thorn.transform.DOMove(Thorn.transform.position + new Vector3(0, 0.5f, 0), 0.3f);
+        yield return new WaitForSeconds(1.0f);
         Destroy(gameObject);
     }
-
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
         GameObject obj = other.gameObject;
-        if (obj.CompareTag(TagConstant.Player))
-        {
-            Player.Instance.GetDamaged(damage);
-            Destroy(gameObject);
-        }
+        if (obj.CompareTag(TagConstant.Player)) Player.Instance.GetDamaged(damage);
     }
 }
