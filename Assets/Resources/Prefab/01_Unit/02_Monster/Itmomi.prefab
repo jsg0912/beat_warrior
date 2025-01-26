@@ -78,6 +78,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   AnotherHPValue: 0
   attackCollider: {fileID: 0}
+  monsterBodyCollider: {fileID: 0}
 --- !u!50 &7572720725117535486
 Rigidbody2D:
   serializedVersion: 4
@@ -115,6 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2693979295720383395}
   - component: {fileID: 3353338847850064151}
+  - component: {fileID: 4135205508027935915}
   - component: {fileID: 4929787839666111627}
   m_Layer: 7
   m_Name: Monster_Sprite
@@ -190,6 +192,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4135205508027935915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162318648507243343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581d4b387bf463f4d8b93c26b3983efa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!61 &4929787839666111627
 BoxCollider2D:
   m_ObjectHideFlags: 0

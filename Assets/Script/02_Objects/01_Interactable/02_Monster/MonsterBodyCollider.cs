@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MonsterBodyCollider
+public class MonsterBodyCollider : MonoBehaviour
 {
     private BoxCollider2D boxCollider;
     private PolygonCollider2D polygonCollider;
