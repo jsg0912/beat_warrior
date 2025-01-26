@@ -10,7 +10,6 @@ public class AttackCollider : MonoBehaviour
     void Start()
     {
         TargetMonster = new List<GameObject>();
-        Destroy(gameObject, 0.1f);
     }
 
     public void SetAtk(int atk)
@@ -25,6 +24,11 @@ public class AttackCollider : MonoBehaviour
             additionalEffects = new List<AdditionalEffect>();
         }
         additionalEffects.Add(additionalEffect);
+    }
+
+    public void ResetTargetMonster()
+    {
+        TargetMonster.Clear();
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)
