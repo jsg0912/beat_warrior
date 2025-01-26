@@ -12,7 +12,7 @@ public class Dash : ActiveSkillPlayer
     private float ghostDelayTimeMax;
     private GameObject GhostPrefab;
 
-    public Dash(GameObject unit) : base(unit)
+    public Dash(GameObject unit) : base(unit, SkillTier.Normal)
     {
         skillName = SkillName.Dash;
         status = PlayerStatus.Dash;

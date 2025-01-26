@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class DoubleJump : PassiveSkillBuffPlayer
 {
-    public DoubleJump(GameObject unit) : base(unit)
+    public DoubleJump(GameObject unit) : base(unit, SkillTier.Rare)
     {
         skillName = SkillName.DoubleJump;
 

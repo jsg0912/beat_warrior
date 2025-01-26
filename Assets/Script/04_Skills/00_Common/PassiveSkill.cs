@@ -2,5 +2,5 @@ using UnityEngine;
 
 public abstract class PassiveSkill : Skill
 {
-    protected PassiveSkill(GameObject unit) : base(unit) { }
+    protected PassiveSkill(GameObject unit, SkillTier skillTier) : base(unit, skillTier) { }
 }

@@ -6,7 +6,7 @@ public class Attack : ActiveSkillPlayer
     private bool isCharging;
     private KnockBack knockBack;
 
-    public Attack(GameObject unit) : base(unit)
+    public Attack(GameObject unit) : base(unit, SkillTier.Normal)
     {
         skillName = SkillName.Attack;
         status = PlayerStatus.Attack;

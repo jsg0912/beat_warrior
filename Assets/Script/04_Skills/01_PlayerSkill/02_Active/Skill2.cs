@@ -4,7 +4,7 @@ public class Skill2 : ActiveSkillPlayer
 {
     private float dashRange;
 
-    public Skill2(GameObject unit) : base(unit)
+    public Skill2(GameObject unit) : base(unit, SkillTier.Normal)
     {
         skillName = SkillName.Skill2;
         status = PlayerStatus.Skill2;

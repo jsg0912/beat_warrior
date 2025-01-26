@@ -5,7 +5,7 @@ public class PassiveSkillBuffPlayer : PassiveSkill
     protected StatKind statKind;
     protected int statBuff;
 
-    public PassiveSkillBuffPlayer(GameObject unit) : base(unit) { }
+    public PassiveSkillBuffPlayer(GameObject unit, SkillTier skillTier) : base(unit, skillTier) { }
 
     public override void GetSkill()
     {

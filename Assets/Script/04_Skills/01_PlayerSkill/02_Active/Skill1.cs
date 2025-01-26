@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Skill1 : ActiveSkillPlayer
 {
-    public Skill1(GameObject unit) : base(unit)
+    public Skill1(GameObject unit) : base(unit, SkillTier.Normal)
     {
         skillName = SkillName.Skill1;
         status = PlayerStatus.Skill1;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SkillReset : PassiveSkill
 {
-    public SkillReset(GameObject unit) : base(unit)
+    public SkillReset(GameObject unit) : base(unit, SkillTier.Legendary)
     {
         skillName = SkillName.SkillReset;
     }

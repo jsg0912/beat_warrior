@@ -4,7 +4,7 @@ public class Mark : ActiveSkillPlayer
 {
     private GameObject MarkerPrefab;
 
-    public Mark(GameObject unit) : base(unit)
+    public Mark(GameObject unit) : base(unit, SkillTier.Normal)
     {
         skillName = SkillName.Mark;
         status = PlayerStatus.Mark;

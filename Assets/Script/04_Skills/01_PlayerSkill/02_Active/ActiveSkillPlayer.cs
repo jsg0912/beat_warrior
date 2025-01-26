@@ -6,7 +6,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
     protected PlayerStatus status;
     protected AttackCollider attackCollider; // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
 
-    protected ActiveSkillPlayer(GameObject unit) : base(unit) { }
+    protected ActiveSkillPlayer(GameObject unit, SkillTier skillTier) : base(unit, skillTier) { }
 
     protected override void UseSkill()
     {

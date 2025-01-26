@@ -8,6 +8,7 @@ public abstract class Skill
 
     public SkillName skillName;
     public string description;
+    public SkillTier tier;
 
     // CoolTime
     protected float coolTimeMax;
@@ -19,7 +20,7 @@ public abstract class Skill
 
     protected GameObject EffectPrefab;
 
-    public Skill(GameObject unit, string description = "")
+    public Skill(GameObject unit, SkillTier skillTier, string description = "")
     {
         this.unit = unit;
         this.description = description;
