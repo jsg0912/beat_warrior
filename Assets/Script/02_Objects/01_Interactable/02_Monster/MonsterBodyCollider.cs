@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class MonsterBodyCollider : MonoBehaviour
 {
+    [SerializeField] private Collider2D colliderObj;
     private BoxCollider2D boxCollider;
     private PolygonCollider2D polygonCollider;
 
     public void Start()
     {
-        boxCollider = GetComponentInChildren<BoxCollider2D>();
-        polygonCollider = GetComponentInChildren<PolygonCollider2D>();
+        boxCollider = colliderObj.GetComponent<BoxCollider2D>();
+        polygonCollider = colliderObj.GetComponent<PolygonCollider2D>();
     }
 
     public Vector2 GetSize()
