@@ -6,7 +6,7 @@ public class InGameManager : MonoBehaviour
     public static InGameManager Instance => TryCreateInGameManager();
 
     private GameObject SoulPrefab;
-    private Vector3 SoulPositionOffset = new Vector3(0, 0.5f, 0);
+    private Vector3 SoulPositionOffset = new Vector3(0, 0, 0);
 
     public static InGameManager TryCreateInGameManager()
     {
@@ -26,6 +26,7 @@ public class InGameManager : MonoBehaviour
     public void Start()
     {
         SoulPrefab = Resources.Load(PrefabRouter.SoulPrefab) as GameObject;
+        PauseController.instance.SetGameSpeed(1f);
     }
 
     public void CreateSoul(Vector3 position)
