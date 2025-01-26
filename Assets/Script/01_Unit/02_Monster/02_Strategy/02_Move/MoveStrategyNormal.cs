@@ -20,15 +20,9 @@ public class MoveStrategyNormal : MoveStrategyRandom
         return true;
     }
 
-    protected override Vector3 GetRayStartPoint()
-    {
-        Vector3 bottomPos = GetMonsterBottomPos();
-        return bottomPos + new Vector3(GetMonsterSize().x * GetMovingDirectionFloat() / 2, 0, 0);
-    }
-
     protected void CheckGround()
     {
-        RaycastHit2D rayHit = Physics2D.Raycast(GetRayStartPoint(), Vector3.down, 0.1f, GroundLayer);
+        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterFrontPos(), Vector3.down, 0.1f, GroundLayer);
         //Debug.DrawLine(GetRayStartPoint(), GetMonsterPos() + offset + Vector3.down * 0.1f, Color.red);
 
         if (rayHit.collider == null) FlipDirection();

@@ -97,7 +97,7 @@ public class AttackStrategyRush : AttackStrategy
 
     protected Vector3 GetRayStartPoint()
     {
-        return GetMonsterBottomPos() + new Vector3((int)RushDirection * GetMonsterSize().x / 2, 0, 0);
+        return GetMonsterPos() + new Vector3((int)RushDirection * GetMonsterSize().x / 2, 0, 0);
     }
 
     protected void CheckGround()

@@ -78,7 +78,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   AnotherHPValue: 0
   attackCollider: {fileID: 0}
-  monsterBodyCollider: {fileID: 0}
+  monsterBodyCollider: {fileID: 4135205508027935915}
 --- !u!50 &7572720725117535486
 Rigidbody2D:
   serializedVersion: 4
@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581d4b387bf463f4d8b93c26b3983efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colliderObj: {fileID: 4929787839666111627}
 --- !u!61 &4929787839666111627
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -5,6 +5,6 @@ public class AttackStrategyThrowIsmomi : AttackStrategyCreate
     protected override void SkillMethod()
     {
         base.SkillMethod();
-        obj.transform.position = new Vector3(GetPlayerPos().x, GetMonsterBottomPos().y, 0);
+        obj.transform.position = new Vector3(GetPlayerPos().x, GetMonsterPos().y, 0);
     }
 }

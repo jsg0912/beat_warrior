@@ -6,6 +6,7 @@ public class MoveStrategy : Strategy
 
     protected LayerMask GroundLayer;
     protected bool isEndOfGround;
+    private const float GROUNDCHECKRAY = 0.1f;
 
     public override void Initialize(Monster monster)
     {
@@ -33,7 +34,13 @@ public class MoveStrategy : Strategy
         monster.SetWalkingAnimation(true);
         return true;
     }
+    protected void CheckGround()
+    {
+        RaycastHit2D rayHit = Physics2D.Raycast(GetRayStartPoint(), Vector3.down, GROUNDCHECKRAY, GroundLayer);
 
+        if (rayHit.collider == null) isEndOfGround = true;
+        else isEndOfGround = false;
+    }
     protected virtual void CheckWall()
     {
         float movingDirection = GetMovingDirectionFloat();
