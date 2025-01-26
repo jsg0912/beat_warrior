@@ -20,6 +20,14 @@ public class PlayerSkillConstant
         { SkillName.Skill2, 0.1f }
     };
 
+    public static Dictionary<SkillName, float> SkillDuration = new() {
+        { SkillName.Attack, 0.1f },
+        { SkillName.Mark, 1f },
+        { SkillName.Dash, 0.1f },
+        { SkillName.Skill1, 0.1f },
+        { SkillName.Skill2, 0.1f }
+    };
+
     public const float recoveryHPTimeMax = 10.0f;
     public const float ghostDelayTimeMax = 0.01f;
 

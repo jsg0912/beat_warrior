@@ -10,7 +10,6 @@ public class AttackCollider : MonoBehaviour
     void Start()
     {
         TargetMonster = new List<GameObject>();
-        Destroy(gameObject, 0.1f);
     }
 
     public void SetAtk(int atk)

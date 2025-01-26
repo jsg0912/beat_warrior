@@ -30,9 +30,9 @@ public abstract class ActiveSkillPlayer : ActiveSkill
     }
 
     // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
-    protected override void CreateEffectPrefab()
+    protected override bool CreateEffectPrefab()
     {
-        bool madeNew = false;
+        bool isMade = false;
         if (attackCollider == null)
         {
             GameObject attackPrefab = GameObject.Instantiate(EffectPrefab);
@@ -42,6 +42,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
             attackPrefab.transform.localScale = new Vector3(Scale.x * Player.Instance.GetMovingDirectionFloat(), Scale.y, Scale.z);
 
             attackCollider = attackPrefab.GetComponentInChildren<AttackCollider>();
+            isMade = true;
         }
         else
         {
@@ -49,6 +50,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
         }
 
         attackCollider.SetAtk(damageMultiplier);
+        return isMade;
     }
 
     protected abstract void UpdateKey();
