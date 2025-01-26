@@ -5,10 +5,10 @@ public class MonsterBodyCollider : MonoBehaviour
     private BoxCollider2D boxCollider;
     private PolygonCollider2D polygonCollider;
 
-    public MonsterBodyCollider(Monster monster)
+    public void Start()
     {
-        boxCollider = monster.GetComponentInChildren<BoxCollider2D>();
-        polygonCollider = monster.GetComponentInChildren<PolygonCollider2D>();
+        boxCollider = GetComponentInChildren<BoxCollider2D>();
+        polygonCollider = GetComponentInChildren<PolygonCollider2D>();
     }
 
     public Vector2 GetSize()
