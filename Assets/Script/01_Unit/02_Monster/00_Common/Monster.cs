@@ -17,6 +17,7 @@ public class Monster : DirectionalGameObject
     [SerializeField] private int AnotherHPValue = 0;
 
     [SerializeField] public GameObject attackCollider;
+    [SerializeField] private MonsterBodyCollider monsterBodyCollider;
 
     void Start()
     {
@@ -125,6 +126,10 @@ public class Monster : DirectionalGameObject
             return;
         }
     }
+
+    public Vector2 GetSize() { return monsterBodyCollider.GetSize(); }
+    public Vector3 GetMiddlePos() { return monsterBodyCollider.GetMiddlePos(); }
+    public Vector3 GetBottomPos() { return monsterBodyCollider.GetBottomPos(); }
 
     public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
     public void SetStatus(MonsterStatus status)
