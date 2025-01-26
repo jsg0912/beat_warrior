@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class RecoveryHP : ActiveSkillPlayer
 {
-    public RecoveryHP(GameObject unit) : base(unit, SkillTier.Rare)
+    public RecoveryHP(GameObject unit) : base(unit)
     {
         skillName = SkillName.KillRecoveryHP;
         coolTime = PlayerSkillConstant.recoveryHPTimeMax;

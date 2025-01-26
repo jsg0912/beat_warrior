@@ -4,7 +4,7 @@ public class Execution : PassiveSkill
 {
     private int executionHP;
 
-    public Execution(GameObject unit) : base(unit, SkillTier.Legendary)
+    public Execution(GameObject unit) : base(unit)
     {
         skillName = SkillName.Execution;
         executionHP = 1;

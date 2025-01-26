@@ -7,7 +7,7 @@ public class KillRecoveryHP : PassiveSkill
     private int killMonsterCount;
     private int killMonsterCountMax;
 
-    public KillRecoveryHP(GameObject unit) : base(unit, SkillTier.Epic)
+    public KillRecoveryHP(GameObject unit) : base(unit)
     {
         skillName = SkillName.KillRecoveryHP;
 

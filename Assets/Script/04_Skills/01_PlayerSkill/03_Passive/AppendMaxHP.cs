@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AppendMaxHP : PassiveSkillBuffPlayer
 {
-    public AppendMaxHP(GameObject unit) : base(unit, SkillTier.Rare)
+    public AppendMaxHP(GameObject unit) : base(unit)
     {
         skillName = SkillName.AppendMaxHP;
 

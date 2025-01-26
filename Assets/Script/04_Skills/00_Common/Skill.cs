@@ -20,7 +20,7 @@ public abstract class Skill
 
     protected GameObject EffectPrefab;
 
-    public Skill(GameObject unit, SkillTier skillTier, string description = "")
+    public Skill(GameObject unit, string description = "")
     {
         this.unit = unit;
         this.description = description;
@@ -28,6 +28,8 @@ public abstract class Skill
     }
 
     public virtual void GetSkill() { return; }
+
+    public SkillTier GetTier() { return tier; }
 
     public virtual void RemoveSkill() { return; }
 

@@ -1,6 +1,6 @@
 public enum SkillTier
 {
-    Normal,
+    Common,
     Rare,
     Epic,
     Legendary,
