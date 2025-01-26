@@ -22,18 +22,18 @@ public class Marker : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject obj = collision.gameObject;
+        GameObject obj = Util.GetMonsterGameObject(collision);
 
-        if (obj.CompareTag(TagConstant.Monster) && obj.GetComponent<Monster>().GetIsAlive())
+        if (obj != null && obj.CompareTag(TagConstant.Monster) && obj.GetComponent<Monster>().GetIsAlive())
         {
             Player.Instance.SetTarget(obj);
             obj.GetComponent<Monster>().SetTarget();
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
     public void DestroyMarker()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }

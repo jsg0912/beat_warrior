@@ -60,5 +60,5 @@ public abstract class Skill
         coolTime = 0;
     }
 
-    protected virtual void CreateEffectPrefab() { return; } // [Code Review - KMJ] Check the Necessity and "virtual" - SDH, 20240106
+    protected virtual bool CreateEffectPrefab() { return false; }
 }

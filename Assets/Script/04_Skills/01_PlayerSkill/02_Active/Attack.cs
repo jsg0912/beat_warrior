@@ -58,10 +58,12 @@ public class Attack : ActiveSkillPlayer
             unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 
-    protected override void CreateEffectPrefab()
+    protected override bool CreateEffectPrefab()
     {
-        base.CreateEffectPrefab();
-        attackCollider.SetAdditionalEffect(knockBack);
+        bool isMade = base.CreateEffectPrefab();
+        if (isMade) attackCollider.SetAdditionalEffect(knockBack);
+
+        return isMade;
     }
 
     protected override void UpdateKey()

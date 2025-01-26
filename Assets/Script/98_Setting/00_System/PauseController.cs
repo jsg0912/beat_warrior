@@ -25,6 +25,11 @@ public class PauseController : MonoBehaviour
         }
     }
 
+    public void SetGameSpeed(float speed)
+    {
+        Time.timeScale = speed;
+    }
+
     public void ResumeGame()
     {
         if (isPauseActive)
