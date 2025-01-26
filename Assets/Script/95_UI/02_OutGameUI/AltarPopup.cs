@@ -5,7 +5,7 @@ using TMPro;
 using System.Linq;
 
 // TODO: AltarManager로 바꿔서 Hierarchy에서도 AltarUI로 수정 - 정성균, 20241126
-public class AltarPopup : PopupSystem
+public class AltarPopup : PageAblePopupSystem
 {
     SkillName[] salesSkillList;
     public bool isOn;
@@ -21,7 +21,7 @@ public class AltarPopup : PopupSystem
     TraitSetButtonStatus InfoButton;
 
     public GameObject Button;
-    public TMP_Text PriceView;
+    public TMP_Text PlayerSoulView;
 
     public GameObject Information;
     //public Image InfoImage;
@@ -59,10 +59,15 @@ public class AltarPopup : PopupSystem
 
     }
 
+    protected override void ChangePage(int index)
+    {
+
+    }
+
     // Update is called once per frame
     public void UpdateUI()
     {
-        PriceView.text = "Soul : " + spiritCount.ToString();
+        PlayerSoulView.text = "Soul : " + spiritCount.ToString();
         InfoName.text = SelectTrait.ToString();
         if (CheckSelectInSales()) InfoDescription.text = GetTraitScript(SelectTrait);
 
