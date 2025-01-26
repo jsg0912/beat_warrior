@@ -17,16 +17,16 @@ public class TraitUI : MonoBehaviour
 
     private SkillName traitName;
 
-    public void SetSkillName(SkillName skillName)
+    public void SetSkillName(SkillName traitName)
     {
-        if (skillName == SkillName.End)
+        if (traitName == SkillName.End)
         {
             ShowLock();
             return;
         }
 
-        this.traitName = skillName;
-        traitStatus = Inventory.Instance.GetTraitStatus(skillName);
+        this.traitName = traitName;
+        traitStatus = Inventory.Instance.GetTraitStatus(traitName);
         switch (traitStatus)
         {
             case TraitSetButtonStatus.Locked:
@@ -38,21 +38,22 @@ public class TraitUI : MonoBehaviour
                 ShowUnlock();
                 break;
         }
-
-        SetTierText(TraitTierList.GetTier(skillName));
+        SetTraitImage();
+        SetTierText(TraitTierList.GetTier(traitName));
     }
 
     public void ShowEmpty()
     {
+        traitName = SkillName.End;
         traitStatus = TraitSetButtonStatus.None;
-        traitImage.sprite = null;
+        SetTraitImage();
         TierText.text = "";
     }
 
     // TODO: Trait Icon 나오면 작업해야함 - 신동환, 20250126
-    private void SetTraitImage(Sprite sprite)
+    private void SetTraitImage()
     {
-        traitImage.sprite = sprite;
+        traitImage.sprite = Resources.Load<Sprite>(PrefabRouter.TraitIconImages[traitName]);
     }
 
     private void SetTierText(SkillTier tier)

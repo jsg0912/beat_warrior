@@ -46,6 +46,7 @@ public class AltarDetailPopup : PopupSystem
     public void UpdateEquippedTraitUIs()
     {
         SkillName[] equippedTraits = Player.Instance.GetTraits();
+        DebugConsole.Log($"UpdateEquippedTraitUIs: {equippedTraits.Length}");
         int i = 0;
         for (; i < equippedTraits.Length; i++)
         {
