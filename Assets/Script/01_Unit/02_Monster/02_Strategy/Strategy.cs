@@ -13,8 +13,8 @@ public abstract class Strategy
     {
         this.monster = monster;
         TargetLayer = LayerMask.GetMask(LayerConstant.Player);
-        colliderBox = monster.gameObject.GetComponent<BoxCollider2D>();
-        colliderPoly = monster.gameObject.GetComponent<PolygonCollider2D>();
+        colliderBox = monster.gameObject.GetComponentInChildren<BoxCollider2D>();
+        colliderPoly = monster.gameObject.GetComponentInChildren<PolygonCollider2D>();
     }
 
     public virtual bool PlayStrategy() { return false; } // it returns whether the strategy plays or not.

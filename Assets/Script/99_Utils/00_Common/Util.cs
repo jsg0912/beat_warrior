@@ -13,7 +13,6 @@ public static class Util
         if (gameObject != null && gameObject.activeSelf != isOn)
         {
             gameObject.SetActive(isOn);
-            DebugConsole.Log($"{gameObject.name} is set to {isOn}");
             return true;
         }
         return false;
@@ -129,5 +128,25 @@ public static class Util
         }
 
         return null; // 컴포넌트를 찾지 못한 경우
+    }
+
+    public static Vector2 GetLocalSize(SpriteRenderer spriteRenderer)
+    {
+        if (spriteRenderer != null && spriteRenderer.sprite != null)
+        {
+            Vector2 pixelSize = spriteRenderer.sprite.rect.size; // 픽셀 크기
+            float pixelsPerUnit = spriteRenderer.sprite.pixelsPerUnit; // PPU 값
+
+            DebugConsole.Log($"size is {(pixelSize / pixelsPerUnit).y}");
+            return pixelSize / pixelsPerUnit; // 로컬 크기 반환
+        }
+
+        Debug.LogError("SpriteRenderer or Sprite is null!");
+        return Vector2.zero;
+    }
+
+    public static GameObject GetMonsterGameObject(Collider2D collision)
+    {
+        return collision.gameObject.transform.parent?.gameObject;
     }
 }

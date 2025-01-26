@@ -6,16 +6,6 @@ namespace MyPooler
 {
     public class ObjectPooler : MonoBehaviour
     {
-        [System.Serializable]
-        public class Pool
-        {
-            public PoolTag tag;
-            public GameObject prefab;
-            public int amount;
-            public bool shouldExpandPool = true;
-            public int extensionLimit;
-        }
-
         private static ObjectPooler _instance;
         public static ObjectPooler Instance
         {
@@ -35,32 +25,8 @@ namespace MyPooler
             }
         }
 
-        void Awake()
-        {
-            _instance = this;
-            if (!shouldDestroyOnLoad)
-                DontDestroyOnLoad(this);
-            pools.Add(new Pool
-            {
-                tag = PoolTag.EnemyMiniMapIcon,
-                prefab = Resources.Load<GameObject>(PrefabRouter.MapMonsterIcon),
-                amount = 5,
-                shouldExpandPool = true,
-            });
-            pools.Add(new Pool
-            {
-                tag = PoolTag.IbkkugiThrow,
-                prefab = Resources.Load<GameObject>(PrefabRouter.IbkkugiThrow),
-                amount = 10,
-                shouldExpandPool = true,
-            });
-            CreatePools();
-        }
-
         public bool isDebug = false;
         public bool shouldDestroyOnLoad = false;
-        private int extensionSize;
-        public List<Pool> pools;
         public Dictionary<string, Transform> parents;
         public Dictionary<string, Queue<GameObject>> poolDictionary;
         public Dictionary<string, List<GameObject>> activeObjects;
@@ -73,6 +39,15 @@ namespace MyPooler
         /// <param name="position"></param>
         /// <param name="rotation"></param>
         /// <returns></returns>
+
+        void Awake()
+        {
+            _instance = this;
+            if (!shouldDestroyOnLoad)
+                DontDestroyOnLoad(this);
+            CreatePools();
+        }
+
         public GameObject GetFromPool(PoolTag poolTag, Vector3 position, Quaternion rotation)
         {
             // 태그 제한 확인
@@ -99,10 +74,10 @@ namespace MyPooler
             }
             else
             {
-                Pool currentPool = pools.Find(pool => pool.tag == poolTag);
+                ObjectPoolContent currentPool = ObjectPoolContents.infos[poolTag];
                 if (currentPool != null && currentPool.shouldExpandPool)
                 {
-                    o = IncrementPool(currentPool);
+                    o = IncrementPool(poolTag, currentPool);
                     if (isDebug)
                         Debug.Log($"Pool '{tag}' incremented.");
                 }
@@ -170,30 +145,31 @@ namespace MyPooler
             parents = new Dictionary<string, Transform>();
             activeObjects = new Dictionary<string, List<GameObject>>();
 
-            foreach (Pool pool in pools)
+            foreach (PoolTag poolTag in ObjectPoolContents.infos.Keys)
             {
-                GameObject poolObject = new GameObject(pool.tag.ToString() + "_Pool");
+                ObjectPoolContent objectPoolContent = ObjectPoolContents.infos[poolTag];
+                GameObject poolObject = new GameObject(poolTag.ToString() + "_Pool");
                 poolObject.transform.SetParent(this.transform);
-                parents.Add(pool.tag.ToString(), poolObject.transform);
-                activeObjects.Add(pool.tag.ToString(), new List<GameObject>());
+                parents.Add(poolTag.ToString(), poolObject.transform);
+                activeObjects.Add(poolTag.ToString(), new List<GameObject>());
                 Queue<GameObject> objectPool = new Queue<GameObject>();
-                for (int i = 0; i < pool.amount; i++)
+                for (int i = 0; i < objectPoolContent.amount; i++)
                 {
-                    GameObject o = Instantiate(pool.prefab);
+                    GameObject o = Instantiate(objectPoolContent.prefab);
                     o.SetActive(false);
                     objectPool.Enqueue(o);
                     o.transform.SetParent(poolObject.transform);
                 }
-                poolDictionary.Add(pool.tag.ToString(), objectPool);
+                poolDictionary.Add(poolTag.ToString(), objectPool);
             }
         }
 
-        GameObject IncrementPool(Pool p)
+        GameObject IncrementPool(PoolTag pooTag, ObjectPoolContent p)
         {
             GameObject objectToIncrement = p.prefab;
             GameObject obj = Instantiate(objectToIncrement);
-            obj.transform.SetParent(parents[p.tag.ToString()]);
-            activeObjects[p.tag.ToString()].Add(obj);
+            obj.transform.SetParent(parents[pooTag.ToString()]);
+            activeObjects[pooTag.ToString()].Add(obj);
             return obj;
         }
     }
