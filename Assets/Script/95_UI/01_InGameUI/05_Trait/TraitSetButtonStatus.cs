@@ -1,6 +1,8 @@
 public enum TraitSetButtonStatus
 {
-    UnEquip,
-    Equip,
-    Buy
+    Buyable,
+    EquipAble,
+    Equipped,
+    Locked,
+    None,
 }

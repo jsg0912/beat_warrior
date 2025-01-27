@@ -24,10 +24,22 @@ public class PrefabRouter
     public const string MiniMapIconKoppulso = MiniMapUIPrefabRoute + "MiniMapMonsterIconKoppulso";
     public const string IbkkugiThrow = "Prefab/02_Object/IbkkugiThrow";
 
+    public const string EmptyImage = "Image/UI/empty";
+
     public static Dictionary<MonsterName, string> AttackPrefab = new() {
         { MonsterName.Ibkkugi, "Prefab/02_Object/IbkkugiThrow" },
         { MonsterName.Jiljili, "Prefab/02_Object/JiljiliThrow" },
         { MonsterName.Itmomi, "Prefab/02_Object/IsmomiThrow" },
         { MonsterName.Koppulso, "Prefab/02_Object/KoppulsoDashCollider" },
+    };
+
+    public static Dictionary<SkillName, string> TraitIconImages = new() {
+        { SkillName.End, EmptyImage },
+        { SkillName.AppendMaxHP, MonsterImageRoute + "Ippali/attack_0" },
+        { SkillName.SkillReset, MonsterImageRoute + "Ippali/attack_2" },
+        { SkillName.DoubleJump, MonsterImageRoute + "Ippali/attack_1" },
+        { SkillName.Execution, MonsterImageRoute + "Ippali/attack_3" },
+        { SkillName.AppendAttack, MonsterImageRoute + "Ippali/attack_4" },
+        { SkillName.KillRecoveryHP, MonsterImageRoute + "Ippali/attack_5" },
     };
 }

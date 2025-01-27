@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
     private float masterVolume;
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -27,7 +27,7 @@ public class SoundManager : MonoBehaviour
     public void BackGroundVolume(float val)
     {
         backgroundVolume = val;
-        if(val == 0f)
+        if (val == 0f)
         {
             mixer.SetFloat("BackGroundSound", -80);
             return;
@@ -37,7 +37,7 @@ public class SoundManager : MonoBehaviour
     public void SFXVolume(float val)
     {
         sfxVolume = val;
-        if(val == 0f)
+        if (val == 0f)
         {
             mixer.SetFloat("SFX", -80f);
             return;
@@ -47,7 +47,7 @@ public class SoundManager : MonoBehaviour
     public void MasterVolume(float val)
     {
         masterVolume = val;
-        if(val == 0f)
+        if (val == 0f)
         {
             mixer.SetFloat("SFX", -80f);
             mixer.SetFloat("BackGroundSound", -80f);
@@ -56,6 +56,7 @@ public class SoundManager : MonoBehaviour
         mixer.SetFloat("SFX", Mathf.Log10(masterVolume * sfxVolume) * 20);
         mixer.SetFloat("BackGroundSound", Mathf.Log10(masterVolume * backgroundVolume) * 20);
     }
+
     public void SFXPlay(string name, AudioClip clip)
     {
         GameObject go = new GameObject(name + "Sound");
@@ -65,8 +66,9 @@ public class SoundManager : MonoBehaviour
         audioSource.Play();
 
 
-        Destroy(go,clip.length);
+        Destroy(go, clip.length);
     }
+
     public void BackGroundPlay(AudioClip clip)
     {
         backGroundSound.outputAudioMixerGroup = mixer.FindMatchingGroups("BackGround")[0];

@@ -55,6 +55,34 @@ public class Inventory : MonoBehaviour
         return spirit.Change(number);
     }
 
+    // TODO: 해당 함수 위치가 여기 있는게 맞는지 검토 필요 - 신동환, 20250126
+    public TraitSetButtonStatus GetTraitStatus(SkillName traitName)
+    {
+        if (IsPaidTrait(traitName))
+        {
+            if (Player.Instance.IsEquippedTrait(traitName))
+            {
+                return TraitSetButtonStatus.Equipped;
+            }
+            else
+            {
+                return TraitSetButtonStatus.EquipAble;
+            }
+
+        }
+        else
+        {
+            if (AltarUIManager.Instance.CheckInSales(traitName))
+            {
+                return TraitSetButtonStatus.Buyable;
+            }
+            else
+            {
+                return TraitSetButtonStatus.Locked;
+            }
+        }
+    }
+
     public bool IsPaidTrait(SkillName targetSkill)
     {
         return mySkillList.Exists(mySkill => mySkill == targetSkill);
