@@ -19,6 +19,7 @@ public class AltarDetailPopup : PopupSystem
         }
     }
 
+    // TODO: Update문 안써야 함. Button 어떤 식으로 작동할지 기획 나오면 그떄가서 수정 - SDH, 20250127
     private void Update()
     {
         targetTraitUI.SetSkillName(traitName);
@@ -46,7 +47,6 @@ public class AltarDetailPopup : PopupSystem
     public void UpdateEquippedTraitUIs()
     {
         SkillName[] equippedTraits = Player.Instance.GetTraits();
-        DebugConsole.Log($"UpdateEquippedTraitUIs: {equippedTraits.Length}");
         int i = 0;
         for (; i < equippedTraits.Length; i++)
         {
@@ -60,7 +60,6 @@ public class AltarDetailPopup : PopupSystem
 
     private void OnClickTraitUI(TraitUI traitUI)
     {
-        DebugConsole.Log($"OnClickTraitUI: {traitUI.name} {traitUI.traitStatus}");
         switch (traitUI.traitStatus)
         {
             case TraitSetButtonStatus.Buyable:
