@@ -281,7 +281,7 @@ public class Player : DirectionalGameObject
     {
         if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Interaction]))
         {
-            if (Portal.Instance.IsTriggerPortal == true)
+            if (Portal.Instance?.IsTriggerPortal == true)
             {
                 ChapterManager.Instance.MoveToNextStage();
             }

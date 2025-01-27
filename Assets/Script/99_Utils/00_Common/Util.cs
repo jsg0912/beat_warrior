@@ -154,4 +154,14 @@ public static class Util
     {
         return (p + q - 1) / q;
     }
+
+    public static Vector3 GetMousePointWithPerspectiveCamera()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        DebugConsole.Log($"mousePosition: {mousePosition}");
+        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        DebugConsole.Log($"worldMousePosition: {worldMousePosition}");
+        DebugConsole.Log($"PlayerPosition: {Player.Instance.transform.position}");
+        return worldMousePosition;
+    }
 }
