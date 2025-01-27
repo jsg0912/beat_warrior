@@ -40,7 +40,6 @@ public abstract class Pattern
 
     public void StopAttack()
     {
-        DebugConsole.Log("StopAttack Pattern");
         Attack?.StopAttack();
     }
 }
