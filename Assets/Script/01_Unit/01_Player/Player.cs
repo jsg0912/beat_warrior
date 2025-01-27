@@ -94,7 +94,7 @@ public class Player : DirectionalGameObject
 
     // GET Functions
     public PlayerStatus GetPlayerStatus() { return status; }
-    public SkillName[] GetTraits() { return traitList.Select(trait => trait.skillName).ToArray(); }
+    public SkillName[] GetTraits() { return traitList.Where(skill => skill.tier != SkillTier.Common).Select(trait => trait.skillName).ToArray(); }
     public int GetCurrentStat(StatKind statKind) { return playerUnit.unitStat.GetCurrentStat(statKind); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
     public GameObject GetTargetInfo() { return targetInfo; }
@@ -453,6 +453,11 @@ public class Player : DirectionalGameObject
         isInvincibility = true;
         yield return new WaitForSeconds(timer);
         isInvincibility = false;
+    }
+
+    public bool CheckFullEquipTrait()
+    {
+        return GetTraits().Length == PlayerConstant.MaxAdditionalSkillCount;
     }
 
     private void OnTriggerExit2D(Collider2D other)
