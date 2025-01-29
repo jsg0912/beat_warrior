@@ -77,7 +77,8 @@ MonoBehaviour:
   HpUI: {fileID: 8121129461690677475}
   Target: {fileID: 0}
   AnotherHPValue: 0
-  attackCollider: {fileID: 0}
+  bodyCollider: {fileID: 3691406545238830474}
+  monsterBodyCollider: {fileID: 4135205508027935915}
 --- !u!50 &7572720725117535486
 Rigidbody2D:
   serializedVersion: 4
@@ -115,6 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2693979295720383395}
   - component: {fileID: 3353338847850064151}
+  - component: {fileID: 4135205508027935915}
   - component: {fileID: 4929787839666111627}
   m_Layer: 7
   m_Name: Monster_Sprite
@@ -179,17 +181,30 @@ SpriteRenderer:
   m_SortingLayerID: 1686646113
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 894259884, guid: e22a511c02c1d5c4e92f750ab3c25bd1, type: 3}
+  m_Sprite: {fileID: 360942546, guid: 6c75cc485dda94e4dbf17e785d09a599, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.15, y: 1.6}
+  m_Size: {x: 2.4, y: 1.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4135205508027935915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9162318648507243343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581d4b387bf463f4d8b93c26b3983efa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderObj: {fileID: 4929787839666111627}
 --- !u!61 &4929787839666111627
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -222,18 +237,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0152923465, y: -0.12}
+  m_Offset: {x: 0.08, y: -0.15}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.15, y: 1.6}
-    newSize: {x: 2.15, y: 1.6}
+    oldSize: {x: 2.4, y: 1.6}
+    newSize: {x: 2.4, y: 1.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.5382751, y: 1.0426757}
+  m_Size: {x: 1.6, y: 1}
   m_EdgeRadius: 0
 --- !u!1001 &6191197455053714835
 PrefabInstance:

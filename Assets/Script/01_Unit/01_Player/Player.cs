@@ -15,7 +15,7 @@ public class Player : DirectionalGameObject
     private List<ActiveSkillPlayer> skillList;
     private List<Skill> traitList = new();
 
-    private ColliderController colliderController;
+    public ColliderController colliderController;
     [SerializeField] private PlayerStatus status;
 
     private bool isOnBaseTile;
@@ -64,7 +64,7 @@ public class Player : DirectionalGameObject
 
         skillList = new List<ActiveSkillPlayer>
         {
-            new Attack(gameObject),
+            new HolyBlade(gameObject),
             new Mark(gameObject),
             new Dash(gameObject),
             new Skill1(gameObject),
@@ -74,7 +74,6 @@ public class Player : DirectionalGameObject
         _collider = GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        colliderController = GetComponent<ColliderController>();
 
         SetPlayerStatus(PlayerStatus.Idle);
 
@@ -113,7 +112,8 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerConstant.jumpAnimTrigger);
                 break;
             case PlayerStatus.Attack:
-                _animator.SetTrigger(PlayerSkillConstant.attackAnimTrigger);
+                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.attackRAnimTrigger);
+                else _animator.SetTrigger(PlayerSkillConstant.attackLAnimTrigger);
                 break;
             case PlayerStatus.Dash:
                 _animator.SetTrigger(PlayerSkillConstant.dashAnimTrigger);
@@ -128,6 +128,7 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerSkillConstant.skill2AnimTrigger);
                 break;
             case PlayerStatus.Dead:
+                KnockBacked();
                 _animator.SetTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
@@ -225,7 +226,6 @@ public class Player : DirectionalGameObject
             case PlayerStatus.Idle:
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
-            case PlayerStatus.Attack:
             case PlayerStatus.Skill1:
             case PlayerStatus.Mark:
                 return true;
@@ -445,6 +445,11 @@ public class Player : DirectionalGameObject
 
 
         _animator.SetTrigger("hurt");
+        KnockBacked();
+    }
+
+    private void KnockBacked()
+    {
         PlayerAddForce(new Vector2(5.0f, 1.0f), -1);
     }
 

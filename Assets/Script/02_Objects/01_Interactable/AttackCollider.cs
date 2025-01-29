@@ -4,12 +4,13 @@ using UnityEngine;
 public class AttackCollider : MonoBehaviour
 {
     protected int atk;
-    protected List<GameObject> TargetMonster;
-    public List<AdditionalEffect> additionalEffects;
+    protected List<GameObject> TargetMonster = new();
+    public List<AdditionalEffect> additionalEffects = new();
 
-    void Start()
+    public void InitializeBeforeAttack()
     {
-        TargetMonster = new List<GameObject>();
+        additionalEffects.Clear();
+        TargetMonster.Clear();
     }
 
     public void SetAtk(int atk)
@@ -26,11 +27,6 @@ public class AttackCollider : MonoBehaviour
         additionalEffects.Add(additionalEffect);
     }
 
-    public void ResetTargetMonster()
-    {
-        TargetMonster.Clear();
-    }
-
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         GameObject obj = Util.GetMonsterGameObject(collision);
@@ -38,7 +34,7 @@ public class AttackCollider : MonoBehaviour
         if (CheckAttackAbleCollision(obj))
         {
             TargetMonster.Add(obj);
-            obj.GetComponent<Monster>().GetDamaged(atk);
+            obj.GetComponent<Monster>().AttackedByPlayer(atk);
             additionalEffects?.ForEach(additionalEffect => additionalEffect.work(obj));
         }
     }

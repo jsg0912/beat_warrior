@@ -9,7 +9,8 @@ public class AttackStrategyCreate : AttackStrategy
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
-        prefab = Resources.Load(PrefabRouter.AttackPrefab[monster.monsterName]) as GameObject;
+        if (PrefabRouter.MonsterAttackPrefab.ContainsKey(monster.monsterName))
+            prefab = Resources.Load(PrefabRouter.MonsterAttackPrefab[monster.monsterName]) as GameObject;
     }
 
     protected override void SkillMethod()

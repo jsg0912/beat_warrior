@@ -32,13 +32,13 @@ public class MonsterConstant
     public const float KoppulsoRushSpeed = 10.0f;
     public const float KoppulsoRushDuration = 10.0f;
 
-    public static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
+    private static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
         { MonsterName.Ippali, 1.1f },
         { MonsterName.Ibkkugi, 1.0f },
         { MonsterName.Koppulso, 1.6f },
         { MonsterName.Jiljili, 0.4f },
         { MonsterName.Giljjugi, 0.7f },
-        { MonsterName.Itmomi, 1.2f }
+        { MonsterName.Itmomi, 0f }
     };
 
     public static Dictionary<MonsterName, float> MoveSpeed = new() {
@@ -56,7 +56,7 @@ public class MonsterConstant
         { MonsterName.Koppulso, 7.0f },
         { MonsterName.Jiljili, 4.0f },
         { MonsterName.Giljjugi, 7.0f },
-        { MonsterName.Itmomi, 1.2f }
+        { MonsterName.Itmomi, 5.0f }
     };
 
     public static Dictionary<MonsterName, float> AttackThrowSpeed = new() {

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Skill
@@ -9,6 +10,8 @@ public abstract class Skill
     public SkillName skillName;
     public string description;
     public SkillTier tier => TraitTierList.GetTier(skillName);
+
+    public List<AdditionalEffect> additionalEffects = new();
 
     // CoolTime
     protected float coolTimeMax;
@@ -60,5 +63,5 @@ public abstract class Skill
         coolTime = 0;
     }
 
-    protected virtual bool CreateEffectPrefab() { return false; }
+    protected virtual void CreateEffectPrefab() { return; } // [Code Review - KMJ] Check the Necessity and "virtual" - SDH, 20240106
 }

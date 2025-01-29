@@ -8,8 +8,9 @@ public class MonsterJSON
     public string[] statKinds;
     public int[] statValues;
     public string patternName;
+    public bool isKnockBackAble;
 
-    public MonsterJSON(MonsterName monsterName, string description, Dictionary<StatKind, int> unitStats, PatternName patternName)
+    public MonsterJSON(MonsterName monsterName, string description, Dictionary<StatKind, int> unitStats, PatternName patternName, bool isKnockBackAble = true)
     {
         this.monsterName = monsterName.ToString();
         this.description = description;
@@ -23,5 +24,6 @@ public class MonsterJSON
             index++;
         }
         this.patternName = patternName.ToString();
+        this.isKnockBackAble = isKnockBackAble;
     }
 }

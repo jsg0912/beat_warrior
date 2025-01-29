@@ -13,7 +13,7 @@ public class RecognizeStrategyRanged : RecognizeStrategy
     {
         Vector3 dir = Vector3.right * GetMovingDirectionFloat();
         RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterMiddlePos(), dir, recognizeRange, TargetLayer);
-        //Debug.DrawLine(GetMonsterMiddlePos(), GetMonsterMiddlePos() + Vector3.right * GetDirection() * recognizeRange, Color.red);
+
 
         if (rayHit.collider != null)
         {

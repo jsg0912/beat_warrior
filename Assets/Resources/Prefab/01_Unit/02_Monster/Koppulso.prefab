@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3256169419523355322}
   - component: {fileID: 4936051214309209554}
   m_Layer: 10
-  m_Name: AttackCollider
+  m_Name: TackleCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,8 @@ MonoBehaviour:
   HpUI: {fileID: 7073441460641642031}
   Target: {fileID: 0}
   AnotherHPValue: 0
-  attackCollider: {fileID: 3559754675971902742}
+  tackleCollider: {fileID: 3559754675971902742}
+  monsterBodyCollider: {fileID: 6429159573309252447}
 --- !u!50 &7312698048288680494
 Rigidbody2D:
   serializedVersion: 4
@@ -198,6 +199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3637404684887225049}
   - component: {fileID: 9041314009162275493}
+  - component: {fileID: 6429159573309252447}
   - component: {fileID: 2560526084195439612}
   m_Layer: 7
   m_Name: Monster_Sprite
@@ -262,17 +264,30 @@ SpriteRenderer:
   m_SortingLayerID: 1686646113
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1977569712, guid: 329375625b2072741a0a62803275f05c, type: 3}
+  m_Sprite: {fileID: -294772364, guid: eb884ce906d4d0940a07511c8dd2b2c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.5040002, y: 2.1899998}
+  m_Size: {x: 3.5, y: 2.19}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6429159573309252447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7863959799796572547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581d4b387bf463f4d8b93c26b3983efa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colliderObj: {fileID: 2560526084195439612}
 --- !u!60 &2560526084195439612
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -309,8 +324,8 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.5040002, y: 2.1899998}
-    newSize: {x: 3.5040002, y: 2.1899998}
+    oldSize: {x: 3.5, y: 2.19}
+    newSize: {x: 3.5, y: 2.19}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

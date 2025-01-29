@@ -4,7 +4,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
 {
     protected KeyCode keyCode;
     protected PlayerStatus status;
-    protected PlayerSkillColliderController attackCollider; // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
+    protected AttackCollider attackCollider; // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
 
     protected ActiveSkillPlayer(GameObject unit) : base(unit) { }
 
@@ -30,31 +30,36 @@ public abstract class ActiveSkillPlayer : ActiveSkill
     }
 
     // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
-    protected override bool CreateEffectPrefab()
+    protected override void CreateEffectPrefab()
     {
-        bool isMade = false;
         if (attackCollider == null)
         {
             GameObject attackPrefab = GameObject.Instantiate(EffectPrefab);
-
             attackPrefab.transform.SetParent(Player.Instance.transform, false);
-
-            attackCollider = attackPrefab.GetComponent<PlayerSkillColliderController>();
-            isMade = true;
+            attackCollider = attackPrefab.GetComponentInChildren<AttackCollider>();
         }
-        else
+
+        if (attackCollider == null)
         {
-            Util.SetActive(attackCollider.gameObject, true);
+            DebugConsole.Log("no attack collider " + this.GetType().Name);
+            return;
+        }
+        if (CheckObjectDirection() == false)
+        {
+            Util.FlipLocalScaleX(attackCollider.gameObject);
         }
 
+        attackCollider.InitializeBeforeAttack();
         attackCollider.SetAtk(damageMultiplier);
-        Vector3 Scale = attackCollider.gameObject.transform.localScale;
-        if (Player.Instance.GetMovingDirectionFloat() * Scale.x < 0)
-        {
-            attackCollider.gameObject.transform.localScale = new Vector3(-Scale.x, Scale.y, Scale.z);
-        }
-        return isMade;
+        foreach (AdditionalEffect additionalEffect in additionalEffects) attackCollider.SetAdditionalEffect(additionalEffect);
     }
 
     protected abstract void UpdateKey();
+
+    public bool CheckObjectDirection()
+    {
+        if (Player.Instance.GetMovingDirectionFloat() * attackCollider.transform.localScale.x > 0) return true;
+
+        return false;
+    }
 }
