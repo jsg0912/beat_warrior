@@ -82,7 +82,7 @@ public class Dash : ActiveSkillPlayer
         {
             if (obj.CompareTag(TagConstant.Monster))
             {
-                obj.GetComponent<Monster>().GetDamaged(damageMultiplier);
+                obj.GetComponent<Monster>().AttackedByPlayer(damageMultiplier);
             }
         }
 

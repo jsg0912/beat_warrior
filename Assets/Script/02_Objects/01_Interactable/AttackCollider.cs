@@ -34,7 +34,7 @@ public class AttackCollider : MonoBehaviour
         if (CheckAttackAbleCollision(obj))
         {
             TargetMonster.Add(obj);
-            obj.GetComponent<Monster>().GetDamaged(atk);
+            obj.GetComponent<Monster>().AttackedByPlayer(atk);
             additionalEffects?.ForEach(additionalEffect => additionalEffect.work(obj));
         }
     }
