@@ -112,7 +112,8 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerConstant.jumpAnimTrigger);
                 break;
             case PlayerStatus.Attack:
-                _animator.SetTrigger(PlayerSkillConstant.attackAnimTrigger);
+                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.attackRAnimTrigger);
+                else _animator.SetTrigger(PlayerSkillConstant.attackLAnimTrigger);
                 break;
             case PlayerStatus.Dash:
                 _animator.SetTrigger(PlayerSkillConstant.dashAnimTrigger);
