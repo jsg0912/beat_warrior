@@ -128,6 +128,7 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerSkillConstant.skill2AnimTrigger);
                 break;
             case PlayerStatus.Dead:
+                KnockBacked();
                 _animator.SetTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
@@ -445,6 +446,11 @@ public class Player : DirectionalGameObject
 
 
         _animator.SetTrigger("hurt");
+        KnockBacked();
+    }
+
+    private void KnockBacked()
+    {
         PlayerAddForce(new Vector2(5.0f, 1.0f), -1);
     }
 
