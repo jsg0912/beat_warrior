@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class AttackStrategy : Strategy
 {
     protected MonoBehaviour monoBehaviour;
+    protected Direction attackDirection;
     protected Coroutine attackCoroutine;
 
     protected float attackCoolTimeMax;
@@ -69,5 +70,11 @@ public abstract class AttackStrategy : Strategy
     {
         monoBehaviour.StopAllCoroutines();
         SetMaxAttackCoolTime();
+    }
+
+    public void SetAttackDirection()
+    {
+        if (Player.Instance.transform.position.x > monster.transform.position.x) attackDirection = Direction.Right;
+        else attackDirection = Direction.Left;
     }
 }

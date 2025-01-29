@@ -25,7 +25,7 @@ public class AttackStrategyRush : AttackStrategy
     protected override IEnumerator UseSkill()
     {
         monster.SetStatus(MonsterStatus.Attack);
-        SetRushDirection();
+        SetAttackDirection();
         yield return new WaitForSeconds(attackStartDelay);
 
         monster.PlayAnimation(MonsterStatus.AttackCharge);
@@ -62,12 +62,6 @@ public class AttackStrategyRush : AttackStrategy
 
         monster.PlayAnimation(MonsterStatus.AttackEnd);
         monster.SetStatus(MonsterStatus.Idle);
-    }
-
-    protected virtual void SetRushDirection()
-    {
-        if (Player.Instance.transform.position.x > monster.transform.position.x) RushDirection = Direction.Right;
-        else RushDirection = Direction.Left;
     }
 
     protected virtual void Rush()
