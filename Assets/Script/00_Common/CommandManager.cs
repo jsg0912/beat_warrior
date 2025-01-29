@@ -54,10 +54,15 @@ public class CommandManager : MonoBehaviour
                     UIManager.Instance.TurnOnAltarPopup();
                 }
 
+
+                // TODO: 이 아래는 Test용 임시 코드들로 삭제해야 함. - SDH, 20250124
                 if (Input.GetKeyDown(KeyCode.B))
                 {
-                    // TODO: Test용 임시 재시작(부활) 코드로 삭제해야 함. - SDH, 20250124
                     GameManager.Instance.RestartGame();
+                }
+                if (Input.GetKeyDown(KeyCode.N))
+                {
+                    Player.Instance.GetDamaged(Player.Instance.GetCurrentStat(StatKind.HP));
                 }
             }
         }
