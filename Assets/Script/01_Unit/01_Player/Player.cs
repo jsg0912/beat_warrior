@@ -15,7 +15,7 @@ public class Player : DirectionalGameObject
     private List<ActiveSkillPlayer> skillList;
     private List<Skill> traitList = new();
 
-    private ColliderController colliderController;
+    public ColliderController colliderController;
     [SerializeField] private PlayerStatus status;
 
     private bool isOnBaseTile;
@@ -64,7 +64,7 @@ public class Player : DirectionalGameObject
 
         skillList = new List<ActiveSkillPlayer>
         {
-            new Attack(gameObject),
+            new HolyBlade(gameObject),
             new Mark(gameObject),
             new Dash(gameObject),
             new Skill1(gameObject),
@@ -74,7 +74,6 @@ public class Player : DirectionalGameObject
         _collider = GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        colliderController = GetComponent<ColliderController>();
 
         SetPlayerStatus(PlayerStatus.Idle);
 
@@ -226,7 +225,6 @@ public class Player : DirectionalGameObject
             case PlayerStatus.Idle:
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
-            case PlayerStatus.Attack:
             case PlayerStatus.Skill1:
             case PlayerStatus.Mark:
                 return true;
