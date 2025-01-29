@@ -6,6 +6,7 @@ public class PrefabRouter
     public const string ObjectPrefabRoute = "Prefab/02_Object/";
     public const string MonsterImageRoute = "Image/Monster/";
     public const string MiniMapUIPrefabRoute = "Prefab/03_UI/02_InGameUI/02_MiniMapUI/";
+    public const string MonsterObjectRoute = "Prefab/02_Object/05_Monster/";
 
     public const string PlayerPrefab = PlayerPrefabRoute + "Player";
     public const string PlayerAttackPrefab = PlayerPrefabRoute + "AttackCollider";
@@ -22,15 +23,14 @@ public class PrefabRouter
     public const string MiniMapIconIppali = MiniMapUIPrefabRoute + "MiniMapMonsterIconIppali";
     public const string MiniMapIconIbkkugi = MiniMapUIPrefabRoute + "MiniMapMonsterIconIbkkugi";
     public const string MiniMapIconKoppulso = MiniMapUIPrefabRoute + "MiniMapMonsterIconKoppulso";
-    public const string IbkkugiThrow = "Prefab/02_Object/IbkkugiThrow";
+    public const string IbkkugiThrow = "Prefab/02_Object/05_Monster/IbkkugiThrow";
 
     public const string EmptyImage = "Image/UI/empty";
 
-    public static Dictionary<MonsterName, string> AttackPrefab = new() {
-        { MonsterName.Ibkkugi, "Prefab/02_Object/IbkkugiThrow" },
-        { MonsterName.Jiljili, "Prefab/02_Object/JiljiliThrow" },
-        { MonsterName.Itmomi, "Prefab/02_Object/IsmomiThrow" },
-        { MonsterName.Koppulso, "Prefab/02_Object/KoppulsoDashCollider" },
+    public static Dictionary<MonsterName, string> MonsterAttackPrefab = new() {
+        { MonsterName.Ibkkugi, MonsterObjectRoute + "IbkkugiThrow"},
+        { MonsterName.Jiljili, MonsterObjectRoute + "JiljiliThrow"},
+        { MonsterName.Itmomi, MonsterObjectRoute + "ItmomiThrow"},
     };
 
     public static Dictionary<SkillName, string> TraitIconImages = new() {
