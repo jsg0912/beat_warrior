@@ -4,13 +4,13 @@ using UnityEngine;
 public class AttackCollider : MonoBehaviour
 {
     protected int atk;
-    protected List<GameObject> TargetMonster;
-    public List<AdditionalEffect> additionalEffects;
+    protected List<GameObject> TargetMonster = new();
+    public List<AdditionalEffect> additionalEffects = new();
 
-    void Start()
+    public void InitializeBeforeAttack()
     {
-        TargetMonster = new List<GameObject>();
-        Destroy(gameObject, 0.1f);
+        additionalEffects.Clear();
+        TargetMonster.Clear();
     }
 
     public void SetAtk(int atk)

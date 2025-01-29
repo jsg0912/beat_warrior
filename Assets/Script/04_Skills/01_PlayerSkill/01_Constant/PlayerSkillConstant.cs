@@ -13,7 +13,7 @@ public class PlayerSkillConstant
     public const float SkillResetProbability = 0.9f; // TODO: 임시로 테스트를 위해 90%로 함 - 신동환, 20240901
 
     public static Dictionary<SkillName, float> SkillCoolTime = new() {
-        { SkillName.Attack, 4.0f },
+        { SkillName.Attack, 0.1f },
         { SkillName.Mark, 8.0f },
         { SkillName.Dash, 8.0f },
         { SkillName.Skill1, 8.0f },

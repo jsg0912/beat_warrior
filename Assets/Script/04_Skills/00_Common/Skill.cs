@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Skill
@@ -9,6 +10,8 @@ public abstract class Skill
     public SkillName skillName;
     public string description;
     public SkillTier tier => TraitTierList.GetTier(skillName);
+
+    public List<AdditionalEffect> additionalEffects = new();
 
     // CoolTime
     protected float coolTimeMax;

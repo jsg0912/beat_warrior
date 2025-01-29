@@ -32,21 +32,34 @@ public abstract class ActiveSkillPlayer : ActiveSkill
     // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
     protected override void CreateEffectPrefab()
     {
-        GameObject attackPrefab = GameObject.Instantiate(EffectPrefab);
-
-        attackPrefab.transform.SetParent(Player.Instance.transform, false);
-        Vector3 Scale = attackPrefab.transform.localScale;
-        attackPrefab.transform.localScale = new Vector3(Scale.x * Player.Instance.GetMovingDirectionFloat(), Scale.y, Scale.z);
-
-        attackCollider = attackPrefab.GetComponentInChildren<AttackCollider>();
+        if (attackCollider == null)
+        {
+            GameObject attackPrefab = GameObject.Instantiate(EffectPrefab);
+            attackPrefab.transform.SetParent(Player.Instance.transform, false);
+            attackCollider = attackPrefab.GetComponentInChildren<AttackCollider>();
+        }
 
         if (attackCollider == null)
         {
             DebugConsole.Log("no attack collider " + this.GetType().Name);
             return;
         }
+        if (CheckObjectDirection() == false)
+        {
+            Util.FlipLocalScaleX(attackCollider.gameObject);
+        }
+
+        attackCollider.InitializeBeforeAttack();
         attackCollider.SetAtk(damageMultiplier);
+        foreach (AdditionalEffect additionalEffect in additionalEffects) attackCollider.SetAdditionalEffect(additionalEffect);
     }
 
     protected abstract void UpdateKey();
+
+    public bool CheckObjectDirection()
+    {
+        if (Player.Instance.GetMovingDirectionFloat() * attackCollider.transform.localScale.x > 0) return true;
+
+        return false;
+    }
 }

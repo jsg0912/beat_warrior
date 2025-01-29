@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ColliderController : MonoBehaviour
 {
+    public AttackCollider hollyBladeCollider;
     private BoxCollider2D playerCollider;
 
     private void Start()

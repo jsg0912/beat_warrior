@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class Attack : ActiveSkillPlayer
+public class HolyBlade : ActiveSkillPlayer
 {
     private bool isCharging;
-    private KnockBack knockBack;
 
-    public Attack(GameObject unit) : base(unit)
+    public HolyBlade(GameObject unit) : base(unit)
     {
         skillName = SkillName.Attack;
         status = PlayerStatus.Attack;
@@ -19,7 +18,7 @@ public class Attack : ActiveSkillPlayer
         coolTime = 0;
 
         EffectPrefab = Resources.Load(PrefabRouter.PlayerAttackPrefab) as GameObject;
-        knockBack = new KnockBack(PlayerSkillConstant.attackKnockBackDistance);
+        additionalEffects.Add(new KnockBack(PlayerSkillConstant.attackKnockBackDistance));
     }
 
     protected override IEnumerator CountCoolTime()
@@ -60,8 +59,8 @@ public class Attack : ActiveSkillPlayer
 
     protected override void CreateEffectPrefab()
     {
+        attackCollider = Player.Instance.colliderController.hollyBladeCollider;
         base.CreateEffectPrefab();
-        attackCollider.SetAdditionalEffect(knockBack);
     }
 
     protected override void UpdateKey()
