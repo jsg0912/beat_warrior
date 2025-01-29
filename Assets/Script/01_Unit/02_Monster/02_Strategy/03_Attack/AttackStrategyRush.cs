@@ -25,6 +25,7 @@ public class AttackStrategyRush : AttackStrategy
     protected override IEnumerator UseSkill()
     {
         monster.SetStatus(MonsterStatus.Attack);
+        SetRushDirection();
         yield return new WaitForSeconds(attackStartDelay);
 
         monster.PlayAnimation(MonsterStatus.AttackCharge);
@@ -44,8 +45,7 @@ public class AttackStrategyRush : AttackStrategy
         monster.SetIsTackleAble(true);
         monster.SetIsKnockBackAble(false);
         monster.SetIsFixedAnimation(true);
-        monster.attackCollider.SetActive(true);
-        SetRushDirection();
+        monster.bodyCollider.SetActive(true);
 
         while (elapsedTime < dashDuration)
         {
@@ -57,7 +57,7 @@ public class AttackStrategyRush : AttackStrategy
         monster.SetIsFixedAnimation(false);
         monster.SetIsTackleAble(false);
         monster.SetIsKnockBackAble(true);
-        monster.attackCollider.SetActive(false);
+        monster.bodyCollider.SetActive(false);
         attackCoolTime = attackCoolTimeMax;
 
         monster.PlayAnimation(MonsterStatus.AttackEnd);
