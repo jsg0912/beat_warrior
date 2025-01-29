@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3256169419523355322}
   - component: {fileID: 4936051214309209554}
   m_Layer: 10
-  m_Name: AttackCollider
+  m_Name: TackleCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,7 +160,7 @@ MonoBehaviour:
   HpUI: {fileID: 7073441460641642031}
   Target: {fileID: 0}
   AnotherHPValue: 0
-  bodyCollider: {fileID: 3559754675971902742}
+  tackleCollider: {fileID: 3559754675971902742}
   monsterBodyCollider: {fileID: 6429159573309252447}
 --- !u!50 &7312698048288680494
 Rigidbody2D:

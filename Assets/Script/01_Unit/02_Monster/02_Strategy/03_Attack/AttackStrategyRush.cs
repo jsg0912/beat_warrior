@@ -4,7 +4,6 @@ using UnityEngine;
 public class AttackStrategyRush : AttackStrategy
 {
     protected float rushSpeed;
-    protected Direction RushDirection;
     protected float dashDuration;
     protected Coroutine rushCoroutine;
     protected LayerMask GroundLayer;
@@ -45,7 +44,7 @@ public class AttackStrategyRush : AttackStrategy
         monster.SetIsTackleAble(true);
         monster.SetIsKnockBackAble(false);
         monster.SetIsFixedAnimation(true);
-        monster.bodyCollider.SetActive(true);
+        monster.tackleCollider.SetActive(true);
 
         while (elapsedTime < dashDuration)
         {
@@ -57,7 +56,7 @@ public class AttackStrategyRush : AttackStrategy
         monster.SetIsFixedAnimation(false);
         monster.SetIsTackleAble(false);
         monster.SetIsKnockBackAble(true);
-        monster.bodyCollider.SetActive(false);
+        monster.tackleCollider.SetActive(false);
         attackCoolTime = attackCoolTimeMax;
 
         monster.PlayAnimation(MonsterStatus.AttackEnd);
@@ -68,18 +67,18 @@ public class AttackStrategyRush : AttackStrategy
     {
         if (isChangingDir) return;
 
-        monster.SetMovingDirection(RushDirection);
+        monster.SetMovingDirection(attackDirection);
 
         CheckWall();
         CheckGround();
 
-        monster.gameObject.transform.position += new Vector3((int)RushDirection * rushSpeed * Time.deltaTime, 0, 0);
+        monster.gameObject.transform.position += new Vector3((int)attackDirection * rushSpeed * Time.deltaTime, 0, 0);
     }
 
     protected virtual void CheckWall()
     {
-        Vector3 start = GetMonsterMiddlePos() + new Vector3(GetMonsterSize().x / 2, 0, 0) * (int)RushDirection;
-        Vector3 dir = Vector3.right * (int)RushDirection;
+        Vector3 start = GetMonsterMiddlePos() + new Vector3(GetMonsterSize().x / 2, 0, 0) * (int)attackDirection;
+        Vector3 dir = Vector3.right * (int)attackDirection;
 
         RaycastHit2D rayHit = Physics2D.Raycast(start, dir, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
         //Debug.DrawLine(start, start + dir * 0.1f, Color.red);
@@ -91,7 +90,7 @@ public class AttackStrategyRush : AttackStrategy
 
     protected Vector3 GetRayStartPoint()
     {
-        return GetMonsterPos() + new Vector3((int)RushDirection * GetMonsterSize().x / 2, 0, 0);
+        return GetMonsterPos() + new Vector3((int)attackDirection * GetMonsterSize().x / 2, 0, 0);
     }
 
     protected void CheckGround()
@@ -104,8 +103,8 @@ public class AttackStrategyRush : AttackStrategy
 
     protected IEnumerator ChangeDir()
     {
-        RushDirection = (Direction)(-1 * (int)RushDirection);
-        monster.SetMovingDirection(RushDirection);
+        attackDirection = (Direction)(-1 * (int)attackDirection);
+        monster.SetMovingDirection(attackDirection);
         monster.SetIsFixedAnimation(false);
         monster.PlayAnimation(MonsterConstant.turnAnimTrigger);
         monster.SetIsFixedAnimation(true);

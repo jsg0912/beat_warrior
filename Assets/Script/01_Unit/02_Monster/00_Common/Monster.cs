@@ -16,7 +16,7 @@ public class Monster : DirectionalGameObject
     [SerializeField] private GameObject Target;
     [SerializeField] private int AnotherHPValue = 0;
 
-    [SerializeField] public GameObject bodyCollider;
+    [SerializeField] public GameObject tackleCollider;
     [SerializeField] private MonsterBodyCollider monsterBodyCollider;
 
     void Start()
