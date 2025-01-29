@@ -28,7 +28,8 @@ public static class MonsterList
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
         },
-        PatternName.Itmomi),
+        PatternName.Itmomi,
+        isKnockBackAble: false),
 
         new MonsterJSON(MonsterName.Koppulso,
         "코뿔소",
@@ -84,7 +85,8 @@ public static class MonsterList
         return new MonsterUnit(
             new MonsterInfo(monsterName, monsterJSON.description),
             new UnitStat(monsterStats),
-            patternName
+            patternName,
+            monsterJSON.isKnockBackAble
         );
     }
 
