@@ -2,7 +2,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System;
 
+[System.Serializable]
 public class MiniMap : MonoBehaviour
 {
     public static MiniMap Instance;
@@ -13,8 +15,11 @@ public class MiniMap : MonoBehaviour
     GameObject PlayerMapIcon;
 
     GameObject[] monster;
-    GameObject[] icon;
-    GameObject[] monsterInMap;
+    private List<GameObject> icon = new List<GameObject>();
+    private List<GameObject> monsterInMap = new List<GameObject>();
+    private List<GameObject> monsterForIcon = new List<GameObject>();
+
+    int forIconCount;
 
     Dictionary<MonsterName, PoolTag> enemyIcons = new() {
         { MonsterName.Koppulso, PoolTag.MiniMapIconKoppulso },
@@ -57,10 +62,12 @@ public class MiniMap : MonoBehaviour
         MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.Tile);
 
         UpdateMonsterInfo();
-        icon = new GameObject[monster.Length];
-        monsterInMap = new GameObject[monster.Length];
+        icon = new List<GameObject>();
+        monsterInMap = new List<GameObject>();
+        monsterForIcon = new List<GameObject>();
 
         CountMapMonster = 0;
+        forIconCount = 0;
 
         // TODO: Main Camera를 Inspector상에서 끌어놓거나, 없을 때를 대비한 코드 필요 - 신동환, 20241204
         // MainCamera[] mainCameras = FindObjectsOfType<MainCamera>();
@@ -85,7 +92,7 @@ public class MiniMap : MonoBehaviour
         ChapterManager.Instance.SetMonsterCount(monster.Length);
         RemainMonster.text = "Remains : " + monster.Length.ToString();
 
-        if (CountMapMonster != MonsterInMapCount)
+        for(int i = 0; i < monsterInMap.Count; i++)
         {
             if (CountMapMonster > MonsterInMapCount)
             {
@@ -102,17 +109,24 @@ public class MiniMap : MonoBehaviour
                     icon[i] = MyPooler.ObjectPooler.Instance.GetFromPool(GetEnemyIconPoolTag(monsterInMap[i].GetComponent<Monster>().monsterName), monsterInMap[i].transform.position, Quaternion.identity);
                 }
             }
-
-            CountMapMonster = MonsterInMapCount;
         }
+        for(int i = 0; i < monsterForIcon.Count; i++)
         {
-            for (int i = 0; i < MonsterInMapCount; i++)
+            if(!monsterInMap.Contains(monsterForIcon[i]))
             {
-                if (i >= monsterInMap.Length) break;
-                if (i >= icon.Length) break;
-                icon[i].GetComponent<MiniMapIcon>().GetHp(monsterInMap[i].GetComponent<Monster>().GetCurrentHP());
-                icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterInMap[i].transform.position);
+                icon[i].GetComponent<MiniMapIcon>().GetHp(0);
+                icon.RemoveAt(i);
+                monsterForIcon.RemoveAt(i);
             }
+        }
+
+
+
+        for (int i = 0; i < monsterForIcon.Count; i++)
+        {
+            if (i > icon.Count) break;
+            icon[i].GetComponent<MiniMapIcon>().GetHp(monsterForIcon[i].GetComponent<Monster>().GetCurrentHP());
+            icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterForIcon[i].transform.position);
         }
     }
 
@@ -129,25 +143,39 @@ public class MiniMap : MonoBehaviour
 
     private void CountObjectInMiniMap()
     {
-        int Count = 0;
+        if(monsterInMap == null)
+        {
+            monsterInMap = new List<GameObject>();
+        }
+        monsterInMap?.Clear();
+        
         for (int i = 0; i < monster.Length; i++)
         {
             if (CheckObjectInMiniMap(monster[i]))
             {
-                monsterInMap[Count++] = monster[i];
+                monsterInMap.Add(monster[i]);
             }
             else continue;
         }
-        MonsterInMapCount = Count;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         TryCreatePlayerMapIcon();
+        for (int i = 0; i < icon.Count; i++)
+        {
+            if (i > icon.Count) continue;
+            icon[i].GetComponent<MiniMapIcon>().GetHp(0);
+        }
+        icon.Clear();
 
         monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
-        icon = new GameObject[monster.Length];
-        monsterInMap = new GameObject[monster.Length];
+        icon = new List<GameObject>();
+        monsterInMap = new List<GameObject>();
+        monsterForIcon = new List<GameObject>();
+
+        CountMapMonster = 0;
+        forIconCount = 0;
     }
 
     private void TryCreatePlayerMapIcon()
