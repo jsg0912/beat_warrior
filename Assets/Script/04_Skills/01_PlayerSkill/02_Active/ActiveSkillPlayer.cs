@@ -44,7 +44,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
             DebugConsole.Log("no attack collider " + this.GetType().Name);
             return;
         }
-        if (CheckObjectDirection() == false)
+        if (!CheckObjectDirection())
         {
             Util.FlipLocalScaleX(attackCollider.gameObject);
         }

@@ -53,7 +53,7 @@ public class HolyBlade : ActiveSkillPlayer
     {
         if (isCharging == true) return;
 
-        if (Player.Instance.playerUnit.GetIsFullStat(StatKind.AttackCount) == false)
+        if (!Player.Instance.playerUnit.GetIsFullStat(StatKind.AttackCount))
             unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 

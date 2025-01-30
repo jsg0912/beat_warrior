@@ -33,7 +33,7 @@ public abstract class AttackStrategy : Strategy
 
     public void UpdateCoolTime()
     {
-        if (attackCoolTime > 0 && monster.GetIsAttacking() == false)
+        if (attackCoolTime > 0 && !monster.GetIsAttacking())
         {
             attackCoolTime -= Time.deltaTime;
         }

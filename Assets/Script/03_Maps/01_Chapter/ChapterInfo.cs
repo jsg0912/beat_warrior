@@ -12,7 +12,7 @@ public static class ChapterInfo
     {
         foreach (ChapterName chapterName in Enum.GetValues(typeof(ChapterName)))
         {
-            if (ChapterSceneInfo.ContainsKey(chapterName) == false)
+            if (!ChapterSceneInfo.ContainsKey(chapterName))
             {
                 DebugConsole.Error($"ChapterInfo has no information for {chapterName}.");
                 return false;

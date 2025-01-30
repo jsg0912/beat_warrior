@@ -21,7 +21,7 @@ public class RecoveryHP : ActiveSkillPlayer
 
         Player.Instance.ChangeCurrentHP(1);
 
-        if (Player.Instance.playerUnit.GetIsFullStat(StatKind.HP) == false)
+        if (!Player.Instance.playerUnit.GetIsFullStat(StatKind.HP))
             unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
     }
 

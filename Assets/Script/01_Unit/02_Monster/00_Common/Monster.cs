@@ -120,7 +120,7 @@ public class Monster : DirectionalGameObject
 
         HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
-        if (CheckIsAlive() == false)
+        if (!CheckIsAlive())
         {
             Die();
             return;
@@ -162,7 +162,7 @@ public class Monster : DirectionalGameObject
 
     public void StopAttack()
     {
-        if (GetIsAttacking() || GetIsAlive() == false)
+        if (GetIsAttacking() || !GetIsAlive())
         {
             pattern?.StopAttack();
         }

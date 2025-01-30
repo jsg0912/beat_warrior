@@ -22,7 +22,7 @@ public class MoveStrategy : Strategy
 
     protected virtual bool Move()
     {
-        if (IsMoveable() == false)
+        if (!IsMoveable())
         {
             monster.SetWalkingAnimation(false);
             return false;
