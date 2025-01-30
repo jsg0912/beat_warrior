@@ -19,8 +19,6 @@ public class MiniMap : MonoBehaviour
     private List<GameObject> monsterInMap = new List<GameObject>();
     private List<GameObject> monsterForIcon = new List<GameObject>();
 
-    int forIconCount;
-
     Dictionary<MonsterName, PoolTag> enemyIcons = new() {
         { MonsterName.Koppulso, PoolTag.MiniMapIconKoppulso },
         { MonsterName.Ippali, PoolTag.MiniMapIconIppali },
@@ -35,10 +33,6 @@ public class MiniMap : MonoBehaviour
         // return PoolTag.EnemyMiniMapIcon;
         return enemyIcons.ContainsKey(monsterName) ? enemyIcons[monsterName] : PoolTag.MiniMapIconIppali;
     }
-
-    int CountMapMonster;
-
-    int MonsterInMapCount;
 
     void OnEnable()
     {
@@ -66,12 +60,7 @@ public class MiniMap : MonoBehaviour
         monsterInMap = new List<GameObject>();
         monsterForIcon = new List<GameObject>();
 
-        CountMapMonster = 0;
-        forIconCount = 0;
-
-        // TODO: Main Camera를 Inspector상에서 끌어놓거나, 없을 때를 대비한 코드 필요 - 신동환, 20241204
-        // MainCamera[] mainCameras = FindObjectsOfType<MainCamera>();
-        // mainCameras[0].GetComponent<Camera>().cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
+        Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
 
         TryCreatePlayerMapIcon();
     }
@@ -159,13 +148,12 @@ public class MiniMap : MonoBehaviour
         }
         icon.Clear();
 
+        Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
+
         monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
         icon = new List<GameObject>();
         monsterInMap = new List<GameObject>();
         monsterForIcon = new List<GameObject>();
-
-        CountMapMonster = 0;
-        forIconCount = 0;
     }
 
     private void TryCreatePlayerMapIcon()
