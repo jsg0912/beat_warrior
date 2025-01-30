@@ -79,7 +79,7 @@ public class Dash : ActiveSkillPlayer
 
         foreach (GameObject obj in DashTargetMonster)
         {
-            if (obj.CompareTag(TagConstant.Monster))
+            if (obj.layer == LayerMask.NameToLayer(LayerConstant.Monster))
             {
                 obj.GetComponent<MonsterBodyCollider>().monster.AttackedByPlayer(damageMultiplier);
             }
