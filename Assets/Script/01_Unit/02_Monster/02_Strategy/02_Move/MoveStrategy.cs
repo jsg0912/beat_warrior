@@ -36,7 +36,7 @@ public class MoveStrategy : Strategy
     }
     protected void CheckGround()
     {
-        RaycastHit2D rayHit = Physics2D.Raycast(GetRayStartPoint(), Vector3.down, GROUNDCHECKRAY, GroundLayer);
+        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterFrontPos(), Vector3.down, GROUNDCHECKRAY, GroundLayer);
 
         if (rayHit.collider == null) isEndOfGround = true;
         else isEndOfGround = false;
@@ -44,7 +44,7 @@ public class MoveStrategy : Strategy
     protected virtual void CheckWall()
     {
         float movingDirection = GetMovingDirectionFloat();
-        Vector3 start = GetMonsterMiddlePos() + new Vector3(GetMonsterSize().x / 2, 0, 0) * movingDirection;
+        Vector3 start = GetMonsterMiddleFrontPos();
         Vector3 dir = Vector3.right * movingDirection;
 
         RaycastHit2D rayHit = Physics2D.Raycast(start, dir, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
