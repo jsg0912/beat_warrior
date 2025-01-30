@@ -18,7 +18,7 @@ public class MonsterConstant
     public const float RangedRecognizeRange = 10.0f;
     public const float MeleeRecognizeRange = 10.0f;
 
-    public const float ThrowObjectYOffset = 0.5f;
+    public const float ThrowObjectXOffset = -0.5f;
 
     // Ibkkugi
     public const float IbkkugiThrowSpeed = 3f;
