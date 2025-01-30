@@ -158,7 +158,7 @@ MonoBehaviour:
   monsterName: 2
   status: 0
   HpUI: {fileID: 7073441460641642031}
-  Target: {fileID: 0}
+  Target: {fileID: 3945161825203820121}
   AnotherHPValue: 0
   tackleCollider: {fileID: 3559754675971902742}
   monsterBodyCollider: {fileID: 6429159573309252447}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 2560526084195439612}
   m_Layer: 7
   m_Name: Monster_Sprite
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581d4b387bf463f4d8b93c26b3983efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster: {fileID: 0}
   colliderObj: {fileID: 2560526084195439612}
 --- !u!60 &2560526084195439612
 PolygonCollider2D:

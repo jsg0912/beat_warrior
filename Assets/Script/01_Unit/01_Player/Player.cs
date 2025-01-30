@@ -310,7 +310,7 @@ public class Player : DirectionalGameObject
             if (!passWall)
             {
                 float movingDir = GetMovingDirectionFloat();
-                Vector3 start = GetMonsterMiddlePos() + new Vector3(GetPlayerSize().x / 2, 0, 0) * movingDir;
+                Vector3 start = GetMiddlePos() + new Vector3(GetSize().x / 2, 0, 0) * movingDir;
                 Vector3 direction = Vector3.right * movingDir;
 
                 RaycastHit2D rayHit = Physics2D.Raycast(start, direction, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
@@ -329,9 +329,9 @@ public class Player : DirectionalGameObject
         if (changeDir == true) SetMovingDirection((Direction)(-1 * (int)dir));
     }
 
-    public Vector3 GetPlayerSize() { return new Vector3(_collider.size.x, _collider.size.y, 0); }
-    protected Vector3 GetMonsterMiddlePos() { return transform.position + new Vector3(_collider.offset.x, _collider.offset.y, 0); }
-    public Vector3 GetPlayerBottomPos() { return transform.position + new Vector3(_collider.offset.x, _collider.offset.y - _collider.size.y / 2, 0); }
+    public Vector3 GetSize() { return Util.GetSizeBoxCollider2D(_collider); }
+    public Vector3 GetMiddlePos() { return Util.GetMiddlePosBoxCollider2D(_collider); }
+    public Vector3 GetBottomPos() { return Util.GetBottomPosBoxCollider2D(_collider); }
 
     private void Skill()
     {
