@@ -12,7 +12,7 @@ public class KnockBack : AdditionalEffect
         Monster monster = obj.GetComponent<Monster>();
         if (monster != null)
         {
-            if (monster.GetIsKnockBackAble() == false) return;
+            if (!monster.GetIsKnockBackAble()) return;
             monster.StopAttack();
             monster.SetStatus(MonsterStatus.Idle);
             //TODO :임시

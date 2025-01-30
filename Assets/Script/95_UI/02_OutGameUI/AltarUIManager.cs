@@ -56,7 +56,7 @@ public class AltarUIManager : MonoBehaviour
                 Inventory.Instance.AddSkill(traitName);
                 break;
             case TraitSetButtonStatus.EquipAble:
-                if (Player.Instance.CheckFullEquipTrait() == false)
+                if (!Player.Instance.CheckFullEquipTrait())
                 {
                     Player.Instance.EquipTrait(traitName);
                     break;

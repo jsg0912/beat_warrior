@@ -42,7 +42,7 @@ public class SkillCoolTimeUI : MonoBehaviour
 
     private void TryTurnOffSkillCoolTimeUI()
     {
-        if (isFirstCoolTime == false)
+        if (!isFirstCoolTime)
         {
             isFirstCoolTime = true;
             Util.SetActive(SkillIconUILight.gameObject, false);

@@ -20,7 +20,7 @@ public static class TraitPriceList
 
         for (int i = start; i < (int)SkillName.End; i++)
         {
-            if (Info.ContainsKey(skillNames[i]) == false)
+            if (!Info.ContainsKey(skillNames[i]))
             {
                 throw new Exception($"No {skillNames[i]} is in TraitPriceList");
             }

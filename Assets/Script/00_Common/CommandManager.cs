@@ -13,7 +13,7 @@ public class CommandManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (GameManager.Instance.isInGame && PauseController.instance.GetPause() == false)
+        if (GameManager.Instance.isInGame && !PauseController.instance.GetPause())
         {
             Player.Instance?.CheckIsMove();
         }
@@ -22,7 +22,7 @@ public class CommandManager : MonoBehaviour
     void Update()
     {
         bool isInGame = GameManager.Instance.isInGame;
-        bool isCommandAble = GameManager.Instance.IsLoading == false;
+        bool isCommandAble = !GameManager.Instance.IsLoading;
 
         if (isCommandAble)
         {

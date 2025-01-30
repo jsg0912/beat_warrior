@@ -113,7 +113,7 @@ public class Player : DirectionalGameObject
                 break;
             case PlayerStatus.Attack:
                 if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.attackRAnimTrigger);
-                else _animator.SetTrigger(PlayerSkillConstant.attackLAnimTrigger);
+                else _animator.SetTrigger(PlayerSkillConstant.attackRAnimTrigger);
                 break;
             case PlayerStatus.Dash:
                 _animator.SetTrigger(PlayerSkillConstant.dashAnimTrigger);
@@ -122,7 +122,8 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerSkillConstant.markAnimTrigger);
                 break;
             case PlayerStatus.Skill1:
-                _animator.SetTrigger(PlayerSkillConstant.skill1AnimTrigger);
+                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.skill1LAnimTrigger);
+                else _animator.SetTrigger(PlayerSkillConstant.skill1LAnimTrigger);
                 break;
             case PlayerStatus.Skill2:
                 _animator.SetTrigger(PlayerSkillConstant.skill2AnimTrigger);
@@ -187,7 +188,7 @@ public class Player : DirectionalGameObject
 
     public void CheckIsMove()
     {
-        if (IsMoveable() == false) return;
+        if (!IsMoveable()) return;
 
         bool isMove = false;
 
@@ -203,7 +204,7 @@ public class Player : DirectionalGameObject
             isMove = true;
         }
 
-        if (IsUsingSkill() == false && status != PlayerStatus.Jump) SetPlayerStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
+        if (!IsUsingSkill() && status != PlayerStatus.Jump) SetPlayerStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
 
         if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
@@ -226,7 +227,6 @@ public class Player : DirectionalGameObject
             case PlayerStatus.Idle:
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
-            case PlayerStatus.Skill1:
             case PlayerStatus.Mark:
                 return true;
             default:
@@ -251,8 +251,8 @@ public class Player : DirectionalGameObject
 
     private void Down()
     {
-        if (isOnTile == false) return;
-        if (_animator.GetBool(PlayerConstant.groundedAnimBool) == false) return;
+        if (!isOnTile) return;
+        if (!_animator.GetBool(PlayerConstant.groundedAnimBool)) return;
 
         if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Down])) colliderController.PassTile(tileCollider);
     }
@@ -307,7 +307,7 @@ public class Player : DirectionalGameObject
         int moveCount = 0;
         while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
-            if (passWall == false)
+            if (!passWall)
             {
                 float movingDir = GetMovingDirectionFloat();
                 Vector3 start = GetMonsterMiddlePos() + new Vector3(GetPlayerSize().x / 2, 0, 0) * movingDir;
@@ -371,7 +371,7 @@ public class Player : DirectionalGameObject
 
     public void AddOrRemoveTrait(SkillName name)
     {
-        if (IsEquippedTrait(name) == false) EquipTrait(name);
+        if (!IsEquippedTrait(name)) EquipTrait(name);
         else RemoveTrait(name);
     }
 
@@ -435,7 +435,7 @@ public class Player : DirectionalGameObject
 
         bool isAlive = ChangeCurrentHP(-dmg);
 
-        if (isAlive == false)
+        if (!isAlive)
         {
             SetDead();
             return;
@@ -475,7 +475,7 @@ public class Player : DirectionalGameObject
     {
         GameObject other = collision.gameObject;
 
-        if (TagConstant.IsBlockTag(other) == false) return;
+        if (!TagConstant.IsBlockTag(other)) return;
 
         float collisionPoint = collision.GetContact(0).point.y;
         float colliderBottom = _collider.bounds.center.y - _collider.bounds.size.y / 2;
