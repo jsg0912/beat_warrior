@@ -39,7 +39,6 @@ public abstract class ActiveSkillPlayer : ActiveSkill
             attackCollider = attackPrefab.GetComponentInChildren<AttackCollider>();
         }
 
-        attackCollider.InitializeBeforeAttack();
         if (!CheckObjectDirection())
         {
             Util.FlipLocalScaleX(attackCollider.gameObject);
