@@ -56,9 +56,6 @@ public class MiniMap : MonoBehaviour
         MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.Tile);
 
         UpdateMonsterInfo();
-        icon = new List<GameObject>();
-        monsterInMap = new List<GameObject>();
-        monsterForIcon = new List<GameObject>();
 
         Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
 
