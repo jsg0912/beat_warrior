@@ -19,5 +19,5 @@ public class PlayerConstant
     public const string restartAnimTrigger = "restart";
     public const string reviveAnimTrigger = "revive";
 
-    public const int MaxAdditionalSkillCount = 2;
+    public const int MaxAdditionalSkillCount = 3;
 }
