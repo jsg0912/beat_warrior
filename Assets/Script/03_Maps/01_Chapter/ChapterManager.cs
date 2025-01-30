@@ -72,7 +72,7 @@ public class ChapterManager : MonoBehaviour
     public void StartNewGame()
     {
         InitializeChaptersForNewGame();
-        if (!tutorialCompleted)
+        if (tutorialCompleted == false)
         {
             StartChapter(ChapterName.Tutorial);
         }
