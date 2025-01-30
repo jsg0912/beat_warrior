@@ -30,4 +30,9 @@ public class UIManager : MonoBehaviour
     {
         Util.SetActive(inGameUIPrefab, GameManager.Instance.isInGame);
     }
+
+    public void TrunOnSettingPopup()
+    {
+        SettingUIManager.Instance.TurnOnSettingUI();
+    }
 }
