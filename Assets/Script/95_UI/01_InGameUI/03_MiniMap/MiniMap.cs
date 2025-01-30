@@ -74,8 +74,8 @@ public class MiniMap : MonoBehaviour
     {
         PlayerMapIcon.transform.position = Player.Instance.transform.position + Vector3.up * 0.7f;
 
-        UpdateMonsterInfo();
         CountObjectInMiniMap();
+        UpdateMonsterInfo();
     }
 
     private void UpdateMonsterInfo()
