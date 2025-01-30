@@ -11,6 +11,8 @@ public class MoveCamera : MonoBehaviour
     private float orthographicSize;
     private float horizongraphicSize;
 
+    public bool isCamera = true;
+
     private void Start()
     {
         orthographicSize = Camera.main.orthographicSize;
@@ -33,8 +35,16 @@ public class MoveCamera : MonoBehaviour
 
     private void cameraMovement()
     {
-        transform.position = Vector3.Lerp(transform.position, Target.position, Time.deltaTime * speed);
-        transform.position = new Vector3(transform.position.x, transform.position.y, z);
+        if (isCamera)
+        {
+            transform.position = Vector3.Lerp(transform.position, Target.position, Time.deltaTime * speed);
+            transform.position = new Vector3(transform.position.x, transform.position.y, z);
+        }
+        else
+        {
+            Vector3 targetPosition = new Vector3(Target.position.x, transform.position.y, z);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
+        }
     }
 
     private void maxCameraMovement()

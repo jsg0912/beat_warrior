@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Intensity: 0.4
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 000000008d72c65a395cfd1c4735b31a612d8864e57e3c7db1b15851d7b6af4b
+  m_ApplyToSortingLayers: 000000008d72c65a395cfd1c4735b31ae57e3c7db1b15851d7b6af4b
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Intensity: 3.73
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 000000008d72c65a395cfd1c4735b31a612d8864e57e3c7db1b15851d7b6af4b
+  m_ApplyToSortingLayers: 000000008d72c65a395cfd1c4735b31ae57e3c7db1b15851d7b6af4b
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -334,6 +334,10 @@ PrefabInstance:
     - target: {fileID: 19900004, guid: 55da70703668fe04f93b89f9c0cf29be, type: 3}
       propertyPath: m_SortingLayer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19900004, guid: 55da70703668fe04f93b89f9c0cf29be, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 19900004, guid: 55da70703668fe04f93b89f9c0cf29be, type: 3}
       propertyPath: m_SortingLayerID
