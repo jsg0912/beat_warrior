@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HolyBlade : ActiveSkillPlayer
 {
-    private bool isCharging;
+    private bool isCharging => coolTime > 0;
 
     public HolyBlade(GameObject unit) : base(unit)
     {
@@ -11,8 +11,6 @@ public class HolyBlade : ActiveSkillPlayer
         status = PlayerStatus.Attack;
 
         damageMultiplier = PlayerSkillConstant.attackAtk;
-
-        isCharging = false;
 
         coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
         coolTime = 0;
@@ -24,16 +22,14 @@ public class HolyBlade : ActiveSkillPlayer
     protected override IEnumerator CountCoolTime()
     {
         coolTime = coolTimeMax;
-        isCharging = true;
 
-        while (coolTime > 0)
+        while (isCharging)
         {
             coolTime -= Time.deltaTime;
             yield return null;
         }
 
         coolTime = 0;
-        isCharging = false;
 
         Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, 1);
 
@@ -51,7 +47,7 @@ public class HolyBlade : ActiveSkillPlayer
 
     public void CheckCoolTime()
     {
-        if (isCharging == true) return;
+        if (isCharging) return;
 
         if (!Player.Instance.playerUnit.GetIsFullStat(StatKind.AttackCount))
             unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
@@ -59,7 +55,7 @@ public class HolyBlade : ActiveSkillPlayer
 
     protected override void CreateEffectPrefab()
     {
-        attackCollider = Player.Instance.colliderController.hollyBladeCollider;
+        attackCollider = Player.Instance.colliderController.shortBladeCollider;
         base.CreateEffectPrefab();
     }
 

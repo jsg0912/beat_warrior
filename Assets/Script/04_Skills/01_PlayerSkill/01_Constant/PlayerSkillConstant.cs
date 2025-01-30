@@ -16,7 +16,7 @@ public class PlayerSkillConstant
         { SkillName.Attack, 0.1f },
         { SkillName.Mark, 8.0f },
         { SkillName.Dash, 8.0f },
-        { SkillName.Skill1, 8.0f },
+        { SkillName.Skill1, 0.1f },
         { SkillName.Skill2, 8.0f }
     };
 
@@ -33,6 +33,7 @@ public class PlayerSkillConstant
     public const string attackLAnimTrigger = "attackL";
     public const string markAnimTrigger = "mark";
     public const string dashAnimTrigger = "dash";
-    public const string skill1AnimTrigger = "skill1";
+    public const string skill1RAnimTrigger = "skill1R";
+    public const string skill1LAnimTrigger = "skill1L";
     public const string skill2AnimTrigger = "skill2";
 }

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System;
 
-[System.Serializable]
+[Serializable]
 public class MiniMap : MonoBehaviour
 {
     public static MiniMap Instance;
@@ -140,9 +140,9 @@ public class MiniMap : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        for (int i = 0; i < CountMapMonster; i++)
+        for (int i = 0; i < monsterInMap.Count; i++)
         {
-            if (i >= icon.Length) break;
+            if (i >= icon.Count) break;
             icon[i].GetComponent<MiniMapIcon>().GetHp(0);
         }
         TryCreatePlayerMapIcon();
