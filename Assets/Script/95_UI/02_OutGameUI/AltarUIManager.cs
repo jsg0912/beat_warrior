@@ -61,6 +61,7 @@ public class AltarUIManager : MonoBehaviour
                     Player.Instance.EquipTrait(traitName);
                     break;
                 }
+                // TODO: 가득차있는데 장착하려고 하면, 어떻게 할지 결정해야 함 - 신동환, 20250130
                 break;
             case TraitSetButtonStatus.Equipped:
                 Player.Instance.RemoveTrait(traitName);
