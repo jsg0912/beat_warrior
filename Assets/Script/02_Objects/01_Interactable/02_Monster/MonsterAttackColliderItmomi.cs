@@ -8,17 +8,17 @@ public class MonsterAttackColliderItmomi : MonsterAttackCollider
 
     public override void Initiate()
     {
-        StartCoroutine(enumerator());
+        // StartCoroutine(enumerator());
     }
 
-    private IEnumerator enumerator()
-    {
-        yield return new WaitForSeconds(1.0f);
-        Util.SetActive(Warning, false);
-        Util.SetActive(Thorn, true);
-        yield return new WaitForSeconds(1.0f);
-        Destroy(gameObject);
-    }
+    // private IEnumerator enumerator()
+    // {
+    //     yield return new WaitForSeconds(1.0f);
+    //     Util.SetActive(Warning, false);
+    //     Util.SetActive(Thorn, true);
+    //     yield return new WaitForSeconds(3.0f);
+    //     Destroy(gameObject);
+    // }
 
     public override void OnTriggerEnter2D(Collider2D other)
     {

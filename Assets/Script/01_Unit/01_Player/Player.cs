@@ -348,9 +348,9 @@ public class Player : DirectionalGameObject
         if (changeDir == true) SetMovingDirection((Direction)(-1 * (int)dir));
     }
 
-    public Vector3 GetSize() { return new Vector3(_collider.size.x, _collider.size.y, 0); }
-    protected Vector3 GetMiddlePos() { return transform.position + new Vector3(_collider.offset.x, _collider.offset.y, 0); }
-    public Vector3 GetBottomPos() { return transform.position + new Vector3(_collider.offset.x, _collider.offset.y - _collider.size.y / 2, 0); }
+    public Vector3 GetSize() { return Util.GetSizeBoxCollider2D(_collider); }
+    public Vector3 GetMiddlePos() { return Util.GetMiddlePosBoxCollider2D(_collider); }
+    public Vector3 GetBottomPos() { return Util.GetBottomPosBoxCollider2D(_collider); }
 
     private void Skill()
     {
