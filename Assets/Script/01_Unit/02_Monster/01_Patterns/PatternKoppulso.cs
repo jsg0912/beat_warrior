@@ -1,6 +1,6 @@
-public class KoppulsoPattern : Pattern
+public class PatternKoppulso : Pattern
 {
-    public KoppulsoPattern()
+    public PatternKoppulso()
     {
         Recognize = new RecognizeStrategyMelee();
         MoveBasic = new MoveStrategyNormal();

@@ -1,6 +1,6 @@
-public class IbkkugiPattern : Pattern
+public class PatternIbkkugi : Pattern
 {
-    public IbkkugiPattern()
+    public PatternIbkkugi()
     {
         Recognize = new RecognizeStrategyRanged();
         MoveBasic = new MoveStrategyNormal();

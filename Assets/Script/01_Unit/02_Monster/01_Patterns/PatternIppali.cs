@@ -1,6 +1,6 @@
-public class IppaliPattern : Pattern
+public class PatternIppali : Pattern
 {
-    public IppaliPattern()
+    public PatternIppali()
     {
         Recognize = new RecognizeStrategyMelee();
         MoveBasic = new MoveStrategyNormal();

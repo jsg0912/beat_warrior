@@ -1,6 +1,6 @@
-public class JiljiliPattern : Pattern
+public class PatternJiljili : Pattern
 {
-    public JiljiliPattern()
+    public PatternJiljili()
     {
         Recognize = new RecognizeStrategyMelee();
         MoveBasic = new MoveStrategyNormal();

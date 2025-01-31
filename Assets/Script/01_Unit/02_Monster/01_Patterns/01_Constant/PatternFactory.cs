@@ -12,19 +12,21 @@ public static class PatternFactory
                 return new Monster2Pattern();
             case PatternName.Monster3:
                 return new Monster3Pattern();
+            case PatternName.RangedMonster:
+                return new PatternIbkkugi();
+            // TODO: 이 위는 모두 임시임 - SDH, 20250131
             case PatternName.Ibkkugi:
-                return new IbkkugiPattern();
+                return new PatternIbkkugi();
             case PatternName.Jiljili:
-                return new JiljiliPattern();
-            case PatternName.RangedMonster: // TODO: 임시
-                return new IbkkugiPattern();
-            case PatternName.Itmomi: // TODO: 임시
-                return new ItmomiPattern();
+                return new PatternJiljili();
+            case PatternName.Itmomi:
+                return new PatternItmomi();
             case PatternName.Ippali:
-                return new IppaliPattern();
+                return new PatternIppali();
             case PatternName.Koppulso:
-                return new KoppulsoPattern();
-
+                return new PatternKoppulso();
+            case PatternName.Giljjugi:
+                return new PatternGiljjugi();
         }
 
         throw new System.Exception($"{patternName} is not exist");

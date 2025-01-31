@@ -1,6 +1,6 @@
-public class ItmomiPattern : Pattern
+public class PatternItmomi : Pattern
 {
-    public ItmomiPattern()
+    public PatternItmomi()
     {
         MoveBasic = new MoveStrategyRandom();
         Recognize = new RecognizeStrategyRanged();
