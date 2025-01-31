@@ -228,6 +228,8 @@ public class Player : DirectionalGameObject
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
             case PlayerStatus.Mark:
+                // case PlayerStatus.Attack:
+                // case PlayerStatus.Skill1:
                 return true;
             default:
                 return false;
