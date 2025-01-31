@@ -17,6 +17,7 @@ public class MoveStrategyNormal : MoveStrategyRandom
         base.PlayStrategy();
 
         CheckGround();
+        if (isEndOfGround == true) FlipDirection();
         return true;
     }
 }
