@@ -140,7 +140,11 @@ public class Monster : DirectionalGameObject
         }
         this.status = status;
     }
-    public void SetIsTackleAble(bool isTackleAble) { monsterUnit.isTackleAble = isTackleAble; }
+    public void SetIsTackleAble(bool isTackleAble)
+    {
+        monsterUnit.isTackleAble = isTackleAble;
+        Util.SetActive(tackleCollider, isTackleAble);
+    }
     public void SetIsKnockBackAble(bool isKnockBackAble) { monsterUnit.isKnockBackAble = isKnockBackAble; }
     public void SetIsFixedAnimation(bool isFixedAnimation) { this.isFixedAnimation = isFixedAnimation; }
     public virtual void Die()

@@ -15,7 +15,7 @@ public static class PatternFactory
             // TODO: 이 위는 모두 임시임 - SDH, 20250131
             case PatternName.Ibkkugi:
                 return new PatternIbkkugi();
-            case PatternName.Jiljili:
+            case PatternName.Dulduli:
                 return new PatternDulDulI();
             case PatternName.Itmomi:
                 return new PatternItmomi();
