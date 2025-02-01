@@ -46,19 +46,25 @@ public class AltarPopup : PageAblePopupSystem
         }
     }
 
-    public override void TurnOnPopup()
+    public override bool TurnOnPopup()
     {
-        Initialize();
-        base.TurnOnPopup();
-        PauseController.instance.PauseGame();
-        Util.SetActive(MiniMap.Instance.gameObject, false);
-        ShowCurrentPageText();
+        bool success = base.TurnOnPopup();
+        if (success)
+        {
+            Initialize();
+            Util.SetActive(MiniMap.Instance.gameObject, false);
+            ShowCurrentPageText();
+        }
+        return success;
     }
 
-    public override void TurnOffPopup()
+    public override bool TurnOffPopup()
     {
-        base.TurnOffPopup();
-        PauseController.instance.ResumeGame();
-        Util.SetActive(MiniMap.Instance.gameObject, true);
+        bool success = base.TurnOffPopup();
+        if (success)
+        {
+            Util.SetActive(MiniMap.Instance.gameObject, true);
+        }
+        return success;
     }
 }
