@@ -7,7 +7,7 @@ public class AttackCollider : MonoBehaviour
     protected List<GameObject> TargetMonster = new();
     public List<AdditionalEffect> additionalEffects = new();
 
-    public void InitializeBeforeAttack()
+    void OnDisable()
     {
         additionalEffects.Clear();
         TargetMonster.Clear();
@@ -43,8 +43,8 @@ public class AttackCollider : MonoBehaviour
     {
         // Alive Monster Check
         if (gameObject == null) return false;
-        if (gameObject.CompareTag(TagConstant.Monster) == false) return false;
-        if (gameObject.GetComponent<Monster>().GetIsAlive() == false) return false;
+        if (!gameObject.CompareTag(TagConstant.Monster)) return false;
+        if (!gameObject.GetComponent<Monster>().GetIsAlive()) return false;
 
         // Check duplication
         if (TargetMonster.Contains(gameObject)) return false;

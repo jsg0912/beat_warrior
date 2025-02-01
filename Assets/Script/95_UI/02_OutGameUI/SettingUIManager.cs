@@ -20,6 +20,11 @@ public class SettingUIManager : MonoBehaviour
         ChangeContent(DefaultSettingContentIndex);
     }
 
+    public void TrunOffSettingUI()
+    {
+        settingUIPopup.TurnOffPopup();
+    }
+
     public void ChangeContent(SettingContentIndex newContentIndex)
     {
         if (currentContentIndex == newContentIndex) return;

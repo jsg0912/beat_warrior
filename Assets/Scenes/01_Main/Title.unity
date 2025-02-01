@@ -278,6 +278,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77055964}
   m_CullTransparentMesh: 1
+--- !u!114 &95603681 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 43760972634434967, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+  m_PrefabInstance: {fileID: 1550215503}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b9df7d599cddc54b825afbc00080476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &124411342
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,6 +641,7 @@ GameObject:
   - component: {fileID: 554831689}
   - component: {fileID: 554831690}
   - component: {fileID: 554831691}
+  - component: {fileID: 554831692}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -679,7 +691,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8defdbdb7a27204ba1c695d2a592b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupSystemStack: []
 --- !u!114 &554831690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -702,6 +713,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57038f4c42140c24ab6643d388ab1d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &554831692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 554831686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 079fc9064768f6c45851e25634eaa562, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &620035297
@@ -1941,7 +1964,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0e02077619cd5fa47aaf971d99906269, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ed94444a2aef6974cbec6fa018bf9199, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8580,14 +8603,14 @@ PrefabInstance:
     - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 695329075}
+      objectReference: {fileID: 95603681}
     - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnSettingClick
+      value: TrunOnSettingPopup
       objectReference: {fileID: 0}
     - target: {fileID: 7957067548516871925, guid: 2c339035d7386124b936021c39101669, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: TitleManager, Assembly-CSharp
+      value: UIManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5399804278181557449, guid: 2c339035d7386124b936021c39101669, type: 3}

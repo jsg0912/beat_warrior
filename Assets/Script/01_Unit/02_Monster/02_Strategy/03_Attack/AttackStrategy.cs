@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class AttackStrategy : Strategy
 {
-    protected MonoBehaviour monoBehaviour;
+    protected MonoBehaviour monoBehaviour; // For Coroutine
     protected Direction attackDirection;
     protected Coroutine attackCoroutine;
 
@@ -33,7 +33,7 @@ public abstract class AttackStrategy : Strategy
 
     public void UpdateCoolTime()
     {
-        if (attackCoolTime > 0 && monster.GetIsAttacking() == false)
+        if (attackCoolTime > 0 && !monster.GetIsAttacking())
         {
             attackCoolTime -= Time.deltaTime;
         }
@@ -74,7 +74,6 @@ public abstract class AttackStrategy : Strategy
 
     public void SetAttackDirection()
     {
-        if (Player.Instance.transform.position.x > monster.transform.position.x) attackDirection = Direction.Right;
-        else attackDirection = Direction.Left;
+        attackDirection = GetRelativeDirectionToPlayer();
     }
 }

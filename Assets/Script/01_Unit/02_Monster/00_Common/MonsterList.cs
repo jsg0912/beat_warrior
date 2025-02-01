@@ -14,13 +14,13 @@ public static class MonsterList
         },
         PatternName.Ibkkugi),
 
-         new MonsterJSON(MonsterName.Jiljili,
+         new MonsterJSON(MonsterName.Dulduli,
         "질질이",
         new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
         },
-        PatternName.Jiljili),
+        PatternName.Dulduli),
 
         new MonsterJSON(MonsterName.Itmomi,
         "잇몸이",

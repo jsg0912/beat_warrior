@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MonsterBodyCollider : MonoBehaviour
 {
+    [SerializeField] public Monster monster;
     [SerializeField] private Collider2D colliderObj;
     private BoxCollider2D boxCollider;
     private PolygonCollider2D polygonCollider;

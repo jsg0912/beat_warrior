@@ -1,7 +1,7 @@
 public class PlayerConstant
 {
     public const int atk = 1;
-    public const int hpMax = 3;
+    public const int hpMax = 5;
     public const int jumpCountMax = 1;
 
     public const float gravityScale = 5.0f;
@@ -19,5 +19,5 @@ public class PlayerConstant
     public const string restartAnimTrigger = "restart";
     public const string reviveAnimTrigger = "revive";
 
-    public const int MaxAdditionalSkillCount = 2;
+    public const int MaxAdditionalSkillCount = 3;
 }
