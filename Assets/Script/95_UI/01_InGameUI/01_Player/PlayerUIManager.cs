@@ -25,5 +25,12 @@ public class PlayerUIManager : MonoBehaviour
         //     skillCoolTimeUI.initialize();
         // }
         attackCountUI.UpdateUI();
+        SwapMarkAndDash(true);
+    }
+
+    public void SwapMarkAndDash(bool isMarkOn)
+    {
+        Util.SetActive(SkillCoolTimeUIMark.gameObject, isMarkOn);
+        Util.SetActive(SkillCoolTimeUIDash.gameObject, !isMarkOn);
     }
 }

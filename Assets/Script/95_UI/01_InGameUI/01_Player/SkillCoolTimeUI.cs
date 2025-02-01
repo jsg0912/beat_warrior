@@ -7,13 +7,14 @@ public class SkillCoolTimeUI : MonoBehaviour
     [SerializeField] SkillName skillName;
     [SerializeField] Image CoolTimeImg;
     [SerializeField] Image SkillIconUILight;
-    [SerializeField] TextMeshProUGUI SkillName; // TODO: 표시 안하는 거로 기획 확정나면 제거 - 신동환, 20250114
+    [SerializeField] TextMeshProUGUI SkillHotKey;
     [SerializeField] TextMeshProUGUI CoolTimeText;
 
     private bool isFirstCoolTime = false; // This Bool is for optimization - SDH, 20250114
+
     void Start()
     {
-        SkillName.text = skillName.ToString();
+        UpdateSkillHotKey();
     }
 
     // [Code Review - KMJ] Using Coroutine, not Update - SDH, 20250114
@@ -59,5 +60,11 @@ public class SkillCoolTimeUI : MonoBehaviour
             animator.SetTrigger("Start");
             animator.speed = 1 / PlayerSkillConstant.SkillCoolTime[skillName];
         }
+    }
+
+    public void UpdateSkillHotKey()
+    {
+        // TODO: HotKey 설정된 것에 따라 바뀌게 해야함
+        // SkillHotKey.text = skillName.ToString(); 
     }
 }
