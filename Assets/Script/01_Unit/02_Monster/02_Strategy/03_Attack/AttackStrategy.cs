@@ -74,7 +74,6 @@ public abstract class AttackStrategy : Strategy
 
     public void SetAttackDirection()
     {
-        if (Player.Instance.transform.position.x > monster.transform.position.x) attackDirection = Direction.Right;
-        else attackDirection = Direction.Left;
+        attackDirection = GetRelativeDirectionToPlayer();
     }
 }
