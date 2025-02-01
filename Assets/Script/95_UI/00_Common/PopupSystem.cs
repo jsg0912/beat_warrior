@@ -22,15 +22,15 @@ public abstract class PopupSystem : MonoBehaviour
         TurnOffPopup();
     }
 
-    public virtual void TurnOnPopup()
+    public virtual bool TurnOnPopup()
     {
         bool success = Util.SetActive(gameObject, true);
-        if (success) CommandManager.Instance?.popupSystemStack.Add(this);
+        if (success) PopupManager.Instance.PushPopup(this);
+        return success;
     }
 
-    public virtual void TurnOffPopup()
+    public virtual bool TurnOffPopup()
     {
-        bool success = Util.SetActive(gameObject, false);
-        if (success) CommandManager.Instance?.PopPopupSystem();
+        return Util.SetActive(gameObject, false);
     }
 }

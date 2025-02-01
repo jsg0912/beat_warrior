@@ -53,25 +53,24 @@ public class Dash : ActiveSkillPlayer
     {
         coolTime = 0;
 
-        Transform playerTransform = Player.Instance.transform;
-
-        Vector2 playerBottom = playerTransform.position;
-        Vector2 playerMiddle = playerBottom + new Vector2(0, PlayerConstant.playerHeight / 2);
+        Vector2 playerBottom = Player.Instance.GetBottomPos();
+        Vector2 playerMiddle = Player.Instance.GetMiddlePos();
         Vector2 playerTop = playerBottom + new Vector2(0, PlayerConstant.playerHeight);
-        Vector2 endPoint = TargetMonster.transform.position;
+        Vector2 endPoint = TargetMonster.GetComponent<Monster>().GetBottomPos();
 
         Vector2 direction = (endPoint - playerBottom).normalized;
         endPoint += new Vector2(PlayerSkillConstant.DashEndPointInterval * direction.x, PlayerSkillConstant.DashEndYOffset);
 
         float distance = Vector2.Distance(playerBottom, endPoint);
+
         CheckMonsterHitBox(playerBottom, direction, distance);
         CheckMonsterHitBox(playerMiddle, direction, distance);
         CheckMonsterHitBox(playerTop, direction, distance);
 
         // Dash시에 Player 머리와 발끝 경로가 보이는 Test용 코드 - 김민지, 20240901
-        // Debug.DrawRay(playerBottom, dir, Color.red, distance);
-        // Debug.DrawRay(playerMiddle, dir, Color.red, distance);
-        // Debug.DrawRay(playerTop, dir, Color.red, distance);
+        // Debug.DrawRay(playerBottom, direction * distance, Color.red, distance);
+        // Debug.DrawRay(playerMiddle, direction * distance, Color.red, distance);
+        // Debug.DrawRay(playerTop, direction * distance, Color.red, distance);
 
         // 중복 제거
         DashTargetMonster = DashTargetMonster.Distinct().ToList();
@@ -80,9 +79,9 @@ public class Dash : ActiveSkillPlayer
 
         foreach (GameObject obj in DashTargetMonster)
         {
-            if (obj.CompareTag(TagConstant.Monster))
+            if (obj.layer == LayerMask.NameToLayer(LayerConstant.Monster))
             {
-                obj.GetComponent<Monster>().AttackedByPlayer(damageMultiplier);
+                obj.GetComponent<MonsterBodyCollider>().monster.AttackedByPlayer(damageMultiplier);
             }
         }
 
@@ -107,7 +106,6 @@ public class Dash : ActiveSkillPlayer
         if (countCoolTime != null) monoBehaviour.StopCoroutine(countCoolTime);
         coolTime = Player.Instance.GetSkillCoolTime(SkillName.Mark);
     }
-
 
     private void CheckMonsterHitBox(Vector2 origin, Vector2 Direction, float distance)
     {

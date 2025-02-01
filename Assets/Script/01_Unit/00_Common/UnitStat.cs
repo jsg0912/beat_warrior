@@ -26,7 +26,7 @@ public class UnitStat
         foreach (StatKind statKind in Enum.GetValues(typeof(StatKind)))
         {
             if (statKind == StatKind.Necessary) break;
-            if (stats.ContainsKey(statKind) == false) throw new Exception($"Stat이 없음 ${statKind}");
+            if (!stats.ContainsKey(statKind)) throw new Exception($"Stat이 없음 ${statKind}");
         }
     }
 

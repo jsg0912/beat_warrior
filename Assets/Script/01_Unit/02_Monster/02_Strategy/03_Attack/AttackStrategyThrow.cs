@@ -37,10 +37,10 @@ public class AttackStrategyThrow : AttackStrategyCreate
     {
         base.SkillMethod();
 
-        Vector3 offset = new Vector3(0, MonsterConstant.ThrowObjectYOffset, 0);
+        Vector3 offset = new Vector3(MonsterConstant.ThrowObjectXOffset, 0, 0);
         obj.transform.position = monster.transform.position + offset;
 
-        float distance = targetPosition.x - GetMonsterPos().x - MonsterConstant.ThrowObjectYOffset * GetRelativePlayerDirectionFloat();
+        float distance = targetPosition.x - GetMonsterPos().x;
 
         monsterAttackCollider.rb.velocity = GetVelocityConstantFlyTime(distance);
     }

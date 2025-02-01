@@ -27,7 +27,7 @@ public class SkillReset : PassiveSkill
 
     public void TryReset(Skill skill)
     {
-        if (ResetTargetSkills.Contains(skill.skillName) == false)
+        if (!ResetTargetSkills.Contains(skill.skillName))
         {
             return;
         }

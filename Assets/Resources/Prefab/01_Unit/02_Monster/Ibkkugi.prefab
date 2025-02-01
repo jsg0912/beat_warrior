@@ -54,7 +54,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581d4b387bf463f4d8b93c26b3983efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster: {fileID: 2200227098567476836}
   colliderObj: {fileID: 3995051724842549428}
 --- !u!61 &3995051724842549428
 BoxCollider2D:
@@ -221,7 +222,7 @@ MonoBehaviour:
   HpUI: {fileID: 3219088139619967221}
   Target: {fileID: 0}
   AnotherHPValue: 0
-  bodyCollider: {fileID: 6604740661846717948}
+  tackleCollider: {fileID: 0}
   monsterBodyCollider: {fileID: 1655126573235298881}
 --- !u!50 &29716057721496312
 Rigidbody2D:

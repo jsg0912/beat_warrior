@@ -69,7 +69,7 @@ public class AltarDetailPopup : PopupSystem
                 Update();
                 break;
             case TraitSetButtonStatus.EquipAble:
-                if (Player.Instance.CheckFullEquipTrait() == false)
+                if (!Player.Instance.CheckFullEquipTrait())
                 {
                     Player.Instance.EquipTrait(traitName);
                     Update();

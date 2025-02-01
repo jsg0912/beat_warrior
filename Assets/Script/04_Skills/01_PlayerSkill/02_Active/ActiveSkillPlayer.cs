@@ -39,17 +39,11 @@ public abstract class ActiveSkillPlayer : ActiveSkill
             attackCollider = attackPrefab.GetComponentInChildren<AttackCollider>();
         }
 
-        if (attackCollider == null)
-        {
-            DebugConsole.Log("no attack collider " + this.GetType().Name);
-            return;
-        }
-        if (CheckObjectDirection() == false)
+        if (!CheckObjectDirection())
         {
             Util.FlipLocalScaleX(attackCollider.gameObject);
         }
 
-        attackCollider.InitializeBeforeAttack();
         attackCollider.SetAtk(damageMultiplier);
         foreach (AdditionalEffect additionalEffect in additionalEffects) attackCollider.SetAdditionalEffect(additionalEffect);
     }

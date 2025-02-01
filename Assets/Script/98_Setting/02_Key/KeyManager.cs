@@ -19,7 +19,7 @@ public class KeyManager : MonoBehaviour
         Instance = this;
         for (int i = 0; i < defaultKeys.Length; i++)
         {
-            if (KeySetting.keys.ContainsKey((PlayerAction)i) == false)
+            if (!KeySetting.keys.ContainsKey((PlayerAction)i))
                 KeySetting.keys.Add((PlayerAction)i, defaultKeys[i]);
         }
     }
