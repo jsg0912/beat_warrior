@@ -46,7 +46,7 @@ public class SkillCoolTimeUI : MonoBehaviour
         if (!isFirstCoolTime)
         {
             isFirstCoolTime = true;
-            Util.SetActive(SkillIconUILight.gameObject, false);
+            Util.SetActive(SkillIconUILight?.gameObject, false);
             Util.SetActive(CoolTimeText.gameObject, false);
             CoolTimeImg.fillAmount = 1;
         }
