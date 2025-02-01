@@ -115,8 +115,8 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerConstant.jumpAnimTrigger);
                 break;
             case PlayerStatus.Attack:
-                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.attackLAnimTrigger);
-                else _animator.SetTrigger(PlayerSkillConstant.attackLAnimTrigger);
+                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.attackRAnimTrigger);
+                else _animator.SetTrigger(PlayerSkillConstant.attackRAnimTrigger);
                 break;
             case PlayerStatus.Dash:
                 _animator.SetTrigger(PlayerSkillConstant.dashAnimTrigger);
@@ -125,8 +125,8 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerSkillConstant.markAnimTrigger);
                 break;
             case PlayerStatus.Skill1:
-                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.skill1RAnimTrigger);
-                else _animator.SetTrigger(PlayerSkillConstant.skill1RAnimTrigger);
+                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.skill1LAnimTrigger);
+                else _animator.SetTrigger(PlayerSkillConstant.skill1LAnimTrigger);
                 break;
             case PlayerStatus.Skill2:
                 _animator.SetTrigger(PlayerSkillConstant.skill2AnimTrigger);
