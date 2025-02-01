@@ -6,8 +6,6 @@ public static class PatternFactory
     {
         switch (patternName)
         {
-            case PatternName.MeleeEnemy:
-                return new MeleeEnemy();
             case PatternName.Monster2:
                 return new Monster2Pattern();
             case PatternName.Monster3:
@@ -18,7 +16,7 @@ public static class PatternFactory
             case PatternName.Ibkkugi:
                 return new PatternIbkkugi();
             case PatternName.Jiljili:
-                return new PatternJiljili();
+                return new PatternDulDulI();
             case PatternName.Itmomi:
                 return new PatternItmomi();
             case PatternName.Ippali:

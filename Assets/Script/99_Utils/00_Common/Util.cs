@@ -154,4 +154,11 @@ public static class Util
     {
         return (p + q - 1) / q;
     }
+
+    public static Vector3 GetMousePointWithPerspectiveCamera()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = Mathf.Abs(Camera.main.transform.position.z);
+        return Camera.main.ScreenToWorldPoint(mousePosition); ;
+    }
 }
