@@ -36,7 +36,7 @@ public class AltarUIManager : MonoBehaviour
 
     public void PlayEquipSound()
     {
-        SoundManager.instance.SFXPlay("Equip", EquipClip);
+        SoundManager.Instance.SFXPlay("Equip", EquipClip);
     }
 
     public void UpdatePlayerSoulView() => PlayerSoulView.text = "Soul : " + spiritCount.ToString();
