@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 1747267375979273751}
   - component: {fileID: 2662925559456600727}
   m_Layer: 5
-  m_Name: SkillCoolTime (2)
+  m_Name: Skill1CoolTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 8496626244104237805}
   - component: {fileID: 6847192553530734099}
   m_Layer: 5
-  m_Name: SkillCoolTime (3)
+  m_Name: Skill2CoolTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -716,7 +716,6 @@ GameObject:
   - component: {fileID: 9116639052199047134}
   - component: {fileID: 8001978819251050093}
   - component: {fileID: 2667226835610801677}
-  - component: {fileID: 7860014629566978456}
   - component: {fileID: 3016062957645751389}
   m_Layer: 5
   m_Name: PlayerUI
@@ -809,19 +808,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7860014629566978456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2335633658880510028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 565c0654f336481458413c37e16c34f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HP: {fileID: 6698299672893407081}
 --- !u!114 &3016062957645751389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,13 +820,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef357f8bcc5b2542b67dac77ee30f01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHpUI: {fileID: 7860014629566978456}
-  skillCoolTimeUIs:
-  - {fileID: 639966960574828629}
-  - {fileID: 5529516264062601518}
-  - {fileID: 2662925559456600727}
-  - {fileID: 6847192553530734099}
-  - {fileID: 820430162955520481}
+  playerHpUI: {fileID: 0}
+  SkillCoolTimeUIMark: {fileID: 639966960574828629}
+  SkillCoolTimeUIDash: {fileID: 5529516264062601518}
+  SkillCoolTimeUISpecialBlade: {fileID: 2662925559456600727}
+  SkillCoolTimeUISweepingBlade: {fileID: 6847192553530734099}
+  SkillCoolTimeUIHollyBlade: {fileID: 820430162955520481}
   attackCountUI: {fileID: 2243086762723870987}
 --- !u!1 &2445784075852270518
 GameObject:
@@ -988,7 +973,7 @@ GameObject:
   - component: {fileID: 644599197546090590}
   - component: {fileID: 639966960574828629}
   m_Layer: 5
-  m_Name: SkillCoolTime
+  m_Name: MarkCoolTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1623,7 +1608,7 @@ GameObject:
   - component: {fileID: 820430162955520481}
   - component: {fileID: 2243086762723870987}
   m_Layer: 5
-  m_Name: SkillCoolTime (4)
+  m_Name: AttackCoolTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2255,8 +2240,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2965271946434608487}
   - component: {fileID: 1191783082752766825}
+  - component: {fileID: 5007507015534613046}
   m_Layer: 5
-  m_Name: HP
+  m_Name: HPUILIst
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2278,7 +2264,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 16, y: -21.000061}
+  m_AnchoredPosition: {x: 16, y: -21}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1191783082752766825
@@ -2307,6 +2293,19 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &5007507015534613046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6698299672893407081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 565c0654f336481458413c37e16c34f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HPPrefab: {fileID: 8594637561320709253, guid: e428296d19983c14d998b47bb7a77e4c, type: 3}
 --- !u!1 &7399603824847727006
 GameObject:
   m_ObjectHideFlags: 0
@@ -2453,7 +2452,7 @@ GameObject:
   - component: {fileID: 582296262117204348}
   - component: {fileID: 5529516264062601518}
   m_Layer: 5
-  m_Name: SkillCoolTime (1)
+  m_Name: DashCoolTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
