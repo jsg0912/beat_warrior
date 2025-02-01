@@ -267,7 +267,11 @@ public class Player : DirectionalGameObject
     {
         if (jumpDeltaTimer > 0) return;
 
-        RaycastHit2D rayHit = Physics2D.Raycast(GetBottomPos(), Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
+        Vector3 left = GetBottomPos() - new Vector3(GetSize().x / 2, 0, 0);
+        Vector3 right = GetBottomPos() + new Vector3(GetSize().x / 2, 0, 0);
+
+        RaycastHit2D rayHit = Physics2D.Raycast(left, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
+        if (rayHit.collider == null) rayHit = Physics2D.Raycast(right, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
 
         isGround = rayHit.collider != null && _rigidbody.velocity.y >= 0;
         _animator.SetBool(PlayerConstant.groundedAnimBool, isGround);
