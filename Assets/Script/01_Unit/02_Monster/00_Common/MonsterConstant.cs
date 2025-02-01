@@ -54,7 +54,7 @@ public class MonsterConstant
         { MonsterName.Ippali, 2.0f },
         { MonsterName.Ibkkugi, 2.8f },
         { MonsterName.Koppulso, 7.0f },
-        { MonsterName.Jiljili, 4.0f },
+        { MonsterName.Jiljili, 7.0f },
         { MonsterName.Giljjugi, 7.0f },
         { MonsterName.Itmomi, 5.0f }
     };

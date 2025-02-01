@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class AttackStrategy : Strategy
 {
-    protected MonoBehaviour monoBehaviour;
+    protected MonoBehaviour monoBehaviour; // For Coroutine
     protected Direction attackDirection;
     protected Coroutine attackCoroutine;
 
