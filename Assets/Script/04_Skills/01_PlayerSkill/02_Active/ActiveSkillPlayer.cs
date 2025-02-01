@@ -11,6 +11,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
     protected override void UseSkill()
     {
         Player.Instance.SetPlayerStatus(status);
+        Player.Instance.GetComponent<Rigidbody2D>().velocity = Vector2.zero; // TODO: 기획에 따라 스킬 사용 중 멈추는 것이 바뀔 수 있음 - SDH, 20250106
 
         SkillMethod();
 
