@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class LoadingSceneManager : MonoBehaviour
 {
-    [SerializeField] Image progressBar;
+    [SerializeField] float progress;
 
     private void Start()
     {
@@ -25,16 +25,16 @@ public class LoadingSceneManager : MonoBehaviour
             timer += Time.deltaTime;
             if (loadingSceneProcess.progress < 0.9f)
             {
-                progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, loadingSceneProcess.progress, timer);
-                if (progressBar.fillAmount >= loadingSceneProcess.progress)
+                progress = Mathf.Lerp(progress, loadingSceneProcess.progress, timer);
+                if (progress >= loadingSceneProcess.progress)
                 {
                     timer = 0f;
                 }
             }
             else
             {
-                progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, 1f, timer);
-                if (progressBar.fillAmount == 1.0f)
+                progress = Mathf.Lerp(progress, 1f, timer);
+                if (progress == 1.0f)
                 {
                     loadingSceneProcess.allowSceneActivation = true;
                     yield break;
