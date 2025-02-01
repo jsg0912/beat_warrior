@@ -32,6 +32,9 @@ public class MonsterConstant
     public const float KoppulsoRushSpeed = 10.0f;
     public const float KoppulsoRushDuration = 10.0f;
 
+    public const float WallCheckRayDistance = 0.1f;
+    public const float GroundCheckRayDistance = 0.1f;
+
     private static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
         { MonsterName.Ippali, 1.1f },
         { MonsterName.Ibkkugi, 1.0f },
