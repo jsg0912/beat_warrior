@@ -78,7 +78,7 @@ public class MonsterConstant
         { MonsterName.Ibkkugi, 0.8f },
         { MonsterName.Koppulso, 2f },
         { MonsterName.Dulduli, 0.5f },
-        { MonsterName.Giljjugi, 0.5f },
+        { MonsterName.Giljjugi, 2.3f },
         { MonsterName.Itmomi, 0.5f }
     };
 }
