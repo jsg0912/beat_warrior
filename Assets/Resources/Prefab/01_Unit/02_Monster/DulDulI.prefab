@@ -116,7 +116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2822727226431534982}
-  - component: {fileID: 8984558956453297029}
+  - component: {fileID: 190179692422204781}
   m_Layer: 7
   m_Name: TackleCollider
   m_TagString: Untagged
@@ -139,8 +139,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2148411854989943231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &8984558956453297029
-BoxCollider2D:
+--- !u!58 &190179692422204781
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -168,22 +168,12 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05, y: 0.06}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 3.3333333, y: 3.3333333}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -0.05, y: 0.05}
   serializedVersion: 2
-  m_Size: {x: 1.14, y: 1.2}
-  m_EdgeRadius: 0
+  m_Radius: 0.56
 --- !u!1 &7785004647941268595
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +333,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4541592506435115188, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5007745989193565330, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
       propertyPath: m_LocalPosition.x
