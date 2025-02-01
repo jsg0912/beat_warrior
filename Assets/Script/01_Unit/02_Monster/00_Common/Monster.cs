@@ -108,10 +108,11 @@ public class Monster : DirectionalGameObject
     }
     public int GetCurrentHP() { return monsterUnit.GetCurrentHP(); }
     public int GetCurrentStat(StatKind statKind) { return monsterUnit.unitStat.GetCurrentStat(statKind); }
-    public void AttackedByPlayer(int playerATK)
+    public void AttackedByPlayer(int playerATK, bool isAlreadyCheckHitMonsterFunc = false)
     {
+        if (!GetIsAlive()) return;
         GetDamaged(playerATK);
-        if (Player.Instance.hitMonsterFuncList != null) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
+        if (Player.Instance.hitMonsterFuncList != null && !isAlreadyCheckHitMonsterFunc) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
         PlayAnimation(MonsterConstant.hurtAnimTrigger);
     }
     public virtual void GetDamaged(int dmg)
@@ -140,10 +141,14 @@ public class Monster : DirectionalGameObject
         }
         this.status = status;
     }
-    public void SetIsTackleAble(bool isTackleAble) { monsterUnit.isTackleAble = isTackleAble; }
+    public void SetIsTackleAble(bool isTackleAble)
+    {
+        monsterUnit.isTackleAble = isTackleAble;
+        Util.SetActive(tackleCollider, isTackleAble);
+    }
     public void SetIsKnockBackAble(bool isKnockBackAble) { monsterUnit.isKnockBackAble = isKnockBackAble; }
     public void SetIsFixedAnimation(bool isFixedAnimation) { this.isFixedAnimation = isFixedAnimation; }
-    protected virtual void Die()
+    public virtual void Die()
     {
         StopAttack();
         Player.Instance.CheckResetSkills(gameObject);

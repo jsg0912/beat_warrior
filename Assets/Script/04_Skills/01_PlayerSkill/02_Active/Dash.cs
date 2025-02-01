@@ -52,6 +52,7 @@ public class Dash : ActiveSkillPlayer
     protected override void SkillMethod()
     {
         coolTime = 0;
+        PlayerUIManager.Instance.SwapMarkAndDash(true);
 
         Vector2 playerBottom = Player.Instance.GetBottomPos();
         Vector2 playerMiddle = Player.Instance.GetMiddlePos();

@@ -15,9 +15,8 @@ public class PauseController : MonoBehaviour
         isPauseActive = false;
     }
 
-    public void PauseGame()
+    public void TryPauseGame()
     {
-
         if (!isPauseActive)
         {
             Time.timeScale = 0;
@@ -25,7 +24,7 @@ public class PauseController : MonoBehaviour
         }
     }
 
-    public void ResumeGame()
+    public void TryResumeGame()
     {
         if (isPauseActive)
         {
@@ -34,5 +33,5 @@ public class PauseController : MonoBehaviour
         }
     }
 
-    public bool GetPause() { return isPauseActive; }
+    public bool IsPause() { return isPauseActive; }
 }

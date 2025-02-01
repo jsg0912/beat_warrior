@@ -18,7 +18,7 @@ public class Execution : PassiveSkill
     public void ExecutionMonster(Monster monster)
     {
         int currentHP = monster.GetCurrentHP();
-        if (currentHP <= executionHP) monster.AttackedByPlayer(currentHP);
+        if (currentHP <= executionHP) monster.AttackedByPlayer(currentHP, true);
     }
 
     public override void RemoveSkill()

@@ -1,5 +1,5 @@
 using UnityEngine;
-
+// 박경필 바보
 public class KnockBack : AdditionalEffect
 {
     private float knockBackDistance;

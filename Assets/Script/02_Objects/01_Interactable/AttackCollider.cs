@@ -7,7 +7,7 @@ public class AttackCollider : MonoBehaviour
     protected List<GameObject> TargetMonster = new();
     public List<AdditionalEffect> additionalEffects = new();
 
-    public void InitializeBeforeAttack()
+    void OnDisable()
     {
         additionalEffects.Clear();
         TargetMonster.Clear();
