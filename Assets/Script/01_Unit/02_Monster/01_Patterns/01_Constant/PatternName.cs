@@ -7,7 +7,7 @@ public enum PatternName
     Ippali,
     Ibkkugi,
     Koppulso,
-    Jiljili,
+    Dulduli,
     Giljjugi,
     Itmomi
 }

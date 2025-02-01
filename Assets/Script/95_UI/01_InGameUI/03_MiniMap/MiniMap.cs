@@ -23,7 +23,7 @@ public class MiniMap : MonoBehaviour
         { MonsterName.Koppulso, PoolTag.MiniMapIconKoppulso },
         { MonsterName.Ippali, PoolTag.MiniMapIconIppali },
         { MonsterName.Ibkkugi, PoolTag.MiniMapIconIbkkugi },
-        { MonsterName.Jiljili, PoolTag.MiniMapIconIppali },
+        { MonsterName.Dulduli, PoolTag.MiniMapIconIppali },
         { MonsterName.Giljjugi, PoolTag.MiniMapIconIppali },
         { MonsterName.Itmomi, PoolTag.MiniMapIconIppali },
     };

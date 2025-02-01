@@ -24,9 +24,9 @@ public class MonsterConstant
     public const float IbkkugiThrowSpeed = 3f;
     public const float IbkkugiMaxHeight = 1.5f;
 
-    // Jiljili
-    public const float JiljiliThrowSpeed = 3f;
-    public const float JiljiliMaxHeight = 1f;
+    // Dulduli
+    public const float DulduliThrowSpeed = 3f;
+    public const float DulduliMaxHeight = 1f;
 
     // Koppulso
     public const float KoppulsoRushSpeed = 10.0f;
@@ -36,7 +36,7 @@ public class MonsterConstant
         { MonsterName.Ippali, 1.1f },
         { MonsterName.Ibkkugi, 1.0f },
         { MonsterName.Koppulso, 1.6f },
-        { MonsterName.Jiljili, 0.4f },
+        { MonsterName.Dulduli, 0.4f },
         { MonsterName.Giljjugi, 0.7f },
         { MonsterName.Itmomi, 0f }
     };
@@ -45,7 +45,7 @@ public class MonsterConstant
         { MonsterName.Ippali, moveSpeed * MoveSpeedRatio[MonsterName.Ippali] },
         { MonsterName.Ibkkugi, moveSpeed * MoveSpeedRatio[MonsterName.Ibkkugi] },
         { MonsterName.Koppulso, moveSpeed * MoveSpeedRatio[MonsterName.Koppulso] },
-        { MonsterName.Jiljili, moveSpeed * MoveSpeedRatio[MonsterName.Jiljili] },
+        { MonsterName.Dulduli, moveSpeed * MoveSpeedRatio[MonsterName.Dulduli] },
         { MonsterName.Giljjugi, moveSpeed * MoveSpeedRatio[MonsterName.Giljjugi] },
         { MonsterName.Itmomi, moveSpeed * MoveSpeedRatio[MonsterName.Itmomi] },
     };
@@ -54,21 +54,21 @@ public class MonsterConstant
         { MonsterName.Ippali, 2.0f },
         { MonsterName.Ibkkugi, 2.8f },
         { MonsterName.Koppulso, 7.0f },
-        { MonsterName.Jiljili, 7.0f },
+        { MonsterName.Dulduli, 4.0f },
         { MonsterName.Giljjugi, 7.0f },
         { MonsterName.Itmomi, 5.0f }
     };
 
     public static Dictionary<MonsterName, float> AttackThrowSpeed = new() {
         { MonsterName.Ibkkugi, 0.5f },
-        { MonsterName.Jiljili, 25.0f },
+        { MonsterName.Dulduli, 25.0f },
     };
 
     public static Dictionary<MonsterName, float> AttackStartDelays = new() {
         { MonsterName.Ippali, 1.0f },
         { MonsterName.Ibkkugi, 0.5f },
         { MonsterName.Koppulso, 0.5f },
-        { MonsterName.Jiljili, 0.5f },
+        { MonsterName.Dulduli, 0.5f },
         { MonsterName.Giljjugi, 0.5f },
         { MonsterName.Itmomi, 0.5f }
     };
@@ -77,7 +77,7 @@ public class MonsterConstant
         { MonsterName.Ippali, 0.5f },
         { MonsterName.Ibkkugi, 0.8f },
         { MonsterName.Koppulso, 2f },
-        { MonsterName.Jiljili, 0.5f },
+        { MonsterName.Dulduli, 0.5f },
         { MonsterName.Giljjugi, 0.5f },
         { MonsterName.Itmomi, 0.5f }
     };
