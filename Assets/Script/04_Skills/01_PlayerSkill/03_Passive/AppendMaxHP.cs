@@ -13,12 +13,12 @@ public class AppendMaxHP : PassiveSkillBuffPlayer
     public override void GetSkill()
     {
         base.GetSkill();
-        PlayerHpUI.Instance.CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+        PlayerHpUIController.Instance.CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }
 
     public override void RemoveSkill()
     {
         base.RemoveSkill();
-        PlayerHpUI.Instance.CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+        PlayerHpUIController.Instance.CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
     }
 }

@@ -91,7 +91,7 @@ public class Player : DirectionalGameObject
     {
         Initialize();
         _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
-        PlayerUIController.Instance.Initialize();
+        PlayerUIManager.Instance.Initialize();
     }
 
     // GET Functions
@@ -164,7 +164,7 @@ public class Player : DirectionalGameObject
     public bool ChangeCurrentHP(int hp)
     {
         bool isAlive = playerUnit.ChangeCurrentHP(hp);
-        PlayerHpUI.Instance?.UpdateHPUI();
+        PlayerHpUIController.Instance?.UpdateHPUI();
         return isAlive;
     }
 

@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class PlayerUIController : MonoBehaviour
+public class PlayerUIManager : MonoBehaviour
 {
-    public static PlayerUIController Instance;
-    [SerializeField] private PlayerHpUI playerHpUI;
+    public static PlayerUIManager Instance;
+    [SerializeField] private PlayerHpUIController playerHpUI;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIMark;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIDash;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUISpecialBlade;
