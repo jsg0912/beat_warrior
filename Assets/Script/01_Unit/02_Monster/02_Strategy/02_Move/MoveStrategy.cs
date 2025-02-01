@@ -36,7 +36,7 @@ public class MoveStrategy : Strategy
     }
     protected void CheckGround()
     {
-        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterFrontPos(), Vector3.down, GROUNDCHECKRAY, GroundLayer);
+        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterFrontPos() + new Vector3(0, 0.05f, 0), Vector3.down, GROUNDCHECKRAY, GroundLayer);
         //Debug.DrawLine(GetMonsterFrontPos(), GetMonsterFrontPos() + Vector3.down * GROUNDCHECKRAY, Color.red);
 
         if (rayHit.collider == null) isEndOfGround = true;
