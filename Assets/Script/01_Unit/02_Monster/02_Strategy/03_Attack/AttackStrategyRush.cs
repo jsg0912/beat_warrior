@@ -111,7 +111,7 @@ public class AttackStrategyRush : AttackStrategy
         monster.PlayAnimation(MonsterConstant.turnAnimTrigger);
         monster.SetIsFixedAnimation(true);
         isChangingDir = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.33f);
         isChangingDir = false;
     }
 }
