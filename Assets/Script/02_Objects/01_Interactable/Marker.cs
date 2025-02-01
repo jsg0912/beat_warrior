@@ -28,6 +28,7 @@ public class Marker : MonoBehaviour
         {
             Player.Instance.SetTarget(obj);
             obj.GetComponent<Monster>().SetTarget();
+            PlayerUIManager.Instance.SwapMarkAndDash(false);
             Destroy(gameObject);
         }
     }

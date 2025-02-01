@@ -110,6 +110,7 @@ public class Monster : DirectionalGameObject
     public int GetCurrentStat(StatKind statKind) { return monsterUnit.unitStat.GetCurrentStat(statKind); }
     public void AttackedByPlayer(int playerATK, bool isAlreadyCheckHitMonsterFunc = false)
     {
+        if (!GetIsAlive()) return;
         GetDamaged(playerATK);
         if (Player.Instance.hitMonsterFuncList != null && !isAlreadyCheckHitMonsterFunc) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
         PlayAnimation(MonsterConstant.hurtAnimTrigger);
