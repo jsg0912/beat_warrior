@@ -82,7 +82,7 @@ public class AttackStrategyRush : AttackStrategy
 
         RaycastHit2D rayHit = Physics2D.Raycast(start, dir, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
         //Debug.DrawLine(start, start + dir * 0.1f, Color.red);
-        if (rayHit.collider != null && rayHit.collider.CompareTag("Base"))
+        if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base))
         {
             monoBehaviour.StartCoroutine(ChangeDir());
         }
