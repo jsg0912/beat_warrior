@@ -9,7 +9,6 @@ public class AltarUIManager : MonoBehaviour
     public AltarPopup altarPopup;
     public AltarDetailPopup altarDetailPopup;
     public TMP_Text PlayerSoulView;
-    public AudioClip EquipClip;
 
     public SkillName[] salesSkillList;
     int spiritCount => Inventory.Instance.GetSoulNumber();
@@ -32,11 +31,6 @@ public class AltarUIManager : MonoBehaviour
     public bool CheckInSales(SkillName skillName)
     {
         return salesSkillList.Contains(skillName);
-    }
-
-    public void PlayEquipSound()
-    {
-        SoundManager.Instance.SFXPlay("Equip", EquipClip);
     }
 
     public void UpdatePlayerSoulView() => PlayerSoulView.text = "Soul : " + spiritCount.ToString();

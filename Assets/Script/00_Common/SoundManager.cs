@@ -80,4 +80,9 @@ public class SoundManager : MonoBehaviour
     {
         BackGroundPlay(SoundList.Instance.titleBGM);
     }
+
+    public void PlayEquipSFX()
+    {
+        SFXPlay("Equip", SoundList.Instance.equipClip);
+    }
 }
