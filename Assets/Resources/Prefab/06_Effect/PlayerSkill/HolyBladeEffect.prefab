@@ -4900,7 +4900,7 @@ GameObject:
   - component: {fileID: 8272034084456924712}
   - component: {fileID: 5285397640846611002}
   m_Layer: 0
-  m_Name: Basic Slash Blue
+  m_Name: HolyBladeEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4914,14 +4914,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8108773055647562271}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.99152, y: -5.95, z: -0.8751736}
-  m_LocalScale: {x: 0.6, y: 0.8, z: 0.61}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6350262300226304150}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &8272034084456924712
 ParticleSystem:
   m_ObjectHideFlags: 0
