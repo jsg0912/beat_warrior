@@ -50,8 +50,7 @@ public class CommandManager : MonoBehaviour
 
                 if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Interaction]))
                 {
-                    // [Code Review - LJD] TODO: UIManager에서 AltarPopup을 키는 것이 아님 + 주변에 InteractionPressPrompt가 있는지 확인해야 함 + Player의 Interaction()도 함께 고려해야함 - SDH, 20250117
-                    UIManager.Instance.TurnOnAltarPopup();
+                    InteractionManager.Instance.InteractWithLastObject();
                 }
                 CheckTestCommandInGame();
             }

@@ -51,6 +51,7 @@ public class SceneController : MonoBehaviour
 
     public void LoadTitle()
     {
+        SoundManager.Instance.PlayTitleBGM();
         ChangeSceneWithLoading(SceneName.Title);
     }
 }

@@ -9,6 +9,8 @@ public class PrefabRouter
     public const string MiniMapUIPrefabRoute = "Prefab/03_UI/02_InGameUI/02_MiniMapUI/";
     public const string MonsterObjectRoute = "Prefab/02_Object/05_Monster/";
     public const string TraitIconRoute = "Image/UI/AltarUI/TraitIcon/";
+    public const string InteractionObjectRoute = "Prefab/02_Object/03_InteractionObject/";
+    public const string ScriptableObjectRoute = "Prefab/99_ScriptableObject/";
 
     public const string PlayerPrefab = PlayerPrefabRoute + "Player";
     public const string PlayerAttackPrefab = PlayerPrefabRoute + "AttackCollider";
@@ -16,9 +18,10 @@ public class PrefabRouter
     public const string Skill2Prefab = PlayerPrefabRoute + "Skill2Collider";
     public const string GhostPrefab = PlayerPrefabRoute + "Ghost";
 
-    public const string SoulPrefab = ObjectPrefabRoute + "Soul";
+    public const string SoulPrefab = InteractionObjectRoute + "Soul";
     public const string MarkerPrefab = PlayerObjectPrefabRoute + "Marker";
     public const string ObjectPooler = ObjectPrefabRoute + "ObjectPooler";
+    public const string SoundList = ScriptableObjectRoute + "SoundList";
 
     public const string UIPrefab = "Prefab/03_UI/UI";
     public const string MapMonsterIcon = MiniMapUIPrefabRoute + "MapMonsterIcon";

@@ -73,36 +73,40 @@ public class AttackStrategyRush : AttackStrategy
         monster.gameObject.transform.position += new Vector3((int)attackDirection * rushSpeed * Time.deltaTime, 0, 0);
     }
 
+    //[Code Review - KMJ] TODO: MoveStrategy에도 있는데, Wall을 Check해서 bool을 return하는 함수를 만들고, 그에 따라 필요한 행동은 Strategy에서 알아서 하도록 수정 필요, CheckGround도 마찬가지 - Nights, 20250201
     protected virtual void CheckWall()
     {
-        Vector3 start = GetMonsterMiddlePos() + new Vector3(GetMonsterSize().x / 2, 0, 0) * (int)attackDirection;
-        Vector3 dir = Vector3.right * (int)attackDirection;
+        float movingDirection = GetMovingDirectionFloat();
+        Vector3 start = GetMonsterMiddleFrontPos();
+        Vector3 dir = Vector3.right * movingDirection;
 
-        RaycastHit2D rayHit = Physics2D.Raycast(start, dir, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
-        //Debug.DrawLine(start, start + dir * 0.1f, Color.red);
+        RaycastHit2D rayHit = Physics2D.Raycast(start, dir, MonsterConstant.WallCheckRayDistance, LayerMask.GetMask(LayerConstant.Tile));
+        // Debug.DrawLine(start, start + dir * MonsterConstant.WallCheckDistance, Color.red);
         if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base))
         {
             monoBehaviour.StartCoroutine(ChangeDir());
         }
     }
 
-    protected Vector3 GetRayStartPoint()
+    protected Vector3 GetGroundCheckRayStartPoint()
     {
         return GetMonsterPos() + new Vector3((int)attackDirection * GetMonsterSize().x / 2, 0, 0);
     }
 
     protected void CheckGround()
     {
-        RaycastHit2D rayHit = Physics2D.Raycast(GetRayStartPoint(), Vector3.down, 0.1f, GroundLayer);
-        //Debug.DrawLine(GetRayStartPoint(), GetMonsterPos() + offset + Vector3.down * 0.1f, Color.red);
+        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterFrontPos() + new Vector3(0, 0.05f, 0), Vector3.down, MonsterConstant.GroundCheckRayDistance, GroundLayer);
+        //Debug.DrawLine(GetMonsterFrontPos(), GetMonsterFrontPos() + Vector3.down * MonsterConstant.GroundCheckRayDistance, Color.red);
 
         if (rayHit.collider == null) monoBehaviour.StartCoroutine(ChangeDir());
     }
 
     protected IEnumerator ChangeDir()
     {
-        attackDirection = (Direction)(-1 * (int)attackDirection);
-        monster.SetMovingDirection(attackDirection);
+        DebugConsole.Log($"attackDirection: {attackDirection}");
+        monster.FlipDirection();
+        attackDirection = monster.GetMovingDirection();
+        DebugConsole.Log($"attackDirection: {attackDirection}");
         monster.SetIsFixedAnimation(false);
         monster.PlayAnimation(MonsterConstant.turnAnimTrigger);
         monster.SetIsFixedAnimation(true);

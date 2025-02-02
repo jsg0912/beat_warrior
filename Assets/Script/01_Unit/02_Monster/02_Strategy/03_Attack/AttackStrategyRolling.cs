@@ -48,7 +48,6 @@ public class AttackStrategyRolling : AttackStrategy
 
     public void SetAfterSkill()
     {
-        DebugConsole.Log("SetAfterSkill");
         SetMaxAttackCoolTime();
 
         monster.SetIsFixedAnimation(false);

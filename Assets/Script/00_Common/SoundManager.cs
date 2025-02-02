@@ -3,20 +3,18 @@ using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
+    public static SoundManager Instance;
     public AudioSource backGroundSound;
-    public AudioClip backGroundClip;
     public AudioMixer mixer;
     private float sfxVolume;
     private float backgroundVolume;
     private float masterVolume;
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
-            BackGroundPlay(backGroundClip);
         }
         else
         {
@@ -76,5 +74,15 @@ public class SoundManager : MonoBehaviour
         backGroundSound.loop = true;
         backGroundSound.volume = 1.0f;
         backGroundSound.Play();
+    }
+
+    public void PlayTitleBGM()
+    {
+        BackGroundPlay(SoundList.Instance.titleBGM);
+    }
+
+    public void PlayEquipSFX()
+    {
+        SFXPlay("Equip", SoundList.Instance.equipClip);
     }
 }
