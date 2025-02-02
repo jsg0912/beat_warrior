@@ -10,7 +10,7 @@ public class Monster : DirectionalGameObject
 
     private MonsterStatus _status;
     [SerializeField]
-    private MonsterStatus status
+    private MonsterStatus status // 수정 필요하면 SDH에게 문의 - SDH, 20250202
     {
         get { return _status; }
         set

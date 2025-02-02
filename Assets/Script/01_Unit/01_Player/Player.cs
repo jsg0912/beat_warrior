@@ -18,7 +18,7 @@ public class Player : DirectionalGameObject
     public ColliderController colliderController;
     private PlayerStatus _status;
     [SerializeField]
-    private PlayerStatus status
+    private PlayerStatus status // 수정 필요하면 SDH에게 문의 - SDH, 20250202
     {
         get { return _status; }
         set
