@@ -8,7 +8,24 @@ public class Monster : DirectionalGameObject
     private MonsterUnit monsterUnit;
     public Pattern pattern;
 
-    [SerializeField] private MonsterStatus status;
+    private MonsterStatus _status;
+    [SerializeField]
+    private MonsterStatus status
+    {
+        get { return _status; }
+        set
+        {
+            if (GetCurrentStat(StatKind.HP) <= 0 && value != MonsterStatus.Dead)
+            {
+                return;
+            }
+            else
+            {
+                _status = value;
+            }
+        }
+    }
+
     protected Animator _animator;
     private bool isFixedAnimation = false;
 
@@ -135,7 +152,6 @@ public class Monster : DirectionalGameObject
     public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
     public void SetStatus(MonsterStatus status)
     {
-        if (this.status == MonsterStatus.Dead) return; // 만약 이미 Dead인데, 어디선가 다른 Status 변환을 요구하면 무시 - 신동환, 20250202
         if (status == MonsterStatus.Dead)
         {
             SetIsFixedAnimation(false);

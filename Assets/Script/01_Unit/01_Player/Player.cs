@@ -16,7 +16,23 @@ public class Player : DirectionalGameObject
     private List<Skill> traitList = new();
 
     public ColliderController colliderController;
-    [SerializeField] private PlayerStatus status;
+    private PlayerStatus _status;
+    [SerializeField]
+    private PlayerStatus status
+    {
+        get { return _status; }
+        set
+        {
+            if (GetCurrentStat(StatKind.HP) <= 0 && value != PlayerStatus.Dead)
+            {
+                return;
+            }
+            else
+            {
+                _status = value;
+            }
+        }
+    }
 
     private bool isGround;
     private float jumpDeltaTimer;
