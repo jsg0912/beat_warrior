@@ -16,7 +16,7 @@ public class Player : DirectionalGameObject
     private List<Skill> traitList = new();
 
     public ColliderController colliderController;
-    private PlayerStatus _status;
+    [SerializeField] private PlayerStatus _status;
     [SerializeField]
     private PlayerStatus status // 수정 필요하면 SDH에게 문의 - SDH, 20250202
     {
