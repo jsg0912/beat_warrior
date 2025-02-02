@@ -220,7 +220,6 @@ public class Player : DirectionalGameObject
             CheckGround();
             Down();
             Skill();
-            Interaction();
         }
     }
     private bool IsMoveable()
@@ -300,18 +299,6 @@ public class Player : DirectionalGameObject
 
             jumpDeltaTimer = jumpTimer;
         }
-    }
-
-    private void Interaction()
-    {
-        if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Interaction]))
-        {
-            if (Portal.Instance?.IsTriggerPortal == true)
-            {
-                ChapterManager.Instance.MoveToNextStage();
-            }
-        }
-        // TODO: ObjectWithInteractionPrompt과 상호작용 관련 로직 추가해야 함 - 신동환, 20250124
     }
 
     public void Dashing(Vector2 end, bool changeDir, bool isInvincibility, bool passWall = true)
