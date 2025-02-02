@@ -6,9 +6,10 @@ public class Execution : PassiveSkill
 
     public Execution(GameObject unit) : base(unit)
     {
-        skillName = SkillName.Execution;
         executionHP = 1;
     }
+
+    protected override void SetSkillName() { skillName = SkillName.Execution; }
 
     public override void GetSkill()
     {

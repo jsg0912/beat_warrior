@@ -6,14 +6,11 @@ public class Mark : ActiveSkillPlayer
 
     public Mark(GameObject unit) : base(unit)
     {
-        skillName = SkillName.Mark;
         status = PlayerStatus.Mark;
-
-        coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
-        coolTime = 0;
-
         MarkerPrefab = Resources.Load(PrefabRouter.MarkerPrefab) as GameObject;
     }
+
+    protected override void SetSkillName() { skillName = SkillName.Mark; }
 
     protected override void UpdateKey()
     {

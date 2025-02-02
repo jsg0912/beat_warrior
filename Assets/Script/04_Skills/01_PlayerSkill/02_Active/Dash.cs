@@ -5,28 +5,24 @@ using UnityEngine;
 
 public class Dash : ActiveSkillPlayer
 {
-    private List<GameObject> DashTargetMonster;
+    private List<GameObject> DashTargetMonster = new();
     private GameObject TargetMonster;
 
-    private float ghostDelayTime;
+    private float ghostDelayTime = 0;
     private float ghostDelayTimeMax;
     private GameObject GhostPrefab;
 
     public Dash(GameObject unit) : base(unit)
     {
-        skillName = SkillName.Dash;
         status = PlayerStatus.Dash;
 
         damageMultiplier = PlayerSkillConstant.dashAtk;
-        coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
-        coolTime = 0;
 
-        DashTargetMonster = new List<GameObject>();
-
-        ghostDelayTime = 0;
         ghostDelayTimeMax = PlayerSkillConstant.ghostDelayTimeMax;
         GhostPrefab = Resources.Load(PrefabRouter.GhostPrefab) as GameObject;
     }
+
+    protected override void SetSkillName() { skillName = SkillName.Dash; }
 
     public override void CheckInputKeyCode()
     {

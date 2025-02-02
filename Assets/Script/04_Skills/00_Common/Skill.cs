@@ -7,7 +7,11 @@ public abstract class Skill
     protected GameObject unit;
     protected MonoBehaviour monoBehaviour;
 
-    public SkillName skillName;
+    public SkillName skillName
+    {
+        get;
+        protected set;
+    }
     public string description;
     public SkillTier tier => TraitTierList.GetTier(skillName);
 
@@ -15,7 +19,7 @@ public abstract class Skill
 
     // CoolTime
     protected float coolTimeMax;
-    protected float coolTime;
+    protected float coolTime = 0;
     protected Coroutine countCoolTime;
 
     // Damage
@@ -28,7 +32,13 @@ public abstract class Skill
         this.unit = unit;
         this.description = description;
         monoBehaviour = unit.GetComponent<MonoBehaviour>();
+        SetSkillName();
+
+        if (PlayerSkillConstant.SkillCoolTime.ContainsKey(skillName)) coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
     }
+
+    // You muse set the SkillName and Status!!
+    protected abstract void SetSkillName();
 
     public virtual void GetSkill() { return; }
 

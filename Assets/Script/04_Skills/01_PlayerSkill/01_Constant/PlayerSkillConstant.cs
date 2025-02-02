@@ -15,10 +15,14 @@ public class PlayerSkillConstant
         { SkillName.Mark, 8.0f },
         { SkillName.Dash, 8.0f },
         { SkillName.Skill1, 0.1f },
-        { SkillName.Skill2, 8.0f }
+        { SkillName.Skill2, 8.0f },
+        { SkillName.KillRecoveryHP, 10.0f}
     };
 
-    public const float recoveryHPTimeMax = 10.0f;
+    public static Dictionary<AdditionalEffectName, bool> AdditionalEffectCanDuplicate = new() {
+        { AdditionalEffectName.KnockBack, false },
+    };
+
     public const float ghostDelayTimeMax = 0.01f;
 
     public const int attackAtk = 1;
