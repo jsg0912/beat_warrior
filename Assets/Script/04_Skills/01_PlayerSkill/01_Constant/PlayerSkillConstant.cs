@@ -4,7 +4,7 @@ public class PlayerSkillConstant
 {
     public const int attackCountMax = 2;
     public const float attackKnockBackDistance = 3.0f;
-    public const float skill2DashRange = 2.0f;
+    public const float skill2DashRange = 5.0f;
     public const float DashEndPointInterval = 1f;
     public const float DashEndYOffset = 0.1f;
     public const float DashSpeed = 0.03f;
@@ -15,7 +15,7 @@ public class PlayerSkillConstant
         { SkillName.Mark, 8.0f },
         { SkillName.Dash, 8.0f },
         { SkillName.Skill1, 0.1f },
-        { SkillName.Skill2, 8.0f },
+        { SkillName.Skill2, 0.2f },
         { SkillName.KillRecoveryHP, 10.0f}
     };
 
