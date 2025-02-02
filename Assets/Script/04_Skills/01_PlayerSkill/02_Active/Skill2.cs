@@ -21,6 +21,12 @@ public class Skill2 : ActiveSkillPlayer
         keyCode = KeySetting.keys[PlayerAction.Skill2];
     }
 
+    protected override void CreateEffectPrefab()
+    {
+        attackCollider = Player.Instance.colliderController.shortBladeCollider;
+        base.CreateEffectPrefab();
+    }
+
     protected override void SkillMethod()
     {
         CreateEffectPrefab();
