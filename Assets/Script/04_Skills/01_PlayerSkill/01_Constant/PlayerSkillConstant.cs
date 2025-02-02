@@ -2,8 +2,6 @@ using System.Collections.Generic;
 
 public class PlayerSkillConstant
 {
-    public const float SkillDelayInterval = 0.2f;
-
     public const int attackCountMax = 2;
     public const float attackKnockBackDistance = 3.0f;
     public const float skill2DashRange = 2.0f;

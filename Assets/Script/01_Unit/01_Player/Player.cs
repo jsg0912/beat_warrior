@@ -76,7 +76,7 @@ public class Player : DirectionalGameObject
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
-        SetPlayerStatus(PlayerStatus.Idle);
+        SetStatus(PlayerStatus.Idle);
 
         SetMovingDirection(direction);
         isGround = false;
@@ -85,6 +85,14 @@ public class Player : DirectionalGameObject
         isInvincibility = false;
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
+    }
+
+    public void Update()
+    {
+        if (IsUsingSkill())
+        {
+            _rigidbody.velocity = Vector2.zero; // TODO: 기획에 따라 스킬 사용 중 멈추는 것이 바뀔 수 있음 - SDH, 20250106
+        }
     }
 
     public void RestartPlayer()
@@ -102,7 +110,7 @@ public class Player : DirectionalGameObject
     public GameObject GetTargetInfo() { return targetInfo; }
 
     // SET Functions
-    public void SetPlayerStatus(PlayerStatus status)
+    public void SetStatus(PlayerStatus status)
     {
         this.status = status;
 
@@ -136,8 +144,6 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
-
-        if (IsUsingSkill() == true) StartCoroutine(UseSkill());
     }
 
     public void SetGravityScale(bool gravity)
@@ -175,7 +181,7 @@ public class Player : DirectionalGameObject
         dash.SetTarget(obj);
     }
 
-    private void SetDead() { SetPlayerStatus(PlayerStatus.Dead); }
+    private void SetDead() { SetStatus(PlayerStatus.Dead); }
 
     public void CheckResetSkills(GameObject obj)
     {
@@ -207,14 +213,14 @@ public class Player : DirectionalGameObject
             isMove = true;
         }
 
-        if (!IsUsingSkill() && status != PlayerStatus.Jump) SetPlayerStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
+        if (!IsUsingSkill() && status != PlayerStatus.Jump) SetStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
 
         if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
     public void CheckPlayerCommand()
     {
-        if (status != PlayerStatus.Dead)
+        if (status != PlayerStatus.Dead && !IsUsingSkill())
         {
             Jump();
             CheckGround();
@@ -277,7 +283,7 @@ public class Player : DirectionalGameObject
 
         if (!isGround) return;
 
-        if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
+        if (status == PlayerStatus.Jump) SetStatus(PlayerStatus.Idle);
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
         tileCollider = rayHit.collider.GetComponent<BoxCollider2D>();
 
@@ -290,7 +296,7 @@ public class Player : DirectionalGameObject
 
         if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Jump]))
         {
-            SetPlayerStatus(PlayerStatus.Jump);
+            SetStatus(PlayerStatus.Jump);
 
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
 
@@ -348,12 +354,6 @@ public class Player : DirectionalGameObject
     private void Skill()
     {
         foreach (var skill in skillList) skill.CheckInputKeyCode();
-    }
-
-    IEnumerator UseSkill()
-    {
-        yield return new WaitForSeconds(PlayerSkillConstant.SkillDelayInterval);
-        if (status != PlayerStatus.Dead) SetPlayerStatus(PlayerStatus.Idle);
     }
 
     public float GetSkillCoolTime(SkillName skillName)
