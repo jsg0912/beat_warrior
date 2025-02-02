@@ -8,7 +8,7 @@ public class Monster : DirectionalGameObject
     private MonsterUnit monsterUnit;
     public Pattern pattern;
 
-    private MonsterStatus _status;
+    [SerializeField] private MonsterStatus _status;
     [SerializeField]
     private MonsterStatus status // 수정 필요하면 SDH에게 문의 - SDH, 20250202
     {
