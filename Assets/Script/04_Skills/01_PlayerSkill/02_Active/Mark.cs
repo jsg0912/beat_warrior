@@ -27,7 +27,6 @@ public class Mark : ActiveSkillPlayer
         Vector3 start = playerTransform.position + new Vector3(0, 0.5f, 0);
         Vector3 end = Util.GetMousePointWithPerspectiveCamera();
         end.z = 0;
-        DebugConsole.Log($"start: {start}, end: {end}");
         GameObject Marker = GameObject.Instantiate(MarkerPrefab, start, Quaternion.identity);
 
         Vector3 direction = end - start;

@@ -103,13 +103,15 @@ public class AttackStrategyRush : AttackStrategy
 
     protected IEnumerator ChangeDir()
     {
-        DebugConsole.Log($"attackDirection: {attackDirection}");
         monster.FlipDirection();
         attackDirection = monster.GetMovingDirection();
-        DebugConsole.Log($"attackDirection: {attackDirection}");
+
         monster.SetIsFixedAnimation(false);
+
         monster.PlayAnimation(MonsterConstant.turnAnimTrigger);
+
         monster.SetIsFixedAnimation(true);
+
         isChangingDir = true;
         yield return new WaitForSeconds(0.33f);
         isChangingDir = false;
