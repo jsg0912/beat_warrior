@@ -12,21 +12,29 @@ public abstract class ObjectWithInteractionPrompt : MonoBehaviour
         isInitialized = true;
     }
 
-    public void ShowPrompt()
+    public abstract void StartInteraction();
+
+    public void SetInteractAble()
     {
         Initialize();
-        Util.SetActive(promptText.gameObject, true);
-
+        bool success = SetActivePromptText(true);
+        if (success) InteractionManager.Instance.AddObject(this);
         promptText.text = PromptMessageGenerator.GeneratePromptMessage();
     }
 
-    public void HidePrompt() { Util.SetActive(promptText.gameObject, false); }
+    public void SetInteractDisable()
+    {
+        bool success = SetActivePromptText(false);
+        if (success) InteractionManager.Instance.RemoveObject(this);
+    }
+
+    private bool SetActivePromptText(bool isActive) { return Util.SetActive(promptText.gameObject, isActive); }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag(TagConstant.Player))
         {
-            ShowPrompt();
+            SetInteractAble();
         }
     }
 
@@ -34,7 +42,7 @@ public abstract class ObjectWithInteractionPrompt : MonoBehaviour
     {
         if (collision.CompareTag(TagConstant.Player))
         {
-            HidePrompt();
+            SetInteractDisable();
         }
     }
 }
