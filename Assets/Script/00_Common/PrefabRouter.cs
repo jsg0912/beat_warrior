@@ -39,11 +39,11 @@ public class PrefabRouter
 
     public static Dictionary<SkillName, string> TraitIconImages = new() {
         { SkillName.End, EmptyImage },
-        { SkillName.AppendMaxHP, TraitIconRoute + "006" },
-        { SkillName.SkillReset, TraitIconRoute + "003" },
-        { SkillName.DoubleJump, TraitIconRoute + "009" },
-        { SkillName.Execution, TraitIconRoute + "007" },
-        { SkillName.AppendAttack, TraitIconRoute + "001" },
-        { SkillName.KillRecoveryHP, TraitIconRoute + "004" },
+        { SkillName.AppendMaxHP, TraitIconRoute + "016" },
+        { SkillName.SkillReset, TraitIconRoute + "003 1" },
+        { SkillName.DoubleJump, TraitIconRoute + "005" },
+        { SkillName.Execution, TraitIconRoute + "014" },
+        { SkillName.AppendAttack, TraitIconRoute + "002 1" },
+        { SkillName.KillRecoveryHP, TraitIconRoute + "007" },
     };
 }
