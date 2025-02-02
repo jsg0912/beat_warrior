@@ -117,7 +117,6 @@ public class Monster : DirectionalGameObject
     }
     public virtual void GetDamaged(int dmg)
     {
-        if (!GetIsAlive()) return;
         monsterUnit.ChangeCurrentHP(-dmg);
 
         HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
