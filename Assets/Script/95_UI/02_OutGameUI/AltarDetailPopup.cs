@@ -28,12 +28,12 @@ public class AltarDetailPopup : PopupSystem
 
     private void SetTraitName()
     {
-        traitNameView.text = traitName.ToString();
+        traitNameView.text = ScriptPool.TraitNameScript[traitName][GameManager.Instance.Language]; ;
     }
 
     private void SetTraitDescription()
     {
-        traitInfoDescription.text = ScriptPool.TraitUIScript[traitName][GameManager.Instance.Language]; ;
+        traitInfoDescription.text = ScriptPool.TraitUIScript[traitName][GameManager.Instance.Language];
     }
 
     public void ShowSkillDetail(SkillName traitName)
