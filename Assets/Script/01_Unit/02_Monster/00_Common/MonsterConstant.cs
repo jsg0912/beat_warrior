@@ -21,8 +21,8 @@ public class MonsterConstant
     public const float ThrowObjectXOffset = -0.5f;
 
     // Ibkkugi
-    public const float IbkkugiThrowSpeed = 1.5f;
-    public const float IbkkugiMaxHeight = 7f;
+    public const float IbkkugiThrowSpeed = 3f;
+    public const float IbkkugiMaxHeight = 1.5f;
 
     // Jiljili
     public const float JiljiliThrowSpeed = 3f;
@@ -30,14 +30,14 @@ public class MonsterConstant
 
     // Koppulso
     public const float KoppulsoRushSpeed = 10.0f;
-    public const float KoppulsoRushDuration = 4f;
+    public const float KoppulsoRushDuration = 10.0f;
 
     private static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
-        { MonsterName.Ippali, 2.0f },
-        { MonsterName.Ibkkugi, 1.8f },
+        { MonsterName.Ippali, 1.1f },
+        { MonsterName.Ibkkugi, 1.0f },
         { MonsterName.Koppulso, 1.6f },
-        { MonsterName.Jiljili, 0.5f },
-        { MonsterName.Giljjugi, 0.3f },
+        { MonsterName.Jiljili, 0.4f },
+        { MonsterName.Giljjugi, 0.7f },
         { MonsterName.Itmomi, 0f }
     };
 
