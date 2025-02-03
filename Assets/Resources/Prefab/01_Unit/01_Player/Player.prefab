@@ -29,7 +29,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.55, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8792216383532157244}
   m_Father: {fileID: 991352858349409682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5881253563951645107
@@ -120,7 +121,6 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5832865420382322659}
-  - {fileID: 8792216383532157244}
   - {fileID: 3061009664352304810}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -424,7 +424,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 991352858349409682}
+    m_TransformParent: {fileID: 5832865420382322659}
     m_Modifications:
     - target: {fileID: 8296827009130781867, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: looping
@@ -611,12 +611,20 @@ PrefabInstance:
       value: 0.208
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 266.66666
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 266.66666
+      objectReference: {fileID: 0}
+    - target: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.3599999
+      value: -13.599998
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.488204
+      value: -60.382042
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalPosition.z
@@ -670,8 +678,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dirty Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8296827009149224397, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8296827009149224387, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
+    - {fileID: 8296827009149224393, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
+    - {fileID: 8296827009149233167, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
