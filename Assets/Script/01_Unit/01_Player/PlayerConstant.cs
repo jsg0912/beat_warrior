@@ -18,6 +18,13 @@ public class PlayerConstant
     public const string dieAnimTrigger = "die";
     public const string restartAnimTrigger = "restart";
     public const string reviveAnimTrigger = "revive";
+    public const string attackRAnimTrigger = "attackR";
+    public const string attackLAnimTrigger = "attackL";
+    public const string markAnimTrigger = "mark";
+    public const string dashAnimTrigger = "dash";
+    public const string skill1RAnimTrigger = "skill1R";
+    public const string skill1LAnimTrigger = "skill1L";
+    public const string skill2AnimTrigger = "skill2";
 
     public const int MaxAdditionalSkillCount = 3;
 }

@@ -4,7 +4,7 @@ public class Skill1 : ActiveSkillPlayer
 {
     public Skill1(GameObject unit) : base(unit)
     {
-        status = PlayerStatus.Skill1;
+        trigger = new() { PlayerConstant.skill1LAnimTrigger, PlayerConstant.skill1RAnimTrigger };
 
         damageMultiplier = PlayerSkillConstant.skill1Atk;
         EffectPrefab = Resources.Load(PrefabRouter.Skill1Prefab) as GameObject;
