@@ -6,6 +6,7 @@ public abstract class Pattern
     protected MoveStrategy MoveBasic;
     protected MoveStrategy MoveChase;
     protected AttackStrategy Attack;
+    protected GroggyStrategy Groggy;
 
     public virtual void Initialize(Monster monster)
     {
@@ -15,6 +16,7 @@ public abstract class Pattern
         MoveBasic?.Initialize(monster);
         MoveChase?.Initialize(monster);
         Attack?.Initialize(monster);
+        Groggy?.Initialize(monster);
     }
 
     // It called at every Update.

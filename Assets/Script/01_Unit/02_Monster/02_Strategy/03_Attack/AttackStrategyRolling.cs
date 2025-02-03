@@ -8,6 +8,13 @@ public class AttackStrategyRolling : AttackStrategy
     public int numJumps;
     public float duration;
 
+    public AttackStrategyRolling(float jumpPower, int numJumps, float duration)
+    {
+        this.jumpPower = jumpPower;
+        this.numJumps = numJumps;
+        this.duration = duration;
+    }
+
     protected override IEnumerator UseSkill()
     {
         monster.SetStatus(MonsterStatus.Attack);
@@ -20,6 +27,7 @@ public class AttackStrategyRolling : AttackStrategy
         yield return new WaitForSeconds(duration + 0.3f);
         SetAfterSkill();
 
+        monster.SetStatus(MonsterStatus.AttackEnd);
         monster.PlayAnimation(MonsterStatus.AttackEnd);
     }
 
