@@ -39,6 +39,7 @@ public class Monster : DirectionalGameObject
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _animator.SetBool(MonsterConstant.endMotionBool, MonsterConstant.HasEndMotion[monsterName]);
         monsterUnit = MonsterList.FindMonster(monsterName, AnotherHPValue);
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
@@ -210,6 +211,9 @@ public class Monster : DirectionalGameObject
         Util.SetActive(Target, false);
     }
 
+    public Direction GetRelativeDirectionToPlayer() { return Player.Instance.GetBottomPos().x > GetBottomPos().x ? Direction.Right : Direction.Left; }
+    public float GetRelativePlayerDirectionFloat() { return Player.Instance.GetBottomPos().x > GetBottomPos().x ? 1.0f : -1.0f; }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (GetIsTackleAble())
@@ -217,7 +221,7 @@ public class Monster : DirectionalGameObject
             GameObject obj = collision.gameObject;
             if (obj.CompareTag(TagConstant.Player))
             {
-                Player.Instance.GetDamaged(GetCurrentStat(StatKind.ATK));
+                Player.Instance.GetDamaged(GetCurrentStat(StatKind.ATK), GetRelativeDirectionToPlayer());
             }
         }
     }

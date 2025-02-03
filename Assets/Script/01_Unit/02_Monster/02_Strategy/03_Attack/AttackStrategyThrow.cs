@@ -66,7 +66,7 @@ public class AttackStrategyThrow : AttackStrategyCreate
         float sinTheta = Mathf.Sin(theta);
         float cosTheta = Mathf.Cos(theta);
 
-        return new Vector3(throwSpeed * cosTheta * GetRelativePlayerDirectionFloat(), throwSpeed * sinTheta, 0);
+        return new Vector3(throwSpeed * cosTheta * monster.GetRelativePlayerDirectionFloat(), throwSpeed * sinTheta, 0);
     }
 
 }

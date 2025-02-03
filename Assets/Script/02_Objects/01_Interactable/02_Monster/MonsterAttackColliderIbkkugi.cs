@@ -7,7 +7,7 @@ public class MonsterAttackColliderIbkkugi : MonsterAttackCollider
         GameObject obj = other.gameObject;
         if (obj.CompareTag(TagConstant.Player))
         {
-            Player.Instance.GetDamaged(damage);
+            Player.Instance.GetDamaged(damage, GetRelativeDirectionToPlayer());
             Destroy(gameObject);
         }
 
