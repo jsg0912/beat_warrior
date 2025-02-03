@@ -15,6 +15,7 @@ public class MonsterHPUI : MonoBehaviour
 
     public void SetHP(int hp, int hpMax)
     {
+        if (this == null) return;
         if (hp == 0) Destroy(this.gameObject);
 
         hpText.text = hp.ToString();

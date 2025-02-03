@@ -2,11 +2,9 @@ using System.Collections.Generic;
 
 public class PlayerSkillConstant
 {
-    public const float SkillDelayInterval = 0.2f;
-
     public const int attackCountMax = 2;
     public const float attackKnockBackDistance = 3.0f;
-    public const float skill2DashRange = 2.0f;
+    public const float skill2DashRange = 5.0f;
     public const float DashEndPointInterval = 1f;
     public const float DashEndYOffset = 0.1f;
     public const float DashSpeed = 0.03f;
@@ -14,13 +12,17 @@ public class PlayerSkillConstant
 
     public static Dictionary<SkillName, float> SkillCoolTime = new() {
         { SkillName.Attack, 0.1f },
-        { SkillName.Mark, 3.0f },
-        { SkillName.Dash, 3.0f },
+        { SkillName.Mark, 8.0f },
+        { SkillName.Dash, 8.0f },
         { SkillName.Skill1, 0.1f },
-        { SkillName.Skill2, 8.0f }
+        { SkillName.Skill2, 0.2f },
+        { SkillName.KillRecoveryHP, 10.0f}
     };
 
-    public const float recoveryHPTimeMax = 10.0f;
+    public static Dictionary<AdditionalEffectName, bool> AdditionalEffectCanDuplicate = new() {
+        { AdditionalEffectName.KnockBack, false },
+    };
+
     public const float ghostDelayTimeMax = 0.01f;
 
     public const int attackAtk = 1;

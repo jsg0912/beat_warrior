@@ -58,7 +58,7 @@ public class TraitUI : MonoBehaviour
 
     private void SetTierText(SkillTier tier)
     {
-        TierText.text = ((int)tier).ToString();
+        TierText.text = OutGameUIConstant.TraitTireViewText[tier];
     }
 
     private void ShowLock()

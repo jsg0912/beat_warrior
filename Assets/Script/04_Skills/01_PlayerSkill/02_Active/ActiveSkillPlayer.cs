@@ -10,7 +10,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
 
     protected override void UseSkill()
     {
-        Player.Instance.SetPlayerStatus(status);
+        Player.Instance.SetStatus(status);
 
         SkillMethod();
 

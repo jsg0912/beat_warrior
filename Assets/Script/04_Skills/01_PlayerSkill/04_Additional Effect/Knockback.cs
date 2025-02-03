@@ -3,10 +3,13 @@ using UnityEngine;
 public class KnockBack : AdditionalEffect
 {
     private float knockBackDistance;
-    public KnockBack(float knockBackDistance)
+    public KnockBack(float knockBackDistance) : base()
     {
         this.knockBackDistance = knockBackDistance;
     }
+
+    public override void SetAdditionalEffectName() { additionalEffectName = AdditionalEffectName.KnockBack; }
+
     public override void work(GameObject obj)
     {
         Monster monster = obj.GetComponent<Monster>();

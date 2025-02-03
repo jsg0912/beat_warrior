@@ -16,10 +16,27 @@ public class Player : DirectionalGameObject
     private List<Skill> traitList = new();
 
     public ColliderController colliderController;
-    [SerializeField] private PlayerStatus status;
+    [SerializeField] private PlayerStatus _status;
+    [SerializeField]
+    private PlayerStatus status // 수정 필요하면 SDH에게 문의 - SDH, 20250202
+    {
+        get { return _status; }
+        set
+        {
+            if (GetCurrentStat(StatKind.HP) <= 0 && value != PlayerStatus.Dead)
+            {
+                return;
+            }
+            else
+            {
+                _status = value;
+            }
+        }
+    }
 
-    private bool isOnBaseTile;
-    private bool isOnTile;
+    private bool isGround;
+    private float jumpDeltaTimer;
+    private float jumpTimer;
     private bool isInvincibility;
     private BoxCollider2D tileCollider;
 
@@ -75,20 +92,30 @@ public class Player : DirectionalGameObject
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
-        SetPlayerStatus(PlayerStatus.Idle);
+        SetStatus(PlayerStatus.Idle);
 
         SetMovingDirection(direction);
-        isOnBaseTile = false;
+        isGround = false;
+        jumpDeltaTimer = 0;
+        jumpTimer = 0.1f;
         isInvincibility = false;
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
+    }
+
+    public void Update()
+    {
+        if (IsUsingSkill())
+        {
+            _rigidbody.velocity = Vector2.zero; // TODO: 기획에 따라 스킬 사용 중 멈추는 것이 바뀔 수 있음 - SDH, 20250106
+        }
     }
 
     public void RestartPlayer()
     {
         Initialize();
         _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
-        PlayerUIController.Instance.Initialize();
+        PlayerUIManager.Instance.Initialize();
     }
 
     // GET Functions
@@ -99,7 +126,7 @@ public class Player : DirectionalGameObject
     public GameObject GetTargetInfo() { return targetInfo; }
 
     // SET Functions
-    public void SetPlayerStatus(PlayerStatus status)
+    public void SetStatus(PlayerStatus status)
     {
         this.status = status;
 
@@ -113,7 +140,7 @@ public class Player : DirectionalGameObject
                 break;
             case PlayerStatus.Attack:
                 if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.attackRAnimTrigger);
-                else _animator.SetTrigger(PlayerSkillConstant.attackRAnimTrigger);
+                else _animator.SetTrigger(PlayerSkillConstant.attackLAnimTrigger);
                 break;
             case PlayerStatus.Dash:
                 _animator.SetTrigger(PlayerSkillConstant.dashAnimTrigger);
@@ -122,7 +149,7 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerSkillConstant.markAnimTrigger);
                 break;
             case PlayerStatus.Skill1:
-                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.skill1LAnimTrigger);
+                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.skill1RAnimTrigger);
                 else _animator.SetTrigger(PlayerSkillConstant.skill1LAnimTrigger);
                 break;
             case PlayerStatus.Skill2:
@@ -133,8 +160,6 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
-
-        if (IsUsingSkill() == true) StartCoroutine(UseSkill());
     }
 
     public void SetGravityScale(bool gravity)
@@ -161,7 +186,7 @@ public class Player : DirectionalGameObject
     public bool ChangeCurrentHP(int hp)
     {
         bool isAlive = playerUnit.ChangeCurrentHP(hp);
-        PlayerHpUI.Instance?.UpdateHPUI();
+        PlayerHpUIController.Instance?.UpdateHPUI();
         return isAlive;
     }
 
@@ -172,7 +197,7 @@ public class Player : DirectionalGameObject
         dash.SetTarget(obj);
     }
 
-    private void SetDead() { SetPlayerStatus(PlayerStatus.Dead); }
+    private void SetDead() { SetStatus(PlayerStatus.Dead); }
 
     public void CheckResetSkills(GameObject obj)
     {
@@ -204,20 +229,19 @@ public class Player : DirectionalGameObject
             isMove = true;
         }
 
-        if (!IsUsingSkill() && status != PlayerStatus.Jump) SetPlayerStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
+        if (!IsUsingSkill() && status != PlayerStatus.Jump) SetStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
 
         if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
     public void CheckPlayerCommand()
     {
-        if (status != PlayerStatus.Dead)
+        if (status != PlayerStatus.Dead && !IsUsingSkill())
         {
             Jump();
-            Fall();
+            CheckGround();
             Down();
             Skill();
-            Interaction();
         }
     }
     private bool IsMoveable()
@@ -228,6 +252,8 @@ public class Player : DirectionalGameObject
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
             case PlayerStatus.Mark:
+                // case PlayerStatus.Attack:
+                // case PlayerStatus.Skill1:
                 return true;
             default:
                 return false;
@@ -251,42 +277,50 @@ public class Player : DirectionalGameObject
 
     private void Down()
     {
-        if (!isOnTile) return;
-        if (!_animator.GetBool(PlayerConstant.groundedAnimBool)) return;
+        if (!Input.GetKeyDown(KeySetting.keys[PlayerAction.Down])) return;
+        if (!isGround) return;
+        if (tileCollider == null) return;
 
-        if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Down])) colliderController.PassTile(tileCollider);
+        colliderController.PassTile(tileCollider);
     }
 
-    private void Fall()
+    private void CheckGround()
     {
-        _animator.SetBool(PlayerConstant.groundedAnimBool, _rigidbody.velocity.y >= -0.05f);
+        if (jumpDeltaTimer > 0) return;
+
+        Vector3 left = GetBottomPos() - new Vector3(GetSize().x / 2, 0, 0);
+        Vector3 right = GetBottomPos() + new Vector3(GetSize().x / 2, 0, 0);
+
+        RaycastHit2D rayHit = Physics2D.Raycast(left, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
+        if (rayHit.collider == null) rayHit = Physics2D.Raycast(right, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
+
+        isGround = rayHit.collider != null && _rigidbody.velocity.y >= 0;
+        _animator.SetBool(PlayerConstant.groundedAnimBool, isGround);
+
+        if (!isGround) return;
+
+        if (status == PlayerStatus.Jump) SetStatus(PlayerStatus.Idle);
+        playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
+        tileCollider = rayHit.collider.GetComponent<BoxCollider2D>();
+
     }
 
     private void Jump()
     {
+        if (jumpDeltaTimer > 0) jumpDeltaTimer -= Time.deltaTime;
         if (IsUsingSkill() == true || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
 
         if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Jump]))
         {
-            SetPlayerStatus(PlayerStatus.Jump);
+            SetStatus(PlayerStatus.Jump);
 
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
             _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
-        }
-    }
 
-    private void Interaction()
-    {
-        if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Interaction]))
-        {
-            if (Portal.Instance.IsTriggerPortal == true)
-            {
-                ChapterManager.Instance.MoveToNextStage();
-            }
+            jumpDeltaTimer = jumpTimer;
         }
-        // TODO: ObjectWithInteractionPrompt과 상호작용 관련 로직 추가해야 함 - 신동환, 20250124
     }
 
     public void Dashing(Vector2 end, bool changeDir, bool isInvincibility, bool passWall = true)
@@ -336,12 +370,6 @@ public class Player : DirectionalGameObject
     private void Skill()
     {
         foreach (var skill in skillList) skill.CheckInputKeyCode();
-    }
-
-    IEnumerator UseSkill()
-    {
-        yield return new WaitForSeconds(PlayerSkillConstant.SkillDelayInterval);
-        if (status != PlayerStatus.Dead) SetPlayerStatus(PlayerStatus.Idle);
     }
 
     public float GetSkillCoolTime(SkillName skillName)
@@ -407,6 +435,7 @@ public class Player : DirectionalGameObject
 
         trait.GetSkill();
         traitList.Add(trait);
+        SoundManager.Instance.PlayEquipSFX();
     }
 
     public void RemoveTraitByIndex(int index)
@@ -423,6 +452,7 @@ public class Player : DirectionalGameObject
             if (trait.skillName == name)
             {
                 traitList.Remove(trait);
+                SoundManager.Instance.PlayEquipSFX();
                 trait.RemoveSkill();
                 return;
             }
@@ -443,7 +473,6 @@ public class Player : DirectionalGameObject
 
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
 
-
         _animator.SetTrigger("hurt");
         KnockBacked();
     }
@@ -463,32 +492,5 @@ public class Player : DirectionalGameObject
     public bool CheckFullEquipTrait()
     {
         return GetTraits().Length == PlayerConstant.MaxAdditionalSkillCount;
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag(TagConstant.Base)) isOnBaseTile = false;
-        if (other.CompareTag(TagConstant.Tile)) isOnTile = false;
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        GameObject other = collision.gameObject;
-
-        if (!TagConstant.IsBlockTag(other)) return;
-
-        float collisionPoint = collision.GetContact(0).point.y;
-        float colliderBottom = _collider.bounds.center.y - _collider.bounds.size.y / 2;
-
-        if (collisionPoint > colliderBottom + 0.05f) return;
-
-        tileCollider = other.GetComponent<BoxCollider2D>();
-
-        if (other.CompareTag(TagConstant.Base)) isOnBaseTile = true;
-        if (other.CompareTag(TagConstant.Tile)) isOnTile = true;
-
-        if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
-
-        playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
     }
 }

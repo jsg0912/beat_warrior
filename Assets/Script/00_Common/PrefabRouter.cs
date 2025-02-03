@@ -8,6 +8,9 @@ public class PrefabRouter
     public const string MonsterImageRoute = "Image/Monster/";
     public const string MiniMapUIPrefabRoute = "Prefab/03_UI/02_InGameUI/02_MiniMapUI/";
     public const string MonsterObjectRoute = "Prefab/02_Object/05_Monster/";
+    public const string TraitIconRoute = "Image/UI/AltarUI/TraitIcon/";
+    public const string InteractionObjectRoute = "Prefab/02_Object/03_InteractionObject/";
+    public const string ScriptableObjectRoute = "Prefab/99_ScriptableObject/";
 
     public const string PlayerPrefab = PlayerPrefabRoute + "Player";
     public const string PlayerAttackPrefab = PlayerPrefabRoute + "AttackCollider";
@@ -15,9 +18,10 @@ public class PrefabRouter
     public const string Skill2Prefab = PlayerPrefabRoute + "Skill2Collider";
     public const string GhostPrefab = PlayerPrefabRoute + "Ghost";
 
-    public const string SoulPrefab = ObjectPrefabRoute + "Soul";
+    public const string SoulPrefab = InteractionObjectRoute + "Soul";
     public const string MarkerPrefab = PlayerObjectPrefabRoute + "Marker";
     public const string ObjectPooler = ObjectPrefabRoute + "ObjectPooler";
+    public const string SoundList = ScriptableObjectRoute + "SoundList";
 
     public const string UIPrefab = "Prefab/03_UI/UI";
     public const string MapMonsterIcon = MiniMapUIPrefabRoute + "MapMonsterIcon";
@@ -30,17 +34,16 @@ public class PrefabRouter
 
     public static Dictionary<MonsterName, string> MonsterAttackPrefab = new() {
         { MonsterName.Ibkkugi, MonsterObjectRoute + "IbkkugiThrow"},
-        { MonsterName.Jiljili, MonsterObjectRoute + "JiljiliThrow"},
         { MonsterName.Itmomi, MonsterObjectRoute + "ItmomiThrow"},
     };
 
     public static Dictionary<SkillName, string> TraitIconImages = new() {
         { SkillName.End, EmptyImage },
-        { SkillName.AppendMaxHP, MonsterImageRoute + "Ippali/attack_0" },
-        { SkillName.SkillReset, MonsterImageRoute + "Ippali/attack_2" },
-        { SkillName.DoubleJump, MonsterImageRoute + "Ippali/attack_1" },
-        { SkillName.Execution, MonsterImageRoute + "Ippali/attack_3" },
-        { SkillName.AppendAttack, MonsterImageRoute + "Ippali/attack_4" },
-        { SkillName.KillRecoveryHP, MonsterImageRoute + "Ippali/attack_5" },
+        { SkillName.AppendMaxHP, TraitIconRoute + "006" },
+        { SkillName.SkillReset, TraitIconRoute + "003" },
+        { SkillName.DoubleJump, TraitIconRoute + "009" },
+        { SkillName.Execution, TraitIconRoute + "007" },
+        { SkillName.AppendAttack, TraitIconRoute + "001" },
+        { SkillName.KillRecoveryHP, TraitIconRoute + "004" },
     };
 }

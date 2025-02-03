@@ -24,7 +24,18 @@ public class AttackCollider : MonoBehaviour
         {
             additionalEffects = new List<AdditionalEffect>();
         }
-        additionalEffects.Add(additionalEffect);
+
+        if (additionalEffect.canDuplicate)
+        {
+            additionalEffects.Add(additionalEffect);
+        }
+        else
+        {
+            if (!additionalEffects.Exists(alreadyExist => alreadyExist.additionalEffectName == additionalEffect.additionalEffectName))
+            {
+                additionalEffects.Add(additionalEffect);
+            }
+        }
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

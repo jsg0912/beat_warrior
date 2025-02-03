@@ -1,24 +1,7 @@
-using UnityEngine;
-
-public class Portal : MonoBehaviour
+public class Portal : ObjectWithInteractionPrompt
 {
-    public static Portal Instance;
-    public bool IsTriggerPortal;
-
-    private void Start()
+    public override void StartInteraction()
     {
-        IsTriggerPortal = false;
-        Instance = this;
+        ChapterManager.Instance.MoveToNextStage();
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag(TagConstant.Player)) IsTriggerPortal = true;
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag(TagConstant.Player)) IsTriggerPortal = false;
-    }
-
 }
