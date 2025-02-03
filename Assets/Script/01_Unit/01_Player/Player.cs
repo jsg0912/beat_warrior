@@ -23,14 +23,8 @@ public class Player : DirectionalGameObject
         get { return _status; }
         set
         {
-            if (GetCurrentStat(StatKind.HP) <= 0 && value != PlayerStatus.Dead)
-            {
-                return;
-            }
-            else
-            {
-                _status = value;
-            }
+            if (GetCurrentStat(StatKind.HP) <= 0 && value != PlayerStatus.Dead) return;
+            else _status = value;
         }
     }
 
@@ -101,16 +95,6 @@ public class Player : DirectionalGameObject
         isInvincibility = false;
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
-    }
-
-    public void Update()
-    {
-        if (IsUsingSkill())
-        {
-            _rigidbody.velocity = Vector2.zero; // TODO: 기획에 따라 스킬 사용 중 멈추는 것이 바뀔 수 있음 - SDH, 20250106
-        }
-
-        Debug.Log(status);
     }
 
     public void RestartPlayer()
