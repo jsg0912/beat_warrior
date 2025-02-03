@@ -23,9 +23,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
 
         if (Input.GetKeyDown(keyCode))
         {
-            if (Player.Instance.IsUsingSkill() == true) return;
-
-            TrySkill();
+            if (Player.Instance.IsActionAble()) TrySkill();
         }
     }
 

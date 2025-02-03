@@ -16,6 +16,8 @@ public class PlayerConstant
     public const float playerHeight = 1.0f;
 
     public const float invincibilityTime = 0.5f;
+    public const float knockBackedStunTime = 2.0f;
+    public const float knockBackedDistance = 5.0f;
 
     public const string runAnimBool = "isRun";
     public const string jumpAnimTrigger = "jump";

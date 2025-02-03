@@ -66,7 +66,7 @@ public class CommandManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.N))
         {
-            Player.Instance.GetDamaged(Player.Instance.GetCurrentStat(StatKind.HP), Direction.Left);
+            Player.Instance.GetDamaged(Player.Instance.GetCurrentStat(StatKind.HP), Player.Instance.GetMovingDirection());
         }
     }
 }

@@ -8,7 +8,6 @@ public delegate void PlayerCreateDelegate(); // [Code Review - KMJ] No ref? - SD
 public class Player : DirectionalGameObject
 {
     public static Player Instance;
-    public int Hp => playerUnit.unitStat.GetCurrentStat(StatKind.HP);
     public Unit playerUnit;
     private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
@@ -35,16 +34,14 @@ public class Player : DirectionalGameObject
         }
     }
 
+    public int Hp => playerUnit.unitStat.GetCurrentStat(StatKind.HP);
+
     private bool isGround;
     private float jumpDeltaTimer;
     private float jumpTimer;
     private bool isInvincibility;
-    private BoxCollider2D tileCollider;
+    private BoxCollider2D tileCollider; // [Code Review - KMJ] TODO: 이제 필요없으면 제거 or TileCollider를 왜 가지고 있는지 모르겠음 - 
 
-    private GameObject targetInfo;
-
-    public delegate void HitMonsterFunc(Monster monster);
-    public delegate void UseSkillFunc(Skill skill);
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
 
@@ -119,13 +116,13 @@ public class Player : DirectionalGameObject
     public SkillName[] GetTraits() { return traitList.Where(skill => skill.tier != SkillTier.Common).Select(trait => trait.skillName).ToArray(); }
     public int GetCurrentStat(StatKind statKind) { return playerUnit.unitStat.GetCurrentStat(statKind); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
-    public GameObject GetTargetInfo() { return targetInfo; }
 
     // SET Functions
     public void SetStatus(PlayerStatus status)
     {
         this.status = status;
 
+        _animator.SetBool(PlayerConstant.runAnimBool, status == PlayerStatus.Run);
         _animator.SetFloat("Speed", status == PlayerStatus.Run ? 1 : 0);
 
         switch (status)
@@ -223,15 +220,14 @@ public class Player : DirectionalGameObject
             isMove = true;
         }
 
-        //if (!IsUsingSkill() && status != PlayerStatus.Jump) SetStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
-        Debug.Log(isMove + " " + status);
+        if (!IsUsingSkill() && status != PlayerStatus.Jump) SetStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
 
         if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
     public void CheckPlayerCommand()
     {
-        if (status != PlayerStatus.Dead && !IsUsingSkill())
+        if (status != PlayerStatus.Dead && IsActionAble())
         {
             Jump();
             CheckGround();
@@ -247,6 +243,19 @@ public class Player : DirectionalGameObject
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
             case PlayerStatus.Mark:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public bool IsActionAble()
+    {
+        switch (status)
+        {
+            case PlayerStatus.Idle:
+            case PlayerStatus.Run:
+            case PlayerStatus.Jump:
                 return true;
             default:
                 return false;
@@ -292,7 +301,7 @@ public class Player : DirectionalGameObject
 
         if (!isGround) return;
 
-        //if (status == PlayerStatus.Jump) SetStatus(PlayerStatus.Idle);
+        if (status == PlayerStatus.Jump) SetStatus(PlayerStatus.Idle);
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
         tileCollider = rayHit.collider.GetComponent<BoxCollider2D>();
 
@@ -301,7 +310,7 @@ public class Player : DirectionalGameObject
     private void Jump()
     {
         if (jumpDeltaTimer > 0) jumpDeltaTimer -= Time.deltaTime;
-        if (IsUsingSkill() == true || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
+        if (!IsActionAble() || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
 
         if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Jump]))
         {
@@ -474,11 +483,17 @@ public class Player : DirectionalGameObject
 
     private void KnockBack(Direction direction)
     {
-        SetStatus(PlayerStatus.KnockBacked);
+        SetStatus(PlayerStatus.Stun);
 
         if (direction == objectDirection) FlipDirection();
-        PlayerAddForce(new Vector2(5.0f, 1.0f), (int)direction);
-        StartCoroutine(KnockBacked(2.0f));
+        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), (int)direction);
+        StartCoroutine(KnockBacked(PlayerConstant.knockBackedStunTime));
+    }
+
+    private IEnumerator KnockBacked(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        SetStatus(PlayerStatus.Idle);
     }
 
     private IEnumerator Invincibility(float timer)
@@ -488,11 +503,6 @@ public class Player : DirectionalGameObject
         isInvincibility = false;
     }
 
-    private IEnumerator KnockBacked(float timer)
-    {
-        yield return new WaitForSeconds(timer);
-        SetStatus(PlayerStatus.Idle);
-    }
 
     public bool CheckFullEquipTrait()
     {
