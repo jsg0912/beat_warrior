@@ -24,7 +24,6 @@ public class MonsterConstant
     public const float IbkkugiMaxHeight = 1.5f;
 
     // Dulduli
-    public const float DulduliThrowSpeed = 3f;
     public const float DulduliJumpPower = 5f;
     public const int DulduliJumpNumber = 1;
     public const float DulduliJumpDuration = 1f;
