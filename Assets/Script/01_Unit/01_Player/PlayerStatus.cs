@@ -11,6 +11,7 @@ public enum PlayerStatus
     Attack,
     Skill1,
     Skill2,
+    KnockBacked,
     Dead,
     Null
 }

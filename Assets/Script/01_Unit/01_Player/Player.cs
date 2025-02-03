@@ -130,7 +130,6 @@ public class Player : DirectionalGameObject
     {
         this.status = status;
 
-        _animator.SetBool(PlayerConstant.runAnimBool, status == PlayerStatus.Run);
         _animator.SetFloat("Speed", status == PlayerStatus.Run ? 1 : 0);
 
         switch (status)
@@ -156,7 +155,6 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerSkillConstant.skill2AnimTrigger);
                 break;
             case PlayerStatus.Dead:
-                KnockBacked();
                 _animator.SetTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
@@ -229,7 +227,8 @@ public class Player : DirectionalGameObject
             isMove = true;
         }
 
-        if (!IsUsingSkill() && status != PlayerStatus.Jump) SetStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
+        //if (!IsUsingSkill() && status != PlayerStatus.Jump) SetStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
+        Debug.Log(isMove + " " + status);
 
         if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
@@ -252,8 +251,6 @@ public class Player : DirectionalGameObject
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
             case PlayerStatus.Mark:
-                // case PlayerStatus.Attack:
-                // case PlayerStatus.Skill1:
                 return true;
             default:
                 return false;
@@ -299,7 +296,7 @@ public class Player : DirectionalGameObject
 
         if (!isGround) return;
 
-        if (status == PlayerStatus.Jump) SetStatus(PlayerStatus.Idle);
+        //if (status == PlayerStatus.Jump) SetStatus(PlayerStatus.Idle);
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
         tileCollider = rayHit.collider.GetComponent<BoxCollider2D>();
 
@@ -459,7 +456,7 @@ public class Player : DirectionalGameObject
         }
     }
 
-    public void GetDamaged(int dmg)
+    public void GetDamaged(int dmg, Direction direction)
     {
         if (isInvincibility || status == PlayerStatus.Dead) return;
 
@@ -474,12 +471,16 @@ public class Player : DirectionalGameObject
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
 
         _animator.SetTrigger("hurt");
-        KnockBacked();
+        KnockBack(direction);
     }
 
-    private void KnockBacked()
+    private void KnockBack(Direction direction)
     {
-        PlayerAddForce(new Vector2(5.0f, 1.0f), -1);
+        SetStatus(PlayerStatus.KnockBacked);
+
+        if (direction == objectDirection) FlipDirection();
+        PlayerAddForce(new Vector2(5.0f, 1.0f), (int)direction);
+        StartCoroutine(KnockBacked(2.0f));
     }
 
     private IEnumerator Invincibility(float timer)
@@ -487,6 +488,12 @@ public class Player : DirectionalGameObject
         isInvincibility = true;
         yield return new WaitForSeconds(timer);
         isInvincibility = false;
+    }
+
+    private IEnumerator KnockBacked(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        SetStatus(PlayerStatus.Idle);
     }
 
     public bool CheckFullEquipTrait()
