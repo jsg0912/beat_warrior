@@ -160,6 +160,8 @@ MonoBehaviour:
   movingDirection: 1
   objectDirection: 1
   spriteRenderer: {fileID: 5881253563951645107}
+  childDirectionalObjects:
+  - {fileID: 8792216383531930908}
   colliderController: {fileID: 8536599870213391182}
   _status: 0
 --- !u!114 &8536599870213391182
@@ -426,6 +428,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5832865420382322659}
     m_Modifications:
+    - target: {fileID: 8296827009130751247, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
+      propertyPath: m_Flip.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8296827009130781867, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: looping
       value: 1
@@ -500,7 +506,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009130781867, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 4.45
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009130781867, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
@@ -604,15 +610,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131243, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0416
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131243, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.208
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalScale.x
-      value: 266.66666
+      value: 266.6667
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalScale.y
@@ -620,11 +626,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.599998
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -60.382042
+      value: -5.5
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalPosition.z
@@ -660,11 +666,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131247, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0414
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149131247, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.207
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8296827009149149359, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
       propertyPath: m_LocalPosition.x
@@ -690,6 +696,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
+--- !u!1 &8792216383531930908 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8296827009149224397, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
+  m_PrefabInstance: {fileID: 657659700711428305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8792216383532157244 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
