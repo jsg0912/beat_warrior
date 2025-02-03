@@ -5,6 +5,6 @@ public class PatternDulDulI : Pattern
         Recognize = new RecognizeStrategyMelee();
         MoveBasic = new MoveStrategyNormal();
         MoveChase = new MoveStrategyChase();
-        Attack = new AttackStrategyRolling();
+        Attack = new AttackStrategyRollingDulDulI();
     }
 }

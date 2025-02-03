@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AttackStrategyRolling : AttackStrategy
 {
-    public float jumpPower = 5f; // 점프 높이
-    public int numJumps = 1;  // 튀는 횟수
-    public float duration = 1f; // 전체 애니메이션 시간
+    public float jumpPower;
+    public int numJumps;
+    public float duration;
 
     protected override IEnumerator UseSkill()
     {

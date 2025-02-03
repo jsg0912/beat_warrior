@@ -7,18 +7,20 @@ public static class MonsterList
     public static List<MonsterJSON> monsterList = new List<MonsterJSON>()
     {
         new MonsterJSON(MonsterName.Ibkkugi,
-        "입꾹이",
+        "입꾹이", // TODO: 이 이름도 ScriptPool로 이동해야 함 
         new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
+            {StatKind.Def, 0},
         },
         PatternName.Ibkkugi),
 
          new MonsterJSON(MonsterName.Dulduli,
-        "질질이",
+        "덜덜이",
         new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
+            {StatKind.Def, 9999},
         },
         PatternName.Dulduli),
 
@@ -27,6 +29,7 @@ public static class MonsterList
         new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
+            {StatKind.Def, 0},
         },
         PatternName.Itmomi,
         isKnockBackAble: false),
@@ -36,6 +39,7 @@ public static class MonsterList
         new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
+            {StatKind.Def, 0},
         },
         PatternName.Koppulso),
         new MonsterJSON(MonsterName.Giljjugi,
@@ -43,6 +47,7 @@ public static class MonsterList
         new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
+            {StatKind.Def, 0},
         },
         PatternName.Monster3),
         new MonsterJSON(MonsterName.Ippali,
@@ -50,6 +55,7 @@ public static class MonsterList
         new Dictionary<StatKind, int>{
             {StatKind.HP, 2},
             {StatKind.ATK, 1},
+            {StatKind.Def, 0},
         },
         PatternName.Ippali),
     };

@@ -8,6 +8,7 @@ public delegate void PlayerCreateDelegate(); // [Code Review - KMJ] No ref? - SD
 public class Player : DirectionalGameObject
 {
     public static Player Instance;
+    public int Hp => playerUnit.unitStat.GetCurrentStat(StatKind.HP);
     public Unit playerUnit;
     private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
@@ -72,12 +73,7 @@ public class Player : DirectionalGameObject
     private void Initialize(Direction direction = Direction.Left)
     {
         // TODO: Alternate real user nickname than "playerName" - SDH, 20241204
-        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
-            {StatKind.HP, PlayerConstant.hpMax},
-            {StatKind.ATK, PlayerConstant.atk},
-            {StatKind.JumpCount, PlayerConstant.jumpCountMax},
-            {StatKind.AttackCount, PlayerSkillConstant.attackCountMax}
-        }));
+        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.defaultStat));
 
         skillList = new List<ActiveSkillPlayer>
         {
@@ -456,9 +452,11 @@ public class Player : DirectionalGameObject
         }
     }
 
-    public void GetDamaged(int dmg, Direction direction)
+    public void GetDamaged(int monsterAtk, Direction direction)
     {
         if (isInvincibility || status == PlayerStatus.Dead) return;
+
+        int dmg = monsterAtk - GetFinalStat(StatKind.Def);
 
         bool isAlive = ChangeCurrentHP(-dmg);
 
