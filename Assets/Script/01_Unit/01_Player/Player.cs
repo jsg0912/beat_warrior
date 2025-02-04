@@ -112,15 +112,12 @@ public class Player : DirectionalGameObject
     public GameObject GetTargetInfo() { return targetInfo; }
 
     // SET Functions
-    public void SetStatus(PlayerStatus status, string trigger = "")
+    public void SetStatus(PlayerStatus status)
     {
         this.status = status;
 
         switch (status)
         {
-            case PlayerStatus.Skill:
-                SetAnimTrigger(trigger);
-                break;
             case PlayerStatus.Dead:
                 SetAnimTrigger(PlayerConstant.dieAnimTrigger);
                 break;

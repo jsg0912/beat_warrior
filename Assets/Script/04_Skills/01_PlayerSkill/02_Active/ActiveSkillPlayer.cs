@@ -11,7 +11,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
 
     protected override void UseSkill()
     {
-        Player.Instance.SetStatus(PlayerStatus.Skill, trigger[Random.Range(0, trigger.Count)]);
+        Player.Instance.SetAnimTrigger(trigger[Random.Range(0, trigger.Count)]);
 
         SkillMethod();
 
