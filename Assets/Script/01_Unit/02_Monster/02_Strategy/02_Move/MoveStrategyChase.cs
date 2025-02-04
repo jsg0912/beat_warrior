@@ -28,7 +28,7 @@ public class MoveStrategyChase : MoveStrategy
 
     protected void ChaseTarget()
     {
-        SetMovingDirection(GetRelativeDirectionToPlayer());
+        SetMovingDirection(monster.GetRelativeDirectionToPlayer());
     }
 
     protected override bool IsMoveable()

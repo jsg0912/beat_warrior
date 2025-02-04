@@ -74,7 +74,7 @@ MonoBehaviour:
   objectDirection: 1
   spriteRenderer: {fileID: 5938675433907970453}
   monsterName: 3
-  status: 0
+  _status: 0
   HpUI: {fileID: 1349157933565216087}
   Target: {fileID: 0}
   AnotherHPValue: 0
@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2822727226431534982}
   - component: {fileID: 190179692422204781}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: TackleCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,14 +247,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1686646113
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 65e6d9a4a99d09743916e38ede9146eb, type: 3}
+  m_Sprite: {fileID: 756099117, guid: ccd0c034efdd919439626dd4b4e9f23c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.3333333, y: 3.3333333}
+  m_Size: {x: 2.6, y: 2.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -310,8 +310,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.857143, y: 2.857143}
-    newSize: {x: 3.3333333, y: 3.3333333}
+    oldSize: {x: 2.6, y: 2.6}
+    newSize: {x: 2.6, y: 2.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

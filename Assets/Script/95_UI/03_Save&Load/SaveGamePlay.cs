@@ -10,13 +10,13 @@ public class SaveGamePlay
 
     public SaveGamePlay()
     {
-        this.currentChapterName = ChapterName.Tutorial.ToString();
-        this.equipSkill = null;
-        this.hp = PlayerConstant.hpMax;
+        currentChapterName = ChapterName.Tutorial.ToString();
+        equipSkill = null;
+        hp = Player.Instance.Hp;
     }
     public SaveGamePlay(Chapter chapter, SkillName[] equipSkill, int hp)
     {
-        this.currentChapterName = chapter.name.ToString();
+        currentChapterName = chapter.name.ToString();
         this.equipSkill = Array.ConvertAll(equipSkill, skillValue => skillValue.ToString());
         this.hp = hp;
 
