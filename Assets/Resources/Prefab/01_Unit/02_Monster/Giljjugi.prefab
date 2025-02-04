@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1686646113
-  m_SortingLayer: 4
-  m_SortingOrder: 0
+  m_SortingLayer: 5
+  m_SortingOrder: 91
   m_Sprite: {fileID: -1351552238, guid: 52d5efa737d972643bddb9163e91f205, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -222,8 +222,9 @@ MonoBehaviour:
   movingDirection: 1
   objectDirection: 1
   spriteRenderer: {fileID: 1220593941234673828}
+  childDirectionalObjects: []
   monsterName: 0
-  status: 0
+  _status: 0
   HpUI: {fileID: 1649727570667360246}
   Target: {fileID: 0}
   AnotherHPValue: 0
