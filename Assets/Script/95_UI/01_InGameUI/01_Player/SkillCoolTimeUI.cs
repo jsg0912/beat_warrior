@@ -6,7 +6,7 @@ public class SkillCoolTimeUI : MonoBehaviour
 {
     [SerializeField] SkillName skillName;
     [SerializeField] Image CoolTimeImg;
-    [SerializeField] Image SkillIconUILight;
+    [SerializeField] Image SkillIconUILight; // It can be null (ex. Passive Skill or Dash) 
     [SerializeField] TextMeshProUGUI SkillHotKey;
     [SerializeField] TextMeshProUGUI CoolTimeText;
 
@@ -35,7 +35,7 @@ public class SkillCoolTimeUI : MonoBehaviour
         if (isFirstCoolTime == true)
         {
             isFirstCoolTime = false;
-            Util.SetActive(SkillIconUILight.gameObject, true);
+            Util.SetActive(SkillIconUILight?.gameObject, true);
             Util.SetActive(CoolTimeText.gameObject, true);
             StartSkillIconLightAnimation();
         }

@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     private Language language = Language.kr;
     public Language Language => language;
-    public Texture2D cursorIcon;
     public bool IsLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();
     public SceneName currentScene;
 
@@ -39,8 +38,9 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        SetMouseCursor();
+        SetDefaultCursor();
         isInGame = false;
+        SetDefaultCursor();
         Enum.TryParse(SceneManager.GetActiveScene().name, true, out currentScene);
     }
 
@@ -49,9 +49,16 @@ public class GameManager : MonoBehaviour
         this.language = language;
     }
 
-    private void SetMouseCursor()
+    public void SetDefaultCursor()
     {
-        if (cursorIcon != null) Cursor.SetCursor(cursorIcon, Vector2.zero, CursorMode.Auto);
+        if (isInGame)
+        {
+            CursorController.Instance.SetInGameCursor();
+        }
+        else
+        {
+            CursorController.Instance.SetTitleCursor();
+        }
     }
 
     public void StartGame()

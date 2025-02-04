@@ -2,9 +2,12 @@ using System;
 
 public static class StageCount
 {
+    // For Prototype, the number of stages in each chapter is reduced as below (before be commented). - SDH, 20250204
     public const int TUTORIAL = 1;
-    public const int CH1 = 2;
-    public const int CH2 = 6;
+    // public const int TUTORIAL = 2;
+    public const int CH1 = 1;
+    // public const int CH2 = 6;
+    public const int CH2 = 3;
     public const int CH3 = 6;
     public const int CH4 = 6;
 

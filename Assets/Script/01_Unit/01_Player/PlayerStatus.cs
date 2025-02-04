@@ -12,5 +12,6 @@ public enum PlayerStatus
     Skill1,
     Skill2,
     Dead,
+    Stun,
     Null
 }

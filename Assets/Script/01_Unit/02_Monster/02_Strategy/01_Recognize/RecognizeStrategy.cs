@@ -8,7 +8,7 @@ public abstract class RecognizeStrategy : Strategy
         return true;
     }
 
-    protected virtual bool IsLookingTarget() { return GetMovingDirection() == GetRelativeDirectionToPlayer(); }
+    protected virtual bool IsLookingTarget() { return GetMovingDirection() == monster.GetRelativeDirectionToPlayer(); }
     protected abstract void CheckTarget();
 
     protected void StartChase()

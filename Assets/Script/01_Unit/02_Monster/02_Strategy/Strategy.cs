@@ -1,4 +1,3 @@
-using Unity.Mathematics;
 using UnityEngine;
 
 public abstract class Strategy
@@ -14,7 +13,7 @@ public abstract class Strategy
 
     public virtual bool PlayStrategy() { return false; } // it returns whether the strategy plays or not.
 
-    protected Vector3 GetPlayerPos() { return Player.Instance.transform.position; }
+    protected Vector3 GetPlayerPos() { return Player.Instance.GetBottomPos(); }
     protected Vector3 GetMonsterPos() { return monster.GetBottomPos(); }
     protected Vector3 GetMonsterMiddlePos() { return monster.GetMiddlePos(); }
     protected Vector3 GetMonsterFrontPos() { return GetMonsterPos() + new Vector3(GetMonsterSize().x * GetMovingDirectionFloat() / 2, 0, 0); }
@@ -22,6 +21,4 @@ public abstract class Strategy
     protected Vector2 GetMonsterSize() { return monster.GetSize(); }
     protected Direction GetMovingDirection() { return monster.GetMovingDirection(); }
     protected float GetMovingDirectionFloat() { return monster.GetMovingDirectionFloat(); }
-    protected Direction GetRelativeDirectionToPlayer() { return Player.Instance.transform.position.x > monster.transform.position.x ? Direction.Right : Direction.Left; }
-    protected float GetRelativePlayerDirectionFloat() { return Player.Instance.transform.position.x > monster.transform.position.x ? 1.0f : -1.0f; }
 }

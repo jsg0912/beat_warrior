@@ -34,16 +34,14 @@ public class Player : DirectionalGameObject
         }
     }
 
+    public int Hp => playerUnit.unitStat.GetCurrentStat(StatKind.HP);
+
     private bool isGround;
     private float jumpDeltaTimer;
     private float jumpTimer;
     private bool isInvincibility;
-    private BoxCollider2D tileCollider;
+    private BoxCollider2D tileCollider; // [Code Review - KMJ] TODO: 이제 필요없으면 제거 or TileCollider를 왜 가지고 있는지 모르겠음 - 
 
-    private GameObject targetInfo;
-
-    public delegate void HitMonsterFunc(Monster monster);
-    public delegate void UseSkillFunc(Skill skill);
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
 
@@ -72,12 +70,7 @@ public class Player : DirectionalGameObject
     private void Initialize(Direction direction = Direction.Left)
     {
         // TODO: Alternate real user nickname than "playerName" - SDH, 20241204
-        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
-            {StatKind.HP, PlayerConstant.hpMax},
-            {StatKind.ATK, PlayerConstant.atk},
-            {StatKind.JumpCount, PlayerConstant.jumpCountMax},
-            {StatKind.AttackCount, PlayerSkillConstant.attackCountMax}
-        }));
+        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.defaultStat));
 
         skillList = new List<ActiveSkillPlayer>
         {
@@ -123,7 +116,6 @@ public class Player : DirectionalGameObject
     public SkillName[] GetTraits() { return traitList.Where(skill => skill.tier != SkillTier.Common).Select(trait => trait.skillName).ToArray(); }
     public int GetCurrentStat(StatKind statKind) { return playerUnit.unitStat.GetCurrentStat(statKind); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
-    public GameObject GetTargetInfo() { return targetInfo; }
 
     // SET Functions
     public void SetStatus(PlayerStatus status)
@@ -156,7 +148,6 @@ public class Player : DirectionalGameObject
                 _animator.SetTrigger(PlayerSkillConstant.skill2AnimTrigger);
                 break;
             case PlayerStatus.Dead:
-                KnockBacked();
                 _animator.SetTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
@@ -236,7 +227,7 @@ public class Player : DirectionalGameObject
 
     public void CheckPlayerCommand()
     {
-        if (status != PlayerStatus.Dead && !IsUsingSkill())
+        if (status != PlayerStatus.Dead && IsActionAble())
         {
             Jump();
             CheckGround();
@@ -252,8 +243,19 @@ public class Player : DirectionalGameObject
             case PlayerStatus.Run:
             case PlayerStatus.Jump:
             case PlayerStatus.Mark:
-                // case PlayerStatus.Attack:
-                // case PlayerStatus.Skill1:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public bool IsActionAble()
+    {
+        switch (status)
+        {
+            case PlayerStatus.Idle:
+            case PlayerStatus.Run:
+            case PlayerStatus.Jump:
                 return true;
             default:
                 return false;
@@ -308,7 +310,7 @@ public class Player : DirectionalGameObject
     private void Jump()
     {
         if (jumpDeltaTimer > 0) jumpDeltaTimer -= Time.deltaTime;
-        if (IsUsingSkill() == true || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
+        if (!IsActionAble() || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
 
         if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Jump]))
         {
@@ -459,9 +461,11 @@ public class Player : DirectionalGameObject
         }
     }
 
-    public void GetDamaged(int dmg)
+    public void GetDamaged(int monsterAtk, Direction direction)
     {
         if (isInvincibility || status == PlayerStatus.Dead) return;
+
+        int dmg = monsterAtk - GetFinalStat(StatKind.Def);
 
         bool isAlive = ChangeCurrentHP(-dmg);
 
@@ -474,12 +478,22 @@ public class Player : DirectionalGameObject
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
 
         _animator.SetTrigger("hurt");
-        KnockBacked();
+        KnockBack(direction);
     }
 
-    private void KnockBacked()
+    private void KnockBack(Direction direction)
     {
-        PlayerAddForce(new Vector2(5.0f, 1.0f), -1);
+        SetStatus(PlayerStatus.Stun);
+
+        if (direction == objectDirection) FlipDirection();
+        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), (int)direction);
+        StartCoroutine(KnockBacked(PlayerConstant.knockBackedStunTime));
+    }
+
+    private IEnumerator KnockBacked(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        SetStatus(PlayerStatus.Idle);
     }
 
     private IEnumerator Invincibility(float timer)
@@ -488,6 +502,7 @@ public class Player : DirectionalGameObject
         yield return new WaitForSeconds(timer);
         isInvincibility = false;
     }
+
 
     public bool CheckFullEquipTrait()
     {

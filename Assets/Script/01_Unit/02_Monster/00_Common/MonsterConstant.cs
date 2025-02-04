@@ -7,9 +7,8 @@ public class MonsterConstant
     public const string attackChargeAnimTrigger = "charge";
     public const string attackAnimTrigger = "attack";
     public const string attackEndAnimTrigger = "attack end";
-
+    public const string endMotionBool = "has end motion";
     public const string turnAnimTrigger = "turn";
-
     public const string hurtAnimTrigger = "hurt";
     public const string dieAnimTrigger = "die";
 
@@ -25,8 +24,10 @@ public class MonsterConstant
     public const float IbkkugiMaxHeight = 1.5f;
 
     // Dulduli
-    public const float DulduliThrowSpeed = 3f;
-    public const float DulduliMaxHeight = 1f;
+    public const float DulduliJumpPower = 5f;
+    public const int DulduliJumpNumber = 1;
+    public const float DulduliJumpDuration = 1f;
+    public const float DulduliGroggyDuration = 2.0f;
 
     // Koppulso
     public const float KoppulsoRushSpeed = 10.0f;
@@ -83,5 +84,14 @@ public class MonsterConstant
         { MonsterName.Dulduli, 0.5f },
         { MonsterName.Giljjugi, 2.3f },
         { MonsterName.Itmomi, 0.5f }
+    };
+
+    public static Dictionary<MonsterName, bool> HasEndMotion = new() {
+        { MonsterName.Ippali, false },
+        { MonsterName.Ibkkugi, false },
+        { MonsterName.Koppulso, false },
+        { MonsterName.Dulduli, true },
+        { MonsterName.Giljjugi, false },
+        { MonsterName.Itmomi, false }
     };
 }
