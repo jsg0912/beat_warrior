@@ -4,6 +4,7 @@ public static class ValidationChecker
     // When we release the project, then you have to comment out function call at GameManager - SDH, 20250109
     public static void Check()
     {
+        if (!Util.IsEditor) return;
         TraitPriceList.CheckTraitPriceListValidation();
         MonsterList.CheckValidStat();
         ChapterInfo.CheckValid();
