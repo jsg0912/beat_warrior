@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class AttackStrategyRolling : AttackStrategy
 {
-    public float jumpPower = 5f; // 점프 높이
-    public int numJumps = 1;  // 튀는 횟수
-    public float duration = 1f; // 전체 애니메이션 시간
+    public float jumpPower;
+    public int numJumps;
+    public float duration;
+
+    public AttackStrategyRolling(float jumpPower, int numJumps, float duration)
+    {
+        this.jumpPower = jumpPower;
+        this.numJumps = numJumps;
+        this.duration = duration;
+    }
 
     protected override IEnumerator UseSkill()
     {
@@ -20,6 +27,7 @@ public class AttackStrategyRolling : AttackStrategy
         yield return new WaitForSeconds(duration + 0.3f);
         SetAfterSkill();
 
+        monster.SetStatus(MonsterStatus.AttackEnd);
         monster.PlayAnimation(MonsterStatus.AttackEnd);
     }
 

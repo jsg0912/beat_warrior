@@ -155,6 +155,8 @@ MonoBehaviour:
   movingDirection: 1
   objectDirection: 1
   spriteRenderer: {fileID: 9041314009162275493}
+  childDirectionalObjects:
+  - {fileID: 1584882063128745106}
   monsterName: 2
   _status: 0
   HpUI: {fileID: 7073441460641642031}
@@ -621,6 +623,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dirty Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8296827009149224397, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -629,5 +635,10 @@ PrefabInstance:
 --- !u!4 &1584882063128578226 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8296827009149131245, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
+  m_PrefabInstance: {fileID: 7411484497781821791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1584882063128745106 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8296827009149224397, guid: f401a11e31267d240ab411cd5ab76151, type: 3}
   m_PrefabInstance: {fileID: 7411484497781821791}
   m_PrefabAsset: {fileID: 0}

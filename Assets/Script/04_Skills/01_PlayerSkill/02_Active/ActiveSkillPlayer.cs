@@ -24,9 +24,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
 
         if (Input.GetKeyDown(keyCode))
         {
-            if (Player.Instance.IsUsingSkill() == true) return;
-
-            TrySkill();
+            if (Player.Instance.IsActionAble()) TrySkill();
         }
     }
 
@@ -45,7 +43,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
             Util.FlipLocalScaleX(attackCollider.gameObject);
         }
 
-        attackCollider.SetAtk(damageMultiplier);
+        attackCollider.SetAtk(damageMultiplier * Player.Instance.GetFinalStat(StatKind.ATK));
         foreach (AdditionalEffect additionalEffect in additionalEffects) attackCollider.SetAdditionalEffect(additionalEffect);
     }
 
