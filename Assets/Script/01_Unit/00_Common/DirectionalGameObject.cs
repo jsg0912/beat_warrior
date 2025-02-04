@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class DirectionalGameObject : MonoBehaviour
@@ -6,6 +7,7 @@ public abstract class DirectionalGameObject : MonoBehaviour
     [SerializeField] protected Direction movingDirection = Direction.Right;
     [SerializeField] protected Direction objectDirection = Direction.Right;
     [SerializeField] public SpriteRenderer spriteRenderer;
+    [SerializeField] private List<GameObject> childDirectionalObjects = new List<GameObject>();
 
     public Direction GetMovingDirection() { return movingDirection; }
     public float GetMovingDirectionFloat() { return (float)movingDirection; }
@@ -16,6 +18,7 @@ public abstract class DirectionalGameObject : MonoBehaviour
         if (objectDirection != movingDirection)
         {
             FlipObjectSprite();
+            FlipAdditionalScaleChangeObjects();
             objectDirection = dir;
         }
     }
@@ -29,5 +32,16 @@ public abstract class DirectionalGameObject : MonoBehaviour
     private void FlipObjectSprite()
     {
         spriteRenderer.flipX = !spriteRenderer.flipX;
+    }
+
+    private void FlipAdditionalScaleChangeObjects()
+    {
+        foreach (GameObject obj in childDirectionalObjects)
+        {
+            Util.FlipLocalScaleX(obj);
+            Vector3 objPos = obj.transform.localPosition;
+            objPos.x = -objPos.x;
+            obj.transform.localPosition = objPos;
+        }
     }
 }

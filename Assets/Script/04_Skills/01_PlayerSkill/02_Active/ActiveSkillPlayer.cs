@@ -1,16 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class ActiveSkillPlayer : ActiveSkill
 {
     protected KeyCode keyCode;
-    protected PlayerStatus status;
+    protected List<string> trigger;
     protected AttackCollider attackCollider; // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
 
     protected ActiveSkillPlayer(GameObject unit) : base(unit) { }
 
     protected override void UseSkill()
     {
-        Player.Instance.SetPlayerStatus(status);
+        Player.Instance.SetAnimTrigger(trigger[Random.Range(0, trigger.Count)]);
 
         SkillMethod();
 
@@ -23,9 +24,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
 
         if (Input.GetKeyDown(keyCode))
         {
-            if (Player.Instance.IsUsingSkill() == true) return;
-
-            TrySkill();
+            if (Player.Instance.IsActionAble()) TrySkill();
         }
     }
 
@@ -44,7 +43,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
             Util.FlipLocalScaleX(attackCollider.gameObject);
         }
 
-        attackCollider.SetAtk(damageMultiplier);
+        attackCollider.SetAtk(damageMultiplier * Player.Instance.GetFinalStat(StatKind.ATK));
         foreach (AdditionalEffect additionalEffect in additionalEffects) attackCollider.SetAdditionalEffect(additionalEffect);
     }
 

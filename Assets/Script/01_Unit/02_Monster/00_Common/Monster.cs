@@ -8,7 +8,24 @@ public class Monster : DirectionalGameObject
     private MonsterUnit monsterUnit;
     public Pattern pattern;
 
-    [SerializeField] private MonsterStatus status;
+    [SerializeField] private MonsterStatus _status;
+    [SerializeField]
+    private MonsterStatus status // 수정 필요하면 SDH에게 문의 - SDH, 20250202
+    {
+        get { return _status; }
+        set
+        {
+            if (GetCurrentStat(StatKind.HP) <= 0 && value != MonsterStatus.Dead)
+            {
+                return;
+            }
+            else
+            {
+                _status = value;
+            }
+        }
+    }
+
     protected Animator _animator;
     private bool isFixedAnimation = false;
 
@@ -22,6 +39,7 @@ public class Monster : DirectionalGameObject
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _animator.SetBool(MonsterConstant.endMotionBool, MonsterConstant.HasEndMotion[monsterName]);
         monsterUnit = MonsterList.FindMonster(monsterName, AnotherHPValue);
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
@@ -108,13 +126,19 @@ public class Monster : DirectionalGameObject
     }
     public int GetCurrentHP() { return monsterUnit.GetCurrentHP(); }
     public int GetCurrentStat(StatKind statKind) { return monsterUnit.unitStat.GetCurrentStat(statKind); }
+    public int GetFinalStat(StatKind statKind) { return monsterUnit.unitStat.GetFinalStat(statKind); }
+    public void SetBuffMultiply(StatKind statKind, int value) { monsterUnit.unitStat.SetBuffMultiply(statKind, value); }
+    public void ResetBuffMultiply(StatKind statKind) { monsterUnit.unitStat.ResetBuffMultiply(statKind); }
     public void AttackedByPlayer(int playerATK, bool isAlreadyCheckHitMonsterFunc = false)
     {
         if (!GetIsAlive()) return;
-        GetDamaged(playerATK);
+        int damage = playerATK - monsterUnit.unitStat.GetFinalStat(StatKind.Def);
+        if (damage <= 0) return;
+        GetDamaged(damage);
         if (Player.Instance.hitMonsterFuncList != null && !isAlreadyCheckHitMonsterFunc) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
         PlayAnimation(MonsterConstant.hurtAnimTrigger);
     }
+
     public virtual void GetDamaged(int dmg)
     {
         monsterUnit.ChangeCurrentHP(-dmg);
@@ -193,6 +217,9 @@ public class Monster : DirectionalGameObject
         Util.SetActive(Target, false);
     }
 
+    public Direction GetRelativeDirectionToPlayer() { return Player.Instance.GetBottomPos().x > GetBottomPos().x ? Direction.Right : Direction.Left; }
+    public float GetRelativePlayerDirectionFloat() { return Player.Instance.GetBottomPos().x > GetBottomPos().x ? 1.0f : -1.0f; }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (GetIsTackleAble())
@@ -200,7 +227,7 @@ public class Monster : DirectionalGameObject
             GameObject obj = collision.gameObject;
             if (obj.CompareTag(TagConstant.Player))
             {
-                Player.Instance.GetDamaged(GetCurrentStat(StatKind.ATK));
+                Player.Instance.GetDamaged(GetFinalStat(StatKind.ATK), GetRelativeDirectionToPlayer());
             }
         }
     }

@@ -161,4 +161,6 @@ public static class Util
         mousePosition.z = Mathf.Abs(Camera.main.transform.position.z);
         return Camera.main.ScreenToWorldPoint(mousePosition); ;
     }
+
+    public static bool isEditor => Application.isEditor;
 }

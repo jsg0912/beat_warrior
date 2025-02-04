@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PassiveSkillBuffPlayer : PassiveSkill
+public abstract class PassiveSkillBuffPlayer : PassiveSkill
 {
     protected StatKind statKind;
     protected int statBuff;

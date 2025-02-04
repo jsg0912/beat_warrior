@@ -7,17 +7,13 @@ public class HolyBlade : ActiveSkillPlayer
 
     public HolyBlade(GameObject unit) : base(unit)
     {
-        skillName = SkillName.Attack;
-        status = PlayerStatus.Attack;
-
+        trigger = new() { PlayerConstant.attackLAnimTrigger, PlayerConstant.attackRAnimTrigger };
         damageMultiplier = PlayerSkillConstant.attackAtk;
-
-        coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
-        coolTime = 0;
-
         EffectPrefab = Resources.Load(PrefabRouter.PlayerAttackPrefab) as GameObject;
         additionalEffects.Add(new KnockBack(PlayerSkillConstant.attackKnockBackDistance));
     }
+
+    protected override void SetSkillName() { skillName = SkillName.Attack; }
 
     protected override IEnumerator CountCoolTime()
     {

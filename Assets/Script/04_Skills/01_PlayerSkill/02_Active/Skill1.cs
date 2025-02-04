@@ -4,16 +4,13 @@ public class Skill1 : ActiveSkillPlayer
 {
     public Skill1(GameObject unit) : base(unit)
     {
-        skillName = SkillName.Skill1;
-        status = PlayerStatus.Skill1;
+        trigger = new() { PlayerConstant.skill1LAnimTrigger, PlayerConstant.skill1RAnimTrigger };
 
         damageMultiplier = PlayerSkillConstant.skill1Atk;
-
-        coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
-        coolTime = 0;
-
         EffectPrefab = Resources.Load(PrefabRouter.Skill1Prefab) as GameObject;
     }
+
+    protected override void SetSkillName() { skillName = SkillName.Skill1; }
 
     protected override void UpdateKey()
     {

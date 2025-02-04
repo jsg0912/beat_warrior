@@ -6,14 +6,11 @@ public class Mark : ActiveSkillPlayer
 
     public Mark(GameObject unit) : base(unit)
     {
-        skillName = SkillName.Mark;
-        status = PlayerStatus.Mark;
-
-        coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
-        coolTime = 0;
-
+        trigger = new() { PlayerConstant.markAnimTrigger };
         MarkerPrefab = Resources.Load(PrefabRouter.MarkerPrefab) as GameObject;
     }
+
+    protected override void SetSkillName() { skillName = SkillName.Mark; }
 
     protected override void UpdateKey()
     {
@@ -27,7 +24,6 @@ public class Mark : ActiveSkillPlayer
         Vector3 start = playerTransform.position + new Vector3(0, 0.5f, 0);
         Vector3 end = Util.GetMousePointWithPerspectiveCamera();
         end.z = 0;
-        DebugConsole.Log($"start: {start}, end: {end}");
         GameObject Marker = GameObject.Instantiate(MarkerPrefab, start, Quaternion.identity);
 
         Vector3 direction = end - start;

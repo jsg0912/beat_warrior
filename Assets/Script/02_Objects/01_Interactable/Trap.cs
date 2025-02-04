@@ -17,7 +17,7 @@ public class Trap : MonoBehaviour
         if (CompareTag(TagConstant.Player) && damaged == true)
         {
             damaged = false;
-            Player.Instance.GetDamaged(1);
+            Player.Instance.GetDamaged(1, Direction.Right);
             StartCoroutine(InvincibleTime(1));
         }
     }

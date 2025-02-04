@@ -5,8 +5,9 @@ public class SkillReset : PassiveSkill
 {
     public SkillReset(GameObject unit) : base(unit)
     {
-        skillName = SkillName.SkillReset;
     }
+
+    protected override void SetSkillName() { skillName = SkillName.SkillReset; }
 
     private List<SkillName> ResetTargetSkills = new List<SkillName>
     {

@@ -31,6 +31,7 @@ public class ChapterManager : MonoBehaviour
     private int currentStageIndex;
     private bool tutorialCompleted = true; // TODO: 임시로 true임 - 신동환, 20250123
     private bool IsCurrentStageCompleted => CurrentStage.Cleared;
+    private ChapterName currentChapterName => currentChapter.name;
 
     private void Awake()
     {
@@ -90,6 +91,7 @@ public class ChapterManager : MonoBehaviour
             currentChapter = chapters[chapterName];
             currentStageIndex = 0;
             LoadStageScene();
+            PlayChapterBGM();
         }
         else
         {
@@ -103,7 +105,7 @@ public class ChapterManager : MonoBehaviour
         {
             if (++currentStageIndex == currentChapter.stages.Length)
             {
-                Debug.Log($"{currentChapter.name} completed!");
+                Debug.Log($"{currentChapterName} completed!");
                 MoveToNextChapter();
             }
             else
@@ -123,7 +125,7 @@ public class ChapterManager : MonoBehaviour
 
     private void LoadStageScene()
     {
-        SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapter.name][currentStageIndex]);
+        SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapterName][currentStageIndex]);
     }
 
     private void MoveToNextChapter()
@@ -142,11 +144,32 @@ public class ChapterManager : MonoBehaviour
 
     private ChapterName GetNextChapter()
     {
-        ChapterName currentChapterName = currentChapter.name;
         if (currentChapterName + 1 < ChapterName.End)
         {
             return currentChapterName + 1;
         }
         return ChapterName.End;
+    }
+
+    private void PlayChapterBGM()
+    {
+        switch (currentChapterName)
+        {
+            case ChapterName.Ch1:
+                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter1BGM);
+                break;
+            case ChapterName.Ch2:
+                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter2BGM);
+                break;
+            case ChapterName.Ch3:
+                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter3BGM);
+                break;
+            case ChapterName.Ch4:
+                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter4BGM);
+                break;
+            default:
+                Debug.LogError($"Chapter {currentChapterName} does not have BGM");
+                break;
+        }
     }
 }
