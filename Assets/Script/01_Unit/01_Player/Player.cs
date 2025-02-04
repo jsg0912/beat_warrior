@@ -23,27 +23,19 @@ public class Player : DirectionalGameObject
         get { return _status; }
         set
         {
-            if (GetCurrentStat(StatKind.HP) <= 0 && value != PlayerStatus.Dead)
-            {
-                return;
-            }
-            else
-            {
-                _status = value;
-            }
+            if (GetCurrentStat(StatKind.HP) <= 0 && value != PlayerStatus.Dead) return;
+            else _status = value;
         }
     }
+
+    public int Hp => playerUnit.unitStat.GetCurrentStat(StatKind.HP);
 
     private bool isGround;
     private float jumpDeltaTimer;
     private float jumpTimer;
     private bool isInvincibility;
-    private BoxCollider2D tileCollider;
+    private BoxCollider2D tileCollider; // [Code Review - KMJ] TODO: 이제 필요없으면 제거 or TileCollider를 왜 가지고 있는지 모르겠음 - 
 
-    private GameObject targetInfo;
-
-    public delegate void HitMonsterFunc(Monster monster);
-    public delegate void UseSkillFunc(Skill skill);
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
 
@@ -72,12 +64,7 @@ public class Player : DirectionalGameObject
     private void Initialize(Direction direction = Direction.Left)
     {
         // TODO: Alternate real user nickname than "playerName" - SDH, 20241204
-        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
-            {StatKind.HP, PlayerConstant.hpMax},
-            {StatKind.ATK, PlayerConstant.atk},
-            {StatKind.JumpCount, PlayerConstant.jumpCountMax},
-            {StatKind.AttackCount, PlayerSkillConstant.attackCountMax}
-        }));
+        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.defaultStat));
 
         skillList = new List<ActiveSkillPlayer>
         {
@@ -92,7 +79,7 @@ public class Player : DirectionalGameObject
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
-        SetStatus(PlayerStatus.Idle);
+        SetStatus(PlayerStatus.Normal);
 
         SetMovingDirection(direction);
         isGround = false;
@@ -103,18 +90,10 @@ public class Player : DirectionalGameObject
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
     }
 
-    public void Update()
-    {
-        if (IsUsingSkill())
-        {
-            _rigidbody.velocity = Vector2.zero; // TODO: 기획에 따라 스킬 사용 중 멈추는 것이 바뀔 수 있음 - SDH, 20250106
-        }
-    }
-
     public void RestartPlayer()
     {
         Initialize();
-        _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
+        SetAnimTrigger(PlayerConstant.restartAnimTrigger);
         PlayerUIManager.Instance.Initialize();
     }
 
@@ -123,41 +102,16 @@ public class Player : DirectionalGameObject
     public SkillName[] GetTraits() { return traitList.Where(skill => skill.tier != SkillTier.Common).Select(trait => trait.skillName).ToArray(); }
     public int GetCurrentStat(StatKind statKind) { return playerUnit.unitStat.GetCurrentStat(statKind); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
-    public GameObject GetTargetInfo() { return targetInfo; }
 
     // SET Functions
     public void SetStatus(PlayerStatus status)
     {
         this.status = status;
 
-        _animator.SetBool(PlayerConstant.runAnimBool, status == PlayerStatus.Run);
-        _animator.SetFloat("Speed", status == PlayerStatus.Run ? 1 : 0);
-
         switch (status)
         {
-            case PlayerStatus.Jump:
-                _animator.SetTrigger(PlayerConstant.jumpAnimTrigger);
-                break;
-            case PlayerStatus.Attack:
-                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.attackRAnimTrigger);
-                else _animator.SetTrigger(PlayerSkillConstant.attackLAnimTrigger);
-                break;
-            case PlayerStatus.Dash:
-                _animator.SetTrigger(PlayerSkillConstant.dashAnimTrigger);
-                break;
-            case PlayerStatus.Mark:
-                _animator.SetTrigger(PlayerSkillConstant.markAnimTrigger);
-                break;
-            case PlayerStatus.Skill1:
-                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.skill1RAnimTrigger);
-                else _animator.SetTrigger(PlayerSkillConstant.skill1LAnimTrigger);
-                break;
-            case PlayerStatus.Skill2:
-                _animator.SetTrigger(PlayerSkillConstant.skill2AnimTrigger);
-                break;
             case PlayerStatus.Dead:
-                KnockBacked();
-                _animator.SetTrigger(PlayerConstant.dieAnimTrigger);
+                SetAnimTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
     }
@@ -168,20 +122,11 @@ public class Player : DirectionalGameObject
         if (!gravity) _rigidbody.velocity = Vector3.zero;
     }
 
-    public void SetPlayerAnimTrigger(string trigger)
-    {
-        _animator.SetTrigger(trigger);
-    }
+    public void SetAnimTrigger(string trigger) { _animator.SetTrigger(trigger); }
 
-    public void SetInvincibility(bool isInvin)
-    {
-        isInvincibility = isInvin;
-    }
+    public void SetInvincibility(bool isInvin) { isInvincibility = isInvin; }
 
-    public void PlayerAddForce(Vector2 force, int dir)
-    {
-        _rigidbody.AddForce(force * (int)objectDirection * dir, ForceMode2D.Impulse);
-    }
+    public void PlayerAddForce(Vector2 force, int dir) { _rigidbody.AddForce(force * (int)objectDirection * dir, ForceMode2D.Impulse); }
 
     public bool ChangeCurrentHP(int hp)
     {
@@ -229,14 +174,14 @@ public class Player : DirectionalGameObject
             isMove = true;
         }
 
-        if (!IsUsingSkill() && status != PlayerStatus.Jump) SetStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
+        _animator.SetFloat("Speed", isMove ? 1 : 0);
 
         if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
     public void CheckPlayerCommand()
     {
-        if (status != PlayerStatus.Dead && !IsUsingSkill())
+        if (status != PlayerStatus.Dead && IsActionAble())
         {
             Jump();
             CheckGround();
@@ -248,12 +193,18 @@ public class Player : DirectionalGameObject
     {
         switch (status)
         {
-            case PlayerStatus.Idle:
-            case PlayerStatus.Run:
-            case PlayerStatus.Jump:
-            case PlayerStatus.Mark:
-                // case PlayerStatus.Attack:
-                // case PlayerStatus.Skill1:
+            case PlayerStatus.Normal:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public bool IsActionAble()
+    {
+        switch (status)
+        {
+            case PlayerStatus.Normal:
                 return true;
             default:
                 return false;
@@ -264,11 +215,7 @@ public class Player : DirectionalGameObject
     {
         switch (status)
         {
-            case PlayerStatus.Attack:
-            case PlayerStatus.Mark:
-            case PlayerStatus.Dash:
-            case PlayerStatus.Skill1:
-            case PlayerStatus.Skill2:
+            case PlayerStatus.Skill:
                 return true;
             default:
                 return false;
@@ -299,7 +246,6 @@ public class Player : DirectionalGameObject
 
         if (!isGround) return;
 
-        if (status == PlayerStatus.Jump) SetStatus(PlayerStatus.Idle);
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
         tileCollider = rayHit.collider.GetComponent<BoxCollider2D>();
 
@@ -308,11 +254,11 @@ public class Player : DirectionalGameObject
     private void Jump()
     {
         if (jumpDeltaTimer > 0) jumpDeltaTimer -= Time.deltaTime;
-        if (IsUsingSkill() == true || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
+        if (!IsActionAble() || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
 
         if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Jump]))
         {
-            SetStatus(PlayerStatus.Jump);
+            SetAnimTrigger(PlayerConstant.jumpAnimTrigger);
 
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
 
@@ -459,9 +405,11 @@ public class Player : DirectionalGameObject
         }
     }
 
-    public void GetDamaged(int dmg)
+    public void GetDamaged(int monsterAtk, Direction direction)
     {
         if (isInvincibility || status == PlayerStatus.Dead) return;
+
+        int dmg = monsterAtk - GetFinalStat(StatKind.Def);
 
         bool isAlive = ChangeCurrentHP(-dmg);
 
@@ -474,12 +422,22 @@ public class Player : DirectionalGameObject
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
 
         _animator.SetTrigger("hurt");
-        KnockBacked();
+        KnockBack(direction);
     }
 
-    private void KnockBacked()
+    private void KnockBack(Direction direction)
     {
-        PlayerAddForce(new Vector2(5.0f, 1.0f), -1);
+        SetStatus(PlayerStatus.Unmovable);
+
+        if (direction == objectDirection) FlipDirection();
+        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), (int)direction);
+        StartCoroutine(KnockBacked(PlayerConstant.knockBackedStunTime));
+    }
+
+    private IEnumerator KnockBacked(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        SetStatus(PlayerStatus.Normal);
     }
 
     private IEnumerator Invincibility(float timer)
@@ -492,5 +450,28 @@ public class Player : DirectionalGameObject
     public bool CheckFullEquipTrait()
     {
         return GetTraits().Length == PlayerConstant.MaxAdditionalSkillCount;
+    }
+
+    public void AttackAnimationStart()
+    {
+        SetStatus(PlayerStatus.Skill);
+        SetGravityScale(false);
+    }
+
+    public void AttackAnimationEnd()
+    {
+        SetStatus(PlayerStatus.Normal);
+        SetGravityScale(true);
+    }
+
+    public void UnmovableAnimationStart()
+    {
+        SetStatus(PlayerStatus.Unmovable);
+    }
+
+    public void UnmovableAnimationEnd()
+    {
+        SetStatus(PlayerStatus.Normal);
+        SetGravityScale(true);
     }
 }

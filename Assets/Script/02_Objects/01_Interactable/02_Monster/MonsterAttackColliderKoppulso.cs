@@ -6,6 +6,6 @@ public class MonsterAttackColliderKoppulso : MonsterAttackCollider
     {
         Debug.Log(name + " / " + other.gameObject.name);
         GameObject obj = other.gameObject;
-        if (obj.CompareTag(TagConstant.Player)) Player.Instance.GetDamaged(damage);
+        if (obj.CompareTag(TagConstant.Player)) Player.Instance.GetDamaged(damage, GetRelativeDirectionToPlayer());
     }
 }

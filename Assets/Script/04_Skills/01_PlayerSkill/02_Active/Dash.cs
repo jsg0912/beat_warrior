@@ -14,7 +14,7 @@ public class Dash : ActiveSkillPlayer
 
     public Dash(GameObject unit) : base(unit)
     {
-        status = PlayerStatus.Dash;
+        trigger = new() { PlayerConstant.dashAnimTrigger };
 
         damageMultiplier = PlayerSkillConstant.dashAtk;
 
@@ -78,7 +78,7 @@ public class Dash : ActiveSkillPlayer
         {
             if (obj.layer == LayerMask.NameToLayer(LayerConstant.Monster))
             {
-                obj.GetComponent<MonsterBodyCollider>().monster.AttackedByPlayer(damageMultiplier);
+                obj.GetComponent<MonsterBodyCollider>().monster.AttackedByPlayer(damageMultiplier * Player.Instance.GetFinalStat(StatKind.ATK));
             }
         }
 
@@ -132,7 +132,7 @@ public class Dash : ActiveSkillPlayer
             return;
         }
 
-        if (Player.Instance.GetPlayerStatus() != PlayerStatus.Dash) return;
+        //if (Player.Instance.GetPlayerStatus() != PlayerStatus.Dash) return;
 
         GameObject ghost = GameObject.Instantiate(GhostPrefab, Player.Instance.transform.position, Quaternion.identity);
         ghostDelayTime = ghostDelayTimeMax;
