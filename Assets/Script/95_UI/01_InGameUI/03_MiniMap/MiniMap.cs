@@ -101,11 +101,29 @@ public class MiniMap : MonoBehaviour
         for (int i = 0; i < monsterForIcon.Count; i++)
         {
             if (i > icon.Count) break;
-            if(monsterForIcon[i] == null) continue;
+            
+            GameObject obj = monsterForIcon[i];
+            if (obj == null || !obj) continue;
+
+            Monster monster = obj.GetComponent<Monster>();
+            if (monster == null) continue;
+
+            try
+            {
+                int currentHP = monster.GetCurrentHP();
+                if (currentHP <= 0) continue;
+            }
+            catch (MissingReferenceException)
+            {
+                continue;
+            }
+                        
             icon[i].GetComponent<MiniMapIcon>().GetHp(monsterForIcon[i].GetComponent<Monster>().GetCurrentHP());
             icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterForIcon[i].transform.position);
+            
         }
     }
+
 
     private bool CheckObjectInMiniMap(GameObject target)
     {
