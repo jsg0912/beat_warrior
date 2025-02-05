@@ -22,7 +22,7 @@ public class LoadingSceneManager : MonoBehaviour
         while (!loadingSceneProcess.isDone)
         {
             yield return null;
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             if (loadingSceneProcess.progress < 0.9f)
             {
                 progress = Mathf.Lerp(progress, loadingSceneProcess.progress, timer);
