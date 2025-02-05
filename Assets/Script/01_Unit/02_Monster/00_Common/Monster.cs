@@ -143,7 +143,7 @@ public class Monster : DirectionalGameObject
     {
         monsterUnit.ChangeCurrentHP(-dmg);
 
-        HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
+        if (HpUI != null) HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
         if (!CheckIsAlive())
         {
