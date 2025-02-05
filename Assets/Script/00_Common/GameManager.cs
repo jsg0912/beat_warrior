@@ -33,6 +33,15 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         // ValidationChecker.Check();
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else if (_instance != this)
+        {
+            Destroy(gameObject);
+        }
+
         DontDestroyOnLoad(this);
     }
 

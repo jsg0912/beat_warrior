@@ -6,7 +6,7 @@ public class Mark : ActiveSkillPlayer
 
     public Mark(GameObject unit) : base(unit)
     {
-        status = PlayerStatus.Mark;
+        trigger = new() { PlayerConstant.markAnimTrigger };
         MarkerPrefab = Resources.Load(PrefabRouter.MarkerPrefab) as GameObject;
     }
 

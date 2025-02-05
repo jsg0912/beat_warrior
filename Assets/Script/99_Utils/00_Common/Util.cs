@@ -162,5 +162,5 @@ public static class Util
         return Camera.main.ScreenToWorldPoint(mousePosition); ;
     }
 
-    public static bool isEditor => Application.isEditor;
+    public static bool IsEditor => Application.isEditor;
 }
