@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class MonsterConstant
 {
@@ -7,7 +6,7 @@ public class MonsterConstant
     public const string attackChargeAnimTrigger = "charge";
     public const string attackAnimTrigger = "attack";
     public const string attackEndAnimTrigger = "attack end";
-    public const string endMotionBool = "has end motion";
+    public const string endMotionBool = "has attack end";
     public const string turnAnimTrigger = "turn";
     public const string hurtAnimTrigger = "hurt";
     public const string dieAnimTrigger = "die";
@@ -89,7 +88,7 @@ public class MonsterConstant
     public static Dictionary<MonsterName, bool> HasEndMotion = new() {
         { MonsterName.Ippali, false },
         { MonsterName.Ibkkugi, false },
-        { MonsterName.Koppulso, false },
+        { MonsterName.Koppulso, true },
         { MonsterName.Dulduli, true },
         { MonsterName.Giljjugi, false },
         { MonsterName.Itmomi, false }
