@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     private static GameManager _instance;
     private Language language = Language.kr;
     public Language Language => language;
-    public CursorController cursorController;
     public bool IsLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();
     public SceneName currentScene;
 
@@ -34,8 +33,16 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         // ValidationChecker.Check();
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else if (_instance != this)
+        {
+            Destroy(gameObject);
+        }
+
         DontDestroyOnLoad(this);
-        cursorController = new CursorController();
     }
 
     public void Start()
@@ -55,11 +62,11 @@ public class GameManager : MonoBehaviour
     {
         if (isInGame)
         {
-            cursorController.SetInGameCursor();
+            CursorController.Instance.SetInGameCursor();
         }
         else
         {
-            cursorController.SetTitleCursor();
+            CursorController.Instance.SetTitleCursor();
         }
     }
 
