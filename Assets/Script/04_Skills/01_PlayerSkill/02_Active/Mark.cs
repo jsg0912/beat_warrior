@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Mark : ActiveSkillPlayer
@@ -15,6 +16,12 @@ public class Mark : ActiveSkillPlayer
     protected override void UpdateKey()
     {
         keyCode = KeySetting.keys[PlayerAction.Mark_Dash];
+    }
+
+    protected override IEnumerator CountCoolTime()
+    {
+        yield return base.CountCoolTime();
+        PlayerUIManager.Instance.SwapMarkAndDash(true);
     }
 
     protected override void SkillMethod()
