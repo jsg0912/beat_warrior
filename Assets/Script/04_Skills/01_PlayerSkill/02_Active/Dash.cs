@@ -98,6 +98,12 @@ public class Dash : ActiveSkillPlayer
         coolTime = 0;
     }
 
+    protected override void CreateEffectPrefab()
+    {
+        attackCollider = Player.Instance.colliderController.BodyAttackCollider;
+        base.CreateEffectPrefab();
+    }
+
     public override void ResetCoolTime()
     {
         if (countCoolTime != null) monoBehaviour.StopCoroutine(countCoolTime);
