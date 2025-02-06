@@ -23,9 +23,9 @@ public class MiniMap : MonoBehaviour
         { MonsterName.Koppulso, PoolTag.MiniMapIconKoppulso },
         { MonsterName.Ippali, PoolTag.MiniMapIconIppali },
         { MonsterName.Ibkkugi, PoolTag.MiniMapIconIbkkugi },
-        { MonsterName.Dulduli, PoolTag.MiniMapIconIppali },
-        { MonsterName.Giljjugi, PoolTag.MiniMapIconIppali },
-        { MonsterName.Itmomi, PoolTag.MiniMapIconIppali },
+        { MonsterName.Dulduli, PoolTag.MiniMapIconDulduli },
+        { MonsterName.Giljjugi, PoolTag.MiniMapIconGiljjugi },
+        { MonsterName.Itmomi, PoolTag.MiniMapIconItmomi },
     };
 
     private PoolTag GetEnemyIconPoolTag(MonsterName monsterName)
