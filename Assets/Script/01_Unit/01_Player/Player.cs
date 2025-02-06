@@ -421,7 +421,7 @@ public class Player : DirectionalGameObject
 
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
 
-        _animator.SetTrigger("hurt");
+        SetAnimTrigger(PlayerConstant.hurtAnimTrigger);
         KnockBack(direction);
     }
 
