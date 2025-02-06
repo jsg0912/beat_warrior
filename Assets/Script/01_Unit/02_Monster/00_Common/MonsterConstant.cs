@@ -25,7 +25,7 @@ public class MonsterConstant
     // Dulduli
     public const float DulduliJumpPower = 5f;
     public const int DulduliJumpNumber = 1;
-    public const float DulduliJumpDuration = 1f;
+    public const float DulduliJumpDuration = 0.7f;
     public const float DulduliGroggyDuration = 2.0f;
 
     // Koppulso

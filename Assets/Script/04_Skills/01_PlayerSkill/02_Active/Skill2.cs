@@ -23,7 +23,7 @@ public class Skill2 : ActiveSkillPlayer
 
     protected override void CreateEffectPrefab()
     {
-        attackCollider = Player.Instance.colliderController.shortBladeCollider;
+        attackCollider = Player.Instance.colliderController.BodyAttackCollider;
         base.CreateEffectPrefab();
     }
 
