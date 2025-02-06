@@ -63,7 +63,7 @@ public static class ScriptPool
             }}},
         {SkillName.AppendAttack, new Dictionary<Language, string>{
             {
-                Language.kr, "예비용 단검"
+                Language.kr, "검술 수련"
             },{
                 Language.en, "Spare Dagger"
             }}},

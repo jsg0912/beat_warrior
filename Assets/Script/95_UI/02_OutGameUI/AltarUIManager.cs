@@ -33,7 +33,7 @@ public class AltarUIManager : MonoBehaviour
         return salesSkillList.Contains(skillName);
     }
 
-    public void UpdatePlayerSoulView() => PlayerSoulView.text = "Soul : " + spiritCount.ToString();
+    public void UpdatePlayerSoulView() => PlayerSoulView.text = " : " + spiritCount.ToString();
 
     public void ShowSkillDetail(SkillName skillName)
     {
