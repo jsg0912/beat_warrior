@@ -63,10 +63,13 @@ public class AltarDetailPopup : PopupSystem
         switch (traitUI.traitStatus)
         {
             case TraitSetButtonStatus.Buyable:
-                Inventory.Instance.ChangeSoulNumber(-TraitPriceList.Info[traitName]);
-                Inventory.Instance.AddSkill(traitName);
-                AltarUIManager.Instance.UpdatePlayerSoulView();
-                Update();
+                if (Inventory.Instance.GetSoulNumber() >= TraitPriceList.Info[traitName])
+                {
+                    Inventory.Instance.ChangeSoulNumber(-TraitPriceList.Info[traitName]);
+                    Inventory.Instance.AddSkill(traitName);
+                    AltarUIManager.Instance.UpdatePlayerSoulView();
+                    Update();
+                }
                 break;
             case TraitSetButtonStatus.EquipAble:
                 if (!Player.Instance.CheckFullEquipTrait())

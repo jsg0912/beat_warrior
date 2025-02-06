@@ -30,8 +30,8 @@ public class PlayerConstant
     public const string attackLAnimTrigger = "attackL";
     public const string markAnimTrigger = "mark";
     public const string dashAnimTrigger = "dash";
-    public const string skill1RAnimTrigger = "skill1R";
-    public const string skill1LAnimTrigger = "skill1L";
+    public const string hurtAnimTrigger = "hurt";
+    public const string skill1AnimTrigger = "skill1";
     public const string skill2AnimTrigger = "skill2";
 
     public const int MaxAdditionalSkillCount = 3;

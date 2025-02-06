@@ -132,7 +132,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.06}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -222,9 +222,8 @@ MonoBehaviour:
   movingDirection: 1
   objectDirection: 1
   spriteRenderer: {fileID: 1220593941234673828}
-  childDirectionalObjects: []
   monsterName: 0
-  _status: 0
+  status: 0
   HpUI: {fileID: 1649727570667360246}
   Target: {fileID: 0}
   AnotherHPValue: 0
