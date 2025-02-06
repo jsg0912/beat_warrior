@@ -1,16 +1,17 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class ActiveSkillPlayer : ActiveSkill
 {
     protected KeyCode keyCode;
-    protected PlayerStatus status;
+    protected List<string> trigger;
     protected AttackCollider attackCollider; // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
 
     protected ActiveSkillPlayer(GameObject unit) : base(unit) { }
 
     protected override void UseSkill()
     {
-        Player.Instance.SetStatus(status);
+        Player.Instance.SetAnimTrigger(trigger[Random.Range(0, trigger.Count)]);
 
         SkillMethod();
 

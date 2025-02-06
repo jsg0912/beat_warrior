@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Mark : ActiveSkillPlayer
@@ -6,7 +7,7 @@ public class Mark : ActiveSkillPlayer
 
     public Mark(GameObject unit) : base(unit)
     {
-        status = PlayerStatus.Mark;
+        trigger = new() { PlayerConstant.markAnimTrigger };
         MarkerPrefab = Resources.Load(PrefabRouter.MarkerPrefab) as GameObject;
     }
 
@@ -15,6 +16,12 @@ public class Mark : ActiveSkillPlayer
     protected override void UpdateKey()
     {
         keyCode = KeySetting.keys[PlayerAction.Mark_Dash];
+    }
+
+    protected override IEnumerator CountCoolTime()
+    {
+        yield return base.CountCoolTime();
+        PlayerUIManager.Instance.SwapMarkAndDash(true);
     }
 
     protected override void SkillMethod()

@@ -6,7 +6,7 @@ public class Skill2 : ActiveSkillPlayer
 
     public Skill2(GameObject unit) : base(unit)
     {
-        status = PlayerStatus.Skill2;
+        trigger = new() { PlayerConstant.skill2AnimTrigger };
 
         damageMultiplier = PlayerSkillConstant.skill2Atk;
         dashRange = PlayerSkillConstant.skill2DashRange;
