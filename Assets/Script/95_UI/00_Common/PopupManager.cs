@@ -19,8 +19,7 @@ public class PopupManager : MonoBehaviour
         if (success)
         {
             popupSystemStack.RemoveAt(popupSystemStack.Count - 1);
-            if (!IsAnyPopupAlive() && GameManager.Instance.isInGame)
-                PauseController.instance.TryResumeGame();
+            TryResumeGame();
         }
         return success;
     }
@@ -40,5 +39,21 @@ public class PopupManager : MonoBehaviour
         popupSystemStack.Add(popupSystem);
         if (GameManager.Instance.isInGame)
             PauseController.instance.TryPauseGame();
+    }
+
+    public bool RemovePopup(PopupSystem popupSystem)
+    {
+        bool success = popupSystemStack.Remove(popupSystem);
+        if (success)
+        {
+            TryResumeGame();
+        }
+        return success;
+    }
+
+    private void TryResumeGame()
+    {
+        if (!IsAnyPopupAlive() && GameManager.Instance.isInGame)
+            PauseController.instance.TryResumeGame();
     }
 }
