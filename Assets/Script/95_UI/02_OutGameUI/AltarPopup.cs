@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class AltarPopup : PageAblePopupSystem
 {
-    [SerializeField] private List<TraitUI> traitUIs;
+    [SerializeField] private List<TraitIcon> traitUIs;
 
     // Start is called before the first frame update
     protected override void Start()
@@ -14,9 +14,9 @@ public class AltarPopup : PageAblePopupSystem
 
     public void Initialize()
     {
-        ChangePage(1);
         AltarUIManager.Instance.UpdatePlayerSoulView();
         maxPage = Util.Round(AltarUIManager.Instance.salesSkillList.Length, traitUIs.Count);
+        ChangePage(1);
     }
 
     public void ChangePage(int pageNumber)
@@ -37,11 +37,11 @@ public class AltarPopup : PageAblePopupSystem
             int traitIndex = pageIndex * traitUIs.Count + i;
             if (traitIndex < AltarUIManager.Instance.salesSkillList.Length)
             {
-                traitUIs[i].SetSkillName(AltarUIManager.Instance.salesSkillList[traitIndex]);
+                traitUIs[i].SetTraitName(AltarUIManager.Instance.salesSkillList[traitIndex]);
             }
             else
             {
-                traitUIs[i].SetSkillName(SkillName.End);
+                traitUIs[i].SetTraitName(SkillName.End);
             }
         }
     }

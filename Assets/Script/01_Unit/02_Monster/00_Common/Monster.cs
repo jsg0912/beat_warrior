@@ -33,7 +33,7 @@ public class Monster : DirectionalGameObject
     [SerializeField] private GameObject Target;
     [SerializeField] private int AnotherHPValue = 0;
 
-    [SerializeField] public GameObject tackleCollider;
+    [SerializeField] public GameObject attackCollider;
     [SerializeField] private MonsterBodyCollider monsterBodyCollider;
 
     void Start()
@@ -168,14 +168,14 @@ public class Monster : DirectionalGameObject
     public void SetIsTackleAble(bool isTackleAble)
     {
         monsterUnit.isTackleAble = isTackleAble;
-        Util.SetActive(tackleCollider, isTackleAble);
     }
+
     public void SetIsKnockBackAble(bool isKnockBackAble) { monsterUnit.isKnockBackAble = isKnockBackAble; }
     public void SetIsFixedAnimation(bool isFixedAnimation) { this.isFixedAnimation = isFixedAnimation; }
     public virtual void Die()
     {
         StopAttack();
-        Player.Instance.CheckResetSkills(gameObject);
+        Player.Instance.TryResetSkillsByMarkKill(gameObject);
 
         monsterUnit.ResetIsKnockBackAble();
         monsterUnit.ResetIsTackleAble();
@@ -215,6 +215,13 @@ public class Monster : DirectionalGameObject
         }
 
         Util.SetActive(Target, false);
+    }
+
+    protected override void FlipAdditionalScaleChangeObjects()
+    {
+        base.FlipAdditionalScaleChangeObjects();
+        monsterBodyCollider.TryFlipPolygonCollider();
+        if (attackCollider != null) Util.FlipLocalScaleX(attackCollider);
     }
 
     public Direction GetRelativeDirectionToPlayer() { return Player.Instance.GetBottomPos().x > GetBottomPos().x ? Direction.Right : Direction.Left; }

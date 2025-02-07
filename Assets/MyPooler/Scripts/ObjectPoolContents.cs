@@ -20,7 +20,7 @@ namespace MyPooler
                 PoolTag.MiniMapIconKoppulso,
                 new ObjectPoolContent
                 {
-                    prefab = Resources.Load<GameObject>(PrefabRouter.MiniMapIconKoppulso),
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MiniMapIconRoute(MonsterName.Koppulso)),
                     amount = 5,
                     shouldExpandPool = true,
                 }
@@ -28,7 +28,7 @@ namespace MyPooler
                 PoolTag.MiniMapIconIbkkugi,
                 new ObjectPoolContent
                 {
-                    prefab = Resources.Load<GameObject>(PrefabRouter.MiniMapIconIbkkugi),
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MiniMapIconRoute(MonsterName.Ibkkugi)),
                     amount = 5,
                     shouldExpandPool = true,
                 }
@@ -36,7 +36,7 @@ namespace MyPooler
                 PoolTag.MiniMapIconIppali,
                 new ObjectPoolContent
                 {
-                    prefab = Resources.Load<GameObject>(PrefabRouter.MiniMapIconIppali),
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MiniMapIconRoute(MonsterName.Ippali)),
                     amount = 5,
                     shouldExpandPool = true,
                 }
@@ -44,11 +44,36 @@ namespace MyPooler
                 PoolTag.EnemyMiniMapIcon,
                 new ObjectPoolContent
                 {
-                    prefab = Resources.Load<GameObject>(PrefabRouter.MapMonsterIcon),
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MiniMapIconRoute(MonsterName.Ippali)),
                     amount = 5,
                     shouldExpandPool = true,
                 }
             }, {
+                PoolTag.MiniMapIconGiljjugi,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MiniMapIconRoute(MonsterName.Giljjugi)),
+                    amount = 5,
+                    shouldExpandPool = true,
+                }
+            }, {
+                PoolTag.MiniMapIconDulduli,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MiniMapIconRoute(MonsterName.Dulduli)),
+                    amount = 5,
+                    shouldExpandPool = true,
+                }
+            },{
+                PoolTag.MiniMapIconItmomi,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MiniMapIconRoute(MonsterName.Itmomi)),
+                    amount = 5,
+                    shouldExpandPool = true,
+                }
+            },
+            {
                 PoolTag.IbkkugiThrow,
                 new ObjectPoolContent
                 {
