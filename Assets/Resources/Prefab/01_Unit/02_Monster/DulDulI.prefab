@@ -34,7 +34,6 @@ Transform:
   m_Children:
   - {fileID: 8257839131988872373}
   - {fileID: 5811409768528699836}
-  - {fileID: 2822727226431534982}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9083114808991776564
@@ -79,7 +78,7 @@ MonoBehaviour:
   HpUI: {fileID: 1349157933565216087}
   Target: {fileID: 0}
   AnotherHPValue: 0
-  tackleCollider: {fileID: 5335818054842263266}
+  attackCollider: {fileID: 5335818054842263266}
   monsterBodyCollider: {fileID: 4271014955822344814}
 --- !u!50 &2296474326589475115
 Rigidbody2D:
@@ -138,7 +137,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2148411854989943231}
+  m_Father: {fileID: 5811409768528699836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &190179692422204781
 CircleCollider2D:
@@ -207,7 +206,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2822727226431534982}
   m_Father: {fileID: 2148411854989943231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5938675433907970453

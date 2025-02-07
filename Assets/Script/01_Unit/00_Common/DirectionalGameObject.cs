@@ -12,6 +12,12 @@ public abstract class DirectionalGameObject : MonoBehaviour
     public Direction GetMovingDirection() { return movingDirection; }
     public float GetMovingDirectionFloat() { return (float)movingDirection; }
 
+    public void FlipDirection()
+    {
+        if (movingDirection == Direction.Right) SetMovingDirection(Direction.Left);
+        else SetMovingDirection(Direction.Right);
+    }
+
     public void SetMovingDirection(Direction dir)
     {
         movingDirection = dir;
@@ -23,19 +29,14 @@ public abstract class DirectionalGameObject : MonoBehaviour
         }
     }
 
-    public void FlipDirection()
-    {
-        if (movingDirection == Direction.Right) SetMovingDirection(Direction.Left);
-        else SetMovingDirection(Direction.Right);
-    }
-
     private void FlipObjectSprite()
     {
         spriteRenderer.flipX = !spriteRenderer.flipX;
     }
 
-    private void FlipAdditionalScaleChangeObjects()
+    protected virtual void FlipAdditionalScaleChangeObjects()
     {
+        // TODO: childDirectionalObjects의 Type에 따라 최적화된 Flip을 하도록 수정해야 함
         foreach (GameObject obj in childDirectionalObjects)
         {
             Util.FlipLocalScaleX(obj);

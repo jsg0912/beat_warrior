@@ -101,6 +101,19 @@ public static class Util
         FlipLocalScaleX(gameObject.transform);
     }
 
+    public static void FlipLocalScaleX(PolygonCollider2D polygonCollider)
+    {
+        if (polygonCollider != null)
+        {
+            Vector2[] points = polygonCollider.points;
+            for (int i = 0; i < points.Length; i++)
+            {
+                points[i].x = -points[i].x;
+            }
+            polygonCollider.points = points;
+        }
+    }
+
     public static void FlipLocalScaleX(Transform transform)
     {
         Vector3 scale = transform.localScale;

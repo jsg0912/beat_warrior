@@ -81,8 +81,8 @@ public class MonsterConstant
         { MonsterName.Ibkkugi, 0.8f },
         { MonsterName.Koppulso, 2f },
         { MonsterName.Dulduli, 0.5f },
-        { MonsterName.Giljjugi, 15f },
-        { MonsterName.Itmomi, 0.5f }
+        { MonsterName.Giljjugi, 1.133f },
+        { MonsterName.Itmomi, 0.33f }
     };
 
     public static Dictionary<MonsterName, bool> HasEndMotion = new() {
