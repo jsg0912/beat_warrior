@@ -175,7 +175,7 @@ public class Monster : DirectionalGameObject
     public virtual void Die()
     {
         StopAttack();
-        Player.Instance.CheckResetSkills(gameObject);
+        Player.Instance.TryResetSkillsByMarkKill(gameObject);
 
         monsterUnit.ResetIsKnockBackAble();
         monsterUnit.ResetIsTackleAble();
