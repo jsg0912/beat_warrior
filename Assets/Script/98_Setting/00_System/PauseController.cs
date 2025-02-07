@@ -4,6 +4,7 @@ public class PauseController : MonoBehaviour
 {
     public static PauseController instance;
     private bool isPauseActive;
+    private float defaultGameSpeed = 1.0f;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class PauseController : MonoBehaviour
 
     public void SetGameSpeed(float speed)
     {
+        defaultGameSpeed = speed;
         Time.timeScale = speed;
     }
 
@@ -33,7 +35,7 @@ public class PauseController : MonoBehaviour
     {
         if (isPauseActive)
         {
-            Time.timeScale = 1.0f;
+            Time.timeScale = defaultGameSpeed;
             isPauseActive = false;
         }
     }
