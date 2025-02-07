@@ -11,12 +11,19 @@ public class PlayerSkillConstant
     public const float SkillResetProbability = 0.9f; // TODO: 임시로 테스트를 위해 90%로 함 - 신동환, 20240901
 
     public static Dictionary<SkillName, float> SkillCoolTime = new() {
-        { SkillName.Attack, 0.1f },
-        { SkillName.Mark, 3.0f },
-        { SkillName.Dash, 3.0f },
-        { SkillName.Skill1, 0.1f },
-        { SkillName.Skill2, 0.2f },
+        { SkillName.Attack, 4f },
+        { SkillName.Mark, 8.0f },
+        { SkillName.Dash, 8.0f },
+        { SkillName.Skill1, 8.0f },
+        { SkillName.Skill2, 8.0f },
         { SkillName.KillRecoveryHP, 10.0f}
+    };
+
+    public static List<SkillName> ResetSkillListByMarkKill = new() {
+        SkillName.Mark,
+        SkillName.Dash,
+        SkillName.Skill1,
+        SkillName.Skill2,
     };
 
     public static Dictionary<AdditionalEffectName, bool> AdditionalEffectCanDuplicate = new() {
@@ -30,4 +37,7 @@ public class PlayerSkillConstant
     public const int skill1Atk = 1;
     public const int skill2Atk = 1;
     public const int KillRecoveryHPTrigger = 10;
+
+    public const float markerSpeed = 15.0f;
+    public const float markerDuration = 2.0f;
 }
