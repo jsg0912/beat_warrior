@@ -1,11 +1,17 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Util
 {
     public static T ParseEnumFromString<T>(string value)
     {
         return (T)Enum.Parse(typeof(T), value);
+    }
+
+    public static bool SetActive(Button button, bool isOn)
+    {
+        return SetActive(button.gameObject, isOn);
     }
 
     public static bool SetActive(GameObject gameObject, bool isOn)
