@@ -7,6 +7,7 @@ public class Monster : DirectionalGameObject
     public MonsterName monsterName;
     private MonsterUnit monsterUnit;
     public Pattern pattern;
+    public Timer timer;
 
     [SerializeField] private MonsterStatus _status;
     [SerializeField]
@@ -45,6 +46,8 @@ public class Monster : DirectionalGameObject
         pattern.Initialize(this);
 
         HpUI.SetMaxHP(monsterUnit.GetCurrentHP()); // Customizing HP Code - SDH, 20250119
+
+        timer = new Timer();
     }
 
     void Update()
@@ -206,11 +209,10 @@ public class Monster : DirectionalGameObject
     {
         Util.SetActive(Target, true);
 
-        float timer = PlayerSkillConstant.SkillCoolTime[SkillName.Mark];
+        timer.Initialize(PlayerSkillConstant.SkillCoolTime[SkillName.Mark]);
 
-        while (timer > 0 && GetIsAlive())
+        while (timer.Tick() && GetIsAlive())
         {
-            timer -= Time.deltaTime;
             yield return null;
         }
 

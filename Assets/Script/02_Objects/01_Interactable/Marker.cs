@@ -26,8 +26,8 @@ public class Marker : MonoBehaviour
         }
     }
 
-    public void DestroyMarker(float timer = 0.0f)
+    public void DestroyMarker(float delay = 0.0f)
     {
-        Destroy(gameObject, timer);
+        Destroy(gameObject, delay);
     }
 }

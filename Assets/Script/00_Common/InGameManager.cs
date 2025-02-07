@@ -26,7 +26,7 @@ public class InGameManager : MonoBehaviour
     public void Start()
     {
         SoulPrefab = Resources.Load(PrefabRouter.SoulPrefab) as GameObject;
-        // PauseController.instance.SetGameSpeed(0.3f);
+        // PauseController.instance.SetDefaultGameSpeed(0.3f);
     }
 
     public void CreateSoul(Vector3 position)

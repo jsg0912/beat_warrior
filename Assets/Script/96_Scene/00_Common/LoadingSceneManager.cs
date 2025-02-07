@@ -1,15 +1,16 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class LoadingSceneManager : MonoBehaviour
 {
     [SerializeField] float progress;
+    private Timer timer;
 
     private void Start()
     {
         StartCoroutine(LoadScene());
+        timer = new Timer();
     }
 
     IEnumerator LoadScene()
@@ -18,22 +19,22 @@ public class LoadingSceneManager : MonoBehaviour
         SceneController.Instance.RunChangeSceneProcess(GameManager.Instance.currentScene);
         AsyncOperation loadingSceneProcess = SceneManager.LoadSceneAsync(GameManager.Instance.currentScene.ToString());
         loadingSceneProcess.allowSceneActivation = false;
-        float timer = 0.0f;
+        timer.Initialize();
         while (!loadingSceneProcess.isDone)
         {
             yield return null;
-            timer += Time.unscaledDeltaTime;
+            timer.UnScaledTick();
             if (loadingSceneProcess.progress < 0.9f)
             {
-                progress = Mathf.Lerp(progress, loadingSceneProcess.progress, timer);
+                progress = Mathf.Lerp(progress, loadingSceneProcess.progress, timer.time);
                 if (progress >= loadingSceneProcess.progress)
                 {
-                    timer = 0f;
+                    timer.Initialize();
                 }
             }
             else
             {
-                progress = Mathf.Lerp(progress, 1f, timer);
+                progress = Mathf.Lerp(progress, 1f, timer.time);
                 if (progress == 1.0f)
                 {
                     loadingSceneProcess.allowSceneActivation = true;

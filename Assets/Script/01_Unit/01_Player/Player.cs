@@ -148,7 +148,7 @@ public class Player : DirectionalGameObject
     {
         Dash dash = HaveSkill(SkillName.Dash) as Dash;
 
-        if (dash.GetTarget() != obj) return;
+        if (dash.targetMonster != obj) return;
 
         foreach (SkillName skillName in PlayerSkillConstant.ResetSkillListByMarkKill)
             HaveSkill(skillName).ResetCoolTime();
@@ -320,7 +320,7 @@ public class Player : DirectionalGameObject
     {
         foreach (ActiveSkillPlayer skill in skillList)
         {
-            if (skill.skillName == skillName) return skill.GetCoolTime();
+            if (skill.skillName == skillName) return skill.coolTime;
         }
 
         return 0;
