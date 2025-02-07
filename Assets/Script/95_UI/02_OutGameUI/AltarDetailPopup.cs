@@ -1,37 +1,41 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using TMPro;
+using UnityEngine.UI;
 
 public class AltarDetailPopup : PopupSystem
 {
-    public TraitUI targetTraitUI;
-    public List<TraitUI> equippedTraitUIs;
+    public TraitIcon targetTraitUI;
+    public List<TraitIcon> equippedTraitUIs;
     public TMP_Text traitNameView;
     public TMP_Text traitInfoDescription;
+    // TODO: 아래 interactionButton Class 만들면 좋음
+    public Button interactionButton;
+    public TMP_Text interactionButtonText;
+
     private SkillName traitName;
 
     private void Start()
     {
-        targetTraitUI.traitSelectionButton.onClick.AddListener(() => OnClickTraitUI(targetTraitUI));
-        foreach (TraitUI traitUI in equippedTraitUIs)
+        interactionButton.onClick.AddListener(() => OnClickTraitUI(targetTraitUI));
+        foreach (TraitIcon traitUI in equippedTraitUIs)
         {
-            traitUI.traitSelectionButton.onClick.AddListener(() => OnClickTraitUI(traitUI));
+            traitUI.traitSelectionButton.onClick.AddListener(() => ShowSkillDetail(traitUI.traitName));
         }
     }
 
-    // TODO: Update문 안써야 함. Button 어떤 식으로 작동할지 기획 나오면 그떄가서 수정 - SDH, 20250127
-    private void Update()
+    private void UpdateTargetTraitInfo()
     {
-        targetTraitUI.SetSkillName(traitName);
+        targetTraitUI.UpdateTraitStatus(false);
         UpdateEquippedTraitUIs();
+        UpdateAltarUIButtons();
     }
 
-    private void SetTraitName()
+    private void UpdateTraitName()
     {
         traitNameView.text = ScriptPool.TraitNameScript[traitName][GameManager.Instance.Language]; ;
     }
 
-    private void SetTraitDescription()
+    private void UpdateTraitDescription()
     {
         traitInfoDescription.text = ScriptPool.TraitUIScript[traitName][GameManager.Instance.Language];
     }
@@ -39,18 +43,41 @@ public class AltarDetailPopup : PopupSystem
     public void ShowSkillDetail(SkillName traitName)
     {
         this.traitName = traitName;
-        targetTraitUI.SetSkillName(traitName);
-        SetTraitName();
-        SetTraitDescription();
+        targetTraitUI.SetTraitName(traitName, false);
+        UpdateTraitName();
+        UpdateTraitDescription();
+        UpdateAltarUIButtons();
     }
 
-    public void UpdateEquippedTraitUIs()
+    private void UpdateAltarUIButtons()
+    {
+        switch (targetTraitUI.traitStatus)
+        {
+            case TraitSetButtonStatus.Locked:
+                Util.SetActive(interactionButton, false);
+                break;
+            case TraitSetButtonStatus.Buyable:
+                Util.SetActive(interactionButton, true);
+                interactionButtonText.text = "구매";
+                break;
+            case TraitSetButtonStatus.EquipAble:
+                Util.SetActive(interactionButton, true);
+                interactionButtonText.text = "장착";
+                break;
+            case TraitSetButtonStatus.Equipped:
+                Util.SetActive(interactionButton, true);
+                interactionButtonText.text = "해제";
+                break;
+        }
+    }
+
+    private void UpdateEquippedTraitUIs()
     {
         SkillName[] equippedTraits = Player.Instance.GetTraits();
         int i = 0;
         for (; i < equippedTraits.Length; i++)
         {
-            equippedTraitUIs[i].SetSkillName(equippedTraits[i]);
+            equippedTraitUIs[i].SetTraitName(equippedTraits[i]);
         }
         for (; i < equippedTraitUIs.Count; i++)
         {
@@ -58,30 +85,46 @@ public class AltarDetailPopup : PopupSystem
         }
     }
 
-    private void OnClickTraitUI(TraitUI traitUI)
+    private void OnClickTraitUI(TraitIcon traitUI)
     {
         switch (traitUI.traitStatus)
         {
             case TraitSetButtonStatus.Buyable:
-                if (Inventory.Instance.GetSoulNumber() >= TraitPriceList.Info[traitName])
-                {
-                    Inventory.Instance.ChangeSoulNumber(-TraitPriceList.Info[traitName]);
-                    Inventory.Instance.AddSkill(traitName);
-                    AltarUIManager.Instance.UpdatePlayerSoulView();
-                    Update();
-                }
+                TryBuyTrait();
                 break;
             case TraitSetButtonStatus.EquipAble:
-                if (!Player.Instance.CheckFullEquipTrait())
-                {
-                    Player.Instance.EquipTrait(traitName);
-                    Update();
-                }
+                TryEquipTrait();
                 break;
             case TraitSetButtonStatus.Equipped:
-                Player.Instance.RemoveTrait(traitName);
-                Update();
+                TryUnEquipTrait();
                 break;
         }
+    }
+
+    private void TryBuyTrait()
+    {
+        if (Inventory.Instance.GetSoulNumber() >= TraitPriceList.Info[traitName])
+        {
+            Inventory.Instance.ChangeSoulNumber(-TraitPriceList.Info[traitName]);
+            Inventory.Instance.AddSkill(traitName);
+            AltarUIManager.Instance.UpdatePlayerSoulView();
+            UpdateTargetTraitInfo();
+            AltarUIManager.Instance.RefreshMainAltarPopup();
+        }
+    }
+
+    private void TryEquipTrait()
+    {
+        if (!Player.Instance.CheckFullEquipTrait())
+        {
+            Player.Instance.EquipTrait(traitName);
+            UpdateTargetTraitInfo();
+        }
+    }
+
+    private void TryUnEquipTrait()
+    {
+        Player.Instance.RemoveTrait(traitName);
+        UpdateTargetTraitInfo();
     }
 }
