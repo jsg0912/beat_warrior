@@ -8,7 +8,7 @@ public class InGameManager : SingletonObject<InGameManager>
     public void Start()
     {
         SoulPrefab = Resources.Load(PrefabRouter.SoulPrefab) as GameObject;
-        // PauseController.Instance.SetDefaultGameSpeed(0.3f);
+        // PauseController.Instance.ChangeDefaultGameSpeed(0.3f);
     }
 
     public void CreateSoul(Vector3 position)
