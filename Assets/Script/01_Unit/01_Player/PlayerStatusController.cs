@@ -2,13 +2,24 @@ using UnityEngine;
 
 public class PlayerStatusController : StateMachineBehaviour
 {
-    private Player player;
+    private Player _player;
+
+    private Player player
+    {
+        get
+        {
+            if (_player == null) _player = Player.Instance;
+            return _player;
+        }
+    }
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (player == null) player = Player.Instance;
+        if (stateInfo.IsName(PlayerAnimation.Dash) || stateInfo.IsName(PlayerAnimation.DashCharge)) player.SetStatus(PlayerStatus.Dash);
+        if (stateInfo.IsName(PlayerAnimation.Idle)) player.SetStatus(PlayerStatus.Normal);
+    }
 
-        if (stateInfo.IsName("DashCharge") || stateInfo.IsName("Dash")) player.SetStatus(PlayerStatus.Dash);
-        if (stateInfo.IsName("Idle")) player.SetStatus(PlayerStatus.Normal);
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
     }
 }
