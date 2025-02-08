@@ -22,7 +22,7 @@ public class Mark : ActiveSkillPlayer
         if (coolTime <= 0 && Input.GetKeyDown(keyCode))
         {
             markSlowTimer.Initialize();
-            PauseController.instance.SetZoomInSlow();
+            PauseController.Instance.SetZoomInSlow();
             // TODO: Cursor Change;
         }
         else if (markSlowTimer.remainTime > 0)
@@ -30,21 +30,21 @@ public class Mark : ActiveSkillPlayer
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 markSlowTimer.SetRemainTimeZero();
-                PauseController.instance.ResetSpeed();
+                PauseController.Instance.ResetSpeed();
                 // TODO: Cursor Change;
             }
             if (Input.GetKey(keyCode))
             {
                 if (!markSlowTimer.UnScaledTick())
                 {
-                    PauseController.instance.ResetSpeed();
+                    PauseController.Instance.ResetSpeed();
                 }
             }
             else if (Input.GetKeyUp(keyCode))
             {
                 if (Player.Instance.IsActionAble())
                 {
-                    PauseController.instance.ResetSpeed();
+                    PauseController.Instance.ResetSpeed();
                     TrySkill();
                     // TODO: CursorReset;
                 }
