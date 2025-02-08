@@ -2,39 +2,41 @@ using UnityEngine;
 
 public class PauseController : MonoBehaviour
 {
+    private float defaultGameSpeed = TimeScaleConstant.Default;
     public static PauseController instance;
-    private bool isPauseActive;
+    public bool isPauseActive => Time.timeScale == 0;
+    public bool isSlowActive => Time.timeScale < defaultGameSpeed;
 
-    private void Awake()
+    private void Awake() { instance = this; }
+
+    private void SetGameSpeed(float speed)
     {
-        instance = this;
+        Time.timeScale = speed;
     }
 
-    private void Start()
+    public void ChangeDefaultGameSpeed(float speed)
     {
-        isPauseActive = false;
+        defaultGameSpeed = speed;
+        SetGameSpeed(defaultGameSpeed);
     }
+
+    public void ResetSpeed() { SetGameSpeed(defaultGameSpeed); }
+
+    public void SetZoomInSlow() { SetGameSpeed(TimeScaleConstant.ZoomInSlow); }
 
     public void TryPauseGame()
     {
         if (!isPauseActive)
         {
-            Time.timeScale = 0;
-            isPauseActive = true;
+            SetGameSpeed(0);
         }
-    }
-
-    public void SetGameSpeed(float speed)
-    {
-        Time.timeScale = speed;
     }
 
     public void TryResumeGame()
     {
         if (isPauseActive)
         {
-            Time.timeScale = 1.0f;
-            isPauseActive = false;
+            ResetSpeed();
         }
     }
 

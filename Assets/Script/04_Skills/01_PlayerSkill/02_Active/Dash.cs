@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class Dash : ActiveSkillPlayer
 {
-    private List<GameObject> DashTargetMonster = new();
-    private GameObject TargetMonster;
+    private Timer dashAvailableTimer;
+    private List<GameObject> attackedMonsterByDash = new();
+    public GameObject targetMonster { get; private set; }
 
     private float ghostDelayTime = 0;
     private float ghostDelayTimeMax;
@@ -20,6 +21,8 @@ public class Dash : ActiveSkillPlayer
 
         ghostDelayTimeMax = PlayerSkillConstant.ghostDelayTimeMax;
         GhostPrefab = Resources.Load(PrefabRouter.GhostPrefab) as GameObject;
+
+        dashAvailableTimer = coolTimer;
     }
 
     protected override void SetSkillName() { skillName = SkillName.Dash; }
@@ -28,7 +31,7 @@ public class Dash : ActiveSkillPlayer
     {
         base.CheckInputKeyCode();
 
-        Ghost();
+        Ghost(); // TODO: 왜 Ghost가 여기 있는지 확인 - SDH, 20250208
     }
 
     protected override void UpdateKey()
@@ -38,39 +41,35 @@ public class Dash : ActiveSkillPlayer
 
     protected override void TrySkill()
     {
-        if (TargetMonster == null) return;
+        if (targetMonster == null) return;
 
-        if (coolTime <= 0) return;
+        if (dashAvailableTimer.remainTime <= 0) return;
 
         UseSkill();
     }
 
     protected override void SkillMethod()
     {
-        coolTime = 0;
+        dashAvailableTimer.SetRemainTimeZero();
         PlayerUIManager.Instance.SwapMarkAndDash(true);
 
         Vector2 playerBottom = Player.Instance.GetBottomPos();
-        Vector2 endPoint = TargetMonster.GetComponent<Monster>().GetBottomPos();
+        Vector2 endPoint = targetMonster.GetComponent<Monster>().GetBottomPos();
 
         Vector2 direction = (endPoint - playerBottom).normalized;
         endPoint += new Vector2(PlayerSkillConstant.DashEndPointInterval * direction.x, PlayerSkillConstant.DashEndYOffset);
 
         Player.Instance.Dashing(endPoint, true, true);
-        STartDealTrigger(playerBottom, endPoint, direction);
+        StartDealTrigger(playerBottom, endPoint, direction);
     }
 
-    protected override IEnumerator CountCoolTime()
+    protected IEnumerator CountDashAvailableTimer()
     {
-        coolTime = Player.Instance.GetSkillCoolTime(SkillName.Mark);
-
-        while (coolTime > 0)
+        dashAvailableTimer.Initialize(Player.Instance.GetSkillCoolTime(SkillName.Mark));
+        while (dashAvailableTimer.Tick())
         {
-            coolTime -= Time.deltaTime;
             yield return null;
         }
-
-        coolTime = 0;
     }
 
     protected override void CreateEffectPrefab()
@@ -79,14 +78,8 @@ public class Dash : ActiveSkillPlayer
         base.CreateEffectPrefab();
     }
 
-    public override void ResetCoolTime()
-    {
-        if (countCoolTime != null) monoBehaviour.StopCoroutine(countCoolTime);
-        coolTime = Player.Instance.GetSkillCoolTime(SkillName.Mark);
-    }
-
     // Dash의 속도가 매우 빨라서 일반적인 Collider 판정으로 딜을 넣기 불가능하기 때문에 따로 Ray를 쏴서 판정을 내려야 함
-    private void STartDealTrigger(Vector2 playerBottom, Vector2 endPoint, Vector2 direction)
+    private void StartDealTrigger(Vector2 playerBottom, Vector2 endPoint, Vector2 direction)
     {
         Vector2 playerMiddle = Player.Instance.GetMiddlePos();
         Vector2 playerTop = playerBottom + new Vector2(0, PlayerConstant.playerHeight);
@@ -96,14 +89,14 @@ public class Dash : ActiveSkillPlayer
         CheckMonsterHitBox(playerBottom, direction, distance);
         CheckMonsterHitBox(playerMiddle, direction, distance);
         CheckMonsterHitBox(playerTop, direction, distance);
-        DashTargetMonster = DashTargetMonster.Distinct().ToList();
+        attackedMonsterByDash = attackedMonsterByDash.Distinct().ToList();
 
         // Dash시에 Player 머리와 발끝 경로가 보이는 Test용 코드 - 김민지, 20240901
         // Debug.DrawRay(playerBottom, direction * distance, Color.red, distance);
         // Debug.DrawRay(playerMiddle, direction * distance, Color.red, distance);
         // Debug.DrawRay(playerTop, direction * distance, Color.red, distance);
 
-        foreach (GameObject obj in DashTargetMonster)
+        foreach (GameObject obj in attackedMonsterByDash)
         {
             if (obj.layer == LayerMask.NameToLayer(LayerConstant.Monster))
             {
@@ -111,27 +104,22 @@ public class Dash : ActiveSkillPlayer
             }
         }
 
-        DashTargetMonster.Clear();
+        attackedMonsterByDash.Clear();
     }
 
     private void CheckMonsterHitBox(Vector2 origin, Vector2 Direction, float distance)
     {
         foreach (RaycastHit2D hit in Physics2D.RaycastAll(origin, Direction, distance))
         {
-            DashTargetMonster.Add(hit.collider.gameObject);
+            attackedMonsterByDash.Add(hit.collider.gameObject);
         }
     }
 
     public void SetTarget(GameObject obj)
     {
-        TargetMonster = obj;
+        targetMonster = obj;
 
-        monoBehaviour.StartCoroutine(CountCoolTime());
-    }
-
-    public GameObject GetTarget()
-    {
-        return TargetMonster;
+        countCoolTime = monoBehaviour.StartCoroutine(CountDashAvailableTimer());
     }
 
     private void Ghost()
