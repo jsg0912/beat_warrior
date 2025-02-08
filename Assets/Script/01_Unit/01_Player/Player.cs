@@ -286,7 +286,7 @@ public class Player : DirectionalGameObject
         if (changeDir == true) SetMovingDirection(dir);
 
         // TODO: 아래의 10은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
-        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 10;
+        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 100;
         int moveCount = 0;
         while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
@@ -300,7 +300,7 @@ public class Player : DirectionalGameObject
                 if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base)) break;
             }
 
-            playerGhostConstroller.TryMakeGhost(dir);
+            //playerGhostConstroller.TryMakeGhost(dir);
 
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
             moveCount++;
