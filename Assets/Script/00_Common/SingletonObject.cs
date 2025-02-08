@@ -23,7 +23,7 @@ public abstract class SingletonObject<T> : MonoBehaviour where T : MonoBehaviour
         if (_instance == null)
         {
             _instance = gameObject.GetComponent<T>();
-            DontDestroyOnLoad(gameObject);
+            if (Util.IsRootGameObject(gameObject)) DontDestroyOnLoad(gameObject);
         }
         else Destroy(this);
     }
@@ -37,7 +37,8 @@ public abstract class SingletonObject<T> : MonoBehaviour where T : MonoBehaviour
             {
                 GameObject go = new GameObject(typeof(T).ToString());
                 _instance = go.AddComponent<T>();
-                DontDestroyOnLoad(go);
+
+                if (Util.IsRootGameObject(go)) DontDestroyOnLoad(go);
             }
         }
     }
