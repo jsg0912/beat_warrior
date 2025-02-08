@@ -47,7 +47,7 @@ public class Mark : ActiveSkillPlayer
 
     private void ZoomOut()
     {
-        CursorController.Instance.SetTitleCursor();
+        GameManager.Instance.SetDefaultCursor();
         PauseController.Instance.ResetSpeed();
         markSlowTimer.SetRemainTimeZero();
     }

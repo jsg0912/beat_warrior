@@ -17,9 +17,7 @@ public class GameManager : SingletonObject<GameManager>
 
     public void Start()
     {
-        SetDefaultCursor();
         SetIsInGame(false);
-        SetDefaultCursor();
         Enum.TryParse(SceneManager.GetActiveScene().name, true, out currentScene);
     }
 
@@ -64,5 +62,6 @@ public class GameManager : SingletonObject<GameManager>
     public void SetIsInGame(bool isInGame)
     {
         this.isInGame = isInGame;
+        SetDefaultCursor();
     }
 }
