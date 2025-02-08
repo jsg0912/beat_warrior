@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerStatusController : StateMachineBehaviour
+public class PlayerAnimatorController : StateMachineBehaviour
 {
     private Player player => Player.Instance;
 

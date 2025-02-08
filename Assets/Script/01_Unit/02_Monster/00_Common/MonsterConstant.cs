@@ -76,11 +76,12 @@ public class MonsterConstant
         { MonsterName.Itmomi, 0.5f }
     };
 
+    // TODO: 김민지가 MonsterAnimatorController 기능으로 추가하면 아래 값 안쓰면서 삭제해야함 
     public static Dictionary<MonsterName, float> AttackActionIntervals = new() {
         { MonsterName.Ippali, 0.5f },
         { MonsterName.Ibkkugi, 1.0f },
         { MonsterName.Koppulso, 2f },
-        { MonsterName.Dulduli, 0.5f },
+        { MonsterName.Dulduli, 0.4f },
         { MonsterName.Giljjugi, 1.133f },
         { MonsterName.Itmomi, 0.33f }
     };
