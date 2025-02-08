@@ -2,6 +2,6 @@ public class Portal : ObjectWithInteractionPrompt
 {
     public override void StartInteraction()
     {
-        ChapterManager.Instance.MoveToNextStage();
+        bool success = ChapterManager.Instance.MoveToNextStage();
     }
 }

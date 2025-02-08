@@ -69,7 +69,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
         }
     }
 
-    public void MoveToNextStage()
+    public bool MoveToNextStage()
     {
         if (IsCurrentStageCompleted)
         {
@@ -82,7 +82,9 @@ public class ChapterManager : SingletonObject<ChapterManager>
             {
                 LoadStageScene();
             }
+            return true;
         }
+        return false;
     }
 
     public void AlarmMonsterKilled(MonsterName monsterName)
