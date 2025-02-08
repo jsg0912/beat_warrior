@@ -2,33 +2,38 @@ using UnityEngine;
 
 public class PauseController : SingletonObject<PauseController>
 {
-    private bool isPauseActive;
+    private float defaultGameSpeed = TimeScaleConstant.Default;
+    public bool isPauseActive => Time.timeScale == 0;
+    public bool isSlowActive => Time.timeScale < defaultGameSpeed;
 
-    private void Start()
+    private void SetGameSpeed(float speed)
     {
-        isPauseActive = false;
+        Time.timeScale = speed;
     }
+
+    public void ChangeDefaultGameSpeed(float speed)
+    {
+        defaultGameSpeed = speed;
+        SetGameSpeed(defaultGameSpeed);
+    }
+
+    public void ResetSpeed() { SetGameSpeed(defaultGameSpeed); }
+
+    public void SetZoomInSlow() { SetGameSpeed(TimeScaleConstant.ZoomInSlow); }
 
     public void TryPauseGame()
     {
         if (!isPauseActive)
         {
-            Time.timeScale = 0;
-            isPauseActive = true;
+            SetGameSpeed(0);
         }
-    }
-
-    public void SetGameSpeed(float speed)
-    {
-        Time.timeScale = speed;
     }
 
     public void TryResumeGame()
     {
         if (isPauseActive)
         {
-            Time.timeScale = 1.0f;
-            isPauseActive = false;
+            ResetSpeed();
         }
     }
 

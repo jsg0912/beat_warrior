@@ -144,16 +144,14 @@ public class Player : DirectionalGameObject
 
     private void SetDead() { SetStatus(PlayerStatus.Dead); }
 
-    public void CheckResetSkills(GameObject obj)
+    public void TryResetSkillsByMarkKill(GameObject obj)
     {
         Dash dash = HaveSkill(SkillName.Dash) as Dash;
 
-        if (dash.GetTarget() != obj) return;
+        if (dash.targetMonster != obj) return;
 
-        foreach (ActiveSkillPlayer playerSkill in skillList)
-        {
-            playerSkill.ResetCoolTime();
-        }
+        foreach (SkillName skillName in PlayerSkillConstant.ResetSkillListByMarkKill)
+            HaveSkill(skillName).ResetCoolTime();
     }
 
     public void CheckIsMove()
@@ -322,7 +320,7 @@ public class Player : DirectionalGameObject
     {
         foreach (ActiveSkillPlayer skill in skillList)
         {
-            if (skill.skillName == skillName) return skill.GetCoolTime();
+            if (skill.skillName == skillName) return skill.coolTime;
         }
 
         return 0;
@@ -421,7 +419,7 @@ public class Player : DirectionalGameObject
 
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
 
-        _animator.SetTrigger("hurt");
+        SetAnimTrigger(PlayerConstant.hurtAnimTrigger);
         KnockBack(direction);
     }
 

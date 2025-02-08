@@ -34,7 +34,6 @@ Transform:
   m_Children:
   - {fileID: 8257839131988872373}
   - {fileID: 5811409768528699836}
-  - {fileID: 2822727226431534982}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9083114808991776564
@@ -73,12 +72,13 @@ MonoBehaviour:
   movingDirection: 1
   objectDirection: 1
   spriteRenderer: {fileID: 5938675433907970453}
+  childDirectionalObjects: []
   monsterName: 3
   _status: 0
   HpUI: {fileID: 1349157933565216087}
   Target: {fileID: 0}
   AnotherHPValue: 0
-  tackleCollider: {fileID: 5335818054842263266}
+  attackCollider: {fileID: 5335818054842263266}
   monsterBodyCollider: {fileID: 4271014955822344814}
 --- !u!50 &2296474326589475115
 Rigidbody2D:
@@ -137,7 +137,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2148411854989943231}
+  m_Father: {fileID: 5811409768528699836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &190179692422204781
 CircleCollider2D:
@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 5938675433907970453}
   - component: {fileID: 4271014955822344814}
   - component: {fileID: 5574483967301617734}
+  - component: {fileID: 5431938697097428371}
   m_Layer: 7
   m_Name: Monster_Sprite
   m_TagString: Untagged
@@ -205,7 +206,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2822727226431534982}
   m_Father: {fileID: 2148411854989943231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5938675433907970453
@@ -306,7 +308,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.06}
+  m_Offset: {x: 0, y: -0.1}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -317,8 +319,44 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.65, y: 1.7}
+  m_Size: {x: 1.65, y: 1.3}
   m_EdgeRadius: 0
+--- !u!114 &5431938697097428371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7785004647941268595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de3cc9236cdbd1948afeda74df3ed412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &4028094390470789159
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,6 +13,11 @@ public class MonsterBodyCollider : MonoBehaviour
         polygonCollider = colliderObj.GetComponent<PolygonCollider2D>();
     }
 
+    public void TryFlipPolygonCollider()
+    {
+        Util.FlipLocalScaleX(polygonCollider);
+    }
+
     public Vector2 GetSize()
     {
         if (boxCollider != null) return Util.GetSizeBoxCollider2D(boxCollider);

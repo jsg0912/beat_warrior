@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class MonsterConstant
 {
@@ -26,7 +25,7 @@ public class MonsterConstant
     // Dulduli
     public const float DulduliJumpPower = 5f;
     public const int DulduliJumpNumber = 1;
-    public const float DulduliJumpDuration = 1f;
+    public const float DulduliJumpDuration = 0.7f;
     public const float DulduliGroggyDuration = 2.0f;
 
     // Koppulso
@@ -82,8 +81,8 @@ public class MonsterConstant
         { MonsterName.Ibkkugi, 0.8f },
         { MonsterName.Koppulso, 2f },
         { MonsterName.Dulduli, 0.5f },
-        { MonsterName.Giljjugi, 15f },
-        { MonsterName.Itmomi, 0.5f }
+        { MonsterName.Giljjugi, 1.133f },
+        { MonsterName.Itmomi, 0.33f }
     };
 
     public static Dictionary<MonsterName, bool> HasEndMotion = new() {
