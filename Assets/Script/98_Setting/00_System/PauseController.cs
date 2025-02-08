@@ -1,14 +1,8 @@
 using UnityEngine;
 
-public class PauseController : MonoBehaviour
+public class PauseController : SingletonObject<PauseController>
 {
-    public static PauseController instance;
     private bool isPauseActive;
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     private void Start()
     {

@@ -24,6 +24,7 @@ public abstract class PopupSystem : MonoBehaviour
 
     public virtual bool TurnOnPopup()
     {
+        DebugConsole.Log($"{gameObject.name}.TurnOnSettingUI");
         bool success = Util.SetActive(gameObject, true);
         if (success) PopupManager.Instance.PushPopup(this);
         return success;

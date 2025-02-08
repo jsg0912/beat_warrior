@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class TitleManager : MonoBehaviour
 {
-    public static TitleManager Instance;
     public void Start()
     {
         SoundManager.Instance.PlayTitleBGM();
@@ -15,7 +14,7 @@ public class TitleManager : MonoBehaviour
 
     public void OnSettingClick()
     {
-        SettingUIManager.Instance.TurnOnSettingUI();
+        UIManager.Instance.SetActiveSettingPopup(true);
     }
 
     public void OnExitClick()

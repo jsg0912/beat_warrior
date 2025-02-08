@@ -1,7 +1,8 @@
 using TMPro;
 using UnityEngine;
 
-// TODO: [Code Review - LJD] 현재 이 MenuUI는 InGameMenuManager(Monobehaviour)로 바뀌어야 하고, 실제 팝업은 InGameMenuUIPopup 등으로 분할되어야 함(AltarUI 관련 참고) - SDH< 20250201
+// TODO: [Code Review - LJD] 현재 이 MenuUI는 InGameMenuManager(Monobehaviour)로 바뀌어야 하고, 실제 팝업은 InGameMenuUIPopup 등으로 분할되어야 함(AltarUI 관련 참고) - SDH, 20250201
+// TODO: 위의 작업을 한다음 MenuUI는 SingletonObject로 바뀌어야 함 - SDH, 20250208
 public class MenuUI : PopupSystem
 {
     public static MenuUI Instance;
@@ -35,7 +36,7 @@ public class MenuUI : PopupSystem
 
     public void OnClickOption()
     {
-        SettingUIManager.Instance.TurnOnSettingUI();
+        UIManager.Instance.SetActiveSettingPopup(true);
     }
 
     public void OnClickQuit()
