@@ -69,7 +69,7 @@ public class MonsterConstant
 
     public static Dictionary<MonsterName, float> AttackStartDelays = new() {
         { MonsterName.Ippali, 0.7f },
-        { MonsterName.Ibkkugi, 0.5f },
+        { MonsterName.Ibkkugi, 1.0f },
         { MonsterName.Koppulso, 0.5f },
         { MonsterName.Dulduli, 0.5f },
         { MonsterName.Giljjugi, 0.5f },

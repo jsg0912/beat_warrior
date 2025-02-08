@@ -11,6 +11,6 @@ public class MonsterAttackColliderIbkkugi : MonsterAttackCollider
             Destroy(gameObject);
         }
 
-        if (obj.CompareTag(TagConstant.Base) || obj.CompareTag(TagConstant.Tile)) Destroy(gameObject);
+        if (obj.CompareTag(TagConstant.Base)) Destroy(gameObject);
     }
 }
