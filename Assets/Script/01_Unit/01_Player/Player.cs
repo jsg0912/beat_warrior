@@ -182,14 +182,15 @@ public class Player : DirectionalGameObject
 
     public void CheckPlayerCommand()
     {
-        if (status != PlayerStatus.Dead && IsActionAble())
+        if (IsActionAble())
         {
             Jump();
-            CheckGround();
             Down();
             Skill();
         }
+        CheckGround();
     }
+
     private bool IsMoveable()
     {
         switch (status)
