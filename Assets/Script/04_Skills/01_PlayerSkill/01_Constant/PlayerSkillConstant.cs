@@ -31,7 +31,7 @@ public class PlayerSkillConstant
         { AdditionalEffectName.KnockBack, false },
     };
 
-    public const float ghostDelayTimeMax = 0.05f;
+    public const float ghostDelayTimeMax = 0.1f;
 
     public const int attackAtk = 1;
     public const int dashAtk = 1;

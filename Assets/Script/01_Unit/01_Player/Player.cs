@@ -300,7 +300,7 @@ public class Player : DirectionalGameObject
                 if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base)) break;
             }
 
-            //playerGhostConstroller.TryMakeGhost(dir);
+            playerGhostConstroller.TryMakeGhost(dir);
 
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
             moveCount++;
