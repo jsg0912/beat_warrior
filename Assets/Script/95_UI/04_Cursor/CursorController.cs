@@ -27,6 +27,7 @@ public class CursorController : SingletonObject<CursorController>
 
     public void SetZoomInCursor()
     {
+        cursorAnimator.SetBool(CursorAnimationTrigger.InGameTrigger, false);
         cursorAnimator.SetTrigger(CursorAnimationTrigger.ZoomInTrigger);
     }
 }
