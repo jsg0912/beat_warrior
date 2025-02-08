@@ -19,37 +19,37 @@ public class Mark : ActiveSkillPlayer
     {
         UpdateKey();
 
-        if (coolTime <= 0 && Input.GetKeyDown(keyCode))
-        {
-            markSlowTimer.Initialize();
-            PauseController.instance.SetZoomInSlow();
-            // TODO: Cursor Change;
-        }
+        if (coolTime <= 0 && Input.GetKeyDown(keyCode)) ZoomIn();
         else if (markSlowTimer.remainTime > 0)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0)) ZoomOut();
+            else if (Input.GetKey(keyCode))
             {
-                markSlowTimer.SetRemainTimeZero();
-                PauseController.instance.ResetSpeed();
-                // TODO: Cursor Change;
-            }
-            if (Input.GetKey(keyCode))
-            {
-                if (!markSlowTimer.UnScaledTick())
-                {
-                    PauseController.instance.ResetSpeed();
-                }
+                if (!markSlowTimer.UnScaledTick()) ZoomOut();
             }
             else if (Input.GetKeyUp(keyCode))
             {
                 if (Player.Instance.IsActionAble())
                 {
-                    PauseController.instance.ResetSpeed();
+                    ZoomOut();
                     TrySkill();
-                    // TODO: CursorReset;
                 }
             }
         }
+    }
+
+    private void ZoomIn()
+    {
+        CursorController.Instance.SetZoomInCursor();
+        markSlowTimer.Initialize();
+        PauseController.instance.SetZoomInSlow();
+    }
+
+    private void ZoomOut()
+    {
+        CursorController.Instance.SetTitleCursor();
+        PauseController.instance.ResetSpeed();
+        markSlowTimer.SetRemainTimeZero();
     }
 
     // TODO: UpdateKey 사용 시점 수정(지금 무슨 실행될떄마다 실행되고 있음 쓸데없이)
@@ -62,6 +62,12 @@ public class Mark : ActiveSkillPlayer
     {
         yield return base.CountCoolTime();
         PlayerUIManager.Instance.SwapMarkAndDash(true);
+    }
+
+    public override void ResetCoolTime()
+    {
+        if (countCoolTime != null) monoBehaviour.StopCoroutine(countCoolTime);
+        coolTimer.SetRemainTimeZero();
     }
 
     protected override void SkillMethod()
