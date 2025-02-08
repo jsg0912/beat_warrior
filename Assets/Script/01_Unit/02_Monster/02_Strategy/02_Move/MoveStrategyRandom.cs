@@ -3,12 +3,11 @@ using UnityEngine;
 public class MoveStrategyRandom : MoveStrategy
 {
     protected bool isStop = false;
-    protected float changeDestTime = 0;
 
     public override bool PlayStrategy()
     {
         base.PlayStrategy();
-        ChangeDest();
+        TryFlipDirection();
         return true;
     }
 
@@ -23,14 +22,11 @@ public class MoveStrategyRandom : MoveStrategy
         return base.Move();
     }
 
-    protected void ChangeDest()
+    protected override void TryFlipDirection()
     {
-        if (changeDestTime > 0)
-        {
-            changeDestTime -= Time.deltaTime;
-            return;
-        }
+        if (changeDestTimer.Tick()) return;
 
+        // TODO: [Code Review - KMJ] Constant화 해야함
         int dest = Random.Range(0, 3);
         switch (dest)
         {
@@ -46,6 +42,6 @@ public class MoveStrategyRandom : MoveStrategy
                 break;
         }
 
-        changeDestTime = 3 + Random.value * 2;
+        SetRandomFlipTimer();
     }
 }
