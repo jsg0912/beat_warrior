@@ -19,6 +19,8 @@ public class Monster : DirectionalGameObject
     [SerializeField] public GameObject tackleCollider;
     [SerializeField] private MonsterBodyCollider monsterBodyCollider;
 
+    
+
     void Start()
     {
         _animator = GetComponent<Animator>();
@@ -33,6 +35,7 @@ public class Monster : DirectionalGameObject
     {
         pattern?.PlayPattern();
     }
+
 
     // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
     public void PlayAnimation(MonsterStatus status)
