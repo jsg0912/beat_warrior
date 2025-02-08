@@ -20,8 +20,9 @@ public class AttackStrategyRolling : AttackStrategy
         monster.SetStatus(MonsterStatus.Attack);
         yield return new WaitForSeconds(attackStartDelay);
 
-        monster.PlayAnimation(MonsterStatus.Attack);
+        monster.PlayAnimation(MonsterStatus.AttackCharge);
         yield return new WaitForSeconds(attackActionInterval);
+        monster.PlayAnimation(MonsterStatus.Attack);
         SkillMethod();
 
         yield return new WaitForSeconds(duration + 0.3f);
