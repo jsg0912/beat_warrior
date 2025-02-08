@@ -27,6 +27,12 @@ public class Mark : ActiveSkillPlayer
         }
         else if (markSlowTimer.remainTime > 0)
         {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                markSlowTimer.SetRemainTimeZero();
+                PauseController.instance.ResetSpeed();
+                // TODO: Cursor Change;
+            }
             if (Input.GetKey(keyCode))
             {
                 if (!markSlowTimer.UnScaledTick())
