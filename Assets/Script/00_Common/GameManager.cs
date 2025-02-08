@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Language Language => language;
     public bool IsLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();
     public SceneName currentScene;
+    public bool isInGame { get; private set; }
 
     public static GameManager Instance
     {
@@ -28,8 +29,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public bool isInGame = false;
-
     public void Awake()
     {
         // ValidationChecker.Check();
@@ -48,7 +47,7 @@ public class GameManager : MonoBehaviour
     public void Start()
     {
         SetDefaultCursor();
-        isInGame = false;
+        SetIsInGame(false);
         SetDefaultCursor();
         Enum.TryParse(SceneManager.GetActiveScene().name, true, out currentScene);
     }
@@ -72,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        isInGame = true;
+        SetIsInGame(true);
         InGameManager.TryCreateInGameManager();
         ChapterManager.Instance.StartNewGame();
     }
@@ -81,5 +80,17 @@ public class GameManager : MonoBehaviour
     {
         StartGame();
         Player.Instance.RestartPlayer();
+    }
+
+    public void QuitInGame()
+    {
+        SetIsInGame(false);
+        Destroy(InGameManager.Instance.gameObject);
+        // TODO: Save Game
+    }
+
+    public void SetIsInGame(bool isInGame)
+    {
+        this.isInGame = isInGame;
     }
 }
