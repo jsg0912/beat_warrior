@@ -1,10 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CursorController : MonoBehaviour
+public class CursorController : SingletonObject<CursorController>
 {
-    public static CursorController Instance;
-    void Awake() { Instance = this; }
     [SerializeField] private Animator cursorAnimator;
     [SerializeField] private Image cursorImage;
     [SerializeField] private Sprite inGameCursor;

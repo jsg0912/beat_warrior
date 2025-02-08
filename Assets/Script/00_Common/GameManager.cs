@@ -1,47 +1,18 @@
 using System;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonObject<GameManager>
 {
-    private static GameManager _instance;
     private Language language = Language.kr;
     public Language Language => language;
     public bool IsLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();
     public SceneName currentScene;
     public bool isInGame { get; private set; }
 
-    public static GameManager Instance
+    protected override void Awake()
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<GameManager>();
-                if (_instance == null)
-                {
-                    GameObject go = new GameObject("GameManager");
-                    _instance = go.AddComponent<GameManager>();
-                    DontDestroyOnLoad(go);
-                }
-            }
-            return _instance;
-        }
-    }
-
-    public void Awake()
-    {
+        base.Awake();
         // ValidationChecker.Check();
-        if (_instance == null)
-        {
-            _instance = this;
-        }
-        else if (_instance != this)
-        {
-            Destroy(gameObject);
-        }
-
-        DontDestroyOnLoad(this);
     }
 
     public void Start()
@@ -72,8 +43,9 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SetIsInGame(true);
-        InGameManager.TryCreateInGameManager();
+        InGameManager.TryCreateSingletonObject();
         ChapterManager.Instance.StartNewGame();
+        Player.TryCreatePlayer();
     }
 
     public void RestartGame()

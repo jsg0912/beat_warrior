@@ -42,13 +42,13 @@ public class Mark : ActiveSkillPlayer
     {
         CursorController.Instance.SetZoomInCursor();
         markSlowTimer.Initialize();
-        PauseController.instance.SetZoomInSlow();
+        PauseController.Instance.SetZoomInSlow();
     }
 
     private void ZoomOut()
     {
         CursorController.Instance.SetTitleCursor();
-        PauseController.instance.ResetSpeed();
+        PauseController.Instance.ResetSpeed();
         markSlowTimer.SetRemainTimeZero();
     }
 
