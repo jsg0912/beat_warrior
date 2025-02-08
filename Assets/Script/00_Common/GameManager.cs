@@ -1,6 +1,4 @@
 using System;
-using Unity.VisualScripting;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonObject<GameManager>

@@ -182,4 +182,9 @@ public static class Util
     }
 
     public static bool IsEditor => Application.isEditor;
+
+    public static bool IsRootGameObject(GameObject gameObject)
+    {
+        return gameObject.transform.parent == null;
+    }
 }
