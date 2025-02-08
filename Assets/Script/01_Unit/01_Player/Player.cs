@@ -91,6 +91,7 @@ public class Player : DirectionalGameObject
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
         playerGhostConstroller = new PlayerGhostController();
+        InitializeAttackCollider();
     }
 
     public void RestartPlayer()
@@ -428,6 +429,8 @@ public class Player : DirectionalGameObject
         SetAnimTrigger(PlayerConstant.hurtAnimTrigger);
         KnockBack(direction);
     }
+
+    public void InitializeAttackCollider() { colliderController.InitializeAttackCollider(); }
 
     private void KnockBack(Direction direction)
     {
