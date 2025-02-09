@@ -284,8 +284,8 @@ public class Player : DirectionalGameObject
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetMovingDirection(dir);
 
-        // TODO: 아래의 10은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
-        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 100;
+        // TODO: 아래의 50은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
+        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 50;
         int moveCount = 0;
         while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
