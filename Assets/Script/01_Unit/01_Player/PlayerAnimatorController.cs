@@ -8,12 +8,13 @@ public class PlayerAnimatorController : StateMachineBehaviour
     {
         if (stateInfo.IsName(PlayerAnimation.Dash) || stateInfo.IsName(PlayerAnimation.DashCharge)) player.SetStatus(PlayerStatus.Dash);
         if (stateInfo.IsName(PlayerAnimation.Idle)) player.SetStatus(PlayerStatus.Normal);
+        if (stateInfo.IsName(PlayerAnimation.Revive)) (player.HaveSkill(SkillName.Revive) as Revive).ReviveFunctionBefore();
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (IsAttackStatus(stateInfo)) player.InitializeAttackCollider();
-        else if (stateInfo.IsName(PlayerAnimation.Revive)) player.SetStatus(PlayerStatus.Normal);
+        else if (stateInfo.IsName(PlayerAnimation.Revive)) (player.HaveSkill(SkillName.Revive) as Revive).ReviveFunctionAfter();
     }
 
     private bool IsAttackStatus(AnimatorStateInfo stateInfo)

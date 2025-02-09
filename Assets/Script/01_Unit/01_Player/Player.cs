@@ -12,7 +12,7 @@ public class Player : DirectionalGameObject
     public Sprite sprite => spriteRenderer.sprite;
     private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
-    private Animator _animator;
+    public Animator _animator;
     private List<ActiveSkillPlayer> skillList;
     private List<Skill> traitList = new();
 
@@ -342,6 +342,11 @@ public class Player : DirectionalGameObject
     public Skill HaveSkill(SkillName name)
     {
         foreach (var skill in skillList)
+        {
+            if (skill.skillName == name) return skill;
+        }
+
+        foreach (var skill in traitList)
         {
             if (skill.skillName == name) return skill;
         }
