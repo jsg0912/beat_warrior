@@ -2,28 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChapterManager : MonoBehaviour
+public class ChapterManager : SingletonObject<ChapterManager>
 {
-    private static ChapterManager _instance;
-
-    public static ChapterManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<ChapterManager>();
-                if (_instance == null)
-                {
-                    GameObject go = new GameObject("ChapterManager");
-                    _instance = go.AddComponent<ChapterManager>();
-                    DontDestroyOnLoad(go);
-                }
-            }
-            return _instance;
-        }
-    }
-
     public Dictionary<ChapterName, Chapter> chapters = new();
 
     private Chapter currentChapter;
@@ -33,18 +13,9 @@ public class ChapterManager : MonoBehaviour
     private bool IsCurrentStageCompleted => CurrentStage.Cleared;
     private ChapterName currentChapterName => currentChapter.name;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else if (_instance != this)
-        {
-            Destroy(gameObject);
-        }
-
+        base.Awake();
         InitializeChaptersForNewGame();
     }
 
@@ -81,7 +52,6 @@ public class ChapterManager : MonoBehaviour
         {
             StartChapter(ChapterName.Ch1);
         }
-        Player.TryCreatePlayer();
     }
 
     public void StartChapter(ChapterName chapterName)
@@ -99,7 +69,7 @@ public class ChapterManager : MonoBehaviour
         }
     }
 
-    public void MoveToNextStage()
+    public bool MoveToNextStage()
     {
         if (IsCurrentStageCompleted)
         {
@@ -112,7 +82,9 @@ public class ChapterManager : MonoBehaviour
             {
                 LoadStageScene();
             }
+            return true;
         }
+        return false;
     }
 
     public void AlarmMonsterKilled(MonsterName monsterName)

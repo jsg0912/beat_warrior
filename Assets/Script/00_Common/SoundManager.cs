@@ -1,26 +1,13 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : SingletonObject<SoundManager>
 {
-    public static SoundManager Instance;
     public AudioSource backGroundSound;
     public AudioMixer mixer;
     private float sfxVolume;
     private float backgroundVolume;
     private float masterVolume;
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void BackGroundVolume(float val)
     {
@@ -32,6 +19,7 @@ public class SoundManager : MonoBehaviour
         }
         mixer.SetFloat("BackGroundSound", Mathf.Log10(masterVolume * backgroundVolume) * 20);
     }
+
     public void SFXVolume(float val)
     {
         sfxVolume = val;
@@ -42,6 +30,7 @@ public class SoundManager : MonoBehaviour
         }
         mixer.SetFloat("SFX", Mathf.Log10(masterVolume * sfxVolume) * 20);
     }
+
     public void MasterVolume(float val)
     {
         masterVolume = val;

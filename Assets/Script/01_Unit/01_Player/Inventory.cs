@@ -1,26 +1,7 @@
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : SingletonObject<Inventory>
 {
-    private static Inventory _instance;
-    public static Inventory Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<Inventory>();
-                if (_instance == null)
-                {
-                    GameObject go = new GameObject("Inventory");
-                    _instance = go.AddComponent<Inventory>();
-                    DontDestroyOnLoad(go);
-                }
-            }
-            return _instance;
-        }
-    }
     private Soul spirit = new Soul();
     private List<Item> items = new List<Item>();
     private static List<SkillName> mySkillList = new List<SkillName>();

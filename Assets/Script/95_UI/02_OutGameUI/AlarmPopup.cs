@@ -1,13 +1,8 @@
+// [Code Review - LJD]: ObjectPool 사용하도록 수정, Singleton 쓸게 아님 - SDH, 20250208
 using TMPro;
 
 public class AlarmPopup : PopupSystem
 {
-    public static AlarmPopup instance;
-    public override void Awake()
-    {
-        base.Awake();
-        instance = this;
-    }
     public TextMeshProUGUI txtContent;
 
     public void SetContent(string content)

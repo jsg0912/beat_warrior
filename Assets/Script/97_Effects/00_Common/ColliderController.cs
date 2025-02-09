@@ -12,6 +12,12 @@ public class ColliderController : MonoBehaviour
         playerCollider = GetComponent<BoxCollider2D>();
     }
 
+    public void InitializeAttackCollider()
+    {
+        shortBladeCollider.ResetTargetMonster();
+        BodyAttackCollider.ResetTargetMonster();
+    }
+
     public void SetColliderTrigger(bool isTrigger)
     {
         playerCollider.isTrigger = isTrigger;

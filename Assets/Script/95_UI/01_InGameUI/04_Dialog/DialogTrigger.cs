@@ -53,13 +53,13 @@ public class DialogTrigger : MonoBehaviour
         {
             dialogIndex = 0;
             Util.SetActive(dialogPanel, false);
-            PauseController.instance.TryResumeGame();
+            PauseController.Instance.TryResumeGame();
             return;
         }
 
         Util.SetActive(dialogPanel, true);
         dialogText.text = dialogData;
         dialogIndex++;
-        PauseController.instance.TryPauseGame();
+        PauseController.Instance.TryPauseGame();
     }
 }

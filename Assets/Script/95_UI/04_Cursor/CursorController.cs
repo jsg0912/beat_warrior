@@ -1,14 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class CursorController : MonoBehaviour
+public class CursorController : SingletonObject<CursorController>
 {
-    public static CursorController Instance;
-    void Awake() { Instance = this; }
     [SerializeField] private Animator cursorAnimator;
-    [SerializeField] private Image cursorImage;
-    [SerializeField] private Sprite inGameCursor;
-    [SerializeField] private Sprite zoomInCursor;
 
     void Start()
     {
@@ -17,7 +11,7 @@ public class CursorController : MonoBehaviour
 
     void Update()
     {
-        cursorImage.transform.position = Input.mousePosition;
+        gameObject.transform.position = Input.mousePosition;
     }
 
     public void SetTitleCursor()
@@ -27,15 +21,12 @@ public class CursorController : MonoBehaviour
 
     public void SetInGameCursor()
     {
-        cursorAnimator.SetTrigger(CursorAnimationTrigger.ResetTrigger);
-        cursorImage.sprite = inGameCursor;
-        // cursorAnimator.SetTrigger(CursorAnimationTrigger.InGameTrigger);
+        cursorAnimator.SetTrigger(CursorAnimationTrigger.InGameTrigger);
     }
 
     public void SetZoomInCursor()
     {
-        cursorAnimator.SetTrigger(CursorAnimationTrigger.ResetTrigger);
-        cursorImage.sprite = zoomInCursor;
-        // cursorAnimator.SetTrigger(CursorAnimationTrigger.ZoomInTrigger);
+        cursorAnimator.SetBool(CursorAnimationTrigger.InGameTrigger, false);
+        cursorAnimator.SetTrigger(CursorAnimationTrigger.ZoomInTrigger);
     }
 }

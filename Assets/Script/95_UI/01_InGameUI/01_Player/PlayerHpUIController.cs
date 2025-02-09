@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// PlayerHpUIController는 없으면 없는대로 되어야 하기 때문에(안그러면 버그가 생김), SingletonObject를 상속받지 않는다.
 public class PlayerHpUIController : MonoBehaviour
 {
     public static PlayerHpUIController Instance;
@@ -10,7 +11,6 @@ public class PlayerHpUIController : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        //HPPrefab = Resources.Load("Prefab/03_UI/03_PlayerUI/PlayerHP") as GameObject;
     }
 
     private void Start()

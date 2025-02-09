@@ -1,13 +1,11 @@
-using System.Linq;
 using UnityEngine;
 
-public class MainCamera : MonoBehaviour
+public class MainCamera : SingletonObject<MainCamera>
 {
-    public static MainCamera Instance;
     public Camera main;
-    void Awake()
+    protected override void Awake()
     {
-        Instance = this;
+        base.Awake();
         main = GetComponent<Camera>();
     }
 

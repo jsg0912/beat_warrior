@@ -5,6 +5,7 @@ public enum PlayerStatus
 {
     Normal,
     Skill,
+    Dash,
     Unmovable,
     Unattackable,
     Stun, // Unmovable + Unattackable
