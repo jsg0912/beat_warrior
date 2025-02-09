@@ -2,14 +2,6 @@ using UnityEngine;
 
 public class CommandManager : SingletonObject<CommandManager>
 {
-    void FixedUpdate()
-    {
-        if (GameManager.Instance.isInGame && !PauseController.Instance.IsPause())
-        {
-            Player.Instance?.CheckIsMove();
-        }
-    }
-
     void Update()
     {
         bool isInGame = GameManager.Instance.isInGame;
@@ -38,6 +30,7 @@ public class CommandManager : SingletonObject<CommandManager>
                 // When we paused the game, we don't want to check below commands.
                 if (!PauseController.Instance.IsPause() && Player.Instance != null)
                 {
+                    Player.Instance.CheckIsMove();
                     Player.Instance.CheckPlayerCommand();
                 }
 
