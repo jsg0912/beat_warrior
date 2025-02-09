@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MonsterStatusController : StateMachineBehaviour
+public class MonsterAnimatorController : StateMachineBehaviour
 {
     private Monster monster;
 

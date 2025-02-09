@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CursorController : SingletonObject<CursorController>
 {
@@ -27,6 +26,7 @@ public class CursorController : SingletonObject<CursorController>
 
     public void SetZoomInCursor()
     {
+        cursorAnimator.SetBool(CursorAnimationTrigger.InGameTrigger, false);
         cursorAnimator.SetTrigger(CursorAnimationTrigger.ZoomInTrigger);
     }
 }

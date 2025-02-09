@@ -91,6 +91,7 @@ public class Player : DirectionalGameObject
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
         playerGhostConstroller = new PlayerGhostController();
+        InitializeAttackCollider();
     }
 
     public void RestartPlayer()
@@ -182,14 +183,15 @@ public class Player : DirectionalGameObject
 
     public void CheckPlayerCommand()
     {
-        if (status != PlayerStatus.Dead && IsActionAble())
+        if (IsActionAble())
         {
             Jump();
-            CheckGround();
             Down();
             Skill();
         }
+        CheckGround();
     }
+
     private bool IsMoveable()
     {
         switch (status)
@@ -242,14 +244,13 @@ public class Player : DirectionalGameObject
         RaycastHit2D rayHit = Physics2D.Raycast(left, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
         if (rayHit.collider == null) rayHit = Physics2D.Raycast(right, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
 
-        isGround = rayHit.collider != null && _rigidbody.velocity.y >= 0;
+        isGround = rayHit.collider != null && Mathf.Approximately(_rigidbody.velocity.y, 0f);
         _animator.SetBool(PlayerConstant.groundedAnimBool, isGround);
 
         if (!isGround) return;
 
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
         tileCollider = rayHit.collider.GetComponent<BoxCollider2D>();
-
     }
 
     private void Jump()
@@ -284,7 +285,7 @@ public class Player : DirectionalGameObject
         if (changeDir == true) SetMovingDirection(dir);
 
         // TODO: 아래의 10은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
-        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 10;
+        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 100;
         int moveCount = 0;
         while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
@@ -427,6 +428,8 @@ public class Player : DirectionalGameObject
         SetAnimTrigger(PlayerConstant.hurtAnimTrigger);
         KnockBack(direction);
     }
+
+    public void InitializeAttackCollider() { colliderController.InitializeAttackCollider(); }
 
     private void KnockBack(Direction direction)
     {
