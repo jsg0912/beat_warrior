@@ -34,7 +34,7 @@ public class Player : DirectionalGameObject
     private bool isGround;
     private float jumpDeltaTimer;
     private float jumpTimer;
-    private bool isInvincibility;
+    [SerializeField] private bool isInvincibility;
     private BoxCollider2D tileCollider; // [Code Review - KMJ] TODO: 이제 필요없으면 제거 or TileCollider를 왜 가지고 있는지 모르겠음 - SDH, 20250208
 
     public PlayerGhostController playerGhostConstroller;
@@ -51,6 +51,14 @@ public class Player : DirectionalGameObject
             {
                 CreatePlayer();
             }
+        }
+    }
+
+    public void Update()
+    {
+        if (IsUsingSkill())
+        {
+            _rigidbody.velocity = Vector2.zero; // TODO: 기획에 따라 스킬 사용 중 멈추는 것이 바뀔 수 있음 - SDH, 20250106
         }
     }
 
@@ -346,6 +354,11 @@ public class Player : DirectionalGameObject
             if (skill.skillName == name) return skill;
         }
 
+        foreach (var skill in traitList)
+        {
+            if (skill.skillName == name) return skill;
+        }
+
         return null;
     }
 
@@ -382,6 +395,9 @@ public class Player : DirectionalGameObject
                 break;
             case SkillName.SkillReset:
                 trait = new SkillReset(this.gameObject);
+                break;
+            case SkillName.Revive:
+                trait = new Revive(this.gameObject);
                 break;
         }
 
@@ -426,12 +442,13 @@ public class Player : DirectionalGameObject
 
         if (!isAlive)
         {
-            if (reviveSKillFuncList != null) isAlive = reviveSKillFuncList();
-            if (!isAlive)
+            SetDead();
+            if (reviveSKillFuncList != null)
             {
-                SetDead();
-                return;
+                reviveSKillFuncList();
+                SetStatus(PlayerStatus.Normal);
             }
+            return;
         }
 
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
