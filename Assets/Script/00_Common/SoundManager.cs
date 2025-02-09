@@ -9,39 +9,38 @@ public class SoundManager : SingletonObject<SoundManager>
     private float backgroundVolume;
     private float masterVolume;
 
-    public void BackGroundVolume(float val)
+    private void ApplyVolume()
     {
-        backgroundVolume = val;
-        if (val == 0f)
-        {
-            mixer.SetFloat("BackGroundSound", -80);
-            return;
-        }
-        mixer.SetFloat("BackGroundSound", Mathf.Log10(masterVolume * backgroundVolume) * 20);
-    }
-
-    public void SFXVolume(float val)
-    {
-        sfxVolume = val;
-        if (val == 0f)
-        {
-            mixer.SetFloat("SFX", -80f);
-            return;
-        }
-        mixer.SetFloat("SFX", Mathf.Log10(masterVolume * sfxVolume) * 20);
-    }
-
-    public void MasterVolume(float val)
-    {
-        masterVolume = val;
-        if (val == 0f)
+        if (masterVolume == 0f)
         {
             mixer.SetFloat("SFX", -80f);
             mixer.SetFloat("BackGroundSound", -80f);
             return;
         }
-        mixer.SetFloat("SFX", Mathf.Log10(masterVolume * sfxVolume) * 20);
-        mixer.SetFloat("BackGroundSound", Mathf.Log10(masterVolume * backgroundVolume) * 20);
+
+        float bgVolume = (masterVolume * backgroundVolume);
+        float sfxVol = (masterVolume * sfxVolume);
+
+        mixer.SetFloat("BackGroundSound", bgVolume > 0 ? Mathf.Log10(bgVolume) * 20 : -80f);
+        mixer.SetFloat("SFX", sfxVol > 0 ? Mathf.Log10(sfxVol) * 20 : -80f);
+    }
+
+    public void BackGroundVolume(float val)
+    {
+        backgroundVolume = val;
+        ApplyVolume();
+    }
+
+    public void SFXVolume(float val)
+    {
+        sfxVolume = val;
+        ApplyVolume() ;
+    }
+
+    public void MasterVolume(float val)
+    {
+        masterVolume = val;
+        ApplyVolume();
     }
 
     public void SFXPlay(string name, AudioClip clip)
