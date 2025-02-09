@@ -25,10 +25,9 @@ public class Revive : PassiveSkill
     }
 
 
-    public bool RevivePlayer()
+    public bool RevivePlayer() // return isRevive
     {
-        bool isAlive = false;
-        if (isUsed) return isAlive;
+        if (isUsed) return false;
 
         Player player = Player.Instance;
         player.SetAnimTrigger(PlayerConstant.reviveAnimTrigger);
@@ -37,9 +36,8 @@ public class Revive : PassiveSkill
         Vector3 position = player.transform.position + new Vector3(0, 2, 0);
         GameObject effect = GameObject.Instantiate(reviveEffect, position, Quaternion.identity);
         isUsed = true;
-        isAlive = true;
         GameObject.Destroy(effect, PlayerSkillConstant.reviveDuration);
 
-        return isAlive;
+        return true;
     }
 }

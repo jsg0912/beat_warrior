@@ -13,6 +13,7 @@ public class PlayerAnimatorController : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (IsAttackStatus(stateInfo)) player.InitializeAttackCollider();
+        else if (stateInfo.IsName(PlayerAnimation.Revive)) player.SetStatus(PlayerStatus.Normal);
     }
 
     private bool IsAttackStatus(AnimatorStateInfo stateInfo)
