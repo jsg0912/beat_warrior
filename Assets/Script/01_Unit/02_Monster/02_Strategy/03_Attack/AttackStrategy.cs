@@ -54,15 +54,18 @@ public abstract class AttackStrategy : Strategy
 
     protected virtual IEnumerator UseSkill()
     {
-        monster.SetStatus(MonsterStatus.Attack);
         yield return new WaitForSeconds(attackStartDelay);
-
         monster.PlayAnimation(MonsterStatus.Attack);
-        yield return new WaitForSeconds(attackActionInterval);
-        SkillMethod();
+    }
 
+    public virtual void AttackStart()
+    {
+        SkillMethod();
         SetMaxAttackCoolTime();
-        monster.SetStatus(MonsterStatus.Idle);
+    }
+
+    public virtual void AttackEnd()
+    {
     }
 
     protected abstract void SkillMethod();

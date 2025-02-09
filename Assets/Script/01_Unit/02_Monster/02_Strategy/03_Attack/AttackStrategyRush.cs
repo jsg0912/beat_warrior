@@ -27,7 +27,7 @@ public class AttackStrategyRush : AttackStrategy
         SetAttackDirection();
         yield return new WaitForSeconds(attackStartDelay);
 
-        monster.PlayAnimation(MonsterStatus.AttackCharge);
+        //monster.PlayAnimation(MonsterStatus.AttackCharge);
         yield return new WaitForSeconds(attackActionInterval);
         monster.PlayAnimation(MonsterStatus.Attack);
         SkillMethod();
@@ -56,9 +56,6 @@ public class AttackStrategyRush : AttackStrategy
         monster.SetIsTackleAble(false);
         monster.SetIsKnockBackAble(true);
         attackCoolTime = attackCoolTimeMax;
-
-        monster.PlayAnimation(MonsterStatus.AttackEnd);
-        monster.SetStatus(MonsterStatus.Idle);
     }
 
     protected virtual void Rush()

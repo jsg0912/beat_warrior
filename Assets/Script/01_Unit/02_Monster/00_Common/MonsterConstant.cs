@@ -2,14 +2,13 @@ using System.Collections.Generic;
 
 public class MonsterConstant
 {
-    public const string walkAnimBool = "isWalk";
-    public const string attackChargeAnimTrigger = "charge";
-    public const string attackAnimTrigger = "attack";
-    public const string attackEndAnimTrigger = "attack end";
-    public const string endMotionBool = "has attack end";
-    public const string turnAnimTrigger = "turn";
-    public const string hurtAnimTrigger = "hurt";
-    public const string dieAnimTrigger = "die";
+    public const string walkAnimBool = "IsWalk";
+    public const string attackAnimTrigger = "Attack";
+    public const string attackEndAnimTrigger = "AttackEnd";
+    public const string repeatAttackBool = "RepeatAttack";
+    public const string turnAnimTrigger = "Turn";
+    public const string hurtAnimTrigger = "Hurt";
+    public const string dieAnimTrigger = "Die";
 
     public const float moveSpeed = 1.0f;
 
@@ -86,11 +85,11 @@ public class MonsterConstant
         { MonsterName.Itmomi, 0.33f }
     };
 
-    public static Dictionary<MonsterName, bool> HasEndMotion = new() {
+    public static Dictionary<MonsterName, bool> RepeatAttack = new() {
         { MonsterName.Ippali, false },
         { MonsterName.Ibkkugi, false },
         { MonsterName.Koppulso, true },
-        { MonsterName.Dulduli, true },
+        { MonsterName.Dulduli, false },
         { MonsterName.Giljjugi, false },
         { MonsterName.Itmomi, false }
     };

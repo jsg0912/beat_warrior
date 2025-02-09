@@ -7,5 +7,6 @@ public class MonsterAnimation
     public const string Turn = "Turn";
     public const string Hurt = "Hurt";
     public const string Groggy = "Groggy";
+    public const string GroggyEnd = "GroggyEnd";
     public const string Die = "Die";
 }

@@ -7,6 +7,7 @@ public class Monster : DirectionalGameObject
     public MonsterName monsterName;
     private MonsterUnit monsterUnit;
     public Pattern pattern;
+    public bool isChasing;
     public Timer timer;
 
     [SerializeField] private MonsterStatus _status;
@@ -39,8 +40,9 @@ public class Monster : DirectionalGameObject
 
     void Start()
     {
+        isChasing = false;
         _animator = GetComponent<Animator>();
-        _animator.SetBool(MonsterConstant.endMotionBool, MonsterConstant.HasEndMotion[monsterName]);
+        _animator.SetBool(MonsterConstant.repeatAttackBool, MonsterConstant.RepeatAttack[monsterName]);
         monsterUnit = MonsterList.FindMonster(monsterName, AnotherHPValue);
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
@@ -55,6 +57,9 @@ public class Monster : DirectionalGameObject
         pattern?.PlayPattern();
     }
 
+    public void AttackStart() { pattern.AttackStartMethod(); }
+    public void AttackEnd() { pattern.AttackEndMethod(); }
+
     // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
     public void PlayAnimation(MonsterStatus status)
     {
@@ -63,12 +68,6 @@ public class Monster : DirectionalGameObject
         {
             case MonsterStatus.Attack:
                 PlayAnimation(MonsterConstant.attackAnimTrigger);
-                break;
-            case MonsterStatus.AttackCharge:
-                PlayAnimation(MonsterConstant.attackChargeAnimTrigger);
-                break;
-            case MonsterStatus.AttackEnd:
-                PlayAnimation(MonsterConstant.attackEndAnimTrigger);
                 break;
             case MonsterStatus.Dead:
                 PlayAnimation(MonsterConstant.dieAnimTrigger);
@@ -88,8 +87,6 @@ public class Monster : DirectionalGameObject
         switch (status)
         {
             case MonsterStatus.Attack:
-            case MonsterStatus.AttackCharge:
-            case MonsterStatus.AttackEnd:
                 return true;
             default:
                 return false;
@@ -101,14 +98,8 @@ public class Monster : DirectionalGameObject
         {
             switch (status)
             {
-                case MonsterStatus.Idle:
-                case MonsterStatus.Chase:
+                case MonsterStatus.Normal:
                     return true;
-                case MonsterStatus.AttackCharge:
-                case MonsterStatus.Attack:
-                case MonsterStatus.AttackEnd:
-                case MonsterStatus.Hurt:
-                case MonsterStatus.Dead:
                 default:
                     return false;
             }

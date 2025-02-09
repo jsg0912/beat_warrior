@@ -13,7 +13,7 @@ public class PatternDulDulI : Pattern
     {
         Attack?.UpdateCoolTime();
 
-        switch (monster.GetStatus())
+        /*switch (monster.GetStatus())
         {
             case MonsterStatus.Idle:
                 Recognize?.PlayStrategy();
@@ -29,7 +29,6 @@ public class PatternDulDulI : Pattern
             case MonsterStatus.AttackEnd:
                 Groggy?.PlayStrategy();
                 break;
-        }
+        }*/
     }
-
 }

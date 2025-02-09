@@ -20,16 +20,12 @@ public class AttackStrategyRolling : AttackStrategy
         monster.SetStatus(MonsterStatus.Attack);
         yield return new WaitForSeconds(attackStartDelay);
 
-        monster.PlayAnimation(MonsterStatus.AttackCharge);
         yield return new WaitForSeconds(attackActionInterval);
         monster.PlayAnimation(MonsterStatus.Attack);
         SkillMethod();
 
         yield return new WaitForSeconds(duration + 0.3f);
         SetAfterSkill();
-
-        monster.SetStatus(MonsterStatus.AttackEnd);
-        monster.PlayAnimation(MonsterStatus.AttackEnd);
     }
 
     protected override void SkillMethod()
@@ -62,7 +58,5 @@ public class AttackStrategyRolling : AttackStrategy
         monster.SetIsTackleAble(false);
         monster.SetIsKnockBackAble(true);
         monster.spriteRenderer.transform.DORotate(Vector3.zero, 0.1f);
-
-        monster.SetStatus(MonsterStatus.Idle);
     }
 }

@@ -25,7 +25,6 @@ public class AttackStrategyThrow : AttackStrategyCreate
         SkillMethod();
 
         attackCoolTime = attackCoolTimeMax;
-        monster.SetStatus(MonsterStatus.Idle);
     }
 
     private void SetTargetPosition()

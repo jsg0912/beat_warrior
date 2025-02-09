@@ -1,17 +1,14 @@
-using System.Collections;
-
 public class AttackStrategyMelee : AttackStrategy
 {
     protected override void SkillMethod()
     {
-        monster.PlayAnimation(MonsterStatus.Attack);
+        Util.SetActive(monster.attackCollider, true);
         monster.SetIsTackleAble(true);
-        monoBehaviour.StartCoroutine(TurnOffAttack());
     }
 
-    private IEnumerator TurnOffAttack()
+    public override void AttackEnd()
     {
-        if (monster.GetStatus() == MonsterStatus.Attack) yield return null;
+        Util.SetActive(monster.attackCollider, false);
         monster.SetIsTackleAble(false);
     }
 }
