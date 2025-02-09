@@ -12,7 +12,7 @@ public class Player : DirectionalGameObject
     public Sprite sprite => spriteRenderer.sprite;
     private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
-    public Animator _animator;
+    private Animator _animator;
     private List<ActiveSkillPlayer> skillList;
     private List<Skill> traitList = new();
 
@@ -51,6 +51,14 @@ public class Player : DirectionalGameObject
             {
                 CreatePlayer();
             }
+        }
+    }
+
+    public void Update()
+    {
+        if (IsUsingSkill())
+        {
+            _rigidbody.velocity = Vector2.zero; // TODO: 기획에 따라 스킬 사용 중 멈추는 것이 바뀔 수 있음 - SDH, 20250106
         }
     }
 
