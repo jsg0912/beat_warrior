@@ -12,7 +12,6 @@ public class Revive : PassiveSkill
     {
         isUsed = false;
         reviveEffect = Resources.Load(PrefabRouter.ReviveEffectPrefab) as GameObject;
-        DebugConsole.Log($"Load: {reviveEffect != null}");
     }
 
     protected override void SetSkillName() { skillName = SkillName.Revive; }
@@ -32,7 +31,7 @@ public class Revive : PassiveSkill
     {
         if (isUsed) return false;
 
-        player._animator.SetBool(PlayerConstant.reviveAnimTrigger, true);
+        player.SetAnimTrigger(PlayerConstant.reviveAnimTrigger);
         isUsed = true;
 
         return true;

@@ -13,5 +13,6 @@ public class PlayerAnimation
     public const string Dash = "Dash";
     public const string Skill1 = "Skill1";
     public const string Skill2 = "Skill2";
-    public const string Revive = "Revive";
+    public const string Revive0 = "Revive0";
+    public const string Revive1 = "Revive1";
 }
