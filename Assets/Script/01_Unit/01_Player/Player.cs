@@ -54,14 +54,6 @@ public class Player : DirectionalGameObject
         }
     }
 
-    public void Update()
-    {
-        if (IsUsingSkill())
-        {
-            _rigidbody.velocity = Vector2.zero; // TODO: 기획에 따라 스킬 사용 중 멈추는 것이 바뀔 수 있음 - SDH, 20250106
-        }
-    }
-
     private static void CreatePlayer()
     {
         GameObject player;
