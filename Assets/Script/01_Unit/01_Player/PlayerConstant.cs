@@ -12,7 +12,7 @@ public class PlayerConstant
 
     public const float gravityScale = 5.0f;
     public const float moveSpeed = 5.6f;
-    public const float jumpHeight = 18.0f;
+    public const float jumpPower = 18.0f;
     public const float playerHeight = 1.0f;
 
     public const float invincibilityTime = 0.5f;
