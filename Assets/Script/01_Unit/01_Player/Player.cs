@@ -37,7 +37,7 @@ public class Player : DirectionalGameObject
     [SerializeField] private bool isInvincibility;
     private BoxCollider2D tileCollider; // [Code Review - KMJ] TODO: 이제 필요없으면 제거 or TileCollider를 왜 가지고 있는지 모르겠음 - SDH, 20250208
 
-    public PlayerGhostController playerGhostConstroller;
+    public PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
     public ReviveSkillFunc reviveSKillFuncList = null;
@@ -99,7 +99,7 @@ public class Player : DirectionalGameObject
         isInvincibility = false;
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
-        playerGhostConstroller = new PlayerGhostController();
+        playerGhostController = new PlayerGhostController();
         InitializeAttackCollider();
     }
 
@@ -314,7 +314,7 @@ public class Player : DirectionalGameObject
                 if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base)) break;
             }
 
-            playerGhostConstroller.TryMakeGhost(dir);
+            playerGhostController.TryMakeGhost(dir);
 
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
             moveCount++;
