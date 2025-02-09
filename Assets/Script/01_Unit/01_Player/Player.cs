@@ -204,6 +204,7 @@ public class Player : DirectionalGameObject
             Down();
             Skill();
         }
+        FixedSkillUpdate();
         CheckGround();
     }
 
@@ -336,6 +337,12 @@ public class Player : DirectionalGameObject
     {
         foreach (var skill in skillList) skill.CheckInputKeyCode();
     }
+
+    private void FixedSkillUpdate()
+    {
+        foreach (var skill in skillList) skill.CheckFixedInputKeyCode();
+    }
+
 
     public float GetSkillCoolTime(SkillName skillName)
     {
