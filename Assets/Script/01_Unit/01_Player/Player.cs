@@ -86,6 +86,9 @@ public class Player : DirectionalGameObject
             new Skill2(gameObject)
         };
 
+        traitList.Clear();
+        Inventory.Instance.Initialize();
+
         _collider = GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
