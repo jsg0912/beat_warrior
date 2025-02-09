@@ -2,6 +2,7 @@ using UnityEngine;
 
 public delegate void HitMonsterFunc(Monster monster);
 public delegate void UseSkillFunc(Skill skill);
+public delegate bool ReviveSkillFunc();
 
 public abstract class AdditionalEffect
 {

@@ -1,18 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Revive : MonoBehaviour
+public class Revive : PassiveSkill
 {
-    // Start is called before the first frame update
-    void Start()
+    private const int ReviveHP = 2;
+    bool isUsed;
+
+    public Revive(GameObject unit) : base(unit)
     {
-        
+        isUsed = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void SetSkillName() { skillName = SkillName.Revive; }
+
+    public override void GetSkill()
     {
-        
+        Player.Instance.reviveSKillFuncList += RevivePlayer;
+    }
+
+    public override void RemoveSkill()
+    {
+        Player.Instance.reviveSKillFuncList -= RevivePlayer;
+    }
+
+
+    public bool RevivePlayer()
+    {
+        bool isAlive = false;
+        if (isUsed) return isAlive;
+
+        Player player = Player.Instance;
+        player.SetAnimTrigger(PlayerConstant.reviveAnimTrigger);
+        player.ForceSetCurrentHp(ReviveHP);
+        isUsed = true;
+        isAlive = true;
+
+        return isAlive;
     }
 }

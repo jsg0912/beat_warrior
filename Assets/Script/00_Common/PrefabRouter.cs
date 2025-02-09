@@ -41,6 +41,7 @@ public class PrefabRouter
         { SkillName.Execution, TraitIconRoute + "014" },
         { SkillName.AppendAttack, TraitIconRoute + "002 1" },
         { SkillName.KillRecoveryHP, TraitIconRoute + "007" },
+        { SkillName.Revive, TraitIconRoute + "009 1" },
     };
 
     public static string MiniMapIconRoute(MonsterName monsterName)

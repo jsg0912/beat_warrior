@@ -40,6 +40,7 @@ public class Player : DirectionalGameObject
     public PlayerGhostController playerGhostConstroller;
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
+    public ReviveSkillFunc reviveSKillFuncList = null;
 
     public static void TryCreatePlayer()
     {
@@ -131,6 +132,12 @@ public class Player : DirectionalGameObject
     public void SetInvincibility(bool isInvin) { isInvincibility = isInvin; }
 
     public void PlayerAddForce(Vector2 force, int dir) { _rigidbody.AddForce(force * (int)objectDirection * dir, ForceMode2D.Impulse); }
+
+    public void ForceSetCurrentHp(int hp)
+    {
+        playerUnit.ForceSetCurrentHP(hp);
+        PlayerHpUIController.Instance?.UpdateHPUI();
+    }
 
     public bool ChangeCurrentHP(int hp)
     {
@@ -419,8 +426,12 @@ public class Player : DirectionalGameObject
 
         if (!isAlive)
         {
-            SetDead();
-            return;
+            if (reviveSKillFuncList != null) isAlive = reviveSKillFuncList();
+            if (!isAlive)
+            {
+                SetDead();
+                return;
+            }
         }
 
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
