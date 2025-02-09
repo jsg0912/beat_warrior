@@ -383,6 +383,9 @@ public class Player : DirectionalGameObject
             case SkillName.SkillReset:
                 trait = new SkillReset(this.gameObject);
                 break;
+            case SkillName.Revive:
+                trait = new Revive(this.gameObject);
+                break;
         }
 
         if (trait == null)
