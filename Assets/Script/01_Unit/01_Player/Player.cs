@@ -34,7 +34,7 @@ public class Player : DirectionalGameObject
     private bool isGround;
     private float jumpDeltaTimer;
     private float jumpTimer;
-    private bool isInvincibility;
+    [SerializeField] private bool isInvincibility;
     private BoxCollider2D tileCollider; // [Code Review - KMJ] TODO: 이제 필요없으면 제거 or TileCollider를 왜 가지고 있는지 모르겠음 - SDH, 20250208
 
     public PlayerGhostController playerGhostConstroller;
@@ -426,12 +426,13 @@ public class Player : DirectionalGameObject
 
         if (!isAlive)
         {
-            if (reviveSKillFuncList != null) isAlive = reviveSKillFuncList();
-            if (!isAlive)
+            SetDead();
+            if (reviveSKillFuncList != null)
             {
-                SetDead();
-                return;
+                reviveSKillFuncList();
+                SetStatus(PlayerStatus.Normal);
             }
+            return;
         }
 
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));

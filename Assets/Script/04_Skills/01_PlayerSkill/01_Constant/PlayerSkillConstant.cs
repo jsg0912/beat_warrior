@@ -41,4 +41,5 @@ public class PlayerSkillConstant
 
     public const float markerSpeed = 15.0f;
     public const float markerDuration = 2.0f;
+    public const float reviveDuration = 9.0f;
 }
