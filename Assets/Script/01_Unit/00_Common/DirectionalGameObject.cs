@@ -40,9 +40,6 @@ public abstract class DirectionalGameObject : MonoBehaviour
         foreach (GameObject obj in childDirectionalObjects)
         {
             Util.FlipLocalScaleX(obj);
-            Vector3 objPos = obj.transform.localPosition;
-            objPos.x = -objPos.x;
-            obj.transform.localPosition = objPos;
         }
     }
 }

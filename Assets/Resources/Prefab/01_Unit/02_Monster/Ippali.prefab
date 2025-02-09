@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 683762935750058428}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.337, y: 1.171, z: 0}
-  m_LocalScale: {x: 0.71999997, y: 0.79999995, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2140342183630988586}
@@ -64,7 +64,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06, y: -2.42}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,10 +76,10 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.5, y: 1.3}
-      - {x: 1, y: 1.3}
-      - {x: 1, y: 0.9}
-      - {x: 1.5, y: 0.9}
+    - - {x: 0.8, y: 0.4}
+      - {x: 0.3, y: 0.4}
+      - {x: 0.3, y: -0.1}
+      - {x: 0.8, y: -0.1}
   m_UseDelaunayMesh: 0
 --- !u!1 &6842711473081470587
 GameObject:
@@ -153,10 +153,11 @@ MonoBehaviour:
   movingDirection: 1
   objectDirection: 1
   spriteRenderer: {fileID: 4394129516929480509}
-  childDirectionalObjects: []
-  childDirectionalObjects: []
+  childDirectionalObjects:
+  - {fileID: 683762935750058428}
   monsterName: 0
-  __status: 0
+  isChasing: 0
+  _status: 0
   HpUI: {fileID: 4203209206365839487}
   Target: {fileID: 0}
   AnotherHPValue: 0

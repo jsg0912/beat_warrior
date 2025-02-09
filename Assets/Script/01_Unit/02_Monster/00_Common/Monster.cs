@@ -214,7 +214,6 @@ public class Monster : DirectionalGameObject
     {
         base.FlipAdditionalScaleChangeObjects();
         monsterBodyCollider.TryFlipPolygonCollider();
-        if (attackCollider != null) Util.FlipLocalScaleX(attackCollider);
     }
 
     public Direction GetRelativeDirectionToPlayer() { return Player.Instance.GetBottomPos().x > GetBottomPos().x ? Direction.Right : Direction.Left; }

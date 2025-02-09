@@ -104,7 +104,10 @@ public static class Util
 
     public static void FlipLocalScaleX(GameObject gameObject)
     {
-        FlipLocalScaleX(gameObject.transform);
+        if (gameObject.GetComponent<PolygonCollider2D>() != null)
+            FlipLocalScaleX(gameObject.GetComponent<PolygonCollider2D>());
+        else
+            FlipLocalScaleX(gameObject.transform);
     }
 
     public static void FlipLocalScaleX(PolygonCollider2D polygonCollider)
