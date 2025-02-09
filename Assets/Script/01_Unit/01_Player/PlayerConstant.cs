@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public class PlayerConstant
 {
     public static Dictionary<StatKind, int> defaultStat = new(){
-        {StatKind.HP, 5},
+        {StatKind.HP, 3},
         { StatKind.ATK, 1},
         { StatKind.Def, 0},
         { StatKind.JumpCount, 1},
