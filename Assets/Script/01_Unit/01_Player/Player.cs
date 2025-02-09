@@ -34,12 +34,13 @@ public class Player : DirectionalGameObject
     private bool isGround;
     private float jumpDeltaTimer;
     private float jumpTimer;
-    private bool isInvincibility;
+    [SerializeField] private bool isInvincibility;
     private BoxCollider2D tileCollider; // [Code Review - KMJ] TODO: 이제 필요없으면 제거 or TileCollider를 왜 가지고 있는지 모르겠음 - SDH, 20250208
 
     public PlayerGhostController playerGhostConstroller;
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
+    public ReviveSkillFunc reviveSKillFuncList = null;
 
     public static void TryCreatePlayer()
     {
@@ -50,6 +51,14 @@ public class Player : DirectionalGameObject
             {
                 CreatePlayer();
             }
+        }
+    }
+
+    public void Update()
+    {
+        if (IsUsingSkill())
+        {
+            _rigidbody.velocity = Vector2.zero; // TODO: 기획에 따라 스킬 사용 중 멈추는 것이 바뀔 수 있음 - SDH, 20250106
         }
     }
 
@@ -131,6 +140,12 @@ public class Player : DirectionalGameObject
     public void SetInvincibility(bool isInvin) { isInvincibility = isInvin; }
 
     public void PlayerAddForce(Vector2 force, int dir) { _rigidbody.AddForce(force * (int)objectDirection * dir, ForceMode2D.Impulse); }
+
+    public void ForceSetCurrentHp(int hp)
+    {
+        playerUnit.ForceSetCurrentHP(hp);
+        PlayerHpUIController.Instance?.UpdateHPUI();
+    }
 
     public bool ChangeCurrentHP(int hp)
     {
@@ -244,7 +259,7 @@ public class Player : DirectionalGameObject
         RaycastHit2D rayHit = Physics2D.Raycast(left, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
         if (rayHit.collider == null) rayHit = Physics2D.Raycast(right, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
 
-        isGround = rayHit.collider != null && Mathf.Approximately(_rigidbody.velocity.y, 0f);
+        isGround = rayHit.collider != null && Util.IsStoppedSpeed(_rigidbody.velocity.y);
         _animator.SetBool(PlayerConstant.groundedAnimBool, isGround);
 
         if (!isGround) return;
@@ -284,8 +299,8 @@ public class Player : DirectionalGameObject
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetMovingDirection(dir);
 
-        // TODO: 아래의 10은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
-        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 100;
+        // TODO: 아래의 50은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
+        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 50;
         int moveCount = 0;
         while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
@@ -339,6 +354,11 @@ public class Player : DirectionalGameObject
             if (skill.skillName == name) return skill;
         }
 
+        foreach (var skill in traitList)
+        {
+            if (skill.skillName == name) return skill;
+        }
+
         return null;
     }
 
@@ -375,6 +395,9 @@ public class Player : DirectionalGameObject
                 break;
             case SkillName.SkillReset:
                 trait = new SkillReset(this.gameObject);
+                break;
+            case SkillName.Revive:
+                trait = new Revive(this.gameObject);
                 break;
         }
 
@@ -420,6 +443,11 @@ public class Player : DirectionalGameObject
         if (!isAlive)
         {
             SetDead();
+            if (reviveSKillFuncList != null)
+            {
+                reviveSKillFuncList();
+                SetStatus(PlayerStatus.Normal);
+            }
             return;
         }
 
