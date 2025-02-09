@@ -280,7 +280,7 @@ public class Player : DirectionalGameObject
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
-            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
+            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpPower, ForceMode2D.Impulse);
 
             jumpDeltaTimer = jumpTimer;
         }
