@@ -1,17 +1,10 @@
 using UnityEngine;
 
-public class CommandManager : MonoBehaviour
+public class CommandManager : SingletonObject<CommandManager>
 {
-    public static CommandManager Instance;
-
-    void Awake()
-    {
-        Instance = this;
-    }
-
     void FixedUpdate()
     {
-        if (GameManager.Instance.isInGame && !PauseController.instance.IsPause())
+        if (GameManager.Instance.isInGame && !PauseController.Instance.IsPause())
         {
             Player.Instance?.CheckIsMove();
         }
@@ -30,7 +23,7 @@ public class CommandManager : MonoBehaviour
                 {
                     if (isInGame)
                     {
-                        PauseController.instance.TryPauseGame(); // TODO: 기획 정해야함, MenuUI 뿐만 아닌 모든 PopupSystem이 켜져야하는 경우 InGame이 멈춰야 하는지 확인 후, 해당 Logic 위치 수정 필요.
+                        PauseController.Instance.TryPauseGame(); // TODO: 기획 정해야함, MenuUI 뿐만 아닌 모든 PopupSystem이 켜져야하는 경우 InGame이 멈춰야 하는지 확인 후, 해당 Logic 위치 수정 필요.
                         MenuUI.Instance.TurnOnPopup();
                     }
                     else
@@ -43,7 +36,7 @@ public class CommandManager : MonoBehaviour
             if (isInGame)
             {
                 // When we paused the game, we don't want to check below commands.
-                if (!PauseController.instance.IsPause() && Player.Instance != null)
+                if (!PauseController.Instance.IsPause() && Player.Instance != null)
                 {
                     Player.Instance.CheckPlayerCommand();
                 }

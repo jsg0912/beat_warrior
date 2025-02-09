@@ -2,22 +2,15 @@ using UnityEngine;
 
 public class Marker : MonoBehaviour
 {
-    private const float markerSpeed = 15.0f;
-
     private void Start()
     {
-        Destroy(this.gameObject, 2.0f);
-    }
-
-    private void FixedUpdate()
-    {
-        //transform.Rotate(new Vector3(0, 0, -1) * Time.deltaTime * 500);
+        DestroyMarker(PlayerSkillConstant.markerDuration);
     }
 
     public void SetVelocity(Vector2 start, Vector2 end)
     {
         Vector2 direction = (end - start).normalized;
-        GetComponent<Rigidbody2D>().velocity = direction * markerSpeed;
+        GetComponent<Rigidbody2D>().velocity = direction * PlayerSkillConstant.markerSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,8 +26,8 @@ public class Marker : MonoBehaviour
         }
     }
 
-    public void DestroyMarker()
+    public void DestroyMarker(float delay = 0.0f)
     {
-        Destroy(gameObject);
+        Destroy(gameObject, delay);
     }
 }

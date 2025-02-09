@@ -2,7 +2,7 @@ public class PatternItmomi : Pattern
 {
     public PatternItmomi()
     {
-        MoveBasic = new MoveStrategyRandom();
+        MoveBasic = new MoveStrategyFix();
         Recognize = new RecognizeStrategyRanged();
         Attack = new AttackStrategyThrowItmomi();
     }

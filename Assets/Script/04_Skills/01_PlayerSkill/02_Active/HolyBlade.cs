@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class HolyBlade : ActiveSkillPlayer
 {
-    private bool isCharging => coolTime > 0;
-
     public HolyBlade(GameObject unit) : base(unit)
     {
         trigger = new() { PlayerConstant.attackLAnimTrigger, PlayerConstant.attackRAnimTrigger };
@@ -17,15 +15,11 @@ public class HolyBlade : ActiveSkillPlayer
 
     protected override IEnumerator CountCoolTime()
     {
-        coolTime = coolTimeMax;
-
-        while (isCharging)
+        coolTimer.Initialize();
+        while (coolTimer.Tick())
         {
-            coolTime -= Time.deltaTime;
             yield return null;
         }
-
-        coolTime = 0;
 
         Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, 1);
 
@@ -43,10 +37,13 @@ public class HolyBlade : ActiveSkillPlayer
 
     public void CheckCoolTime()
     {
-        if (isCharging) return;
+        if (coolTime > 0) return;
 
         if (!Player.Instance.playerUnit.GetIsFullStat(StatKind.AttackCount))
-            unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
+        {
+            countCoolTime = unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
+        }
+
     }
 
     protected override void CreateEffectPrefab()

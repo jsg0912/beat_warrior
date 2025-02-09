@@ -3,12 +3,19 @@ using UnityEngine;
 
 public class ColliderController : MonoBehaviour
 {
-    public AttackCollider shortBladeCollider;
     private BoxCollider2D playerCollider;
+    public AttackCollider shortBladeCollider;
+    public AttackCollider BodyAttackCollider;
 
     private void Start()
     {
         playerCollider = GetComponent<BoxCollider2D>();
+    }
+
+    public void InitializeAttackCollider()
+    {
+        shortBladeCollider.ResetTargetMonster();
+        BodyAttackCollider.ResetTargetMonster();
     }
 
     public void SetColliderTrigger(bool isTrigger)

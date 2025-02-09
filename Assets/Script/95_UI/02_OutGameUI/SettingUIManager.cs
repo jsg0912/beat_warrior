@@ -1,15 +1,12 @@
-using UnityEngine;
-
-public class SettingUIManager : MonoBehaviour
+public class SettingUIManager : SingletonObject<SettingUIManager>
 {
     public const SettingContentIndex DefaultSettingContentIndex = SettingContentIndex.SoundSetting;
-    public static SettingUIManager Instance;
     public SettingUIPopup settingUIPopup;
     private SettingContentIndex currentContentIndex;
 
-    public void Awake()
+    protected override void Awake()
     {
-        Instance = this;
+        base.Awake();
         settingUIPopup.Initialize();
         ChangeContent(DefaultSettingContentIndex);
     }
@@ -20,7 +17,7 @@ public class SettingUIManager : MonoBehaviour
         ChangeContent(DefaultSettingContentIndex);
     }
 
-    public void TrunOffSettingUI()
+    public void TurnOffSettingUI()
     {
         settingUIPopup.TurnOffPopup();
     }

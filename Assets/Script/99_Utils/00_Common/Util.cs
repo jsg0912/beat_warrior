@@ -1,11 +1,17 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Util
 {
     public static T ParseEnumFromString<T>(string value)
     {
         return (T)Enum.Parse(typeof(T), value);
+    }
+
+    public static bool SetActive(Button button, bool isOn)
+    {
+        return SetActive(button.gameObject, isOn);
     }
 
     public static bool SetActive(GameObject gameObject, bool isOn)
@@ -101,6 +107,19 @@ public static class Util
         FlipLocalScaleX(gameObject.transform);
     }
 
+    public static void FlipLocalScaleX(PolygonCollider2D polygonCollider)
+    {
+        if (polygonCollider != null)
+        {
+            Vector2[] points = polygonCollider.points;
+            for (int i = 0; i < points.Length; i++)
+            {
+                points[i].x = -points[i].x;
+            }
+            polygonCollider.points = points;
+        }
+    }
+
     public static void FlipLocalScaleX(Transform transform)
     {
         Vector3 scale = transform.localScale;
@@ -163,4 +182,9 @@ public static class Util
     }
 
     public static bool IsEditor => Application.isEditor;
+
+    public static bool IsRootGameObject(GameObject gameObject)
+    {
+        return gameObject.transform.parent == null;
+    }
 }

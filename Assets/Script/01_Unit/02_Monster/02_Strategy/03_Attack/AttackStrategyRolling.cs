@@ -20,8 +20,9 @@ public class AttackStrategyRolling : AttackStrategy
         monster.SetStatus(MonsterStatus.Attack);
         yield return new WaitForSeconds(attackStartDelay);
 
-        monster.PlayAnimation(MonsterStatus.Attack);
+        monster.PlayAnimation(MonsterStatus.AttackCharge);
         yield return new WaitForSeconds(attackActionInterval);
+        monster.PlayAnimation(MonsterStatus.Attack);
         SkillMethod();
 
         yield return new WaitForSeconds(duration + 0.3f);
@@ -37,8 +38,10 @@ public class AttackStrategyRolling : AttackStrategy
         target.y = monster.transform.position.y + jumpPower;
         SetBeforeSkill();
 
-        monster.transform.DOJump(target, jumpPower, numJumps, duration)
-            .SetEase(Ease.OutQuad); // 부드러운 튀는 느낌
+        monster.transform.DOMoveX(target.x, duration)
+            .SetEase(Ease.InSine);
+        monster.transform.DOMoveY(target.y, duration)
+            .SetEase(Ease.OutSine);
     }
 
     private void SetBeforeSkill()

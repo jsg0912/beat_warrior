@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class MonsterConstant
 {
@@ -7,7 +6,7 @@ public class MonsterConstant
     public const string attackChargeAnimTrigger = "charge";
     public const string attackAnimTrigger = "attack";
     public const string attackEndAnimTrigger = "attack end";
-    public const string endMotionBool = "has end motion";
+    public const string endMotionBool = "has attack end";
     public const string turnAnimTrigger = "turn";
     public const string hurtAnimTrigger = "hurt";
     public const string dieAnimTrigger = "die";
@@ -26,7 +25,7 @@ public class MonsterConstant
     // Dulduli
     public const float DulduliJumpPower = 5f;
     public const int DulduliJumpNumber = 1;
-    public const float DulduliJumpDuration = 1f;
+    public const float DulduliJumpDuration = 0.7f;
     public const float DulduliGroggyDuration = 2.0f;
 
     // Koppulso
@@ -70,26 +69,27 @@ public class MonsterConstant
 
     public static Dictionary<MonsterName, float> AttackStartDelays = new() {
         { MonsterName.Ippali, 0.7f },
-        { MonsterName.Ibkkugi, 0.5f },
+        { MonsterName.Ibkkugi, 1.0f },
         { MonsterName.Koppulso, 0.5f },
         { MonsterName.Dulduli, 0.5f },
         { MonsterName.Giljjugi, 0.5f },
         { MonsterName.Itmomi, 0.5f }
     };
 
+    // TODO: 김민지가 MonsterAnimatorController 기능으로 추가하면 아래 값 안쓰면서 삭제해야함 
     public static Dictionary<MonsterName, float> AttackActionIntervals = new() {
         { MonsterName.Ippali, 0.5f },
-        { MonsterName.Ibkkugi, 0.8f },
+        { MonsterName.Ibkkugi, 1.0f },
         { MonsterName.Koppulso, 2f },
-        { MonsterName.Dulduli, 0.5f },
-        { MonsterName.Giljjugi, 15f },
-        { MonsterName.Itmomi, 0.5f }
+        { MonsterName.Dulduli, 0.4f },
+        { MonsterName.Giljjugi, 1.133f },
+        { MonsterName.Itmomi, 0.33f }
     };
 
     public static Dictionary<MonsterName, bool> HasEndMotion = new() {
         { MonsterName.Ippali, false },
         { MonsterName.Ibkkugi, false },
-        { MonsterName.Koppulso, false },
+        { MonsterName.Koppulso, true },
         { MonsterName.Dulduli, true },
         { MonsterName.Giljjugi, false },
         { MonsterName.Itmomi, false }

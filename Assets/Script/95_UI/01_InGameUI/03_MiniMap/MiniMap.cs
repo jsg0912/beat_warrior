@@ -5,9 +5,8 @@ using System.Collections.Generic;
 using System;
 
 [Serializable]
-public class MiniMap : MonoBehaviour
+public class MiniMap : SingletonObject<MiniMap>
 {
-    public static MiniMap Instance;
     public TMP_Text RemainMonster;
     public Camera MiniMapCamera;
 
@@ -23,9 +22,9 @@ public class MiniMap : MonoBehaviour
         { MonsterName.Koppulso, PoolTag.MiniMapIconKoppulso },
         { MonsterName.Ippali, PoolTag.MiniMapIconIppali },
         { MonsterName.Ibkkugi, PoolTag.MiniMapIconIbkkugi },
-        { MonsterName.Dulduli, PoolTag.MiniMapIconIppali },
-        { MonsterName.Giljjugi, PoolTag.MiniMapIconIppali },
-        { MonsterName.Itmomi, PoolTag.MiniMapIconIppali },
+        { MonsterName.Dulduli, PoolTag.MiniMapIconDulduli },
+        { MonsterName.Giljjugi, PoolTag.MiniMapIconGiljjugi },
+        { MonsterName.Itmomi, PoolTag.MiniMapIconItmomi },
     };
 
     private PoolTag GetEnemyIconPoolTag(MonsterName monsterName)
@@ -41,11 +40,6 @@ public class MiniMap : MonoBehaviour
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded; // 이벤트 해제
-    }
-
-    void Awake()
-    {
-        Instance = this;
     }
 
     // Start is called before the first frame update

@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class PlayerUIManager : MonoBehaviour
+public class PlayerUIManager : SingletonObject<PlayerUIManager>
 {
-    public static PlayerUIManager Instance;
     [SerializeField] private PlayerHpUIController playerHpUI;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIMark;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIDash;
@@ -10,11 +9,6 @@ public class PlayerUIManager : MonoBehaviour
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUISweepingBlade;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIHollyBlade;
     [SerializeField] private AttackCountUI attackCountUI;
-
-    void Awake()
-    {
-        Instance = this;
-    }
 
     public void Initialize()
     {

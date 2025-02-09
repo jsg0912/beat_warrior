@@ -18,6 +18,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
         if (Player.Instance.useSKillFuncList != null) Player.Instance.useSKillFuncList(this);
     }
 
+    // TODO: Game System 적 기능이라, CommandManager나 기타 다른 클래스로 옮겨가야 함.
     public virtual void CheckInputKeyCode()
     {
         UpdateKey();

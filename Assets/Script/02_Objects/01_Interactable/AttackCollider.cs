@@ -7,10 +7,15 @@ public class AttackCollider : MonoBehaviour
     protected List<GameObject> TargetMonster = new();
     public List<AdditionalEffect> additionalEffects = new();
 
+    public void ResetTargetMonster()
+    {
+        TargetMonster.Clear();
+    }
+
     void OnDisable()
     {
         additionalEffects.Clear();
-        TargetMonster.Clear();
+        ResetTargetMonster();
     }
 
     public void SetAtk(int atk)

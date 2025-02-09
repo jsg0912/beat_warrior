@@ -11,11 +11,8 @@ public class RecoveryHP : ActiveSkillPlayer
 
     protected override IEnumerator CountCoolTime()
     {
-        coolTime = coolTimeMax;
-
-        while (coolTime > 0)
+        while (coolTimer.Tick())
         {
-            coolTime -= Time.deltaTime;
             yield return null;
         }
 

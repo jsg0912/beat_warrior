@@ -1,25 +1,10 @@
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : SingletonObject<UIManager>
 {
-    public static UIManager Instance;
     public AltarPopup altarPopup;
     public MenuUI menuUI;
     public GameObject inGameUIPrefab;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-    }
 
     public void TurnOnAltarPopup()
     {
@@ -31,8 +16,9 @@ public class UIManager : MonoBehaviour
         Util.SetActive(inGameUIPrefab, GameManager.Instance.isInGame);
     }
 
-    public void TrunOnSettingPopup()
+    public void SetActiveSettingPopup(bool isActive)
     {
-        SettingUIManager.Instance.TurnOnSettingUI();
+        if (isActive) SettingUIManager.Instance.TurnOnSettingUI();
+        else SettingUIManager.Instance.TurnOffSettingUI();
     }
 }
