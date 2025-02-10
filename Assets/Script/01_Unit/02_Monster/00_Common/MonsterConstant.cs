@@ -89,7 +89,7 @@ public class MonsterConstant
         { MonsterName.Ippali, false },
         { MonsterName.Ibkkugi, false },
         { MonsterName.Koppulso, true },
-        { MonsterName.Dulduli, false },
+        { MonsterName.Dulduli, true },
         { MonsterName.Giljjugi, false },
         { MonsterName.Itmomi, false }
     };

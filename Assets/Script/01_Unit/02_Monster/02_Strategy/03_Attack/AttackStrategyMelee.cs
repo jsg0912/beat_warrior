@@ -8,6 +8,8 @@ public class AttackStrategyMelee : AttackStrategy
 
     public override void AttackEnd()
     {
+        base.AttackEnd();
+
         Util.SetActive(monster.attackCollider, false);
         monster.SetIsTackleAble(false);
     }

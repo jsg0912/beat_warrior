@@ -60,12 +60,14 @@ public abstract class AttackStrategy : Strategy
 
     public virtual void AttackStart()
     {
+        SetAttackDirection();
         SkillMethod();
-        SetMaxAttackCoolTime();
+        Debug.Log(monster.monsterName + "attackstart");
     }
 
     public virtual void AttackEnd()
     {
+        SetMaxAttackCoolTime();
     }
 
     protected abstract void SkillMethod();

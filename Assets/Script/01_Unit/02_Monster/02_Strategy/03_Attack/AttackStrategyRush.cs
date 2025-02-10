@@ -21,29 +21,19 @@ public class AttackStrategyRush : AttackStrategy
         GroundLayer = LayerMask.GetMask(LayerConstant.Tile);
     }
 
-    protected override IEnumerator UseSkill()
-    {
-        monster.SetStatus(MonsterStatus.Attack);
-        SetAttackDirection();
-        yield return new WaitForSeconds(attackStartDelay);
-
-        //monster.PlayAnimation(MonsterStatus.AttackCharge);
-        yield return new WaitForSeconds(attackActionInterval);
-        monster.PlayAnimation(MonsterStatus.Attack);
-        SkillMethod();
-    }
-
     protected override void SkillMethod()
     {
         attackCoroutine = monoBehaviour.StartCoroutine(RushCoroutine());
+
+        monster.SetIsTackleAble(true);
+        monster.SetIsKnockBackAble(false);
+        monster.SetIsFixedAnimation(true);
+        Util.SetActive(monster.attackCollider, true);
     }
 
     protected IEnumerator RushCoroutine()
     {
         float elapsedTime = 0f;
-        monster.SetIsTackleAble(true);
-        monster.SetIsKnockBackAble(false);
-        monster.SetIsFixedAnimation(true);
 
         while (elapsedTime < dashDuration)
         {
@@ -53,9 +43,16 @@ public class AttackStrategyRush : AttackStrategy
         }
 
         monster.SetIsFixedAnimation(false);
+        monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
+    }
+
+    public override void AttackEnd()
+    {
+        base.AttackEnd();
+
         monster.SetIsTackleAble(false);
         monster.SetIsKnockBackAble(true);
-        attackCoolTime = attackCoolTimeMax;
+        Util.SetActive(monster.attackCollider, false);
     }
 
     protected virtual void Rush()
@@ -85,11 +82,6 @@ public class AttackStrategyRush : AttackStrategy
         }
     }
 
-    protected Vector3 GetGroundCheckRayStartPoint()
-    {
-        return GetMonsterPos() + new Vector3((int)attackDirection * GetMonsterSize().x / 2, 0, 0);
-    }
-
     protected void CheckGround()
     {
         RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterFrontPos() + new Vector3(0, 0.05f, 0), Vector3.down, MonsterConstant.GroundCheckRayDistance, GroundLayer);
@@ -104,9 +96,7 @@ public class AttackStrategyRush : AttackStrategy
         attackDirection = monster.GetMovingDirection();
 
         monster.SetIsFixedAnimation(false);
-
         monster.PlayAnimation(MonsterConstant.turnAnimTrigger);
-
         monster.SetIsFixedAnimation(true);
 
         isChangingDir = true;

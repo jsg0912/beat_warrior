@@ -15,19 +15,6 @@ public class AttackStrategyRolling : AttackStrategy
         this.duration = duration;
     }
 
-    protected override IEnumerator UseSkill()
-    {
-        monster.SetStatus(MonsterStatus.Attack);
-        yield return new WaitForSeconds(attackStartDelay);
-
-        yield return new WaitForSeconds(attackActionInterval);
-        monster.PlayAnimation(MonsterStatus.Attack);
-        SkillMethod();
-
-        yield return new WaitForSeconds(duration + 0.3f);
-        SetAfterSkill();
-    }
-
     protected override void SkillMethod()
     {
         Vector3 target = Player.Instance.transform.position;
@@ -42,17 +29,14 @@ public class AttackStrategyRolling : AttackStrategy
 
     private void SetBeforeSkill()
     {
-        monster.SetStatus(MonsterStatus.Attack);
-        SetAttackDirection();
-
         monster.SetIsTackleAble(true);
         monster.SetIsKnockBackAble(false);
         monster.SetIsTackleAble(true);
     }
 
-    public void SetAfterSkill()
+    public override void AttackEnd()
     {
-        SetMaxAttackCoolTime();
+        base.AttackEnd();
 
         monster.SetIsFixedAnimation(false);
         monster.SetIsTackleAble(false);
