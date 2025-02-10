@@ -197,10 +197,10 @@ public class Player : DirectionalGameObject
     public bool CheckWall()
     {
         float movingDirection = GetMovingDirectionFloat();
-        Vector3 start = GetMiddlePos() + new Vector3(GetSize().x * movingDirection / 2, 0, 0);
+        Vector3 start = GetMiddlePos();
         Vector3 dir = Vector3.right * movingDirection;
 
-        RaycastHit2D rayHit = Physics2D.Raycast(start, dir, 0.05f, LayerMask.GetMask(LayerConstant.Tile));
+        RaycastHit2D rayHit = Physics2D.Raycast(start, dir, GetSize().x + 0.05f, LayerMask.GetMask(LayerConstant.Tile));
         //Debug.DrawLine(start, start + dir * 0.05f, Color.red);
         return rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base);
     }
@@ -314,16 +314,7 @@ public class Player : DirectionalGameObject
         int moveCount = 0;
         while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
-            if (!passWall)
-            {
-                float movingDir = GetMovingDirectionFloat();
-                Vector3 start = GetMiddlePos();
-                Vector3 direction = Vector3.right * movingDir;
-
-                RaycastHit2D rayHit = Physics2D.Raycast(start, direction, 0.5f, LayerMask.GetMask(LayerConstant.Tile));
-                //Debug.DrawRay(start, direction * 0.5f, Color.red);
-                if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base)) break;
-            }
+            if (!passWall && CheckWall()) break;
 
             playerGhostController.TryMakeGhost(dir);
 
