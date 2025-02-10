@@ -318,10 +318,11 @@ public class Player : DirectionalGameObject
             if (!passWall)
             {
                 float movingDir = GetMovingDirectionFloat();
-                Vector3 start = GetMiddlePos() + new Vector3(GetSize().x / 2, 0, 0) * movingDir;
+                Vector3 start = GetMiddlePos();
                 Vector3 direction = Vector3.right * movingDir;
 
-                RaycastHit2D rayHit = Physics2D.Raycast(start, direction, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
+                RaycastHit2D rayHit = Physics2D.Raycast(start, direction, 0.5f, LayerMask.GetMask(LayerConstant.Tile));
+                //Debug.DrawRay(start, direction * 0.5f, Color.red);
                 if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base)) break;
             }
 
