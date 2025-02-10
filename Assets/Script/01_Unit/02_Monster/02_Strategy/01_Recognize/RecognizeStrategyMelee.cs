@@ -13,7 +13,7 @@ public class RecognizeStrategyMelee : RecognizeStrategy
     {
         Vector3 dir = Vector3.right * GetMovingDirectionFloat();
         RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterMiddlePos(), dir, recognizeRange, TargetLayer);
-        //Debug.DrawLine(GetMonsterMiddlePos(), GetMonsterMiddlePos() + dir * recognizeRange, Color.red);
+        Debug.DrawLine(GetMonsterMiddlePos(), GetMonsterMiddlePos() + dir * recognizeRange, Color.red);
 
         if (rayHit.collider != null)
         {
@@ -30,5 +30,7 @@ public class RecognizeStrategyMelee : RecognizeStrategy
         {
             ReleaseChase();
         }
+
+        if (monster.monsterName == MonsterName.Koppulso) Debug.Log(GetMonsterMiddlePos());
     }
 }

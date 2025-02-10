@@ -17,7 +17,6 @@ public class MonsterAnimatorController : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.GetComponent<Monster>().monsterName == MonsterName.Koppulso) Debug.Log(animator.GetCurrentAnimatorClipInfo(layerIndex)[0].clip.name);
         if (stateInfo.IsName(MonsterAnimation.Charge)) monster.AttackStart();
     }
 }

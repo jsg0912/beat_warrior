@@ -14,7 +14,7 @@ public class AttackStrategyThrow : AttackStrategyCreate
         this.maxHeight = maxHeight;
     }
 
-    protected override IEnumerator UseSkill()
+    /*protected override IEnumerator UseSkill()
     {
         monster.SetStatus(MonsterStatus.Attack);
         yield return new WaitForSeconds(attackStartDelay);
@@ -25,7 +25,7 @@ public class AttackStrategyThrow : AttackStrategyCreate
         SkillMethod();
 
         attackCoolTime = attackCoolTimeMax;
-    }
+    }*/
 
     private void SetTargetPosition()
     {
