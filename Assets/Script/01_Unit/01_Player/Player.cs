@@ -194,6 +194,18 @@ public class Player : DirectionalGameObject
         if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
+    public bool CheckWall()
+    {
+        float movingDirection = GetMovingDirectionFloat();
+        Vector3 start = GetMiddlePos() + new Vector3(GetSize().x * movingDirection / 2, 0, 0);
+        Vector3 dir = Vector3.right * movingDirection;
+
+        RaycastHit2D rayHit = Physics2D.Raycast(start, dir, 0.05f, LayerMask.GetMask(LayerConstant.Tile));
+        Debug.DrawLine(start, start + dir * 0.05f, Color.red);
+        Debug.Log(rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base));
+        return rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base);
+    }
+
     public void CheckPlayerCommand()
     {
         if (IsActionAble())
