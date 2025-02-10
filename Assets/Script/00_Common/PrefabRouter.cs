@@ -11,12 +11,14 @@ public class PrefabRouter
     public const string TraitIconRoute = "Image/UI/AltarUI/TraitIcon/";
     public const string InteractionObjectRoute = "Prefab/02_Object/03_InteractionObject/";
     public const string ScriptableObjectRoute = "Prefab/99_ScriptableObject/";
+    public const string PlayerSkillEffectRoute = "Prefab/06_Effect/PlayerSkill/";
 
     public const string PlayerPrefab = PlayerPrefabRoute + "Player";
     public const string PlayerAttackPrefab = PlayerPrefabRoute + "AttackCollider";
     public const string Skill1Prefab = PlayerPrefabRoute + "Skill1Collider";
     public const string Skill2Prefab = PlayerPrefabRoute + "Skill2Collider";
     public const string GhostPrefab = PlayerPrefabRoute + "Ghost";
+    public const string ReviveEffectPrefab = PlayerSkillEffectRoute + "ReviveEffect";
 
     public const string SoulPrefab = InteractionObjectRoute + "Soul";
     public const string MarkerPrefab = PlayerObjectPrefabRoute + "Marker";
@@ -41,6 +43,7 @@ public class PrefabRouter
         { SkillName.Execution, TraitIconRoute + "014" },
         { SkillName.AppendAttack, TraitIconRoute + "002 1" },
         { SkillName.KillRecoveryHP, TraitIconRoute + "007" },
+        { SkillName.Revive, TraitIconRoute + "009 1" },
     };
 
     public static string MiniMapIconRoute(MonsterName monsterName)

@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class PlayerUIManager : MonoBehaviour
 {
-    public static PlayerUIManager Instance;
+    public static PlayerUIManager Instance { get; private set; }
+    void Awake() { Instance = this; }
     [SerializeField] private PlayerHpUIController playerHpUI;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIMark;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIDash;
@@ -10,11 +11,7 @@ public class PlayerUIManager : MonoBehaviour
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUISweepingBlade;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIHollyBlade;
     [SerializeField] private AttackCountUI attackCountUI;
-
-    void Awake()
-    {
-        Instance = this;
-    }
+    [SerializeField] private PlayerFaceController playerFaceController;
 
     public void Initialize()
     {
@@ -32,5 +29,24 @@ public class PlayerUIManager : MonoBehaviour
     {
         Util.SetActive(SkillCoolTimeUIMark.gameObject, isMarkOn);
         Util.SetActive(SkillCoolTimeUIDash.gameObject, !isMarkOn);
+    }
+
+    public void SetPlayerFace(PlayerStatus playerStatus)
+    {
+        switch (playerStatus)
+        {
+            case PlayerStatus.Stun:
+                playerFaceController.SetCrazyFace();
+                break;
+            case PlayerStatus.Hurt:
+                playerFaceController.SetHurtFace();
+                break;
+            case PlayerStatus.Rest:
+                playerFaceController.SetHappyFace();
+                break;
+            default:
+                playerFaceController.SetIdleFace();
+                break;
+        }
     }
 }

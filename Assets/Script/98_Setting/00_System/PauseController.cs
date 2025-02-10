@@ -1,13 +1,10 @@
 using UnityEngine;
 
-public class PauseController : MonoBehaviour
+public class PauseController : SingletonObject<PauseController>
 {
     private float defaultGameSpeed = TimeScaleConstant.Default;
-    public static PauseController instance;
     public bool isPauseActive => Time.timeScale == 0;
     public bool isSlowActive => Time.timeScale < defaultGameSpeed;
-
-    private void Awake() { instance = this; }
 
     private void SetGameSpeed(float speed)
     {

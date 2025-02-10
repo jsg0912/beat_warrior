@@ -9,19 +9,10 @@ public class Dash : ActiveSkillPlayer
     private List<GameObject> attackedMonsterByDash = new();
     public GameObject targetMonster { get; private set; }
 
-    private float ghostDelayTime = 0;
-    private float ghostDelayTimeMax;
-    private GameObject GhostPrefab;
-
     public Dash(GameObject unit) : base(unit)
     {
         trigger = new() { PlayerConstant.dashAnimTrigger };
-
         damageMultiplier = PlayerSkillConstant.dashAtk;
-
-        ghostDelayTimeMax = PlayerSkillConstant.ghostDelayTimeMax;
-        GhostPrefab = Resources.Load(PrefabRouter.GhostPrefab) as GameObject;
-
         dashAvailableTimer = coolTimer;
     }
 
@@ -30,8 +21,6 @@ public class Dash : ActiveSkillPlayer
     public override void CheckInputKeyCode()
     {
         base.CheckInputKeyCode();
-
-        Ghost(); // TODO: 왜 Ghost가 여기 있는지 확인 - SDH, 20250208
     }
 
     protected override void UpdateKey()
@@ -57,7 +46,14 @@ public class Dash : ActiveSkillPlayer
         Vector2 endPoint = targetMonster.GetComponent<Monster>().GetBottomPos();
 
         Vector2 direction = (endPoint - playerBottom).normalized;
-        endPoint += new Vector2(PlayerSkillConstant.DashEndPointInterval * direction.x, PlayerSkillConstant.DashEndYOffset);
+        if (endPoint.x < playerBottom.x)
+        {
+            endPoint += new Vector2(-PlayerSkillConstant.DashEndPointInterval, 0);
+        }
+        else
+        {
+            endPoint += new Vector2(PlayerSkillConstant.DashEndPointInterval, 0);
+        }
 
         Player.Instance.Dashing(endPoint, true, true);
         StartDealTrigger(playerBottom, endPoint, direction);
@@ -120,20 +116,5 @@ public class Dash : ActiveSkillPlayer
         targetMonster = obj;
 
         countCoolTime = monoBehaviour.StartCoroutine(CountDashAvailableTimer());
-    }
-
-    private void Ghost()
-    {
-        if (ghostDelayTime > 0)
-        {
-            ghostDelayTime -= Time.deltaTime;
-            return;
-        }
-
-        //if (Player.Instance.GetPlayerStatus() != PlayerStatus.Dash) return;
-
-        GameObject ghost = GameObject.Instantiate(GhostPrefab, Player.Instance.transform.position, Quaternion.identity);
-        ghostDelayTime = ghostDelayTimeMax;
-        GameObject.Destroy(ghost, 1.0f);
     }
 }

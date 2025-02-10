@@ -3,11 +3,9 @@ using System.IO;
 using UnityEngine;
 using System.Linq;
 
-public class SaveLoadManager : MonoBehaviour
+public class SaveLoadManager : SingletonObject<SaveLoadManager>
 {
     public int maxSaveFiles = 5;
-
-    public static SaveLoadManager instance;
 
     public void SaveData(SaveJSON data)
     {
@@ -23,19 +21,6 @@ public class SaveLoadManager : MonoBehaviour
         Debug.Log("Data saved to: " + path);
 
         ManageSaveFiles();
-    }
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void ManageSaveFiles()

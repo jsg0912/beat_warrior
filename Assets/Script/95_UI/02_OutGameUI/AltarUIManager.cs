@@ -1,22 +1,14 @@
 using System.Linq;
 using TMPro;
-using UnityEngine;
 
-public class AltarUIManager : MonoBehaviour
+public class AltarUIManager : SingletonObject<AltarUIManager>
 {
-    public static AltarUIManager Instance;
-
     public AltarPopup altarPopup;
     public AltarDetailPopup altarDetailPopup;
     public TMP_Text PlayerSoulView;
 
     public SkillName[] salesSkillList;
     int spiritCount => Inventory.Instance.GetSoulNumber();
-
-    public void Awake()
-    {
-        Instance = this;
-    }
 
     void Start()
     {

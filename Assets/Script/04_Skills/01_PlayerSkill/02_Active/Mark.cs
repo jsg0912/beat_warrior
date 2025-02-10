@@ -20,20 +20,24 @@ public class Mark : ActiveSkillPlayer
         UpdateKey();
 
         if (coolTime <= 0 && Input.GetKeyDown(keyCode)) ZoomIn();
-        else if (markSlowTimer.remainTime > 0)
+    }
+
+    public override void CheckFixedInputKeyCode()
+    {
+        if (markSlowTimer.remainTime > 0)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0)) ZoomOut();
-            else if (Input.GetKey(keyCode))
+            if (Input.GetKey(keyCode))
             {
                 if (!markSlowTimer.UnScaledTick()) ZoomOut();
             }
-            else if (Input.GetKeyUp(keyCode))
+            if (Input.GetKeyUp(keyCode))
             {
                 if (Player.Instance.IsActionAble())
                 {
-                    ZoomOut();
                     TrySkill();
                 }
+                ZoomOut();
             }
         }
     }
@@ -42,13 +46,13 @@ public class Mark : ActiveSkillPlayer
     {
         CursorController.Instance.SetZoomInCursor();
         markSlowTimer.Initialize();
-        PauseController.instance.SetZoomInSlow();
+        PauseController.Instance.SetZoomInSlow();
     }
 
     private void ZoomOut()
     {
-        CursorController.Instance.SetTitleCursor();
-        PauseController.instance.ResetSpeed();
+        GameManager.Instance.SetDefaultCursor();
+        PauseController.Instance.ResetSpeed();
         markSlowTimer.SetRemainTimeZero();
     }
 

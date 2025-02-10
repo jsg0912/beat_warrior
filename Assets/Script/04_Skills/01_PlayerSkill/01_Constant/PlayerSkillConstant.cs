@@ -7,7 +7,7 @@ public class PlayerSkillConstant
     public const float skill2DashRange = 5.0f;
     public const float DashEndPointInterval = 1f;
     public const float DashEndYOffset = 0.1f;
-    public const float DashSpeed = 0.03f;
+    public const float DashSpeed = 0.1f;
     public const float SkillResetProbability = 0.9f; // TODO: 임시로 테스트를 위해 90%로 함 - 신동환, 20240901
     public const float MarkSlowDuration = 3.0f;
 
@@ -31,7 +31,7 @@ public class PlayerSkillConstant
         { AdditionalEffectName.KnockBack, false },
     };
 
-    public const float ghostDelayTimeMax = 0.01f;
+    public const float ghostDelayTimeMax = 0.05f;
 
     public const int attackAtk = 1;
     public const int dashAtk = 1;
@@ -41,4 +41,6 @@ public class PlayerSkillConstant
 
     public const float markerSpeed = 15.0f;
     public const float markerDuration = 2.0f;
+    public const float reviveDuration = 9.0f;
+    public const float reviveEffectDuration = 6.0f;
 }
