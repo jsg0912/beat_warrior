@@ -3,7 +3,7 @@ using System.Collections.Generic;
 public class PlayerConstant
 {
     public static Dictionary<StatKind, int> defaultStat = new(){
-        {StatKind.HP, 3},
+        {StatKind.HP, 5},
         { StatKind.ATK, 1},
         { StatKind.Def, 0},
         { StatKind.JumpCount, 1},
@@ -15,7 +15,7 @@ public class PlayerConstant
     public const float jumpPower = 20.0f;
     public const float playerHeight = 1.0f;
 
-    public const float invincibilityTime = 0.5f;
+    public const float invincibilityTime = 1.0f;
     public const float knockBackedStunTime = 2.0f;
     public const float knockBackedDistance = 5.0f;
 

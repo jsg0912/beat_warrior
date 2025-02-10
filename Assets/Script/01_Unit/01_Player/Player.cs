@@ -91,7 +91,7 @@ public class Player : DirectionalGameObject
         isGround = false;
         jumpDeltaTimer = 0;
         jumpTimer = 0.1f;
-        isInvincibility = false;
+        SetInvincibility(false);
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
         playerGhostController = new PlayerGhostController();
@@ -132,7 +132,10 @@ public class Player : DirectionalGameObject
 
     public void SetAnimTrigger(string trigger) { _animator.SetTrigger(trigger); }
 
-    public void SetInvincibility(bool isInvin) { isInvincibility = isInvin; }
+    public void SetInvincibility(bool isInvin)
+    {
+        isInvincibility = isInvin;
+    }
 
     public void PlayerAddForce(Vector2 force, int dir) { _rigidbody.AddForce(force * (int)objectDirection * dir, ForceMode2D.Impulse); }
 
@@ -436,6 +439,7 @@ public class Player : DirectionalGameObject
 
     public void GetDamaged(int monsterAtk, Direction direction)
     {
+        DebugConsole.Log("Player Get Damaged with invincibility: " + isInvincibility);
         if (isInvincibility || status == PlayerStatus.Dead) return;
 
         int dmg = monsterAtk - GetFinalStat(StatKind.Def);
@@ -478,9 +482,11 @@ public class Player : DirectionalGameObject
 
     private IEnumerator Invincibility(float timer)
     {
-        isInvincibility = true;
+        SetInvincibility(true);
+        DebugConsole.Log("Play Player Invincibility");
         yield return new WaitForSeconds(timer);
-        isInvincibility = false;
+        SetInvincibility(false);
+        DebugConsole.Log("Stop Player Invincibility");
     }
 
     public bool CheckFullEquipTrait()
