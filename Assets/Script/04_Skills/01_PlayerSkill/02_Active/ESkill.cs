@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class Skill2 : ActiveSkillPlayer
+public class ESkill : ActiveSkillPlayer
 {
     private float dashRange;
 
-    public Skill2(GameObject unit) : base(unit)
+    public ESkill(GameObject unit) : base(unit)
     {
-        trigger = new() { PlayerConstant.skill2AnimTrigger };
+        trigger = new() { PlayerConstant.ESkillAnimTrigger };
 
         damageMultiplier = PlayerSkillConstant.skill2Atk;
         dashRange = PlayerSkillConstant.skill2DashRange;

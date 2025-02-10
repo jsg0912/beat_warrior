@@ -29,9 +29,9 @@ public class PlayerConstant
     public const string attackAnimTrigger = "attack";
     public const string dashAnimTrigger = "dash";
     public const string hurtAnimTrigger = "hurt";
-    public const string skill1_1AnimTrigger = "skill1_1";
-    public const string skill1_2AnimTrigger = "skill1_2";
-    public const string skill2AnimTrigger = "skill2";
+    public const string QSkill1AnimTrigger = "qSkill1";
+    public const string QSkill2AnimTrigger = "qSkill2";
+    public const string ESkillAnimTrigger = "eSkill";
 
     public const int MaxAdditionalSkillCount = 3;
 }

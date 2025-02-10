@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Skill1 : ActiveSkillPlayer
+public class QSkill : ActiveSkillPlayer
 {
-    public Skill1(GameObject unit) : base(unit)
+    public QSkill(GameObject unit) : base(unit)
     {
-        trigger = new() { PlayerConstant.skill1_1AnimTrigger, PlayerConstant.skill1_2AnimTrigger };
+        trigger = new() { PlayerConstant.QSkill1AnimTrigger, PlayerConstant.QSkill2AnimTrigger };
 
         damageMultiplier = PlayerSkillConstant.skill1Atk;
         EffectPrefab = Resources.Load(PrefabRouter.Skill1Prefab) as GameObject;

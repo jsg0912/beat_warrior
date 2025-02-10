@@ -74,8 +74,8 @@ public class Player : DirectionalGameObject
             new HolyBlade(gameObject),
             new Mark(gameObject),
             new Dash(gameObject),
-            new Skill1(gameObject),
-            new Skill2(gameObject)
+            new QSkill(gameObject),
+            new ESkill(gameObject)
         };
 
         traitList.Clear();
