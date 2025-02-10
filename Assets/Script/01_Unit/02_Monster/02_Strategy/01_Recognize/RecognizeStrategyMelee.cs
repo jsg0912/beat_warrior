@@ -30,7 +30,5 @@ public class RecognizeStrategyMelee : RecognizeStrategy
         {
             ReleaseChase();
         }
-
-        if (monster.monsterName == MonsterName.Koppulso) Debug.Log(GetMonsterMiddlePos());
     }
 }
