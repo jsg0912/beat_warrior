@@ -23,6 +23,17 @@ public class AltarDetailPopup : PopupSystem
         }
     }
 
+    public override bool TurnOnPopup()
+    {
+        bool success = base.TurnOnPopup();
+        if (success)
+        {
+            UpdateEquippedTraitUIs();
+            UpdateAltarUIButtons();
+        }
+        return success;
+    }
+
     private void UpdateTargetTraitInfo()
     {
         targetTraitUI.UpdateTraitStatus(false);

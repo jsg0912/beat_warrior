@@ -29,6 +29,8 @@ public abstract class ActiveSkillPlayer : ActiveSkill
         }
     }
 
+    public virtual void CheckFixedInputKeyCode() { }
+
     // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
     protected override void CreateEffectPrefab()
     {

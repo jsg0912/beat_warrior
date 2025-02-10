@@ -37,7 +37,7 @@ public class Player : DirectionalGameObject
     [SerializeField] private bool isInvincibility;
     private BoxCollider2D tileCollider; // [Code Review - KMJ] TODO: 이제 필요없으면 제거 or TileCollider를 왜 가지고 있는지 모르겠음 - SDH, 20250208
 
-    public PlayerGhostController playerGhostConstroller;
+    public PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
     public ReviveSkillFunc reviveSKillFuncList = null;
@@ -51,14 +51,6 @@ public class Player : DirectionalGameObject
             {
                 CreatePlayer();
             }
-        }
-    }
-
-    public void Update()
-    {
-        if (IsUsingSkill())
-        {
-            _rigidbody.velocity = Vector2.zero; // TODO: 기획에 따라 스킬 사용 중 멈추는 것이 바뀔 수 있음 - SDH, 20250106
         }
     }
 
@@ -86,6 +78,9 @@ public class Player : DirectionalGameObject
             new Skill2(gameObject)
         };
 
+        traitList.Clear();
+        Inventory.Instance.Initialize();
+
         _collider = GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -96,10 +91,10 @@ public class Player : DirectionalGameObject
         isGround = false;
         jumpDeltaTimer = 0;
         jumpTimer = 0.1f;
-        isInvincibility = false;
+        SetInvincibility(false);
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
-        playerGhostConstroller = new PlayerGhostController();
+        playerGhostController = new PlayerGhostController();
         InitializeAttackCollider();
     }
 
@@ -137,7 +132,10 @@ public class Player : DirectionalGameObject
 
     public void SetAnimTrigger(string trigger) { _animator.SetTrigger(trigger); }
 
-    public void SetInvincibility(bool isInvin) { isInvincibility = isInvin; }
+    public void SetInvincibility(bool isInvin)
+    {
+        isInvincibility = isInvin;
+    }
 
     public void PlayerAddForce(Vector2 force, int dir) { _rigidbody.AddForce(force * (int)objectDirection * dir, ForceMode2D.Impulse); }
 
@@ -204,6 +202,7 @@ public class Player : DirectionalGameObject
             Down();
             Skill();
         }
+        FixedSkillUpdate();
         CheckGround();
     }
 
@@ -280,7 +279,7 @@ public class Player : DirectionalGameObject
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
-            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
+            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpPower, ForceMode2D.Impulse);
 
             jumpDeltaTimer = jumpTimer;
         }
@@ -314,7 +313,7 @@ public class Player : DirectionalGameObject
                 if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base)) break;
             }
 
-            playerGhostConstroller.TryMakeGhost(dir);
+            playerGhostController.TryMakeGhost(dir);
 
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
             moveCount++;
@@ -336,6 +335,12 @@ public class Player : DirectionalGameObject
     {
         foreach (var skill in skillList) skill.CheckInputKeyCode();
     }
+
+    private void FixedSkillUpdate()
+    {
+        foreach (var skill in skillList) skill.CheckFixedInputKeyCode();
+    }
+
 
     public float GetSkillCoolTime(SkillName skillName)
     {
@@ -434,6 +439,7 @@ public class Player : DirectionalGameObject
 
     public void GetDamaged(int monsterAtk, Direction direction)
     {
+        DebugConsole.Log("Player Get Damaged with invincibility: " + isInvincibility);
         if (isInvincibility || status == PlayerStatus.Dead) return;
 
         int dmg = monsterAtk - GetFinalStat(StatKind.Def);
@@ -476,9 +482,11 @@ public class Player : DirectionalGameObject
 
     private IEnumerator Invincibility(float timer)
     {
-        isInvincibility = true;
+        SetInvincibility(true);
+        DebugConsole.Log("Play Player Invincibility");
         yield return new WaitForSeconds(timer);
-        isInvincibility = false;
+        SetInvincibility(false);
+        DebugConsole.Log("Stop Player Invincibility");
     }
 
     public bool CheckFullEquipTrait()

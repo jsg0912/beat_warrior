@@ -46,7 +46,14 @@ public class Dash : ActiveSkillPlayer
         Vector2 endPoint = targetMonster.GetComponent<Monster>().GetBottomPos();
 
         Vector2 direction = (endPoint - playerBottom).normalized;
-        endPoint += new Vector2(PlayerSkillConstant.DashEndPointInterval * direction.x, PlayerSkillConstant.DashEndYOffset);
+        if (endPoint.x < playerBottom.x)
+        {
+            endPoint += new Vector2(-PlayerSkillConstant.DashEndPointInterval, 0);
+        }
+        else
+        {
+            endPoint += new Vector2(PlayerSkillConstant.DashEndPointInterval, 0);
+        }
 
         Player.Instance.Dashing(endPoint, true, true);
         StartDealTrigger(playerBottom, endPoint, direction);

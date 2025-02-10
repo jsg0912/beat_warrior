@@ -6,9 +6,11 @@ public class Inventory : SingletonObject<Inventory>
     private List<Item> items = new List<Item>();
     private static List<SkillName> mySkillList = new List<SkillName>();
 
-    public void initialize()
+    public void Initialize()
     {
         items.Clear();
+        mySkillList.Clear();
+        spirit.Initialize();
     }
 
     public void AddItem(Item item)
