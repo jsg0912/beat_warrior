@@ -14,19 +14,6 @@ public class AttackStrategyThrow : AttackStrategyCreate
         this.maxHeight = maxHeight;
     }
 
-    /*protected override IEnumerator UseSkill()
-    {
-        monster.SetStatus(MonsterStatus.Attack);
-        yield return new WaitForSeconds(attackStartDelay);
-
-        monster.PlayAnimation(MonsterStatus.Attack);
-        yield return new WaitForSeconds(attackActionInterval);
-        SetTargetPosition();
-        SkillMethod();
-
-        attackCoolTime = attackCoolTimeMax;
-    }*/
-
     private void SetTargetPosition()
     {
         targetPosition = GetPlayerPos();
@@ -35,6 +22,8 @@ public class AttackStrategyThrow : AttackStrategyCreate
     protected override void SkillMethod()
     {
         base.SkillMethod();
+
+        SetTargetPosition();
 
         Vector3 offset = new Vector3(MonsterConstant.ThrowObjectXOffset, 0, 0);
         obj.transform.position = monster.transform.position + offset;
