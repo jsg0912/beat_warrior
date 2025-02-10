@@ -54,14 +54,6 @@ public class Player : DirectionalGameObject
         }
     }
 
-    public void Update()
-    {
-        if (IsUsingSkill())
-        {
-            _rigidbody.velocity = Vector2.zero; // TODO: 기획에 따라 스킬 사용 중 멈추는 것이 바뀔 수 있음 - SDH, 20250106
-        }
-    }
-
     private static void CreatePlayer()
     {
         GameObject player;
@@ -85,6 +77,9 @@ public class Player : DirectionalGameObject
             new Skill1(gameObject),
             new Skill2(gameObject)
         };
+
+        traitList.Clear();
+        Inventory.Instance.Initialize();
 
         _collider = GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -204,6 +199,7 @@ public class Player : DirectionalGameObject
             Down();
             Skill();
         }
+        FixedSkillUpdate();
         CheckGround();
     }
 
@@ -336,6 +332,12 @@ public class Player : DirectionalGameObject
     {
         foreach (var skill in skillList) skill.CheckInputKeyCode();
     }
+
+    private void FixedSkillUpdate()
+    {
+        foreach (var skill in skillList) skill.CheckFixedInputKeyCode();
+    }
+
 
     public float GetSkillCoolTime(SkillName skillName)
     {

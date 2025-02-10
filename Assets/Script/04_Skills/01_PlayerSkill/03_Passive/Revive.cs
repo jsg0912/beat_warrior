@@ -42,11 +42,13 @@ public class Revive : PassiveSkill
         player.transform.DOMoveY(player.transform.position.y + 1.0f, 2.0f).SetEase(Ease.InSine);
         Vector3 position = player.transform.position + new Vector3(0, 2, 0);
         GameObject effect = GameObject.Instantiate(reviveEffect, position, Quaternion.identity);
-        GameObject.Destroy(effect, PlayerSkillConstant.reviveDuration);
+        player.SetGravityScale(false);
+        GameObject.Destroy(effect, PlayerSkillConstant.reviveEffectDuration);
     }
 
     public void ReviveFunctionAfter()
     {
         player.ForceSetCurrentHp(ReviveHP);
+        player.SetGravityScale(true);
     }
 }
