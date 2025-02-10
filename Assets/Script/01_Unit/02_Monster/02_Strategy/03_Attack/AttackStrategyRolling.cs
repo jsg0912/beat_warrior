@@ -25,6 +25,14 @@ public class AttackStrategyRolling : AttackStrategy
             .SetEase(Ease.InSine);
         monster.transform.DOMoveY(target.y, duration)
             .SetEase(Ease.OutSine);
+
+        monoBehaviour.StartCoroutine(RollingCoroutine());
+    }
+
+    protected IEnumerator RollingCoroutine()
+    {
+        yield return new WaitForSeconds(duration + 0.1f);
+        monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
     }
 
     private void SetBeforeSkill()
@@ -42,5 +50,7 @@ public class AttackStrategyRolling : AttackStrategy
         monster.SetIsTackleAble(false);
         monster.SetIsKnockBackAble(true);
         monster.spriteRenderer.transform.DORotate(Vector3.zero, 0.1f);
+
+        monster.SetAnimationBool(MonsterStatus.Groggy, true);
     }
 }

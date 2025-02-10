@@ -19,5 +19,6 @@ public class GroggyStrategyZeroDef : GroggyStrategy
         monster.SetBuffMultiply(StatKind.Def, -1);
         yield return new WaitForSeconds(groggyTime);
         monster.ResetBuffMultiply(StatKind.Def);
+        monster.SetAnimationBool(MonsterStatus.Groggy, false);
     }
 }

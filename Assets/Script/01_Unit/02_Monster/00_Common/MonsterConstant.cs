@@ -6,6 +6,7 @@ public class MonsterConstant
     public const string attackAnimTrigger = "Attack";
     public const string attackEndAnimTrigger = "AttackEnd";
     public const string repeatAttackBool = "RepeatAttack";
+    public const string groggyBool = "Groggy";
     public const string turnAnimTrigger = "Turn";
     public const string hurtAnimTrigger = "Hurt";
     public const string dieAnimTrigger = "Die";

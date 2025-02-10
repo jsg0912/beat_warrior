@@ -28,14 +28,13 @@ public abstract class Pattern
         {
             Recognize?.PlayStrategy();
             MoveBasic?.PlayStrategy();
+            return;
         }
-        else
+
+        Recognize?.PlayStrategy();
+        if (Attack?.PlayStrategy() == false)
         {
-            Recognize?.PlayStrategy();
-            if (Attack?.PlayStrategy() == false)
-            {
-                MoveChase?.PlayStrategy();
-            }
+            MoveChase?.PlayStrategy();
         }
     }
 

@@ -75,6 +75,16 @@ public class Monster : DirectionalGameObject
         }
     }
 
+    public void SetAnimationBool(MonsterStatus status, bool value)
+    {
+        switch (status)
+        {
+            case MonsterStatus.Groggy:
+                _animator.SetBool(MonsterConstant.groggyBool, value);
+                break;
+        }
+    }
+
     public void PlayAnimation(string trigger)
     {
         if (isFixedAnimation) return;

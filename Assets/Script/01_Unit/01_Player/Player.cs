@@ -201,8 +201,7 @@ public class Player : DirectionalGameObject
         Vector3 dir = Vector3.right * movingDirection;
 
         RaycastHit2D rayHit = Physics2D.Raycast(start, dir, 0.05f, LayerMask.GetMask(LayerConstant.Tile));
-        Debug.DrawLine(start, start + dir * 0.05f, Color.red);
-        Debug.Log(rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base));
+        //Debug.DrawLine(start, start + dir * 0.05f, Color.red);
         return rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base);
     }
 
