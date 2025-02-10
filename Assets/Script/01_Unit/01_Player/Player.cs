@@ -502,10 +502,8 @@ public class Player : DirectionalGameObject
     private IEnumerator Invincibility(float timer)
     {
         SetInvincibility(true);
-        DebugConsole.Log("Play Player Invincibility");
         yield return new WaitForSeconds(timer);
         SetInvincibility(false);
-        DebugConsole.Log("Stop Player Invincibility");
     }
 
     public bool CheckFullEquipTrait()
