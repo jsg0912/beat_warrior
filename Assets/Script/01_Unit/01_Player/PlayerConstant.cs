@@ -28,7 +28,6 @@ public class PlayerConstant
     public const string reviveAnimTrigger = "revive";
     public const string attackRAnimTrigger = "attackR";
     public const string attackLAnimTrigger = "attackL";
-    public const string markAnimTrigger = "mark";
     public const string dashAnimTrigger = "dash";
     public const string hurtAnimTrigger = "hurt";
     public const string skill1AnimTrigger = "skill1";
