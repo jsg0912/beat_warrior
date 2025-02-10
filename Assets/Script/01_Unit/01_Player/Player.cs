@@ -489,7 +489,7 @@ public class Player : DirectionalGameObject
         SetStatus(PlayerStatus.Unmovable);
 
         if (direction == objectDirection) FlipDirection();
-        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), (int)direction);
+        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), -1);
         StartCoroutine(KnockBacked(PlayerConstant.knockBackedStunTime));
     }
 
