@@ -43,6 +43,7 @@ public class Revive : PassiveSkill
         Vector3 position = player.transform.position + new Vector3(0, 2, 0);
         GameObject effect = GameObject.Instantiate(reviveEffect, position, Quaternion.identity);
         player.SetGravityScale(false);
+        player.SetInvincibility(true);
         GameObject.Destroy(effect, PlayerSkillConstant.reviveEffectDuration);
     }
 
@@ -50,5 +51,6 @@ public class Revive : PassiveSkill
     {
         player.ForceSetCurrentHp(ReviveHP);
         player.SetGravityScale(true);
+        player.SetInvincibility(false);
     }
 }
