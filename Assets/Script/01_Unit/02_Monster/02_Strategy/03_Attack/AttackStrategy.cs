@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public abstract class AttackStrategy : Strategy
@@ -39,13 +38,13 @@ public abstract class AttackStrategy : Strategy
     {
         if (attackCoolTime > 0) return false;
 
+        SetAttackDirection();
         monster.PlayAnimation(MonsterStatus.Attack);
         return true;
     }
 
     public virtual void AttackStart()
     {
-        SetAttackDirection();
         SkillMethod();
         Debug.Log(monster.monsterName + "attackstart");
     }
@@ -66,6 +65,6 @@ public abstract class AttackStrategy : Strategy
     public void SetAttackDirection()
     {
         attackDirection = monster.GetRelativeDirectionToPlayer();
-        if (attackDirection != monster.GetMovingDirection()) monster.FlipDirection();
+        monster.SetMovingDirection(attackDirection);
     }
 }
