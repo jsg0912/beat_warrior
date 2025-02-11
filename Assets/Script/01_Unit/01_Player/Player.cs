@@ -24,12 +24,12 @@ public class Player : DirectionalGameObject
         get { return _status; }
         set
         {
-            if (GetCurrentStat(StatKind.HP) <= 0 && value != PlayerStatus.Dead) return;
+            if (Hp <= 0 && value != PlayerStatus.Dead) return;
             else _status = value;
         }
     }
 
-    public int Hp => playerUnit.unitStat.GetCurrentStat(StatKind.HP);
+    public int Hp => GetCurrentStat(StatKind.HP);
 
     private bool isGround;
     private float jumpDeltaTimer;
@@ -115,6 +115,7 @@ public class Player : DirectionalGameObject
     public void SetStatus(PlayerStatus status)
     {
         this.status = status;
+        PlayerUIManager.Instance?.SetPlayerFace(status);
 
         switch (status)
         {
@@ -145,10 +146,25 @@ public class Player : DirectionalGameObject
         PlayerHpUIController.Instance?.UpdateHPUI();
     }
 
-    public bool ChangeCurrentHP(int hp)
+    public bool ChangeCurrentHP(int change)
     {
-        bool isAlive = playerUnit.ChangeCurrentHP(hp);
+        bool isAlive = playerUnit.ChangeCurrentHP(change);
         PlayerHpUIController.Instance?.UpdateHPUI();
+        if (PlayerUIManager.Instance != null)
+        {
+            if (change > 0)
+            {
+                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Rest);
+            }
+            else if (Hp == 1)
+            {
+                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Hurt);
+            }
+            else
+            {
+                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Normal);
+            }
+        }
         return isAlive;
     }
 
