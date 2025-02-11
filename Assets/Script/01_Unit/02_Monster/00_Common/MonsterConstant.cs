@@ -35,6 +35,24 @@ public class MonsterConstant
     public const float WallCheckRayDistance = 0.1f;
     public const float GroundCheckRayDistance = 0.1f;
 
+    public static Dictionary<MonsterName, float> RecognizeRange = new() {
+        { MonsterName.Ippali, 5.0f },
+        { MonsterName.Ibkkugi, 10.0f },
+        { MonsterName.Koppulso, 10.0f },
+        { MonsterName.Dulduli, 7.0f },
+        { MonsterName.Giljjugi, 7.0f },
+        { MonsterName.Itmomi, 10.0f }
+    };
+
+    public static Dictionary<MonsterName, float> AttackRange = new() {
+        { MonsterName.Ippali, 1.0f },
+        { MonsterName.Ibkkugi, 9.0f },
+        { MonsterName.Koppulso, 10.0f },
+        { MonsterName.Dulduli, 7.0f },
+        { MonsterName.Giljjugi, 6.0f },
+        { MonsterName.Itmomi, 9.0f }
+    };
+
     private static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
         { MonsterName.Ippali, 2.0f },
         { MonsterName.Ibkkugi, 1.0f },
