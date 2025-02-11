@@ -12,26 +12,35 @@ public class PlayerFaceController : MonoBehaviour
 
     public void SetIdleFace()
     {
-        if (Random.Range(0, 100) == 0) faceImage.sprite = beautyFace;
-        else faceImage.sprite = idleFace;
-
+        if (faceImage.sprite != idleFace)
+            faceImage.sprite = idleFace;
     }
 
     public void SetHurtFace()
     {
-        DebugConsole.Log("SetHurtFace");
-        faceImage.sprite = hurtFace;
+        if (faceImage.sprite != hurtFace)
+            faceImage.sprite = hurtFace;
     }
 
     public void SetHappyFace()
     {
-        DebugConsole.Log("SetHappyFace");
-        faceImage.sprite = happyFace;
+        if (Random.Range(0, 10) == 0) SetBeautyFace();
+        else
+        {
+            if (faceImage.sprite != happyFace)
+                faceImage.sprite = happyFace;
+        }
+    }
+
+    public void SetBeautyFace()
+    {
+        if (faceImage.sprite != beautyFace)
+            faceImage.sprite = beautyFace;
     }
 
     public void SetCrazyFace()
     {
-        DebugConsole.Log("SetCrazyFace");
-        faceImage.sprite = crazyFace;
+        if (faceImage.sprite != crazyFace)
+            faceImage.sprite = crazyFace;
     }
 }

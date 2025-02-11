@@ -115,7 +115,7 @@ public class Player : DirectionalGameObject
     public void SetStatus(PlayerStatus status)
     {
         this.status = status;
-        PlayerUIManager.Instance?.SetPlayerFace(status);
+        PlayerUIManager.Instance?.SetPlayerFace(status, Hp);
 
         switch (status)
         {
@@ -150,21 +150,7 @@ public class Player : DirectionalGameObject
     {
         bool isAlive = playerUnit.ChangeCurrentHP(change);
         PlayerHpUIController.Instance?.UpdateHPUI();
-        if (PlayerUIManager.Instance != null)
-        {
-            if (change > 0)
-            {
-                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Rest);
-            }
-            else if (Hp == 1)
-            {
-                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Hurt);
-            }
-            else
-            {
-                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Normal);
-            }
-        }
+        PlayerUIManager.Instance?.SetPlayerFace(status, Hp);
         return isAlive;
     }
 
@@ -455,7 +441,6 @@ public class Player : DirectionalGameObject
 
     public void GetDamaged(int monsterAtk, Direction direction)
     {
-        DebugConsole.Log("Player Get Damaged with invincibility: " + isInvincibility);
         if (isInvincibility || status == PlayerStatus.Dead) return;
 
         int dmg = monsterAtk - GetFinalStat(StatKind.Def);
@@ -499,10 +484,8 @@ public class Player : DirectionalGameObject
     private IEnumerator Invincibility(float timer)
     {
         SetInvincibility(true);
-        DebugConsole.Log("Play Player Invincibility");
         yield return new WaitForSeconds(timer);
         SetInvincibility(false);
-        DebugConsole.Log("Stop Player Invincibility");
     }
 
     public bool CheckFullEquipTrait()

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class StageController
 {
     public int monsterCount { get; private set; }
