@@ -31,22 +31,13 @@ public class PlayerUIManager : MonoBehaviour
         Util.SetActive(SkillCoolTimeUIDash.gameObject, !isMarkOn);
     }
 
-    public void SetPlayerFace(PlayerStatus playerStatus)
+    public void SetPlayerFace(PlayerStatus playerStatus, int hp)
     {
-        switch (playerStatus)
+        if (playerStatus == PlayerStatus.Happy) playerFaceController.SetHappyFace(); // Stage Clear is the most valuable face
+        else
         {
-            case PlayerStatus.Stun:
-                playerFaceController.SetCrazyFace();
-                break;
-            case PlayerStatus.Hurt:
-                playerFaceController.SetHurtFace();
-                break;
-            case PlayerStatus.Rest:
-                playerFaceController.SetHappyFace();
-                break;
-            default:
-                playerFaceController.SetIdleFace();
-                break;
+            if (hp <= PlayerConstant.PlayerHurtFaceTriggerHp) playerFaceController.SetHurtFace();
+            else playerFaceController.SetIdleFace();
         }
     }
 }

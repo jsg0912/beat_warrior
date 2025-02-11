@@ -34,4 +34,5 @@ public class PlayerConstant
     public const string ESkillAnimTrigger = "eSkill";
 
     public const int MaxAdditionalSkillCount = 3;
+    public const int PlayerHurtFaceTriggerHp = 1;
 }
