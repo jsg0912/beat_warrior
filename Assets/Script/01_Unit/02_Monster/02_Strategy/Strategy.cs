@@ -36,9 +36,17 @@ public abstract class Strategy
         return rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base);
     }
 
-    protected bool CheckGround()
+    protected bool CheckEndOfGround()
     {
         RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterFrontPos() + new Vector3(0, 0.05f, 0), Vector3.down, MonsterConstant.GroundCheckRayDistance, GroundLayer);
+        //Debug.DrawLine(GetMonsterFrontPos(), GetMonsterFrontPos() + Vector3.down * MonsterConstant.GroundCheckRayDistance, Color.red);
+
+        return rayHit.collider == null;
+    }
+
+    protected bool CheckGround()
+    {
+        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterPos() + new Vector3(0, 0.05f, 0), Vector3.down, MonsterConstant.GroundCheckRayDistance, GroundLayer);
         //Debug.DrawLine(GetMonsterFrontPos(), GetMonsterFrontPos() + Vector3.down * MonsterConstant.GroundCheckRayDistance, Color.red);
 
         return rayHit.collider != null;

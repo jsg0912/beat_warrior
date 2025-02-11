@@ -60,7 +60,7 @@ public class AttackStrategyRush : AttackStrategy
 
         monster.SetMovingDirection(attackDirection);
 
-        if (CheckWall() || !CheckGround()) monoBehaviour.StartCoroutine(ChangeDir());
+        if (CheckWall() || CheckEndOfGround()) monoBehaviour.StartCoroutine(ChangeDir());
 
         monster.gameObject.transform.position += new Vector3((int)attackDirection * rushSpeed * Time.deltaTime, 0, 0);
     }

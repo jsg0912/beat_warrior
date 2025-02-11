@@ -30,7 +30,7 @@ public class MoveStrategyChase : MoveStrategy
 
     protected override bool IsMoveable()
     {
-        if (!CheckGround() || CheckWall() || Mathf.Abs(TargetPos().x - GetMonsterPos().x) < STOPOFFSET)
+        if (CheckWall() || CheckEndOfGround() || Mathf.Abs(TargetPos().x - GetMonsterPos().x) < STOPOFFSET)
         {
             return false;
         }
