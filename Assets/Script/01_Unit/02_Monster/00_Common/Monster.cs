@@ -58,6 +58,7 @@ public class Monster : DirectionalGameObject
 
     void Update()
     {
+        if (GetStatus() == MonsterStatus.Dead) return;
         pattern?.PlayPattern();
     }
 
