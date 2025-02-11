@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class SceneTagManager
+public class SceneTagManager : SingletonObject<SceneTagManager>
 {
     public static List<PoolTag> PoolTagDefault { get; } = new List<PoolTag> {
         PoolTag.EnemyMiniMapIcon,
@@ -12,8 +12,6 @@ public class SceneTagManager
         PoolTag.MiniMapIconDulduli,
         PoolTag.MiniMapIconItmomi
     };
-    private static SceneTagManager _instance;
-    public static SceneTagManager Instance => _instance ??= new SceneTagManager();
 
     private readonly Dictionary<string, List<PoolTag>> sceneTagRestrictions = new Dictionary<string, List<PoolTag>>();
 
