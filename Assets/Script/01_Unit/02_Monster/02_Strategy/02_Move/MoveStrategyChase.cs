@@ -13,7 +13,6 @@ public class MoveStrategyChase : MoveStrategy
 
     public override bool PlayStrategy()
     {
-        CheckGround();
         ChaseTarget();
 
         return base.PlayStrategy();

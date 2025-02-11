@@ -11,12 +11,4 @@ public class MoveStrategyNormal : MoveStrategyRandom
         // 초기 방향 랜덤 설정
         SetMovingDirection(Random.Range(0, 2) == 0 ? Direction.Right : Direction.Left);
     }
-
-    public override bool PlayStrategy()
-    {
-        base.PlayStrategy();
-
-        if (!CheckGround()) FlipDirection();
-        return true;
-    }
 }

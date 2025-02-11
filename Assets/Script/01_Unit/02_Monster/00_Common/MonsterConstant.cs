@@ -9,7 +9,7 @@ public class MonsterConstant
     public const string groggyBool = "Groggy";
     public const string turnAnimTrigger = "Turn";
     public const string hurtAnimTrigger = "Hurt";
-    public const string dieAnimTrigger = "Die";
+    public const string dieAnimBool = "Die";
 
     public const float moveSpeed = 1.0f;
 

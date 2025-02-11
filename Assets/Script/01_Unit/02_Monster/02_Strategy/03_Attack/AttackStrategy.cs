@@ -37,7 +37,7 @@ public abstract class AttackStrategy : Strategy
         attackCoolTime = attackCoolTimeMax;
     }
 
-    protected bool TrySkill()
+    protected virtual bool TrySkill()
     {
         if (attackCoolTime > 0) return false;
         if (!CheckTarget()) return false;
