@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Monster : DirectionalGameObject
@@ -9,6 +10,7 @@ public class Monster : DirectionalGameObject
     public Pattern pattern;
     public bool isChasing;
     public Timer timer;
+    [SerializeField] private List<GameObject> hitEffects = new List<GameObject>();
 
     [SerializeField] private MonsterStatus _status;
     [SerializeField]
@@ -38,6 +40,8 @@ public class Monster : DirectionalGameObject
     [SerializeField] public GameObject attackCollider;
     [SerializeField] private MonsterBodyCollider monsterBodyCollider;
 
+
+
     void Start()
     {
         isChasing = false;
@@ -59,6 +63,7 @@ public class Monster : DirectionalGameObject
 
     public void AttackStart() { pattern.AttackStartMethod(); }
     public void AttackEnd() { pattern.AttackEndMethod(); }
+
 
     // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
     public void PlayAnimation(MonsterStatus status)
@@ -149,6 +154,10 @@ public class Monster : DirectionalGameObject
     public virtual void GetDamaged(int dmg)
     {
         monsterUnit.ChangeCurrentHP(-dmg);
+        foreach (GameObject hitEffect in hitEffects)
+        {
+            StartCoroutine(Util.PlayInstantEffect(hitEffect, 0.5f));
+        }
 
         if (HpUI != null) HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
