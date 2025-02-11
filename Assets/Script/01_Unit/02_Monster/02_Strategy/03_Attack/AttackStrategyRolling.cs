@@ -15,11 +15,22 @@ public class AttackStrategyRolling : AttackStrategy
         this.duration = duration;
     }
 
-    protected override void SkillMethod()
+    protected override bool TrySkill()
+    {
+        if (attackCoolTime > 0) return false;
+        if (!CheckTarget()) return false;
+
+        SetAttackDirection();
+        monster.PlayAnimation(MonsterStatus.Attack);
+        JumpAnimation();
+
+        return true;
+    }
+
+    protected void JumpAnimation()
     {
         Vector3 target = Player.Instance.transform.position;
         target.y = monster.transform.position.y + jumpPower;
-        SetBeforeSkill();
 
         monster.transform.DOMoveX(target.x, duration)
             .SetEase(Ease.InSine);
@@ -29,9 +40,26 @@ public class AttackStrategyRolling : AttackStrategy
         monoBehaviour.StartCoroutine(RollingCoroutine());
     }
 
+    protected override void SkillMethod()
+    {
+        SetBeforeSkill();
+    }
+
     protected IEnumerator RollingCoroutine()
     {
-        yield return new WaitForSeconds(duration + 0.1f);
+        Rigidbody2D rb = monster.GetComponent<Rigidbody2D>();
+        float gravity = rb.gravityScale;
+
+        yield return new WaitForSeconds(duration);
+
+        rb.gravityScale = 0;
+        rb.velocity = Vector2.zero;
+
+        yield return new WaitForSeconds(1.0f);
+
+        rb.gravityScale = gravity;
+        rb.velocity = Vector2.down * gravity * 10;
+
         monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
     }
 
@@ -49,7 +77,6 @@ public class AttackStrategyRolling : AttackStrategy
         monster.SetIsFixedAnimation(false);
         monster.SetIsTackleAble(false);
         monster.SetIsKnockBackAble(true);
-        monster.spriteRenderer.transform.DORotate(Vector3.zero, 0.1f);
 
         monster.SetAnimationBool(MonsterStatus.Groggy, true);
     }

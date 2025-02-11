@@ -58,6 +58,7 @@ public class Monster : DirectionalGameObject
 
     void Update()
     {
+        if (GetStatus() == MonsterStatus.Dead) return;
         pattern?.PlayPattern();
     }
 
@@ -75,7 +76,7 @@ public class Monster : DirectionalGameObject
                 PlayAnimation(MonsterConstant.attackAnimTrigger);
                 break;
             case MonsterStatus.Dead:
-                PlayAnimation(MonsterConstant.dieAnimTrigger);
+                SetAnimationBool(status, true);
                 break;
         }
     }
@@ -86,6 +87,9 @@ public class Monster : DirectionalGameObject
         {
             case MonsterStatus.Groggy:
                 _animator.SetBool(MonsterConstant.groggyBool, value);
+                break;
+            case MonsterStatus.Dead:
+                _animator.SetBool(MonsterConstant.dieAnimBool, value);
                 break;
         }
     }
