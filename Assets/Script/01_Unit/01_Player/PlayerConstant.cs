@@ -35,4 +35,5 @@ public class PlayerConstant
     public const string skill2AnimTrigger = "skill2";
 
     public const int MaxAdditionalSkillCount = 3;
+    public const int PlayerHurtFaceTriggerHp = 1;
 }
