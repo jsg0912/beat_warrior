@@ -10,13 +10,9 @@ public class MonsterAnimatorController : StateMachineBehaviour
 
         if (stateInfo.IsName(MonsterAnimation.Idle) || stateInfo.IsName(MonsterAnimation.Walk)) monster.SetStatus(MonsterStatus.Normal);
         else if (stateInfo.IsName(MonsterAnimation.Charge)) monster.SetStatus(MonsterStatus.Attack);
+        else if (stateInfo.IsName(MonsterAnimation.Attack)) monster.AttackStart();
         else if (stateInfo.IsName(MonsterAnimation.AttackEnd)) monster.AttackEnd();
         else if (stateInfo.IsName(MonsterAnimation.Groggy)) monster.SetStatus(MonsterStatus.Groggy);
         else if (stateInfo.IsName(MonsterAnimation.Die)) monster.SetStatus(MonsterStatus.Dead);
-    }
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if (stateInfo.IsName(MonsterAnimation.Charge)) monster.AttackStart();
     }
 }
