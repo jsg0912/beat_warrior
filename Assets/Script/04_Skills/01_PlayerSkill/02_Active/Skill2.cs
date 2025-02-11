@@ -6,21 +6,25 @@ public class Skill2 : ActiveSkillPlayer
 
     public Skill2(GameObject unit) : base(unit)
     {
-        skillName = SkillName.Skill2;
-        status = PlayerStatus.Skill2;
+        trigger = new() { PlayerConstant.skill2AnimTrigger };
 
         damageMultiplier = PlayerSkillConstant.skill2Atk;
         dashRange = PlayerSkillConstant.skill2DashRange;
 
-        coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
-        coolTime = 0;
-
         EffectPrefab = Resources.Load(PrefabRouter.Skill2Prefab) as GameObject;
     }
+
+    protected override void SetSkillName() { skillName = SkillName.Skill2; }
 
     protected override void UpdateKey()
     {
         keyCode = KeySetting.keys[PlayerAction.Skill2];
+    }
+
+    protected override void CreateEffectPrefab()
+    {
+        attackCollider = Player.Instance.colliderController.BodyAttackCollider;
+        base.CreateEffectPrefab();
     }
 
     protected override void SkillMethod()

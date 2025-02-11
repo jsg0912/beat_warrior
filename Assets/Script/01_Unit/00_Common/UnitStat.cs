@@ -95,4 +95,10 @@ public class UnitStat
 
         return currentStats[statKind];
     }
+
+    public int ForceSetCurrentStat(StatKind statKind, int value)
+    {
+        currentStats[statKind] = value;
+        return currentStats[statKind];
+    }
 }

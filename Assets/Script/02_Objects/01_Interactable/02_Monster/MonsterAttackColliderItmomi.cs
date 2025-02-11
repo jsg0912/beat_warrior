@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class MonsterAttackColliderItmomi : MonsterAttackCollider
@@ -23,6 +22,6 @@ public class MonsterAttackColliderItmomi : MonsterAttackCollider
     public override void OnTriggerEnter2D(Collider2D other)
     {
         GameObject obj = other.gameObject;
-        if (obj.CompareTag(TagConstant.Player)) Player.Instance.GetDamaged(damage);
+        if (obj.CompareTag(TagConstant.Player)) Player.Instance.GetDamaged(damage, GetRelativeDirectionToPlayer());
     }
 }

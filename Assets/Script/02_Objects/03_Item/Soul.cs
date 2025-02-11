@@ -4,12 +4,12 @@ public class Soul : Item
 
     public Soul()
     {
-        number = 100;
+        Initialize();
     }
 
     public void Initialize()
     {
-        number = 0;
+        number = ItemConstant.InitSoul;
     }
 
     public int Change(int gain)

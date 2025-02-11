@@ -97,7 +97,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 2
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -108,8 +108,8 @@ MonoBehaviour:
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 21300000, guid: 13ba2f12bdda1954789d1be7d942aacb, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 13ba2f12bdda1954789d1be7d942aacb, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -134,8 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7280a01cbafad6e449f60de9acc6dd96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  action: 0
   ActionText: {fileID: 0}
   KeyText: {fileID: 494816602596247039}
+  KeyImage: {fileID: 0}
 --- !u!1 &7367275155268418996
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +206,7 @@ MonoBehaviour:
   m_text: Button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 063e6884f01b491458a5107fe60c6734, type: 2}
-  m_sharedMaterial: {fileID: 8636329904973778454, guid: 063e6884f01b491458a5107fe60c6734, type: 2}
+  m_sharedMaterial: {fileID: -6227483819004387357, guid: 063e6884f01b491458a5107fe60c6734, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

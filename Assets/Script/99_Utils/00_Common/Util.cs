@@ -1,11 +1,17 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class Util
 {
     public static T ParseEnumFromString<T>(string value)
     {
         return (T)Enum.Parse(typeof(T), value);
+    }
+
+    public static bool SetActive(Button button, bool isOn)
+    {
+        return SetActive(button.gameObject, isOn);
     }
 
     public static bool SetActive(GameObject gameObject, bool isOn)
@@ -101,6 +107,19 @@ public static class Util
         FlipLocalScaleX(gameObject.transform);
     }
 
+    public static void FlipLocalScaleX(PolygonCollider2D polygonCollider)
+    {
+        if (polygonCollider != null)
+        {
+            Vector2[] points = polygonCollider.points;
+            for (int i = 0; i < points.Length; i++)
+            {
+                points[i].x = -points[i].x;
+            }
+            polygonCollider.points = points;
+        }
+    }
+
     public static void FlipLocalScaleX(Transform transform)
     {
         Vector3 scale = transform.localScale;
@@ -160,5 +179,18 @@ public static class Util
         Vector3 mousePosition = Input.mousePosition;
         mousePosition.z = Mathf.Abs(Camera.main.transform.position.z);
         return Camera.main.ScreenToWorldPoint(mousePosition); ;
+    }
+
+    public static bool IsEditor => Application.isEditor;
+
+    public static bool IsRootGameObject(GameObject gameObject)
+    {
+        return gameObject.transform.parent == null;
+    }
+
+    public static bool IsStoppedSpeed(float speed)
+    {
+        // Speed can be not exact zero, just check it is close to zero, - SDH, 20250208
+        return -1e-4f <= speed && speed <= 1e4f;
     }
 }

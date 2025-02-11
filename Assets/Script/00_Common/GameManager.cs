@@ -1,46 +1,23 @@
 using System;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonObject<GameManager>
 {
-    private static GameManager _instance;
     private Language language = Language.kr;
     public Language Language => language;
-    public Texture2D cursorIcon;
     public bool IsLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();
     public SceneName currentScene;
+    public bool isInGame { get; private set; }
 
-    public static GameManager Instance
+    protected override void Awake()
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<GameManager>();
-                if (_instance == null)
-                {
-                    GameObject go = new GameObject("GameManager");
-                    _instance = go.AddComponent<GameManager>();
-                    DontDestroyOnLoad(go);
-                }
-            }
-            return _instance;
-        }
-    }
-
-    public bool isInGame = false;
-
-    public void Awake()
-    {
+        base.Awake();
         // ValidationChecker.Check();
-        DontDestroyOnLoad(this);
     }
 
     public void Start()
     {
-        SetMouseCursor();
-        isInGame = false;
+        SetIsInGame(false);
         Enum.TryParse(SceneManager.GetActiveScene().name, true, out currentScene);
     }
 
@@ -49,21 +26,43 @@ public class GameManager : MonoBehaviour
         this.language = language;
     }
 
-    private void SetMouseCursor()
+    public void SetDefaultCursor()
     {
-        if (cursorIcon != null) Cursor.SetCursor(cursorIcon, Vector2.zero, CursorMode.Auto);
+        if (isInGame)
+        {
+            CursorController.Instance.SetInGameCursor();
+        }
+        else
+        {
+            CursorController.Instance.SetTitleCursor();
+        }
     }
 
     public void StartGame()
     {
-        isInGame = true;
-        InGameManager.TryCreateInGameManager();
+        SetIsInGame(true);
+        PauseController.Instance.ResetSpeed();
+        InGameManager.TryCreateSingletonObject();
         ChapterManager.Instance.StartNewGame();
+        Player.TryCreatePlayer();
     }
 
     public void RestartGame()
     {
         StartGame();
         Player.Instance.RestartPlayer();
+    }
+
+    public void QuitInGame()
+    {
+        SetIsInGame(false);
+        Destroy(InGameManager.Instance.gameObject);
+        // TODO: Save Game
+    }
+
+    public void SetIsInGame(bool isInGame)
+    {
+        this.isInGame = isInGame;
+        SetDefaultCursor();
     }
 }

@@ -7,10 +7,15 @@ public class AttackCollider : MonoBehaviour
     protected List<GameObject> TargetMonster = new();
     public List<AdditionalEffect> additionalEffects = new();
 
+    public void ResetTargetMonster()
+    {
+        TargetMonster.Clear();
+    }
+
     void OnDisable()
     {
         additionalEffects.Clear();
-        TargetMonster.Clear();
+        ResetTargetMonster();
     }
 
     public void SetAtk(int atk)
@@ -24,7 +29,18 @@ public class AttackCollider : MonoBehaviour
         {
             additionalEffects = new List<AdditionalEffect>();
         }
-        additionalEffects.Add(additionalEffect);
+
+        if (additionalEffect.canDuplicate)
+        {
+            additionalEffects.Add(additionalEffect);
+        }
+        else
+        {
+            if (!additionalEffects.Exists(alreadyExist => alreadyExist.additionalEffectName == additionalEffect.additionalEffectName))
+            {
+                additionalEffects.Add(additionalEffect);
+            }
+        }
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

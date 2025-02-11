@@ -15,5 +15,6 @@ public enum SkillName
     AppendAttack,
     // CounterAttack,
     KillRecoveryHP,
+    Revive,
     End
 }

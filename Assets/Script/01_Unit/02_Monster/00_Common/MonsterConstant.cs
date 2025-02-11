@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
 
 public class MonsterConstant
 {
@@ -7,9 +6,8 @@ public class MonsterConstant
     public const string attackChargeAnimTrigger = "charge";
     public const string attackAnimTrigger = "attack";
     public const string attackEndAnimTrigger = "attack end";
-
+    public const string endMotionBool = "has attack end";
     public const string turnAnimTrigger = "turn";
-
     public const string hurtAnimTrigger = "hurt";
     public const string dieAnimTrigger = "die";
 
@@ -21,22 +19,24 @@ public class MonsterConstant
     public const float ThrowObjectXOffset = -0.5f;
 
     // Ibkkugi
-    public const float IbkkugiThrowSpeed = 3f;
-    public const float IbkkugiMaxHeight = 1.5f;
+    public const float IbkkugiThrowSpeed = 6f;
+    public const float IbkkugiMaxHeight = 7f;
 
     // Dulduli
-    public const float DulduliThrowSpeed = 3f;
-    public const float DulduliMaxHeight = 1f;
+    public const float DulduliJumpPower = 5f;
+    public const int DulduliJumpNumber = 1;
+    public const float DulduliJumpDuration = 0.7f;
+    public const float DulduliGroggyDuration = 2.0f;
 
     // Koppulso
     public const float KoppulsoRushSpeed = 10.0f;
-    public const float KoppulsoRushDuration = 10.0f;
+    public const float KoppulsoRushDuration = 4.0f;
 
     public const float WallCheckRayDistance = 0.1f;
     public const float GroundCheckRayDistance = 0.1f;
 
     private static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
-        { MonsterName.Ippali, 1.1f },
+        { MonsterName.Ippali, 2.0f },
         { MonsterName.Ibkkugi, 1.0f },
         { MonsterName.Koppulso, 1.6f },
         { MonsterName.Dulduli, 0.4f },
@@ -55,11 +55,11 @@ public class MonsterConstant
 
     public static Dictionary<MonsterName, float> AttackSpeed = new() {
         { MonsterName.Ippali, 2.0f },
-        { MonsterName.Ibkkugi, 2.8f },
-        { MonsterName.Koppulso, 7.0f },
-        { MonsterName.Dulduli, 4.0f },
-        { MonsterName.Giljjugi, 7.0f },
-        { MonsterName.Itmomi, 5.0f }
+        { MonsterName.Ibkkugi, 2.2f },
+        { MonsterName.Koppulso, 6.0f },
+        { MonsterName.Dulduli, 3.0f },
+        { MonsterName.Giljjugi, 6.0f },
+        { MonsterName.Itmomi, 3.5f }
     };
 
     public static Dictionary<MonsterName, float> AttackThrowSpeed = new() {
@@ -68,20 +68,30 @@ public class MonsterConstant
     };
 
     public static Dictionary<MonsterName, float> AttackStartDelays = new() {
-        { MonsterName.Ippali, 1.0f },
-        { MonsterName.Ibkkugi, 0.5f },
+        { MonsterName.Ippali, 0.7f },
+        { MonsterName.Ibkkugi, 1.0f },
         { MonsterName.Koppulso, 0.5f },
         { MonsterName.Dulduli, 0.5f },
         { MonsterName.Giljjugi, 0.5f },
         { MonsterName.Itmomi, 0.5f }
     };
 
+    // TODO: 김민지가 MonsterAnimatorController 기능으로 추가하면 아래 값 안쓰면서 삭제해야함 
     public static Dictionary<MonsterName, float> AttackActionIntervals = new() {
         { MonsterName.Ippali, 0.5f },
-        { MonsterName.Ibkkugi, 0.8f },
+        { MonsterName.Ibkkugi, 1.0f },
         { MonsterName.Koppulso, 2f },
-        { MonsterName.Dulduli, 0.5f },
-        { MonsterName.Giljjugi, 2.3f },
-        { MonsterName.Itmomi, 0.5f }
+        { MonsterName.Dulduli, 0.4f },
+        { MonsterName.Giljjugi, 1.133f },
+        { MonsterName.Itmomi, 0.33f }
+    };
+
+    public static Dictionary<MonsterName, bool> HasEndMotion = new() {
+        { MonsterName.Ippali, false },
+        { MonsterName.Ibkkugi, false },
+        { MonsterName.Koppulso, true },
+        { MonsterName.Dulduli, true },
+        { MonsterName.Giljjugi, false },
+        { MonsterName.Itmomi, false }
     };
 }

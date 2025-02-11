@@ -8,4 +8,5 @@ public abstract class MonsterAttackCollider : PhysicalObject
     public virtual void Initiate() { }
     public void SetMonsterAtk(int damage) { this.damage = damage; }
     public abstract void OnTriggerEnter2D(Collider2D other);
+    protected Direction GetRelativeDirectionToPlayer() { return Player.Instance.GetBottomPos().x > transform.position.x ? Direction.Right : Direction.Left; }
 }

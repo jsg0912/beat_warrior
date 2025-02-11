@@ -7,15 +7,19 @@ public abstract class Skill
     protected GameObject unit;
     protected MonoBehaviour monoBehaviour;
 
-    public SkillName skillName;
+    public SkillName skillName
+    {
+        get;
+        protected set;
+    }
     public string description;
     public SkillTier tier => TraitTierList.GetTier(skillName);
 
     public List<AdditionalEffect> additionalEffects = new();
 
     // CoolTime
-    protected float coolTimeMax;
-    protected float coolTime;
+    protected Timer coolTimer;
+    public float coolTime => countCoolTime == null ? 0 : coolTimer.remainTime;
     protected Coroutine countCoolTime;
 
     // Damage
@@ -28,16 +32,17 @@ public abstract class Skill
         this.unit = unit;
         this.description = description;
         monoBehaviour = unit.GetComponent<MonoBehaviour>();
+        SetSkillName();
+
+        if (PlayerSkillConstant.SkillCoolTime.ContainsKey(skillName)) coolTimer = new Timer(PlayerSkillConstant.SkillCoolTime[skillName]);
     }
+
+    // You muse set the SkillName and Status!!
+    protected abstract void SetSkillName();
 
     public virtual void GetSkill() { return; }
 
     public virtual void RemoveSkill() { return; }
-
-    public float GetCoolTime()
-    {
-        return coolTime;
-    }
 
     public void StartCountCoolTime()
     {
@@ -46,21 +51,17 @@ public abstract class Skill
 
     protected virtual IEnumerator CountCoolTime()
     {
-        coolTime = coolTimeMax;
-
-        while (coolTime > 0)
+        coolTimer.Initialize();
+        while (coolTimer.Tick())
         {
-            coolTime -= Time.deltaTime;
             yield return null;
         }
-
-        coolTime = 0;
     }
 
     public virtual void ResetCoolTime()
     {
         if (countCoolTime != null) monoBehaviour.StopCoroutine(countCoolTime);
-        coolTime = 0;
+        coolTimer.SetRemainTimeZero();
     }
 
     protected virtual void CreateEffectPrefab() { return; } // [Code Review - KMJ] Check the Necessity and "virtual" - SDH, 20240106

@@ -9,6 +9,7 @@ public class Player : DirectionalGameObject
 {
     public static Player Instance;
     public Unit playerUnit;
+    public Sprite sprite => spriteRenderer.sprite;
     private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
@@ -16,27 +17,37 @@ public class Player : DirectionalGameObject
     private List<Skill> traitList = new();
 
     public ColliderController colliderController;
-    [SerializeField] private PlayerStatus status;
+    [SerializeField] private PlayerStatus _status;
+    [SerializeField]
+    private PlayerStatus status // 수정 필요하면 SDH에게 문의 - SDH, 20250202
+    {
+        get { return _status; }
+        set
+        {
+            if (Hp <= 0 && value != PlayerStatus.Dead) return;
+            else _status = value;
+        }
+    }
+
+    public int Hp => GetCurrentStat(StatKind.HP);
 
     private bool isGround;
     private float jumpDeltaTimer;
     private float jumpTimer;
-    private bool isInvincibility;
-    private BoxCollider2D tileCollider;
+    [SerializeField] private bool isInvincibility;
+    private BoxCollider2D tileCollider; // [Code Review - KMJ] TODO: 이제 필요없으면 제거 or TileCollider를 왜 가지고 있는지 모르겠음 - SDH, 20250208
 
-    private GameObject targetInfo;
-
-    public delegate void HitMonsterFunc(Monster monster);
-    public delegate void UseSkillFunc(Skill skill);
+    public PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
+    public ReviveSkillFunc reviveSKillFuncList = null;
 
     public static void TryCreatePlayer()
     {
         if (Instance == null)
         {
             Instance = FindObjectOfType<Player>();
-            if (Instance == null && GameManager.Instance.isInGame == true)
+            if (Instance == null && GameManager.Instance.isInGame)
             {
                 CreatePlayer();
             }
@@ -56,12 +67,7 @@ public class Player : DirectionalGameObject
     private void Initialize(Direction direction = Direction.Left)
     {
         // TODO: Alternate real user nickname than "playerName" - SDH, 20241204
-        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(new Dictionary<StatKind, int>{
-            {StatKind.HP, PlayerConstant.hpMax},
-            {StatKind.ATK, PlayerConstant.atk},
-            {StatKind.JumpCount, PlayerConstant.jumpCountMax},
-            {StatKind.AttackCount, PlayerSkillConstant.attackCountMax}
-        }));
+        playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.defaultStat));
 
         skillList = new List<ActiveSkillPlayer>
         {
@@ -72,25 +78,30 @@ public class Player : DirectionalGameObject
             new Skill2(gameObject)
         };
 
+        traitList.Clear();
+        Inventory.Instance.Initialize();
+
         _collider = GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
-        SetPlayerStatus(PlayerStatus.Idle);
+        SetStatus(PlayerStatus.Normal);
 
         SetMovingDirection(direction);
         isGround = false;
         jumpDeltaTimer = 0;
         jumpTimer = 0.1f;
-        isInvincibility = false;
+        SetInvincibility(false);
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
+        playerGhostController = new PlayerGhostController();
+        InitializeAttackCollider();
     }
 
     public void RestartPlayer()
     {
         Initialize();
-        _animator.SetTrigger(PlayerConstant.restartAnimTrigger);
+        SetAnimTrigger(PlayerConstant.restartAnimTrigger);
         PlayerUIManager.Instance.Initialize();
     }
 
@@ -99,45 +110,19 @@ public class Player : DirectionalGameObject
     public SkillName[] GetTraits() { return traitList.Where(skill => skill.tier != SkillTier.Common).Select(trait => trait.skillName).ToArray(); }
     public int GetCurrentStat(StatKind statKind) { return playerUnit.unitStat.GetCurrentStat(statKind); }
     public int GetFinalStat(StatKind statKind) { return playerUnit.unitStat.GetFinalStat(statKind); }
-    public GameObject GetTargetInfo() { return targetInfo; }
 
     // SET Functions
-    public void SetPlayerStatus(PlayerStatus status)
+    public void SetStatus(PlayerStatus status)
     {
         this.status = status;
-
-        _animator.SetBool(PlayerConstant.runAnimBool, status == PlayerStatus.Run);
-        _animator.SetFloat("Speed", status == PlayerStatus.Run ? 1 : 0);
+        PlayerUIManager.Instance?.SetPlayerFace(status);
 
         switch (status)
         {
-            case PlayerStatus.Jump:
-                _animator.SetTrigger(PlayerConstant.jumpAnimTrigger);
-                break;
-            case PlayerStatus.Attack:
-                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.attackRAnimTrigger);
-                else _animator.SetTrigger(PlayerSkillConstant.attackLAnimTrigger);
-                break;
-            case PlayerStatus.Dash:
-                _animator.SetTrigger(PlayerSkillConstant.dashAnimTrigger);
-                break;
-            case PlayerStatus.Mark:
-                _animator.SetTrigger(PlayerSkillConstant.markAnimTrigger);
-                break;
-            case PlayerStatus.Skill1:
-                if (UnityEngine.Random.Range(0, 2) == 0) _animator.SetTrigger(PlayerSkillConstant.skill1RAnimTrigger);
-                else _animator.SetTrigger(PlayerSkillConstant.skill1LAnimTrigger);
-                break;
-            case PlayerStatus.Skill2:
-                _animator.SetTrigger(PlayerSkillConstant.skill2AnimTrigger);
-                break;
             case PlayerStatus.Dead:
-                KnockBacked();
-                _animator.SetTrigger(PlayerConstant.dieAnimTrigger);
+                SetAnimTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
-
-        if (IsUsingSkill() == true) StartCoroutine(UseSkill());
     }
 
     public void SetGravityScale(bool gravity)
@@ -146,25 +131,40 @@ public class Player : DirectionalGameObject
         if (!gravity) _rigidbody.velocity = Vector3.zero;
     }
 
-    public void SetPlayerAnimTrigger(string trigger)
-    {
-        _animator.SetTrigger(trigger);
-    }
+    public void SetAnimTrigger(string trigger) { _animator.SetTrigger(trigger); }
 
     public void SetInvincibility(bool isInvin)
     {
         isInvincibility = isInvin;
     }
 
-    public void PlayerAddForce(Vector2 force, int dir)
+    public void PlayerAddForce(Vector2 force, int dir) { _rigidbody.AddForce(force * (int)objectDirection * dir, ForceMode2D.Impulse); }
+
+    public void ForceSetCurrentHp(int hp)
     {
-        _rigidbody.AddForce(force * (int)objectDirection * dir, ForceMode2D.Impulse);
+        playerUnit.ForceSetCurrentHP(hp);
+        PlayerHpUIController.Instance?.UpdateHPUI();
     }
 
-    public bool ChangeCurrentHP(int hp)
+    public bool ChangeCurrentHP(int change)
     {
-        bool isAlive = playerUnit.ChangeCurrentHP(hp);
+        bool isAlive = playerUnit.ChangeCurrentHP(change);
         PlayerHpUIController.Instance?.UpdateHPUI();
+        if (PlayerUIManager.Instance != null)
+        {
+            if (change > 0)
+            {
+                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Rest);
+            }
+            else if (Hp == 1)
+            {
+                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Hurt);
+            }
+            else
+            {
+                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Normal);
+            }
+        }
         return isAlive;
     }
 
@@ -175,18 +175,16 @@ public class Player : DirectionalGameObject
         dash.SetTarget(obj);
     }
 
-    private void SetDead() { SetPlayerStatus(PlayerStatus.Dead); }
+    private void SetDead() { SetStatus(PlayerStatus.Dead); }
 
-    public void CheckResetSkills(GameObject obj)
+    public void TryResetSkillsByMarkKill(GameObject obj)
     {
         Dash dash = HaveSkill(SkillName.Dash) as Dash;
 
-        if (dash.GetTarget() != obj) return;
+        if (dash.targetMonster != obj) return;
 
-        foreach (ActiveSkillPlayer playerSkill in skillList)
-        {
-            playerSkill.ResetCoolTime();
-        }
+        foreach (SkillName skillName in PlayerSkillConstant.ResetSkillListByMarkKill)
+            HaveSkill(skillName).ResetCoolTime();
     }
 
     public void CheckIsMove()
@@ -207,31 +205,39 @@ public class Player : DirectionalGameObject
             isMove = true;
         }
 
-        if (!IsUsingSkill() && status != PlayerStatus.Jump) SetPlayerStatus(isMove ? PlayerStatus.Run : PlayerStatus.Idle);
+        _animator.SetFloat("Speed", isMove ? 1 : 0);
 
         if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
     public void CheckPlayerCommand()
     {
-        if (status != PlayerStatus.Dead)
+        if (IsActionAble())
         {
             Jump();
-            CheckGround();
             Down();
             Skill();
         }
+        FixedSkillUpdate();
+        CheckGround();
     }
+
     private bool IsMoveable()
     {
         switch (status)
         {
-            case PlayerStatus.Idle:
-            case PlayerStatus.Run:
-            case PlayerStatus.Jump:
-            case PlayerStatus.Mark:
-                // case PlayerStatus.Attack:
-                // case PlayerStatus.Skill1:
+            case PlayerStatus.Normal:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public bool IsActionAble()
+    {
+        switch (status)
+        {
+            case PlayerStatus.Normal:
                 return true;
             default:
                 return false;
@@ -242,11 +248,7 @@ public class Player : DirectionalGameObject
     {
         switch (status)
         {
-            case PlayerStatus.Attack:
-            case PlayerStatus.Mark:
-            case PlayerStatus.Dash:
-            case PlayerStatus.Skill1:
-            case PlayerStatus.Skill2:
+            case PlayerStatus.Skill:
                 return true;
             default:
                 return false;
@@ -272,30 +274,28 @@ public class Player : DirectionalGameObject
         RaycastHit2D rayHit = Physics2D.Raycast(left, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
         if (rayHit.collider == null) rayHit = Physics2D.Raycast(right, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
 
-        isGround = rayHit.collider != null && _rigidbody.velocity.y >= 0;
+        isGround = rayHit.collider != null && Util.IsStoppedSpeed(_rigidbody.velocity.y);
         _animator.SetBool(PlayerConstant.groundedAnimBool, isGround);
 
         if (!isGround) return;
 
-        if (status == PlayerStatus.Jump) SetPlayerStatus(PlayerStatus.Idle);
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
         tileCollider = rayHit.collider.GetComponent<BoxCollider2D>();
-
     }
 
     private void Jump()
     {
         if (jumpDeltaTimer > 0) jumpDeltaTimer -= Time.deltaTime;
-        if (IsUsingSkill() == true || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
+        if (!IsActionAble() || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
 
         if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Jump]))
         {
-            SetPlayerStatus(PlayerStatus.Jump);
+            SetAnimTrigger(PlayerConstant.jumpAnimTrigger);
 
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
-            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
+            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpPower, ForceMode2D.Impulse);
 
             jumpDeltaTimer = jumpTimer;
         }
@@ -314,8 +314,8 @@ public class Player : DirectionalGameObject
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetMovingDirection(dir);
 
-        // TODO: 아래의 10은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
-        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 10;
+        // TODO: 아래의 50은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
+        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 50;
         int moveCount = 0;
         while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
@@ -328,6 +328,8 @@ public class Player : DirectionalGameObject
                 RaycastHit2D rayHit = Physics2D.Raycast(start, direction, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
                 if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base)) break;
             }
+
+            playerGhostController.TryMakeGhost(dir);
 
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
             moveCount++;
@@ -350,17 +352,17 @@ public class Player : DirectionalGameObject
         foreach (var skill in skillList) skill.CheckInputKeyCode();
     }
 
-    IEnumerator UseSkill()
+    private void FixedSkillUpdate()
     {
-        yield return new WaitForSeconds(PlayerSkillConstant.SkillDelayInterval);
-        if (status != PlayerStatus.Dead) SetPlayerStatus(PlayerStatus.Idle);
+        foreach (var skill in skillList) skill.CheckFixedInputKeyCode();
     }
+
 
     public float GetSkillCoolTime(SkillName skillName)
     {
         foreach (ActiveSkillPlayer skill in skillList)
         {
-            if (skill.skillName == skillName) return skill.GetCoolTime();
+            if (skill.skillName == skillName) return skill.coolTime;
         }
 
         return 0;
@@ -369,6 +371,11 @@ public class Player : DirectionalGameObject
     public Skill HaveSkill(SkillName name)
     {
         foreach (var skill in skillList)
+        {
+            if (skill.skillName == name) return skill;
+        }
+
+        foreach (var skill in traitList)
         {
             if (skill.skillName == name) return skill;
         }
@@ -410,6 +417,9 @@ public class Player : DirectionalGameObject
             case SkillName.SkillReset:
                 trait = new SkillReset(this.gameObject);
                 break;
+            case SkillName.Revive:
+                trait = new Revive(this.gameObject);
+                break;
         }
 
         if (trait == null)
@@ -443,38 +453,83 @@ public class Player : DirectionalGameObject
         }
     }
 
-    public void GetDamaged(int dmg)
+    public void GetDamaged(int monsterAtk, Direction direction)
     {
+        DebugConsole.Log("Player Get Damaged with invincibility: " + isInvincibility);
         if (isInvincibility || status == PlayerStatus.Dead) return;
+
+        int dmg = monsterAtk - GetFinalStat(StatKind.Def);
 
         bool isAlive = ChangeCurrentHP(-dmg);
 
         if (!isAlive)
         {
             SetDead();
+            if (reviveSKillFuncList != null)
+            {
+                reviveSKillFuncList();
+                SetStatus(PlayerStatus.Normal);
+            }
             return;
         }
 
         StartCoroutine(Invincibility(PlayerConstant.invincibilityTime));
 
-        _animator.SetTrigger("hurt");
-        KnockBacked();
+        SetAnimTrigger(PlayerConstant.hurtAnimTrigger);
+        KnockBack(direction);
     }
 
-    private void KnockBacked()
+    public void InitializeAttackCollider() { colliderController.InitializeAttackCollider(); }
+
+    private void KnockBack(Direction direction)
     {
-        PlayerAddForce(new Vector2(5.0f, 1.0f), -1);
+        SetStatus(PlayerStatus.Unmovable);
+
+        if (direction == objectDirection) FlipDirection();
+        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), (int)direction);
+        StartCoroutine(KnockBacked(PlayerConstant.knockBackedStunTime));
+    }
+
+    private IEnumerator KnockBacked(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        SetStatus(PlayerStatus.Normal);
     }
 
     private IEnumerator Invincibility(float timer)
     {
-        isInvincibility = true;
+        SetInvincibility(true);
+        DebugConsole.Log("Play Player Invincibility");
         yield return new WaitForSeconds(timer);
-        isInvincibility = false;
+        SetInvincibility(false);
+        DebugConsole.Log("Stop Player Invincibility");
     }
 
     public bool CheckFullEquipTrait()
     {
         return GetTraits().Length == PlayerConstant.MaxAdditionalSkillCount;
+    }
+
+    public void AttackAnimationStart()
+    {
+        SetStatus(PlayerStatus.Skill);
+        SetGravityScale(false);
+    }
+
+    public void AttackAnimationEnd()
+    {
+        SetStatus(PlayerStatus.Normal);
+        SetGravityScale(true);
+    }
+
+    public void UnmovableAnimationStart()
+    {
+        SetStatus(PlayerStatus.Unmovable);
+    }
+
+    public void UnmovableAnimationEnd()
+    {
+        SetStatus(PlayerStatus.Normal);
+        SetGravityScale(true);
     }
 }

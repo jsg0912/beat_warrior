@@ -10,12 +10,12 @@ public class SaveButton : MonoBehaviour
 
         newSave.saveRecord.soul = Inventory.Instance.GetSoulNumber();
 
-        SaveLoadManager.instance.SaveData(newSave);
+        SaveLoadManager.Instance.SaveData(newSave);
     }
 
     public void OnClickLoad()
     {
-        SaveJSON loadedData = SaveLoadManager.instance.LoadMostRecentData();
+        SaveJSON loadedData = SaveLoadManager.Instance.LoadMostRecentData();
 
         Debug.Log(loadedData.saveRecord.soul);
         Debug.Log(loadedData.saveSetting.resolutionWidth);

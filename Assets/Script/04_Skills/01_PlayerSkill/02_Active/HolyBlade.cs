@@ -3,33 +3,23 @@ using UnityEngine;
 
 public class HolyBlade : ActiveSkillPlayer
 {
-    private bool isCharging => coolTime > 0;
-
     public HolyBlade(GameObject unit) : base(unit)
     {
-        skillName = SkillName.Attack;
-        status = PlayerStatus.Attack;
-
+        trigger = new() { PlayerConstant.attackLAnimTrigger, PlayerConstant.attackRAnimTrigger };
         damageMultiplier = PlayerSkillConstant.attackAtk;
-
-        coolTimeMax = PlayerSkillConstant.SkillCoolTime[skillName];
-        coolTime = 0;
-
         EffectPrefab = Resources.Load(PrefabRouter.PlayerAttackPrefab) as GameObject;
         additionalEffects.Add(new KnockBack(PlayerSkillConstant.attackKnockBackDistance));
     }
 
+    protected override void SetSkillName() { skillName = SkillName.Attack; }
+
     protected override IEnumerator CountCoolTime()
     {
-        coolTime = coolTimeMax;
-
-        while (isCharging)
+        coolTimer.Initialize();
+        while (coolTimer.Tick())
         {
-            coolTime -= Time.deltaTime;
             yield return null;
         }
-
-        coolTime = 0;
 
         Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, 1);
 
@@ -47,10 +37,13 @@ public class HolyBlade : ActiveSkillPlayer
 
     public void CheckCoolTime()
     {
-        if (isCharging) return;
+        if (coolTime > 0) return;
 
         if (!Player.Instance.playerUnit.GetIsFullStat(StatKind.AttackCount))
-            unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
+        {
+            countCoolTime = unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
+        }
+
     }
 
     protected override void CreateEffectPrefab()

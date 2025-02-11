@@ -7,8 +7,26 @@ public class Monster : DirectionalGameObject
     public MonsterName monsterName;
     private MonsterUnit monsterUnit;
     public Pattern pattern;
+    public Timer timer;
 
-    [SerializeField] private MonsterStatus status;
+    [SerializeField] private MonsterStatus _status;
+    [SerializeField]
+    private MonsterStatus status // 수정 필요하면 SDH에게 문의 - SDH, 20250202
+    {
+        get { return _status; }
+        set
+        {
+            if (GetCurrentStat(StatKind.HP) <= 0 && value != MonsterStatus.Dead)
+            {
+                return;
+            }
+            else
+            {
+                _status = value;
+            }
+        }
+    }
+
     protected Animator _animator;
     private bool isFixedAnimation = false;
 
@@ -16,7 +34,7 @@ public class Monster : DirectionalGameObject
     [SerializeField] private GameObject Target;
     [SerializeField] private int AnotherHPValue = 0;
 
-    [SerializeField] public GameObject tackleCollider;
+    [SerializeField] public GameObject attackCollider;
     [SerializeField] private MonsterBodyCollider monsterBodyCollider;
 
     
@@ -24,11 +42,14 @@ public class Monster : DirectionalGameObject
     void Start()
     {
         _animator = GetComponent<Animator>();
+        _animator.SetBool(MonsterConstant.endMotionBool, MonsterConstant.HasEndMotion[monsterName]);
         monsterUnit = MonsterList.FindMonster(monsterName, AnotherHPValue);
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
 
         HpUI.SetMaxHP(monsterUnit.GetCurrentHP()); // Customizing HP Code - SDH, 20250119
+
+        timer = new Timer();
     }
 
     void Update()
@@ -111,19 +132,24 @@ public class Monster : DirectionalGameObject
     }
     public int GetCurrentHP() { return monsterUnit.GetCurrentHP(); }
     public int GetCurrentStat(StatKind statKind) { return monsterUnit.unitStat.GetCurrentStat(statKind); }
+    public int GetFinalStat(StatKind statKind) { return monsterUnit.unitStat.GetFinalStat(statKind); }
+    public void SetBuffMultiply(StatKind statKind, int value) { monsterUnit.unitStat.SetBuffMultiply(statKind, value); }
+    public void ResetBuffMultiply(StatKind statKind) { monsterUnit.unitStat.ResetBuffMultiply(statKind); }
     public void AttackedByPlayer(int playerATK, bool isAlreadyCheckHitMonsterFunc = false)
     {
         if (!GetIsAlive()) return;
-        GetDamaged(playerATK);
+        int damage = playerATK - monsterUnit.unitStat.GetFinalStat(StatKind.Def);
+        if (damage <= 0) return;
+        GetDamaged(damage);
         if (Player.Instance.hitMonsterFuncList != null && !isAlreadyCheckHitMonsterFunc) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
         PlayAnimation(MonsterConstant.hurtAnimTrigger);
     }
+
     public virtual void GetDamaged(int dmg)
     {
-        if (!GetIsAlive()) return;
         monsterUnit.ChangeCurrentHP(-dmg);
 
-        HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
+        if (HpUI != null) HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
         if (!CheckIsAlive())
         {
@@ -148,14 +174,14 @@ public class Monster : DirectionalGameObject
     public void SetIsTackleAble(bool isTackleAble)
     {
         monsterUnit.isTackleAble = isTackleAble;
-        Util.SetActive(tackleCollider, isTackleAble);
     }
+
     public void SetIsKnockBackAble(bool isKnockBackAble) { monsterUnit.isKnockBackAble = isKnockBackAble; }
     public void SetIsFixedAnimation(bool isFixedAnimation) { this.isFixedAnimation = isFixedAnimation; }
     public virtual void Die()
     {
         StopAttack();
-        Player.Instance.CheckResetSkills(gameObject);
+        Player.Instance.TryResetSkillsByMarkKill(gameObject);
 
         monsterUnit.ResetIsKnockBackAble();
         monsterUnit.ResetIsTackleAble();
@@ -186,16 +212,25 @@ public class Monster : DirectionalGameObject
     {
         Util.SetActive(Target, true);
 
-        float timer = PlayerSkillConstant.SkillCoolTime[SkillName.Mark];
+        timer.Initialize(PlayerSkillConstant.SkillCoolTime[SkillName.Mark]);
 
-        while (timer > 0 && GetIsAlive())
+        while (timer.Tick() && GetIsAlive())
         {
-            timer -= Time.deltaTime;
             yield return null;
         }
 
         Util.SetActive(Target, false);
     }
+
+    protected override void FlipAdditionalScaleChangeObjects()
+    {
+        base.FlipAdditionalScaleChangeObjects();
+        monsterBodyCollider.TryFlipPolygonCollider();
+        if (attackCollider != null) Util.FlipLocalScaleX(attackCollider);
+    }
+
+    public Direction GetRelativeDirectionToPlayer() { return Player.Instance.GetBottomPos().x > GetBottomPos().x ? Direction.Right : Direction.Left; }
+    public float GetRelativePlayerDirectionFloat() { return Player.Instance.GetBottomPos().x > GetBottomPos().x ? 1.0f : -1.0f; }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -204,7 +239,7 @@ public class Monster : DirectionalGameObject
             GameObject obj = collision.gameObject;
             if (obj.CompareTag(TagConstant.Player))
             {
-                Player.Instance.GetDamaged(GetCurrentStat(StatKind.ATK));
+                Player.Instance.GetDamaged(GetFinalStat(StatKind.ATK), GetRelativeDirectionToPlayer());
             }
         }
     }

@@ -5,17 +5,14 @@ public class RecoveryHP : ActiveSkillPlayer
 {
     public RecoveryHP(GameObject unit) : base(unit)
     {
-        skillName = SkillName.KillRecoveryHP;
-        coolTime = PlayerSkillConstant.recoveryHPTimeMax;
     }
+
+    protected override void SetSkillName() { skillName = SkillName.KillRecoveryHP; }
 
     protected override IEnumerator CountCoolTime()
     {
-        coolTime = PlayerSkillConstant.recoveryHPTimeMax;
-
-        while (coolTime > 0)
+        while (coolTimer.Tick())
         {
-            coolTime -= Time.deltaTime;
             yield return null;
         }
 

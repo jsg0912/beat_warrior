@@ -74,6 +74,7 @@ public abstract class AttackStrategy : Strategy
 
     public void SetAttackDirection()
     {
-        attackDirection = GetRelativeDirectionToPlayer();
+        attackDirection = monster.GetRelativeDirectionToPlayer();
+        if (attackDirection != monster.GetMovingDirection()) monster.FlipDirection();
     }
 }
