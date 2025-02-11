@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Monster : DirectionalGameObject
@@ -8,6 +9,7 @@ public class Monster : DirectionalGameObject
     private MonsterUnit monsterUnit;
     public Pattern pattern;
     public Timer timer;
+    [SerializeField] private List<GameObject> hitEffects = new List<GameObject>();
 
     [SerializeField] private MonsterStatus _status;
     [SerializeField]
@@ -37,7 +39,7 @@ public class Monster : DirectionalGameObject
     [SerializeField] public GameObject attackCollider;
     [SerializeField] private MonsterBodyCollider monsterBodyCollider;
 
-    
+
 
     void Start()
     {
@@ -148,6 +150,10 @@ public class Monster : DirectionalGameObject
     public virtual void GetDamaged(int dmg)
     {
         monsterUnit.ChangeCurrentHP(-dmg);
+        foreach (GameObject hitEffect in hitEffects)
+        {
+            StartCoroutine(Util.PlayInstantEffect(hitEffect, 0.5f));
+        }
 
         if (HpUI != null) HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 

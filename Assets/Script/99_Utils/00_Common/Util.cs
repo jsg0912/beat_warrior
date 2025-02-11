@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -192,5 +193,19 @@ public static class Util
     {
         // Speed can be not exact zero, just check it is close to zero, - SDH, 20250208
         return -1e-4f <= speed && speed <= 1e4f;
+    }
+
+    public static IEnumerator PlayInstantEffect(GameObject effect, float duration)
+    {
+        Timer timer = new Timer(duration);
+        if (effect != null)
+        {
+            SetActive(effect, true);
+        }
+        while (timer.Tick())
+        {
+            yield return null;
+        }
+        SetActive(effect, false);
     }
 }
