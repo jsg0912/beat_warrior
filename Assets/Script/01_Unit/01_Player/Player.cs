@@ -74,8 +74,8 @@ public class Player : DirectionalGameObject
             new HolyBlade(gameObject),
             new Mark(gameObject),
             new Dash(gameObject),
-            new Skill1(gameObject),
-            new Skill2(gameObject)
+            new QSkill(gameObject),
+            new ESkill(gameObject)
         };
 
         traitList.Clear();
@@ -115,7 +115,7 @@ public class Player : DirectionalGameObject
     public void SetStatus(PlayerStatus status)
     {
         this.status = status;
-        PlayerUIManager.Instance?.SetPlayerFace(status);
+        PlayerUIManager.Instance?.SetPlayerFace(status, Hp);
 
         switch (status)
         {
@@ -150,21 +150,7 @@ public class Player : DirectionalGameObject
     {
         bool isAlive = playerUnit.ChangeCurrentHP(change);
         PlayerHpUIController.Instance?.UpdateHPUI();
-        if (PlayerUIManager.Instance != null)
-        {
-            if (change > 0)
-            {
-                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Rest);
-            }
-            else if (Hp == 1)
-            {
-                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Hurt);
-            }
-            else
-            {
-                PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Normal);
-            }
-        }
+        PlayerUIManager.Instance?.SetPlayerFace(status, Hp);
         return isAlive;
     }
 
@@ -208,6 +194,17 @@ public class Player : DirectionalGameObject
         _animator.SetFloat("Speed", isMove ? 1 : 0);
 
         if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
+    }
+
+    public bool CheckWall()
+    {
+        float movingDirection = GetMovingDirectionFloat();
+        Vector3 start = GetMiddlePos();
+        Vector3 dir = Vector3.right * movingDirection;
+
+        RaycastHit2D rayHit = Physics2D.Raycast(start, dir, GetSize().x + 0.05f, LayerMask.GetMask(LayerConstant.Tile));
+        //Debug.DrawLine(start, start + dir * 0.05f, Color.red);
+        return rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base);
     }
 
     public void CheckPlayerCommand()
@@ -319,15 +316,7 @@ public class Player : DirectionalGameObject
         int moveCount = 0;
         while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
-            if (!passWall)
-            {
-                float movingDir = GetMovingDirectionFloat();
-                Vector3 start = GetMiddlePos() + new Vector3(GetSize().x / 2, 0, 0) * movingDir;
-                Vector3 direction = Vector3.right * movingDir;
-
-                RaycastHit2D rayHit = Physics2D.Raycast(start, direction, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
-                if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base)) break;
-            }
+            if (!passWall && CheckWall()) break;
 
             playerGhostController.TryMakeGhost(dir);
 
@@ -455,7 +444,6 @@ public class Player : DirectionalGameObject
 
     public void GetDamaged(int monsterAtk, Direction direction)
     {
-        DebugConsole.Log("Player Get Damaged with invincibility: " + isInvincibility);
         if (isInvincibility || status == PlayerStatus.Dead) return;
 
         int dmg = monsterAtk - GetFinalStat(StatKind.Def);
@@ -486,7 +474,7 @@ public class Player : DirectionalGameObject
         SetStatus(PlayerStatus.Unmovable);
 
         if (direction == objectDirection) FlipDirection();
-        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), (int)direction);
+        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), -1);
         StartCoroutine(KnockBacked(PlayerConstant.knockBackedStunTime));
     }
 
@@ -499,10 +487,8 @@ public class Player : DirectionalGameObject
     private IEnumerator Invincibility(float timer)
     {
         SetInvincibility(true);
-        DebugConsole.Log("Play Player Invincibility");
         yield return new WaitForSeconds(timer);
         SetInvincibility(false);
-        DebugConsole.Log("Stop Player Invincibility");
     }
 
     public bool CheckFullEquipTrait()

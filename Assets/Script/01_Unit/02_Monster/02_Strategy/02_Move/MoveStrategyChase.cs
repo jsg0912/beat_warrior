@@ -9,13 +9,10 @@ public class MoveStrategyChase : MoveStrategy
         base.Initialize(monster);
 
         moveSpeed = MonsterConstant.MoveSpeed[monster.monsterName];
-
-        isEndOfGround = false;
     }
 
     public override bool PlayStrategy()
     {
-        CheckGround();
         ChaseTarget();
 
         return base.PlayStrategy();
@@ -33,7 +30,7 @@ public class MoveStrategyChase : MoveStrategy
 
     protected override bool IsMoveable()
     {
-        if (isEndOfGround == true || Mathf.Abs(TargetPos().x - GetMonsterPos().x) < STOPOFFSET)
+        if (CheckWall() || CheckEndOfGround() || Mathf.Abs(TargetPos().x - GetMonsterPos().x) < STOPOFFSET)
         {
             return false;
         }

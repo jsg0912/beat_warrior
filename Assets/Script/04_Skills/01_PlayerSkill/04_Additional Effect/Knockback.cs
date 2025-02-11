@@ -17,7 +17,6 @@ public class KnockBack : AdditionalEffect
         {
             if (!monster.GetIsKnockBackAble()) return;
             monster.StopAttack();
-            monster.SetStatus(MonsterStatus.Idle);
             //TODO :임시
             monster.SetMovingDirection(Player.Instance.GetBottomPos().x > monster.transform.position.x ? Direction.Right : Direction.Left);
         }
