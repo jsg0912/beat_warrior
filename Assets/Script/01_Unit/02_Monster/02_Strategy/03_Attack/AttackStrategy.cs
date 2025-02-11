@@ -6,14 +6,17 @@ public abstract class AttackStrategy : Strategy
     protected Direction attackDirection;
     protected Coroutine attackCoroutine;
 
+    protected float attackRange;
     protected float attackCoolTimeMax;
     protected float attackCoolTime;
+
 
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
         monoBehaviour = monster.GetComponent<MonoBehaviour>();
 
+        attackRange = MonsterConstant.AttackRange[monster.monsterName];
         attackCoolTimeMax = MonsterConstant.AttackSpeed[monster.monsterName];
         attackCoolTime = 0;
     }
@@ -37,6 +40,7 @@ public abstract class AttackStrategy : Strategy
     protected bool TrySkill()
     {
         if (attackCoolTime > 0) return false;
+        if (!CheckTarget()) return false;
 
         SetAttackDirection();
         monster.PlayAnimation(MonsterStatus.Attack);
@@ -65,4 +69,6 @@ public abstract class AttackStrategy : Strategy
         attackDirection = monster.GetRelativeDirectionToPlayer();
         monster.SetMovingDirection(attackDirection);
     }
+
+    protected virtual bool CheckTarget() { return Vector2.Distance(GetPlayerPos(), GetMonsterPos()) < attackRange; }
 }
