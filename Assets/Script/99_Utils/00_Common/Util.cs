@@ -222,4 +222,9 @@ public static class Util
     {
         if (gameObject != null) gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
+
+    public static bool RandomBool(float truePercentage)
+    {
+        return UnityEngine.Random.Range(0, 100) < truePercentage;
+    }
 }
