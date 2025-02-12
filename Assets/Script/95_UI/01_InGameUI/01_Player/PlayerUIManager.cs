@@ -29,6 +29,16 @@ public class PlayerUIManager : MonoBehaviour
     {
         Util.SetActive(SkillCoolTimeUIMark.gameObject, isMarkOn);
         Util.SetActive(SkillCoolTimeUIDash.gameObject, !isMarkOn);
+        if (isMarkOn)
+        {
+            SetCoolTimeUI(SkillName.Mark);
+            ResetCoolTImeUI(SkillName.Dash);
+        }
+        else
+        {
+            SetCoolTimeUI(SkillName.Dash);
+            ResetCoolTImeUI(SkillName.Mark);
+        }
     }
 
     public void SetPlayerFace(PlayerStatus playerStatus, int hp)
@@ -38,6 +48,58 @@ public class PlayerUIManager : MonoBehaviour
         {
             if (hp <= PlayerConstant.PlayerHurtFaceTriggerHp) playerFaceController.SetHurtFace();
             else playerFaceController.SetIdleFace();
+        }
+    }
+
+    public void SetCoolTimeUI(SkillName skillName)
+    {
+        switch (skillName)
+        {
+            case SkillName.Attack:
+                SkillCoolTimeUIHollyBlade.StartSkillIconLightAnimation();
+                SkillCoolTimeUIHollyBlade.TryCoolDownAnimation();
+                break;
+            case SkillName.Skill1:
+                SkillCoolTimeUISpecialBlade.StartSkillIconLightAnimation();
+                SkillCoolTimeUISpecialBlade.TryCoolDownAnimation();
+                break;
+            case SkillName.Skill2:
+                SkillCoolTimeUISweepingBlade.StartSkillIconLightAnimation();
+                SkillCoolTimeUISweepingBlade.TryCoolDownAnimation();
+                break;
+            case SkillName.Mark:
+                SkillCoolTimeUIMark.StartSkillIconLightAnimation();
+                SkillCoolTimeUIMark.TryCoolDownAnimation();
+                break;
+            case SkillName.Dash:
+                SkillCoolTimeUIDash.StartSkillIconLightAnimation();
+                break;
+        }
+    }
+
+    public void ResetCoolTImeUI(SkillName skillName)
+    {
+        switch (skillName)
+        {
+            case SkillName.Attack:
+                SkillCoolTimeUIHollyBlade.ResetSkillCoolDownUI();
+                SkillCoolTimeUIHollyBlade.StopCoolDownAnimation();
+                break;
+            case SkillName.Skill1:
+                SkillCoolTimeUISpecialBlade.ResetSkillCoolDownUI();
+                SkillCoolTimeUISpecialBlade.StopCoolDownAnimation();
+                break;
+            case SkillName.Skill2:
+                SkillCoolTimeUISweepingBlade.ResetSkillCoolDownUI();
+                SkillCoolTimeUISweepingBlade.StopCoolDownAnimation();
+                break;
+            case SkillName.Mark:
+                SkillCoolTimeUIMark.ResetSkillCoolDownUI();
+                SkillCoolTimeUIMark.StopCoolDownAnimation();
+                break;
+            case SkillName.Dash:
+                SkillCoolTimeUIDash.ResetSkillCoolDownUI();
+                break;
         }
     }
 }

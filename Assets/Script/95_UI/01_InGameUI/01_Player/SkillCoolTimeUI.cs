@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,53 +10,55 @@ public class SkillCoolTimeUI : MonoBehaviour
     [SerializeField] Image SkillIconUILight; // It can be null (ex. Passive Skill or Dash) 
     [SerializeField] TextMeshProUGUI SkillHotKey;
     [SerializeField] TextMeshProUGUI CoolTimeText;
-
-    private bool isFirstCoolTime = false; // This Bool is for optimization - SDH, 20250114
+    Timer timer = new Timer();
+    Coroutine coroutine = null;
 
     void Start()
     {
         UpdateSkillHotKey();
+        // ResetSkillCoolDownUI();
     }
 
-    // [Code Review - KMJ] Using Coroutine, not Update - SDH, 20250114
-    void Update()
+    public void TryCoolDownAnimation()
     {
-        float coolTime = Player.Instance.GetSkillCoolTime(skillName);
-        if (coolTime > 0)
+        float initCoolTime = Player.Instance.GetSkillCoolTime(skillName);
+        if (initCoolTime > 0)
         {
-            TryTurnOnSkillCoolTimeUI();
-            CoolTimeImg.fillAmount = 1 - coolTime / PlayerSkillConstant.SkillCoolTime[skillName];
+            timer.Initialize(initCoolTime);
+            coroutine = StartCoroutine(CoolDownAnimation(initCoolTime));
+        }
+    }
+
+    private IEnumerator CoolDownAnimation(float initCoolTime)
+    {
+        TryTurnOnSkillCoolDownUI();
+        while (timer.Tick())
+        {
+            float coolTime = Player.Instance.GetSkillCoolTime(skillName);
+            CoolTimeImg.fillAmount = 1 - coolTime / initCoolTime;
             CoolTimeText.text = Mathf.Ceil(coolTime).ToString();
+            yield return null;
         }
-        else TryTurnOffSkillCoolTimeUI();
+        ResetSkillCoolDownUI();
     }
 
-    private void TryTurnOnSkillCoolTimeUI()
+    public void TryTurnOnSkillCoolDownUI()
     {
-        if (isFirstCoolTime == true)
-        {
-            isFirstCoolTime = false;
-            Util.SetActive(SkillIconUILight?.gameObject, true);
-            Util.SetActive(CoolTimeText.gameObject, true);
-            StartSkillIconLightAnimation();
-        }
+        Util.SetActive(CoolTimeText.gameObject, true);
     }
 
-    private void TryTurnOffSkillCoolTimeUI()
+    public void ResetSkillCoolDownUI()
     {
-        if (!isFirstCoolTime)
-        {
-            isFirstCoolTime = true;
-            Util.SetActive(SkillIconUILight?.gameObject, false);
-            Util.SetActive(CoolTimeText.gameObject, false);
-            CoolTimeImg.fillAmount = 1;
-        }
+        Util.SetActive(SkillIconUILight?.gameObject, false);
+        Util.SetActive(CoolTimeText.gameObject, false);
+        CoolTimeImg.fillAmount = 1;
     }
 
-    private void StartSkillIconLightAnimation()
+    public void StartSkillIconLightAnimation()
     {
         if (SkillIconUILight != null)
         {
+            Util.SetActive(SkillIconUILight?.gameObject, true);
             Animator animator = SkillIconUILight.GetComponent<Animator>();
             animator.SetTrigger("Start");
             animator.speed = 1 / PlayerSkillConstant.SkillCoolTime[skillName];
@@ -64,7 +67,32 @@ public class SkillCoolTimeUI : MonoBehaviour
 
     public void UpdateSkillHotKey()
     {
-        // TODO: HotKey 설정된 것에 따라 바뀌게 해야함
-        // SkillHotKey.text = skillName.ToString(); 
+        switch (skillName)
+        {
+            case SkillName.Attack:
+                SkillHotKey.text = KeySetting.keys[PlayerAction.Attack].ToString();
+                break;
+            case SkillName.Mark:
+                SkillHotKey.text = KeySetting.keys[PlayerAction.Mark_Dash].ToString();
+                break;
+            case SkillName.Dash:
+                SkillHotKey.text = KeySetting.keys[PlayerAction.Mark_Dash].ToString();
+                break;
+            case SkillName.Skill1:
+                SkillHotKey.text = KeySetting.keys[PlayerAction.Skill1].ToString();
+                break;
+            case SkillName.Skill2:
+                SkillHotKey.text = KeySetting.keys[PlayerAction.Skill2].ToString();
+                break;
+        }
+    }
+
+    public void StopCoolDownAnimation()
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        }
     }
 }
