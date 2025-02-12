@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Monster : DirectionalGameObject
@@ -7,7 +8,9 @@ public class Monster : DirectionalGameObject
     public MonsterName monsterName;
     private MonsterUnit monsterUnit;
     public Pattern pattern;
+    public bool isChasing;
     public Timer timer;
+    [SerializeField] private List<GameObject> hitEffects = new List<GameObject>();
 
     [SerializeField] private MonsterStatus _status;
     [SerializeField]
@@ -37,10 +40,13 @@ public class Monster : DirectionalGameObject
     [SerializeField] public GameObject attackCollider;
     [SerializeField] private MonsterBodyCollider monsterBodyCollider;
 
+
+
     void Start()
     {
+        isChasing = false;
         _animator = GetComponent<Animator>();
-        _animator.SetBool(MonsterConstant.endMotionBool, MonsterConstant.HasEndMotion[monsterName]);
+        _animator.SetBool(MonsterConstant.repeatAttackBool, MonsterConstant.RepeatAttack[monsterName]);
         monsterUnit = MonsterList.FindMonster(monsterName, AnotherHPValue);
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
@@ -52,8 +58,13 @@ public class Monster : DirectionalGameObject
 
     void Update()
     {
+        if (GetStatus() == MonsterStatus.Dead) return;
         pattern?.PlayPattern();
     }
+
+    public void AttackStart() { pattern.AttackStartMethod(); }
+    public void AttackEnd() { pattern.AttackEndMethod(); }
+
 
     // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
     public void PlayAnimation(MonsterStatus status)
@@ -64,14 +75,21 @@ public class Monster : DirectionalGameObject
             case MonsterStatus.Attack:
                 PlayAnimation(MonsterConstant.attackAnimTrigger);
                 break;
-            case MonsterStatus.AttackCharge:
-                PlayAnimation(MonsterConstant.attackChargeAnimTrigger);
+            case MonsterStatus.Dead:
+                SetAnimationBool(status, true);
                 break;
-            case MonsterStatus.AttackEnd:
-                PlayAnimation(MonsterConstant.attackEndAnimTrigger);
+        }
+    }
+
+    public void SetAnimationBool(MonsterStatus status, bool value)
+    {
+        switch (status)
+        {
+            case MonsterStatus.Groggy:
+                _animator.SetBool(MonsterConstant.groggyBool, value);
                 break;
             case MonsterStatus.Dead:
-                PlayAnimation(MonsterConstant.dieAnimTrigger);
+                _animator.SetBool(MonsterConstant.dieAnimBool, value);
                 break;
         }
     }
@@ -88,8 +106,6 @@ public class Monster : DirectionalGameObject
         switch (status)
         {
             case MonsterStatus.Attack:
-            case MonsterStatus.AttackCharge:
-            case MonsterStatus.AttackEnd:
                 return true;
             default:
                 return false;
@@ -101,14 +117,8 @@ public class Monster : DirectionalGameObject
         {
             switch (status)
             {
-                case MonsterStatus.Idle:
-                case MonsterStatus.Chase:
+                case MonsterStatus.Normal:
                     return true;
-                case MonsterStatus.AttackCharge:
-                case MonsterStatus.Attack:
-                case MonsterStatus.AttackEnd:
-                case MonsterStatus.Hurt:
-                case MonsterStatus.Dead:
                 default:
                     return false;
             }
@@ -146,6 +156,10 @@ public class Monster : DirectionalGameObject
     public virtual void GetDamaged(int dmg)
     {
         monsterUnit.ChangeCurrentHP(-dmg);
+        foreach (GameObject hitEffect in hitEffects)
+        {
+            StartCoroutine(Util.PlayInstantEffect(hitEffect, 0.5f));
+        }
 
         if (HpUI != null) HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
@@ -224,7 +238,6 @@ public class Monster : DirectionalGameObject
     {
         base.FlipAdditionalScaleChangeObjects();
         monsterBodyCollider.TryFlipPolygonCollider();
-        if (attackCollider != null) Util.FlipLocalScaleX(attackCollider);
     }
 
     public Direction GetRelativeDirectionToPlayer() { return Player.Instance.GetBottomPos().x > GetBottomPos().x ? Direction.Right : Direction.Left; }

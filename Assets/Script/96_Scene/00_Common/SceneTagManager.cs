@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
-public class SceneTagManager
+public class SceneTagManager : SingletonObject<SceneTagManager>
 {
     public static List<PoolTag> PoolTagDefault { get; } = new List<PoolTag> {
         PoolTag.EnemyMiniMapIcon,
@@ -12,8 +13,6 @@ public class SceneTagManager
         PoolTag.MiniMapIconDulduli,
         PoolTag.MiniMapIconItmomi
     };
-    private static SceneTagManager _instance;
-    public static SceneTagManager Instance => _instance ??= new SceneTagManager();
 
     private readonly Dictionary<string, List<PoolTag>> sceneTagRestrictions = new Dictionary<string, List<PoolTag>>();
 
@@ -32,7 +31,7 @@ public class SceneTagManager
 
     private void UpdateAllowedTags()
     {
-        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        string currentScene = SceneManager.GetActiveScene().name;
 
         if (sceneTagRestrictions.ContainsKey(currentScene))
         {

@@ -9,22 +9,9 @@ public abstract class RecognizeStrategy : Strategy
     }
 
     protected virtual bool IsLookingTarget() { return GetMovingDirection() == monster.GetRelativeDirectionToPlayer(); }
+    protected void ChaseTarget() { if (!IsLookingTarget()) monster.FlipDirection(); }
     protected abstract void CheckTarget();
 
-    protected void StartChase()
-    {
-        if (monster.GetStatus() == MonsterStatus.Idle)
-        {
-            // DebugConsole.Log("StartChase");
-            monster.SetStatus(MonsterStatus.Chase);
-        }
-    }
-    protected void ReleaseChase()
-    {
-        if (monster.GetStatus() == MonsterStatus.Chase)
-        {
-            // DebugConsole.Log("ReleaseChase");
-            monster.SetStatus(MonsterStatus.Idle);
-        }
-    }
+    protected void StartChase() { if (!monster.isChasing) monster.isChasing = true; }
+    protected void ReleaseChase() { if (monster.isChasing) monster.isChasing = false; }
 }
