@@ -34,7 +34,7 @@ public class SoundManager : SingletonObject<SoundManager>
     public void SFXVolume(float val)
     {
         sfxVolume = val;
-        ApplyVolume() ;
+        ApplyVolume();
     }
 
     public void MasterVolume(float val)
@@ -49,7 +49,7 @@ public class SoundManager : SingletonObject<SoundManager>
         AudioSource audioSource = go.AddComponent<AudioSource>();
         audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
         audioSource.clip = clip;
-        audioSource.Play();
+        audioSource.PlayOneShot(clip, 1);
 
 
         Destroy(go, clip.length);

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class SceneTagManager : SingletonObject<SceneTagManager>
 {
@@ -30,7 +31,7 @@ public class SceneTagManager : SingletonObject<SceneTagManager>
 
     private void UpdateAllowedTags()
     {
-        string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        string currentScene = SceneManager.GetActiveScene().name;
 
         if (sceneTagRestrictions.ContainsKey(currentScene))
         {
