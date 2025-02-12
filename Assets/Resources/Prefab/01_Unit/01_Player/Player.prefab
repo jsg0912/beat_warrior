@@ -285,7 +285,7 @@ MonoBehaviour:
   objectDirection: 1
   spriteRenderer: {fileID: 5881253563951645107}
   childDirectionalObjects:
-  - {fileID: 0}
+  - {fileID: 1013251589374986126}
   colliderController: {fileID: 8536599870213391182}
   _status: 0
   isInvincibility: 0
@@ -859,7 +859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 517827030620133215, guid: 2fc859ca3b5592246bfb28229719aff2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -869,6 +869,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fc859ca3b5592246bfb28229719aff2, type: 3}
+--- !u!1 &1013251589374986126 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 517827030620133215, guid: 2fc859ca3b5592246bfb28229719aff2, type: 3}
+  m_PrefabInstance: {fileID: 657659700711428305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1013251589375024046 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 517827030619966335, guid: 2fc859ca3b5592246bfb28229719aff2, type: 3}
@@ -1170,6 +1175,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5832865420382322659}
     m_Modifications:
+    - target: {fileID: 2451701643423400851, guid: 5b2b19f3ee0ccb940ac9e7dace726d2a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6200824895781752097, guid: 5b2b19f3ee0ccb940ac9e7dace726d2a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.3599999
