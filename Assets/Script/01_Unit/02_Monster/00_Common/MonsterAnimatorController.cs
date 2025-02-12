@@ -18,6 +18,6 @@ public class MonsterAnimatorController : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (stateInfo.IsName(MonsterAnimation.Attack)) monster.AttackOn();
+        if (stateInfo.IsName(MonsterAnimation.Attack)) monster.AttackUpdate();
     }
 }

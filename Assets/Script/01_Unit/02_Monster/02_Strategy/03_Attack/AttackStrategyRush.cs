@@ -30,7 +30,7 @@ public class AttackStrategyRush : AttackStrategy
         Util.SetActive(monster.attackCollider, true);
     }
 
-    public override void AttackOn()
+    public override void AttackUpdate()
     {
         if (isChangingDir) return;
         if (dashDurationLeft <= 0)

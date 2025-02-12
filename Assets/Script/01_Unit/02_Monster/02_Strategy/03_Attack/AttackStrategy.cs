@@ -10,7 +10,6 @@ public abstract class AttackStrategy : Strategy
     protected float attackCoolTimeMax;
     protected float attackCoolTime;
 
-
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
@@ -27,16 +26,6 @@ public abstract class AttackStrategy : Strategy
         return TrySkill();
     }
 
-    public void UpdateCoolTime()
-    {
-        if (attackCoolTime > 0 && !monster.GetIsAttacking()) attackCoolTime -= Time.deltaTime;
-    }
-
-    public void SetMaxAttackCoolTime()
-    {
-        attackCoolTime = attackCoolTimeMax;
-    }
-
     protected virtual bool TrySkill()
     {
         if (attackCoolTime > 0) return false;
@@ -45,18 +34,6 @@ public abstract class AttackStrategy : Strategy
         SetAttackDirection();
         monster.PlayAnimation(MonsterStatus.Attack);
         return true;
-    }
-
-    public virtual void AttackStart()
-    {
-        SkillMethod();
-    }
-
-    public virtual void AttackOn() { }
-
-    public virtual void AttackEnd()
-    {
-        SetMaxAttackCoolTime();
     }
 
     protected abstract void SkillMethod();
@@ -72,5 +49,10 @@ public abstract class AttackStrategy : Strategy
         monster.SetMovingDirection(attackDirection);
     }
 
+    public virtual void AttackStart() { SkillMethod(); }
+    public virtual void AttackUpdate() { }
+    public virtual void AttackEnd() { SetMaxAttackCoolTime(); }
+    public void UpdateCoolTime() { if (attackCoolTime > 0 && !monster.GetIsAttacking()) attackCoolTime -= Time.deltaTime; }
+    public void SetMaxAttackCoolTime() { attackCoolTime = attackCoolTimeMax; }
     protected virtual bool CheckTarget() { return Vector2.Distance(GetPlayerPos(), GetMonsterPos()) < attackRange; }
 }

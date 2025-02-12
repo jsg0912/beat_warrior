@@ -63,11 +63,9 @@ public class Monster : DirectionalGameObject
     }
 
     public void AttackStart() { pattern.AttackStartMethod(); }
-    public void AttackOn() { pattern.AttackOnMethod(); }
+    public void AttackUpdate() { pattern.AttackUpdateMethod(); }
     public void AttackEnd() { pattern.AttackEndMethod(); }
 
-
-    // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
     public void PlayAnimation(MonsterStatus status)
     {
         if (isFixedAnimation) return;
@@ -112,7 +110,6 @@ public class Monster : DirectionalGameObject
                 return false;
         }
     }
-
     public bool GetIsMoveable()
     {
         {
