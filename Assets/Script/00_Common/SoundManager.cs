@@ -18,8 +18,8 @@ public class SoundManager : SingletonObject<SoundManager>
             return;
         }
 
-        float bgVolume = (masterVolume * backgroundVolume);
-        float sfxVol = (masterVolume * sfxVolume);
+        float bgVolume = masterVolume * backgroundVolume;
+        float sfxVol = masterVolume * sfxVolume;
 
         mixer.SetFloat("BackGroundSound", bgVolume > 0 ? Mathf.Log10(bgVolume) * 20 : -80f);
         mixer.SetFloat("SFX", sfxVol > 0 ? Mathf.Log10(sfxVol) * 20 : -80f);
