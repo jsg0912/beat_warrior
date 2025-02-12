@@ -49,7 +49,7 @@ public class SoundManager : SingletonObject<SoundManager>
         AudioSource audioSource = go.AddComponent<AudioSource>();
         audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
         audioSource.clip = clip;
-        audioSource.PlayOneShot(clip, 1);
+        audioSource.PlayOneShot(clip, 0.5f);
 
 
         Destroy(go, clip.length);
@@ -71,6 +71,9 @@ public class SoundManager : SingletonObject<SoundManager>
 
     public void PlayEquipSFX()
     {
-        SFXPlay("Equip", SoundList.Instance.equipClip);
+        SFXPlay("Equip", SoundList.Instance.altarEquip);
     }
 }
+
+
+

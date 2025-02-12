@@ -306,6 +306,8 @@ public class Player : DirectionalGameObject
             _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpPower, ForceMode2D.Impulse);
 
             jumpDeltaTimer = jumpTimer;
+
+            SoundManager.Instance.SFXPlay("PlayerJump", SoundList.Instance.playerJump);
         }
     }
 
@@ -461,9 +463,12 @@ public class Player : DirectionalGameObject
 
         bool isAlive = ChangeCurrentHP(-dmg);
 
+        SoundManager.Instance.SFXPlay("PlayerHit", SoundList.Instance.playerHit);
+
         if (!isAlive)
         {
             SetDead();
+            SoundManager.Instance.SFXPlay("PlayerDead", SoundList.Instance.playerDead);
             if (reviveSKillFuncList != null)
             {
                 reviveSKillFuncList();
