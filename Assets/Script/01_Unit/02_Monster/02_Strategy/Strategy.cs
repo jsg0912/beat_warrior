@@ -33,7 +33,7 @@ public abstract class Strategy
         Vector3 dir = Vector3.right * movingDirection;
 
         RaycastHit2D rayHit = Physics2D.Raycast(start, dir, MonsterConstant.WallCheckRayDistance, LayerMask.GetMask(LayerConstant.Tile));
-        // Debug.DrawLine(start, start + dir * MonsterConstant.WallCheckDistance, Color.red);
+        Debug.DrawLine(start, start + dir * MonsterConstant.WallCheckRayDistance, Color.red);
         return rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base);
     }
 
