@@ -11,8 +11,6 @@ public class RecognizeStrategyRanged : RecognizeStrategy
 
     protected override void CheckTarget()
     {
-        //Collider2D collider = Physics2D.OverlapCircle(GetMonsterMiddlePos(), recognizeRange, TargetLayer);
-
         if (Vector2.Distance(GetPlayerPos(), GetMonsterPos()) < recognizeRange) StartChase();
         else ReleaseChase();
     }

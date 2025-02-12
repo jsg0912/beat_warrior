@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public static class Util
 {
+    public static Vector3 OffsetX = new Vector3(0.05f, 0, 0);
+    public static Vector3 OffsetY = new Vector3(0, 0.05f, 0);
+
     public static T ParseEnumFromString<T>(string value)
     {
         return (T)Enum.Parse(typeof(T), value);
