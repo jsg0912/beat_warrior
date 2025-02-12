@@ -63,6 +63,7 @@ public class Monster : DirectionalGameObject
     }
 
     public void AttackStart() { pattern.AttackStartMethod(); }
+    public void AttackOn() { pattern.AttackOnMethod(); }
     public void AttackEnd() { pattern.AttackEndMethod(); }
 
 

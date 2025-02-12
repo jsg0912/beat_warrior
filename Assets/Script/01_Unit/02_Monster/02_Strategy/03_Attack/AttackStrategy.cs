@@ -52,6 +52,8 @@ public abstract class AttackStrategy : Strategy
         SkillMethod();
     }
 
+    public virtual void AttackOn() { }
+
     public virtual void AttackEnd()
     {
         SetMaxAttackCoolTime();

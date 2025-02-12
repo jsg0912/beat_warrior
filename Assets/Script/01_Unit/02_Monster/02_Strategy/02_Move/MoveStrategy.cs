@@ -28,7 +28,7 @@ public class MoveStrategy : Strategy
 
         if ((CheckWall() || CheckEndOfGround()) && !monster.GetIsAttacking() && CheckGround()) FlipDirection();
 
-        monster.gameObject.transform.position += new Vector3(GetMovingDirectionFloat() * moveSpeed * Time.deltaTime, 0, 0);
+        MoveFor(GetMovingDirection(), moveSpeed);
         monster.SetWalkingAnimation(true);
         return true;
     }
