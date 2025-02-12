@@ -192,6 +192,7 @@ public class Monster : DirectionalGameObject
     {
         StopAttack();
         Player.Instance.TryResetSkillsByMarkKill(gameObject);
+        Util.SetActive(Target, false);
 
         monsterUnit.ResetIsKnockBackAble();
         monsterUnit.ResetIsTackleAble();
