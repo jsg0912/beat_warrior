@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -104,7 +105,10 @@ public static class Util
 
     public static void FlipLocalScaleX(GameObject gameObject)
     {
-        FlipLocalScaleX(gameObject.transform);
+        if (gameObject.GetComponent<PolygonCollider2D>() != null)
+            FlipLocalScaleX(gameObject.GetComponent<PolygonCollider2D>());
+        else
+            FlipLocalScaleX(gameObject.transform);
     }
 
     public static void FlipLocalScaleX(PolygonCollider2D polygonCollider)
@@ -156,7 +160,6 @@ public static class Util
             Vector2 pixelSize = spriteRenderer.sprite.rect.size; // 픽셀 크기
             float pixelsPerUnit = spriteRenderer.sprite.pixelsPerUnit; // PPU 값
 
-            DebugConsole.Log($"size is {(pixelSize / pixelsPerUnit).y}");
             return pixelSize / pixelsPerUnit; // 로컬 크기 반환
         }
 
@@ -192,5 +195,36 @@ public static class Util
     {
         // Speed can be not exact zero, just check it is close to zero, - SDH, 20250208
         return -1e-4f <= speed && speed <= 1e4f;
+    }
+
+    public static IEnumerator PlayInstantEffect(GameObject effect, float duration)
+    {
+        Timer timer = new Timer(duration);
+        if (effect != null)
+        {
+            SetActive(effect, true);
+        }
+        while (timer.Tick())
+        {
+            yield return null;
+        }
+        SetActive(effect, false);
+    }
+
+    public static void SetRotationZ(GameObject gameObject, float rotationZRatio)
+    {
+        if (rotationZRatio > 1.0f) rotationZRatio = 1.0f;
+        else if (rotationZRatio < 0.0f) rotationZRatio = 0.0f;
+        if (gameObject != null) gameObject.transform.rotation = Quaternion.Euler(0, 0, rotationZRatio * 360);
+    }
+
+    public static void ResetRotationZ(GameObject gameObject)
+    {
+        if (gameObject != null) gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    public static bool RandomBool(float truePercentage)
+    {
+        return UnityEngine.Random.Range(0, 100) < truePercentage;
     }
 }

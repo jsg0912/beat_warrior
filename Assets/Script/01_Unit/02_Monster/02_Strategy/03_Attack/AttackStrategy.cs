@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public abstract class AttackStrategy : Strategy
@@ -7,22 +6,18 @@ public abstract class AttackStrategy : Strategy
     protected Direction attackDirection;
     protected Coroutine attackCoroutine;
 
+    protected float attackRange;
     protected float attackCoolTimeMax;
     protected float attackCoolTime;
-
-    protected float attackStartDelay;
-    protected float attackActionInterval;
 
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
         monoBehaviour = monster.GetComponent<MonoBehaviour>();
 
+        attackRange = MonsterConstant.AttackRange[monster.monsterName];
         attackCoolTimeMax = MonsterConstant.AttackSpeed[monster.monsterName];
         attackCoolTime = 0;
-
-        attackStartDelay = MonsterConstant.AttackStartDelays[monster.monsterName];
-        attackActionInterval = MonsterConstant.AttackActionIntervals[monster.monsterName];
     }
 
     public override bool PlayStrategy()
@@ -31,38 +26,14 @@ public abstract class AttackStrategy : Strategy
         return TrySkill();
     }
 
-    public void UpdateCoolTime()
-    {
-        if (attackCoolTime > 0 && !monster.GetIsAttacking())
-        {
-            attackCoolTime -= Time.deltaTime;
-        }
-    }
-
-    public void SetMaxAttackCoolTime()
-    {
-        attackCoolTime = attackCoolTimeMax;
-    }
-
-    protected bool TrySkill()
+    protected virtual bool TrySkill()
     {
         if (attackCoolTime > 0) return false;
-        // [Code Review - KMJ]: Implement Attack Range Check Process - SDH, 20250119
-        attackCoroutine = monoBehaviour.StartCoroutine(UseSkill());
-        return true;
-    }
+        if (!CheckTarget()) return false;
 
-    protected virtual IEnumerator UseSkill()
-    {
-        monster.SetStatus(MonsterStatus.Attack);
-        yield return new WaitForSeconds(attackStartDelay);
-
+        SetAttackDirection();
         monster.PlayAnimation(MonsterStatus.Attack);
-        yield return new WaitForSeconds(attackActionInterval);
-        SkillMethod();
-
-        SetMaxAttackCoolTime();
-        monster.SetStatus(MonsterStatus.Idle);
+        return true;
     }
 
     protected abstract void SkillMethod();
@@ -75,6 +46,13 @@ public abstract class AttackStrategy : Strategy
     public void SetAttackDirection()
     {
         attackDirection = monster.GetRelativeDirectionToPlayer();
-        if (attackDirection != monster.GetMovingDirection()) monster.FlipDirection();
+        monster.SetMovingDirection(attackDirection);
     }
+
+    public virtual void AttackStart() { SkillMethod(); }
+    public virtual void AttackUpdate() { }
+    public virtual void AttackEnd() { SetMaxAttackCoolTime(); }
+    public void UpdateCoolTime() { if (attackCoolTime > 0 && !monster.GetIsAttacking()) attackCoolTime -= Time.deltaTime; }
+    public void SetMaxAttackCoolTime() { attackCoolTime = attackCoolTimeMax; }
+    protected virtual bool CheckTarget() { return Vector2.Distance(GetPlayerPos(), GetMonsterPos()) < attackRange; }
 }

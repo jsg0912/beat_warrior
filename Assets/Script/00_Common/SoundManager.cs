@@ -18,8 +18,8 @@ public class SoundManager : SingletonObject<SoundManager>
             return;
         }
 
-        float bgVolume = (masterVolume * backgroundVolume);
-        float sfxVol = (masterVolume * sfxVolume);
+        float bgVolume = masterVolume * backgroundVolume;
+        float sfxVol = masterVolume * sfxVolume;
 
         mixer.SetFloat("BackGroundSound", bgVolume > 0 ? Mathf.Log10(bgVolume) * 20 : -80f);
         mixer.SetFloat("SFX", sfxVol > 0 ? Mathf.Log10(sfxVol) * 20 : -80f);
@@ -34,7 +34,7 @@ public class SoundManager : SingletonObject<SoundManager>
     public void SFXVolume(float val)
     {
         sfxVolume = val;
-        ApplyVolume() ;
+        ApplyVolume();
     }
 
     public void MasterVolume(float val)
@@ -45,14 +45,12 @@ public class SoundManager : SingletonObject<SoundManager>
 
     public void SFXPlay(string name, AudioClip clip)
     {
-        GameObject go = new GameObject(name + "Sound");
-        AudioSource audioSource = go.AddComponent<AudioSource>();
-        audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
-        audioSource.clip = clip;
-        audioSource.Play();
-
-
-        Destroy(go, clip.length);
+        if (clip == null)
+        {
+            Debug.LogError("SoundManager: " + name + " is null");
+            return;
+        }
+        backGroundSound.PlayOneShot(clip, 0.5f * sfxVolume);
     }
 
     public void BackGroundPlay(AudioClip clip)
@@ -71,6 +69,9 @@ public class SoundManager : SingletonObject<SoundManager>
 
     public void PlayEquipSFX()
     {
-        SFXPlay("Equip", SoundList.Instance.equipClip);
+        SFXPlay("Equip", SoundList.Instance.altarEquip);
     }
 }
+
+
+

@@ -5,14 +5,15 @@ public class AttackStrategyRush : AttackStrategy
 {
     protected float rushSpeed;
     protected float dashDuration;
+    protected float dashDurationLeft;
     protected Coroutine rushCoroutine;
-    protected LayerMask GroundLayer;
     protected bool isChangingDir = false;
 
     public AttackStrategyRush(float rushSpeed, float dashDuration)
     {
         this.rushSpeed = rushSpeed;
         this.dashDuration = dashDuration;
+        dashDurationLeft = dashDuration;
     }
 
     public override void Initialize(Monster monster)
@@ -21,99 +22,53 @@ public class AttackStrategyRush : AttackStrategy
         GroundLayer = LayerMask.GetMask(LayerConstant.Tile);
     }
 
-    protected override IEnumerator UseSkill()
-    {
-        monster.SetStatus(MonsterStatus.Attack);
-        SetAttackDirection();
-        yield return new WaitForSeconds(attackStartDelay);
-
-        monster.PlayAnimation(MonsterStatus.AttackCharge);
-        yield return new WaitForSeconds(attackActionInterval);
-        monster.PlayAnimation(MonsterStatus.Attack);
-        SkillMethod();
-    }
-
     protected override void SkillMethod()
     {
-        attackCoroutine = monoBehaviour.StartCoroutine(RushCoroutine());
-    }
-
-    protected IEnumerator RushCoroutine()
-    {
-        float elapsedTime = 0f;
         monster.SetIsTackleAble(true);
         monster.SetIsKnockBackAble(false);
         monster.SetIsFixedAnimation(true);
-
-        while (elapsedTime < dashDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            Rush();
-            yield return null;
-        }
-
-        monster.SetIsFixedAnimation(false);
-        monster.SetIsTackleAble(false);
-        monster.SetIsKnockBackAble(true);
-        attackCoolTime = attackCoolTimeMax;
-
-        monster.PlayAnimation(MonsterStatus.AttackEnd);
-        monster.SetStatus(MonsterStatus.Idle);
+        Util.SetActive(monster.attackCollider, true);
     }
 
-    protected virtual void Rush()
+    public override void AttackUpdate()
     {
         if (isChangingDir) return;
-
-        monster.SetMovingDirection(attackDirection);
-
-        CheckWall();
-        CheckGround();
-
-        monster.gameObject.transform.position += new Vector3((int)attackDirection * rushSpeed * Time.deltaTime, 0, 0);
-    }
-
-    //[Code Review - KMJ] TODO: MoveStrategy에도 있는데, Wall을 Check해서 bool을 return하는 함수를 만들고, 그에 따라 필요한 행동은 Strategy에서 알아서 하도록 수정 필요, CheckGround도 마찬가지 - Nights, 20250201
-    protected virtual void CheckWall()
-    {
-        float movingDirection = GetMovingDirectionFloat();
-        Vector3 start = GetMonsterMiddleFrontPos();
-        Vector3 dir = Vector3.right * movingDirection;
-
-        RaycastHit2D rayHit = Physics2D.Raycast(start, dir, MonsterConstant.WallCheckRayDistance, LayerMask.GetMask(LayerConstant.Tile));
-        // Debug.DrawLine(start, start + dir * MonsterConstant.WallCheckDistance, Color.red);
-        if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base))
+        if (dashDurationLeft <= 0)
         {
-            monoBehaviour.StartCoroutine(ChangeDir());
+            dashDurationLeft = dashDuration;
+            monster.SetIsFixedAnimation(false);
+            monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
         }
+
+        dashDurationLeft -= Time.deltaTime;
+        monster.SetMovingDirection(attackDirection);
+        MoveFor(GetMovingDirection(), rushSpeed);
+
+        if (CheckWall() || CheckEndOfGround()) monoBehaviour.StartCoroutine(ChangeDir());
     }
 
-    protected Vector3 GetGroundCheckRayStartPoint()
+    public override void AttackEnd()
     {
-        return GetMonsterPos() + new Vector3((int)attackDirection * GetMonsterSize().x / 2, 0, 0);
-    }
+        base.AttackEnd();
 
-    protected void CheckGround()
-    {
-        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterFrontPos() + new Vector3(0, 0.05f, 0), Vector3.down, MonsterConstant.GroundCheckRayDistance, GroundLayer);
-        //Debug.DrawLine(GetMonsterFrontPos(), GetMonsterFrontPos() + Vector3.down * MonsterConstant.GroundCheckRayDistance, Color.red);
-
-        if (rayHit.collider == null) monoBehaviour.StartCoroutine(ChangeDir());
+        monster.SetIsTackleAble(false);
+        monster.SetIsKnockBackAble(true);
+        Util.SetActive(monster.attackCollider, false);
     }
 
     protected IEnumerator ChangeDir()
     {
+        float turningTime = 0.33f;
         monster.FlipDirection();
         attackDirection = monster.GetMovingDirection();
 
         monster.SetIsFixedAnimation(false);
-
         monster.PlayAnimation(MonsterConstant.turnAnimTrigger);
-
         monster.SetIsFixedAnimation(true);
 
         isChangingDir = true;
-        yield return new WaitForSeconds(0.33f);
+        yield return new WaitForSeconds(turningTime);
+        dashDurationLeft -= turningTime;
         isChangingDir = false;
     }
 }

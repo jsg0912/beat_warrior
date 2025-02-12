@@ -1,10 +1,8 @@
 public enum MonsterStatus
 {
-    Idle,
-    Chase,
-    AttackCharge,
+    Normal,
     Attack,
-    AttackEnd,
+    Groggy,
     Hurt,
     Dead
 }

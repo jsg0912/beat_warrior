@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,62 +10,141 @@ public class SkillCoolTimeUI : MonoBehaviour
     [SerializeField] Image SkillIconUILight; // It can be null (ex. Passive Skill or Dash) 
     [SerializeField] TextMeshProUGUI SkillHotKey;
     [SerializeField] TextMeshProUGUI CoolTimeText;
-
-    private bool isFirstCoolTime = false; // This Bool is for optimization - SDH, 20250114
+    Timer lightTimer = new Timer();
+    Timer gaugeTimer = new Timer();
+    Timer textTimer = new Timer();
+    float maxCoolTime;
 
     void Start()
     {
+        maxCoolTime = PlayerSkillConstant.SkillCoolTime[skillName];
         UpdateSkillHotKey();
     }
 
-    // [Code Review - KMJ] Using Coroutine, not Update - SDH, 20250114
-    void Update()
+    public void TryCoolDownAnimation(bool isOnGauge = true, bool isOnText = true, bool isOnLight = true)
     {
-        float coolTime = Player.Instance.GetSkillCoolTime(skillName);
-        if (coolTime > 0)
+        float initCoolTime = Player.Instance.GetSkillCoolTime(skillName);
+        if (initCoolTime > 0)
         {
-            TryTurnOnSkillCoolTimeUI();
-            CoolTimeImg.fillAmount = 1 - coolTime / PlayerSkillConstant.SkillCoolTime[skillName];
+            if (isOnText && CoolTimeText != null)
+            {
+                StartCoroutine(CoolDownAnimationText(initCoolTime));
+            }
+            if (isOnGauge && CoolTimeImg != null)
+            {
+                StartCoroutine(CoolDownAnimationGauge(initCoolTime));
+            }
+            if (isOnLight && SkillIconUILight != null)
+            {
+                StartCoroutine(CoolDownAnimationLight(initCoolTime));
+            }
+        }
+        else
+        {
+            ResetSkillCoolDownUI();
+        }
+    }
+
+    public void ResetSkillCoolDownUI()
+    {
+        StopAllCoroutines();
+        ResetCoolTimeLight();
+        ResetCoolTimeText();
+        ResetCoolTimeGauge();
+    }
+
+    private IEnumerator CoolDownAnimationText(float initCoolTime)
+    {
+        Util.SetActive(CoolTimeText.gameObject, true);
+
+        textTimer.Initialize(initCoolTime);
+        while (textTimer.Tick())
+        {
+            float coolTime = Player.Instance.GetSkillCoolTime(skillName);
             CoolTimeText.text = Mathf.Ceil(coolTime).ToString();
+            yield return null;
         }
-        else TryTurnOffSkillCoolTimeUI();
+
+        ResetCoolTimeText();
     }
 
-    private void TryTurnOnSkillCoolTimeUI()
+    private IEnumerator CoolDownAnimationGauge(float initCoolTime)
     {
-        if (isFirstCoolTime == true)
+        gaugeTimer.Initialize(initCoolTime);
+        while (gaugeTimer.Tick())
         {
-            isFirstCoolTime = false;
-            Util.SetActive(SkillIconUILight?.gameObject, true);
-            Util.SetActive(CoolTimeText.gameObject, true);
-            StartSkillIconLightAnimation();
+            float coolTime = Player.Instance.GetSkillCoolTime(skillName);
+            CoolTimeImg.fillAmount = 1 - coolTime / maxCoolTime;
+            yield return null;
         }
+
+        ResetCoolTimeGauge();
     }
 
-    private void TryTurnOffSkillCoolTimeUI()
+    private IEnumerator CoolDownAnimationLight(float initCoolTime)
     {
-        if (!isFirstCoolTime)
+        Util.SetActive(SkillIconUILight.gameObject, true);
+        Util.SetRotationZ(SkillIconUILight.gameObject, 1 - initCoolTime / maxCoolTime);
+
+        lightTimer.Initialize(initCoolTime);
+        while (lightTimer.Tick())
         {
-            isFirstCoolTime = true;
-            Util.SetActive(SkillIconUILight?.gameObject, false);
-            Util.SetActive(CoolTimeText.gameObject, false);
-            CoolTimeImg.fillAmount = 1;
+            float coolTime = Player.Instance.GetSkillCoolTime(skillName);
+            Util.SetRotationZ(SkillIconUILight.gameObject, coolTime / maxCoolTime);
+            yield return null;
         }
+
+        ResetCoolTimeLight();
     }
 
-    private void StartSkillIconLightAnimation()
+    private void ResetCoolTimeLight()
     {
         if (SkillIconUILight != null)
         {
-            Animator animator = SkillIconUILight.GetComponent<Animator>();
-            animator.SetTrigger("Start");
-            animator.speed = 1 / PlayerSkillConstant.SkillCoolTime[skillName];
+            Util.ResetRotationZ(SkillIconUILight.gameObject);
+            Util.SetActive(SkillIconUILight.gameObject, false);
+            lightTimer.SetRemainTimeZero();
         }
     }
 
+    private void ResetCoolTimeText()
+    {
+        if (CoolTimeText != null)
+        {
+            Util.SetActive(CoolTimeText.gameObject, false);
+            textTimer.SetRemainTimeZero();
+        }
+    }
+
+    private void ResetCoolTimeGauge()
+    {
+        if (CoolTimeImg != null)
+        {
+            CoolTimeImg.fillAmount = 1;
+            gaugeTimer.SetRemainTimeZero();
+        }
+    }
+
+
     public void UpdateSkillHotKey()
     {
-        // TODO: HotKey 설정된 것에 따라 바뀌게 해야함
-        // SkillHotKey.text = skillName.ToString(); 
+        switch (skillName)
+        {
+            case SkillName.Attack:
+                SkillHotKey.text = KeySetting.keys[PlayerAction.Attack].ToString();
+                break;
+            case SkillName.Mark:
+                SkillHotKey.text = KeySetting.keys[PlayerAction.Mark_Dash].ToString();
+                break;
+            case SkillName.Dash:
+                SkillHotKey.text = KeySetting.keys[PlayerAction.Mark_Dash].ToString();
+                break;
+            case SkillName.Skill1:
+                SkillHotKey.text = KeySetting.keys[PlayerAction.Skill1].ToString();
+                break;
+            case SkillName.Skill2:
+                SkillHotKey.text = KeySetting.keys[PlayerAction.Skill2].ToString();
+                break;
+        }
     }
 }

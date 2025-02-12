@@ -15,54 +15,65 @@ public class AttackStrategyRolling : AttackStrategy
         this.duration = duration;
     }
 
-    protected override IEnumerator UseSkill()
+    protected override bool TrySkill()
     {
-        monster.SetStatus(MonsterStatus.Attack);
-        yield return new WaitForSeconds(attackStartDelay);
+        if (attackCoolTime > 0) return false;
+        if (!CheckTarget()) return false;
 
-        monster.PlayAnimation(MonsterStatus.AttackCharge);
-        yield return new WaitForSeconds(attackActionInterval);
+        SetAttackDirection();
         monster.PlayAnimation(MonsterStatus.Attack);
-        SkillMethod();
+        JumpAnimation();
 
-        yield return new WaitForSeconds(duration + 0.3f);
-        SetAfterSkill();
-
-        monster.SetStatus(MonsterStatus.AttackEnd);
-        monster.PlayAnimation(MonsterStatus.AttackEnd);
+        return true;
     }
 
-    protected override void SkillMethod()
+    protected void JumpAnimation()
     {
         Vector3 target = Player.Instance.transform.position;
         target.y = monster.transform.position.y + jumpPower;
-        SetBeforeSkill();
 
         monster.transform.DOMoveX(target.x, duration)
             .SetEase(Ease.InSine);
         monster.transform.DOMoveY(target.y, duration)
-            .SetEase(Ease.OutSine);
+            .SetEase(Ease.OutSine)
+            .OnComplete(() =>
+            {
+                Rigidbody2D rb = monster.GetComponent<Rigidbody2D>();
+                float gravity = rb.gravityScale;
+
+                rb.gravityScale = 0;
+                rb.velocity = Vector2.zero;
+
+                DOVirtual.DelayedCall(1.0f, () =>
+                {
+                    rb.gravityScale = gravity;
+                    rb.velocity = Vector2.down * gravity * 10;
+
+                    monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
+                });
+            });
+    }
+
+    protected override void SkillMethod()
+    {
+        SetBeforeSkill();
     }
 
     private void SetBeforeSkill()
     {
-        monster.SetStatus(MonsterStatus.Attack);
-        SetAttackDirection();
-
         monster.SetIsTackleAble(true);
         monster.SetIsKnockBackAble(false);
         monster.SetIsTackleAble(true);
     }
 
-    public void SetAfterSkill()
+    public override void AttackEnd()
     {
-        SetMaxAttackCoolTime();
+        base.AttackEnd();
 
         monster.SetIsFixedAnimation(false);
         monster.SetIsTackleAble(false);
         monster.SetIsKnockBackAble(true);
-        monster.spriteRenderer.transform.DORotate(Vector3.zero, 0.1f);
 
-        monster.SetStatus(MonsterStatus.Idle);
+        monster.SetAnimationBool(MonsterStatus.Groggy, true);
     }
 }

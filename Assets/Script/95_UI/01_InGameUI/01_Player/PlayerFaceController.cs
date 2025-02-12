@@ -9,29 +9,61 @@ public class PlayerFaceController : MonoBehaviour
     [SerializeField] private Sprite happyFace;
     [SerializeField] private Sprite crazyFace;
     [SerializeField] private Sprite beautyFace;
+    private PlayerStatus currentFace;
+
+    public void SetPlayerFace(PlayerStatus playerStatus, int hp)
+    {
+        if (playerStatus == PlayerStatus.Happy) SetHappyFace(); // Stage Clear is the most valuable face
+        else
+        {
+            if (hp <= PlayerConstant.PlayerHurtFaceTriggerHp) SetHurtFace();
+            else SetIdleFace();
+        }
+    }
+
+    private bool IsSameFace(PlayerStatus newFace)
+    {
+        if (currentFace == newFace) return true;
+        currentFace = newFace;
+        DebugConsole.Log("Player Face: " + newFace);
+        return false;
+    }
 
     public void SetIdleFace()
     {
-        if (Random.Range(0, 100) == 0) faceImage.sprite = beautyFace;
-        else faceImage.sprite = idleFace;
+        if (IsSameFace(PlayerStatus.Normal)) return;
 
+        if (Util.RandomBool(10)) SetBeautyFace(); // 임시로 10% 확률로 이쁜 얼굴
+        else faceImage.sprite = idleFace;
     }
 
     public void SetHurtFace()
     {
-        DebugConsole.Log("SetHurtFace");
-        faceImage.sprite = hurtFace;
+        if (IsSameFace(PlayerStatus.Hurt)) return;
+
+        if (faceImage.sprite != hurtFace)
+            faceImage.sprite = hurtFace;
     }
 
     public void SetHappyFace()
     {
-        DebugConsole.Log("SetHappyFace");
-        faceImage.sprite = happyFace;
+        if (IsSameFace(PlayerStatus.Happy)) return;
+
+        if (faceImage.sprite != happyFace)
+            faceImage.sprite = happyFace;
+    }
+
+
+    // Below faces are for fun...
+    public void SetBeautyFace()
+    {
+        if (faceImage.sprite != beautyFace)
+            faceImage.sprite = beautyFace;
     }
 
     public void SetCrazyFace()
     {
-        DebugConsole.Log("SetCrazyFace");
-        faceImage.sprite = crazyFace;
+        if (faceImage.sprite != crazyFace)
+            faceImage.sprite = crazyFace;
     }
 }

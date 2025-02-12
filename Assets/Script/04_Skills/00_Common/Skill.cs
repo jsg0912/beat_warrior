@@ -60,8 +60,12 @@ public abstract class Skill
 
     public virtual void ResetCoolTime()
     {
-        if (countCoolTime != null) monoBehaviour.StopCoroutine(countCoolTime);
-        coolTimer.SetRemainTimeZero();
+        if (countCoolTime != null)
+        {
+            monoBehaviour.StopCoroutine(countCoolTime);
+            coolTimer.SetRemainTimeZero();
+            PlayerUIManager.Instance.ResetCoolTImeUI(skillName);
+        }
     }
 
     protected virtual void CreateEffectPrefab() { return; } // [Code Review - KMJ] Check the Necessity and "virtual" - SDH, 20240106
