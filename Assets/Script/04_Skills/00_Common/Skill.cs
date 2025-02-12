@@ -52,7 +52,6 @@ public abstract class Skill
     protected virtual IEnumerator CountCoolTime()
     {
         coolTimer.Initialize();
-        PlayerUIManager.Instance.SetCoolTimeUI(skillName);
         while (coolTimer.Tick())
         {
             yield return null;
@@ -63,9 +62,9 @@ public abstract class Skill
     {
         if (countCoolTime != null)
         {
-            PlayerUIManager.Instance.ResetCoolTImeUI(skillName);
             monoBehaviour.StopCoroutine(countCoolTime);
             coolTimer.SetRemainTimeZero();
+            PlayerUIManager.Instance.ResetCoolTImeUI(skillName);
         }
     }
 

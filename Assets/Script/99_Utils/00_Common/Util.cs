@@ -160,7 +160,6 @@ public static class Util
             Vector2 pixelSize = spriteRenderer.sprite.rect.size; // 픽셀 크기
             float pixelsPerUnit = spriteRenderer.sprite.pixelsPerUnit; // PPU 값
 
-            DebugConsole.Log($"size is {(pixelSize / pixelsPerUnit).y}");
             return pixelSize / pixelsPerUnit; // 로컬 크기 반환
         }
 
@@ -210,5 +209,17 @@ public static class Util
             yield return null;
         }
         SetActive(effect, false);
+    }
+
+    public static void SetRotationZ(GameObject gameObject, float rotationZRatio)
+    {
+        if (rotationZRatio > 1.0f) rotationZRatio = 1.0f;
+        else if (rotationZRatio < 0.0f) rotationZRatio = 0.0f;
+        if (gameObject != null) gameObject.transform.rotation = Quaternion.Euler(0, 0, rotationZRatio * 360);
+    }
+
+    public static void ResetRotationZ(GameObject gameObject)
+    {
+        if (gameObject != null) gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 }

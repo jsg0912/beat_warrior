@@ -74,12 +74,6 @@ public class Mark : ActiveSkillPlayer
         PlayerUIManager.Instance.SwapMarkAndDash(true);
     }
 
-    public override void ResetCoolTime()
-    {
-        if (countCoolTime != null) monoBehaviour.StopCoroutine(countCoolTime);
-        coolTimer.SetRemainTimeZero();
-    }
-
     protected override void SkillMethod()
     {
         Transform playerTransform = Player.Instance.transform;

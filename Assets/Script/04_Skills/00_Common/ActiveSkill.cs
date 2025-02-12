@@ -9,6 +9,7 @@ public abstract class ActiveSkill : Skill
         if (coolTime > 0) return;
 
         StartCountCoolTime();
+        PlayerUIManager.Instance.SetCoolTimeUI(skillName);
 
         UseSkill();
     }
