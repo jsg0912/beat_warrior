@@ -147,7 +147,7 @@ public class Monster : DirectionalGameObject
         if (!GetIsAlive()) return;
         int damage = playerATK - monsterUnit.unitStat.GetFinalStat(StatKind.Def);
         if (damage <= 0) return;
-        SoundManager.Instance.PlayMonsterHitSFX();
+        SoundManager.Instance.SFXPlay("MonsterHit", SoundList.Instance.monsterHit);
         GetDamaged(damage);
         if (Player.Instance.hitMonsterFuncList != null && !isAlreadyCheckHitMonsterFunc) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
         PlayAnimation(MonsterConstant.hurtAnimTrigger);

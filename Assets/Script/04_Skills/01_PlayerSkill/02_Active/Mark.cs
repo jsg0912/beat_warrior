@@ -95,6 +95,6 @@ public class Mark : ActiveSkillPlayer
 
         Marker.GetComponent<Marker>().SetVelocity(start, end);
 
-        SoundManager.Instance.PlayMarkSFX();
+        SoundManager.Instance.SFXPlay("PlayerMark", SoundList.Instance.playerMark);
     }
 }

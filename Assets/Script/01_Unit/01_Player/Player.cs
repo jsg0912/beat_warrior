@@ -296,7 +296,7 @@ public class Player : DirectionalGameObject
 
             jumpDeltaTimer = jumpTimer;
 
-            SoundManager.Instance.PlayPlayerJumpSFX();
+            SoundManager.Instance.SFXPlay("PlayerJump", SoundList.Instance.playerJump);
         }
     }
 
@@ -452,12 +452,12 @@ public class Player : DirectionalGameObject
 
         bool isAlive = ChangeCurrentHP(-dmg);
 
-        SoundManager.Instance.PlayPlayerHitSFX();
+        SoundManager.Instance.SFXPlay("PlayerHit", SoundList.Instance.playerHit);
 
         if (!isAlive)
         {
             SetDead();
-            SoundManager.Instance.PlayPlayerDeadSFX();
+            SoundManager.Instance.SFXPlay("PlayerDead", SoundList.Instance.playerDead);
             if (reviveSKillFuncList != null)
             {
                 reviveSKillFuncList();

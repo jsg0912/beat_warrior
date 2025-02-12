@@ -71,37 +71,7 @@ public class SoundManager : SingletonObject<SoundManager>
 
     public void PlayEquipSFX()
     {
-        SFXPlay("Equip", SoundList.Instance.equipClip);
-    }
-
-    public void PlayHolyBladeSFX()
-    {
-        SFXPlay("HolyBlade", SoundList.Instance.holyBladeClip);
-    }
-
-    public void PlayMonsterHitSFX()
-    {
-        SFXPlay("MonsterHit", SoundList.Instance.monsterHit);
-    }
-
-    public void PlayMarkSFX()
-    {
-        SFXPlay("Mark", SoundList.Instance.mark);
-    }
-
-    public void PlayPlayerHitSFX()
-    {
-        SFXPlay("PlayerHit", SoundList.Instance.playerHit);
-    }
-
-    public void PlayPlayerDeadSFX()
-    {
-        SFXPlay("PlayerDead", SoundList.Instance.playerDead);
-    }
-
-    public void PlayPlayerJumpSFX()
-    {
-        SFXPlay("PlayerJump", SoundList.Instance.playerJump);
+        SFXPlay("Equip", SoundList.Instance.altarEquip);
     }
 }
 
