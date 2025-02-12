@@ -47,7 +47,7 @@ public class SoundManager : SingletonObject<SoundManager>
     {
         if (clip == null)
         {
-            Debug.LogError("SoundManager: " + name + " is null");
+            // Debug.LogError("SoundManager: " + name + " is null");
             return;
         }
         backGroundSound.PlayOneShot(clip, 0.5f * sfxVolume);
