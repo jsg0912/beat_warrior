@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class SystemMassagePopup : MonoBehaviour
@@ -6,6 +7,7 @@ public class SystemMassagePopup : MonoBehaviour
     public CanvasGroup canvasGroup;
     public float fadeDuration = 1.0f;
     public float displayDuration = 3.0f;
+    public TMP_Text massageText;
 
     private Coroutine fadeCoroutine;
 
@@ -67,5 +69,13 @@ public class SystemMassagePopup : MonoBehaviour
 
         canvasGroup.alpha = 0;
         TurnOffPopup();
+    }
+
+    public void SetMessageText(string message)
+    {
+        if (massageText != null)
+        {
+            massageText.text = message;
+        }
     }
 }

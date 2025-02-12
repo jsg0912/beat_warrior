@@ -5,7 +5,7 @@ public class Portal : ObjectWithInteractionPrompt
         bool success = ChapterManager.Instance.MoveToNextStage();
         if(success == false)
         {
-            SystemMassageUIManager.Instance.TurnOnSystemMassageUI();
+            SystemMassageUIManager.Instance.TurnOnSystemMassageUI(SyetemMassageType.EnemyRemaining);
         }
     }
 }
