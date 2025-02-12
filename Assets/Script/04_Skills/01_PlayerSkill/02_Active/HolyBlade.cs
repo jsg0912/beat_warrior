@@ -5,7 +5,7 @@ public class HolyBlade : ActiveSkillPlayer
 {
     public HolyBlade(GameObject unit) : base(unit)
     {
-        trigger = new() { PlayerConstant.attackLAnimTrigger, PlayerConstant.attackRAnimTrigger };
+        trigger = new() { PlayerConstant.attackAnimTrigger };
         damageMultiplier = PlayerSkillConstant.attackAtk;
         EffectPrefab = Resources.Load(PrefabRouter.PlayerAttackPrefab) as GameObject;
         additionalEffects.Add(new KnockBack(PlayerSkillConstant.attackKnockBackDistance));

@@ -8,11 +8,11 @@ public class MonsterAnimatorController : StateMachineBehaviour
     {
         if (monster == null) monster = animator.GetComponent<Monster>();
 
-        if (stateInfo.IsName("Idle")) monster.SetStatus(MonsterStatus.Idle);
-        else if (stateInfo.IsName("Charge")) monster.SetStatus(MonsterStatus.AttackCharge);
-        else if (stateInfo.IsName("Attack")) monster.SetStatus(MonsterStatus.Attack);
-        else if (stateInfo.IsName("AttackEnd")) monster.SetStatus(MonsterStatus.AttackEnd);
-        else if (stateInfo.IsName("Hurt")) monster.SetStatus(MonsterStatus.Hurt);
-        else if (stateInfo.IsName("Die")) monster.SetStatus(MonsterStatus.Dead);
+        if (stateInfo.IsName(MonsterAnimation.Idle) || stateInfo.IsName(MonsterAnimation.Walk)) monster.SetStatus(MonsterStatus.Normal);
+        else if (stateInfo.IsName(MonsterAnimation.Charge)) monster.SetStatus(MonsterStatus.Attack);
+        else if (stateInfo.IsName(MonsterAnimation.Attack)) monster.AttackStart();
+        else if (stateInfo.IsName(MonsterAnimation.AttackEnd)) monster.AttackEnd();
+        else if (stateInfo.IsName(MonsterAnimation.Groggy)) monster.SetStatus(MonsterStatus.Groggy);
+        else if (stateInfo.IsName(MonsterAnimation.Die)) monster.SetStatus(MonsterStatus.Dead);
     }
 }

@@ -41,6 +41,7 @@ public class GameManager : SingletonObject<GameManager>
     public void StartGame()
     {
         SetIsInGame(true);
+        PauseController.Instance.ResetSpeed();
         InGameManager.TryCreateSingletonObject();
         ChapterManager.Instance.StartNewGame();
         Player.TryCreatePlayer();

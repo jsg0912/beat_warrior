@@ -11,6 +11,13 @@ public class RecognizeStrategyMelee : RecognizeStrategy
 
     protected override void CheckTarget()
     {
+        if (monster.isChasing)
+        {
+            if (Vector2.Distance(GetPlayerPos(), GetMonsterPos()) > recognizeRange) ReleaseChase();
+            else ChaseTarget();
+            return;
+        }
+
         Vector3 dir = Vector3.right * GetMovingDirectionFloat();
         RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterMiddlePos(), dir, recognizeRange, TargetLayer);
         //Debug.DrawLine(GetMonsterMiddlePos(), GetMonsterMiddlePos() + dir * recognizeRange, Color.red);

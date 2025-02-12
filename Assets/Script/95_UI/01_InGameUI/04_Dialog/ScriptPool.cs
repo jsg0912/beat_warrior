@@ -73,6 +73,12 @@ public static class ScriptPool
             },{
                 Language.en, "Health Absorption"
             }}},
+        {SkillName.Revive, new Dictionary<Language, string>{
+            {
+                Language.kr, "여신의 은총"
+            },{
+                Language.en, "Grace of Goddess"
+            }}},
     };
 
     public static Dictionary<SkillName, Dictionary<Language, string>> TraitUIScript = new Dictionary<SkillName, Dictionary<Language, string>>
@@ -154,6 +160,12 @@ public static class ScriptPool
                 Language.kr, "10마리 처치 시 체력을 1회복한다."
             },{
                 Language.en, "1 recovery in stamina when you treat 10 animals."
+            }}},
+        {SkillName.Revive, new Dictionary<Language, string>{
+            {
+                Language.kr, "체력이 모두 줄어 사망했을 때 한 번만 체력 2로 살아난다. (1회용)"
+            },{
+                Language.en, "When the stamina is completely reduced and died, it is revived with stamina 2 only once. (1 time use)"
             }}},
     };
 

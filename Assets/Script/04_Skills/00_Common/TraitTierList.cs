@@ -11,11 +11,12 @@ public static class TraitTierList
         {SkillName.KillRecoveryHP, SkillTier.Epic},
         {SkillName.Execution, SkillTier.Legendary},
         {SkillName.SkillReset, SkillTier.Legendary},
+        {SkillName.Revive, SkillTier.Legendary},
     };
 
     public static SkillTier GetTier(SkillName skillName)
     {
-        if(Info.ContainsKey(skillName)) return Info[skillName];
+        if (Info.ContainsKey(skillName)) return Info[skillName];
         return SkillTier.Common;
     }
 }

@@ -1,15 +1,21 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class KeySettingButton : MonoBehaviour
 {
-    private bool isListeningForInput = false;
-    private int idx;
-
+    [SerializeField] private PlayerAction action;   
     [SerializeField] private TextMeshProUGUI ActionText;
     [SerializeField] private TextMeshProUGUI KeyText;
     [SerializeField] private Image KeyImage; // It used for Mouse Key Input
+
+    private bool isListeningForInput = false;
+
+    void Start()
+    {
+        UpdateKeyText();
+    }
 
     void Update()
     {
@@ -21,22 +27,6 @@ public class KeySettingButton : MonoBehaviour
 
     private void ListenForInput()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            SetKeyCode(KeyCode.Mouse0);
-            return;
-        }
-        if (Input.GetMouseButtonDown(1))
-        {
-            SetKeyCode(KeyCode.Mouse1);
-            return;
-        }
-        if (Input.GetMouseButtonDown(2))
-        {
-            SetKeyCode(KeyCode.Mouse2);
-            return;
-        }
-
         foreach (KeyCode keyCode in System.Enum.GetValues(typeof(KeyCode)))
         {
             if (Input.GetKeyDown(keyCode))
@@ -50,9 +40,9 @@ public class KeySettingButton : MonoBehaviour
     void SetKeyCode(KeyCode keyCode)
     {
         isListeningForInput = false;
-
-        KeySetting.keys[(PlayerAction)idx] = keyCode;
+        KeySetting.keys[action] = keyCode;
         UpdateKeyText();
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void OnClick()
@@ -62,17 +52,7 @@ public class KeySettingButton : MonoBehaviour
 
     public void UpdateKeyText()
     {
-        if (ActionText == null || KeyText == null)
-            return;
-
-        ActionText.text = ((PlayerAction)idx).ToString();
-        KeyText.text = KeySetting.keys[(PlayerAction)idx].ToString();
-    }
-
-    public void SetKey(int key)
-    {
-        this.idx = key;
-
-        UpdateKeyText();
+        //ActionText.text = action.ToString();
+        KeyText.text = KeySetting.keys[action].ToString();
     }
 }

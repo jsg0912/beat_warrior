@@ -8,9 +8,15 @@ public class Mark : ActiveSkillPlayer
 
     public Mark(GameObject unit) : base(unit)
     {
-        trigger = new() { PlayerConstant.markAnimTrigger };
         MarkerPrefab = Resources.Load(PrefabRouter.MarkerPrefab) as GameObject;
         markSlowTimer = new Timer(PlayerSkillConstant.MarkSlowDuration);
+    }
+
+    protected override void UseSkill()
+    {
+        SkillMethod();
+
+        if (Player.Instance.useSKillFuncList != null) Player.Instance.useSKillFuncList(this);
     }
 
     protected override void SetSkillName() { skillName = SkillName.Mark; }
@@ -20,20 +26,24 @@ public class Mark : ActiveSkillPlayer
         UpdateKey();
 
         if (coolTime <= 0 && Input.GetKeyDown(keyCode)) ZoomIn();
-        else if (markSlowTimer.remainTime > 0)
+    }
+
+    public override void CheckFixedInputKeyCode()
+    {
+        if (markSlowTimer.remainTime > 0)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0)) ZoomOut();
-            else if (Input.GetKey(keyCode))
+            if (Input.GetKey(keyCode))
             {
                 if (!markSlowTimer.UnScaledTick()) ZoomOut();
             }
-            else if (Input.GetKeyUp(keyCode))
+            if (Input.GetKeyUp(keyCode))
             {
                 if (Player.Instance.IsActionAble())
                 {
-                    ZoomOut();
                     TrySkill();
                 }
+                ZoomOut();
             }
         }
     }

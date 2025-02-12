@@ -24,22 +24,23 @@ public class Player : DirectionalGameObject
         get { return _status; }
         set
         {
-            if (GetCurrentStat(StatKind.HP) <= 0 && value != PlayerStatus.Dead) return;
+            if (Hp <= 0 && value != PlayerStatus.Dead) return;
             else _status = value;
         }
     }
 
-    public int Hp => playerUnit.unitStat.GetCurrentStat(StatKind.HP);
+    public int Hp => GetCurrentStat(StatKind.HP);
 
     private bool isGround;
     private float jumpDeltaTimer;
     private float jumpTimer;
-    private bool isInvincibility;
+    [SerializeField] private bool isInvincibility;
     private BoxCollider2D tileCollider; // [Code Review - KMJ] TODO: 이제 필요없으면 제거 or TileCollider를 왜 가지고 있는지 모르겠음 - SDH, 20250208
 
-    public PlayerGhostController playerGhostConstroller;
+    public PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
+    public ReviveSkillFunc reviveSKillFuncList = null;
 
     public static void TryCreatePlayer()
     {
@@ -73,9 +74,12 @@ public class Player : DirectionalGameObject
             new HolyBlade(gameObject),
             new Mark(gameObject),
             new Dash(gameObject),
-            new Skill1(gameObject),
-            new Skill2(gameObject)
+            new QSkill(gameObject),
+            new ESkill(gameObject)
         };
+
+        traitList.Clear();
+        Inventory.Instance.Initialize();
 
         _collider = GetComponent<BoxCollider2D>();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -87,10 +91,10 @@ public class Player : DirectionalGameObject
         isGround = false;
         jumpDeltaTimer = 0;
         jumpTimer = 0.1f;
-        isInvincibility = false;
+        SetInvincibility(false);
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
-        playerGhostConstroller = new PlayerGhostController();
+        playerGhostController = new PlayerGhostController();
         InitializeAttackCollider();
     }
 
@@ -111,6 +115,7 @@ public class Player : DirectionalGameObject
     public void SetStatus(PlayerStatus status)
     {
         this.status = status;
+        PlayerUIManager.Instance?.SetPlayerFace(status, Hp);
 
         switch (status)
         {
@@ -128,14 +133,24 @@ public class Player : DirectionalGameObject
 
     public void SetAnimTrigger(string trigger) { _animator.SetTrigger(trigger); }
 
-    public void SetInvincibility(bool isInvin) { isInvincibility = isInvin; }
+    public void SetInvincibility(bool isInvin)
+    {
+        isInvincibility = isInvin;
+    }
 
     public void PlayerAddForce(Vector2 force, int dir) { _rigidbody.AddForce(force * (int)objectDirection * dir, ForceMode2D.Impulse); }
 
-    public bool ChangeCurrentHP(int hp)
+    public void ForceSetCurrentHp(int hp)
     {
-        bool isAlive = playerUnit.ChangeCurrentHP(hp);
+        playerUnit.ForceSetCurrentHP(hp);
         PlayerHpUIController.Instance?.UpdateHPUI();
+    }
+
+    public bool ChangeCurrentHP(int change)
+    {
+        bool isAlive = playerUnit.ChangeCurrentHP(change);
+        PlayerHpUIController.Instance?.UpdateHPUI();
+        PlayerUIManager.Instance?.SetPlayerFace(status, Hp);
         return isAlive;
     }
 
@@ -181,6 +196,17 @@ public class Player : DirectionalGameObject
         if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
     }
 
+    public bool CheckWall()
+    {
+        float movingDirection = GetMovingDirectionFloat();
+        Vector3 start = GetMiddlePos();
+        Vector3 dir = Vector3.right * movingDirection;
+
+        RaycastHit2D rayHit = Physics2D.Raycast(start, dir, GetSize().x + 0.05f, LayerMask.GetMask(LayerConstant.Tile));
+        //Debug.DrawLine(start, start + dir * 0.05f, Color.red);
+        return rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base);
+    }
+
     public void CheckPlayerCommand()
     {
         if (IsActionAble())
@@ -189,6 +215,7 @@ public class Player : DirectionalGameObject
             Down();
             Skill();
         }
+        FixedSkillUpdate();
         CheckGround();
     }
 
@@ -244,7 +271,7 @@ public class Player : DirectionalGameObject
         RaycastHit2D rayHit = Physics2D.Raycast(left, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
         if (rayHit.collider == null) rayHit = Physics2D.Raycast(right, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
 
-        isGround = rayHit.collider != null && Mathf.Approximately(_rigidbody.velocity.y, 0f);
+        isGround = rayHit.collider != null && Util.IsStoppedSpeed(_rigidbody.velocity.y);
         _animator.SetBool(PlayerConstant.groundedAnimBool, isGround);
 
         if (!isGround) return;
@@ -265,7 +292,7 @@ public class Player : DirectionalGameObject
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
 
             _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
-            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpHeight, ForceMode2D.Impulse);
+            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpPower, ForceMode2D.Impulse);
 
             jumpDeltaTimer = jumpTimer;
         }
@@ -284,22 +311,14 @@ public class Player : DirectionalGameObject
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetMovingDirection(dir);
 
-        // TODO: 아래의 10은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
-        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 100;
+        // TODO: 아래의 50은 임시 상수로, 일종의 보정치 개념임, 실험을 하면서 값을 찾고 어떻게 할지 확인해야함 - 신동환, 2024.08.30
+        int expectedMoveCount = (int)Math.Ceiling(1 / PlayerSkillConstant.DashSpeed) + 50;
         int moveCount = 0;
         while (Vector2.Distance(end, transform.position) >= 0.05f && moveCount < expectedMoveCount)
         {
-            if (!passWall)
-            {
-                float movingDir = GetMovingDirectionFloat();
-                Vector3 start = GetMiddlePos() + new Vector3(GetSize().x / 2, 0, 0) * movingDir;
-                Vector3 direction = Vector3.right * movingDir;
+            if (!passWall && CheckWall()) break;
 
-                RaycastHit2D rayHit = Physics2D.Raycast(start, direction, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
-                if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Base)) break;
-            }
-
-            playerGhostConstroller.TryMakeGhost(dir);
+            playerGhostController.TryMakeGhost(dir);
 
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
             moveCount++;
@@ -322,6 +341,12 @@ public class Player : DirectionalGameObject
         foreach (var skill in skillList) skill.CheckInputKeyCode();
     }
 
+    private void FixedSkillUpdate()
+    {
+        foreach (var skill in skillList) skill.CheckFixedInputKeyCode();
+    }
+
+
     public float GetSkillCoolTime(SkillName skillName)
     {
         foreach (ActiveSkillPlayer skill in skillList)
@@ -335,6 +360,11 @@ public class Player : DirectionalGameObject
     public Skill HaveSkill(SkillName name)
     {
         foreach (var skill in skillList)
+        {
+            if (skill.skillName == name) return skill;
+        }
+
+        foreach (var skill in traitList)
         {
             if (skill.skillName == name) return skill;
         }
@@ -375,6 +405,9 @@ public class Player : DirectionalGameObject
                 break;
             case SkillName.SkillReset:
                 trait = new SkillReset(this.gameObject);
+                break;
+            case SkillName.Revive:
+                trait = new Revive(this.gameObject);
                 break;
         }
 
@@ -420,6 +453,11 @@ public class Player : DirectionalGameObject
         if (!isAlive)
         {
             SetDead();
+            if (reviveSKillFuncList != null)
+            {
+                reviveSKillFuncList();
+                SetStatus(PlayerStatus.Normal);
+            }
             return;
         }
 
@@ -436,7 +474,7 @@ public class Player : DirectionalGameObject
         SetStatus(PlayerStatus.Unmovable);
 
         if (direction == objectDirection) FlipDirection();
-        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), (int)direction);
+        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), -1);
         StartCoroutine(KnockBacked(PlayerConstant.knockBackedStunTime));
     }
 
@@ -448,9 +486,9 @@ public class Player : DirectionalGameObject
 
     private IEnumerator Invincibility(float timer)
     {
-        isInvincibility = true;
+        SetInvincibility(true);
         yield return new WaitForSeconds(timer);
-        isInvincibility = false;
+        SetInvincibility(false);
     }
 
     public bool CheckFullEquipTrait()

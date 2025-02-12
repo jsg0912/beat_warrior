@@ -11,11 +11,11 @@ public class PlayerConstant
     };
 
     public const float gravityScale = 5.0f;
-    public const float moveSpeed = 7.0f;
-    public const float jumpHeight = 20.0f;
+    public const float moveSpeed = 5.6f;
+    public const float jumpPower = 20.0f;
     public const float playerHeight = 1.0f;
 
-    public const float invincibilityTime = 0.5f;
+    public const float invincibilityTime = 1.0f;
     public const float knockBackedStunTime = 2.0f;
     public const float knockBackedDistance = 5.0f;
 
@@ -26,13 +26,13 @@ public class PlayerConstant
     public const string dieAnimTrigger = "die";
     public const string restartAnimTrigger = "restart";
     public const string reviveAnimTrigger = "revive";
-    public const string attackRAnimTrigger = "attackR";
-    public const string attackLAnimTrigger = "attackL";
-    public const string markAnimTrigger = "mark";
+    public const string attackAnimTrigger = "attack";
     public const string dashAnimTrigger = "dash";
     public const string hurtAnimTrigger = "hurt";
-    public const string skill1AnimTrigger = "skill1";
-    public const string skill2AnimTrigger = "skill2";
+    public const string QSkill1AnimTrigger = "qSkill1";
+    public const string QSkill2AnimTrigger = "qSkill2";
+    public const string ESkillAnimTrigger = "eSkill";
 
     public const int MaxAdditionalSkillCount = 3;
+    public const int PlayerHurtFaceTriggerHp = 1;
 }

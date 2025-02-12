@@ -11,6 +11,7 @@ public static class TraitPriceList
         {SkillName.Execution, 100},
         {SkillName.AppendAttack, 150},
         {SkillName.KillRecoveryHP, 150},
+        {SkillName.Revive, 100},
     };
 
     public static void CheckTraitPriceListValidation()

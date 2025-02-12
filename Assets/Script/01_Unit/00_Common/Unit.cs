@@ -15,6 +15,8 @@ public class Unit
         return isAlive;
     }
 
+    public void ForceSetCurrentHP(int value) { unitStat.ForceSetCurrentStat(StatKind.HP, value); }
+
     public Unit(UnitInfo unitInfo, UnitStat unitStat)
     {
         this.unitInfo = unitInfo;

@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public class PlayerUIManager : SingletonObject<PlayerUIManager>
+public class PlayerUIManager : MonoBehaviour
 {
+    public static PlayerUIManager Instance { get; private set; }
+    void Awake() { Instance = this; }
     [SerializeField] private PlayerHpUIController playerHpUI;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIMark;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIDash;
@@ -9,6 +11,7 @@ public class PlayerUIManager : SingletonObject<PlayerUIManager>
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUISweepingBlade;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIHollyBlade;
     [SerializeField] private AttackCountUI attackCountUI;
+    [SerializeField] private PlayerFaceController playerFaceController;
 
     public void Initialize()
     {
@@ -26,5 +29,15 @@ public class PlayerUIManager : SingletonObject<PlayerUIManager>
     {
         Util.SetActive(SkillCoolTimeUIMark.gameObject, isMarkOn);
         Util.SetActive(SkillCoolTimeUIDash.gameObject, !isMarkOn);
+    }
+
+    public void SetPlayerFace(PlayerStatus playerStatus, int hp)
+    {
+        if (playerStatus == PlayerStatus.Happy) playerFaceController.SetHappyFace(); // Stage Clear is the most valuable face
+        else
+        {
+            if (hp <= PlayerConstant.PlayerHurtFaceTriggerHp) playerFaceController.SetHurtFace();
+            else playerFaceController.SetIdleFace();
+        }
     }
 }

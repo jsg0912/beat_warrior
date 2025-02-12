@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -104,7 +105,10 @@ public static class Util
 
     public static void FlipLocalScaleX(GameObject gameObject)
     {
-        FlipLocalScaleX(gameObject.transform);
+        if (gameObject.GetComponent<PolygonCollider2D>() != null)
+            FlipLocalScaleX(gameObject.GetComponent<PolygonCollider2D>());
+        else
+            FlipLocalScaleX(gameObject.transform);
     }
 
     public static void FlipLocalScaleX(PolygonCollider2D polygonCollider)
@@ -186,5 +190,25 @@ public static class Util
     public static bool IsRootGameObject(GameObject gameObject)
     {
         return gameObject.transform.parent == null;
+    }
+
+    public static bool IsStoppedSpeed(float speed)
+    {
+        // Speed can be not exact zero, just check it is close to zero, - SDH, 20250208
+        return -1e-4f <= speed && speed <= 1e4f;
+    }
+
+    public static IEnumerator PlayInstantEffect(GameObject effect, float duration)
+    {
+        Timer timer = new Timer(duration);
+        if (effect != null)
+        {
+            SetActive(effect, true);
+        }
+        while (timer.Tick())
+        {
+            yield return null;
+        }
+        SetActive(effect, false);
     }
 }
