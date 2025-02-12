@@ -287,7 +287,6 @@ MonoBehaviour:
   spriteRenderer: {fileID: 5881253563951645107}
   childDirectionalObjects:
   - {fileID: 8792216383531930908}
-  _animator: {fileID: 0}
   colliderController: {fileID: 8536599870213391182}
   _status: 0
   isInvincibility: 0
@@ -883,6 +882,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6200824895781752099, guid: 5b2b19f3ee0ccb940ac9e7dace726d2a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 6200824895782244609, guid: 5b2b19f3ee0ccb940ac9e7dace726d2a, type: 3}
       propertyPath: m_Name
       value: Dirty_Jump
@@ -1173,7 +1176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2754737375970194994, guid: 339d81ade64f88b4eb7ea74f5365e58c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8087286606880247318, guid: 339d81ade64f88b4eb7ea74f5365e58c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1194,6 +1197,14 @@ PrefabInstance:
     - target: {fileID: 8404812107837897665, guid: 339d81ade64f88b4eb7ea74f5365e58c, type: 3}
       propertyPath: looping
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404812107837897666, guid: 339d81ade64f88b4eb7ea74f5365e58c, type: 3}
+      propertyPath: m_SortingLayer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8404812107837897666, guid: 339d81ade64f88b4eb7ea74f5365e58c, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1269806807
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2754737375970194992, guid: 339d81ade64f88b4eb7ea74f5365e58c, type: 3}
@@ -1218,6 +1229,10 @@ PrefabInstance:
     - target: {fileID: 4500468782240785974, guid: f07b24f4c121c37458b3ddd5c9b1f5ca, type: 3}
       propertyPath: m_Name
       value: Dirty_Run
+      objectReference: {fileID: 0}
+    - target: {fileID: 4500468782240785974, guid: f07b24f4c121c37458b3ddd5c9b1f5ca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4500468782241020438, guid: f07b24f4c121c37458b3ddd5c9b1f5ca, type: 3}
       propertyPath: m_LocalPosition.x
