@@ -91,11 +91,18 @@ public class Player : DirectionalGameObject
         isGround = false;
         jumpDeltaTimer = 0;
         jumpTimer = 0.1f;
+        InitializeRigidBody();
         SetInvincibility(false);
 
         ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
         playerGhostController = new PlayerGhostController();
         InitializeAttackCollider();
+    }
+
+    private void InitializeRigidBody()
+    {
+        SetGravityScale(true);
+        _rigidbody.velocity = Vector3.zero;
     }
 
     public void RestartPlayer()
@@ -161,7 +168,11 @@ public class Player : DirectionalGameObject
         dash.SetTarget(obj);
     }
 
-    private void SetDead() { SetStatus(PlayerStatus.Dead); }
+    private void SetDead()
+    {
+        InitializeRigidBody(); // 하지 않으면, 공중에서 공격 중에 맞는 경우 gravity 및 속도 리셋이 안되어 우주로 플레이어가 날아감 - SDH, 20250212
+        SetStatus(PlayerStatus.Dead);
+    }
 
     public void TryResetSkillsByMarkKill(GameObject obj)
     {
