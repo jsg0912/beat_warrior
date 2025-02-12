@@ -53,12 +53,7 @@ public class PlayerUIManager : MonoBehaviour
 
     public void SetPlayerFace(PlayerStatus playerStatus, int hp)
     {
-        if (playerStatus == PlayerStatus.Happy) playerFaceController.SetHappyFace(); // Stage Clear is the most valuable face
-        else
-        {
-            if (hp <= PlayerConstant.PlayerHurtFaceTriggerHp) playerFaceController.SetHurtFace();
-            else playerFaceController.SetIdleFace();
-        }
+        playerFaceController.SetPlayerFace(playerStatus, hp);
     }
 
     public void SetCoolTimeUI(SkillName skillName)
