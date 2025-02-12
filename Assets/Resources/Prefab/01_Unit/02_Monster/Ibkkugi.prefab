@@ -222,12 +222,13 @@ MonoBehaviour:
   childDirectionalObjects:
   - {fileID: 7072081385327347100}
   monsterName: 1
+  isChasing: 0
   hitEffects:
   - {fileID: 7072081385327347100}
   - {fileID: 3986518659941694600}
   _status: 0
   HpUI: {fileID: 3219088139619967221}
-  Target: {fileID: 0}
+  Target: {fileID: 1408496456166460406}
   AnotherHPValue: 0
   attackCollider: {fileID: 0}
   monsterBodyCollider: {fileID: 1655126573235298881}
@@ -5212,6 +5213,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
+--- !u!1 &1408496456166460406 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1907277690499835507, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
+  m_PrefabInstance: {fileID: 717197021818645893}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3219088139619967221 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2693013487634828656, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}

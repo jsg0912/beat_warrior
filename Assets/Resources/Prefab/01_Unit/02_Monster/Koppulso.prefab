@@ -5000,12 +5000,13 @@ MonoBehaviour:
   - {fileID: 1584882063128745106}
   - {fileID: 9009040255622810628}
   monsterName: 2
+  isChasing: 0
   hitEffects:
   - {fileID: 9009040255622810628}
   - {fileID: 3447165844834468899}
   _status: 0
   HpUI: {fileID: 7073441460641642031}
-  Target: {fileID: 0}
+  Target: {fileID: 6705413460053384492}
   AnotherHPValue: 0
   attackCollider: {fileID: 3559754675971902742}
   monsterBodyCollider: {fileID: 6429159573309252447}
@@ -10254,10 +10255,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 7522589603738726038, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 7791856930832967940, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
       propertyPath: m_text
       value: 3
@@ -10286,6 +10283,11 @@ PrefabInstance:
 --- !u!4 &146787578930724813 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5007745989193565330, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
+  m_PrefabInstance: {fileID: 5149418636441549663}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6705413460053384492 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1907277690499835507, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
   m_PrefabInstance: {fileID: 5149418636441549663}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7073441460641642031 stripped
