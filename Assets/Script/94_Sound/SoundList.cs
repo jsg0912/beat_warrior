@@ -9,4 +9,6 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip chapter3BGM;
     public AudioClip chapter4BGM;
     public AudioClip equipClip;
+    public AudioClip holyBladeClip;
+    public AudioClip monsterHit;
 }

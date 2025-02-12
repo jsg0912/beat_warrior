@@ -73,4 +73,15 @@ public class SoundManager : SingletonObject<SoundManager>
     {
         SFXPlay("Equip", SoundList.Instance.equipClip);
     }
+
+    public void PlayHolyBladeSFX()
+    {
+        SFXPlay("HolyBlade", SoundList.Instance.holyBladeClip);
+    }
+
+    public void PlayMonsterHitSFX()
+    {
+        SFXPlay("monsterHit", SoundList.Instance.monsterHit);
+    }
 }
+
