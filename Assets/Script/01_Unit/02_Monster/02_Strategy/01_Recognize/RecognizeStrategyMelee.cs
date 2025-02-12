@@ -13,6 +13,10 @@ public class RecognizeStrategyMelee : RecognizeStrategy
     {
         if (monster.isChasing)
         {
+            if (monster.monsterName == MonsterName.Giljjugi)
+            {
+                DebugConsole.Log("Distance = " + Vector2.Distance(GetPlayerPos(), GetMonsterPos()));
+            }
             if (Vector2.Distance(GetPlayerPos(), GetMonsterPos()) > recognizeRange) ReleaseChase();
             else ChaseTarget();
             return;
@@ -20,7 +24,11 @@ public class RecognizeStrategyMelee : RecognizeStrategy
 
         Vector3 dir = Vector3.right * GetMovingDirectionFloat();
         RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterMiddlePos(), dir, recognizeRange, TargetLayer);
-        //Debug.DrawLine(GetMonsterMiddlePos(), GetMonsterMiddlePos() + dir * recognizeRange, Color.red);
+
+        if (monster.monsterName == MonsterName.Giljjugi)
+        {
+            Debug.DrawLine(GetMonsterMiddlePos(), GetMonsterMiddlePos() + dir * recognizeRange, Color.red);
+        }
 
         if (rayHit.collider != null)
         {
@@ -33,9 +41,6 @@ public class RecognizeStrategyMelee : RecognizeStrategy
                 StartChase();
             }
         }
-        else
-        {
-            ReleaseChase();
-        }
+        else ReleaseChase();
     }
 }
