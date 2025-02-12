@@ -49,7 +49,7 @@ public class SoundManager : SingletonObject<SoundManager>
         AudioSource audioSource = go.AddComponent<AudioSource>();
         audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
         audioSource.clip = clip;
-        audioSource.PlayOneShot(clip, 1);
+        audioSource.PlayOneShot(clip, 0.5f);
 
 
         Destroy(go, clip.length);
@@ -81,7 +81,29 @@ public class SoundManager : SingletonObject<SoundManager>
 
     public void PlayMonsterHitSFX()
     {
-        SFXPlay("monsterHit", SoundList.Instance.monsterHit);
+        SFXPlay("MonsterHit", SoundList.Instance.monsterHit);
+    }
+
+    public void PlayMarkSFX()
+    {
+        SFXPlay("Mark", SoundList.Instance.mark);
+    }
+
+    public void PlayPlayerHitSFX()
+    {
+        SFXPlay("PlayerHit", SoundList.Instance.playerHit);
+    }
+
+    public void PlayPlayerDeadSFX()
+    {
+        SFXPlay("PlayerDead", SoundList.Instance.playerDead);
+    }
+
+    public void PlayPlayerJumpSFX()
+    {
+        SFXPlay("PlayerJump", SoundList.Instance.playerJump);
     }
 }
+
+
 

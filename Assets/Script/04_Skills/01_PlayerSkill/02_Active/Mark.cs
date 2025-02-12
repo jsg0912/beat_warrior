@@ -94,5 +94,7 @@ public class Mark : ActiveSkillPlayer
         Marker.transform.rotation = Quaternion.Euler(0, 0, angle);
 
         Marker.GetComponent<Marker>().SetVelocity(start, end);
+
+        SoundManager.Instance.PlayMarkSFX();
     }
 }
