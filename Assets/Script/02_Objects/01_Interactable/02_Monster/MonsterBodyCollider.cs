@@ -25,14 +25,14 @@ public class MonsterBodyCollider : MonoBehaviour
 
     public Vector2 GetSize()
     {
-        if (boxCollider != null) return Util.GetSizeBoxCollider2D(boxCollider);
-        else if (polygonCollider != null) return Util.GetSizePolygonCollider2D(polygonCollider);
-        else return Vector2.zero;
+        return size;
     }
 
     public Vector3 GetMiddlePos()
     {
-        return size;
+        if (boxCollider != null) return Util.GetMiddlePosBoxCollider2D(boxCollider);
+        else if (polygonCollider != null) return Util.GetMiddlePosPolygonCollider2D(polygonCollider);
+        else return Vector2.zero;
     }
 
     public Vector3 GetBottomPos()
