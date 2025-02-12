@@ -15,4 +15,9 @@ public class MonsterAnimatorController : StateMachineBehaviour
         else if (stateInfo.IsName(MonsterAnimation.Groggy)) monster.SetStatus(MonsterStatus.Groggy);
         else if (stateInfo.IsName(MonsterAnimation.Die)) monster.SetStatus(MonsterStatus.Dead);
     }
+
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (stateInfo.IsName(MonsterAnimation.Attack)) monster.AttackUpdate();
+    }
 }

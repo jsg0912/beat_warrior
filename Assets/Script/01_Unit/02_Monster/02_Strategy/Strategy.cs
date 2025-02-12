@@ -24,6 +24,7 @@ public abstract class Strategy
     protected Vector2 GetMonsterSize() { return monster.GetSize(); }
     protected Direction GetMovingDirection() { return monster.GetMovingDirection(); }
     protected float GetMovingDirectionFloat() { return monster.GetMovingDirectionFloat(); }
+    protected void MoveFor(Direction direction, float speed) { monster.gameObject.transform.position += new Vector3((float)direction * speed * Time.deltaTime, 0, 0); }
 
     protected bool CheckWall()
     {
