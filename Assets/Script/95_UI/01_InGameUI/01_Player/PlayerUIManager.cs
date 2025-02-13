@@ -99,4 +99,24 @@ public class PlayerUIManager : MonoBehaviour
                 break;
         }
     }
+
+    public void UpdateHotKeyText(PlayerAction playerAction)
+    {
+        switch (playerAction)
+        {
+            case PlayerAction.Attack:
+                SkillCoolTimeUIHollyBlade.UpdateSkillHotKey();
+                break;
+            case PlayerAction.Skill1:
+                SkillCoolTimeUISpecialBlade.UpdateSkillHotKey();
+                break;
+            case PlayerAction.Skill2:
+                SkillCoolTimeUISweepingBlade.UpdateSkillHotKey();
+                break;
+            case PlayerAction.Mark_Dash:
+                SkillCoolTimeUIMark.UpdateSkillHotKey();
+                SkillCoolTimeUIDash.UpdateSkillHotKey();
+                break;
+        }
+    }
 }

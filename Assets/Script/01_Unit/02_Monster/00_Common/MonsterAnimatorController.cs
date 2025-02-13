@@ -13,7 +13,12 @@ public class MonsterAnimatorController : StateMachineBehaviour
         else if (stateInfo.IsName(MonsterAnimation.Attack)) monster.AttackStart();
         else if (stateInfo.IsName(MonsterAnimation.AttackEnd)) monster.AttackEnd();
         else if (stateInfo.IsName(MonsterAnimation.Groggy)) monster.SetStatus(MonsterStatus.Groggy);
-        else if (stateInfo.IsName(MonsterAnimation.Die)) monster.SetStatus(MonsterStatus.Dead);
+        else if (stateInfo.IsName(MonsterAnimation.Hurt)) monster.PlayScarEffect();
+        else if (stateInfo.IsName(MonsterAnimation.Die))
+        {
+            monster.SetStatus(MonsterStatus.Dead);
+            monster.PlayScarEffect();
+        }
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

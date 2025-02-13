@@ -5,19 +5,24 @@ public class MoveCamera : MonoBehaviour
     public Transform Target;
     public float speed;
     public float z = -10f;
+    public float yOffest = 2f;
     public Vector2 center;
     public Vector2 size;
 
     private float orthographicSize;
-    private float horizongraphicSize;
+    private float horizontalGraphicSize;
 
     public bool isCamera = true;
 
     private void Start()
     {
         orthographicSize = Camera.main.orthographicSize;
-        horizongraphicSize = orthographicSize * Screen.width / Screen.height;
-        Target = Player.Instance.transform;
+        horizontalGraphicSize = orthographicSize * Screen.width / Screen.height;
+
+        if (Player.Instance != null)
+        {
+            Target = Player.Instance.transform;
+        }
     }
 
     private void OnDrawGizmos()
@@ -28,28 +33,35 @@ public class MoveCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        Target = Player.Instance.transform;
-        cameraMovement();
-        maxCameraMovement();
+        if (Player.Instance != null)
+        {
+            Target = Player.Instance.transform;
+            cameraMovement();
+            maxCameraMovement();
+        }
     }
 
     private void cameraMovement()
     {
+        if (Target == null) return;
+
+        Vector3 targetPosition;
+
         if (isCamera)
         {
-            transform.position = Vector3.Lerp(transform.position, Target.position, Time.deltaTime * speed);
-            transform.position = new Vector3(transform.position.x, transform.position.y, z);
+            targetPosition = new Vector3(Target.position.x, Target.position.y + yOffest, z);
+            transform.position = Vector3.Lerp(transform.position, targetPosition,Time.deltaTime * speed);
         }
         else
         {
-            Vector3 targetPosition = new Vector3(Target.position.x, transform.position.y, z);
+            targetPosition = new Vector3(Target.position.x, transform.position.y, z);
             transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
         }
     }
 
     private void maxCameraMovement()
     {
-        float lx = size.x * 0.5f - horizongraphicSize;
+        float lx = size.x * 0.5f - horizontalGraphicSize;
         float clampX = Mathf.Clamp(transform.position.x, -lx + center.x, lx + center.x);
 
         float ly = size.y * 0.5f - orthographicSize;
