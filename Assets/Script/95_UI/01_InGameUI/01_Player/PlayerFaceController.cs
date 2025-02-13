@@ -25,7 +25,6 @@ public class PlayerFaceController : MonoBehaviour
     {
         if (currentFace == newFace) return true;
         currentFace = newFace;
-        DebugConsole.Log("Player Face: " + newFace);
         return false;
     }
 
