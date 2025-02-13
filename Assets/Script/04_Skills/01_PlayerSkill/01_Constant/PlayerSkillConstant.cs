@@ -9,14 +9,13 @@ public class PlayerSkillConstant
     public const float DashEndYOffset = 0.1f;
     public const float DashSpeed = 0.1f;
     public const float SkillResetProbability = 0.9f; // TODO: 임시로 테스트를 위해 90%로 함 - 신동환, 20240901
-    public const float MarkSlowDuration = 3.0f;
 
     public static Dictionary<SkillName, float> SkillCoolTime = new() {
         { SkillName.Attack, 4.0f },
-        { SkillName.Mark, 8.0f },
+        { SkillName.Mark, 3.0f },
         { SkillName.Dash, 8.0f },
-        { SkillName.Skill1, 8.0f },
-        { SkillName.Skill2, 8.0f },
+        { SkillName.Skill1, 0.1f },
+        { SkillName.Skill2, 0.1f },
         { SkillName.KillRecoveryHP, 10.0f}
     };
 
@@ -25,6 +24,14 @@ public class PlayerSkillConstant
         SkillName.Dash,
         SkillName.Skill1,
         SkillName.Skill2,
+    };
+
+    public static Dictionary<SkillName, PlayerSkillEffectColor> PlayerSkillEffectColorInfo = new()
+    {
+        { SkillName.Attack, PlayerSkillEffectColor.Yellow },
+        { SkillName.Dash, PlayerSkillEffectColor.Purple },
+        { SkillName.Skill1, PlayerSkillEffectColor.Purple },
+        { SkillName.Skill2, PlayerSkillEffectColor.Purple },
     };
 
     public static Dictionary<AdditionalEffectName, bool> AdditionalEffectCanDuplicate = new() {

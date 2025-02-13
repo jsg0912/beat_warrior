@@ -3,6 +3,7 @@ using UnityEngine;
 public class CursorController : SingletonObject<CursorController>
 {
     [SerializeField] private Animator cursorAnimator;
+    [SerializeField] private CursorSlowGaugeController cursorSlowGaugeController;
 
     void Start()
     {
@@ -22,11 +23,13 @@ public class CursorController : SingletonObject<CursorController>
     public void SetInGameCursor()
     {
         cursorAnimator.SetTrigger(CursorAnimationTrigger.InGameTrigger);
+        cursorSlowGaugeController.TurnOff();
     }
 
     public void SetZoomInCursor()
     {
         cursorAnimator.SetBool(CursorAnimationTrigger.InGameTrigger, false);
         cursorAnimator.SetTrigger(CursorAnimationTrigger.ZoomInTrigger);
+        cursorSlowGaugeController.TurnOn();
     }
 }

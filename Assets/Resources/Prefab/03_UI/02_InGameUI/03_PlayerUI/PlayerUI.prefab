@@ -2472,21 +2472,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1067615173815852976
-Transform:
+--- !u!224 &1067615173815852976
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5986232545288358384}
-  serializedVersion: 2
   m_LocalRotation: {x: -0.40809157, y: -0.023703381, z: -0.0111004105, w: 0.9125657}
-  m_LocalPosition: {x: 4.7, y: -14.4, z: 70}
+  m_LocalPosition: {x: 0, y: 0, z: 70}
   m_LocalScale: {x: 0.8, y: 0.8213181, z: 0.6708202}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9140198820216143825}
   m_LocalEulerAnglesHint: {x: -48.189, y: -2.941, z: -0.079}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 4.7, y: -14.4}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!198 &1185722949152553397
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -7737,8 +7741,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9140198820216143825}
-  - {fileID: 931533807222359360}
   - {fileID: 8964454534250960433}
+  - {fileID: 931533807222359360}
   - {fileID: 6118406458683654701}
   - {fileID: 4599992163791620809}
   m_Father: {fileID: 0}
@@ -7830,6 +7834,7 @@ MonoBehaviour:
   SkillCoolTimeUISweepingBlade: {fileID: 2506301603238627673}
   SkillCoolTimeUIHollyBlade: {fileID: 8551475586069640875}
   attackCountUI: {fileID: 7128981437497767489}
+  playerFaceController: {fileID: 0}
 --- !u!1 &6876798617419649909
 GameObject:
   m_ObjectHideFlags: 0
