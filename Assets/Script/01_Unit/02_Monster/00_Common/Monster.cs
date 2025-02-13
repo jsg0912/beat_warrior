@@ -283,4 +283,23 @@ public class Monster : DirectionalGameObject
 
         }
     }
+
+    public void PlayMonsterChargeSFX()
+    {
+        switch(monsterName)
+        {
+            case MonsterName.Koppulso:
+                SoundManager.Instance.SFXPlay("KoppulsoCharge", SoundList.Instance.monsterKoppulsoCharge);
+                break;
+            case MonsterName.Dulduli:
+                SoundManager.Instance.SFXPlay("DulduliCharge", SoundList.Instance.monsterDulduliCharge);
+                break;
+        }
+    }
+
+    public void PlayMonsterThornSFX()
+    {
+        SoundManager.Instance.SFXPlay("monsterItmomiThorn", SoundList.Instance.monsterItmomiThorn);
+    }
+    
 }

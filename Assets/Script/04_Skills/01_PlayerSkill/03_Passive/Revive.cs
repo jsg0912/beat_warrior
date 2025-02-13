@@ -32,7 +32,6 @@ public class Revive : PassiveSkill
         if (isUsed) return false;
 
         player.SetAnimTrigger(PlayerConstant.reviveAnimTrigger);
-        //SoundManager.Instance.SFXPlay("PlayerHit", SoundList.Instance.playerRevive);
         isUsed = true;
 
         return true;

@@ -539,4 +539,14 @@ public class Player : DirectionalGameObject
         SetStatus(PlayerStatus.Normal);
         SetGravityScale(true);
     }
+
+    public void PlayPlayerReviveSFX0()
+    {
+        SoundManager.Instance.SFXPlay("PlayerRevive0", SoundList.Instance.playerRevive0);
+    }
+
+    public void PlayPlayerReviveSFX1()
+    {
+        SoundManager.Instance.SFXPlay("PlayerRevive1", SoundList.Instance.playerRevive1);
+    }
 }

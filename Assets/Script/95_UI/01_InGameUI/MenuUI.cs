@@ -19,12 +19,14 @@ public class MenuUI : PopupSystem
     {
         bool success = Util.SetActive(menu, true);
         if (success) PopupManager.Instance.PushPopup(this);
+        SoundManager.Instance.SFXPlay("MenuOpen", SoundList.Instance.menuOpen);
         return success;
     }
 
     public override bool TurnOffPopup()
     {
         bool success = Util.SetActive(menu, false);
+        SoundManager.Instance.SFXPlay("MenuClose", SoundList.Instance.menuClose);
         return success;
     }
 
