@@ -121,6 +121,8 @@ public class AltarDetailPopup : PopupSystem
             AltarUIManager.Instance.UpdatePlayerSoulView();
             UpdateTargetTraitInfo();
             AltarUIManager.Instance.RefreshMainAltarPopup();
+
+            SoundManager.Instance. SFXPlay("Equip", SoundList.Instance.altarBuy);
         }
     }
 

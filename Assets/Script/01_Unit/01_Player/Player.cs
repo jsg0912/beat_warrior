@@ -431,7 +431,7 @@ public class Player : DirectionalGameObject
 
         trait.GetSkill();
         traitList.Add(trait);
-        SoundManager.Instance.PlayEquipSFX();
+        SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.altarEquip);
     }
 
     public void RemoveTraitByIndex(int index)
@@ -448,7 +448,7 @@ public class Player : DirectionalGameObject
             if (trait.skillName == name)
             {
                 traitList.Remove(trait);
-                SoundManager.Instance.PlayEquipSFX();
+                SoundManager.Instance. SFXPlay("Equip", SoundList.Instance.altarUnequip);
                 trait.RemoveSkill();
                 return;
             }
