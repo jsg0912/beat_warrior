@@ -72,8 +72,8 @@ public static class Util
 
     public static void FlipDirectionX(Transform transform)
     {
-        Vector3 pos = transform.position;
-        transform.position = new Vector3(-pos.x, pos.y, pos.z);
+        Vector3 pos = transform.localPosition;
+        transform.localPosition = new Vector3(-pos.x, pos.y, pos.z);
     }
 
     public static void FlipLocalScaleX(GameObject gameObject)
