@@ -24,24 +24,22 @@ public abstract class Pattern
     {
         Attack?.UpdateCoolTime();
 
-        switch (monster.GetStatus())
+        if (!monster.isChasing)
         {
-            case MonsterStatus.Idle:
-                Recognize?.PlayStrategy();
-                MoveBasic?.PlayStrategy();
-                break;
-            case MonsterStatus.Chase:
-                Recognize?.PlayStrategy();
-                if (Attack?.PlayStrategy() == false)
-                {
-                    MoveChase?.PlayStrategy();
-                }
-                break;
+            Recognize?.PlayStrategy();
+            MoveBasic?.PlayStrategy();
+            return;
+        }
+
+        Recognize?.PlayStrategy();
+        if (Attack?.PlayStrategy() == false)
+        {
+            MoveChase?.PlayStrategy();
         }
     }
 
-    public void StopAttack()
-    {
-        Attack?.StopAttack();
-    }
+    public void AttackStartMethod() { Attack?.AttackStart(); }
+    public void AttackUpdateMethod() { Attack?.AttackUpdate(); }
+    public void AttackEndMethod() { Attack?.AttackEnd(); }
+    public void StopAttack() { Attack?.StopAttack(); }
 }

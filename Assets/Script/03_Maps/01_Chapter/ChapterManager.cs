@@ -33,6 +33,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
     public void SetMonsterCount(int monsterCount)
     {
         CurrentStage.SetMonsterCount(monsterCount);
+        if (IsCurrentStageCompleted) PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Happy, 0);
     }
 
     public void SetTutorialComplete(bool tutorialCompleted)

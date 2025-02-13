@@ -13,39 +13,89 @@ public class PlayerUIManager : MonoBehaviour
     [SerializeField] private AttackCountUI attackCountUI;
     [SerializeField] private PlayerFaceController playerFaceController;
 
+    void Start()
+    {
+        Initialize();
+    }
+
+    void OnEnable()
+    {
+        Initialize();
+    }
+
     public void Initialize()
     {
         playerHpUI.Initialize();
-        // TODO: 현재는 skillCoolTimeUI가 Update 문을 통해 Update되고 있는데, coroutine 사용으로 바뀔 경우 여기서 초기화해주는 Code 필요 - SDH, 20250114
-        // foreach (SkillCoolTimeUI skillCoolTimeUI in skillCoolTimeUIs)
-        // {
-        //     skillCoolTimeUI.initialize();
-        // }
         attackCountUI.UpdateUI();
+        SkillCoolTimeUISpecialBlade.ResetSkillCoolDownUI();
+        SkillCoolTimeUISweepingBlade.ResetSkillCoolDownUI();
+        SkillCoolTimeUIHollyBlade.ResetSkillCoolDownUI();
         SwapMarkAndDash(true);
     }
 
     public void SwapMarkAndDash(bool isMarkOn)
     {
-        Util.SetActive(SkillCoolTimeUIMark.gameObject, isMarkOn);
-        Util.SetActive(SkillCoolTimeUIDash.gameObject, !isMarkOn);
+        if (isMarkOn)
+        {
+            ResetCoolTImeUI(SkillName.Dash);
+            Util.SetActive(SkillCoolTimeUIDash.gameObject, false);
+            Util.SetActive(SkillCoolTimeUIMark.gameObject, true);
+            SetCoolTimeUI(SkillName.Mark);
+        }
+        else
+        {
+            ResetCoolTImeUI(SkillName.Mark);
+            Util.SetActive(SkillCoolTimeUIMark.gameObject, false);
+            Util.SetActive(SkillCoolTimeUIDash.gameObject, true);
+            SetCoolTimeUI(SkillName.Dash);
+        }
     }
 
-    public void SetPlayerFace(PlayerStatus playerStatus)
+    public void SetPlayerFace(PlayerStatus playerStatus, int hp)
     {
-        switch (playerStatus)
+        playerFaceController.SetPlayerFace(playerStatus, hp);
+    }
+
+    public void SetCoolTimeUI(SkillName skillName)
+    {
+        switch (skillName)
         {
-            case PlayerStatus.Stun:
-                playerFaceController.SetCrazyFace();
+            case SkillName.Attack:
+                SkillCoolTimeUIHollyBlade.TryCoolDownAnimation();
                 break;
-            case PlayerStatus.Hurt:
-                playerFaceController.SetHurtFace();
+            case SkillName.Skill1:
+                SkillCoolTimeUISpecialBlade.TryCoolDownAnimation();
                 break;
-            case PlayerStatus.Rest:
-                playerFaceController.SetHappyFace();
+            case SkillName.Skill2:
+                SkillCoolTimeUISweepingBlade.TryCoolDownAnimation();
                 break;
-            default:
-                playerFaceController.SetIdleFace();
+            case SkillName.Mark:
+                SkillCoolTimeUIMark.TryCoolDownAnimation();
+                break;
+            case SkillName.Dash:
+                SkillCoolTimeUIDash.TryCoolDownAnimation(false, false);
+                break;
+        }
+    }
+
+    public void ResetCoolTImeUI(SkillName skillName)
+    {
+        switch (skillName)
+        {
+            case SkillName.Attack:
+                SkillCoolTimeUIHollyBlade.ResetSkillCoolDownUI();
+                break;
+            case SkillName.Skill1:
+                SkillCoolTimeUISpecialBlade.ResetSkillCoolDownUI();
+                break;
+            case SkillName.Skill2:
+                SkillCoolTimeUISweepingBlade.ResetSkillCoolDownUI();
+                break;
+            case SkillName.Mark:
+                SkillCoolTimeUIMark.ResetSkillCoolDownUI();
+                break;
+            case SkillName.Dash:
+                SkillCoolTimeUIDash.ResetSkillCoolDownUI();
                 break;
         }
     }

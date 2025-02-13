@@ -13,23 +13,23 @@ public class PatternDulDulI : Pattern
     {
         Attack?.UpdateCoolTime();
 
-        switch (monster.GetStatus())
+        if (monster.GetStatus() == MonsterStatus.Groggy)
         {
-            case MonsterStatus.Idle:
-                Recognize?.PlayStrategy();
-                MoveBasic?.PlayStrategy();
-                break;
-            case MonsterStatus.Chase:
-                Recognize?.PlayStrategy();
-                if (Attack?.PlayStrategy() == false)
-                {
-                    MoveChase?.PlayStrategy();
-                }
-                break;
-            case MonsterStatus.AttackEnd:
-                Groggy?.PlayStrategy();
-                break;
+            Groggy?.PlayStrategy();
+            return;
+        }
+
+        if (!monster.isChasing)
+        {
+            Recognize?.PlayStrategy();
+            MoveBasic?.PlayStrategy();
+            return;
+        }
+
+        Recognize?.PlayStrategy();
+        if (Attack?.PlayStrategy() == false)
+        {
+            MoveChase?.PlayStrategy();
         }
     }
-
 }

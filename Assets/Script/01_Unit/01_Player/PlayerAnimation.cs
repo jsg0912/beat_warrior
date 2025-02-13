@@ -2,6 +2,7 @@ public class PlayerAnimation
 {
     public const string Idle = "Idle";
     public const string Fall = "Fall";
+    public const string FallWall = "FallWall2";
     public const string FallDown = "FallDown";
     public const string Jump = "Jump";
     public const string Hurt = "Hurt";
