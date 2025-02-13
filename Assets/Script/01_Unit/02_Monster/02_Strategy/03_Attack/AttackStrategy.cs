@@ -51,13 +51,15 @@ public abstract class AttackStrategy : Strategy
 
     public virtual void AttackStart()
     {
-        if (MonsterConstant.NotKnockBackAble.Contains(monster.monsterName)) monster.SetIsKnockBackAble(false);
+        if (MonsterConstant.NotKnockBackAbleWhenAttacking.Contains(monster.monsterName)) monster.SetIsKnockBackAble(false);
+        if (MonsterConstant.FixedAnimationWhenAttacking.Contains(monster.monsterName)) monster.SetIsFixedAnimation(true);
         SkillMethod();
     }
     public virtual void AttackUpdate() { }
     public virtual void AttackEnd()
     {
         monster.SetIsKnockBackAble(true);
+        monster.SetIsFixedAnimation(false);
         SetMaxAttackCoolTime();
     }
     public void UpdateCoolTime() { if (attackCoolTime > 0 && !monster.GetIsAttacking()) attackCoolTime -= Time.deltaTime; }

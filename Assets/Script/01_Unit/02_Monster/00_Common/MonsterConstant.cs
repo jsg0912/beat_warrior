@@ -89,7 +89,11 @@ public class MonsterConstant
         { MonsterName.Itmomi, false }
     };
 
-    public static List<MonsterName> NotKnockBackAble = new(){
+    public static List<MonsterName> NotKnockBackAbleWhenAttacking = new(){
+        MonsterName.Giljjugi, MonsterName.Koppulso, MonsterName.Dulduli
+    };
+
+    public static List<MonsterName> FixedAnimationWhenAttacking = new(){
         MonsterName.Giljjugi, MonsterName.Koppulso, MonsterName.Dulduli
     };
 }
