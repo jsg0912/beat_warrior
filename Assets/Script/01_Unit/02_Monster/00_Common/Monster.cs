@@ -63,10 +63,9 @@ public class Monster : DirectionalGameObject
     }
 
     public void AttackStart() { pattern.AttackStartMethod(); }
+    public void AttackUpdate() { pattern.AttackUpdateMethod(); }
     public void AttackEnd() { pattern.AttackEndMethod(); }
 
-
-    // TODO: 임시로 애니메이션 함수 구현, 추후 수정 필요 - 김민지 2024.09.11
     public void PlayAnimation(MonsterStatus status)
     {
         if (isFixedAnimation) return;
@@ -111,7 +110,6 @@ public class Monster : DirectionalGameObject
                 return false;
         }
     }
-
     public bool GetIsMoveable()
     {
         {
@@ -147,6 +145,7 @@ public class Monster : DirectionalGameObject
         if (!GetIsAlive()) return;
         int damage = playerATK - monsterUnit.unitStat.GetFinalStat(StatKind.Def);
         if (damage <= 0) return;
+        SoundManager.Instance.SFXPlay("MonsterHit", SoundList.Instance.monsterHit);
         GetDamaged(damage);
         if (Player.Instance.hitMonsterFuncList != null && !isAlreadyCheckHitMonsterFunc) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
         PlayAnimation(MonsterConstant.hurtAnimTrigger);
@@ -155,10 +154,6 @@ public class Monster : DirectionalGameObject
     public virtual void GetDamaged(int dmg)
     {
         monsterUnit.ChangeCurrentHP(-dmg);
-        foreach (GameObject hitEffect in hitEffects)
-        {
-            StartCoroutine(Util.PlayInstantEffect(hitEffect, 0.5f));
-        }
 
         if (HpUI != null) HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
@@ -166,6 +161,14 @@ public class Monster : DirectionalGameObject
         {
             Die();
             return;
+        }
+    }
+
+    public void PlayScarEffect()
+    {
+        foreach (GameObject hitEffect in hitEffects)
+        {
+            StartCoroutine(Util.PlayInstantEffect(hitEffect, 0.3f));
         }
     }
 
@@ -193,6 +196,7 @@ public class Monster : DirectionalGameObject
     {
         StopAttack();
         Player.Instance.TryResetSkillsByMarkKill(gameObject);
+        Util.SetActive(Target, false);
 
         monsterUnit.ResetIsKnockBackAble();
         monsterUnit.ResetIsTackleAble();

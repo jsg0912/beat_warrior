@@ -154,14 +154,16 @@ MonoBehaviour:
   objectDirection: 1
   spriteRenderer: {fileID: 4394129516929480509}
   childDirectionalObjects:
+  - {fileID: 683762935750058428}
   - {fileID: 8284978861092747083}
   monsterName: 0
+  isChasing: 0
   hitEffects:
   - {fileID: 8284978861092747083}
   - {fileID: 8994405930846566711}
   _status: 0
   HpUI: {fileID: 4203209206365839487}
-  Target: {fileID: 0}
+  Target: {fileID: 392744501470038908}
   AnotherHPValue: 0
   attackCollider: {fileID: 683762935750058428}
   monsterBodyCollider: {fileID: 227729841037826122}
@@ -5289,11 +5291,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7791856930832967940, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
+      propertyPath: m_text
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
+--- !u!1 &392744501470038908 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1907277690499835507, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}
+  m_PrefabInstance: {fileID: 2236967399139650831}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4203209206365839487 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2693013487634828656, guid: 584ea7a87cbf4e84d9b432f3e6b37bc1, type: 3}

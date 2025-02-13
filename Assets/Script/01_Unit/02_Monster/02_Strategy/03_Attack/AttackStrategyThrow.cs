@@ -25,8 +25,7 @@ public class AttackStrategyThrow : AttackStrategyCreate
 
         SetTargetPosition();
 
-        Vector3 offset = new Vector3(MonsterConstant.ThrowObjectXOffset, 0, 0);
-        obj.transform.position = monster.transform.position + offset;
+        obj.transform.position = monster.attackCollider.transform.position;
 
         float distance = targetPosition.x - GetMonsterPos().x;
 

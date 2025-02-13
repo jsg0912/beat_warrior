@@ -18,24 +18,12 @@ public class RecognizeStrategyMelee : RecognizeStrategy
             return;
         }
 
+        Vector3 start = GetMonsterPos() + new Vector3(0, Player.Instance.GetSize().y, 0) - Util.OffsetY;
         Vector3 dir = Vector3.right * GetMovingDirectionFloat();
-        RaycastHit2D rayHit = Physics2D.Raycast(GetMonsterMiddlePos(), dir, recognizeRange, TargetLayer);
-        //Debug.DrawLine(GetMonsterMiddlePos(), GetMonsterMiddlePos() + dir * recognizeRange, Color.red);
+        RaycastHit2D rayHit = Physics2D.Raycast(start, dir, recognizeRange, TargetLayer);
+        //Debug.DrawRay(start, dir * recognizeRange, Color.red);
 
-        if (rayHit.collider != null)
-        {
-            if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer(LayerConstant.Tile))
-            {
-                ReleaseChase();
-            }
-            else if (rayHit.collider.gameObject.layer == LayerMask.NameToLayer(LayerConstant.Player))
-            {
-                StartChase();
-            }
-        }
-        else
-        {
-            ReleaseChase();
-        }
+        if (rayHit.collider != null && rayHit.collider.CompareTag(TagConstant.Player)) StartChase();
+        else ReleaseChase();
     }
 }

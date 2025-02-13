@@ -18,11 +18,6 @@ public class MoveStrategyChase : MoveStrategy
         return base.PlayStrategy();
     }
 
-    protected Vector3 TargetPos()
-    {
-        return Player.Instance.transform.position;
-    }
-
     protected void ChaseTarget()
     {
         SetMovingDirection(monster.GetRelativeDirectionToPlayer());
@@ -30,7 +25,7 @@ public class MoveStrategyChase : MoveStrategy
 
     protected override bool IsMoveable()
     {
-        if (CheckWall() || CheckEndOfGround() || Mathf.Abs(TargetPos().x - GetMonsterPos().x) < STOPOFFSET)
+        if (CheckWall() || CheckEndOfGround() || Mathf.Abs(GetPlayerPos().x - GetMonsterPos().x) < STOPOFFSET)
         {
             return false;
         }

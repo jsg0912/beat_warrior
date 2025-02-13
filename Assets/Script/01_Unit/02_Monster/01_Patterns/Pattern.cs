@@ -39,6 +39,7 @@ public abstract class Pattern
     }
 
     public void AttackStartMethod() { Attack?.AttackStart(); }
+    public void AttackUpdateMethod() { Attack?.AttackUpdate(); }
     public void AttackEndMethod() { Attack?.AttackEnd(); }
     public void StopAttack() { Attack?.StopAttack(); }
 }

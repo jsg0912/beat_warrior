@@ -5,6 +5,7 @@ public class AttackStrategyRush : AttackStrategy
 {
     protected float rushSpeed;
     protected float dashDuration;
+    protected float dashDurationLeft;
     protected Coroutine rushCoroutine;
     protected bool isChangingDir = false;
 
@@ -12,6 +13,7 @@ public class AttackStrategyRush : AttackStrategy
     {
         this.rushSpeed = rushSpeed;
         this.dashDuration = dashDuration;
+        dashDurationLeft = dashDuration;
     }
 
     public override void Initialize(Monster monster)
@@ -22,27 +24,27 @@ public class AttackStrategyRush : AttackStrategy
 
     protected override void SkillMethod()
     {
-        attackCoroutine = monoBehaviour.StartCoroutine(RushCoroutine());
-
         monster.SetIsTackleAble(true);
         monster.SetIsKnockBackAble(false);
         monster.SetIsFixedAnimation(true);
         Util.SetActive(monster.attackCollider, true);
     }
 
-    protected IEnumerator RushCoroutine()
+    public override void AttackUpdate()
     {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < dashDuration)
+        if (isChangingDir) return;
+        if (dashDurationLeft <= 0)
         {
-            elapsedTime += Time.deltaTime;
-            Rush();
-            yield return null;
+            dashDurationLeft = dashDuration;
+            monster.SetIsFixedAnimation(false);
+            monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
         }
 
-        monster.SetIsFixedAnimation(false);
-        monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
+        dashDurationLeft -= Time.deltaTime;
+        monster.SetMovingDirection(attackDirection);
+        MoveFor(GetMovingDirection(), rushSpeed);
+
+        if (CheckWall() || CheckEndOfGround()) monoBehaviour.StartCoroutine(ChangeDir());
     }
 
     public override void AttackEnd()
@@ -54,19 +56,9 @@ public class AttackStrategyRush : AttackStrategy
         Util.SetActive(monster.attackCollider, false);
     }
 
-    protected virtual void Rush()
-    {
-        if (isChangingDir) return;
-
-        monster.SetMovingDirection(attackDirection);
-
-        if (CheckWall() || CheckEndOfGround()) monoBehaviour.StartCoroutine(ChangeDir());
-
-        monster.gameObject.transform.position += new Vector3((int)attackDirection * rushSpeed * Time.deltaTime, 0, 0);
-    }
-
     protected IEnumerator ChangeDir()
     {
+        float turningTime = 0.33f;
         monster.FlipDirection();
         attackDirection = monster.GetMovingDirection();
 
@@ -75,7 +67,8 @@ public class AttackStrategyRush : AttackStrategy
         monster.SetIsFixedAnimation(true);
 
         isChangingDir = true;
-        yield return new WaitForSeconds(0.33f);
+        yield return new WaitForSeconds(turningTime);
+        dashDurationLeft -= turningTime;
         isChangingDir = false;
     }
 }

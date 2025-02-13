@@ -35,32 +35,28 @@ public class AttackStrategyRolling : AttackStrategy
         monster.transform.DOMoveX(target.x, duration)
             .SetEase(Ease.InSine);
         monster.transform.DOMoveY(target.y, duration)
-            .SetEase(Ease.OutSine);
+            .SetEase(Ease.OutSine)
+            .OnComplete(() =>
+            {
+                Rigidbody2D rb = monster.GetComponent<Rigidbody2D>();
+                float gravity = rb.gravityScale;
 
-        monoBehaviour.StartCoroutine(RollingCoroutine());
+                rb.gravityScale = 0;
+                rb.velocity = Vector2.zero;
+
+                DOVirtual.DelayedCall(1.0f, () =>
+                {
+                    rb.gravityScale = gravity;
+                    rb.velocity = Vector2.down * gravity * 10;
+
+                    monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
+                });
+            });
     }
 
     protected override void SkillMethod()
     {
         SetBeforeSkill();
-    }
-
-    protected IEnumerator RollingCoroutine()
-    {
-        Rigidbody2D rb = monster.GetComponent<Rigidbody2D>();
-        float gravity = rb.gravityScale;
-
-        yield return new WaitForSeconds(duration);
-
-        rb.gravityScale = 0;
-        rb.velocity = Vector2.zero;
-
-        yield return new WaitForSeconds(1.0f);
-
-        rb.gravityScale = gravity;
-        rb.velocity = Vector2.down * gravity * 10;
-
-        monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
     }
 
     private void SetBeforeSkill()

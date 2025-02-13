@@ -18,5 +18,10 @@ public class AttackCountUI : SingletonObject<AttackCountUI>
         {
             AttackChargeGauge.sprite = Max2ChargeImages[Player.Instance.GetCurrentStat(StatKind.AttackCount)];
         }
+
+        if (Player.Instance.GetFinalStat(StatKind.AttackCount) == 3)
+        {
+            AttackChargeGauge.sprite = Max3ChargeImages[Player.Instance.GetCurrentStat(StatKind.AttackCount)];
+        }
     }
 }
