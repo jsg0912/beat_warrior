@@ -6,6 +6,7 @@ public class Timer
     public float time { get; private set; }
     private float timeUp = NoTimeLimit;
     public float remainTime => timeUp - time;
+    public float processRatio => time / timeUp;
 
     public Timer(float timeUp = NoTimeLimit)
     {

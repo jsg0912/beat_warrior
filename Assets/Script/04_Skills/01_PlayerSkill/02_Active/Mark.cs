@@ -9,7 +9,7 @@ public class Mark : ActiveSkillPlayer
     public Mark(GameObject unit) : base(unit)
     {
         MarkerPrefab = Resources.Load(PrefabRouter.MarkerPrefab) as GameObject;
-        markSlowTimer = new Timer(PlayerSkillConstant.MarkSlowDuration);
+        markSlowTimer = new Timer(TimeScaleConstant.MarkSlowDuration);
     }
 
     protected override void SetSkillName() { skillName = SkillName.Mark; }
