@@ -19,7 +19,7 @@ public class PauseController : SingletonObject<PauseController>
 
     public void ResetSpeed() { SetGameSpeed(defaultGameSpeed); }
 
-    public void SetZoomInSlow() { SetGameSpeed(TimeScaleConstant.ZoomInSlow); }
+    public void SetZoomInSlow() { SetGameSpeed(TimeScaleConstant.ZoomInSlowSpeed); }
 
     public void TryPauseGame()
     {

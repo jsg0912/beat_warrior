@@ -2,7 +2,6 @@ public class AttackStrategyMelee : AttackStrategy
 {
     protected override void SkillMethod()
     {
-        Util.SetActive(monster.attackCollider, true);
         monster.SetIsTackleAble(true);
     }
 
@@ -10,7 +9,6 @@ public class AttackStrategyMelee : AttackStrategy
     {
         base.AttackEnd();
 
-        Util.SetActive(monster.attackCollider, false);
         monster.SetIsTackleAble(false);
     }
 }

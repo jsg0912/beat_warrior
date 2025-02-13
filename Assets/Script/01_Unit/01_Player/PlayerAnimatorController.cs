@@ -31,10 +31,10 @@ public class PlayerAnimatorController : StateMachineBehaviour
     private bool IsAttackStatus(AnimatorStateInfo stateInfo)
     {
         return
-        stateInfo.IsName(PlayerAnimation.AttackL)
-        || stateInfo.IsName(PlayerAnimation.AttackR)
-        || stateInfo.IsName(PlayerAnimation.Skill1)
-        || stateInfo.IsName(PlayerAnimation.Skill2)
+        stateInfo.IsName(PlayerAnimation.SpecialBlade1)
+        || stateInfo.IsName(PlayerAnimation.SpecialBlade2)
+        || stateInfo.IsName(PlayerAnimation.Attack)
+        || stateInfo.IsName(PlayerAnimation.SweepingBlade)
         || stateInfo.IsName(PlayerAnimation.Mark)
         || stateInfo.IsName(PlayerAnimation.Dash);
     }

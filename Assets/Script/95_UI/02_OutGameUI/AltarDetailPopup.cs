@@ -53,6 +53,7 @@ public class AltarDetailPopup : PopupSystem
 
     public void ShowSkillDetail(SkillName traitName)
     {
+        if (traitName == SkillName.End) return;
         this.traitName = traitName;
         targetTraitUI.SetTraitName(traitName, false);
         UpdateTraitName();

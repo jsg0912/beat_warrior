@@ -273,8 +273,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9df7d599cddc54b825afbc00080476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  altarPopup: {fileID: 2677894671377590777}
-  menuUI: {fileID: 7714310037807935593}
   inGameUIPrefab: {fileID: 3500340461339598338}
 --- !u!1 &7122387175128012367
 GameObject:
@@ -840,7 +838,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7587462390200140573, guid: 39034393f1e31504c82944b89013931c, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7595762513023532750, guid: 39034393f1e31504c82944b89013931c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -927,17 +925,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39034393f1e31504c82944b89013931c, type: 3}
---- !u!114 &2677894671377590777 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4585373202909737461, guid: 39034393f1e31504c82944b89013931c, type: 3}
-  m_PrefabInstance: {fileID: 1912710022934616076}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf573ba1eb722824c848d2c7be444eca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &6133823117305733972 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5734480911769975640, guid: 39034393f1e31504c82944b89013931c, type: 3}
@@ -1628,10 +1615,6 @@ PrefabInstance:
     - target: {fileID: 2545840385692565434, guid: 89b3032744aa6f24b829a8a066524442, type: 3}
       propertyPath: m_Name
       value: Cursor
-      objectReference: {fileID: 0}
-    - target: {fileID: 2545840385692565434, guid: 89b3032744aa6f24b829a8a066524442, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6366675565975153987, guid: 89b3032744aa6f24b829a8a066524442, type: 3}
       propertyPath: m_Pivot.x
@@ -2571,17 +2554,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8142822660102330809, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
   m_PrefabInstance: {fileID: 4330451128720001975}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7714310037807935593 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6275315559849409502, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
-  m_PrefabInstance: {fileID: 4330451128720001975}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 770d8636fdf4faf469f077c9c6ce49bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5045322700474260001
 PrefabInstance:
   m_ObjectHideFlags: 0
