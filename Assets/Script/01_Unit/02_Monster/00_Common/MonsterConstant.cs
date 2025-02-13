@@ -88,4 +88,8 @@ public class MonsterConstant
         { MonsterName.Giljjugi, false },
         { MonsterName.Itmomi, false }
     };
+
+    public static List<MonsterName> NotKnockBackAble = new(){
+        MonsterName.Giljjugi, MonsterName.Koppulso, MonsterName.Dulduli
+    };
 }
