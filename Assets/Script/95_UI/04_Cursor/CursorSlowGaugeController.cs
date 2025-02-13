@@ -6,7 +6,7 @@ public class CursorSlowGaugeController : MonoBehaviour
     [SerializeField] private Image TimeStopBar_Full;
     Timer timeStopTimer = new Timer();
 
-    void FixedUpdate()
+    void Update()
     {
         if (timeStopTimer.UnScaledTick())
         {
@@ -18,7 +18,7 @@ public class CursorSlowGaugeController : MonoBehaviour
 
     public void TurnOn()
     {
-        if (Util.SetActive(gameObject, true)) timeStopTimer.Initialize(TimeScaleConstant.ZoomInSlow);
+        if (Util.SetActive(gameObject, true)) timeStopTimer.Initialize(TimeScaleConstant.MarkSlowDuration);
     }
 
     public void TurnOff()
