@@ -45,7 +45,6 @@ public class HolyBlade : ActiveSkillPlayer
             countCoolTime = unit.GetComponent<MonoBehaviour>().StartCoroutine(CountCoolTime());
             PlayerUIManager.Instance.SetCoolTimeUI(skillName);
         }
-
     }
 
     protected override void CreateEffectPrefab()
