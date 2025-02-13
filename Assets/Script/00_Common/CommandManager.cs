@@ -45,6 +45,18 @@ public class CommandManager : SingletonObject<CommandManager>
                 {
                     InteractionManager.Instance.InteractWithLastObject();
                 }
+                if(Input.GetKeyDown(KeyCode.I))
+                {
+                    PauseController.Instance.ChangeDefaultGameSpeed(1f);
+                }
+                if (Input.GetKeyDown(KeyCode.O))
+                {
+                    PauseController.Instance.ChangeDefaultGameSpeed(0.3f);
+                }
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    PauseController.Instance.ChangeDefaultGameSpeed(0.1f);
+                }
                 CheckTestCommandInGame();
             }
         }
