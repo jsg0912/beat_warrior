@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+// TODO: 이름에 Player 추가해야함 - SDH, 20250213
 public class ColliderController : MonoBehaviour
 {
     private BoxCollider2D playerCollider;
