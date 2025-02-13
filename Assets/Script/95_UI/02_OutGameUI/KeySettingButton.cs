@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class KeySettingButton : MonoBehaviour
 {
-    [SerializeField] private PlayerAction action;   
+    [SerializeField] private PlayerAction action;
     [SerializeField] private TextMeshProUGUI ActionText;
     [SerializeField] private TextMeshProUGUI KeyText;
     [SerializeField] private Image KeyImage; // It used for Mouse Key Input
@@ -43,6 +43,7 @@ public class KeySettingButton : MonoBehaviour
         KeySetting.keys[action] = keyCode;
         UpdateKeyText();
         EventSystem.current.SetSelectedGameObject(null);
+        if (GameManager.Instance.isInGame) PlayerUIManager.Instance.UpdateHotKeyText(action);
     }
 
     public void OnClick()
