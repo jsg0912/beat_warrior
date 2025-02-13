@@ -303,6 +303,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   speed: 4
   z: 0
+  yOffest: 2
   center: {x: 64, y: -5.68}
   size: {x: 158.4, y: 13.2}
   isCamera: 0
@@ -2620,6 +2621,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   speed: 4
   z: -10
+  yOffest: 2
   center: {x: 64, y: -1.9}
   size: {x: 154.8, y: 13.2}
   isCamera: 1
@@ -4075,10 +4077,6 @@ PrefabInstance:
     - target: {fileID: 3817599359517822106, guid: 497768ca9ab1aeb4d9a9812e1622e181, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4140345539250496889, guid: 497768ca9ab1aeb4d9a9812e1622e181, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.057
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -57424,10 +57422,70 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2140480269820237066, guid: 2f963f89a62da2d42a5094381f8df7ea, type: 3}
   m_PrefabInstance: {fileID: 1114833892}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1123192276
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 511591169}
+    m_Modifications:
+    - target: {fileID: 3945161825203820121, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      propertyPath: m_Name
+      value: Koppulso
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.35362
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.36992645
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3392322765368022473, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+  m_SourcePrefab: {fileID: 100100000, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
 --- !u!4 &1123192277 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 8435822037573901806, guid: d8b9a825f5bd06848a7878947d821659, type: 3}
-  m_PrefabInstance: {fileID: 4787174725022717644}
+  m_CorrespondingSourceObject: {fileID: 8802250563008689940, guid: ffd0b1165b78d6a4c8c33658ec489ea6, type: 3}
+  m_PrefabInstance: {fileID: 1123192276}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1143683536
 PrefabInstance:
@@ -64510,6 +64568,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   speed: 4
   z: 0
+  yOffest: 2
   center: {x: 62, y: -1.9}
   size: {x: 154.8, y: 13.2}
   isCamera: 1
