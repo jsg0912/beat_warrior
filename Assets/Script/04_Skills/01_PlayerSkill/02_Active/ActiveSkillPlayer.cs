@@ -5,13 +5,19 @@ public abstract class ActiveSkillPlayer : ActiveSkill
 {
     protected KeyCode keyCode;
     protected List<string> trigger;
+    protected PlayerSkillEffectColor effectColor;
     protected AttackCollider attackCollider; // TODO: if there are different type of active skill without "attack", then we have to divide this function's contents - SDH, 20250106
 
-    protected ActiveSkillPlayer(GameObject unit) : base(unit) { }
+    protected ActiveSkillPlayer(GameObject unit) : base(unit)
+    {
+        if (PlayerSkillConstant.PlayerSkillEffectColorInfo.ContainsKey(skillName)) effectColor = PlayerSkillConstant.PlayerSkillEffectColorInfo[skillName];
+        else effectColor = PlayerSkillEffectColor.None;
+    }
 
     protected override void UseSkill()
     {
-        Player.Instance.SetAnimTrigger(trigger[Random.Range(0, trigger.Count)]);
+        if (trigger?.Count > 0) Player.Instance.SetAnimTrigger(trigger[Random.Range(0, trigger.Count)]);
+        if (effectColor != PlayerSkillEffectColor.None) Player.Instance.SetLastSkillColor(effectColor);
 
         SkillMethod();
 
