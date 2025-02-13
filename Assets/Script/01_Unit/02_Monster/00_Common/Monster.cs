@@ -154,10 +154,6 @@ public class Monster : DirectionalGameObject
     public virtual void GetDamaged(int dmg)
     {
         monsterUnit.ChangeCurrentHP(-dmg);
-        foreach (GameObject hitEffect in hitEffects)
-        {
-            StartCoroutine(Util.PlayInstantEffect(hitEffect, 0.5f));
-        }
 
         if (HpUI != null) HpUI.SetHP(monsterUnit.GetCurrentHP(), monsterUnit.unitStat.GetFinalStat(StatKind.HP));
 
@@ -165,6 +161,14 @@ public class Monster : DirectionalGameObject
         {
             Die();
             return;
+        }
+    }
+
+    public void PlayScarEffect()
+    {
+        foreach (GameObject hitEffect in hitEffects)
+        {
+            StartCoroutine(Util.PlayInstantEffect(hitEffect, 0.3f));
         }
     }
 

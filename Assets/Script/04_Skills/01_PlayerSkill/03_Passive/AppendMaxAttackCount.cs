@@ -9,4 +9,16 @@ public class AppendMaxAttackCount : PassiveSkillBuffPlayer
     }
 
     protected override void SetSkillName() { skillName = SkillName.AppendAttack; }
+
+    public override void GetSkill()
+    {
+        base.GetSkill();
+        AttackCountUI.Instance.UpdateUI();
+    }
+
+    public override void RemoveSkill()
+    {
+        base.RemoveSkill();
+        AttackCountUI.Instance.UpdateUI();
+    }
 }

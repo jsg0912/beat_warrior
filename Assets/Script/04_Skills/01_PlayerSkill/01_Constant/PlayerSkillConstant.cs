@@ -15,8 +15,8 @@ public class PlayerSkillConstant
         { SkillName.Attack, 4.0f },
         { SkillName.Mark, 8.0f },
         { SkillName.Dash, 8.0f },
-        { SkillName.Skill1, 8.0f },
-        { SkillName.Skill2, 8.0f },
+        { SkillName.Skill1, 0.1f },
+        { SkillName.Skill2, 0.1f },
         { SkillName.KillRecoveryHP, 10.0f}
     };
 
@@ -25,6 +25,14 @@ public class PlayerSkillConstant
         SkillName.Dash,
         SkillName.Skill1,
         SkillName.Skill2,
+    };
+
+    public static Dictionary<SkillName, PlayerSkillEffectColor> PlayerSkillEffectColorInfo = new()
+    {
+        { SkillName.Attack, PlayerSkillEffectColor.Yellow },
+        { SkillName.Dash, PlayerSkillEffectColor.Purple },
+        { SkillName.Skill1, PlayerSkillEffectColor.Purple },
+        { SkillName.Skill2, PlayerSkillEffectColor.Purple },
     };
 
     public static Dictionary<AdditionalEffectName, bool> AdditionalEffectCanDuplicate = new() {

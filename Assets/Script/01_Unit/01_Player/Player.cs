@@ -8,7 +8,8 @@ public delegate void PlayerCreateDelegate(); // [Code Review - KMJ] No ref? - SD
 public class Player : DirectionalGameObject
 {
     public static Player Instance;
-    public Unit playerUnit;
+    public Unit playerUnit { get; private set; }
+    public int Hp => GetCurrentStat(StatKind.HP);
     public Sprite sprite => spriteRenderer.sprite;
     private BoxCollider2D _collider;
     private Rigidbody2D _rigidbody;
@@ -18,7 +19,7 @@ public class Player : DirectionalGameObject
 
     public ColliderController colliderController;
     [SerializeField] private PlayerStatus _status;
-    [SerializeField]
+    public PlayerSkillEffectColor playerSkillEffectColor { get; private set; }
     private PlayerStatus status // 수정 필요하면 SDH에게 문의 - SDH, 20250202
     {
         get { return _status; }
@@ -29,15 +30,14 @@ public class Player : DirectionalGameObject
         }
     }
 
-    public int Hp => GetCurrentStat(StatKind.HP);
 
     private bool isGround;
     private float jumpDeltaTimer;
     private float jumpTimer;
     [SerializeField] private bool isInvincibility;
-    private BoxCollider2D tileCollider; // [Code Review - KMJ] TODO: 이제 필요없으면 제거 or TileCollider를 왜 가지고 있는지 모르겠음 - SDH, 20250208
+    private BoxCollider2D tileCollider;
 
-    public PlayerGhostController playerGhostController;
+    private PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
     public ReviveSkillFunc reviveSKillFuncList = null;
@@ -130,6 +130,11 @@ public class Player : DirectionalGameObject
                 SetAnimTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
+    }
+
+    public void SetLastSkillColor(PlayerSkillEffectColor color)
+    {
+        playerSkillEffectColor = color;
     }
 
     public void SetGravityScale(bool gravity)

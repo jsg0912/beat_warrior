@@ -12,13 +12,6 @@ public class Mark : ActiveSkillPlayer
         markSlowTimer = new Timer(PlayerSkillConstant.MarkSlowDuration);
     }
 
-    protected override void UseSkill()
-    {
-        SkillMethod();
-
-        if (Player.Instance.useSKillFuncList != null) Player.Instance.useSKillFuncList(this);
-    }
-
     protected override void SetSkillName() { skillName = SkillName.Mark; }
 
     public override void CheckInputKeyCode()
