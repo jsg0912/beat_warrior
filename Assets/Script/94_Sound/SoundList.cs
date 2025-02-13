@@ -10,27 +10,37 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip chapter4BGM;
     
     public AudioClip buttonClick;
-    public AudioClip menuOpen;
-    public AudioClip menuClose;
+    public AudioClip menuOpen; //
+    public AudioClip menuClose; //
     public AudioClip altarOpen;
     public AudioClip altarClose;
-    public AudioClip altarBuy;
-    public AudioClip altarEquip;
-    public AudioClip altarUnequip;
+    public AudioClip altarBuy; //
+    public AudioClip altarEquip; //
+    public AudioClip altarUnequip; //
     
-    public AudioClip monsterHit;
+    public AudioClip monsterHit; //
+    public AudioClip monsterIppaliAttack; //
+    public AudioClip monsterIbkkugiAttack; //
+    public AudioClip monsterKoppulsoCharge; //2.0s
+    public AudioClip monsterKoppulsoAttack; //0.3s
+    public AudioClip monsterDulduliCharge; //
+    public AudioClip monsterDulduliAttack; // in attackend animation
+    public AudioClip monsterGiljjugiAttack; //
+    public AudioClip monsterItmomiAttack; //
+    public AudioClip monsterItmomiThorn; // 1.0s up in itmomi attack animation
 
-    public AudioClip playerHit;
+    public AudioClip playerHit; //
 
-    public AudioClip playerHolyBlade;
-    public AudioClip playerMark;
-    public AudioClip playerDash;
-    public AudioClip playerDead;
-    public AudioClip playerJump;
-    public AudioClip playerSkill1;
-    public AudioClip playerSkill2;
-    public AudioClip playerRevive;
+    public AudioClip playerHolyBlade; //
+    public AudioClip playerMark; //
+    public AudioClip playerDash; //
+    public AudioClip playerDead; //
+    public AudioClip playerJump; //
+    public AudioClip playerQSkill; //
+    public AudioClip playerESkill; //
+    public AudioClip playerRevive0; //
+    public AudioClip playerRevive1; //
 
     public AudioClip timeSlow;
-    public AudioClip soulGet;
+    public AudioClip soulGet; //
 }
