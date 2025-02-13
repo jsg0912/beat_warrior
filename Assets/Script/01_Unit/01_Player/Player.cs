@@ -320,6 +320,7 @@ public class Player : DirectionalGameObject
     {
         Direction dir = end.x > transform.position.x ? Direction.Right : Direction.Left;
 
+        _animator.SetBool(PlayerConstant.dashEndAnimBool, false);
         SetGravityScale(false);
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetMovingDirection(dir);
@@ -340,6 +341,7 @@ public class Player : DirectionalGameObject
 
         if (passWall == true) transform.position = end;
 
+        _animator.SetBool(PlayerConstant.dashEndAnimBool, true);
         SetGravityScale(true);
         SetInvincibility(false);
         if (changeDir == true) SetMovingDirection((Direction)(-1 * (int)dir));
