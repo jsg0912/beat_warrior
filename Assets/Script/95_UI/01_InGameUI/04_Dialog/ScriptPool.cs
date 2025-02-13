@@ -247,6 +247,7 @@ public static class ScriptPool
         { KeyCode.F12, "F12"},
         { KeyCode.Escape, "Esc"},
         { KeyCode.Return, "Enter"},
+        { KeyCode.Space, "Space"},
         { KeyCode.Backspace, "BS"},
         { KeyCode.Tab, "Tab"},
         { KeyCode.LeftArrow, "←"},

@@ -59,6 +59,23 @@ public static class Util
         return polygonCollider2D.bounds.center - new Vector3(0, polygonCollider2D.bounds.extents.y, 0);
     }
 
+    public static void FlipDirectionX(GameObject gameObject)
+    {
+        if (gameObject.GetComponent<PolygonCollider2D>() != null)
+            FlipLocalScaleX(gameObject.GetComponent<PolygonCollider2D>());
+        else
+        {
+            FlipDirectionX(gameObject.transform);
+            FlipLocalScaleX(gameObject.transform);
+        }
+    }
+
+    public static void FlipDirectionX(Transform transform)
+    {
+        Vector3 pos = transform.localPosition;
+        transform.localPosition = new Vector3(-pos.x, pos.y, pos.z);
+    }
+
     public static void FlipLocalScaleX(GameObject gameObject)
     {
         if (gameObject.GetComponent<PolygonCollider2D>() != null)
