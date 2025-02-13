@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_AttackL
+  m_Name: Player_Attack
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -31,7 +31,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.16666667
+        time: 0.3
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -40,7 +40,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.38333333
+        time: 0.6666667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -70,7 +70,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.16666667
+        time: 0.3
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -79,7 +79,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.38333333
+        time: 0.6666667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -91,7 +91,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: ShortBladeCollider/Effects/HolyBlade - L
+    path: ShortBladeCollider/Effects/SpecialBlade
     classID: 1
     script: {fileID: 0}
     flags: 16
@@ -99,17 +99,21 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1256783097, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
-    - time: 0.083333336
-      value: {fileID: -839940016, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
-    - time: 0.23333333
-      value: {fileID: -2070203203, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
-    - time: 0.31666666
-      value: {fileID: 189582376, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
+      value: {fileID: 1128289431, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - time: 0.1
+      value: {fileID: 2105046803, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - time: 0.18333334
+      value: {fileID: -746638701, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - time: 0.28333333
+      value: {fileID: -1817965265, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
     - time: 0.38333333
-      value: {fileID: -1269285618, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
-    - time: 0.41666666
-      value: {fileID: 624472927, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
+      value: {fileID: -453961543, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - time: 0.48333332
+      value: {fileID: 543783204, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - time: 0.56666666
+      value: {fileID: 878525423, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - time: 0.6666667
+      value: {fileID: -1940503753, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
     attribute: m_Sprite
     path: Player_Sprite
     classID: 212
@@ -132,7 +136,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1283570504
+      path: 2117583621
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -150,18 +154,20 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 1256783097, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
-    - {fileID: -839940016, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
-    - {fileID: -2070203203, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
-    - {fileID: 189582376, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
-    - {fileID: -1269285618, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
-    - {fileID: 624472927, guid: 14c19c7b754c59741adb9ff9c0b7ad44, type: 3}
+    - {fileID: 1128289431, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - {fileID: 2105046803, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - {fileID: -746638701, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - {fileID: -1817965265, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - {fileID: -453961543, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - {fileID: 543783204, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - {fileID: 878525423, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
+    - {fileID: -1940503753, guid: b56f2c795549ec740acce6f6ca366189, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.43333334
+    m_StopTime: 0.68333334
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -191,7 +197,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.16666667
+        time: 0.3
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -200,7 +206,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.38333333
+        time: 0.6666667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -230,7 +236,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.16666667
+        time: 0.3
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -239,7 +245,7 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.38333333
+        time: 0.6666667
         value: 0
         inSlope: Infinity
         outSlope: Infinity
@@ -251,7 +257,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: ShortBladeCollider/Effects/HolyBlade - L
+    path: ShortBladeCollider/Effects/SpecialBlade
     classID: 1
     script: {fileID: 0}
     flags: 16
@@ -266,7 +272,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.41666666
+  - time: 0.6666667
     functionName: AttackAnimationEnd
     data: 
     objectReferenceParameter: {fileID: 0}
