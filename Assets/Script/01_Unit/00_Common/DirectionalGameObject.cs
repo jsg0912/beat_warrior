@@ -39,7 +39,7 @@ public abstract class DirectionalGameObject : MonoBehaviour
         // TODO: childDirectionalObjects의 Type에 따라 최적화된 Flip을 하도록 수정해야 함
         foreach (GameObject obj in childDirectionalObjects)
         {
-            Util.FlipLocalScaleX(obj);
+            Util.FlipDirectionX(obj);
         }
     }
 }
