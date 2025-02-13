@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class UIManager : SingletonObject<UIManager>
 {
-    public AltarPopup altarPopup;
-    public MenuUI menuUI;
     public GameObject inGameUIPrefab;
 
     public void TurnOnAltarPopup()
     {
-        altarPopup.TurnOnPopup();
+        AltarUIManager.Instance.TurnOnAltarUI();
     }
 
     public void SetInGameUIActive()
