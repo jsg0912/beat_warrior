@@ -187,8 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursorAnimator: {fileID: 2027186324748021500}
-  TimeStopBar: {fileID: 0}
-  TimeStopBar_Full: {fileID: 0}
+  cursorSlowGaugeController: {fileID: 8141149454892735288}
 --- !u!1 &4615284096300157995
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,13 +199,14 @@ GameObject:
   - component: {fileID: 1797424752011643551}
   - component: {fileID: 5246658988610988011}
   - component: {fileID: 5495037431481553547}
+  - component: {fileID: 8141149454892735288}
   m_Layer: 5
   m_Name: TimeStopBar_Empty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1797424752011643551
 RectTransform:
   m_ObjectHideFlags: 0
@@ -265,3 +265,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8141149454892735288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4615284096300157995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfafeb532ba833944a8bdc53ef1f1483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeStopBar_Full: {fileID: 1710794314741782587}
