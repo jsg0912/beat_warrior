@@ -13,7 +13,7 @@ public class PlayerSkillConstant
 
     public static Dictionary<SkillName, float> SkillCoolTime = new() {
         { SkillName.Attack, 4.0f },
-        { SkillName.Mark, 8.0f },
+        { SkillName.Mark, 3.0f },
         { SkillName.Dash, 8.0f },
         { SkillName.Skill1, 0.1f },
         { SkillName.Skill2, 0.1f },
