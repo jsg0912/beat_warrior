@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6791731714204715419}
   - component: {fileID: 3338692379004982773}
-  - component: {fileID: 3659951320996821014}
   - component: {fileID: 5067291678764927535}
   m_Layer: 0
   m_Name: SoundManager
@@ -48,18 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backGroundSound: {fileID: 5067291678764927535}
   mixer: {fileID: 24100000, guid: ca5af5bc42f1325418a099a6677a0154, type: 2}
---- !u!114 &3659951320996821014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1902735031879749021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3d9b0f8f1ac41479cb1eac96563cf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &5067291678764927535
 AudioSource:
   m_ObjectHideFlags: 0
