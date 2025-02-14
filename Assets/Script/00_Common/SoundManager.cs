@@ -50,7 +50,14 @@ public class SoundManager : SingletonObject<SoundManager>
             // Debug.LogError("SoundManager: " + name + " is null");
             return;
         }
-        backGroundSound.PlayOneShot(clip, 0.5f * sfxVolume);
+        GameObject go = new GameObject(name + "Sound");
+        AudioSource audioSource = go.AddComponent<AudioSource>();
+        audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
+        audioSource.clip = clip;
+        audioSource.PlayOneShot(clip, 0.5f);
+
+        Destroy(go, clip.length);
+        //backGroundSound.PlayOneShot(clip, 0.5f * sfxVolume);
     }
 
     public void BackGroundPlay(AudioClip clip)
@@ -67,9 +74,9 @@ public class SoundManager : SingletonObject<SoundManager>
         BackGroundPlay(SoundList.Instance.titleBGM);
     }
 
-    public void PlayEquipSFX()
+    public void PlayButtonClickSFX()
     {
-        SFXPlay("Equip", SoundList.Instance.altarEquip);
+        SFXPlay("Equip", SoundList.Instance.buttonClick);
     }
 }
 

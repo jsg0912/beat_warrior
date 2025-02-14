@@ -7,7 +7,6 @@ public class MenuUI : PopupSystem
 {
     public static MenuUI Instance;
     public GameObject menu;
-    public TextMeshProUGUI[] txt;
 
     public override void Awake()
     {
@@ -18,13 +17,21 @@ public class MenuUI : PopupSystem
     public override bool TurnOnPopup()
     {
         bool success = Util.SetActive(menu, true);
-        if (success) PopupManager.Instance.PushPopup(this);
+        if (success)
+        {
+            PopupManager.Instance.PushPopup(this);
+            GameManager.Instance.SetDefaultCursor();
+            SoundManager.Instance.SFXPlay("MenuOpen", SoundList.Instance.menuOpen);
+            if (GameManager.Instance.isInGame) UIManager.Instance.TurnOnBlur(BlurType.MenuStop);
+        }
         return success;
     }
 
     public override bool TurnOffPopup()
     {
         bool success = Util.SetActive(menu, false);
+        SoundManager.Instance.SFXPlay("MenuClose", SoundList.Instance.menuClose);
+        UIManager.Instance.TurnOffBlur();
         return success;
     }
 

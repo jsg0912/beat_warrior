@@ -20,6 +20,7 @@ public class QSkill : ActiveSkillPlayer
     protected override void SkillMethod()
     {
         CreateEffectPrefab();
+        SoundManager.Instance. SFXPlay("Equip", SoundList.Instance.playerQSkill);
     }
 
     protected override void CreateEffectPrefab()
