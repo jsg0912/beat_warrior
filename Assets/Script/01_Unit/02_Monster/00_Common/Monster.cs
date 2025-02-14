@@ -81,6 +81,7 @@ public class Monster : DirectionalGameObject
                 _animator.SetBool(MonsterConstant.dieAnimBool, value);
                 break;
         }
+        Debug.Log(status);
     }
 
     public void PlayAnimation(string trigger)
