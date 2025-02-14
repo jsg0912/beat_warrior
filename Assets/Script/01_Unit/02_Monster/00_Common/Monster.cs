@@ -44,7 +44,7 @@ public class Monster : DirectionalGameObject
     void Start()
     {
         _animator = GetComponent<Animator>();
-        _animator.SetBool(MonsterConstant.repeatAttackBool, MonsterConstant.IsRepeatAttackAnimation[monsterName]);
+        _animator.SetBool(MonsterAnimTrigger.repeatAttackBool, MonsterConstant.IsRepeatAttackAnimation[monsterName]);
         monsterUnit = MonsterList.FindMonster(monsterName, AnotherHPValue);
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
@@ -64,19 +64,16 @@ public class Monster : DirectionalGameObject
     public void AttackUpdate() { pattern.AttackUpdateMethod(); }
     public void AttackEnd() { pattern.AttackEndMethod(); }
 
-    public void PlayAnimation(MonsterStatus status, bool value = true)
+    public void SetAnimationBool(MonsterStatus status, bool value)
     {
         if (isFixedAnimation) return;
         switch (status)
         {
-            case MonsterStatus.Attack:
-                PlayAnimation(MonsterConstant.attackChargeAnimTrigger);
-                break;
             case MonsterStatus.Groggy:
-                _animator.SetBool(MonsterConstant.groggyBool, value);
+                _animator.SetBool(MonsterAnimTrigger.groggyBool, value);
                 break;
             case MonsterStatus.Dead:
-                _animator.SetBool(MonsterConstant.dieAnimBool, value);
+                _animator.SetBool(MonsterAnimTrigger.dieAnimBool, value);
                 break;
         }
     }
@@ -84,7 +81,7 @@ public class Monster : DirectionalGameObject
     public void PlayAnimation(string trigger)
     {
         if (isFixedAnimation) return;
-        if (trigger == MonsterConstant.hurtAnimTrigger)
+        if (trigger == MonsterAnimTrigger.hurtAnimTrigger)
         {
             SetMovingDirection(Player.Instance.GetBottomPos().x > transform.position.x ? Direction.Right : Direction.Left);
             AttackEnd();
@@ -164,13 +161,13 @@ public class Monster : DirectionalGameObject
         if (!GetIsAlive()) return;
 
         int damage = playerATK - monsterUnit.unitStat.GetFinalStat(StatKind.Def);
-        if(monsterUnit.unitStat.GetFinalStat(StatKind.Def) > 0) SoundManager.Instance.SFXPlay("DefmonsterHit", SoundList.Instance.defMonsterHit);
+        if (monsterUnit.unitStat.GetFinalStat(StatKind.Def) > 0) SoundManager.Instance.SFXPlay("DefmonsterHit", SoundList.Instance.defMonsterHit);
         if (damage <= 0) return;
 
         GetDamaged(damage);
         if (Player.Instance.hitMonsterFuncList != null && !isAlreadyCheckHitMonsterFunc) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
 
-        PlayAnimation(MonsterConstant.hurtAnimTrigger);
+        PlayAnimation(MonsterAnimTrigger.hurtAnimTrigger);
         SoundManager.Instance.SFXPlay("MonsterHit", SoundList.Instance.monsterHit);
     }
 
@@ -205,7 +202,7 @@ public class Monster : DirectionalGameObject
     public Vector3 GetMiddlePos() { return monsterBodyCollider.GetMiddlePos(); }
     public Vector3 GetBottomPos() { return monsterBodyCollider.GetBottomPos(); }
 
-    public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
+    public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterAnimTrigger.walkAnimBool, isWalk); }
     public void SetStatus(MonsterStatus newStatus)
     {
         if (newStatus == MonsterStatus.Dead)
@@ -239,7 +236,7 @@ public class Monster : DirectionalGameObject
         monsterUnit.ResetIsKnockBackAble();
         SetIsFixedAnimation(false);
 
-        PlayAnimation(MonsterStatus.Dead, true);
+        SetAnimationBool(MonsterStatus.Dead, true);
     }
 
     public void MakePlayerRewards()
@@ -315,7 +312,6 @@ public class Monster : DirectionalGameObject
             case MonsterName.Itmomi:
                 SoundManager.Instance.SFXPlay("ItmomiAttack", SoundList.Instance.monsterItmomiAttack);
                 break;
-
         }
     }
 

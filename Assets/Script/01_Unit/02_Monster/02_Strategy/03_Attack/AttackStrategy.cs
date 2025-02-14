@@ -10,6 +10,11 @@ public abstract class AttackStrategy : Strategy
     protected float attackCoolTimeMax;
     protected float attackCoolTime;
 
+    public AttackStrategy(string monsterAnimTrigger)
+    {
+        this.monsterAnimTrigger = monsterAnimTrigger;
+    }
+
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
@@ -37,7 +42,7 @@ public abstract class AttackStrategy : Strategy
         return true;
     }
 
-    private void StartAttackCharge() { monster.PlayAnimation(MonsterStatus.Attack); }
+    protected virtual void StartAttackCharge() { monster.PlayAnimation(monsterAnimTrigger); }
 
     // 이 함수가 실행되면 정말로 공격을 실행한는 것으로 간주
     protected abstract void AttackMethod();

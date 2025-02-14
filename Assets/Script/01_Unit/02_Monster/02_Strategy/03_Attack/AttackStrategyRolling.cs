@@ -56,7 +56,7 @@ public class AttackStrategyRolling : AttackStrategySplash
                 .OnStart(() =>
                 {
                     monster.SetIsFixedAnimation(false);
-                    monster.PlayAnimation(MonsterConstant.fallAnimTrigger);
+                    monster.PlayAnimation(MonsterAnimTrigger.fallAnimTrigger);
                     monster.SetIsFixedAnimation(true);
                 })
                 .OnComplete(() =>
@@ -65,7 +65,7 @@ public class AttackStrategyRolling : AttackStrategySplash
                     rb.gravityScale = gravity;
                     monster.SetIsKnockBackAble(true);
                     monster.SetIsFixedAnimation(false);
-                    monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
+                    monster.PlayAnimation(MonsterAnimTrigger.attackEndAnimTrigger);
                     SplashAttack();
                     monster.playAfterAttackEffect();
                     monster.PlayMonsterAttackSFX();
@@ -85,7 +85,7 @@ public class AttackStrategyRolling : AttackStrategySplash
 
     public override void AttackEnd()
     {
-        monster.PlayAnimation(MonsterStatus.Groggy, true); // TODO: 실행 시점에 대해 고민 필요
+        monster.SetAnimationBool(MonsterStatus.Groggy, true); // TODO: 실행 시점에 대해 고민 필요
         // 주의: base를 안쓰기 떄문에, base에서 공용으로 써야하는 것들이 새로 생기면, 여기도 추가해야할 수 있다.
         monster.SetIsKnockBackAble(true);
         monster.SetIsFixedAnimation(false);

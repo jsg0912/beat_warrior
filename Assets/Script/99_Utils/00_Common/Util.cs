@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -216,5 +217,10 @@ public static class Util
                 gameObject.transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
         }
         gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    public static T GetRandom<T>(List<T> list)
+    {
+        return list[UnityEngine.Random.Range(0, list.Count)];
     }
 }

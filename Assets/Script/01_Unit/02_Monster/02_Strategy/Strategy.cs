@@ -5,6 +5,7 @@ public abstract class Strategy
     protected Monster monster;
     protected LayerMask TargetLayer;
     protected LayerMask GroundLayer;
+    protected string monsterAnimTrigger;
 
     public virtual void Initialize(Monster monster)
     {

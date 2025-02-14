@@ -9,7 +9,7 @@ public class AttackStrategyRush : AttackStrategy
     protected Coroutine rushCoroutine;
     protected bool isChangingDir = false;
 
-    public AttackStrategyRush(float rushSpeed, float dashDuration)
+    public AttackStrategyRush(float rushSpeed, float dashDuration, string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger) : base(monsterAnimTrigger)
     {
         this.rushSpeed = rushSpeed;
         this.dashDuration = dashDuration;
@@ -35,7 +35,7 @@ public class AttackStrategyRush : AttackStrategy
         {
             dashDurationLeft = dashDuration;
             monster.SetIsFixedAnimation(false);
-            monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
+            monster.PlayAnimation(MonsterAnimTrigger.attackEndAnimTrigger);
         }
 
         dashDurationLeft -= Time.deltaTime;
@@ -59,7 +59,7 @@ public class AttackStrategyRush : AttackStrategy
         attackDirection = monster.GetMovingDirection();
 
         monster.SetIsFixedAnimation(false);
-        monster.PlayAnimation(MonsterConstant.turnAnimTrigger);
+        monster.PlayAnimation(MonsterAnimTrigger.turnAnimTrigger);
         monster.SetIsFixedAnimation(true);
 
         isChangingDir = true;

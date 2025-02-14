@@ -5,5 +5,6 @@ public enum MonsterName
     Koppulso,
     Dulduli,
     Giljjugi,
-    Itmomi
+    Itmomi,
+    Ch2Boss,
 }

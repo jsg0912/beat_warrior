@@ -5,7 +5,7 @@ public abstract class AttackStrategySplash : AttackStrategy
 {
     private Vector2 splashRange;
 
-    public AttackStrategySplash(Vector2 splashRange)
+    public AttackStrategySplash(Vector2 splashRange, string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger) : base(monsterAnimTrigger)
     {
         this.splashRange = splashRange;
     }

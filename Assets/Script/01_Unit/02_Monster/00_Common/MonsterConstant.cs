@@ -3,16 +3,6 @@ using UnityEngine;
 
 public class MonsterConstant
 {
-    public const string walkAnimBool = "IsWalk";
-    public const string attackChargeAnimTrigger = "Attack"; // TODO: 사실 상 Charge로 쓰임임
-    public const string attackEndAnimTrigger = "AttackEnd";
-    public const string repeatAttackBool = "RepeatAttack";
-    public const string groggyBool = "Groggy";
-    public const string turnAnimTrigger = "Turn";
-    public const string hurtAnimTrigger = "Hurt";
-    public const string fallAnimTrigger = "Fall";
-    public const string dieAnimBool = "Die";
-
     public const float moveSpeed = 1.0f;
 
     public const float RangedRecognizeRange = 10.0f;

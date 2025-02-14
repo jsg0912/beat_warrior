@@ -6,13 +6,6 @@ public static class PatternFactory
     {
         switch (patternName)
         {
-            case PatternName.Monster2:
-                return new Monster2Pattern();
-            case PatternName.Monster3:
-                return new Monster3Pattern();
-            case PatternName.RangedMonster:
-                return new PatternIbkkugi();
-            // TODO: 이 위는 모두 임시임 - SDH, 20250131
             case PatternName.Ibkkugi:
                 return new PatternIbkkugi();
             case PatternName.Dulduli:
@@ -25,6 +18,8 @@ public static class PatternFactory
                 return new PatternKoppulso();
             case PatternName.Giljjugi:
                 return new PatternGiljjugi();
+            case PatternName.Ch2Boss:
+                return new PatternCh2Boss();
         }
 
         throw new System.Exception($"{patternName} is not exist");

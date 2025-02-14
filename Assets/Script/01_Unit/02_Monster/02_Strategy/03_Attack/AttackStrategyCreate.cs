@@ -6,6 +6,10 @@ public class AttackStrategyCreate : AttackStrategy
     protected GameObject obj;
     protected MonsterAttackCollider monsterAttackCollider;
 
+    public AttackStrategyCreate(string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger) : base(monsterAnimTrigger)
+    {
+    }
+
     public override void Initialize(Monster monster)
     {
         base.Initialize(monster);
