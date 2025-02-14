@@ -1,13 +1,7 @@
 public class AttackStrategyMelee : AttackStrategy
 {
-    protected override void SkillMethod()
+    protected override void AttackMethod()
     {
-        monster.SetIsTackleAble(true);
     }
 
-    public override void AttackEnd()
-    {
-        base.AttackEnd();
-        monster.SetIsTackleAble(false);
-    }
 }

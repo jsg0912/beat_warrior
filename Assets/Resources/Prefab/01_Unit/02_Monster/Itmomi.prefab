@@ -4972,14 +4972,14 @@ MonoBehaviour:
   childDirectionalObjects:
   - {fileID: 2023845650500647015}
   monsterName: 5
-  isChasing: 0
+  _status: 0
+  AnotherHPValue: 0
+  HpUI: {fileID: 8121129461690677475}
+  attackEffect: {fileID: 0}
+  MarkedEffect: {fileID: 5734084789204571104}
   hitEffects:
   - {fileID: 2023845650500647015}
   - {fileID: 2730683714899672892}
-  _status: 0
-  HpUI: {fileID: 8121129461690677475}
-  Target: {fileID: 5734084789204571104}
-  AnotherHPValue: 0
   attackCollider: {fileID: 0}
   monsterBodyCollider: {fileID: 4135205508027935915}
 --- !u!50 &7572720725117535486

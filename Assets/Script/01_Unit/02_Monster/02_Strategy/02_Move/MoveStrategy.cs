@@ -15,10 +15,10 @@ public class MoveStrategy : Strategy
 
     public override bool PlayStrategy()
     {
-        return Move();
+        return TryMove();
     }
 
-    protected virtual bool Move()
+    protected virtual bool TryMove()
     {
         if (!IsMoveable())
         {
@@ -26,7 +26,7 @@ public class MoveStrategy : Strategy
             return false;
         }
 
-        if ((CheckWall() || CheckEndOfGround()) && !monster.GetIsAttacking() && CheckGround()) FlipDirection();
+        if ((CheckWall() || CheckEndOfGround()) && CheckGround()) FlipDirection();
 
         MoveFor(GetMovingDirection(), moveSpeed);
         monster.SetWalkingAnimation(true);

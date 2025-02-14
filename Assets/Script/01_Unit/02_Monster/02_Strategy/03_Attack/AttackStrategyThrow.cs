@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class AttackStrategyThrow : AttackStrategyCreate
 {
@@ -19,15 +18,15 @@ public class AttackStrategyThrow : AttackStrategyCreate
         targetPosition = GetPlayerPos();
     }
 
-    protected override void SkillMethod()
+    protected override void AttackMethod()
     {
-        base.SkillMethod();
+        base.AttackMethod();
 
         SetTargetPosition();
 
         obj.transform.position = monster.attackCollider.transform.position;
 
-        float distance = targetPosition.x - GetMonsterPos().x;
+        float distance = targetPosition.x - GetMonsterFrontPos().x;
 
         monsterAttackCollider.rb.velocity = GetVelocityConstantFlyTime(distance);
     }
