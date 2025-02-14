@@ -24,7 +24,7 @@ public class ResolutionController : MonoBehaviour
 		resolutions.Add(new Resolution { width = 2880, height = 1800 });
 		resolutions.Add(new Resolution { width = 3480, height = 2160 });
 
-		resolutionDropdown.ClearOptions();
+		resolutionDropdown?.ClearOptions();
 
 		List<string> options = new List<string>();
 
@@ -39,10 +39,12 @@ public class ResolutionController : MonoBehaviour
 			}
 			options.Add(option);
 		}
-
-		resolutionDropdown.AddOptions(options);
-		resolutionDropdown.value = optimalResolutionIndex;
-		resolutionDropdown.RefreshShownValue();
+		if (resolutionDropdown != null)
+		{
+			resolutionDropdown.AddOptions(options);
+			resolutionDropdown.value = optimalResolutionIndex;
+			resolutionDropdown.RefreshShownValue();
+		}
 
 
 		SetResolution(optimalResolutionIndex);

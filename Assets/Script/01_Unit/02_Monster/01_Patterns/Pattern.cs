@@ -1,5 +1,3 @@
-using Unity.VisualScripting.Dependencies.Sqlite;
-
 public abstract class Pattern
 {
     protected Monster monster;

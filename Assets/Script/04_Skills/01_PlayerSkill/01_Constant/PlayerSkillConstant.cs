@@ -14,7 +14,7 @@ public class PlayerSkillConstant
         { SkillName.Attack, 4.0f },
         { SkillName.Mark, 8.0f },
         { SkillName.Dash, 8.0f },
-        { SkillName.Skill1, 2.0f },
+        { SkillName.Skill1, 8.0f },
         { SkillName.Skill2, 8.0f },
         { SkillName.KillRecoveryHP, 10.0f}
     };
