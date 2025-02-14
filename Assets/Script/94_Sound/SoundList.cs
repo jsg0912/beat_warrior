@@ -19,6 +19,7 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip altarUnequip; //
     
     public AudioClip monsterHit; //
+    public AudioClip defMonsterHit; //
     public AudioClip monsterIppaliAttack; //
     public AudioClip monsterIbkkugiAttack; //
     public AudioClip monsterKoppulsoCharge; //2.0s

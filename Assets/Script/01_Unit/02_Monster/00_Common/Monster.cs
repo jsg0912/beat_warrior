@@ -134,6 +134,7 @@ public class Monster : DirectionalGameObject
     {
         if (!GetIsAlive()) return;
         int damage = playerATK - monsterUnit.unitStat.GetFinalStat(StatKind.Def);
+        if(StatKind.Def > 0) SoundManager.Instance.SFXPlay("DefmonsterHit", SoundList.Instance.defMonsterHit);
         if (damage <= 0) return;
         SoundManager.Instance.SFXPlay("MonsterHit", SoundList.Instance.monsterHit);
         GetDamaged(damage);
