@@ -14,20 +14,23 @@ public class UnitStat
     public UnitStat(Dictionary<StatKind, int> stats)
     {
         this.stats = new Dictionary<StatKind, int>(stats);
-        this.currentStats = new Dictionary<StatKind, int>(stats);
+        currentStats = new Dictionary<StatKind, int>(stats);
 
         InitializeAllBuff();
         CheckValidStats();
     }
 
-    // Bug 방지 코드
-    public void CheckValidStats()
+    public void SetFullStatAll()
     {
         foreach (StatKind statKind in Enum.GetValues(typeof(StatKind)))
         {
-            if (statKind == StatKind.Necessary) break;
-            if (!stats.ContainsKey(statKind)) throw new Exception($"Stat이 없음 ${statKind}");
+            SetFullStat(statKind);
         }
+    }
+
+    private void SetFullStat(StatKind statKind)
+    {
+        ForceSetCurrentStat(statKind, GetFinalStat(statKind));
     }
 
     public void InitializeAllBuff()
@@ -100,5 +103,15 @@ public class UnitStat
     {
         currentStats[statKind] = value;
         return currentStats[statKind];
+    }
+
+    // Bug 방지 코드
+    public void CheckValidStats()
+    {
+        foreach (StatKind statKind in Enum.GetValues(typeof(StatKind)))
+        {
+            if (statKind == StatKind.Necessary) break;
+            if (!stats.ContainsKey(statKind)) throw new Exception($"Stat이 없음 ${statKind}");
+        }
     }
 }
