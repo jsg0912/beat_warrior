@@ -11,7 +11,7 @@ public class MoveStrategyRandom : MoveStrategy
         return true;
     }
 
-    protected override bool Move()
+    protected override bool TryMove()
     {
         if (isStop == true)
         {
@@ -19,7 +19,7 @@ public class MoveStrategyRandom : MoveStrategy
             return false;
         }
 
-        return base.Move();
+        return base.TryMove();
     }
 
     protected override void TryFlipDirection()

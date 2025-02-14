@@ -4,9 +4,9 @@ public class AttackStrategyThrowItmomi : AttackStrategyCreate
 {
     private float offsetX = 1.0f;
 
-    protected override void SkillMethod()
+    protected override void AttackMethod()
     {
-        base.SkillMethod();
+        base.AttackMethod();
         if (attackDirection == Direction.Right) Util.FlipLocalScaleX(obj);
         obj.transform.position = ClosestGround();
     }

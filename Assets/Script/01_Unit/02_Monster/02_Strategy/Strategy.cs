@@ -19,7 +19,12 @@ public abstract class Strategy
     protected Vector3 GetPlayerPos() { return Player.Instance.GetBottomPos(); }
     protected Vector3 GetMonsterPos() { return monster.GetBottomPos(); }
     protected Vector3 GetMonsterFrontPos() { return GetMonsterPos() + new Vector3(GetMonsterSize().x * GetMovingDirectionFloat() / 2, 0, 0); }
-    protected Vector3 GetMonsterFrontOffsetPos() { return GetMonsterFrontPos() + Util.OffsetY; }
+    protected Vector3 GetMonsterFrontOffsetPos()
+    {
+        Vector3 monsterFrontPos = GetMonsterFrontPos();
+        monsterFrontPos.y += Util.OffsetY;
+        return monsterFrontPos;
+    }
     protected Vector2 GetMonsterSize() { return monster.GetSize(); }
     protected Direction GetMovingDirection() { return monster.GetMovingDirection(); }
     protected float GetMovingDirectionFloat() { return monster.GetMovingDirectionFloat(); }

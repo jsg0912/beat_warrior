@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class AttackStrategyThrow : AttackStrategyCreate
 {
@@ -19,9 +18,9 @@ public class AttackStrategyThrow : AttackStrategyCreate
         targetPosition = GetPlayerPos();
     }
 
-    protected override void SkillMethod()
+    protected override void AttackMethod()
     {
-        base.SkillMethod();
+        base.AttackMethod();
 
         SetTargetPosition();
 

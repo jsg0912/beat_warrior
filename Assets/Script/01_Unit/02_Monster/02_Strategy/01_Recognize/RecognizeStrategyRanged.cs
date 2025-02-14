@@ -9,9 +9,17 @@ public class RecognizeStrategyRanged : RecognizeStrategy
         recognizeRange = MonsterConstant.RangedRecognizeRange;
     }
 
-    protected override void CheckTarget()
+    protected override bool CheckTarget()
     {
-        if (Vector2.Distance(GetPlayerPos(), GetMonsterPos()) < recognizeRange) StartChase();
-        else ReleaseChase();
+        if (Vector2.Distance(GetPlayerPos(), GetMonsterPos()) < recognizeRange)
+        {
+            TrySetChaseStatus();
+            return true;
+        }
+        else
+        {
+            ReleaseChase();
+            return false;
+        }
     }
 }

@@ -6,7 +6,7 @@ public class MoveStrategyChaseFix : MoveStrategyChase
         return true;
     }
 
-    protected override bool Move()
+    protected override bool TryMove()
     {
         return false;
     }

@@ -8,9 +8,6 @@ public class Monster : DirectionalGameObject
     public MonsterName monsterName;
     private MonsterUnit monsterUnit;
     public Pattern pattern;
-    public bool isChasing;
-    public Timer timer;
-    [SerializeField] private List<GameObject> hitEffects = new List<GameObject>();
 
     [SerializeField] private MonsterStatus _status;
     [SerializeField]
@@ -29,31 +26,32 @@ public class Monster : DirectionalGameObject
             }
         }
     }
+    [SerializeField] private int AnotherHPValue = 0;
 
     protected Animator _animator;
     private bool isFixedAnimation = false;
 
     [SerializeField] private MonsterHPUI HpUI;
-    [SerializeField] private GameObject Target;
-    [SerializeField] private int AnotherHPValue = 0;
+    [SerializeField] private GameObject attackEffect;
+    [SerializeField] private GameObject MarkedEffect;
+    [SerializeField] private List<GameObject> hitEffects = new List<GameObject>();
 
     [SerializeField] public GameObject attackCollider;
     [SerializeField] private MonsterBodyCollider monsterBodyCollider;
 
-
+    private Timer markRemainTimer;
 
     void Start()
     {
-        isChasing = false;
         _animator = GetComponent<Animator>();
-        _animator.SetBool(MonsterConstant.repeatAttackBool, MonsterConstant.RepeatAttack[monsterName]);
+        _animator.SetBool(MonsterConstant.repeatAttackBool, MonsterConstant.IsRepeatAttackAnimation[monsterName]);
         monsterUnit = MonsterList.FindMonster(monsterName, AnotherHPValue);
         pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
         pattern.Initialize(this);
 
         HpUI.SetMaxHP(monsterUnit.GetCurrentHP()); // Customizing HP Code - SDH, 20250119
 
-        timer = new Timer();
+        markRemainTimer = new Timer();
     }
 
     void Update()
@@ -72,7 +70,7 @@ public class Monster : DirectionalGameObject
         switch (status)
         {
             case MonsterStatus.Attack:
-                PlayAnimation(MonsterConstant.attackAnimTrigger);
+                PlayAnimation(MonsterConstant.attackChargeAnimTrigger);
                 break;
             case MonsterStatus.Groggy:
                 _animator.SetBool(MonsterConstant.groggyBool, value);
@@ -86,10 +84,16 @@ public class Monster : DirectionalGameObject
     public void PlayAnimation(string trigger)
     {
         if (isFixedAnimation) return;
+        if (trigger == MonsterConstant.hurtAnimTrigger)
+        {
+            SetMovingDirection(Player.Instance.GetBottomPos().x > transform.position.x ? Direction.Right : Direction.Left);
+            AttackEnd();
+        }
         _animator.SetTrigger(trigger);
     }
 
     public MonsterStatus GetStatus() { return status; }
+
     public bool GetIsAttacking()
     {
         switch (status)
@@ -100,12 +104,38 @@ public class Monster : DirectionalGameObject
                 return false;
         }
     }
+
+    public bool GetIsRecognizing()
+    {
+        switch (status)
+        {
+            case MonsterStatus.Attack:
+            case MonsterStatus.Chase:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public bool GetIsAttackAble()
+    {
+        switch (status)
+        {
+            case MonsterStatus.Attack:
+            case MonsterStatus.Groggy:
+                return false;
+            default:
+                return true;
+        }
+    }
+
     public bool GetIsMoveable()
     {
         {
             switch (status)
             {
-                case MonsterStatus.Normal:
+                case MonsterStatus.Idle:
+                case MonsterStatus.Chase:
                     return true;
                 default:
                     return false;
@@ -114,7 +144,6 @@ public class Monster : DirectionalGameObject
     }
 
     public bool GetIsKnockBackAble() { return monsterUnit.isKnockBackAble; }
-    public bool GetIsTackleAble() { return monsterUnit.isTackleAble; }
     public bool GetIsAlive() { return status != MonsterStatus.Dead; }
     public bool CheckIsAlive()
     {
@@ -133,12 +162,15 @@ public class Monster : DirectionalGameObject
     public void AttackedByPlayer(int playerATK, bool isAlreadyCheckHitMonsterFunc = false)
     {
         if (!GetIsAlive()) return;
+
         int damage = playerATK - monsterUnit.unitStat.GetFinalStat(StatKind.Def);
         if (damage <= 0) return;
-        SoundManager.Instance.SFXPlay("MonsterHit", SoundList.Instance.monsterHit);
+
         GetDamaged(damage);
         if (Player.Instance.hitMonsterFuncList != null && !isAlreadyCheckHitMonsterFunc) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
+
         PlayAnimation(MonsterConstant.hurtAnimTrigger);
+        SoundManager.Instance.SFXPlay("MonsterHit", SoundList.Instance.monsterHit);
     }
 
     public virtual void GetDamaged(int dmg)
@@ -154,6 +186,12 @@ public class Monster : DirectionalGameObject
         }
     }
 
+    //TODO: 현재 거의 공격 후 Effect로 쓰는데, 발동 시점이나 네이밍에 문제가 생기면 수정이 필요함.
+    public void playAfterAttackEffect()
+    {
+        if (attackEffect != null) StartCoroutine(Util.PlayInstantEffect(attackEffect, 0.3f));
+    }
+
     public void PlayScarEffect()
     {
         foreach (GameObject hitEffect in hitEffects)
@@ -167,22 +205,13 @@ public class Monster : DirectionalGameObject
     public Vector3 GetBottomPos() { return monsterBodyCollider.GetBottomPos(); }
 
     public void SetWalkingAnimation(bool isWalk) { _animator.SetBool(MonsterConstant.walkAnimBool, isWalk); }
-    public void SetStatus(MonsterStatus status)
+    public void SetStatus(MonsterStatus newStatus)
     {
-        if (status == MonsterStatus.Dead)
+        if (newStatus == MonsterStatus.Dead)
         {
             SetIsFixedAnimation(false);
         }
-        this.status = status;
-    }
-
-    public void SetIsTackleAble(bool isTackleAble)
-    {
-        if (isTackleAble)
-        {
-            monsterUnit.ResetIsTackleAble();
-        }
-        else monsterUnit.isTackleAble = isTackleAble;
+        status = newStatus;
     }
 
     public void SetIsKnockBackAble(bool isKnockBackAble)
@@ -194,23 +223,28 @@ public class Monster : DirectionalGameObject
         else monsterUnit.isKnockBackAble = isKnockBackAble;
     }
 
-    public void SetIsFixedAnimation(bool isFixedAnimation) { this.isFixedAnimation = isFixedAnimation; }
+    public void SetIsFixedAnimation(bool isFixedAnimation)
+    {
+        if (!GetIsAlive()) return; // 죽은 상태라면 함부로 못바꿈
+        this.isFixedAnimation = isFixedAnimation;
+    }
+
     public virtual void Die()
     {
         StopAttack();
         Player.Instance.TryResetSkillsByMarkKill(gameObject);
-        Util.SetActive(Target, false);
+        Util.SetActive(MarkedEffect, false);
 
         monsterUnit.ResetIsKnockBackAble();
-        monsterUnit.ResetIsTackleAble();
         SetIsFixedAnimation(false);
 
         PlayAnimation(MonsterStatus.Dead, true);
+    }
 
+    public void MakePlayerRewards()
+    {
         InGameManager.Instance.CreateSoul(transform.position);
         ChapterManager.Instance.AlarmMonsterKilled(monsterName);
-
-        Destroy(gameObject, 2.0f);
     }
 
     public void StopAttack()
@@ -228,16 +262,16 @@ public class Monster : DirectionalGameObject
 
     protected IEnumerator ShowTargetUI()
     {
-        Util.SetActive(Target, true);
+        Util.SetActive(MarkedEffect, true);
 
-        timer.Initialize(PlayerSkillConstant.SkillCoolTime[SkillName.Mark]);
+        markRemainTimer.Initialize(PlayerSkillConstant.SkillCoolTime[SkillName.Mark]);
 
-        while (timer.Tick() && GetIsAlive())
+        while (markRemainTimer.Tick() && GetIsAlive())
         {
             yield return null;
         }
 
-        Util.SetActive(Target, false);
+        Util.SetActive(MarkedEffect, false);
     }
 
     protected override void FlipAdditionalScaleChangeObjects()
@@ -251,13 +285,10 @@ public class Monster : DirectionalGameObject
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (GetIsTackleAble())
+        GameObject obj = collision.gameObject;
+        if (obj.CompareTag(TagConstant.Player))
         {
-            GameObject obj = collision.gameObject;
-            if (obj.CompareTag(TagConstant.Player))
-            {
-                Player.Instance.GetDamaged(GetFinalStat(StatKind.ATK), GetRelativeDirectionToPlayer());
-            }
+            Player.Instance.GetDamaged(GetFinalStat(StatKind.ATK), GetRelativeDirectionToPlayer());
         }
     }
 
