@@ -18,8 +18,12 @@ public class MenuUI : PopupSystem
     public override bool TurnOnPopup()
     {
         bool success = Util.SetActive(menu, true);
-        if (success) PopupManager.Instance.PushPopup(this);
-        SoundManager.Instance.SFXPlay("MenuOpen", SoundList.Instance.menuOpen);
+        if (success)
+        {
+            PopupManager.Instance.PushPopup(this);
+            GameManager.Instance.SetDefaultCursor();
+            SoundManager.Instance.SFXPlay("MenuOpen", SoundList.Instance.menuOpen);
+        }
         return success;
     }
 

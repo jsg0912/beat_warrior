@@ -66,6 +66,7 @@ public class Player : DirectionalGameObject
 
     private void Initialize(Direction direction = Direction.Left)
     {
+        StopAllCoroutines();
         // TODO: Alternate real user nickname than "playerName" - SDH, 20241204
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.defaultStat));
 
