@@ -37,13 +37,13 @@ public class PrefabRouter
 
     public static Dictionary<SkillName, string> TraitIconImages = new() {
         { SkillName.End, EmptyImage },
-        { SkillName.AppendMaxHP, TraitIconRoute + "016" },
-        { SkillName.SkillReset, TraitIconRoute + "003 1" },
-        { SkillName.DoubleJump, TraitIconRoute + "005" },
-        { SkillName.Execution, TraitIconRoute + "014" },
-        { SkillName.AppendAttack, TraitIconRoute + "002 1" },
-        { SkillName.KillRecoveryHP, TraitIconRoute + "007" },
-        { SkillName.Revive, TraitIconRoute + "009 1" },
+        { SkillName.AppendMaxHP, TraitIconRoute + "AppendMaxHP" },
+        { SkillName.SkillReset, TraitIconRoute + "SkillReset" },
+        { SkillName.DoubleJump, TraitIconRoute + "DoubleJump" },
+        { SkillName.Execution, TraitIconRoute + "Execution" },
+        { SkillName.AppendAttack, TraitIconRoute + "AppendAttack" },
+        { SkillName.KillRecoveryHP, TraitIconRoute + "KillRecoveryHP" },
+        { SkillName.Revive, TraitIconRoute + "Revive" },
     };
 
     public static string MiniMapIconRoute(MonsterName monsterName)
