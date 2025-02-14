@@ -179,11 +179,7 @@ public class Monster : DirectionalGameObject
 
     public void SetIsTackleAble(bool isTackleAble)
     {
-        if (isTackleAble)
-        {
-            monsterUnit.ResetIsTackleAble();
-        }
-        else monsterUnit.isTackleAble = isTackleAble;
+        monsterUnit.isTackleAble = isTackleAble;
     }
 
     public void SetIsKnockBackAble(bool isKnockBackAble)
