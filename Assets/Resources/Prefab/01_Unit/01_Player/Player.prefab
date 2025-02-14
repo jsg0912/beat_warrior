@@ -1465,13 +1465,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2711059708353328864, guid: 71f6656694a7db4478918afb81ed53bd, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711059708353328864, guid: 71f6656694a7db4478918afb81ed53bd, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 0.55
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711059708353328864, guid: 71f6656694a7db4478918afb81ed53bd, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.79559743
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711059708353328864, guid: 71f6656694a7db4478918afb81ed53bd, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.98396105
+      objectReference: {fileID: 0}
+    - target: {fileID: 2711059708353328864, guid: 71f6656694a7db4478918afb81ed53bd, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6405133266261720813, guid: 71f6656694a7db4478918afb81ed53bd, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 657696dc44f2a6c41a112b9f4c7d9b16, type: 2}
+      objectReference: {fileID: 2100000, guid: efe999eca35749f42b553b580e0c8fc7, type: 2}
     - target: {fileID: 6634061441988232811, guid: 71f6656694a7db4478918afb81ed53bd, type: 3}
       propertyPath: m_Name
       value: SpecialBlade
