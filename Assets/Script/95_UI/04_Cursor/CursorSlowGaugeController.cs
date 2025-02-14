@@ -11,7 +11,6 @@ public class CursorSlowGaugeController : MonoBehaviour
         if (timeStopTimer.UnScaledTick())
         {
             TimeStopBar_Full.fillAmount = 1 - timeStopTimer.processRatio;
-            DebugConsole.Log("TimeStopBar_Full.fillAmount : " + TimeStopBar_Full.fillAmount);
         }
     }
 

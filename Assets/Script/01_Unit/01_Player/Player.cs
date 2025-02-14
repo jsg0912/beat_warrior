@@ -66,6 +66,7 @@ public class Player : DirectionalGameObject
 
     private void Initialize(Direction direction = Direction.Left)
     {
+        StopAllCoroutines();
         // TODO: Alternate real user nickname than "playerName" - SDH, 20241204
         playerUnit = new Unit(new PlayerInfo("playerName"), new UnitStat(PlayerConstant.defaultStat));
 
@@ -436,7 +437,7 @@ public class Player : DirectionalGameObject
 
         trait.GetSkill();
         traitList.Add(trait);
-        SoundManager.Instance.PlayEquipSFX();
+        SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.altarEquip);
     }
 
     public void RemoveTraitByIndex(int index)
@@ -453,7 +454,7 @@ public class Player : DirectionalGameObject
             if (trait.skillName == name)
             {
                 traitList.Remove(trait);
-                SoundManager.Instance.PlayEquipSFX();
+                SoundManager.Instance. SFXPlay("Equip", SoundList.Instance.altarUnequip);
                 trait.RemoveSkill();
                 return;
             }
@@ -538,5 +539,15 @@ public class Player : DirectionalGameObject
     {
         SetStatus(PlayerStatus.Normal);
         SetGravityScale(true);
+    }
+
+    public void PlayPlayerReviveSFX0()
+    {
+        SoundManager.Instance.SFXPlay("PlayerRevive0", SoundList.Instance.playerRevive0);
+    }
+
+    public void PlayPlayerReviveSFX1()
+    {
+        SoundManager.Instance.SFXPlay("PlayerRevive1", SoundList.Instance.playerRevive1);
     }
 }
