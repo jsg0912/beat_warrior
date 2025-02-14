@@ -38,9 +38,11 @@ public class LoadingSceneManager : MonoBehaviour
                 if (progress == 1.0f)
                 {
                     loadingSceneProcess.allowSceneActivation = true;
-                    yield break;
+                    FadeManager.Instance.StartFadeIn();
+                    yield return null;
                 }
             }
         }
     }
+
 }

@@ -98,7 +98,8 @@ public class ChapterManager : SingletonObject<ChapterManager>
 
     private void LoadStageScene()
     {
-        SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapterName][currentStageIndex]);
+        StartCoroutine(SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapterName][currentStageIndex]));
+        //SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapterName][currentStageIndex]);
     }
 
     private void MoveToNextChapter()
