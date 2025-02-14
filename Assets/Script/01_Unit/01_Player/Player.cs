@@ -35,7 +35,7 @@ public class Player : DirectionalGameObject
     private float jumpDeltaTimer;
     private float jumpTimer;
     [SerializeField] private bool isInvincibility;
-    private BoxCollider2D tileCollider;
+    private List<BoxCollider2D> tiles = new();
 
     private PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
@@ -291,9 +291,9 @@ public class Player : DirectionalGameObject
     {
         if (!Input.GetKeyDown(KeySetting.keys[PlayerAction.Down])) return;
         if (!isGround) return;
-        if (tileCollider == null) return;
+        if (tiles.Count == 0) return;
 
-        colliderController.PassTile(tileCollider);
+        foreach (BoxCollider2D tile in tiles) if (tile != null) colliderController.PassTile(tile);
     }
 
     private void CheckGround()
@@ -303,16 +303,19 @@ public class Player : DirectionalGameObject
         Vector3 left = GetBottomPos() - new Vector3(GetSize().x / 2, 0, 0);
         Vector3 right = GetBottomPos() + new Vector3(GetSize().x / 2, 0, 0);
 
-        RaycastHit2D rayHit = Physics2D.Raycast(left, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
-        if (rayHit.collider == null) rayHit = Physics2D.Raycast(right, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
+        RaycastHit2D rayHitLeft = Physics2D.Raycast(left, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
+        RaycastHit2D rayHitRight = Physics2D.Raycast(right, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
 
-        isGround = rayHit.collider != null && Util.IsStoppedSpeed(_rigidbody.velocity.y);
+        isGround = !(rayHitLeft.collider == null && rayHitRight.collider == null) && Util.IsStoppedSpeed(_rigidbody.velocity.y);
         _animator.SetBool(PlayerConstant.groundedAnimBool, isGround);
 
         if (!isGround) return;
 
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
-        tileCollider = rayHit.collider.GetComponent<BoxCollider2D>();
+        tiles.Clear();
+
+        if (rayHitLeft.collider != null) tiles.Add(rayHitLeft.collider.GetComponent<BoxCollider2D>());
+        if (rayHitRight.collider != null && rayHitRight != rayHitLeft) tiles.Add(rayHitRight.collider.GetComponent<BoxCollider2D>());
     }
 
     private void Jump()
