@@ -77,9 +77,7 @@ public class Mark : ActiveSkillPlayer
         GameObject Marker = GameObject.Instantiate(MarkerPrefab, start, Quaternion.identity);
 
         Vector3 direction = end - start;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Marker.transform.rotation = Quaternion.Euler(0, 0, angle);
-
+        Util.RotateObjectForwardingDirection(Marker, direction, true);
         Marker.GetComponent<Marker>().SetVelocity(start, end);
 
         SoundManager.Instance.SFXPlay("PlayerMark", SoundList.Instance.playerMark);

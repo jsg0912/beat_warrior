@@ -200,4 +200,20 @@ public static class Util
     {
         return UnityEngine.Random.Range(0, 100) < truePercentage;
     }
+
+    public static void RotateObjectForwardingDirection(GameObject gameObject, Vector3 direction, bool hasTopDownStructure)
+    {
+        if (gameObject == null) return;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (hasTopDownStructure)
+        {
+            var localScale = gameObject.transform.localScale;
+            if (direction.x < 0) // 위아래가 뒤집히면 안되는 경우 왼쪽으로 날아갈때 위 아래를 뒤집어 주어야 함.
+                gameObject.transform.localScale = new Vector3(localScale.x, -localScale.y, localScale.z);
+            else
+                gameObject.transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
+        }
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
 }
