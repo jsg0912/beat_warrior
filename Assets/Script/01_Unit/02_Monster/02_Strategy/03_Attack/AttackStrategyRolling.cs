@@ -74,6 +74,6 @@ public class AttackStrategyRolling : AttackStrategy
         monster.SetIsTackleAble(false);
         monster.SetIsKnockBackAble(true);
 
-        monster.SetAnimationBool(MonsterStatus.Groggy, true);
+        monster.PlayAnimation(MonsterStatus.Groggy, true);
     }
 }

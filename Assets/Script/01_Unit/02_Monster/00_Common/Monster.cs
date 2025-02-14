@@ -66,7 +66,7 @@ public class Monster : DirectionalGameObject
     public void AttackUpdate() { pattern.AttackUpdateMethod(); }
     public void AttackEnd() { pattern.AttackEndMethod(); }
 
-    public void PlayAnimation(MonsterStatus status)
+    public void PlayAnimation(MonsterStatus status, bool value = false)
     {
         if (isFixedAnimation) return;
         switch (status)
@@ -74,16 +74,6 @@ public class Monster : DirectionalGameObject
             case MonsterStatus.Attack:
                 PlayAnimation(MonsterConstant.attackAnimTrigger);
                 break;
-            case MonsterStatus.Dead:
-                SetAnimationBool(status, true);
-                break;
-        }
-    }
-
-    public void SetAnimationBool(MonsterStatus status, bool value)
-    {
-        switch (status)
-        {
             case MonsterStatus.Groggy:
                 _animator.SetBool(MonsterConstant.groggyBool, value);
                 break;

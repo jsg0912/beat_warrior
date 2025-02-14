@@ -28,6 +28,7 @@ public class PlayerConstant
     public const string reviveAnimTrigger = "revive";
     public const string attackAnimTrigger = "attack";
     public const string dashAnimTrigger = "dash";
+    public const string dashEndAnimBool = "DashEnd";
     public const string hurtAnimTrigger = "hurt";
     public const string QSkill1AnimTrigger = "qSkill1";
     public const string QSkill2AnimTrigger = "qSkill2";

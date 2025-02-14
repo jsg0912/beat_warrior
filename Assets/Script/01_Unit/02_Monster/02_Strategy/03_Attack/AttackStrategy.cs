@@ -49,9 +49,19 @@ public abstract class AttackStrategy : Strategy
         monster.SetMovingDirection(attackDirection);
     }
 
-    public virtual void AttackStart() { SkillMethod(); }
+    public virtual void AttackStart()
+    {
+        if (MonsterConstant.NotKnockBackAbleWhenAttacking.Contains(monster.monsterName)) monster.SetIsKnockBackAble(false);
+        if (MonsterConstant.FixedAnimationWhenAttacking.Contains(monster.monsterName)) monster.SetIsFixedAnimation(true);
+        SkillMethod();
+    }
     public virtual void AttackUpdate() { }
-    public virtual void AttackEnd() { SetMaxAttackCoolTime(); }
+    public virtual void AttackEnd()
+    {
+        monster.SetIsKnockBackAble(true);
+        monster.SetIsFixedAnimation(false);
+        SetMaxAttackCoolTime();
+    }
     public void UpdateCoolTime() { if (attackCoolTime > 0 && !monster.GetIsAttacking()) attackCoolTime -= Time.deltaTime; }
     public void SetMaxAttackCoolTime() { attackCoolTime = attackCoolTimeMax; }
     protected virtual bool CheckTarget() { return Vector2.Distance(GetPlayerPos(), GetMonsterPos()) < attackRange; }
