@@ -7,7 +7,7 @@ public class ResolutionController : MonoBehaviour
 	public TMP_Dropdown resolutionDropdown;
 
 	private List<Resolution> resolutions = new List<Resolution>();
-	private int optimalResolutionIndex = 0;
+	private int optimalResolutionIndex = 5;
 
 	private void Start()
 	{
