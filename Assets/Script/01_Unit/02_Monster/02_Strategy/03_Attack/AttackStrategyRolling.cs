@@ -68,6 +68,7 @@ public class AttackStrategyRolling : AttackStrategySplash
                     monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
                     SplashAttack();
                     monster.playAfterAttackEffect();
+                    monster.PlayMonsterAttackSFX();
                 });
         });
     }

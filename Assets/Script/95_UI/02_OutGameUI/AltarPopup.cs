@@ -52,6 +52,7 @@ public class AltarPopup : PageAblePopupSystem
         if (success)
         {
             Initialize();
+            SoundManager.Instance.SFXPlay("AltarOpen", SoundList.Instance.altarOpen);
             Util.SetActive(MiniMap.Instance.gameObject, false);
             ShowCurrentPageText();
         }
@@ -63,6 +64,7 @@ public class AltarPopup : PageAblePopupSystem
         bool success = base.TurnOffPopup();
         if (success)
         {
+            SoundManager.Instance.SFXPlay("AltarOpen", SoundList.Instance.altarClose);
             Util.SetActive(MiniMap.Instance.gameObject, true);
         }
         return success;
