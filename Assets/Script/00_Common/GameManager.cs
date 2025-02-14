@@ -53,6 +53,12 @@ public class GameManager : SingletonObject<GameManager>
         Player.Instance.RestartPlayer();
     }
 
+    public void RestartCurrentStage()
+    {
+        ChapterManager.Instance.RestartCurrentStage();
+    }
+
+
     public void QuitInGame()
     {
         SetIsInGame(false);
