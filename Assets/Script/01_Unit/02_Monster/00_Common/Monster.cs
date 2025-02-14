@@ -66,7 +66,7 @@ public class Monster : DirectionalGameObject
     public void AttackUpdate() { pattern.AttackUpdateMethod(); }
     public void AttackEnd() { pattern.AttackEndMethod(); }
 
-    public void PlayAnimation(MonsterStatus status, bool value = false)
+    public void PlayAnimation(MonsterStatus status, bool value = true)
     {
         if (isFixedAnimation) return;
         switch (status)
@@ -192,7 +192,7 @@ public class Monster : DirectionalGameObject
         monsterUnit.ResetIsTackleAble();
         SetIsFixedAnimation(false);
 
-        PlayAnimation(MonsterStatus.Dead);
+        PlayAnimation(MonsterStatus.Dead, true);
 
         InGameManager.Instance.CreateSoul(transform.position);
         ChapterManager.Instance.AlarmMonsterKilled(monsterName);
@@ -250,7 +250,7 @@ public class Monster : DirectionalGameObject
 
     public void PlayMonsterAttackSFX()
     {
-        switch(monsterName)
+        switch (monsterName)
         {
             case MonsterName.Ippali:
                 SoundManager.Instance.SFXPlay("IppaliAttack", SoundList.Instance.monsterIppaliAttack);
@@ -276,7 +276,7 @@ public class Monster : DirectionalGameObject
 
     public void PlayMonsterChargeSFX()
     {
-        switch(monsterName)
+        switch (monsterName)
         {
             case MonsterName.Koppulso:
                 SoundManager.Instance.SFXPlay("KoppulsoCharge", SoundList.Instance.monsterKoppulsoCharge);
@@ -291,5 +291,5 @@ public class Monster : DirectionalGameObject
     {
         SoundManager.Instance.SFXPlay("monsterItmomiThorn", SoundList.Instance.monsterItmomiThorn);
     }
-    
+
 }
