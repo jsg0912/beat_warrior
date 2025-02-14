@@ -18,9 +18,10 @@ public class PlayerHpUIController : MonoBehaviour
         Initialize();
     }
 
-    public void CreateAndUpdateHPUI(int hp)
+    public void CreateAndUpdateHPUI()
     {
-        CreateHPUI(hp);
+        int maxHP = Player.Instance.GetFinalStat(StatKind.HP);
+        CreateHPUI(maxHP);
         UpdateHPUI();
     }
 
@@ -59,6 +60,6 @@ public class PlayerHpUIController : MonoBehaviour
 
     public void Initialize()
     {
-        CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+        CreateAndUpdateHPUI();
     }
 }
