@@ -257,4 +257,49 @@ public class Monster : DirectionalGameObject
             }
         }
     }
+
+    public void PlayMonsterAttackSFX()
+    {
+        switch(monsterName)
+        {
+            case MonsterName.Ippali:
+                SoundManager.Instance.SFXPlay("IppaliAttack", SoundList.Instance.monsterIppaliAttack);
+                break;
+            case MonsterName.Ibkkugi:
+                SoundManager.Instance.SFXPlay("IbkkugiAttack", SoundList.Instance.monsterIbkkugiAttack);
+                break;
+            case MonsterName.Koppulso:
+                SoundManager.Instance.SFXPlay("KoppulsoAttack", SoundList.Instance.monsterKoppulsoAttack);
+                break;
+            case MonsterName.Dulduli:
+                SoundManager.Instance.SFXPlay("DulduliAttack", SoundList.Instance.monsterDulduliAttack);
+                break;
+            case MonsterName.Giljjugi:
+                SoundManager.Instance.SFXPlay("GiljjugiAttack", SoundList.Instance.monsterGiljjugiAttack);
+                break;
+            case MonsterName.Itmomi:
+                SoundManager.Instance.SFXPlay("ItmomiAttack", SoundList.Instance.monsterItmomiAttack);
+                break;
+
+        }
+    }
+
+    public void PlayMonsterChargeSFX()
+    {
+        switch(monsterName)
+        {
+            case MonsterName.Koppulso:
+                SoundManager.Instance.SFXPlay("KoppulsoCharge", SoundList.Instance.monsterKoppulsoCharge);
+                break;
+            case MonsterName.Dulduli:
+                SoundManager.Instance.SFXPlay("DulduliCharge", SoundList.Instance.monsterDulduliCharge);
+                break;
+        }
+    }
+
+    public void PlayMonsterThornSFX()
+    {
+        SoundManager.Instance.SFXPlay("monsterItmomiThorn", SoundList.Instance.monsterItmomiThorn);
+    }
+    
 }
