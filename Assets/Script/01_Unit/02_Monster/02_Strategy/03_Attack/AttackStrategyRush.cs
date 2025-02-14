@@ -38,8 +38,6 @@ public class AttackStrategyRush : AttackStrategy
             dashDurationLeft = dashDuration;
             monster.SetIsFixedAnimation(false);
             monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
-
-            monster.PlayMonsterAttackSFX();
         }
 
         dashDurationLeft -= Time.deltaTime;
