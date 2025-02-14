@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public static class Util
 {
-    public static Vector3 OffsetX = new Vector3(0.05f, 0, 0);
-    public static Vector3 OffsetY = new Vector3(0, 0.05f, 0);
+    // Vector 활용에 있어서 오차범위용
+    public static float OffsetX = 0.05f;
+    public static float OffsetY = 0.05f;
 
     public static T ParseEnumFromString<T>(string value)
     {

@@ -1,14 +1,16 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class MonsterConstant
 {
     public const string walkAnimBool = "IsWalk";
-    public const string attackAnimTrigger = "Attack";
+    public const string attackChargeAnimTrigger = "Attack"; // TODO: 사실 상 Charge로 쓰임임
     public const string attackEndAnimTrigger = "AttackEnd";
     public const string repeatAttackBool = "RepeatAttack";
     public const string groggyBool = "Groggy";
     public const string turnAnimTrigger = "Turn";
     public const string hurtAnimTrigger = "Hurt";
+    public const string fallAnimTrigger = "Fall";
     public const string dieAnimBool = "Die";
 
     public const float moveSpeed = 1.0f;
@@ -24,8 +26,8 @@ public class MonsterConstant
 
     // Dulduli
     public const float DulduliJumpPower = 5f;
-    public const int DulduliJumpNumber = 1;
     public const float DulduliJumpDuration = 0.7f;
+    public static Vector2 DulduliSplashRange = new Vector2(3.0f, 1.0f);
     public const float DulduliGroggyDuration = 2.0f;
 
     // Koppulso
@@ -71,7 +73,7 @@ public class MonsterConstant
         { MonsterName.Itmomi, moveSpeed * MoveSpeedRatio[MonsterName.Itmomi] },
     };
 
-    public static Dictionary<MonsterName, float> AttackSpeed = new() {
+    public static Dictionary<MonsterName, float> AttackCoolTime = new() {
         { MonsterName.Ippali, 2.0f },
         { MonsterName.Ibkkugi, 2.2f },
         { MonsterName.Koppulso, 6.0f },
@@ -80,7 +82,7 @@ public class MonsterConstant
         { MonsterName.Itmomi, 3.5f }
     };
 
-    public static Dictionary<MonsterName, bool> RepeatAttack = new() {
+    public static Dictionary<MonsterName, bool> IsRepeatAttackAnimation = new() {
         { MonsterName.Ippali, false },
         { MonsterName.Ibkkugi, false },
         { MonsterName.Koppulso, true },

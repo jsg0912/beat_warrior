@@ -5207,14 +5207,14 @@ MonoBehaviour:
   - {fileID: 7661820573471242283}
   - {fileID: 8917363539229149721}
   monsterName: 4
-  isChasing: 0
+  _status: 0
+  AnotherHPValue: 0
+  HpUI: {fileID: 1649727570667360246}
+  attackEffect: {fileID: 0}
+  MarkedEffect: {fileID: 3009110402622661877}
   hitEffects:
   - {fileID: 8917363539229149721}
   - {fileID: 8167488729445322620}
-  _status: 0
-  HpUI: {fileID: 1649727570667360246}
-  Target: {fileID: 3009110402622661877}
-  AnotherHPValue: 0
   attackCollider: {fileID: 7661820573471242283}
   monsterBodyCollider: {fileID: 7833154903112730748}
 --- !u!50 &7007219103791619030

@@ -8,20 +8,27 @@ public class MonsterAnimatorController : StateMachineBehaviour
     {
         if (monster == null) monster = animator.GetComponent<Monster>();
 
-        if (stateInfo.IsName(MonsterAnimation.Idle) || stateInfo.IsName(MonsterAnimation.Walk)) monster.SetStatus(MonsterStatus.Normal);
-        else if (stateInfo.IsName(MonsterAnimation.Charge)) monster.SetStatus(MonsterStatus.Attack);
+        if (stateInfo.IsName(MonsterAnimation.Charge)) monster.SetStatus(MonsterStatus.Attack);
         else if (stateInfo.IsName(MonsterAnimation.Attack)) monster.AttackStart();
         else if (stateInfo.IsName(MonsterAnimation.AttackEnd)) monster.AttackEnd();
         else if (stateInfo.IsName(MonsterAnimation.Groggy)) monster.SetStatus(MonsterStatus.Groggy);
         else if (stateInfo.IsName(MonsterAnimation.Hurt))
         {
-            monster.SetStatus(MonsterStatus.Hurt);
             monster.PlayScarEffect();
         }
         else if (stateInfo.IsName(MonsterAnimation.Die))
         {
             monster.SetStatus(MonsterStatus.Dead);
             monster.PlayScarEffect();
+        }
+    }
+
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (stateInfo.IsName(MonsterAnimation.Hurt))
+        {
+            if (monster.GetStatus() == MonsterStatus.Attack) monster.SetStatus(MonsterStatus.Chase);
+            else monster.SetStatus(MonsterStatus.Idle);
         }
     }
 

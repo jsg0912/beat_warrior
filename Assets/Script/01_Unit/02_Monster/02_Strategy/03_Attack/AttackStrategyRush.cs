@@ -22,7 +22,7 @@ public class AttackStrategyRush : AttackStrategy
         GroundLayer = LayerMask.GetMask(LayerConstant.Tile);
     }
 
-    protected override void SkillMethod()
+    protected override void AttackMethod()
     {
         monster.SetIsTackleAble(true);
         monster.SetIsFixedAnimation(true);

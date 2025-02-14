@@ -2,16 +2,17 @@ public abstract class RecognizeStrategy : Strategy
 {
     protected float recognizeRange;
 
-    public override bool PlayStrategy()
+    public override bool PlayStrategy() // return true if it is looking at the target.
     {
-        if (IsLookingTarget() == true) CheckTarget();
-        return true;
+        if (monster.GetStatus() == MonsterStatus.Groggy) return false;
+        if (monster.GetIsRecognizing() || IsLookingTarget()) return CheckTarget();
+        return false;
     }
 
     protected virtual bool IsLookingTarget() { return GetMovingDirection() == monster.GetRelativeDirectionToPlayer(); }
-    protected void ChaseTarget() { if (!IsLookingTarget()) monster.FlipDirection(); }
-    protected abstract void CheckTarget();
+    protected void TryFlipToTargetDirection() { if (!monster.GetIsAttacking() && !IsLookingTarget()) monster.FlipDirection(); }
+    protected abstract bool CheckTarget();
 
-    protected void StartChase() { if (!monster.isChasing) monster.isChasing = true; }
-    protected void ReleaseChase() { if (monster.isChasing) monster.isChasing = false; }
+    protected void TrySetChaseStatus() { if (!monster.GetIsRecognizing()) monster.SetStatus(MonsterStatus.Chase); }
+    protected void ReleaseChase() { if (monster.GetStatus() == MonsterStatus.Chase) monster.SetStatus(MonsterStatus.Idle); }
 }

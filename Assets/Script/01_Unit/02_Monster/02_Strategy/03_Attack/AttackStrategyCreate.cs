@@ -13,7 +13,7 @@ public class AttackStrategyCreate : AttackStrategy
             prefab = Resources.Load(PrefabRouter.MonsterAttackPrefab[monster.monsterName]) as GameObject;
     }
 
-    protected override void SkillMethod()
+    protected override void AttackMethod()
     {
         obj = GameObject.Instantiate(prefab);
 

@@ -4943,7 +4943,7 @@ Animator:
   m_GameObject: {fileID: 2529686815831883854}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 756ccaeb42659bf4ebbdd81ffec683df, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6b18c72768fb8094bbdad18f14c71d7d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4972,14 +4972,14 @@ MonoBehaviour:
   childDirectionalObjects:
   - {fileID: 2273473355404780299}
   monsterName: 3
-  isChasing: 0
+  _status: 0
+  AnotherHPValue: 0
+  HpUI: {fileID: 1349157933565216087}
+  attackEffect: {fileID: 1650175317288840205}
+  MarkedEffect: {fileID: 3287250002510114388}
   hitEffects:
   - {fileID: 2273473355404780299}
   - {fileID: 6343928678588371176}
-  _status: 0
-  HpUI: {fileID: 1349157933565216087}
-  Target: {fileID: 3287250002510114388}
-  AnotherHPValue: 0
   attackCollider: {fileID: 5335818054842263266}
   monsterBodyCollider: {fileID: 4271014955822344814}
 --- !u!50 &2296474326589475115
@@ -20112,24 +20112,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 5209586563546648255}
     m_Modifications:
     - target: {fileID: 1183404386984352463, guid: 43b3655d2834e074d84c195640b635d2, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 6.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183404386984352463, guid: 43b3655d2834e074d84c195640b635d2, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 3.3700001
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183404386984352463, guid: 43b3655d2834e074d84c195640b635d2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3.4000003
-      objectReference: {fileID: 0}
-    - target: {fileID: 1183404386984352463, guid: 43b3655d2834e074d84c195640b635d2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.286
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1183404386984352463, guid: 43b3655d2834e074d84c195640b635d2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.311
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1183404386984352463, guid: 43b3655d2834e074d84c195640b635d2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20163,10 +20151,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5077431662297951763, guid: 43b3655d2834e074d84c195640b635d2, type: 3}
-      propertyPath: looping
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5835986499240042065, guid: 43b3655d2834e074d84c195640b635d2, type: 3}
       propertyPath: m_Name
       value: Splash_Effect
@@ -20180,6 +20164,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43b3655d2834e074d84c195640b635d2, type: 3}
+--- !u!1 &1650175317288840205 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5835986499240042065, guid: 43b3655d2834e074d84c195640b635d2, type: 3}
+  m_PrefabInstance: {fileID: 5051648422565900892}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6230522812078270611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1183404386984352463, guid: 43b3655d2834e074d84c195640b635d2, type: 3}
@@ -20199,7 +20188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2447018866588821470, guid: 7821ffd3764f60a43ad943775fd807f2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5100503492885952317, guid: 7821ffd3764f60a43ad943775fd807f2, type: 3}
       propertyPath: m_LocalPosition.x
