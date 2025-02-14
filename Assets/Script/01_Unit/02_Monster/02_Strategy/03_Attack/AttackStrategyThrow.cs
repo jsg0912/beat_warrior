@@ -26,7 +26,7 @@ public class AttackStrategyThrow : AttackStrategyCreate
 
         obj.transform.position = monster.attackCollider.transform.position;
 
-        float distance = targetPosition.x - GetMonsterPos().x;
+        float distance = targetPosition.x - GetMonsterFrontPos().x;
 
         monsterAttackCollider.rb.velocity = GetVelocityConstantFlyTime(distance);
     }
