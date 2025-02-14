@@ -22,7 +22,7 @@ public class UnitStat
 
     public void SetFullStatAll()
     {
-        foreach (StatKind statKind in currentStats.Keys)
+        foreach (StatKind statKind in stats.Keys)
         {
             SetFullStat(statKind);
         }
