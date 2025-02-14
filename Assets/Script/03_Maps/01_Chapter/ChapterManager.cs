@@ -96,9 +96,17 @@ public class ChapterManager : SingletonObject<ChapterManager>
         //currentStage.KillMonster();
     }
 
+    public void RestartCurrentStage()
+    {
+        LoadStageScene();
+        // TODO: Return soul or buying Status before stage start - SDH, 20250214
+    }
+
     private void LoadStageScene()
     {
         SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapterName][currentStageIndex]);
+
+        Player.Instance?.RecoverHealthyStatus(); // Recover Player Healthy When Stage start newly
     }
 
     private void MoveToNextChapter()

@@ -25,7 +25,6 @@ public class AttackStrategyRush : AttackStrategy
     protected override void SkillMethod()
     {
         monster.SetIsTackleAble(true);
-        monster.SetIsKnockBackAble(false);
         monster.SetIsFixedAnimation(true);
         Util.SetActive(monster.attackCollider, true);
     }
@@ -52,7 +51,6 @@ public class AttackStrategyRush : AttackStrategy
         base.AttackEnd();
 
         monster.SetIsTackleAble(false);
-        monster.SetIsKnockBackAble(true);
         Util.SetActive(monster.attackCollider, false);
     }
 

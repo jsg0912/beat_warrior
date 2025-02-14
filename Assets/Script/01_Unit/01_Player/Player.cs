@@ -64,7 +64,23 @@ public class Player : DirectionalGameObject
         player.GetComponent<Player>().Initialize();
     }
 
-    private void Initialize(Direction direction = Direction.Left)
+    public void RecoverHealthyStatus()
+    {
+        SetStatus(PlayerStatus.Normal);
+        playerUnit.SetFullStatAll();
+        ResetSkillCoolTimeAll();
+        SetMovingDirection(PlayerConstant.initDirection);
+        isGround = false;
+        jumpDeltaTimer = 0;
+        jumpTimer = 0.1f;
+        InitializeRigidBody();
+        SetInvincibility(false);
+        InitializeAttackCollider();
+
+        PlayerUIManager.Instance?.Initialize();
+    }
+
+    private void Initialize()
     {
         StopAllCoroutines();
         // TODO: Alternate real user nickname than "playerName" - SDH, 20241204
@@ -78,6 +94,7 @@ public class Player : DirectionalGameObject
             new QSkill(gameObject),
             new ESkill(gameObject)
         };
+        playerGhostController = new PlayerGhostController();
 
         traitList.Clear();
         Inventory.Instance.Initialize();
@@ -86,18 +103,7 @@ public class Player : DirectionalGameObject
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
-        SetStatus(PlayerStatus.Normal);
-
-        SetMovingDirection(direction);
-        isGround = false;
-        jumpDeltaTimer = 0;
-        jumpTimer = 0.1f;
-        InitializeRigidBody();
-        SetInvincibility(false);
-
-        ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
-        playerGhostController = new PlayerGhostController();
-        InitializeAttackCollider();
+        RecoverHealthyStatus();
     }
 
     private void InitializeRigidBody()
@@ -110,7 +116,6 @@ public class Player : DirectionalGameObject
     {
         Initialize();
         SetAnimTrigger(PlayerConstant.restartAnimTrigger);
-        PlayerUIManager.Instance.Initialize();
     }
 
     // GET Functions
@@ -188,6 +193,19 @@ public class Player : DirectionalGameObject
 
         foreach (SkillName skillName in PlayerSkillConstant.ResetSkillListByMarkKill)
             HaveSkill(skillName).ResetCoolTime();
+    }
+
+    public void ResetSkillCoolTimeAll()
+    {
+        foreach (var skill in skillList)
+        {
+            skill.ResetCoolTime();
+        }
+
+        foreach (var skill in traitList)
+        {
+            skill.ResetCoolTime();
+        }
     }
 
     public void CheckIsMove()
@@ -326,6 +344,7 @@ public class Player : DirectionalGameObject
     {
         Direction dir = end.x > transform.position.x ? Direction.Right : Direction.Left;
 
+        _animator.SetBool(PlayerConstant.dashEndAnimBool, false);
         SetGravityScale(false);
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetMovingDirection(dir);
@@ -346,6 +365,7 @@ public class Player : DirectionalGameObject
 
         if (passWall == true) transform.position = end;
 
+        _animator.SetBool(PlayerConstant.dashEndAnimBool, true);
         SetGravityScale(true);
         SetInvincibility(false);
         if (changeDir == true) SetMovingDirection((Direction)(-1 * (int)dir));
@@ -454,7 +474,7 @@ public class Player : DirectionalGameObject
             if (trait.skillName == name)
             {
                 traitList.Remove(trait);
-                SoundManager.Instance. SFXPlay("Equip", SoundList.Instance.altarUnequip);
+                SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.altarUnequip);
                 trait.RemoveSkill();
                 return;
             }
