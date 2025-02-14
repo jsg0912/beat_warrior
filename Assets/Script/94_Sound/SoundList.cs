@@ -30,7 +30,6 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip monsterItmomiThorn; // 1.0s up in itmomi attack animation
 
     public AudioClip playerHit; //
-
     public AudioClip playerHolyBlade; //
     public AudioClip playerMark; //
     public AudioClip playerDash; //
@@ -39,7 +38,7 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip playerQSkill; //
     public AudioClip playerESkill; //
     public AudioClip playerRevive0; //
-    public AudioClip playerRevive1; //
+    public AudioClip playerRevive1; // 6.5
 
     public AudioClip timeSlow;
     public AudioClip soulGet; //

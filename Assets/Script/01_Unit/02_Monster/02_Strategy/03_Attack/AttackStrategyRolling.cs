@@ -50,6 +50,7 @@ public class AttackStrategyRolling : AttackStrategy
                     rb.velocity = Vector2.down * gravity * 10;
 
                     monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
+                    monster.PlayMonsterAttackSFX();
                 });
             });
     }
