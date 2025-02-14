@@ -175,12 +175,25 @@ public class Monster : DirectionalGameObject
         }
         this.status = status;
     }
+
     public void SetIsTackleAble(bool isTackleAble)
     {
-        monsterUnit.isTackleAble = isTackleAble;
+        if (isTackleAble)
+        {
+            monsterUnit.ResetIsTackleAble();
+        }
+        else monsterUnit.isTackleAble = isTackleAble;
     }
 
-    public void SetIsKnockBackAble(bool isKnockBackAble) { monsterUnit.isKnockBackAble = isKnockBackAble; }
+    public void SetIsKnockBackAble(bool isKnockBackAble)
+    {
+        if (isKnockBackAble)
+        {
+            monsterUnit.ResetIsKnockBackAble();
+        }
+        else monsterUnit.isKnockBackAble = isKnockBackAble;
+    }
+
     public void SetIsFixedAnimation(bool isFixedAnimation) { this.isFixedAnimation = isFixedAnimation; }
     public virtual void Die()
     {
@@ -250,7 +263,7 @@ public class Monster : DirectionalGameObject
 
     public void PlayMonsterAttackSFX()
     {
-        switch(monsterName)
+        switch (monsterName)
         {
             case MonsterName.Ippali:
                 SoundManager.Instance.SFXPlay("IppaliAttack", SoundList.Instance.monsterIppaliAttack);
@@ -276,7 +289,7 @@ public class Monster : DirectionalGameObject
 
     public void PlayMonsterChargeSFX()
     {
-        switch(monsterName)
+        switch (monsterName)
         {
             case MonsterName.Koppulso:
                 SoundManager.Instance.SFXPlay("KoppulsoCharge", SoundList.Instance.monsterKoppulsoCharge);
@@ -291,5 +304,5 @@ public class Monster : DirectionalGameObject
     {
         SoundManager.Instance.SFXPlay("monsterItmomiThorn", SoundList.Instance.monsterItmomiThorn);
     }
-    
+
 }

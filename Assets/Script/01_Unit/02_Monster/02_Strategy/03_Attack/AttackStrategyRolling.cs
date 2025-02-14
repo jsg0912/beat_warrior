@@ -49,9 +49,15 @@ public class AttackStrategyRolling : AttackStrategy
                     rb.gravityScale = gravity;
                     rb.velocity = Vector2.down * gravity * 10;
 
+                    monster.SetIsFixedAnimation(false);
                     monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
                 });
             });
+        // TODO: DoTween으로 내리찍고 아래 주석된 코드들 콜백으로 실행
+        // monster.SetIsTackleAble(false);
+        // monster.SetIsKnockBackAble(true);
+        // monster.PlayAnimation(MonsterStatus.Groggy, true);
+
     }
 
     protected override void SkillMethod()
@@ -64,16 +70,5 @@ public class AttackStrategyRolling : AttackStrategy
         monster.SetIsTackleAble(true);
         monster.SetIsKnockBackAble(false);
         monster.SetIsTackleAble(true);
-    }
-
-    public override void AttackEnd()
-    {
-        base.AttackEnd();
-
-        monster.SetIsFixedAnimation(false);
-        monster.SetIsTackleAble(false);
-        monster.SetIsKnockBackAble(true);
-
-        monster.PlayAnimation(MonsterStatus.Groggy, true);
     }
 }
