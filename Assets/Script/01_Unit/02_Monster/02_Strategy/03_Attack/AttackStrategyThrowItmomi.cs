@@ -7,8 +7,8 @@ public class AttackStrategyThrowItmomi : AttackStrategyCreate
     protected override void AttackMethod()
     {
         base.AttackMethod();
-        if (attackDirection == Direction.Right) Util.FlipLocalScaleX(obj);
         obj.transform.position = ClosestGround();
+        if (obj.transform.position.x > GetMonsterPos().x) Util.FlipLocalScaleX(obj);
     }
 
     protected Vector3 ClosestGround()
