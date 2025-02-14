@@ -24,7 +24,6 @@ public class AttackStrategyRush : AttackStrategy
 
     protected override void AttackMethod()
     {
-        monster.SetIsTackleAble(true);
         monster.SetIsFixedAnimation(true);
         Util.SetActive(monster.attackCollider, true);
     }
@@ -50,8 +49,7 @@ public class AttackStrategyRush : AttackStrategy
     {
         base.AttackEnd();
 
-        monster.SetIsTackleAble(false);
-        Util.SetActive(monster.attackCollider, false);
+        Util.SetActive(monster.attackCollider, false); // Rush는 턴도는 동작 때문에 여기서 Collider 비활성화
     }
 
     protected IEnumerator ChangeDir()

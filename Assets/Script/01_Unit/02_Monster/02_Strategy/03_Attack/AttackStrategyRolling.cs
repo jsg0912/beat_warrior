@@ -63,7 +63,6 @@ public class AttackStrategyRolling : AttackStrategySplash
                 {
                     // 땅에 닿은 후 실행할 함수
                     rb.gravityScale = gravity;
-                    monster.SetIsTackleAble(false);
                     monster.SetIsKnockBackAble(true);
                     monster.SetIsFixedAnimation(false);
                     monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
@@ -80,9 +79,7 @@ public class AttackStrategyRolling : AttackStrategySplash
 
     private void SetBeforeSkill()
     {
-        monster.SetIsTackleAble(true);
         monster.SetIsKnockBackAble(false);
-        monster.SetIsTackleAble(true);
     }
 
     public override void AttackEnd()
@@ -91,7 +88,6 @@ public class AttackStrategyRolling : AttackStrategySplash
         // 주의: base를 안쓰기 떄문에, base에서 공용으로 써야하는 것들이 새로 생기면, 여기도 추가해야할 수 있다.
         monster.SetIsKnockBackAble(true);
         monster.SetIsFixedAnimation(false);
-        SetMaxAttackCoolTime();
         monster.pattern.PlayGroggy();
     }
 }

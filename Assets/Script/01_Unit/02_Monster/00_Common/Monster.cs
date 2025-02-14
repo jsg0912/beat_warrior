@@ -84,6 +84,11 @@ public class Monster : DirectionalGameObject
     public void PlayAnimation(string trigger)
     {
         if (isFixedAnimation) return;
+        if (trigger == MonsterConstant.hurtAnimTrigger)
+        {
+            SetMovingDirection(Player.Instance.GetBottomPos().x > transform.position.x ? Direction.Right : Direction.Left);
+            AttackEnd();
+        }
         _animator.SetTrigger(trigger);
     }
 
@@ -139,7 +144,6 @@ public class Monster : DirectionalGameObject
     }
 
     public bool GetIsKnockBackAble() { return monsterUnit.isKnockBackAble; }
-    public bool GetIsTackleAble() { return monsterUnit.isTackleAble; }
     public bool GetIsAlive() { return status != MonsterStatus.Dead; }
     public bool CheckIsAlive()
     {
@@ -158,12 +162,15 @@ public class Monster : DirectionalGameObject
     public void AttackedByPlayer(int playerATK, bool isAlreadyCheckHitMonsterFunc = false)
     {
         if (!GetIsAlive()) return;
+
         int damage = playerATK - monsterUnit.unitStat.GetFinalStat(StatKind.Def);
         if (damage <= 0) return;
-        SoundManager.Instance.SFXPlay("MonsterHit", SoundList.Instance.monsterHit);
+
         GetDamaged(damage);
         if (Player.Instance.hitMonsterFuncList != null && !isAlreadyCheckHitMonsterFunc) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
+
         PlayAnimation(MonsterConstant.hurtAnimTrigger);
+        SoundManager.Instance.SFXPlay("MonsterHit", SoundList.Instance.monsterHit);
     }
 
     public virtual void GetDamaged(int dmg)
@@ -206,19 +213,6 @@ public class Monster : DirectionalGameObject
         }
         status = newStatus;
     }
-    public void ForceIsTackleAble(bool isTackleAble)
-    {
-        monsterUnit.isTackleAble = isTackleAble;
-    }
-
-    public void SetIsTackleAble(bool isTackleAble)
-    {
-        if (isTackleAble)
-        {
-            monsterUnit.ResetIsTackleAble();
-        }
-        else monsterUnit.isTackleAble = isTackleAble;
-    }
 
     public void SetIsKnockBackAble(bool isKnockBackAble)
     {
@@ -242,7 +236,6 @@ public class Monster : DirectionalGameObject
         Util.SetActive(MarkedEffect, false);
 
         monsterUnit.ResetIsKnockBackAble();
-        monsterUnit.ResetIsTackleAble();
         SetIsFixedAnimation(false);
 
         PlayAnimation(MonsterStatus.Dead, true);

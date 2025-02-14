@@ -27,6 +27,7 @@ public abstract class AttackStrategy : Strategy
         return TryAttack();
     }
 
+    // Attack을 시도해서 가능한 상황이면, AttackCharge Animation을 시작하고, AnimatorController에서 그 후 처리를 시작함.
     protected virtual bool TryAttack()
     {
         if (attackCoolTime > 0 || !IsInAttackRange()) return false;
@@ -38,11 +39,12 @@ public abstract class AttackStrategy : Strategy
 
     private void StartAttackCharge() { monster.PlayAnimation(MonsterStatus.Attack); }
 
+    // 이 함수가 실행되면 정말로 공격을 실행한는 것으로 간주
     protected abstract void AttackMethod();
+
     public virtual void StopAttack()
     {
         monoBehaviour.StopAllCoroutines();
-        SetMaxAttackCoolTime();
     }
 
     public void SetAttackDirection()
@@ -55,6 +57,7 @@ public abstract class AttackStrategy : Strategy
     {
         if (MonsterConstant.NotKnockBackAbleWhenAttacking.Contains(monster.monsterName)) monster.SetIsKnockBackAble(false);
         if (MonsterConstant.FixedAnimationWhenAttacking.Contains(monster.monsterName)) monster.SetIsFixedAnimation(true);
+        SetMaxAttackCoolTime();
         AttackMethod();
     }
 
@@ -65,7 +68,6 @@ public abstract class AttackStrategy : Strategy
         // 주의: base를 안쓰기 떄문에, base에서 공용으로 써야하는 것들이 새로 생기면, 여기도 추가해야할 수 있다.
         monster.SetIsKnockBackAble(true);
         monster.SetIsFixedAnimation(false);
-        SetMaxAttackCoolTime();
         monster.SetStatus(MonsterStatus.Chase); // TODO: AttackEnd 후에 무조건 Chase로 가야하는지 확인 필요
     }
     public void UpdateCoolTime() { if (attackCoolTime > 0 && !monster.GetIsAttacking()) attackCoolTime -= Time.deltaTime; }
