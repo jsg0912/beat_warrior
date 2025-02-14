@@ -20,6 +20,7 @@ public class MonsterAnimatorController : StateMachineBehaviour
         {
             monster.SetStatus(MonsterStatus.Dead);
             monster.PlayScarEffect();
+            monster.MakePlayerRewards();
         }
     }
 
@@ -30,6 +31,7 @@ public class MonsterAnimatorController : StateMachineBehaviour
             if (monster.GetStatus() == MonsterStatus.Attack) monster.SetStatus(MonsterStatus.Chase);
             else monster.SetStatus(MonsterStatus.Idle);
         }
+        else if (stateInfo.IsName(MonsterAnimation.Die)) Destroy(monster.gameObject);
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -68,7 +68,6 @@ public class AttackStrategyRolling : AttackStrategySplash
                     monster.SetIsFixedAnimation(false);
                     monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
                     SplashAttack();
-                    DebugConsole.Log("effect start");
                     monster.playAfterAttackEffect();
                 });
         });
