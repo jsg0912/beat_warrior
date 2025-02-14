@@ -66,18 +66,22 @@ public class Player : DirectionalGameObject
 
     public void RecoverHealthyStatus()
     {
-        SetStatus(PlayerStatus.Normal);
+        SetAnimTrigger(PlayerConstant.restartAnimTrigger);
+
         playerUnit.SetFullStatAll();
         ResetSkillCoolTimeAll();
+        SetStatus(PlayerStatus.Normal);
+
+        InitializeRigidBody();
+        InitializeAttackCollider();
+
         SetMovingDirection(PlayerConstant.initDirection);
         isGround = false;
         jumpDeltaTimer = 0;
         jumpTimer = 0.1f;
-        InitializeRigidBody();
         SetInvincibility(false);
-        InitializeAttackCollider();
 
-        PlayerUIManager.Instance?.Initialize();
+        PlayerUIManager.InstanceWithoutCreate?.Initialize();
     }
 
     private void Initialize()
@@ -128,7 +132,7 @@ public class Player : DirectionalGameObject
     public void SetStatus(PlayerStatus status)
     {
         this.status = status;
-        PlayerUIManager.Instance?.SetPlayerFace(status, Hp);
+        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
 
         switch (status)
         {
@@ -161,14 +165,14 @@ public class Player : DirectionalGameObject
     public void ForceSetCurrentHp(int hp)
     {
         playerUnit.ForceSetCurrentHP(hp);
-        PlayerHpUIController.Instance?.UpdateHPUI();
+        PlayerHpUIController.InstanceWithoutCreate?.UpdateHPUI();
     }
 
     public bool ChangeCurrentHP(int change)
     {
         bool isAlive = playerUnit.ChangeCurrentHP(change);
-        PlayerHpUIController.Instance?.UpdateHPUI();
-        PlayerUIManager.Instance?.SetPlayerFace(status, Hp);
+        PlayerHpUIController.InstanceWithoutCreate?.UpdateHPUI();
+        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
         return isAlive;
     }
 

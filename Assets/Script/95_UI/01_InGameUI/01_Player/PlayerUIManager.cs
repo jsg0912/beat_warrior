@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class PlayerUIManager : MonoBehaviour
+public class PlayerUIManager : SingletonObject<PlayerUIManager>
 {
-    public static PlayerUIManager Instance { get; private set; }
-    void Awake() { Instance = this; }
     [SerializeField] private PlayerHpUIController playerHpUI;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIMark;
     [SerializeField] private SkillCoolTimeUI SkillCoolTimeUIDash;

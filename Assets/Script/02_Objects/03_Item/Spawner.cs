@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Spawner : MonoBehaviour
 {
-    public static Spawner Instance;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
