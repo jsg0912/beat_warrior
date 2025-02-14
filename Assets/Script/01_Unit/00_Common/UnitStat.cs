@@ -22,7 +22,7 @@ public class UnitStat
 
     public void SetFullStatAll()
     {
-        foreach (StatKind statKind in Enum.GetValues(typeof(StatKind)))
+        foreach (StatKind statKind in currentStats.Keys)
         {
             SetFullStat(statKind);
         }
