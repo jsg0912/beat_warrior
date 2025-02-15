@@ -51,15 +51,6 @@ public class SoundManager : SingletonObject<SoundManager>
             // Debug.LogError("SoundManager: " + name + " is null");
             return;
         }
-        /*
-        GameObject go = new GameObject(name + "Sound");
-        AudioSource audioSource = go.AddComponent<AudioSource>();
-        audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
-        audioSource.clip = clip;
-        audioSource.PlayOneShot(clip, 0.5f);
-
-        Destroy(go, clip.length);
-        */
         soundEffect.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
         soundEffect.PlayOneShot(clip, 0.5f * sfxVolume);
     }
