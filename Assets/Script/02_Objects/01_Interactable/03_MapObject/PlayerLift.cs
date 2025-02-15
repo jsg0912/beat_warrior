@@ -42,9 +42,17 @@ public class PlayerLift : ObjectWithInteractionPrompt
     {
         if (!isMoving)
         {
-            targetPosition = (targetPosition == startPoint.position) ? endPoint.position : startPoint.position;
+            if (Vector3.Distance(transform.position, startPoint.position) < 0.1f)
+            {
+                targetPosition = endPoint.position;
+            }
+            else
+            {
+                targetPosition = startPoint.position;
+            }
+
             ToggleLever();
-            StartCoroutine(MoveLift()); 
+            StartCoroutine(MoveLift());
         }
     }
 
