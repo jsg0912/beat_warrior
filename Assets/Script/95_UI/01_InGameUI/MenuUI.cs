@@ -50,7 +50,6 @@ public class MenuUI : PopupSystem
     {
         TurnOffPopup();
         PopupManager.Instance.RemovePopup(this);
-        SceneController.Instance.LoadTitle();
         GameManager.Instance.QuitInGame();
     }
 }

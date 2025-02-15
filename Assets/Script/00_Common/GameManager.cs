@@ -62,7 +62,7 @@ public class GameManager : SingletonObject<GameManager>
     public void QuitInGame()
     {
         SetIsInGame(false);
-        Destroy(InGameManager.Instance.gameObject);
+        SceneController.Instance.LoadTitle();
         // TODO: Save Game
     }
 
