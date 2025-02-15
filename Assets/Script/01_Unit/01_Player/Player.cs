@@ -32,8 +32,7 @@ public class Player : DirectionalGameObject
 
 
     private bool isGround;
-    private float jumpDeltaTimer;
-    private float jumpTimer;
+    private Timer jumpOffsetTimer;
     [SerializeField] private bool isInvincibility;
     private List<BoxCollider2D> tiles = new();
 
@@ -64,10 +63,8 @@ public class Player : DirectionalGameObject
         player.GetComponent<Player>().Initialize();
     }
 
-    public void RecoverHealthyStatus()
+    public void RecoverHealthyStatus(bool isRestart = false)
     {
-        SetAnimTrigger(PlayerConstant.restartAnimTrigger);
-
         playerUnit.SetFullStatAll();
         ResetSkillCoolTimeAll();
         SetStatus(PlayerStatus.Normal);
@@ -77,8 +74,8 @@ public class Player : DirectionalGameObject
 
         SetMovingDirection(PlayerConstant.initDirection);
         isGround = false;
-        jumpDeltaTimer = 0;
-        jumpTimer = 0.1f;
+        jumpOffsetTimer = new Timer(0.1f);
+        jumpOffsetTimer.SetRemainTimeZero();
         SetInvincibility(false);
 
         PlayerUIManager.InstanceWithoutCreate?.Initialize();
@@ -153,7 +150,12 @@ public class Player : DirectionalGameObject
         if (!gravity) _rigidbody.velocity = Vector3.zero;
     }
 
-    public void SetAnimTrigger(string trigger) { _animator.SetTrigger(trigger); }
+    public void SetAnimTrigger(string trigger)
+    {
+        // TODO: 아래 과정이 뭔가뭔가임 - SDH, 20250215
+        if (trigger == PlayerConstant.restartAnimTrigger && status != PlayerStatus.Dead) return;
+        _animator.SetTrigger(trigger);
+    }
 
     public void SetInvincibility(bool isInvin)
     {
@@ -250,7 +252,7 @@ public class Player : DirectionalGameObject
     {
         if (IsActionAble())
         {
-            Jump();
+            TryJump();
             Down();
             Skill();
         }
@@ -302,7 +304,7 @@ public class Player : DirectionalGameObject
 
     private void CheckGround()
     {
-        if (jumpDeltaTimer > 0) return;
+        if (jumpOffsetTimer.remainTime > 0) return;
 
         Vector3 left = GetBottomPos() - new Vector3(GetSize().x / 2, 0, 0);
         Vector3 right = GetBottomPos() + new Vector3(GetSize().x / 2, 0, 0);
@@ -322,24 +324,27 @@ public class Player : DirectionalGameObject
         if (rayHitRight.collider != null && rayHitRight != rayHitLeft) tiles.Add(rayHitRight.collider.GetComponent<BoxCollider2D>());
     }
 
-    private void Jump()
+    private void TryJump()
     {
-        if (jumpDeltaTimer > 0) jumpDeltaTimer -= Time.deltaTime;
+        jumpOffsetTimer.Tick();
         if (!IsActionAble() || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
 
         if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Jump]))
         {
-            SetAnimTrigger(PlayerConstant.jumpAnimTrigger);
-
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
-
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
-            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpPower, ForceMode2D.Impulse);
-
-            jumpDeltaTimer = jumpTimer;
-
-            SoundManager.Instance.SFXPlay("PlayerJump", SoundList.Instance.playerJump);
+            Jump();
         }
+    }
+
+    private void Jump()
+    {
+        SetAnimTrigger(PlayerConstant.jumpAnimTrigger);
+
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
+        _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpPower, ForceMode2D.Impulse);
+        jumpOffsetTimer.Initialize();
+
+        SoundManager.Instance.SFXPlay("PlayerJump", SoundList.Instance.playerJump);
     }
 
     public void Dashing(Vector2 end, bool changeDir, bool isInvincibility, bool passWall = true)
