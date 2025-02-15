@@ -24,7 +24,7 @@ public class AttackStrategyThrow : AttackStrategyCreate
 
         SetTargetPosition();
 
-        obj.transform.position = monster.attackCollider.transform.position;
+        obj.transform.position = monster.attackCollider.transform.position; // 원거리 몬스터들은 attackCollider를 원거리 공격의 사용 위치로 지정
 
         float distance = targetPosition.x - GetMonsterFrontPos().x;
 
