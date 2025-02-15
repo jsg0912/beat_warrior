@@ -15,7 +15,7 @@ public class BlurUIManager : SingletonObject<BlurUIManager>
         }
         TurnOffActiveBlur();
 
-        bool success = Util.SetActive(blurTypePairs.Find(pair => pair.blurType == blurType).gameObject, true);
+        bool success = Util.SetActive(blurTypePairs.Find(pair => pair.blurType == blurType)?.gameObject, true);
         if (success) currentBlurType = blurType;
     }
 

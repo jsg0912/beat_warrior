@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class FadeManager : MonoBehaviour
 {
-    public static FadeManager Instance;  
+    public static FadeManager Instance;
 
     public CanvasGroup fadeCanvasGroup;
     public GameObject fadePanel;
-    public float fadeInDuration = 1.0f; 
+    public float fadeInDuration = 1.0f;
     public float fadeOutDuration = 1.0f;
 
     private void Awake()
@@ -43,8 +43,6 @@ public class FadeManager : MonoBehaviour
 
         fadeCanvasGroup.alpha = 0;
         fadePanel.SetActive(false);
-        Debug.Log("FadeIn 완료");
-
     }
 
     public IEnumerator FadeOut()
@@ -59,15 +57,13 @@ public class FadeManager : MonoBehaviour
         }
 
         fadeCanvasGroup.alpha = 1;
-        Debug.Log(" FadeOut 완료");
-
     }
 
     public IEnumerator StartFadeInWithSceneTitle()
     {
         yield return null;
         StartCoroutine(FadeIn());
-        StartCoroutine (SystemMassageUIManager.Instance.TriggerTurnOnMapTitleMassage(GameManager.Instance.currentScene));
+        StartCoroutine(SystemMassageUIManager.Instance.TriggerTurnOnMapTitleMassage(GameManager.Instance.currentScene));
     }
 
     public void FadeOutWithSceneTitle()
@@ -75,6 +71,6 @@ public class FadeManager : MonoBehaviour
         StartCoroutine(StartFadeInWithSceneTitle());
     }
 
-    
+
 }
 
