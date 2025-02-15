@@ -12,7 +12,7 @@ public abstract class ObjectWithInteractionPrompt : MonoBehaviour
         isInitialized = true;
     }
 
-    public abstract void StartInteraction();
+    public abstract bool StartInteraction();
 
     public void SetInteractAble()
     {

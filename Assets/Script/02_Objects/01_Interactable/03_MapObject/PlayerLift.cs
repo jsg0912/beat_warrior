@@ -38,7 +38,7 @@ public class PlayerLift : ObjectWithInteractionPrompt
         isMoving = false;
     }
 
-    public void ActivateLift()
+    public bool ActivateLift()
     {
         if (!isMoving)
         {
@@ -53,12 +53,14 @@ public class PlayerLift : ObjectWithInteractionPrompt
 
             ToggleLever();
             StartCoroutine(MoveLift());
+            return true;
         }
+        return false;
     }
 
-    public override void StartInteraction()
+    public override bool StartInteraction()
     {
-        ActivateLift();
+        return ActivateLift();
     }
 
     protected override void OnTriggerEnter2D(Collider2D other)

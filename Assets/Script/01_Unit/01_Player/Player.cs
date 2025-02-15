@@ -65,6 +65,7 @@ public class Player : DirectionalGameObject
 
     public void RecoverHealthyStatus()
     {
+        DebugConsole.Log("RecoverHealthyStatus");
         playerUnit.SetFullStatAll();
         ResetSkillCoolTimeAll();
         SetStatus(PlayerStatus.Normal);
@@ -127,15 +128,22 @@ public class Player : DirectionalGameObject
     // SET Functions
     public void SetStatus(PlayerStatus status)
     {
-        this.status = status;
-        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
-
         switch (status)
         {
+            case PlayerStatus.Normal:
+                if (this.status == PlayerStatus.Rest)
+                {
+                    DebugConsole.Log("ansdianidsanmd");
+                    SetAnimTrigger(PlayerConstant.restartAnimTrigger);
+                }
+                break;
             case PlayerStatus.Dead:
                 SetAnimTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
+
+        this.status = status;
+        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
     }
 
     public void SetLastSkillColor(PlayerSkillEffectColor color)
@@ -156,6 +164,7 @@ public class Player : DirectionalGameObject
         {
             if (status != PlayerStatus.Dead && status != PlayerStatus.Rest) return;
         }
+        DebugConsole.Log($"SetAnimTrigger: {trigger}");
         _animator.SetTrigger(trigger);
     }
 
