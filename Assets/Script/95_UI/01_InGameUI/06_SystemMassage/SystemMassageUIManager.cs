@@ -17,12 +17,10 @@ public class SystemMassageUIManager : SingletonObject<SystemMassageUIManager>
         string message = sceneName.ToString();
         MapTitleMassagePopup.SetMessageText(message);
         MapTitleMassagePopup.TurnOnPopup();
-        Debug.Log(message);
     }
 
     public IEnumerator TriggerTurnOnMapTitleMassage(SceneName sceneName)
     {
-        Debug.Log("코루틴 ㅅ작");
         yield return new WaitForSeconds(1);
         TurnOnMapTitleMassageUI(sceneName );
     }
