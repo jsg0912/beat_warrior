@@ -1,4 +1,4 @@
 public class ItemConstant
 {
-    public const int InitSoul = 1000;
+    public const int InitSoul = 0;
 }
