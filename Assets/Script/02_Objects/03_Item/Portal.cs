@@ -3,9 +3,9 @@ public class Portal : ObjectWithInteractionPrompt
     public override void StartInteraction()
     {
         bool success = ChapterManager.Instance.MoveToNextStage();
-        if(success == false)
+        if (success == false)
         {
-            SystemMessageUIManager.Instance.TurnOnSystemMassageUI(SyetemMessageType.EnemyRemaining);
+            SystemMessageUIManager.Instance.TurnOnSystemMassageUI(SystemMessageType.EnemyRemaining);
         }
     }
 }

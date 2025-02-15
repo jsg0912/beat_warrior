@@ -1,4 +1,5 @@
-public enum SyetemMessageType
+public enum SystemMessageType
 {
     EnemyRemaining,
+    LackSoul,
 }

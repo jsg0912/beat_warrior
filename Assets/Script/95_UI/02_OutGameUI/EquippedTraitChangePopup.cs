@@ -11,7 +11,6 @@ public class EquippedTraitChangePopup : PopupSystem
         {
             traitUI.traitSelectionButton.onClick.AddListener(() => TraitSwap(traitUI.traitName));
         }
-        targetSkill = SkillName.End;
     }
 
     public void TurnOnTraitChangePopup(SkillName targetSkill)
