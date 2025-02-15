@@ -2,6 +2,7 @@ public class SettingUIManager : SingletonObject<SettingUIManager>
 {
     public const SettingContentIndex DefaultSettingContentIndex = SettingContentIndex.SoundSetting;
     public SettingUIPopup settingUIPopup;
+    public FadeInEffect fadeInEffect;
     private SettingContentIndex currentContentIndex;
 
     protected override void Awake()
@@ -20,6 +21,7 @@ public class SettingUIManager : SingletonObject<SettingUIManager>
     public void TurnOffSettingUI()
     {
         settingUIPopup.TurnOffPopup();
+        fadeInEffect.ShowWithFadeIn();
     }
 
     public void ChangeContent(SettingContentIndex newContentIndex)

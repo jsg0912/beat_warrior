@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingUIPopup: {fileID: 3276907147113211156}
+  fadeInEffect: {fileID: 3297732394618160199}
 --- !u!1 &2475608498752215167
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,6 +61,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1558179097997964604}
   - component: {fileID: 3276907147113211156}
+  - component: {fileID: 3297732394618160199}
+  - component: {fileID: 9201229361676786497}
   m_Layer: 5
   m_Name: SettingUIPopup
   m_TagString: Untagged
@@ -110,6 +113,32 @@ MonoBehaviour:
   screenTabButton: {fileID: 9167727661625162233}
   keyTabButton: {fileID: 5972456701645820304}
   currentContentTitle: {fileID: 1767527522548182442}
+--- !u!114 &3297732394618160199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2475608498752215167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2bf0ad8c210ab4aa7e0fd5bf127021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 9201229361676786497}
+  fadeDuration: 1
+--- !u!225 &9201229361676786497
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2475608498752215167}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3590463263448543511
 GameObject:
   m_ObjectHideFlags: 0
