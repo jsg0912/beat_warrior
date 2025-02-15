@@ -77,7 +77,34 @@ namespace MyPooler
                 PoolTag.IbkkugiThrow,
                 new ObjectPoolContent
                 {
-                    prefab = Resources.Load<GameObject>(PrefabRouter.IbkkugiThrow),
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MonsterAttackPrefab[MonsterName.Ibkkugi]),
+                    amount = 10,
+                    shouldExpandPool = true,
+                }
+            },
+            {
+                PoolTag.ItmomiThrow,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MonsterAttackPrefab[MonsterName.Itmomi]),
+                    amount = 10,
+                    shouldExpandPool = true,
+                }
+            },
+            {
+                PoolTag.Soul,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.SoulPrefab),
+                    amount = 10,
+                    shouldExpandPool = true,
+                }
+            },
+            {
+                PoolTag.Ghost,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.GhostPrefab),
                     amount = 10,
                     shouldExpandPool = true,
                 }
