@@ -77,6 +77,10 @@ public class AltarUIManager : SingletonObject<AltarUIManager>
 
             SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.altarBuy);
         }
+        else
+        {
+            SystemMessageUIManager.Instance.TurnOnSystemMassageUI(SystemMessageType.LackSoul);
+        }
     }
 
     public void TryEquipTrait(SkillName traitName)
