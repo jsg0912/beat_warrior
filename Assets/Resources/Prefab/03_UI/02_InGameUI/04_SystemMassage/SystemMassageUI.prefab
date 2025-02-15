@@ -117,7 +117,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   systemMessagePopup: {fileID: 6142912613062165577}
-  MapTitleMessagePopup: {fileID: 4958569311297147302}
+  mapTitleMessagePopup: {fileID: 4958569311297147302}
+  TitleMapImage: {fileID: 21300000, guid: 66ca854ffc88f7348a1e47d650659b21, type: 3}
+  TutorialMapImage: {fileID: 21300000, guid: d98e2d64c8bc4494bbd5e65784e88d91, type: 3}
+  LowerPartMapImage: {fileID: 21300000, guid: ca550b97efca1514b8fcd5307875523f, type: 3}
+  LowerPartBossMapImage: {fileID: 21300000, guid: 66ca854ffc88f7348a1e47d650659b21, type: 3}
 --- !u!1001 &2779544225206768648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -258,6 +262,10 @@ PrefabInstance:
       propertyPath: messageText
       value: 
       objectReference: {fileID: 7392280155684454278}
+    - target: {fileID: 320000862918800959, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
+      propertyPath: MapTitleImage
+      value: 
+      objectReference: {fileID: 4318812236867070750}
     - target: {fileID: 2753414816884283423, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
       propertyPath: m_text
       value: 
@@ -272,27 +280,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2991339420425195130, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2991339420425195130, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2991339420425195130, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2991339420425195130, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2991339420425195130, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1381
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2991339420425195130, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 570
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2991339420425195130, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -350,6 +358,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MapTitlePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 4974768566101621561, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8885390178328284295, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -359,6 +371,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
+--- !u!114 &4318812236867070750 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8885390178328284295, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}
+  m_PrefabInstance: {fileID: 4656932651575469977}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4958569311297147302 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 320000862918800959, guid: 50e09efe461f38a4486df42ab9e045e8, type: 3}

@@ -34,6 +34,6 @@ public class SceneController : SingletonObject<SceneController>
     public void LoadTitle()
     {
         SoundManager.Instance.PlayTitleBGM();
-        ChangeSceneWithLoading(SceneName.Title);
+        StartCoroutine( ChangeSceneWithLoading(SceneName.Title));
     }
 }
