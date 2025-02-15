@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SystemMessagePopup : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class SystemMessagePopup : MonoBehaviour
     public float fadeDuration = 1.0f;
     public float displayDuration = 3.0f;
     public TMP_Text messageText;
+    public Image MapTitleImage;
 
     private Coroutine fadeCoroutine;
 
@@ -76,6 +78,14 @@ public class SystemMessagePopup : MonoBehaviour
         if (messageText != null)
         {
             messageText.text = message;
+        }
+    }
+
+    public void SetBackgroundImage(Sprite sprite)
+    {
+        if (MapTitleImage != null)
+        {
+            MapTitleImage.sprite = sprite;
         }
     }
 }
