@@ -8,9 +8,22 @@ public class Marker : MonoBehaviour
     {
         StartCoroutine(DestroyMarker(PlayerSkillConstant.markerDuration));
     }
+    private void OnEnable()
+    {
+        isUsed = false;
+        StartCoroutine(DestroyMarker(PlayerSkillConstant.markerDuration));
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+
+
 
     public void SetVelocity(Vector2 start, Vector2 end)
     {
+        isUsed = false;
         Vector2 direction = (end - start).normalized;
         GetComponent<Rigidbody2D>().velocity = direction * PlayerSkillConstant.markerSpeed;
     }
@@ -33,6 +46,10 @@ public class Marker : MonoBehaviour
     public IEnumerator DestroyMarker(float delay = 0.0f)
     {
         yield return new WaitForSeconds(delay);
-        MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.Mark, this.gameObject);
+        if (!isUsed)
+        {
+            isUsed = true;
+            MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.Mark, this.gameObject);
+        }
     }
 }
