@@ -21,7 +21,7 @@ public class SystemMassageUIManager : SingletonObject<SystemMassageUIManager>
 
     public IEnumerator TriggerTurnOnMapTitleMassage(SceneName sceneName)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0f);
         TurnOnMapTitleMassageUI(sceneName );
     }
 }
