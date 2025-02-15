@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class TitleManager : MonoBehaviour
 {
-    public void Start()
-    {
-        SoundManager.Instance.PlayTitleBGM();
-    }
+    public void Start() { Initialize(); }
+    public void OnEnable() { Initialize(); }
 
     public void OnPlayClick()
     {
@@ -20,5 +18,11 @@ public class TitleManager : MonoBehaviour
     public void OnExitClick()
     {
         PopupManager.Instance.TurnOnGameExitPopup();
+    }
+
+    private void Initialize()
+    {
+        SoundManager.Instance.PlayTitleBGM();
+        GameManager.Instance.SetDefaultCursor();
     }
 }
