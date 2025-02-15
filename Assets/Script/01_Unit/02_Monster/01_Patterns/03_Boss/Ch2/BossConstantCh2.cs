@@ -10,4 +10,7 @@ public class BossConstantCh2
     public const string AttackAnimTriggerIppaliSpawn = "IppaliSpawn";
     public const string AttackAnimTriggerRange = "RangeAttack";
     public const float Phase2Threshold = 0.5f;
+
+    public const float AttackCoolTime = 3.0f;
+    public const int IppaliSpawnCycle = 3;
 }

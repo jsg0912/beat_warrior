@@ -31,6 +31,7 @@ public abstract class PatternBoss : Pattern
     override public void PlayPattern()
     {
         CheckPhase();
-        // Implement AttackPattern in each PatternBoss
+        Recognize?.PlayStrategy();
+        // Implement AttackPattern in each Boss
     }
 }
