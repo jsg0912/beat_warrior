@@ -19,6 +19,6 @@ public class TitleManager : MonoBehaviour
 
     public void OnExitClick()
     {
-        Application.Quit();
+        PopupManager.Instance.TurnOnGameExitPopup();
     }
 }

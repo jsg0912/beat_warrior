@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine.SceneManagement;
-
 public class SceneController : SingletonObject<SceneController>
 {
     public void ChangeScene(SceneName sceneName)
@@ -8,8 +8,9 @@ public class SceneController : SingletonObject<SceneController>
         SceneManager.LoadScene(sceneName.ToString());
     }
 
-    public void ChangeSceneWithLoading(SceneName targetScene)
+    public IEnumerator ChangeSceneWithLoading(SceneName targetScene)
     {
+        yield return StartCoroutine(FadeManager.Instance.FadeOut());
         switch (targetScene)
         {
             case SceneName.Loading:
@@ -19,6 +20,7 @@ public class SceneController : SingletonObject<SceneController>
                 ChangeScene(SceneName.Loading);
                 break;
         }
+        yield return null;
     }
 
     public void RunChangeSceneProcess(SceneName sceneName)
@@ -32,6 +34,6 @@ public class SceneController : SingletonObject<SceneController>
     public void LoadTitle()
     {
         SoundManager.Instance.PlayTitleBGM();
-        ChangeSceneWithLoading(SceneName.Title);
+        StartCoroutine( ChangeSceneWithLoading(SceneName.Title));
     }
 }
