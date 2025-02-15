@@ -1,21 +1,20 @@
 using UnityEngine;
+using System.Collections;
 
-public class PlayerGhostController
+public class PlayerGhostController : SingletonObject<PlayerGhostController>
 {
     private Timer timer = new Timer();
-    private GameObject GhostPrefab;
 
-    public PlayerGhostController()
+    public void Start()
     {
         timer.Initialize(PlayerSkillConstant.ghostDelayTimeMax);
-        GhostPrefab = Resources.Load(PrefabRouter.GhostPrefab) as GameObject;
     }
 
     public void TryMakeGhost(Direction direction)
     {
         if (timer.Tick()) return;
 
-        GameObject ghostObject = GameObject.Instantiate(GhostPrefab, Player.Instance.transform.position, Quaternion.identity);
+        GameObject ghostObject = MyPooler.ObjectPooler.Instance.GetFromPool(PoolTag.Ghost, Player.Instance.transform.position, Quaternion.identity);
         Ghost ghost = ghostObject.GetComponent<Ghost>();
         if (direction == Direction.Left)
         {
@@ -23,6 +22,12 @@ public class PlayerGhostController
         }
         ghost.ChangeSprite(Player.Instance.sprite);
         timer.Initialize(PlayerSkillConstant.ghostDelayTimeMax);
-        GameObject.Destroy(ghostObject, 1.0f);
+        StartCoroutine(DestroyGhost(ghostObject, 1.0f));
+    }
+
+    public IEnumerator DestroyGhost(GameObject obj, float delay = 0.0f)
+    {
+        yield return new WaitForSeconds(delay);
+        MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.Ghost, obj);
     }
 }

@@ -36,7 +36,6 @@ public class Player : DirectionalGameObject
     [SerializeField] private bool isInvincibility;
     private List<BoxCollider2D> tiles = new();
 
-    private PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
     public ReviveSkillFunc reviveSKillFuncList = null;
@@ -95,7 +94,6 @@ public class Player : DirectionalGameObject
             new QSkill(gameObject),
             new ESkill(gameObject)
         };
-        playerGhostController = new PlayerGhostController();
 
         traitList.Clear();
         Inventory.Instance.Initialize();
@@ -368,7 +366,7 @@ public class Player : DirectionalGameObject
         {
             if (!passWall && CheckWall()) break;
 
-            playerGhostController.TryMakeGhost(dir);
+            PlayerGhostController.Instance.TryMakeGhost(dir);
 
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
             moveCount++;
