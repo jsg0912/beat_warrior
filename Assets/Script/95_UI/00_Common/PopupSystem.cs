@@ -15,11 +15,13 @@ public abstract class PopupSystem : MonoBehaviour
     public virtual void OnClickOkay()
     {
         TurnOffPopup();
+        PopupManager.Instance.RemovePopup(this);
     }
 
     public virtual void OnClickCancel()
     {
         TurnOffPopup();
+        PopupManager.Instance.RemovePopup(this);
     }
 
     public virtual BlurType SetBlur()
