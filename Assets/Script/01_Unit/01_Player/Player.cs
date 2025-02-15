@@ -34,7 +34,8 @@ public class Player : DirectionalGameObject
     private bool isGround;
     private Timer jumpOffsetTimer;
     [SerializeField] private bool isInvincibility;
-    private List<BoxCollider2D> tiles = new();
+    private BoxCollider2D tileLeft;
+    private BoxCollider2D tileRight;
 
     private PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
@@ -297,9 +298,9 @@ public class Player : DirectionalGameObject
     {
         if (!Input.GetKeyDown(KeySetting.keys[PlayerAction.Down])) return;
         if (!isGround) return;
-        if (tiles.Count == 0) return;
 
-        foreach (BoxCollider2D tile in tiles) if (tile != null) colliderController.PassTile(tile);
+        if (tileLeft != null) colliderController.PassTile(tileLeft);
+        if (tileRight != null && tileRight != tileLeft) colliderController.PassTile(tileRight);
     }
 
     private void CheckGround()
@@ -318,10 +319,9 @@ public class Player : DirectionalGameObject
         if (!isGround) return;
 
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
-        tiles.Clear();
 
-        if (rayHitLeft.collider != null) tiles.Add(rayHitLeft.collider.GetComponent<BoxCollider2D>());
-        if (rayHitRight.collider != null && rayHitRight != rayHitLeft) tiles.Add(rayHitRight.collider.GetComponent<BoxCollider2D>());
+        if (rayHitLeft.collider != null) tileLeft = rayHitLeft.collider.GetComponent<BoxCollider2D>();
+        if (rayHitRight.collider != null) tileRight = rayHitRight.collider.GetComponent<BoxCollider2D>();
     }
 
     private void TryJump()
