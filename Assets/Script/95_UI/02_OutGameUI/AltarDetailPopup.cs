@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class AltarDetailPopup : PopupSystem
@@ -11,6 +12,7 @@ public class AltarDetailPopup : PopupSystem
     // TODO: 아래 interactionButton Class 만들면 좋음
     public Button interactionButton;
     public TMP_Text interactionButtonText;
+    public GameObject getIcon;
 
     private SkillName traitName => AltarUIManager.Instance.SelectedTraitName;
 
@@ -67,17 +69,21 @@ public class AltarDetailPopup : PopupSystem
         {
             case TraitSetButtonStatus.Locked:
                 Util.SetActive(interactionButton, false);
+                Util.SetActive(getIcon, false);
                 break;
             case TraitSetButtonStatus.Buyable:
                 Util.SetActive(interactionButton, true);
+                Util.SetActive(getIcon, false);
                 interactionButtonText.text = "구매";
                 break;
             case TraitSetButtonStatus.EquipAble:
                 Util.SetActive(interactionButton, true);
+                Util.SetActive(getIcon, true);
                 interactionButtonText.text = "장착";
                 break;
             case TraitSetButtonStatus.Equipped:
                 Util.SetActive(interactionButton, true);
+                Util.SetActive(getIcon, true);
                 interactionButtonText.text = "해제";
                 break;
         }
