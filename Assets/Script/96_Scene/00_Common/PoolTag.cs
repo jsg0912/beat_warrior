@@ -10,5 +10,6 @@ public enum PoolTag
     IbkkugiThrow,
     ItmomiThrow,
     Soul,
-    Ghost
+    Ghost,
+    Mark
 }

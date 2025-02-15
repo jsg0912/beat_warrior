@@ -108,6 +108,15 @@ namespace MyPooler
                     amount = 10,
                     shouldExpandPool = true,
                 }
+            },
+            {
+                PoolTag.Mark,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MarkerPrefab),
+                    amount = 2,
+                    shouldExpandPool = true,
+                }
             }
         };
     }
