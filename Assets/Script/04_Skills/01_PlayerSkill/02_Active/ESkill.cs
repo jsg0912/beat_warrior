@@ -21,17 +21,17 @@ public class ESkill : ActiveSkillPlayer
         keyCode = KeySetting.keys[PlayerAction.Skill2];
     }
 
-    protected override void CreateEffectPrefab()
+    protected override void SetAttackCollider()
     {
         attackCollider = Player.Instance.colliderController.BodyAttackCollider;
-        base.CreateEffectPrefab();
+        base.SetAttackCollider();
     }
 
     protected override void SkillMethod()
     {
-        CreateEffectPrefab();
+        SetAttackCollider();
 
-        SoundManager.Instance. SFXPlay("Equip", SoundList.Instance.playerESkill);
+        SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.playerESkill);
 
         Vector2 start = Player.Instance.transform.position;
         Vector2 end = start += new Vector2(dashRange, 0.0f) * Player.Instance.GetMovingDirectionFloat();

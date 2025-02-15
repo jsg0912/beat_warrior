@@ -68,5 +68,5 @@ public abstract class Skill
         }
     }
 
-    protected virtual void CreateEffectPrefab() { return; } // [Code Review - KMJ] Check the Necessity and "virtual" - SDH, 20240106
+    protected virtual void SetAttackCollider() { return; } // [Code Review - KMJ] Check the Necessity and "virtual" - SDH, 20240106
 }
