@@ -63,9 +63,15 @@ public class FadeManager : MonoBehaviour
 
     }
 
-    public void StartFadeIn()
+    public IEnumerator StartFadeInWithSceneTitle()
     {
-        StartCoroutine(FadeIn());
+        yield return StartCoroutine(FadeIn());
+        StartCoroutine (SystemMassageUIManager.Instance.TriggerTurnOnMapTitleMassage(GameManager.Instance.currentScene));
+    }
+
+    public void FadeOutWithSceneTitle()
+    {
+        StartCoroutine(StartFadeInWithSceneTitle());
     }
 
     

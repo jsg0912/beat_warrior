@@ -38,7 +38,7 @@ public class LoadingSceneManager : MonoBehaviour
                 if (progress == 1.0f)
                 {
                     loadingSceneProcess.allowSceneActivation = true;
-                    FadeManager.Instance.StartFadeIn();
+                    FadeManager.Instance.FadeOutWithSceneTitle();
                     yield return null;
                 }
             }
