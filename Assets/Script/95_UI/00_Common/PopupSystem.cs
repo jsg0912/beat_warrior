@@ -22,15 +22,31 @@ public abstract class PopupSystem : MonoBehaviour
         TurnOffPopup();
     }
 
+    public virtual BlurType SetBlur()
+    {
+        return BlurType.None;
+    }
+
     public virtual bool TurnOnPopup()
     {
         bool success = Util.SetActive(gameObject, true);
-        if (success) PopupManager.Instance.PushPopup(this);
+        if (success)
+        {
+            BlurUIManager.Instance.TurnOnActiveBlur(SetBlur());
+            PopupManager.Instance.PushPopup(this);
+        }
         return success;
     }
 
     public virtual bool TurnOffPopup()
     {
-        return Util.SetActive(gameObject, false);
+        bool success = Util.SetActive(gameObject, false);
+        if (success)
+        {
+            if (SetBlur() != BlurType.None)
+                BlurUIManager.Instance.TurnOffActiveBlur();
+            PopupManager.Instance.RemovePopup(this);
+        }
+        return success;
     }
 }

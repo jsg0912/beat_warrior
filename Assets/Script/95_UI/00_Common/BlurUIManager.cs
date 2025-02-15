@@ -9,7 +9,7 @@ public class BlurUIManager : SingletonObject<BlurUIManager>
 
     public void TurnOnActiveBlur(BlurType blurType)
     {
-        if (currentBlurType == blurType)
+        if (blurType == BlurType.None || currentBlurType == blurType)
         {
             return;
         }

@@ -22,7 +22,7 @@ public class MenuUI : PopupSystem
             PopupManager.Instance.PushPopup(this);
             GameManager.Instance.SetDefaultCursor();
             SoundManager.Instance.SFXPlay("MenuOpen", SoundList.Instance.menuOpen);
-            if (GameManager.Instance.isInGame) UIManager.Instance.TurnOnBlur(BlurType.MenuStop);
+            if (GameManager.Instance.isInGame) UIManager.Instance.TurnOnBlur(BlurType.BlackBlur);
         }
         return success;
     }
