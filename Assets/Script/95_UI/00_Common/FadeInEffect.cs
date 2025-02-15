@@ -8,7 +8,6 @@ public class FadeInEffect : MonoBehaviour
 
     public void ShowWithFadeIn()
     {
-        Debug.Log("asd");
         StartCoroutine(FadeIn());
     }
 
