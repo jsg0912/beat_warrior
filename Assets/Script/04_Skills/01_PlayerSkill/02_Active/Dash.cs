@@ -42,7 +42,7 @@ public class Dash : ActiveSkillPlayer
         dashAvailableTimer.SetRemainTimeZero();
         PlayerUIManager.Instance.SwapMarkAndDash(true);
 
-        SoundManager.Instance. SFXPlay("Equip", SoundList.Instance.playerDash);
+        SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.playerDash);
 
         Vector2 playerBottom = Player.Instance.GetBottomPos();
         Vector2 endPoint = targetMonster.GetComponent<Monster>().GetBottomPos();
@@ -70,10 +70,10 @@ public class Dash : ActiveSkillPlayer
         }
     }
 
-    protected override void CreateEffectPrefab()
+    protected override void SetAttackCollider()
     {
         attackCollider = Player.Instance.colliderController.BodyAttackCollider;
-        base.CreateEffectPrefab();
+        base.SetAttackCollider();
     }
 
     // Dash의 속도가 매우 빨라서 일반적인 Collider 판정으로 딜을 넣기 불가능하기 때문에 따로 Ray를 쏴서 판정을 내려야 함

@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class MainCamera : SingletonObject<MainCamera>
+public class MainCamera : MonoBehaviour
 {
+    public static MainCamera Instance;
     public Camera main;
-    protected override void Awake()
+    void Awake()
     {
+        Instance = this;
         main = GetComponent<Camera>();
-        base.Awake();
     }
 }
