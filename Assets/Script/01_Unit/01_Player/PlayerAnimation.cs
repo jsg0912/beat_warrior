@@ -16,4 +16,6 @@ public class PlayerAnimation
     public const string SweepingBlade = "SweepingBlade";
     public const string Revive0 = "Revive0";
     public const string Revive1 = "Revive1";
+    public const string Rest1 = "Rest1";
+    public const string Rest2 = "Rest2";
 }

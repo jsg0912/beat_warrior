@@ -154,7 +154,10 @@ public class Player : DirectionalGameObject
     public void SetAnimTrigger(string trigger)
     {
         // TODO: 아래 과정이 뭔가뭔가임 - SDH, 20250215
-        if (trigger == PlayerConstant.restartAnimTrigger && status != PlayerStatus.Dead) return;
+        if (trigger == PlayerConstant.restartAnimTrigger)
+        {
+            if (status != PlayerStatus.Dead && status != PlayerStatus.Rest) return;
+        }
         _animator.SetTrigger(trigger);
     }
 
