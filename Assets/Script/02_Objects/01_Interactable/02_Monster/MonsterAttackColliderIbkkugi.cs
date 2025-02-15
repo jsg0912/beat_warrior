@@ -1,15 +1,16 @@
 using UnityEngine;
+using System.Collections;
 
 public class MonsterAttackColliderIbkkugi : MonsterAttackCollider
 {
     void Start()
     {
-        Destroy(gameObject, 10.0f);
+        StartCoroutine(DestroyCreate(10.0f));
     }
 
     void Update()
     {
-        if (CheckBase(Vector3.down) || CheckBase(Vector3.left) || CheckBase(Vector3.right)) Destroy(gameObject, 0.03f);
+        if (CheckBase(Vector3.down) || CheckBase(Vector3.left) || CheckBase(Vector3.right)) StartCoroutine(DestroyCreate(0.03f));
     }
 
     private bool CheckBase(Vector3 direction)
@@ -26,7 +27,13 @@ public class MonsterAttackColliderIbkkugi : MonsterAttackCollider
         if (obj.CompareTag(TagConstant.Player))
         {
             Player.Instance.GetDamaged(damage, GetRelativeDirectionToPlayer());
-            Destroy(gameObject);
+            MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.IbkkugiThrow, this.gameObject);
         }
+    }
+
+    public IEnumerator DestroyCreate(float delay = 0.0f)
+    {
+        yield return new WaitForSeconds(delay);
+        MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.IbkkugiThrow, this.gameObject);
     }
 }

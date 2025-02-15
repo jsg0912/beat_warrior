@@ -1,11 +1,12 @@
 using UnityEngine;
+using System.Collections;
 
 public class Marker : MonoBehaviour
 {
     bool isUsed = false; // 2명이 동시에 맞는 순간 버그를 처리하기 위해 어쩔 수 없는 Bool 변수 - SDH, 20240213
     private void Start()
     {
-        DestroyMarker(PlayerSkillConstant.markerDuration);
+        StartCoroutine(DestroyMarker(PlayerSkillConstant.markerDuration));
     }
 
     public void SetVelocity(Vector2 start, Vector2 end)
@@ -25,12 +26,13 @@ public class Marker : MonoBehaviour
             Player.Instance.SetTarget(obj);
             obj.GetComponent<Monster>().SetTarget();
             PlayerUIManager.Instance.SwapMarkAndDash(false);
-            Destroy(gameObject);
+            MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.Mark, this.gameObject);
         }
     }
 
-    public void DestroyMarker(float delay = 0.0f)
+    public IEnumerator DestroyMarker(float delay = 0.0f)
     {
-        Destroy(gameObject, delay);
+        yield return new WaitForSeconds(delay);
+        MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.Mark, this.gameObject);
     }
 }
