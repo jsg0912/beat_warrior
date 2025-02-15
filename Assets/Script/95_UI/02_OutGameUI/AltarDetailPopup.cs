@@ -12,7 +12,7 @@ public class AltarDetailPopup : PopupSystem
     public Button interactionButton;
     public TMP_Text interactionButtonText;
 
-    private SkillName traitName;
+    private SkillName traitName => AltarUIManager.Instance.SelectedTraitName;
 
     private void Start()
     {
@@ -28,16 +28,16 @@ public class AltarDetailPopup : PopupSystem
         bool success = base.TurnOnPopup();
         if (success)
         {
-            UpdateEquippedTraitUIs();
+            AltarUIManager.Instance.UpdateEquippedTraitUIs(equippedTraitUIs);
             UpdateAltarUIButtons();
         }
         return success;
     }
 
-    private void UpdateTargetTraitInfo()
+    public void UpdateTargetTraitInfo()
     {
         targetTraitUI.UpdateTraitStatus(false);
-        UpdateEquippedTraitUIs();
+        AltarUIManager.Instance.UpdateEquippedTraitUIs(equippedTraitUIs);
         UpdateAltarUIButtons();
     }
 
@@ -54,11 +54,11 @@ public class AltarDetailPopup : PopupSystem
     public void ShowSkillDetail(SkillName traitName)
     {
         if (traitName == SkillName.End) return;
-        this.traitName = traitName;
         targetTraitUI.SetTraitName(traitName, false);
         UpdateTraitName();
         UpdateTraitDescription();
         UpdateAltarUIButtons();
+        AltarUIManager.Instance.SetSelectedTraitName(traitName);
     }
 
     private void UpdateAltarUIButtons()
@@ -83,62 +83,19 @@ public class AltarDetailPopup : PopupSystem
         }
     }
 
-    private void UpdateEquippedTraitUIs()
-    {
-        SkillName[] equippedTraits = Player.Instance.GetTraits();
-        int i = 0;
-        for (; i < equippedTraits.Length; i++)
-        {
-            equippedTraitUIs[i].SetTraitName(equippedTraits[i]);
-        }
-        for (; i < equippedTraitUIs.Count; i++)
-        {
-            equippedTraitUIs[i].ShowEmpty();
-        }
-    }
-
     private void OnClickTraitUI(TraitIcon traitUI)
     {
         switch (traitUI.traitStatus)
         {
             case TraitSetButtonStatus.Buyable:
-                TryBuyTrait();
+                AltarUIManager.Instance.TryBuyTrait(traitName);
                 break;
             case TraitSetButtonStatus.EquipAble:
-                TryEquipTrait();
+                AltarUIManager.Instance.TryEquipTrait(traitName);
                 break;
             case TraitSetButtonStatus.Equipped:
-                TryUnEquipTrait();
+                AltarUIManager.Instance.TryUnEquipTrait(traitName);
                 break;
         }
-    }
-
-    private void TryBuyTrait()
-    {
-        if (Inventory.Instance.GetSoulNumber() >= TraitPriceList.Info[traitName])
-        {
-            Inventory.Instance.ChangeSoulNumber(-TraitPriceList.Info[traitName]);
-            Inventory.Instance.AddSkill(traitName);
-            AltarUIManager.Instance.UpdatePlayerSoulView();
-            UpdateTargetTraitInfo();
-            AltarUIManager.Instance.RefreshMainAltarPopup();
-
-            SoundManager.Instance. SFXPlay("Equip", SoundList.Instance.altarBuy);
-        }
-    }
-
-    private void TryEquipTrait()
-    {
-        if (!Player.Instance.CheckFullEquipTrait())
-        {
-            Player.Instance.EquipTrait(traitName);
-            UpdateTargetTraitInfo();
-        }
-    }
-
-    private void TryUnEquipTrait()
-    {
-        Player.Instance.RemoveTrait(traitName);
-        UpdateTargetTraitInfo();
     }
 }
