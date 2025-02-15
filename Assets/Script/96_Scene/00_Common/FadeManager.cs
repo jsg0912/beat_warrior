@@ -63,7 +63,7 @@ public class FadeManager : MonoBehaviour
     {
         yield return null;
         StartCoroutine(FadeIn());
-        StartCoroutine(SystemMassageUIManager.Instance.TriggerTurnOnMapTitleMassage(GameManager.Instance.currentScene));
+        StartCoroutine(SystemMessageUIManager.Instance.TriggerTurnOnMapTitleMassage(GameManager.Instance.currentScene));
     }
 
     public void FadeOutWithSceneTitle()
