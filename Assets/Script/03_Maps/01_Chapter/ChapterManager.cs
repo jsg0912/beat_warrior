@@ -98,6 +98,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
 
     public void RestartCurrentStage()
     {
+        Player.Instance.SetAnimTrigger(PlayerConstant.restartAnimTrigger);
         LoadStageScene();
         // TODO: Return soul or buying Status before stage start - SDH, 20250214
     }
