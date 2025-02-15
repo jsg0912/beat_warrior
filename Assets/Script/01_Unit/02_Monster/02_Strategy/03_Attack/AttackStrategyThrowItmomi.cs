@@ -4,11 +4,11 @@ public class AttackStrategyThrowItmomi : AttackStrategyCreate
 {
     private float offsetX = 1.0f;
 
-    protected override void SkillMethod()
+    protected override void AttackMethod()
     {
-        base.SkillMethod();
-        if (attackDirection == Direction.Right) Util.FlipLocalScaleX(obj);
+        base.AttackMethod();
         obj.transform.position = ClosestGround();
+        if (obj.transform.position.x > GetMonsterPos().x) Util.FlipLocalScaleX(obj);
     }
 
     protected Vector3 ClosestGround()

@@ -1,14 +1,11 @@
 public class AttackStrategyMelee : AttackStrategy
 {
-    protected override void SkillMethod()
+    public AttackStrategyMelee(string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger) : base(monsterAnimTrigger)
     {
-        monster.SetIsTackleAble(true);
+
     }
 
-    public override void AttackEnd()
+    protected override void AttackMethod()
     {
-        base.AttackEnd();
-
-        monster.SetIsTackleAble(false);
     }
 }

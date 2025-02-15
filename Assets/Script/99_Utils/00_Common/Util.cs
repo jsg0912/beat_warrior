@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public static class Util
 {
-    public static Vector3 OffsetX = new Vector3(0.05f, 0, 0);
-    public static Vector3 OffsetY = new Vector3(0, 0.05f, 0);
+    // Vector 활용에 있어서 오차범위용
+    public static float OffsetX = 0.05f;
+    public static float OffsetY = 0.05f;
 
     public static T ParseEnumFromString<T>(string value)
     {
@@ -199,5 +201,26 @@ public static class Util
     public static bool RandomBool(float truePercentage)
     {
         return UnityEngine.Random.Range(0, 100) < truePercentage;
+    }
+
+    public static void RotateObjectForwardingDirection(GameObject gameObject, Vector3 direction, bool hasTopDownStructure)
+    {
+        if (gameObject == null) return;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        if (hasTopDownStructure)
+        {
+            var localScale = gameObject.transform.localScale;
+            if (direction.x < 0) // 위아래가 뒤집히면 안되는 경우 왼쪽으로 날아갈때 위 아래를 뒤집어 주어야 함.
+                gameObject.transform.localScale = new Vector3(localScale.x, -localScale.y, localScale.z);
+            else
+                gameObject.transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
+        }
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    public static T GetRandom<T>(List<T> list)
+    {
+        return list[UnityEngine.Random.Range(0, list.Count)];
     }
 }

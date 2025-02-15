@@ -18,6 +18,14 @@ public abstract class SingletonObject<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
+    public static T InstanceWithoutCreate
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
     protected virtual void Awake()
     {
         if (_instance == null)

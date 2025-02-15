@@ -58,6 +58,15 @@ public static class MonsterList
             {StatKind.Def, 0},
         },
         PatternName.Ippali),
+        new MonsterJSON(MonsterName.Ch2Boss,
+        "황혼의 촉수 빨판이",
+        new Dictionary<StatKind, int>{
+            {StatKind.HP, 100},
+            {StatKind.ATK, 1},
+            {StatKind.Def, 0},
+        },
+        PatternName.Ch2Boss,
+        isKnockBackAble: false),
     };
 
     public static MonsterUnit FindMonster(MonsterName name, int anotherHPValue = 0)

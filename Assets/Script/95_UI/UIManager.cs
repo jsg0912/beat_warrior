@@ -19,4 +19,14 @@ public class UIManager : SingletonObject<UIManager>
         if (isActive) SettingUIManager.Instance.TurnOnSettingUI();
         else SettingUIManager.Instance.TurnOffSettingUI();
     }
+
+    public void TurnOnBlur(BlurType blurType)
+    {
+        BlurUIManager.Instance.TurnOnActiveBlur(blurType);
+    }
+
+    public void TurnOffBlur()
+    {
+        BlurUIManager.Instance.TurnOffActiveBlur();
+    }
 }

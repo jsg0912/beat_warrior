@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4471208394998432827}
   - component: {fileID: 4030472575650841747}
   - component: {fileID: 6712622341411504246}
-  - component: {fileID: 1505524826610190089}
   m_Layer: 5
   m_Name: MiniMapUI
   m_TagString: Untagged
@@ -84,24 +83,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
---- !u!114 &1505524826610190089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2977800669444390038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  m_PresetInfoIsWorld: 1
 --- !u!1001 &4529561405159130612
 PrefabInstance:
   m_ObjectHideFlags: 0

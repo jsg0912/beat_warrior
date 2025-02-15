@@ -17,6 +17,11 @@ public class Unit
 
     public void ForceSetCurrentHP(int value) { unitStat.ForceSetCurrentStat(StatKind.HP, value); }
 
+    public void SetFullStatAll()
+    {
+        unitStat.SetFullStatAll();
+    }
+
     public Unit(UnitInfo unitInfo, UnitStat unitStat)
     {
         this.unitInfo = unitInfo;

@@ -22,24 +22,22 @@ public abstract class Pattern
     // It called at every Update.
     public virtual void PlayPattern()
     {
+        // 필수 실행
         Attack?.UpdateCoolTime();
-
-        if (!monster.isChasing)
-        {
-            Recognize?.PlayStrategy();
-            MoveBasic?.PlayStrategy();
-            return;
-        }
-
         Recognize?.PlayStrategy();
-        if (Attack?.PlayStrategy() == false)
+
+        // Monster 상태에 따른 실행
+        if (monster.GetIsRecognizing())
         {
-            MoveChase?.PlayStrategy();
+            // bool의 부정이 반드시 들어가야함(Attack이 null일 수도 있으니)
+            if (Attack?.PlayStrategy() != true) MoveChase?.PlayStrategy();
         }
+        else MoveBasic?.PlayStrategy();
     }
 
     public void AttackStartMethod() { Attack?.AttackStart(); }
     public void AttackUpdateMethod() { Attack?.AttackUpdate(); }
     public void AttackEndMethod() { Attack?.AttackEnd(); }
     public void StopAttack() { Attack?.StopAttack(); }
+    public void PlayGroggy() { Groggy?.PlayStrategy(); }
 }

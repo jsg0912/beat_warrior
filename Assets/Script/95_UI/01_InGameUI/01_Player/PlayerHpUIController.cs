@@ -2,25 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // PlayerHpUIController는 없으면 없는대로 되어야 하기 때문에(안그러면 버그가 생김), SingletonObject를 상속받지 않는다.
-public class PlayerHpUIController : MonoBehaviour
+public class PlayerHpUIController : SingletonObject<PlayerHpUIController>
 {
-    public static PlayerHpUIController Instance;
     public GameObject HPPrefab;
     private List<PlayerHPUI> HPUIList = new();
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Start()
     {
         Initialize();
     }
 
-    public void CreateAndUpdateHPUI(int hp)
+    public void CreateAndUpdateHPUI()
     {
-        CreateHPUI(hp);
+        int maxHP = Player.Instance.GetFinalStat(StatKind.HP);
+        CreateHPUI(maxHP);
         UpdateHPUI();
     }
 
@@ -59,6 +54,6 @@ public class PlayerHpUIController : MonoBehaviour
 
     public void Initialize()
     {
-        CreateAndUpdateHPUI(Player.Instance.GetFinalStat(StatKind.HP));
+        CreateAndUpdateHPUI();
     }
 }

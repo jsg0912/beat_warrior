@@ -9,7 +9,7 @@ public class AttackStrategyRush : AttackStrategy
     protected Coroutine rushCoroutine;
     protected bool isChangingDir = false;
 
-    public AttackStrategyRush(float rushSpeed, float dashDuration)
+    public AttackStrategyRush(float rushSpeed, float dashDuration, string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger) : base(monsterAnimTrigger)
     {
         this.rushSpeed = rushSpeed;
         this.dashDuration = dashDuration;
@@ -22,10 +22,8 @@ public class AttackStrategyRush : AttackStrategy
         GroundLayer = LayerMask.GetMask(LayerConstant.Tile);
     }
 
-    protected override void SkillMethod()
+    protected override void AttackMethod()
     {
-        monster.SetIsTackleAble(true);
-        monster.SetIsKnockBackAble(false);
         monster.SetIsFixedAnimation(true);
         Util.SetActive(monster.attackCollider, true);
     }
@@ -37,9 +35,7 @@ public class AttackStrategyRush : AttackStrategy
         {
             dashDurationLeft = dashDuration;
             monster.SetIsFixedAnimation(false);
-            monster.PlayAnimation(MonsterConstant.attackEndAnimTrigger);
-
-            monster.PlayMonsterAttackSFX();
+            monster.PlayAnimation(MonsterAnimTrigger.attackEndAnimTrigger);
         }
 
         dashDurationLeft -= Time.deltaTime;
@@ -53,9 +49,7 @@ public class AttackStrategyRush : AttackStrategy
     {
         base.AttackEnd();
 
-        monster.SetIsTackleAble(false);
-        monster.SetIsKnockBackAble(true);
-        Util.SetActive(monster.attackCollider, false);
+        Util.SetActive(monster.attackCollider, false); // Rush는 턴도는 동작 때문에 여기서 Collider 비활성화
     }
 
     protected IEnumerator ChangeDir()
@@ -65,7 +59,7 @@ public class AttackStrategyRush : AttackStrategy
         attackDirection = monster.GetMovingDirection();
 
         monster.SetIsFixedAnimation(false);
-        monster.PlayAnimation(MonsterConstant.turnAnimTrigger);
+        monster.PlayAnimation(MonsterAnimTrigger.turnAnimTrigger);
         monster.SetIsFixedAnimation(true);
 
         isChangingDir = true;

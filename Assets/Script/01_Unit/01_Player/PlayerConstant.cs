@@ -10,6 +10,8 @@ public class PlayerConstant
         { StatKind.AttackCount, PlayerSkillConstant.attackCountMax}
     };
 
+    public const Direction initDirection = Direction.Left;
+
     public const float gravityScale = 5.0f;
     public const float moveSpeed = 5.6f;
     public const float jumpPower = 20.0f;
@@ -28,6 +30,7 @@ public class PlayerConstant
     public const string reviveAnimTrigger = "revive";
     public const string attackAnimTrigger = "attack";
     public const string dashAnimTrigger = "dash";
+    public const string dashEndAnimBool = "DashEnd";
     public const string hurtAnimTrigger = "hurt";
     public const string QSkill1AnimTrigger = "qSkill1";
     public const string QSkill2AnimTrigger = "qSkill2";

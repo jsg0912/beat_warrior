@@ -35,7 +35,7 @@ public class Player : DirectionalGameObject
     private float jumpDeltaTimer;
     private float jumpTimer;
     [SerializeField] private bool isInvincibility;
-    private BoxCollider2D tileCollider;
+    private List<BoxCollider2D> tiles = new();
 
     private PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
@@ -64,7 +64,27 @@ public class Player : DirectionalGameObject
         player.GetComponent<Player>().Initialize();
     }
 
-    private void Initialize(Direction direction = Direction.Left)
+    public void RecoverHealthyStatus()
+    {
+        SetAnimTrigger(PlayerConstant.restartAnimTrigger);
+
+        playerUnit.SetFullStatAll();
+        ResetSkillCoolTimeAll();
+        SetStatus(PlayerStatus.Normal);
+
+        InitializeRigidBody();
+        InitializeAttackCollider();
+
+        SetMovingDirection(PlayerConstant.initDirection);
+        isGround = false;
+        jumpDeltaTimer = 0;
+        jumpTimer = 0.1f;
+        SetInvincibility(false);
+
+        PlayerUIManager.InstanceWithoutCreate?.Initialize();
+    }
+
+    private void Initialize()
     {
         StopAllCoroutines();
         // TODO: Alternate real user nickname than "playerName" - SDH, 20241204
@@ -78,6 +98,7 @@ public class Player : DirectionalGameObject
             new QSkill(gameObject),
             new ESkill(gameObject)
         };
+        playerGhostController = new PlayerGhostController();
 
         traitList.Clear();
         Inventory.Instance.Initialize();
@@ -86,18 +107,7 @@ public class Player : DirectionalGameObject
         _rigidbody = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
 
-        SetStatus(PlayerStatus.Normal);
-
-        SetMovingDirection(direction);
-        isGround = false;
-        jumpDeltaTimer = 0;
-        jumpTimer = 0.1f;
-        InitializeRigidBody();
-        SetInvincibility(false);
-
-        ChangeCurrentHP(playerUnit.unitStat.GetFinalStat(StatKind.HP));
-        playerGhostController = new PlayerGhostController();
-        InitializeAttackCollider();
+        RecoverHealthyStatus();
     }
 
     private void InitializeRigidBody()
@@ -110,7 +120,6 @@ public class Player : DirectionalGameObject
     {
         Initialize();
         SetAnimTrigger(PlayerConstant.restartAnimTrigger);
-        PlayerUIManager.Instance.Initialize();
     }
 
     // GET Functions
@@ -123,7 +132,7 @@ public class Player : DirectionalGameObject
     public void SetStatus(PlayerStatus status)
     {
         this.status = status;
-        PlayerUIManager.Instance?.SetPlayerFace(status, Hp);
+        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
 
         switch (status)
         {
@@ -156,14 +165,14 @@ public class Player : DirectionalGameObject
     public void ForceSetCurrentHp(int hp)
     {
         playerUnit.ForceSetCurrentHP(hp);
-        PlayerHpUIController.Instance?.UpdateHPUI();
+        PlayerHpUIController.InstanceWithoutCreate?.UpdateHPUI();
     }
 
     public bool ChangeCurrentHP(int change)
     {
         bool isAlive = playerUnit.ChangeCurrentHP(change);
-        PlayerHpUIController.Instance?.UpdateHPUI();
-        PlayerUIManager.Instance?.SetPlayerFace(status, Hp);
+        PlayerHpUIController.InstanceWithoutCreate?.UpdateHPUI();
+        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
         return isAlive;
     }
 
@@ -188,6 +197,19 @@ public class Player : DirectionalGameObject
 
         foreach (SkillName skillName in PlayerSkillConstant.ResetSkillListByMarkKill)
             HaveSkill(skillName).ResetCoolTime();
+    }
+
+    public void ResetSkillCoolTimeAll()
+    {
+        foreach (var skill in skillList)
+        {
+            skill.ResetCoolTime();
+        }
+
+        foreach (var skill in traitList)
+        {
+            skill.ResetCoolTime();
+        }
     }
 
     public void CheckIsMove()
@@ -273,9 +295,9 @@ public class Player : DirectionalGameObject
     {
         if (!Input.GetKeyDown(KeySetting.keys[PlayerAction.Down])) return;
         if (!isGround) return;
-        if (tileCollider == null) return;
+        if (tiles.Count == 0) return;
 
-        colliderController.PassTile(tileCollider);
+        foreach (BoxCollider2D tile in tiles) if (tile != null) colliderController.PassTile(tile);
     }
 
     private void CheckGround()
@@ -285,16 +307,19 @@ public class Player : DirectionalGameObject
         Vector3 left = GetBottomPos() - new Vector3(GetSize().x / 2, 0, 0);
         Vector3 right = GetBottomPos() + new Vector3(GetSize().x / 2, 0, 0);
 
-        RaycastHit2D rayHit = Physics2D.Raycast(left, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
-        if (rayHit.collider == null) rayHit = Physics2D.Raycast(right, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
+        RaycastHit2D rayHitLeft = Physics2D.Raycast(left, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
+        RaycastHit2D rayHitRight = Physics2D.Raycast(right, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
 
-        isGround = rayHit.collider != null && Util.IsStoppedSpeed(_rigidbody.velocity.y);
+        isGround = !(rayHitLeft.collider == null && rayHitRight.collider == null) && Util.IsStoppedSpeed(_rigidbody.velocity.y);
         _animator.SetBool(PlayerConstant.groundedAnimBool, isGround);
 
         if (!isGround) return;
 
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
-        tileCollider = rayHit.collider.GetComponent<BoxCollider2D>();
+        tiles.Clear();
+
+        if (rayHitLeft.collider != null) tiles.Add(rayHitLeft.collider.GetComponent<BoxCollider2D>());
+        if (rayHitRight.collider != null && rayHitRight != rayHitLeft) tiles.Add(rayHitRight.collider.GetComponent<BoxCollider2D>());
     }
 
     private void Jump()
@@ -326,6 +351,7 @@ public class Player : DirectionalGameObject
     {
         Direction dir = end.x > transform.position.x ? Direction.Right : Direction.Left;
 
+        _animator.SetBool(PlayerConstant.dashEndAnimBool, false);
         SetGravityScale(false);
         SetInvincibility(isInvincibility);
         if (changeDir == true) SetMovingDirection(dir);
@@ -346,6 +372,7 @@ public class Player : DirectionalGameObject
 
         if (passWall == true) transform.position = end;
 
+        _animator.SetBool(PlayerConstant.dashEndAnimBool, true);
         SetGravityScale(true);
         SetInvincibility(false);
         if (changeDir == true) SetMovingDirection((Direction)(-1 * (int)dir));
@@ -454,7 +481,7 @@ public class Player : DirectionalGameObject
             if (trait.skillName == name)
             {
                 traitList.Remove(trait);
-                SoundManager.Instance. SFXPlay("Equip", SoundList.Instance.altarUnequip);
+                SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.altarUnequip);
                 trait.RemoveSkill();
                 return;
             }

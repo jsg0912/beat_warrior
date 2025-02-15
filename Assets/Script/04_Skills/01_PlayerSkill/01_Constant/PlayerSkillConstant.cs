@@ -47,7 +47,7 @@ public class PlayerSkillConstant
     public const int KillRecoveryHPTrigger = 10;
 
     public const float markerSpeed = 25.0f;
-    public const float markerDuration = 2.0f;
+    public const float markerDuration = 0.5f;
     public const float reviveDuration = 9.0f;
     public const float reviveEffectDuration = 6.0f;
 }

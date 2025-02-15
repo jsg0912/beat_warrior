@@ -8,11 +8,14 @@ public class InGameManager : SingletonObject<InGameManager>
     public void Start()
     {
         SoulPrefab = Resources.Load(PrefabRouter.SoulPrefab) as GameObject;
-        // PauseController.Instance.ChangeDefaultGameSpeed(0.3f);
+        //PauseController.Instance.ChangeDefaultGameSpeed(0.1f);
     }
 
     public void CreateSoul(Vector3 position)
     {
-        Instantiate(SoulPrefab, position + SoulPositionOffset, Quaternion.identity);
+        if (Util.RandomBool(ObjectConstant.SoulDropRate))
+        {
+            Instantiate(SoulPrefab, position + SoulPositionOffset, Quaternion.identity);
+        }
     }
 }

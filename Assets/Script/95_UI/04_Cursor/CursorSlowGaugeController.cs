@@ -17,11 +17,19 @@ public class CursorSlowGaugeController : MonoBehaviour
 
     public void TurnOn()
     {
-        if (Util.SetActive(gameObject, true)) timeStopTimer.Initialize(TimeScaleConstant.MarkSlowDuration);
+        if (Util.SetActive(gameObject, true))
+        {
+            timeStopTimer.Initialize(TimeScaleConstant.MarkSlowDuration);
+            UIManager.Instance.TurnOnBlur(BlurType.MarkSlow);
+        }
     }
 
     public void TurnOff()
     {
-        if (Util.SetActive(gameObject, false)) TimeStopBar_Full.fillAmount = 1;
+        if (Util.SetActive(gameObject, false))
+        {
+            TimeStopBar_Full.fillAmount = 1;
+            UIManager.Instance.TurnOffBlur();
+        }
     }
 }
