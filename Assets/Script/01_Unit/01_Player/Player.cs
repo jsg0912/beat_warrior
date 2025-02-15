@@ -464,7 +464,7 @@ public class Player : DirectionalGameObject
 
         if (trait == null)
         {
-            throw new Exception("Trait 없어서 추가 실패!");
+            throw new Exception($"Trait 없어서 추가 실패! {name}");
         }
 
         trait.GetSkill();
