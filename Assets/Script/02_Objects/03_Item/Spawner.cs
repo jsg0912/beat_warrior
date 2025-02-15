@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour
     }
     public void MovePlayerToSpawner()
     {
-        Player player = FindObjectOfType<Player>();
+        Player player = Player.Instance;
         if (player != null)
         {
             player.transform.position = transform.position;

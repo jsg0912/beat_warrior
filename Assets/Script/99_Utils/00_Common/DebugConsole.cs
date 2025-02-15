@@ -7,6 +7,12 @@ public static class DebugConsole
     {
         Debug.LogError(message);
     }
+
+    public static void Warning(string message)
+    {
+        Debug.LogWarning(message);
+    }
+
     public static void Log(string[] messages)
     {
         string totalMessage = "";
