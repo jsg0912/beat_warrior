@@ -62,7 +62,7 @@ public class Player : DirectionalGameObject
         player.GetComponent<Player>().Initialize();
     }
 
-    public void RecoverHealthyStatus(bool isRestart = false)
+    public void RecoverHealthyStatus()
     {
         playerUnit.SetFullStatAll();
         ResetSkillCoolTimeAll();
@@ -210,6 +210,13 @@ public class Player : DirectionalGameObject
         {
             skill.ResetCoolTime();
         }
+    }
+
+    // 주의: PlayerLift 같은 곳에서 Player를 자식으로 삼는 경우가 있는데, 그럴 때 맵을 이동하면 Player가 같이 사라지는 문제가 있었음
+    public void ResetTransform()
+    {
+        transform.SetParent(null);
+        DontDestroyOnLoad(this);
     }
 
     public void CheckIsMove()

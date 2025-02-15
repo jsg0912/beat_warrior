@@ -4,11 +4,11 @@ using System.Collections;
 public class PlayerLift : ObjectWithInteractionPrompt
 {
     public Transform startPoint;
-    public Transform endPoint;   
-    public float speed = 2f;     
+    public Transform endPoint;
+    public float speed = 2f;
 
-    private bool isMoving = false; 
-    private Vector3 targetPosition; 
+    private bool isMoving = false;
+    private Vector3 targetPosition;
 
     private bool leverIsOn = false;
 
@@ -21,8 +21,8 @@ public class PlayerLift : ObjectWithInteractionPrompt
 
     void Start()
     {
-        transform.position = startPoint.position; 
-        targetPosition = endPoint.position; 
+        transform.position = startPoint.position;
+        targetPosition = endPoint.position;
     }
 
     private IEnumerator MoveLift()
@@ -32,7 +32,7 @@ public class PlayerLift : ObjectWithInteractionPrompt
         while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-            yield return null; 
+            yield return null;
         }
 
         isMoving = false;
@@ -44,7 +44,7 @@ public class PlayerLift : ObjectWithInteractionPrompt
         {
             targetPosition = (targetPosition == startPoint.position) ? endPoint.position : startPoint.position;
             ToggleLever();
-            StartCoroutine(MoveLift()); 
+            StartCoroutine(MoveLift());
         }
     }
 
@@ -58,7 +58,7 @@ public class PlayerLift : ObjectWithInteractionPrompt
         base.OnTriggerEnter2D(other);
         if (other.CompareTag(TagConstant.Player))
         {
-            other.transform.SetParent(transform); 
+            other.transform.SetParent(transform);
         }
     }
 
@@ -67,7 +67,7 @@ public class PlayerLift : ObjectWithInteractionPrompt
         base.OnTriggerExit2D(other);
         if (other.CompareTag(TagConstant.Player))
         {
-            other.transform.SetParent(null); 
+            other.GetComponent<Player>().ResetTransform();
         }
     }
 }
