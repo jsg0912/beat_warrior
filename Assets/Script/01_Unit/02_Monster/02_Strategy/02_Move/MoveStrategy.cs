@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 
 public class MoveStrategy : Strategy
 {
     protected float moveSpeed;
 
-    protected float timeLimit => 3 + Random.value * 2; // TODO: [Code Review - KMJ] Constant화 해야함
+    protected float timeLimit => RandomSystem.RandomFloat(3.0f, 5.0f); // TODO: [Code Review - KMJ] Constant화 해야함
     protected Timer changeDestTimer = new Timer();
 
     public override void Initialize(Monster monster)
@@ -13,7 +14,7 @@ public class MoveStrategy : Strategy
         SetRandomFlipTimer();
     }
 
-    public override bool PlayStrategy()
+    public override bool PlayStrategy(Action callback = null)
     {
         return TryMove();
     }
@@ -45,7 +46,7 @@ public class MoveStrategy : Strategy
         if (changeDestTimer.Tick()) return;
 
         // TODO: [Code Review - KMJ] Constant화 해야함
-        int dest = Random.Range(0, 3);
+        int dest = RandomSystem.RandomInt(3);
         if (dest == 0) FlipDirection();
         SetRandomFlipTimer();
     }

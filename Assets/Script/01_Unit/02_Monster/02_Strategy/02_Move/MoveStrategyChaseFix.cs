@@ -1,6 +1,8 @@
+using System;
+
 public class MoveStrategyChaseFix : MoveStrategyChase
 {
-    public override bool PlayStrategy()
+    public override bool PlayStrategy(Action callback = null)
     {
         ChaseTarget();
         return true;

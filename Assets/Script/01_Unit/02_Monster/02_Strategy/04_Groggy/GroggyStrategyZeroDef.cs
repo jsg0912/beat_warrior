@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ public class GroggyStrategyZeroDef : GroggyStrategy
         this.groggyTime = groggyTime;
     }
 
-    public override bool PlayStrategy()
+    public override bool PlayStrategy(Action callback = null)
     {
         monster.GetComponent<MonoBehaviour>().StartCoroutine(PlayGroggy());
         return true;

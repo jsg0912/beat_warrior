@@ -9,6 +9,6 @@ public class MoveStrategyNormal : MoveStrategyRandom
         moveSpeed = MonsterConstant.MoveSpeed[monster.monsterName];
 
         // 초기 방향 랜덤 설정
-        SetMovingDirection(Random.Range(0, 2) == 0 ? Direction.Right : Direction.Left);
+        SetMovingDirection(RandomSystem.RandomBool(1 / 3) ? Direction.Right : Direction.Left);
     }
 }

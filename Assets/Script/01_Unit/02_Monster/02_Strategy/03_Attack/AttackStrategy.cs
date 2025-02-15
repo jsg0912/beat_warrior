@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class AttackStrategy : Strategy
@@ -25,7 +26,7 @@ public abstract class AttackStrategy : Strategy
         attackCoolTime = 0;
     }
 
-    public override bool PlayStrategy()
+    public override bool PlayStrategy(Action callback = null)
     {
         if (monster.GetIsAttacking()) return true;
         if (!monster.GetIsAttackAble()) return false;

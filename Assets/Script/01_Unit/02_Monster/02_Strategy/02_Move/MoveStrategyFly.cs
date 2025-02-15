@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MoveStrategyFly : MoveStrategyRandom
@@ -14,10 +15,10 @@ public class MoveStrategyFly : MoveStrategyRandom
         moveSpeed = MonsterConstant.MoveSpeed[monster.monsterName];
 
         // 초기 방향 랜덤 설정
-        SetMovingDirection(Random.Range(0, 2) == 0 ? Direction.Right : Direction.Left);
+        SetMovingDirection(RandomSystem.RandomBool(33.3f) ? Direction.Right : Direction.Left);
     }
 
-    public override bool PlayStrategy()
+    public override bool PlayStrategy(Action callback = null)
     {
         base.PlayStrategy();
 

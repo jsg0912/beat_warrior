@@ -1,8 +1,10 @@
+using System;
+
 public abstract class RecognizeStrategy : Strategy
 {
     protected float recognizeRange;
 
-    public override bool PlayStrategy() // return true if it is looking at the target.
+    public override bool PlayStrategy(Action callback = null) // return true if it is looking at the target.
     {
         if (monster.GetStatus() == MonsterStatus.Groggy) return false;
         if (monster.GetIsRecognizing() || IsLookingTarget()) return CheckTarget();

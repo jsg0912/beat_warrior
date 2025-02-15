@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MoveStrategyChase : MoveStrategy
@@ -11,7 +12,7 @@ public class MoveStrategyChase : MoveStrategy
         moveSpeed = MonsterConstant.MoveSpeed[monster.monsterName];
     }
 
-    public override bool PlayStrategy()
+    public override bool PlayStrategy(Action callback = null)
     {
         ChaseTarget();
 

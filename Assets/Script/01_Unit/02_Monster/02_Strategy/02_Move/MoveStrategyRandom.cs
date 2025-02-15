@@ -1,10 +1,10 @@
-using UnityEngine;
+using System;
 
 public class MoveStrategyRandom : MoveStrategy
 {
     protected bool isStop = false;
 
-    public override bool PlayStrategy()
+    public override bool PlayStrategy(Action callback = null)
     {
         base.PlayStrategy();
         TryFlipDirection();
@@ -27,7 +27,7 @@ public class MoveStrategyRandom : MoveStrategy
         if (changeDestTimer.Tick()) return;
 
         // TODO: [Code Review - KMJ] Constant화 해야함
-        int dest = Random.Range(0, 3);
+        int dest = RandomSystem.RandomInt(0, 3);
         switch (dest)
         {
             case 0:

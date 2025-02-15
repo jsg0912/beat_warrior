@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Strategy
@@ -15,7 +16,7 @@ public abstract class Strategy
         GroundLayer = LayerMask.GetMask(LayerConstant.Tile);
     }
 
-    public virtual bool PlayStrategy() { return false; } // it returns whether the strategy plays or not.
+    public virtual bool PlayStrategy(Action callback = null) { return false; } // it returns whether the strategy plays or not.
 
     protected Vector3 GetPlayerPos() { return Player.Instance.GetBottomPos(); }
     protected Vector3 GetMonsterPos() { return monster.GetBottomPos(); }
