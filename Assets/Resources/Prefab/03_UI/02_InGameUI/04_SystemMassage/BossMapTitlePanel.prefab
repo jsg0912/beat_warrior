@@ -11,13 +11,16 @@ GameObject:
   - component: {fileID: 8331848751994460324}
   - component: {fileID: 5536616841059609408}
   - component: {fileID: 3673113647323797477}
+  - component: {fileID: 5836875076846807439}
+  - component: {fileID: 3348298480487131383}
+  - component: {fileID: 1137583838585394846}
   m_Layer: 0
   m_Name: BossMapTitlePanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8331848751994460324
 RectTransform:
   m_ObjectHideFlags: 0
@@ -76,6 +79,53 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5836875076846807439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095319740529312326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465d354e39f862441a2ff84b1425c48f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiImage: {fileID: 5697104207008649807}
+  sprites:
+  - {fileID: 2032574538, guid: 91025734bc11f6f44b9181fa6ba73e3a, type: 3}
+  - {fileID: 1936652687, guid: 91025734bc11f6f44b9181fa6ba73e3a, type: 3}
+  - {fileID: 491969012, guid: 91025734bc11f6f44b9181fa6ba73e3a, type: 3}
+  frameRate: 0.1
+  overlayFadeInEffect: {fileID: 8424493748293297761}
+  fadeInEffect: {fileID: 3348298480487131383}
+  overlayImage: {fileID: 7139555917255814638}
+--- !u!114 &3348298480487131383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095319740529312326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2bf0ad8c210ab4aa7e0fd5bf127021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 1137583838585394846}
+  fadeDuration: 3
+--- !u!225 &1137583838585394846
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3095319740529312326}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &4929321956577528917
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,16 +137,13 @@ GameObject:
   - component: {fileID: 1403493797926284121}
   - component: {fileID: 5940925418337579726}
   - component: {fileID: 5697104207008649807}
-  - component: {fileID: 4238044455805899948}
-  - component: {fileID: 3796865981606310285}
-  - component: {fileID: 7201611517237641698}
   m_Layer: 0
   m_Name: BossMapTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1403493797926284121
 RectTransform:
   m_ObjectHideFlags: 0
@@ -155,53 +202,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4238044455805899948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4929321956577528917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 465d354e39f862441a2ff84b1425c48f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  uiImage: {fileID: 5697104207008649807}
-  sprites:
-  - {fileID: 2032574538, guid: 91025734bc11f6f44b9181fa6ba73e3a, type: 3}
-  - {fileID: 1936652687, guid: 91025734bc11f6f44b9181fa6ba73e3a, type: 3}
-  - {fileID: 491969012, guid: 91025734bc11f6f44b9181fa6ba73e3a, type: 3}
-  frameRate: 0.1
-  overlayFadeInEffect: {fileID: 8424493748293297761}
-  fadeInEffect: {fileID: 3796865981606310285}
-  overlayImage: {fileID: 7139555917255814638}
---- !u!114 &3796865981606310285
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4929321956577528917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc2bf0ad8c210ab4aa7e0fd5bf127021, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 7201611517237641698}
-  fadeDuration: 3
---- !u!225 &7201611517237641698
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4929321956577528917}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &6496682878692551865
 GameObject:
   m_ObjectHideFlags: 0

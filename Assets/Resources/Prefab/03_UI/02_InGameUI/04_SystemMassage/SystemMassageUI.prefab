@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7063552790818042904}
   - component: {fileID: 7372852120358526369}
   - component: {fileID: 7753164387774165489}
+  - component: {fileID: 2160168311411699480}
   m_Layer: 0
   m_Name: SystemMassageUI
   m_TagString: Untagged
@@ -87,7 +88,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7372852120358526369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +125,36 @@ MonoBehaviour:
   LowerPartMapImage: {fileID: 21300000, guid: ca550b97efca1514b8fcd5307875523f, type: 3}
   LowerPartBossMapImage: {fileID: 21300000, guid: 66ca854ffc88f7348a1e47d650659b21, type: 3}
   LowerPartBossMapAnimation: {fileID: 423554201505223425}
+--- !u!114 &2160168311411699480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4569494571676718189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52de21a22b6dd44c9cc19f810c65059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Events:
+    m_Signals:
+    - {fileID: 11400000, guid: 8be4a316563b6464f92a95e043434c64, type: 2}
+    m_Events:
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7753164387774165489}
+          m_TargetAssemblyTypeName: SystemMessageUIManager, Assembly-CSharp
+          m_MethodName: TurnOnBossMapTitle
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &2779544225206768648
 PrefabInstance:
   m_ObjectHideFlags: 0
