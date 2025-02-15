@@ -13,8 +13,9 @@ public class AltarUIManager : SingletonObject<AltarUIManager>
     int spiritCount => Inventory.Instance.GetSoulNumber();
     public SkillName SelectedTraitName { get; private set; }
 
-    void Start()
+    override protected void Awake()
     {
+        base.Awake();
         salesSkillList = TraitPriceList.Info.Keys.ToArray();
     }
 
