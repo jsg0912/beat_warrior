@@ -21,6 +21,7 @@ public class UIImageAnimation : MonoBehaviour
     IEnumerator AnimateSprite()
     {
         yield return new WaitForSecondsRealtime(1f);
+        SoundManager.Instance.SFXPlay("chapter2BossMapTitle", SoundList.Instance.chapter2BossMapTitle);
         for (int i = 0; i < sprites.Length; i++) 
         {
             uiImage.sprite = sprites[i];
