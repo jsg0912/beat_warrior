@@ -16,7 +16,7 @@ public abstract class ActiveSkillPlayer : ActiveSkill
 
     protected override void UseSkill()
     {
-        if (trigger?.Count > 0) Player.Instance.SetAnimTrigger(trigger[Random.Range(0, trigger.Count)]);
+        if (trigger?.Count > 0) Player.Instance.SetAnimTrigger(trigger[RandomSystem.RandomInt(trigger.Count)]);
         if (effectColor != PlayerSkillEffectColor.None) Player.Instance.SetLastSkillColor(effectColor);
 
         SkillMethod();

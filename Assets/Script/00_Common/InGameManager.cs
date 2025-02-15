@@ -13,7 +13,7 @@ public class InGameManager : SingletonObject<InGameManager>
 
     public void CreateSoul(Vector3 position)
     {
-        if (Util.RandomBool(ObjectConstant.SoulDropRate))
+        if (RandomSystem.RandomBool(ObjectConstant.SoulDropRate))
         {
             Instantiate(SoulPrefab, position + SoulPositionOffset, Quaternion.identity);
         }

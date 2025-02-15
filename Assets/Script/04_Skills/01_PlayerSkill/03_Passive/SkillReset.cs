@@ -33,8 +33,7 @@ public class SkillReset : PassiveSkill
             return;
         }
 
-        float probability = Random.Range(0.0f, 1.0f);
-        if (probability < PlayerSkillConstant.SkillResetProbability)
+        if (RandomSystem.RandomBool(PlayerSkillConstant.SkillResetProbability))
         {
             skill.ResetCoolTime();
         }

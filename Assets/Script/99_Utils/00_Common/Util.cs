@@ -198,10 +198,7 @@ public static class Util
         if (gameObject != null) gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
-    public static bool RandomBool(float truePercentage)
-    {
-        return UnityEngine.Random.Range(0, 100) < truePercentage;
-    }
+
 
     public static void RotateObjectForwardingDirection(GameObject gameObject, Vector3 direction, bool hasTopDownStructure)
     {
@@ -217,10 +214,5 @@ public static class Util
                 gameObject.transform.localScale = new Vector3(localScale.x, localScale.y, localScale.z);
         }
         gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
-    }
-
-    public static T GetRandom<T>(List<T> list)
-    {
-        return list[UnityEngine.Random.Range(0, list.Count)];
     }
 }

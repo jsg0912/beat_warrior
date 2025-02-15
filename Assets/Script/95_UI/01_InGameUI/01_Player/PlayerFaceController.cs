@@ -32,7 +32,7 @@ public class PlayerFaceController : MonoBehaviour
     {
         if (IsSameFace(PlayerStatus.Normal)) return;
 
-        if (Util.RandomBool(10)) SetBeautyFace(); // 임시로 10% 확률로 이쁜 얼굴
+        if (RandomSystem.RandomBool(10)) SetBeautyFace(); // 임시로 10% 확률로 이쁜 얼굴
         else faceImage.sprite = idleFace;
     }
 
