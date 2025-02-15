@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -197,8 +196,6 @@ public static class Util
     {
         if (gameObject != null) gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
-
-
 
     public static void RotateObjectForwardingDirection(GameObject gameObject, Vector3 direction, bool hasTopDownStructure)
     {

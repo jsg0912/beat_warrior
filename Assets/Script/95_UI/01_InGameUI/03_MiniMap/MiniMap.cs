@@ -29,37 +29,44 @@ public class MiniMap : SingletonObject<MiniMap>
 
     private PoolTag GetEnemyIconPoolTag(MonsterName monsterName)
     {
-        // return PoolTag.EnemyMiniMapIcon;
         return enemyIcons.ContainsKey(monsterName) ? enemyIcons[monsterName] : PoolTag.MiniMapIconIppali;
     }
 
     void OnEnable()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded; // 이벤트 등록
-    }
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded; // 이벤트 해제
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    // Start is called before the first frame update
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     void Start()
     {
-        MiniMapCamera.cullingMask = 0;
-        MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.MiniMap);
-        MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.Tile);
+        if (MiniMapCamera != null)
+        {
+            MiniMapCamera.cullingMask = 0;
+            MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.MiniMap);
+            MiniMapCamera.cullingMask |= 1 << LayerMask.NameToLayer(LayerConstant.Tile);
+        }
 
         UpdateMonsterInfo();
 
-        Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
+        if (Camera.main != null)
+        {
+            Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
+        }
 
         TryCreatePlayerMapIcon();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        PlayerMapIcon.transform.position = Player.Instance.transform.position + Vector3.up * 0.7f;
+        if (PlayerMapIcon != null && Player.Instance != null)
+        {
+            PlayerMapIcon.transform.position = Player.Instance.GetMiddlePos();
+        }
 
         CountObjectInMiniMap();
         UpdateMonsterInfo();
@@ -67,116 +74,164 @@ public class MiniMap : SingletonObject<MiniMap>
 
     private void UpdateMonsterInfo()
     {
-        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
-        // MiniMap에서 Monster 실시간 위치를 파악하기 위해 반드시 위치를 찾아야하다보니, 이왕 찾는거 ChapterManager의 SetMonsterCount()를 여기서 호출해 줌.
-        ChapterManager.Instance.SetMonsterCount(monster.Length);
-        RemainMonster.text = "Remains : " + monster.Length.ToString();
-
-        for (int i = 0; i < monsterInMap.Count; i++)
+        try
         {
-            if (!monsterForIcon.Contains(monsterInMap[i]))
+            monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
+            if (ChapterManager.Instance != null)
             {
-                monsterForIcon.Add(monsterInMap[i]);
-                icon.Add(MyPooler.ObjectPooler.Instance.GetFromPool(GetEnemyIconPoolTag(monsterInMap[i].GetComponent<Monster>().monsterName), monsterInMap[i].transform.position, Quaternion.identity));
+                ChapterManager.Instance.SetMonsterCount(monster.Length);
+            }
+            if (RemainMonster != null)
+            {
+                RemainMonster.text = "Remains : " + monster.Length.ToString();
+            }
+
+            for (int i = 0; i < monsterInMap.Count; i++)
+            {
+                if (!monsterForIcon.Contains(monsterInMap[i]))
+                {
+                    monsterForIcon.Add(monsterInMap[i]);
+                    Monster monsterComponent = monsterInMap[i].GetComponent<Monster>();
+                    if (monsterComponent != null)
+                    {
+                        icon.Add(MyPooler.ObjectPooler.Instance.GetFromPool(GetEnemyIconPoolTag(monsterComponent.monsterName), monsterInMap[i].transform.position, Quaternion.identity));
+                    }
+                }
+            }
+
+            for (int i = 0; i < monsterForIcon.Count; i++)
+            {
+                if (!monsterInMap.Contains(monsterForIcon[i]))
+                {
+                    Monster monsterComponent = monsterForIcon[i].GetComponent<Monster>();
+                    if (monsterComponent != null && i < icon.Count)
+                    {
+                        MyPooler.ObjectPooler.Instance.ReturnToPool(GetEnemyIconPoolTag(monsterComponent.monsterName), icon[i].gameObject);
+                        icon.RemoveAt(i);
+                        monsterForIcon.RemoveAt(i);
+                        i--;
+                    }
+                }
+            }
+
+            for (int i = 0; i < monsterForIcon.Count; i++)
+            {
+                if (i >= icon.Count) break;
+                
+                GameObject obj = monsterForIcon[i];
+                if (obj == null || !obj) continue;
+
+                Monster monster = obj.GetComponent<Monster>();
+                if (monster == null) continue;
+
+                try
+                {
+                    int currentHP = monster.GetCurrentHP();
+                    if (currentHP <= 0)
+                    {
+                        MyPooler.ObjectPooler.Instance.ReturnToPool(GetEnemyIconPoolTag(monster.monsterName), icon[i].gameObject);
+                        icon.RemoveAt(i);
+                        monsterForIcon.RemoveAt(i);
+                        i--;
+                        continue;
+                    }
+                    
+                    MiniMapIcon iconComponent = icon[i].GetComponent<MiniMapIcon>();
+                    if (iconComponent != null)
+                    {
+                        //iconComponent.GetHp(currentHP);
+                        iconComponent.GetTarget(obj.transform.position);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Error updating monster info: {e.Message}");
+                    continue;
+                }
             }
         }
-        for (int i = 0; i < monsterForIcon.Count; i++)
+        catch (Exception e)
         {
-            if (!monsterInMap.Contains(monsterForIcon[i]))
-            {
-                icon[i].GetComponent<MiniMapIcon>().GetHp(0);
-                icon.RemoveAt(i);
-                monsterForIcon.RemoveAt(i);
-            }
-        }
-
-
-
-        for (int i = 0; i < monsterForIcon.Count; i++)
-        {
-            if (i > icon.Count) break;
-            
-            GameObject obj = monsterForIcon[i];
-            if (obj == null || !obj) continue;
-
-            Monster monster = obj.GetComponent<Monster>();
-            if (monster == null) continue;
-
-            try
-            {
-                int currentHP = monster.GetCurrentHP();
-                if (currentHP <= 0) continue;
-            }
-            catch (MissingReferenceException)
-            {
-                continue;
-            }
-                        
-            icon[i].GetComponent<MiniMapIcon>().GetHp(monsterForIcon[i].GetComponent<Monster>().GetCurrentHP());
-            icon[i].GetComponent<MiniMapIcon>().GetTarget(monsterForIcon[i].transform.position);
-            
+            Debug.LogError($"Error in UpdateMonsterInfo: {e.Message}");
         }
     }
-
 
     private bool CheckObjectInMiniMap(GameObject target)
     {
-        if (target == null) return false;
+        if (target == null || MiniMapCamera == null) return false;
         Vector3 screenPoint = MiniMapCamera.WorldToViewportPoint(target.transform.position);
-        bool onMiniMap = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
-
-        return onMiniMap;
+        return screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0 && screenPoint.y < 1;
     }
-
-
 
     private void CountObjectInMiniMap()
     {
-        if (monsterInMap == null)
-        {
-            monsterInMap = new List<GameObject>();
-        }
-        monsterInMap?.Clear();
+        monsterInMap = monsterInMap ?? new List<GameObject>();
+        monsterInMap.Clear();
 
-        for (int i = 0; i < monster.Length; i++)
+        if (monster != null)
         {
-            if (CheckObjectInMiniMap(monster[i]))
+            for (int i = 0; i < monster.Length; i++)
             {
-                monsterInMap.Add(monster[i]);
+                if (CheckObjectInMiniMap(monster[i]))
+                {
+                    monsterInMap.Add(monster[i]);
+                }
             }
-            else continue;
         }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        for (int i = 0; i < monsterInMap.Count; i++)
+        try
         {
-            if (i >= icon.Count) break;
-            icon[i].GetComponent<MiniMapIcon>().GetHp(0);
+            for (int i = 0; i < monsterInMap.Count; i++)
+            {
+                if (i >= icon.Count) break;
+                if (monsterInMap[i] != null && monsterInMap[i].GetComponent<Monster>() != null)
+                {
+                    MyPooler.ObjectPooler.Instance.ReturnToPool(
+                        GetEnemyIconPoolTag(monsterInMap[i].GetComponent<Monster>().monsterName), 
+                        icon[i].gameObject
+                    );
+                }
+            }
+
+            TryCreatePlayerMapIcon();
+
+            for (int i = icon.Count - 1; i >= 0; i--)
+            {
+                if (icon[i] != null)
+                {
+                    MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.MiniMapIconIppali, icon[i].gameObject);
+                }
+            }
+
+            icon.Clear();
+            monsterInMap.Clear();
+            monsterForIcon.Clear();
+
+            if (Camera.main != null)
+            {
+                Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
+            }
+
+            monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
         }
-        TryCreatePlayerMapIcon();
-        for (int i = 0; i < icon.Count; i++)
+        catch (Exception e)
         {
-            if (i > icon.Count) continue;
-            icon[i].GetComponent<MiniMapIcon>().GetHp(0);
+            Debug.LogError($"Error in OnSceneLoaded: {e.Message}");
         }
-        icon.Clear();
-
-        Camera.main.cullingMask = ~(1 << LayerMask.NameToLayer(LayerConstant.MiniMap));
-
-        monster = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
-        icon = new List<GameObject>();
-        monsterInMap = new List<GameObject>();
-        monsterForIcon = new List<GameObject>();
     }
 
     private void TryCreatePlayerMapIcon()
     {
-        if (PlayerMapIcon == null)
+        if (PlayerMapIcon == null && PlayerMapIconPrefab != null)
         {
             PlayerMapIcon = Instantiate(PlayerMapIconPrefab, gameObject.transform);
         }
-        PlayerMapIcon?.gameObject.transform.SetParent(Player.Instance.gameObject.transform);
+        if (PlayerMapIcon != null && Player.Instance != null)
+        {
+            PlayerMapIcon.transform.SetParent(Player.Instance.gameObject.transform);
+        }
     }
 }

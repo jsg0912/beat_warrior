@@ -5,12 +5,16 @@ public class SceneTagManager
     public static List<PoolTag> PoolTagDefault { get; } = new List<PoolTag> {
         PoolTag.EnemyMiniMapIcon,
         PoolTag.IbkkugiThrow,
+        PoolTag.ItmomiThrow,
         PoolTag.MiniMapIconIppali,
         PoolTag.MiniMapIconIbkkugi,
         PoolTag.MiniMapIconKoppulso,
         PoolTag.MiniMapIconGiljjugi,
         PoolTag.MiniMapIconDulduli,
-        PoolTag.MiniMapIconItmomi
+        PoolTag.MiniMapIconItmomi,
+        PoolTag.Soul,
+        PoolTag.Ghost,
+        PoolTag.Mark
     };
     private static SceneTagManager _instance;
     public static SceneTagManager Instance => _instance ??= new SceneTagManager();

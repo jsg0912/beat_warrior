@@ -5,8 +5,8 @@ public static class ChapterInfo
 {
     public static Dictionary<ChapterName, List<SceneName>> ChapterSceneInfo = new()
     {
-        {ChapterName.Ch1, new (){SceneName.Ch2} },
-        {ChapterName.Ch2, new (){SceneName.Ch2 } }
+        {ChapterName.Ch1, new (){SceneName.Tutorial2} },
+        {ChapterName.Ch2, new (){SceneName.Ch2, SceneName.Ch2BossStage} }
     };
 
     public static bool CheckValid()

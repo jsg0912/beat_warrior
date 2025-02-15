@@ -105,8 +105,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
 
     private void LoadStageScene()
     {
-        SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapterName][currentStageIndex]);
-
+        StartCoroutine(SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapterName][currentStageIndex]));
         Player.Instance?.RecoverHealthyStatus(); // Recover Player Healthy When Stage start newly
     }
 

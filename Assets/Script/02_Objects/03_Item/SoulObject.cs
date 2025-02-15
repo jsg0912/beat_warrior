@@ -34,7 +34,7 @@ public class SoulObject : MonoBehaviour
         {
             SoundManager.Instance.SFXPlay("soulGet", SoundList.Instance.soulGet);
             Inventory.Instance.ChangeSoulNumber(ObjectConstant.SoulIdleMotionSpeed);
-            Destroy(gameObject);
+            MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.Soul, this.gameObject);
         }
     }
 }

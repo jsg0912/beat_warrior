@@ -37,7 +37,6 @@ public class Player : DirectionalGameObject
     private BoxCollider2D tileLeft;
     private BoxCollider2D tileRight;
 
-    private PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
     public ReviveSkillFunc reviveSKillFuncList = null;
@@ -96,7 +95,6 @@ public class Player : DirectionalGameObject
             new QSkill(gameObject),
             new ESkill(gameObject)
         };
-        playerGhostController = new PlayerGhostController();
 
         traitList.Clear();
         Inventory.Instance.Initialize();
@@ -371,7 +369,7 @@ public class Player : DirectionalGameObject
         {
             if (!passWall && CheckWall()) break;
 
-            playerGhostController.TryMakeGhost(dir);
+            PlayerGhostController.Instance.TryMakeGhost(dir);
 
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
             moveCount++;
@@ -467,7 +465,7 @@ public class Player : DirectionalGameObject
 
         if (trait == null)
         {
-            throw new Exception("Trait 없어서 추가 실패!");
+            throw new Exception($"Trait 없어서 추가 실패! {name}");
         }
 
         trait.GetSkill();
