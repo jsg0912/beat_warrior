@@ -1,5 +1,8 @@
 public class BossConstantCh2
 {
+    public const string StandAnimTrigger = "Stand";
+    public const string IsStandAnimBool = "isStanding";
+    public const string DieAnimTrigger = "Die";
     public const string AttackAnimTriggerRightHook = "RightHook"; // 오른쪽
     public const string AttackAnimTriggerLeftHook = "LeftHook"; // 왼쪽
     public const string AttackAnimTriggerFullSwing = "FullSwing"; // 풀스윙

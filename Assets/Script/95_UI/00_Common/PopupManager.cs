@@ -1,7 +1,9 @@
+using UnityEngine;
 using System.Collections.Generic;
 
 public class PopupManager : SingletonObject<PopupManager>
 {
+    [SerializeField] private GameExitPopup gameExitPopup;
     private List<PopupSystem> popupSystemStack = new();
 
     private bool IsAnyPopupAlive()
@@ -14,7 +16,6 @@ public class PopupManager : SingletonObject<PopupManager>
         bool success = popupSystemStack[popupSystemStack.Count - 1].TurnOffPopup();
         if (success)
         {
-            popupSystemStack.RemoveAt(popupSystemStack.Count - 1);
             TryResumeGame();
         }
         return success;
@@ -51,5 +52,10 @@ public class PopupManager : SingletonObject<PopupManager>
     {
         if (!IsAnyPopupAlive() && GameManager.Instance.isInGame)
             PauseController.Instance.TryResumeGame();
+    }
+
+    public void TurnOnGameExitPopup()
+    {
+        gameExitPopup.TurnOnPopup();
     }
 }

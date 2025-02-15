@@ -4,12 +4,15 @@ using System.Collections.Generic;
 public class AltarPopup : PageAblePopupSystem
 {
     [SerializeField] private List<TraitIcon> traitUIs;
+    [SerializeField] private ParticleSystem particle;
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         Initialize();
+        var main = particle.main;
+        main.useUnscaledTime = true;
     }
 
     public void Initialize()

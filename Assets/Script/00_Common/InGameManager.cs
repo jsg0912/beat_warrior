@@ -15,7 +15,8 @@ public class InGameManager : SingletonObject<InGameManager>
     {
         if (RandomSystem.RandomBool(ObjectConstant.SoulDropRate))
         {
-            Instantiate(SoulPrefab, position + SoulPositionOffset, Quaternion.identity);
+            MyPooler.ObjectPooler.Instance.GetFromPool(PoolTag.Soul, position + SoulPositionOffset, Quaternion.identity);
+            //Instantiate(SoulPrefab, position + SoulPositionOffset, Quaternion.identity);
         }
     }
 }

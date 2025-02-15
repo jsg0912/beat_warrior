@@ -53,6 +53,7 @@ public class CommandManager : SingletonObject<CommandManager>
     // TODO: 이 아래는 Test용 임시 코드들로 삭제해야 함. - SDH, 20250124
     public void CheckTestCommandInGame()
     {
+        // if (!Util.IsEditor) return;
         if (Input.GetKeyDown(KeyCode.B))
         {
             GameManager.Instance.RestartCurrentStage();
@@ -72,6 +73,30 @@ public class CommandManager : SingletonObject<CommandManager>
         if (Input.GetKeyDown(KeyCode.P))
         {
             PauseController.Instance.ChangeDefaultGameSpeed(0.1f);
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Inventory.Instance.ChangeSoulNumber(1000);
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameObject[] monsters = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
+            foreach (GameObject monster in monsters)
+            {
+                Monster monsterComponent = monster.GetComponent<Monster>();
+                if (monsterComponent != null)
+                {
+                    monsterComponent.AttackedByPlayer(monsterComponent.GetCurrentStat(StatKind.HP), true);
+                }
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Portal portal = FindObjectOfType<Portal>();
+            if (portal != null)
+            {
+                Player.Instance.transform.position = portal.transform.position;
+            }
         }
     }
 }

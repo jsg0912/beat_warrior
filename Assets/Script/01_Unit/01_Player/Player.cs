@@ -32,12 +32,11 @@ public class Player : DirectionalGameObject
 
 
     private bool isGround;
-    private float jumpDeltaTimer;
-    private float jumpTimer;
+    private Timer jumpOffsetTimer;
     [SerializeField] private bool isInvincibility;
-    private List<BoxCollider2D> tiles = new();
+    private BoxCollider2D tileLeft;
+    private BoxCollider2D tileRight;
 
-    private PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
     public ReviveSkillFunc reviveSKillFuncList = null;
@@ -66,8 +65,7 @@ public class Player : DirectionalGameObject
 
     public void RecoverHealthyStatus()
     {
-        SetAnimTrigger(PlayerConstant.restartAnimTrigger);
-
+        DebugConsole.Log("RecoverHealthyStatus");
         playerUnit.SetFullStatAll();
         ResetSkillCoolTimeAll();
         SetStatus(PlayerStatus.Normal);
@@ -77,8 +75,8 @@ public class Player : DirectionalGameObject
 
         SetMovingDirection(PlayerConstant.initDirection);
         isGround = false;
-        jumpDeltaTimer = 0;
-        jumpTimer = 0.1f;
+        jumpOffsetTimer = new Timer(0.1f);
+        jumpOffsetTimer.SetRemainTimeZero();
         SetInvincibility(false);
 
         PlayerUIManager.InstanceWithoutCreate?.Initialize();
@@ -98,7 +96,6 @@ public class Player : DirectionalGameObject
             new QSkill(gameObject),
             new ESkill(gameObject)
         };
-        playerGhostController = new PlayerGhostController();
 
         traitList.Clear();
         Inventory.Instance.Initialize();
@@ -131,15 +128,22 @@ public class Player : DirectionalGameObject
     // SET Functions
     public void SetStatus(PlayerStatus status)
     {
-        this.status = status;
-        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
-
         switch (status)
         {
+            case PlayerStatus.Normal:
+                if (this.status == PlayerStatus.Rest)
+                {
+                    DebugConsole.Log("ansdianidsanmd");
+                    SetAnimTrigger(PlayerConstant.restartAnimTrigger);
+                }
+                break;
             case PlayerStatus.Dead:
                 SetAnimTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
+
+        this.status = status;
+        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
     }
 
     public void SetLastSkillColor(PlayerSkillEffectColor color)
@@ -153,7 +157,16 @@ public class Player : DirectionalGameObject
         if (!gravity) _rigidbody.velocity = Vector3.zero;
     }
 
-    public void SetAnimTrigger(string trigger) { _animator.SetTrigger(trigger); }
+    public void SetAnimTrigger(string trigger)
+    {
+        // TODO: 아래 과정이 뭔가뭔가임 - SDH, 20250215
+        if (trigger == PlayerConstant.restartAnimTrigger)
+        {
+            if (status != PlayerStatus.Dead && status != PlayerStatus.Rest) return;
+        }
+        DebugConsole.Log($"SetAnimTrigger: {trigger}");
+        _animator.SetTrigger(trigger);
+    }
 
     public void SetInvincibility(bool isInvin)
     {
@@ -212,6 +225,13 @@ public class Player : DirectionalGameObject
         }
     }
 
+    // 주의: PlayerLift 같은 곳에서 Player를 자식으로 삼는 경우가 있는데, 그럴 때 맵을 이동하면 Player가 같이 사라지는 문제가 있었음
+    public void ResetTransform()
+    {
+        transform.SetParent(null);
+        DontDestroyOnLoad(this);
+    }
+
     public void CheckIsMove()
     {
         if (!IsMoveable()) return;
@@ -250,7 +270,7 @@ public class Player : DirectionalGameObject
     {
         if (IsActionAble())
         {
-            Jump();
+            TryJump();
             Down();
             Skill();
         }
@@ -295,14 +315,14 @@ public class Player : DirectionalGameObject
     {
         if (!Input.GetKeyDown(KeySetting.keys[PlayerAction.Down])) return;
         if (!isGround) return;
-        if (tiles.Count == 0) return;
 
-        foreach (BoxCollider2D tile in tiles) if (tile != null) colliderController.PassTile(tile);
+        if (tileLeft != null) colliderController.PassTile(tileLeft);
+        if (tileRight != null && tileRight != tileLeft) colliderController.PassTile(tileRight);
     }
 
     private void CheckGround()
     {
-        if (jumpDeltaTimer > 0) return;
+        if (jumpOffsetTimer.remainTime > 0) return;
 
         Vector3 left = GetBottomPos() - new Vector3(GetSize().x / 2, 0, 0);
         Vector3 right = GetBottomPos() + new Vector3(GetSize().x / 2, 0, 0);
@@ -316,30 +336,32 @@ public class Player : DirectionalGameObject
         if (!isGround) return;
 
         playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, playerUnit.unitStat.GetFinalStat(StatKind.JumpCount));
-        tiles.Clear();
 
-        if (rayHitLeft.collider != null) tiles.Add(rayHitLeft.collider.GetComponent<BoxCollider2D>());
-        if (rayHitRight.collider != null && rayHitRight != rayHitLeft) tiles.Add(rayHitRight.collider.GetComponent<BoxCollider2D>());
+        if (rayHitLeft.collider != null) tileLeft = rayHitLeft.collider.GetComponent<BoxCollider2D>();
+        if (rayHitRight.collider != null) tileRight = rayHitRight.collider.GetComponent<BoxCollider2D>();
     }
 
-    private void Jump()
+    private void TryJump()
     {
-        if (jumpDeltaTimer > 0) jumpDeltaTimer -= Time.deltaTime;
+        jumpOffsetTimer.Tick();
         if (!IsActionAble() || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
 
         if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Jump]))
         {
-            SetAnimTrigger(PlayerConstant.jumpAnimTrigger);
-
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
-
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
-            _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpPower, ForceMode2D.Impulse);
-
-            jumpDeltaTimer = jumpTimer;
-
-            SoundManager.Instance.SFXPlay("PlayerJump", SoundList.Instance.playerJump);
+            Jump();
         }
+    }
+
+    private void Jump()
+    {
+        SetAnimTrigger(PlayerConstant.jumpAnimTrigger);
+
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
+        _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpPower, ForceMode2D.Impulse);
+        jumpOffsetTimer.Initialize();
+
+        SoundManager.Instance.SFXPlay("PlayerJump", SoundList.Instance.playerJump);
     }
 
     public void Dashing(Vector2 end, bool changeDir, bool isInvincibility, bool passWall = true)
@@ -363,7 +385,7 @@ public class Player : DirectionalGameObject
         {
             if (!passWall && CheckWall()) break;
 
-            playerGhostController.TryMakeGhost(dir);
+            PlayerGhostController.Instance.TryMakeGhost(dir);
 
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
             moveCount++;
@@ -459,7 +481,7 @@ public class Player : DirectionalGameObject
 
         if (trait == null)
         {
-            throw new Exception("Trait 없어서 추가 실패!");
+            throw new Exception($"Trait 없어서 추가 실패! {name}");
         }
 
         trait.GetSkill();

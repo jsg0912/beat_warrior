@@ -186,12 +186,17 @@ public static class ScriptPool
         } },
     };
 
-    public static Dictionary<SyetemMassageType, Dictionary<Language, string>> SystemMassageDictionary = new Dictionary<SyetemMassageType, Dictionary<Language, string>>
+    public static Dictionary<SystemMessageType, Dictionary<Language, string>> SystemMassageDictionary = new Dictionary<SystemMessageType, Dictionary<Language, string>>
     {
-        {SyetemMassageType.EnemyRemaining,new Dictionary<Language, string>
+        {SystemMessageType.EnemyRemaining,new Dictionary<Language, string>
         {
             {Language.kr, "남아있는 적이 있습니다" },
             {Language.en, "Monsters still remain" },
+        }},
+        {SystemMessageType.LackSoul,new Dictionary<Language, string>
+        {
+            {Language.kr, "영혼이 부족합니다" },
+            {Language.en, "Not Enough Soul" },
         }},
     };
 

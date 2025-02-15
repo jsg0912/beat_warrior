@@ -4,7 +4,7 @@ using TMPro;
 public class MiniMapIcon : MonoBehaviour
 {
     public TMP_Text hpText;
-    public int hp;
+    //public int hp;
 
     private PoolTag poolTag = PoolTag.EnemyMiniMapIcon;
 
@@ -13,13 +13,7 @@ public class MiniMapIcon : MonoBehaviour
     private void Update()
     {
         this.transform.position = Target;
-        if (hp == 0) MyPooler.ObjectPooler.Instance.ReturnToPool(poolTag, this.gameObject);
-    }
-
-    public void GetHp(int unitHp)
-    {
-        hp = unitHp;
-        hpText.text = unitHp.ToString();
+        //if (hp == 0) MyPooler.ObjectPooler.Instance.ReturnToPool(poolTag, this.gameObject);
     }
 
     public void GetTarget(Vector3 pos)
