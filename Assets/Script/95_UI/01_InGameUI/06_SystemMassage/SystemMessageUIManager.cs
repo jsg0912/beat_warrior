@@ -14,7 +14,7 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
     public void TurnOnMapTitleMassageUI(SceneName sceneName)
     {
         string message = sceneName.ToString();
-        MapTitleMessagePopup.SetMessageText(message);
+        //MapTitleMessagePopup.SetMessageText(message);
         MapTitleMessagePopup.TurnOnPopup();
     }
 
