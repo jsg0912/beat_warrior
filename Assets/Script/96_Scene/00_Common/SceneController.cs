@@ -5,6 +5,7 @@ public class SceneController : SingletonObject<SceneController>
     public void ChangeScene(SceneName sceneName)
     {
         RunChangeSceneProcess(sceneName);
+        CheckBossStage(sceneName);
         SceneManager.LoadScene(sceneName.ToString());
     }
 
@@ -34,5 +35,20 @@ public class SceneController : SingletonObject<SceneController>
     public void LoadTitle()
     {
         StartCoroutine(ChangeSceneWithLoading(SceneName.Title));
+    }
+
+    public void CheckBossStage(SceneName scene)
+    {
+        switch(scene)
+        {
+            case SceneName.Ch2BossStage:
+                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter2BossBGM);
+                SoundManager.Instance.PlayCh2BGSFX();
+                UIManager.Instance.TurnOffMiniMap();
+                break;
+            default:
+                UIManager.Instance.TurnOnMiniMap();
+                break;
+        }
     }
 }

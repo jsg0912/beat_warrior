@@ -70,6 +70,7 @@ public class BossGergus : Monster
     public void PlayDie1SFX()
     {
         SoundManager.Instance.SFXPlay("BossDie1", SoundList.Instance.bossDie1);
+        SoundManager.Instance.StopBackGroundSFX();
 
     }
     public void PlayDie2SFX()
