@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3423197402337273031}
   - component: {fileID: 7063552790818042904}
   - component: {fileID: 7372852120358526369}
+  - component: {fileID: 1780481034354928217}
   - component: {fileID: 7753164387774165489}
   - component: {fileID: 2160168311411699480}
   m_Layer: 0
@@ -106,6 +107,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1780481034354928217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4569494571676718189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab905311134b48746bcb095595e0e10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  signalReceiverObject: {fileID: 4569494571676718189}
 --- !u!114 &7753164387774165489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +138,7 @@ MonoBehaviour:
   TutorialMapImage: {fileID: 21300000, guid: d98e2d64c8bc4494bbd5e65784e88d91, type: 3}
   LowerPartMapImage: {fileID: 21300000, guid: ca550b97efca1514b8fcd5307875523f, type: 3}
   LowerPartBossMapImage: {fileID: 21300000, guid: 66ca854ffc88f7348a1e47d650659b21, type: 3}
-  LowerPartBossMapAnimation: {fileID: 423554201505223425}
+  LowerPartBossMapAnimation: {fileID: 100072121672972720}
 --- !u!114 &2160168311411699480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,11 +398,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a6fec86e92783f45ababcb866e706dd, type: 3}
---- !u!1 &423554201505223425 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3095319740529312326, guid: 2a6fec86e92783f45ababcb866e706dd, type: 3}
+--- !u!114 &100072121672972720 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3348298480487131383, guid: 2a6fec86e92783f45ababcb866e706dd, type: 3}
   m_PrefabInstance: {fileID: 3392350347280699719}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2bf0ad8c210ab4aa7e0fd5bf127021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6680141035990911459 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8331848751994460324, guid: 2a6fec86e92783f45ababcb866e706dd, type: 3}
