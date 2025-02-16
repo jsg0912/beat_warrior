@@ -8,7 +8,7 @@ public class PatternCh2Boss : PatternBoss
     private AttackStrategyMelee attackStrategyLeftTripleCombo; // 촉수 3단 휩쓸기기
     private AttackStrategyThrowMany attackStrategyRange; // 토사물 뱉기기
     private AttackStrategyThrowMany attackStrategyRangeMad; // 광폭화 토사물 뱉기기
-    private AttackStrategyThrowMany attackStrategySpawnIppali; // 이빨이 뱉기기
+    private AttackStrategyThrowManyIppali attackStrategySpawnIppali; // 이빨이 뱉기기
     private AttackStrategyMeleeRandomAttack attackStrategySummonTentacleHorizontal; // 촉수 지르기
     private AttackStrategyMeleeRandomAttack attackStrategySummonTentacleVertical; // 촉수 지르기
     private AttackStrategyMeleeRandomAttack attackStrategyFullTentacle;
@@ -30,7 +30,7 @@ public class PatternCh2Boss : PatternBoss
         attackStrategyRange = new AttackStrategyThrowMany(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.EnergyBallSpawnNumber, BossConstantCh2.SpawnInterval, PoolTag.GergusThrow);
         attackStrategyRangeMad = new AttackStrategyThrowMany(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.EnergyBallSpawnNumberMad, BossConstantCh2.SpawnInterval, PoolTag.GergusThrow);
 
-        attackStrategySpawnIppali = new AttackStrategyThrowMany(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.IppaliSpawnNumber, BossConstantCh2.SpawnInterval, PoolTag.IppaliEgg);
+        attackStrategySpawnIppali = new AttackStrategyThrowManyIppali(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.IppaliSpawnNumber, BossConstantCh2.SpawnInterval, PoolTag.IppaliEgg);
 
         attackStrategySummonTentacleHorizontal = new AttackStrategyMeleeRandomAttack(BossConstantCh2.AttackAnimTriggerSummonTentacle, bossGergus.tentaclesHorizontal);
         attackStrategySummonTentacleVertical = new AttackStrategyMeleeRandomAttack(BossConstantCh2.AttackAnimTriggerSummonTentacle, bossGergus.tentaclesVertical);

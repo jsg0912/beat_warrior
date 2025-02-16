@@ -13,7 +13,7 @@ public class AttackStrategyThrow : AttackStrategyCreate
         this.maxHeight = maxHeight;
     }
 
-    private void SetTargetPosition()
+    protected virtual void SetTargetPosition()
     {
         targetPosition = GetPlayerPos();
     }
