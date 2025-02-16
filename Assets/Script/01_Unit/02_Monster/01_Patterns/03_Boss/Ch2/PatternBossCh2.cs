@@ -44,11 +44,10 @@ public class PatternCh2Boss : PatternBoss
 
         attackStrategies[PatternPhase.Phase1] = new()
         {
-            attackStrategyLeftTripleCombo,
-            // attackStrategyRange,
-            // attackStrategySummonTentacleHorizontal,
-            // attackStrategySummonTentacleVertical,
-            // attackStrategyFullTentacle
+            attackStrategyRange,
+            attackStrategySummonTentacleHorizontal,
+            attackStrategySummonTentacleVertical,
+            attackStrategyFullTentacle
         };
         attackStrategies[PatternPhase.Phase2] = new()
         {
@@ -102,5 +101,9 @@ public class PatternCh2Boss : PatternBoss
         }
     }
 
-    public void ResetAttackCoolTimer() { attackCoolTimer.Initialize(); }
+    public void ResetAttackCoolTimer()
+    {
+        DebugConsole.Log("Reset CoolTiem");
+        attackCoolTimer.Initialize();
+    }
 }
