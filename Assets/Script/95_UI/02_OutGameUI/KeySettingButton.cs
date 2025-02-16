@@ -40,7 +40,7 @@ public class KeySettingButton : MonoBehaviour
     void SetKeyCode(KeyCode keyCode)
     {
         isListeningForInput = false;
-        KeySetting.keys[action] = keyCode;
+        KeySetting.SetKey(action, keyCode);
         UpdateKeyText();
         EventSystem.current.SetSelectedGameObject(null);
         if (GameManager.Instance.isInGame) PlayerUIManager.Instance.UpdateHotKeyText(action);
@@ -54,6 +54,6 @@ public class KeySettingButton : MonoBehaviour
     public void UpdateKeyText()
     {
         //ActionText.text = action.ToString();
-        KeyText.text = KeySetting.keys[action].ToString();
+        KeyText.text = KeySetting.GetKey(action).ToString();
     }
 }

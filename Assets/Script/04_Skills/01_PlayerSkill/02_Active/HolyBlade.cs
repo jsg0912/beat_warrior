@@ -55,7 +55,7 @@ public class HolyBlade : ActiveSkillPlayer
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[PlayerAction.Attack];
+        keyCode = KeySetting.GetKey(PlayerAction.Attack);
     }
 
     protected override void SkillMethod()

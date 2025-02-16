@@ -6,6 +6,14 @@ public static class MonsterList
 {
     public static List<MonsterJSON> monsterList = new List<MonsterJSON>()
     {
+        new MonsterJSON(MonsterName.TutorialIppali,
+        "더미",
+        new Dictionary<StatKind, int>{
+            {StatKind.HP, 2},
+            {StatKind.ATK, 0},
+            {StatKind.Def, 0},
+        },
+        PatternName.TutorialIppali),
         new MonsterJSON(MonsterName.Ibkkugi,
         "입꾹이", // TODO: 이 이름도 ScriptPool로 이동해야 함 
         new Dictionary<StatKind, int>{

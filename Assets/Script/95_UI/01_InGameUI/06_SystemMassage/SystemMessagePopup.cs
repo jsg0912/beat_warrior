@@ -11,7 +11,7 @@ public class SystemMessagePopup : MonoBehaviour
     public TMP_Text messageText;
     public Image MapTitleImage;
 
-    private Coroutine fadeCoroutine;
+    private Coroutine hideCoroutine;
 
     void Start()
     {
@@ -21,28 +21,21 @@ public class SystemMessagePopup : MonoBehaviour
         }
     }
 
-    public void FadeOut()
+    public void TurnOnPopup(float displayDuration = 2.0f, bool isStayWhenPause = false)
     {
-        if (fadeCoroutine != null)
-        {
-            StopCoroutine(fadeCoroutine);
-        }
-        fadeCoroutine = StartCoroutine(FadeOutRoutine());
+        Util.SetActive(gameObject, true);
+        TryStopHideCoroutine();
+        hideCoroutine = StartCoroutine(AutoHideRoutine(displayDuration, isStayWhenPause));
     }
 
-    public bool TurnOnPopup()
+    private void TryStopHideCoroutine()
     {
-        bool success = Util.SetActive(gameObject, true);
-        if (success)
+        if (hideCoroutine != null)
         {
-            canvasGroup.alpha = 1;
-            if (fadeCoroutine != null)
-            {
-                StopCoroutine(fadeCoroutine);
-            }
-            StartCoroutine(AutoHideRoutine());
+            StopCoroutine(hideCoroutine);
+            hideCoroutine = null;
+            canvasGroup.alpha = 1.0f;
         }
-        return success;
     }
 
     public bool TurnOffPopup()
@@ -51,12 +44,15 @@ public class SystemMessagePopup : MonoBehaviour
         return success;
     }
 
-    private IEnumerator AutoHideRoutine()
+    private IEnumerator AutoHideRoutine(float displayDuration, bool isStayWhenPause)
     {
-        yield return new WaitForSeconds(displayDuration);
-        FadeOut();
+        if (isStayWhenPause == true) { yield return new WaitForSeconds(displayDuration); }
+        else { yield return new WaitForSecondsRealtime(displayDuration); }
+        yield return FadeOutRoutine();
+        TurnOffPopup();
     }
 
+    // TODO: Util이나 FadeOutController 만들기
     private IEnumerator FadeOutRoutine()
     {
         float startAlpha = canvasGroup.alpha;
@@ -70,7 +66,6 @@ public class SystemMessagePopup : MonoBehaviour
         }
 
         canvasGroup.alpha = 0;
-        TurnOffPopup();
     }
 
     public void SetMessageText(string message)

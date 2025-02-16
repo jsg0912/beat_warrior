@@ -14,7 +14,7 @@ public class QSkill : ActiveSkillPlayer
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[PlayerAction.Skill1];
+        keyCode = KeySetting.GetKey(PlayerAction.Skill1);
     }
 
     protected override void SkillMethod()

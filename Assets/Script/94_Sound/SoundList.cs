@@ -8,6 +8,8 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip chapter2BGM;
     public AudioClip chapter3BGM;
     public AudioClip chapter4BGM;
+
+    public AudioClip chapter2BossMapTitle;
     
     public AudioClip buttonClick;
     public AudioClip menuOpen; //

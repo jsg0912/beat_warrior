@@ -35,12 +35,28 @@ public class CommandManager : SingletonObject<CommandManager>
 
             if (isInGame)
             {
-                if (TutorialManager.InstanceWithoutCreate?.IsWaitingForTutorialAction == true)
+                if (TutorialManager.InstanceWithoutCreate != null)
                 {
-                    PlayerAction tutorialAction = TutorialManager.InstanceWithoutCreate.currentTutorialAction;
-                    if (tutorialAction != PlayerAction.Null && Input.GetKeyDown(KeySetting.keys[tutorialAction]))
+                    if (TutorialManager.InstanceWithoutCreate.isSkillAble)
                     {
-                        TutorialManager.InstanceWithoutCreate.SetUserInput(TutorialManager.InstanceWithoutCreate.currentTutorialAction);
+                        Player.Instance.CheckPlayerCommand();
+                    }
+                    else
+                    {
+                        Player.Instance.CheckGround();
+                        if (TutorialManager.InstanceWithoutCreate.isJumpAble)
+                        {
+                            Player.Instance.TryJump();
+                        }
+                    }
+
+                    if (TutorialManager.InstanceWithoutCreate.IsWaitingForTutorialAction)
+                    {
+                        PlayerAction tutorialAction = TutorialManager.InstanceWithoutCreate.currentTutorialAction;
+                        if (tutorialAction != PlayerAction.Null && Input.GetKeyDown(KeySetting.GetKey(tutorialAction)))
+                        {
+                            TutorialManager.InstanceWithoutCreate.SetUserInput(tutorialAction);
+                        }
                     }
                 }
                 // When we paused the game, we don't want to check below commands.
@@ -49,7 +65,7 @@ public class CommandManager : SingletonObject<CommandManager>
                     Player.Instance.CheckPlayerCommand();
                 }
 
-                if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Interaction]))
+                if (Input.GetKeyDown(KeySetting.GetKey(PlayerAction.Interaction)))
                 {
                     InteractionManager.Instance.InteractWithLastObject();
                 }

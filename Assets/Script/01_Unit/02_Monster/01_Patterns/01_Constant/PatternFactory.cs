@@ -6,6 +6,8 @@ public static class PatternFactory
     {
         switch (patternName)
         {
+            case PatternName.TutorialIppali:
+                return new PatternTutorialIppali();
             case PatternName.Ibkkugi:
                 return new PatternIbkkugi();
             case PatternName.Dulduli:

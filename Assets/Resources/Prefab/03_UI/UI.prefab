@@ -191,14 +191,14 @@ Canvas:
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
-  m_OverrideSorting: 0
+  m_OverrideSorting: 1
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_TargetDisplay: 0
 --- !u!1 &1687089186795558435
 GameObject:
@@ -1356,6 +1356,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 324421891648930052, guid: 39034393f1e31504c82944b89013931c, type: 3}
+      propertyPath: m_SortingOrder
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 324421891648930052, guid: 39034393f1e31504c82944b89013931c, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 446001510298110099, guid: 39034393f1e31504c82944b89013931c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1902,7 +1910,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7587462390200140573, guid: 39034393f1e31504c82944b89013931c, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7595762513023532750, guid: 39034393f1e31504c82944b89013931c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2901,13 +2909,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1418070174317281213}
     m_Modifications:
+    - target: {fileID: 407947633107590304, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2366189222374062131, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423197402337273031, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423197402337273031, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4318812236867070750, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 9ee7a65342ac0994781bd7fe8fc2f58b, type: 3}
     - target: {fileID: 4569494571676718189, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
       propertyPath: m_Name
-      value: SystemMassageUI
+      value: SystemMessageUI
       objectReference: {fileID: 0}
     - target: {fileID: 7063552790818042904, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
       propertyPath: m_PresetInfoIsWorld
@@ -3279,6 +3303,14 @@ PrefabInstance:
     - target: {fileID: 1996664295765188757, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -250
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012567744475329684, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012567744475329684, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2093002387905248448, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4129,10 +4161,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1978376849466248130, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2458833231401105880, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 381ea00658129bd4c8d4a49b06b4cee0, type: 3}
+    - target: {fileID: 2466756743386333605, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 2506301603238627673, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
       propertyPath: SkillHotKey
       value: 
@@ -4257,6 +4297,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5416283667287582745, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 5576882474052674128, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -4310,6 +4354,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 6579920300872198591, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6579920300872198591, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4345,6 +4393,14 @@ PrefabInstance:
       propertyPath: Max3ChargeImages.Array.data[3]
       value: 
       objectReference: {fileID: 21300000, guid: 36d0a90fdf10bbf4da1a65c0fbc261bf, type: 3}
+    - target: {fileID: 7440638273775013835, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7441630680358535936, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
+      propertyPath: m_fontStyle
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 8551475586069640875, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
       propertyPath: SkillHotKey
       value: 

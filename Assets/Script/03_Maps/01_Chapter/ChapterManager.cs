@@ -38,6 +38,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
 
     public void SetTutorialComplete()
     {
+        // TODO: 저장되어야 함.
         tutorialCompleted = true;
     }
 
@@ -135,6 +136,9 @@ public class ChapterManager : SingletonObject<ChapterManager>
     {
         switch (currentChapterName)
         {
+            case ChapterName.Tutorial:
+                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter1BGM);
+                break;
             case ChapterName.Ch1:
                 SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter1BGM);
                 break;

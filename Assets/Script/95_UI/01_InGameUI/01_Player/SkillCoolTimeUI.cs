@@ -131,19 +131,19 @@ public class SkillCoolTimeUI : MonoBehaviour
         switch (skillName)
         {
             case SkillName.Attack:
-                SkillHotKey.text = ScriptPool.KeyCodeText[KeySetting.keys[PlayerAction.Attack]];
+                SkillHotKey.text = ScriptPool.KeyCodeText[KeySetting.GetKey(PlayerAction.Attack)];
                 break;
             case SkillName.Mark:
-                SkillHotKey.text = ScriptPool.KeyCodeText[KeySetting.keys[PlayerAction.Mark_Dash]];
+                SkillHotKey.text = ScriptPool.KeyCodeText[KeySetting.GetKey(PlayerAction.Mark_Dash)];
                 break;
             case SkillName.Dash:
-                SkillHotKey.text = ScriptPool.KeyCodeText[KeySetting.keys[PlayerAction.Mark_Dash]];
+                SkillHotKey.text = ScriptPool.KeyCodeText[KeySetting.GetKey(PlayerAction.Mark_Dash)];
                 break;
             case SkillName.Skill1:
-                SkillHotKey.text = ScriptPool.KeyCodeText[KeySetting.keys[PlayerAction.Skill1]];
+                SkillHotKey.text = ScriptPool.KeyCodeText[KeySetting.GetKey(PlayerAction.Skill1)];
                 break;
             case SkillName.Skill2:
-                SkillHotKey.text = ScriptPool.KeyCodeText[KeySetting.keys[PlayerAction.Skill2]];
+                SkillHotKey.text = ScriptPool.KeyCodeText[KeySetting.GetKey(PlayerAction.Skill2)];
                 break;
         }
     }

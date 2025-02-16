@@ -10,24 +10,25 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
     public Sprite LowerPartMapImage;
     public Sprite LowerPartBossMapImage;
 
-    public void TurnOnSystemMassageUI(SystemMessageType systemMessageType)
+    public FadeInEffect LowerPartBossMapAnimation;
+
+    public void TurnOnSystemMassageUI(SystemMessageType systemMessageType, float displayDuration = 2.0f, bool isStayWhenPause = false)
     {
         string message = ScriptPool.SystemMassageDictionary[systemMessageType][GameManager.Instance.Language];
         systemMessagePopup.SetMessageText(message);
-        systemMessagePopup.TurnOnPopup();
+        systemMessagePopup.TurnOnPopup(displayDuration, isStayWhenPause);
     }
 
-    public void TurnOnTutorialMassageUI(PlayerAction playerAction)
+    public void TurnOnTutorialMassageUI(PlayerAction playerAction, bool isStayWhenPause)
     {
         string message = ScriptPool.TutorialText[playerAction][GameManager.Instance.Language];
         systemMessagePopup.SetMessageText(message);
-        systemMessagePopup.TurnOnPopup();
+        systemMessagePopup.TurnOnPopup(displayDuration: 4.0f, isStayWhenPause);
     }
 
     public void TurnOnMapTitleMassageUI(SceneName sceneName)
     {
-        //string message = sceneName.ToString();
-        //MapTitleMessagePopup.SetMessageText(message);
+        bool isExist = true;
         switch (sceneName)
         {
             case SceneName.Title:
@@ -42,13 +43,21 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
             case SceneName.Ch2BossStage:
                 mapTitleMessagePopup.SetBackgroundImage(LowerPartBossMapImage);
                 break;
+            default:
+                isExist = false;
+                break;
         }
-        mapTitleMessagePopup.TurnOnPopup();
+        if (isExist) mapTitleMessagePopup.TurnOnPopup();
     }
 
     public IEnumerator TriggerTurnOnMapTitleMassage(SceneName sceneName)
     {
         yield return new WaitForSeconds(0f);
         TurnOnMapTitleMassageUI(sceneName);
+    }
+
+    public void TurnOnBossMapTitle()
+    {
+        LowerPartBossMapAnimation.gameObject.SetActive(true);
     }
 }

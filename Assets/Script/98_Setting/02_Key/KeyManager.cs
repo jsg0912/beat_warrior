@@ -3,7 +3,43 @@ using UnityEngine;
 
 public static class KeySetting
 {
-    public static Dictionary<PlayerAction, KeyCode> keys = new Dictionary<PlayerAction, KeyCode>();
+    private static Dictionary<PlayerAction, KeyCode> keys = new Dictionary<PlayerAction, KeyCode>();
+
+    public static KeyCode GetKey(PlayerAction action)
+    {
+        if (keys.ContainsKey(action))
+        {
+            return keys[action];
+        }
+        switch (action)
+        {
+            case PlayerAction.Tutorial_Dash:
+                return GetKey(PlayerAction.Mark_Dash);
+            case PlayerAction.Tutorial_Mark:
+                return GetKey(PlayerAction.Mark_Dash);
+            case PlayerAction.Tutorial_SkillReset:
+                return GetKey(PlayerAction.Interaction);
+            case PlayerAction.Tutorial_Altar:
+                return GetKey(PlayerAction.Interaction);
+            case PlayerAction.Tutorial_Portal:
+                return GetKey(PlayerAction.Interaction);
+            default:
+                Debug.LogError("Key for " + action + " is not set.");
+                return KeyCode.None;
+        }
+    }
+
+    public static void SetKey(PlayerAction action, KeyCode key)
+    {
+        if (keys.ContainsKey(action))
+        {
+            keys[action] = key;
+        }
+        else
+        {
+            keys.Add(action, key);
+        }
+    }
 }
 
 public class KeyManager : SingletonObject<KeyManager>
@@ -18,8 +54,7 @@ public class KeyManager : SingletonObject<KeyManager>
         base.Awake();
         for (int i = 0; i < defaultKeys.Length; i++)
         {
-            if (!KeySetting.keys.ContainsKey((PlayerAction)i))
-                KeySetting.keys.Add((PlayerAction)i, defaultKeys[i]);
+            KeySetting.SetKey((PlayerAction)i, defaultKeys[i]);
         }
     }
 

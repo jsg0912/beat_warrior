@@ -7,4 +7,5 @@ public enum MonsterName
     Giljjugi,
     Itmomi,
     Ch2Boss,
+    TutorialIppali
 }
