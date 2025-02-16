@@ -390,12 +390,27 @@ public class Player : DirectionalGameObject
             yield return null;
         }
 
-        if (passWall == true) transform.position = end;
+        if (passWall == true)
+        {
+            transform.position = end;
+            if (IsWallAtPosition(GetMiddlePos())) transform.position -= new Vector3(DistanceToWall(GetMiddlePos(), (int)dir), 0, 0);
+        }
 
         _animator.SetBool(PlayerConstant.dashEndAnimBool, true);
         SetGravityScale(true);
         SetInvincibility(false);
         if (changeDir == true) SetMovingDirection((Direction)(-1 * (int)dir));
+    }
+
+    private bool IsWallAtPosition(Vector2 position)
+    {
+        return Physics2D.OverlapCircle(position, GetSize().x / 2, LayerMask.GetMask(LayerConstant.Tile));
+    }
+
+    private float DistanceToWall(Vector3 pos, float dir)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(pos, -Vector3.right * dir, GetSize().x, LayerMask.GetMask(LayerConstant.Tile));
+        return hit.point.x - pos.x;
     }
 
     public Vector3 GetSize() { return Util.GetSizeBoxCollider2D(_collider); }
