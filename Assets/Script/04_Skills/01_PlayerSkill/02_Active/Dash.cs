@@ -102,7 +102,7 @@ public class Dash : ActiveSkillPlayer
                 {
                     obj.GetComponentInChildren<MonsterBodyCollider>().monster.AttackedByPlayer(damageMultiplier * Player.Instance.GetFinalStat(StatKind.ATK));
                 }
-                obj.GetComponent<MonsterBodyCollider>().monster.AttackedByPlayer(damageMultiplier * Player.Instance.GetFinalStat(StatKind.ATK));
+                else obj.GetComponent<MonsterBodyCollider>().monster.AttackedByPlayer(damageMultiplier * Player.Instance.GetFinalStat(StatKind.ATK));
             }
         }
 
