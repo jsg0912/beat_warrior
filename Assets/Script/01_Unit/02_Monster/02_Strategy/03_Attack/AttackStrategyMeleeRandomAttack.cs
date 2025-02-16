@@ -11,6 +11,14 @@ public class AttackStrategyMeleeRandomAttack : AttackStrategy
         this.attackColliders = attackColliders;
     }
 
+    public AttackStrategyMeleeRandomAttack(string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger,
+    List<BossTentacle> attackColliders = null) : base(monsterAnimTrigger)
+    {
+
+        attackColliders.ForEach(attackCollider => this.attackColliders.Add(attackCollider));
+    }
+
+
     public override void AttackStart()
     {
         attackCollider = attackColliders[Random.Range(0, attackColliders.Count)];

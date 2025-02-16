@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : Monster
+public class BossGergus : Monster
 {
-    [SerializeField] List<BossTentacle> tentaclesVertical;
-    [SerializeField] List<BossTentacle> tentaclesHorizontal;
-    [SerializeField] List<BossTentacle> tentaclesCrash;
+    [SerializeField] public List<BossTentacle> tentaclesVertical;
+    [SerializeField] public List<BossTentacle> tentaclesHorizontal;
+    [SerializeField] public List<BossTentacle> tentaclesCrash;
 
     protected override void Start()
     {
