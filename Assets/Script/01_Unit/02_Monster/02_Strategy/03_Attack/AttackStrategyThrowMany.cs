@@ -9,7 +9,7 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
     protected int throwCountCurrent;
     protected float targetPosOffset = 2.0f;
 
-    public AttackStrategyThrowMany(float throwSpeed, float maxHeight, int throwCountMax, float throwInterval, PoolTag poolTag) : base(throwSpeed, maxHeight)
+    public AttackStrategyThrowMany(float throwSpeed, float maxHeight, int throwCountMax, float throwInterval, PoolTag poolTag, string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger) : base(throwSpeed, maxHeight, monsterAnimTrigger)
     {
         this.throwCountMax = throwCountMax;
         this.throwInterval = throwInterval;
@@ -33,6 +33,7 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
 
     private IEnumerator ThrowMany()
     {
+        DebugConsole.Log("ThrowMany");
         yield return new WaitForSeconds(BossConstantCh2.ThrowAnimationDelay);
         while (throwCountCurrent < throwCountMax)
         {

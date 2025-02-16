@@ -13,7 +13,7 @@ public class CommandManager : SingletonObject<CommandManager>
     void Update()
     {
         bool isInGame = GameManager.Instance.isInGame;
-        bool isCommandAble = !GameManager.Instance.IsLoading;
+        bool isCommandAble = !GameManager.Instance.IsLoading && !SystemMessageUIManager.Instance.isTimeLinePlaying;
 
         if (isCommandAble)
         {

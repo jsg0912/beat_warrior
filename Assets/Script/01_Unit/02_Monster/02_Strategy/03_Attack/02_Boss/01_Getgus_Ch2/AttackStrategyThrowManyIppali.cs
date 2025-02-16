@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AttackStrategyThrowManyIppali : AttackStrategyThrowMany
 {
-    public AttackStrategyThrowManyIppali(float throwSpeed, float maxHeight, int throwCountMax, float throwInterval, PoolTag poolTag) : base(throwSpeed, maxHeight, throwCountMax, throwInterval, poolTag)
+    public AttackStrategyThrowManyIppali(float throwSpeed, float maxHeight, int throwCountMax, float throwInterval, PoolTag poolTag, string animTrigger) : base(throwSpeed, maxHeight, throwCountMax, throwInterval, poolTag, animTrigger)
     {
         this.throwCountMax = throwCountMax;
         this.throwInterval = throwInterval;

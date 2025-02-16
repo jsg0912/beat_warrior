@@ -7,7 +7,7 @@ public class AttackStrategyThrow : AttackStrategyCreate
     private float gravity = Physics2D.gravity.y;
     protected Vector3 targetPosition;
 
-    public AttackStrategyThrow(float throwSpeed, float maxHeight)
+    public AttackStrategyThrow(float throwSpeed, float maxHeight, string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger) : base(monsterAnimTrigger)
     {
         this.throwSpeed = throwSpeed;
         this.maxHeight = maxHeight;

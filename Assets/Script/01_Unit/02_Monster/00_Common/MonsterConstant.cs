@@ -41,7 +41,8 @@ public class MonsterConstant
         { MonsterName.Koppulso, 10.0f },
         { MonsterName.Dulduli, 7.0f },
         { MonsterName.Giljjugi, 7.0f },
-        { MonsterName.Itmomi, 10.0f }
+        { MonsterName.Itmomi, 10.0f },
+        { MonsterName.Gergus, 1000.0f }
     };
 
     public static Dictionary<MonsterName, float> AttackRange = new() {
@@ -50,7 +51,8 @@ public class MonsterConstant
         { MonsterName.Koppulso, 10.0f },
         { MonsterName.Dulduli, 7.0f },
         { MonsterName.Giljjugi, 6.0f },
-        { MonsterName.Itmomi, 9.0f }
+        { MonsterName.Itmomi, 9.0f },
+        { MonsterName.Gergus, 1000.0f }
     };
 
     private static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
@@ -59,7 +61,8 @@ public class MonsterConstant
         { MonsterName.Koppulso, 1.6f },
         { MonsterName.Dulduli, 0.4f },
         { MonsterName.Giljjugi, 0.7f },
-        { MonsterName.Itmomi, 0f }
+        { MonsterName.Itmomi, 0f },
+        { MonsterName.Gergus, 0.0f }
     };
 
     public static Dictionary<MonsterName, float> MoveSpeed = new() {
@@ -69,6 +72,7 @@ public class MonsterConstant
         { MonsterName.Dulduli, moveSpeed * MoveSpeedRatio[MonsterName.Dulduli] },
         { MonsterName.Giljjugi, moveSpeed * MoveSpeedRatio[MonsterName.Giljjugi] },
         { MonsterName.Itmomi, moveSpeed * MoveSpeedRatio[MonsterName.Itmomi] },
+        { MonsterName.Gergus, moveSpeed * MoveSpeedRatio[MonsterName.Gergus] },
     };
 
     public static Dictionary<MonsterName, float> AttackCoolTime = new() {

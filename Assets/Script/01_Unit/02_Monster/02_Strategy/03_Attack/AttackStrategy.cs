@@ -21,8 +21,8 @@ public abstract class AttackStrategy : Strategy
         base.Initialize(monster);
         monoBehaviour = monster.GetComponent<MonoBehaviour>();
 
-        if (monster.monsterName == MonsterName.Gergus) return;
         attackRange = MonsterConstant.AttackRange[monster.monsterName];
+        if (monster.monsterName == MonsterName.Gergus) return;
         attackCoolTimeMax = MonsterConstant.AttackCoolTime[monster.monsterName];
         attackCoolTime = 0;
     }
@@ -37,6 +37,10 @@ public abstract class AttackStrategy : Strategy
     // Attack을 시도해서 가능한 상황이면, AttackCharge Animation을 시작하고, AnimatorController에서 그 후 처리를 시작함.
     protected virtual bool TryAttack()
     {
+        DebugConsole.Log($"TryAttack {monster.monsterName}");
+
+        DebugConsole.Log($"TryAttack attackCoolTime:  {attackCoolTime}");
+        DebugConsole.Log($"TryAttack IsInAttackRange: {IsInAttackRange()}");
         if (attackCoolTime > 0 || !IsInAttackRange()) return false;
 
         SetAttackDirection();
@@ -79,5 +83,8 @@ public abstract class AttackStrategy : Strategy
     }
     public void UpdateCoolTime() { if (attackCoolTime > 0 && !monster.GetIsAttacking()) attackCoolTime -= Time.deltaTime; }
     public void SetMaxAttackCoolTime() { attackCoolTime = attackCoolTimeMax; }
-    protected virtual bool IsInAttackRange() { return Vector2.Distance(GetPlayerPos(), GetMonsterPos()) < attackRange; }
+    protected virtual bool IsInAttackRange()
+    {
+        return Vector2.Distance(GetPlayerPos(), GetMonsterPos()) < attackRange;
+    }
 }

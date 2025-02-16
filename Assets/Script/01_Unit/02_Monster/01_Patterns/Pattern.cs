@@ -22,6 +22,7 @@ public abstract class Pattern
     // It called at every Update.
     public virtual void PlayPattern()
     {
+        if (SystemMessageUIManager.Instance.isTimeLinePlaying) return;
         // 필수 실행
         Attack?.UpdateCoolTime();
         Recognize?.PlayStrategy();
