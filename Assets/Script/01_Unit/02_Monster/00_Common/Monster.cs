@@ -79,6 +79,11 @@ public class Monster : DirectionalGameObject
         }
     }
 
+    public void SetAnimationFloat(string trigger, float value)
+    {
+        _animator.SetFloat(trigger, value);
+    }
+
     public void PlayAnimation(string trigger)
     {
         if (isFixedAnimation) return;
