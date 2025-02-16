@@ -4,14 +4,15 @@ using UnityEngine;
 public class AttackStrategyThrowMany : AttackStrategyThrow
 {
     PoolTag poolTag;
-    private int throwCount;
     private float throwInterval;
     private int throwCountMax;
     private int throwCountCurrent;
 
-    public AttackStrategyThrowMany(float throwSpeed, float maxHeight, int throwCount, float throwInterval, PoolTag poolTag) : base(throwSpeed, maxHeight)
+    private int throwCount;
+
+    public AttackStrategyThrowMany(float throwSpeed, float maxHeight, int throwCountMax, float throwInterval, PoolTag poolTag) : base(throwSpeed, maxHeight)
     {
-        this.throwCount = throwCount;
+        this.throwCountMax = throwCountMax;
         this.throwInterval = throwInterval;
         this.poolTag = poolTag;
     }
