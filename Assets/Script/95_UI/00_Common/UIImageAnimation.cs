@@ -29,7 +29,7 @@ public class UIImageAnimation : MonoBehaviour
 
     public IEnumerator AnimateSprite()
     {
-        
+        fadeInEffect.SetAlpha(1f);
         yield return new WaitForSecondsRealtime(1f);
         SoundManager.Instance.SFXPlay("chapter2BossMapTitle", SoundList.Instance.chapter2BossMapTitle);
         for (int i = 0; i < sprites.Length; i++) 
