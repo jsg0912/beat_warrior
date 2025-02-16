@@ -3,6 +3,7 @@ using UnityEngine;
 public class UIManager : SingletonObject<UIManager>
 {
     public GameObject inGameUIPrefab;
+    private GameObject minimap = null;
 
     public void TurnOnAltarPopup()
     {
@@ -12,6 +13,7 @@ public class UIManager : SingletonObject<UIManager>
     public void SetInGameUIActive()
     {
         Util.SetActive(inGameUIPrefab, GameManager.Instance.isInGame);
+        minimap = MiniMap.Instance.gameObject;
     }
 
     public void SetActiveSettingPopup(bool isActive)
@@ -28,5 +30,15 @@ public class UIManager : SingletonObject<UIManager>
     public void TurnOffBlur()
     {
         BlurUIManager.Instance.TurnOffActiveBlur();
+    }
+
+    public void TurnOnMiniMap()
+    {
+        minimap.SetActive(true);
+    }
+    
+    public void TurnOffMiniMap()
+    {
+        minimap.SetActive(false);
     }
 }
