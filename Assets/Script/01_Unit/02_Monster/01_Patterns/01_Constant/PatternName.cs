@@ -8,5 +8,8 @@ public enum PatternName
     Dulduli,
     Giljjugi,
     Itmomi,
+    // Boss
     Ch2Boss,
+    //NPC
+    PriestGirl,
 }

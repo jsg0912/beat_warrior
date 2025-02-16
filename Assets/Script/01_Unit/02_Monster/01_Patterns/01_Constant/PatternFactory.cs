@@ -22,6 +22,8 @@ public static class PatternFactory
                 return new PatternGiljjugi();
             case PatternName.Ch2Boss:
                 return new PatternCh2Boss();
+            case PatternName.PriestGirl:
+                return new PatternNPCPriestGirl();
         }
 
         throw new System.Exception($"{patternName} is not exist");
