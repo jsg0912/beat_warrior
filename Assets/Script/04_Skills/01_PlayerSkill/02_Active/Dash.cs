@@ -98,7 +98,11 @@ public class Dash : ActiveSkillPlayer
         {
             if (obj.layer == LayerMask.NameToLayer(LayerConstant.Monster))
             {
-                obj.GetComponent<MonsterBodyCollider>().monster.AttackedByPlayer(damageMultiplier * Player.Instance.GetFinalStat(StatKind.ATK));
+                if (obj.GetComponent<MonsterBodyCollider>() == null)
+                {
+                    obj.GetComponentInChildren<MonsterBodyCollider>().monster.AttackedByPlayer(damageMultiplier * Player.Instance.GetFinalStat(StatKind.ATK));
+                }
+                else obj.GetComponent<MonsterBodyCollider>().monster.AttackedByPlayer(damageMultiplier * Player.Instance.GetFinalStat(StatKind.ATK));
             }
         }
 
