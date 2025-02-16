@@ -6,6 +6,6 @@ public enum MonsterName
     Dulduli,
     Giljjugi,
     Itmomi,
-    Ch2Boss,
+    Gergus,
     TutorialIppali
 }

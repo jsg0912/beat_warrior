@@ -31,19 +31,19 @@ public class AttackStrategyThrow : AttackStrategyCreate
         monsterAttackCollider.rb.velocity = GetVelocityConstantFlyTime(distance);
     }
 
-    private Vector3 GetVelocityConstantFlyTime(float distance)
+    protected Vector3 GetVelocityConstantFlyTime(float distance)
     {
         float time = Mathf.Sqrt(2 * maxHeight / -gravity);
         return new Vector3(distance / time, -gravity * time / 2, 0);
     }
 
-    private Vector3 GetVelocityConstantXSpeed(float distance)
+    protected Vector3 GetVelocityConstantXSpeed(float distance)
     {
         float time = distance / throwSpeed;
         return new Vector3(throwSpeed, -gravity * time / 2, 0);
     }
 
-    private Vector3 GetVelocityConstantAmplitude(float distance)
+    protected Vector3 GetVelocityConstantAmplitude(float distance)
     {
         // 포물선 운동 시간 공식
         float value = -gravity * distance / (throwSpeed * throwSpeed);
@@ -54,5 +54,4 @@ public class AttackStrategyThrow : AttackStrategyCreate
 
         return new Vector3(throwSpeed * cosTheta * monster.GetRelativePlayerDirectionFloat(), throwSpeed * sinTheta, 0);
     }
-
 }
