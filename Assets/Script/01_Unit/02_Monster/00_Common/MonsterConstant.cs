@@ -87,14 +87,15 @@ public class MonsterConstant
         { MonsterName.Koppulso, true },
         { MonsterName.Dulduli, true },
         { MonsterName.Giljjugi, false },
-        { MonsterName.Itmomi, false }
+        { MonsterName.Itmomi, false },
+        { MonsterName.Gergus, false }
     };
 
     public static List<MonsterName> NotKnockBackAbleWhenAttacking = new(){
-        MonsterName.Giljjugi, MonsterName.Koppulso, MonsterName.Dulduli
+        MonsterName.Giljjugi, MonsterName.Koppulso, MonsterName.Dulduli, MonsterName.Gergus,
     };
 
     public static List<MonsterName> FixedAnimationWhenAttacking = new(){
-        MonsterName.Giljjugi, MonsterName.Koppulso, MonsterName.Dulduli
+        MonsterName.Giljjugi, MonsterName.Koppulso, MonsterName.Dulduli, MonsterName.Gergus,
     };
 }
