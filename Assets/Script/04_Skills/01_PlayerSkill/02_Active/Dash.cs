@@ -98,6 +98,7 @@ public class Dash : ActiveSkillPlayer
         {
             if (obj.layer == LayerMask.NameToLayer(LayerConstant.Monster))
             {
+                // TODO: 임시수정
                 if (obj.GetComponent<MonsterBodyCollider>() == null)
                 {
                     obj.GetComponentInChildren<MonsterBodyCollider>().monster.AttackedByPlayer(damageMultiplier * Player.Instance.GetFinalStat(StatKind.ATK));
