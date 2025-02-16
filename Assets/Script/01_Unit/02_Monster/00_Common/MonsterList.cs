@@ -69,7 +69,7 @@ public static class MonsterList
         new MonsterJSON(MonsterName.Gergus,
         "황혼의 촉수 빨판이",
         new Dictionary<StatKind, int>{
-            {StatKind.HP, 10},
+            {StatKind.HP, 50},
             {StatKind.ATK, 1},
             {StatKind.Def, 0},
         },
