@@ -9,7 +9,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
     private Chapter currentChapter;
     private StageController CurrentStage => currentChapter.stages[currentStageIndex];
     private int currentStageIndex;
-    private bool tutorialCompleted = true;
+    private bool tutorialCompleted = false;
     private bool IsCurrentStageCompleted => CurrentStage.Cleared;
     private ChapterName currentChapterName => currentChapter.name;
 
