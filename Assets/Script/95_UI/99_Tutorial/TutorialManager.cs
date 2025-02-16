@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,7 +12,6 @@ public class TutorialManager : SingletonObject<TutorialManager>
         {PlayerAction.Down, false},
         {PlayerAction.Tutorial_Mark, false},
         {PlayerAction.Tutorial_Dash, false},
-        {PlayerAction.Tutorial_Portal, false},
     };
 
     //TODO: 시간 없어서 아래처럼 함

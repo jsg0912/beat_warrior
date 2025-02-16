@@ -38,6 +38,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
 
     public void SetTutorialComplete()
     {
+        // TODO: 저장되어야 함.
         tutorialCompleted = true;
     }
 
