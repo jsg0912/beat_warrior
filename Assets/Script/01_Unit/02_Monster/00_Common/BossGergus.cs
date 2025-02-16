@@ -23,12 +23,15 @@ public class BossGergus : Monster
 
     public override void PlayScarEffect()
     {
-        // Boss의 Collider 내부의 점들 중에서 Player의 현재 위치와 가장 가까운 점을 찾아 Scar Effect를 옮겨서 켠다.
         Vector3 playerPos = Player.Instance.GetMiddlePos();
-        Vector3 bossPos = GetMiddlePos();
-        Vector3 bossColliderPos = attackCollider.transform.position;
+        Collider2D bossCollider = monsterBodyCollider.GetCollider(); // it can be boxCollider2D or polygonCollider2D
 
+        Vector3 closetPoint = bossCollider.ClosestPoint(playerPos);
 
-
+        foreach (GameObject hitEffect in hitEffects)
+        {
+            hitEffect.transform.position = closetPoint;
+            StartCoroutine(Util.PlayInstantEffect(hitEffect, 0.3f));
+        }
     }
 }
