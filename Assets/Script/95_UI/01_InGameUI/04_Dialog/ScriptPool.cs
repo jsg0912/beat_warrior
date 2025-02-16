@@ -1,4 +1,4 @@
-﻿// UI에서 언어 설정에 따라 보이는 글씨의 내용을 적는 곳 - 신동환, 2024.08
+// UI에서 언어 설정에 따라 보이는 글씨의 내용을 적는 곳 - 신동환, 2024.08
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -311,31 +311,35 @@ public static class ScriptPool
     public static Dictionary<PlayerAction, Dictionary<Language, string>> TutorialText = new()
     {
         {PlayerAction.Attack, new () {
-            { Language.kr, "한국어" },
+            { Language.kr, "스페이스바를 눌러 상대를 공격하고 넉백할 수 있습니다." },
             { Language.en, "English" }
         }},
         {PlayerAction.Skill1, new () {
-            { Language.kr, "한국어" },
+            { Language.kr, "Q키를 눌러 바로 앞에 적을 베어 피해를 줍니다." },
             { Language.en, "English" }
         }},
         {PlayerAction.Skill2, new () {
-            { Language.kr, "한국어" },
+            { Language.kr, "E키를 눌러 돌진하여 경로상의 모든 적에게 피해를 줍니다." },
             { Language.en, "English" }
         }},
         {PlayerAction.Jump, new () {
-            { Language.kr, "한국어" },
+            { Language.kr, "W키를 눌러 위로 점프할 수 있습니다." },
             { Language.en, "English" }
         }},
         {PlayerAction.Tutorial_Mark, new () {
-            { Language.kr, "한국어" },
+            { Language.kr, "마우스 우클릭을 눌러 표식을 발사합니다. 표식 대상을 처치하면 쿨타임을 초기화합니다." },
             { Language.en, "English" }
         }},
         {PlayerAction.Tutorial_Dash, new () {
-            { Language.kr, "한국어" },
+            { Language.kr, "마우스 우클릭을 다시 눌러 표식을 적중한 대상에게 돌진합니다. 돌진하는 경로에 있는 모든 적을 공격합니다." },
             { Language.en, "English" }
         }},
-        {PlayerAction.Interaction, new () {
-            { Language.kr, "한국어" },
+        {PlayerAction.Tutorial_Altar, new () {
+            { Language.kr, "F키를 눌러 제단을 활성화 합니다. 제단에서는 몬스터를 처치하여 얻은 영혼들을 사용하여 원하는 특성을 활성화하고 사용합니다." },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Tutorial_Portal, new () {
+            { Language.kr, "F키를 눌러 다음 스테이지로 이동합니다. 다음 스테이지로 이동하기 전 휴식을 취하며 플레이어의 모든 체력을 회복시킵니다." },
             { Language.en, "English" }
         }},
     };
