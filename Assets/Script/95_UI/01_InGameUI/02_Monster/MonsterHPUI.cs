@@ -4,12 +4,17 @@ using UnityEngine;
 public class MonsterHPUI : MonoBehaviour
 {
     [SerializeField] Transform hpTransform;
-    [SerializeField] TextMeshPro hpText;
+    [SerializeField] protected TextMeshPro hpText;
     private float scaleX;
+
+    protected virtual void SetText(int hp, int hpMax)
+    {
+        hpText.text = hp.ToString();
+    }
 
     public void SetMaxHP(int hpMax)
     {
-        hpText.text = hpMax.ToString();
+        SetText(hpMax, hpMax);
         scaleX = hpTransform.localScale.x;
     }
 
@@ -18,7 +23,7 @@ public class MonsterHPUI : MonoBehaviour
         if (this == null) return;
         if (hp == 0) Destroy(this.gameObject);
 
-        hpText.text = hp.ToString();
+        SetText(hp, hpMax);
         hpTransform.localScale = new Vector3(scaleX * (float)hp / hpMax, hpTransform.localScale.y, 1.0f);
     }
 }

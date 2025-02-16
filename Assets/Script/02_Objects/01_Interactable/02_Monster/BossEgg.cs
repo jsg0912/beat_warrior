@@ -4,6 +4,7 @@ public class BossEgg : MonoBehaviour
 {
     [SerializeField] GameObject monster;
     [SerializeField] Animator animator;
+    public Rigidbody2D rb;
 
     public void SummonMonster()
     {

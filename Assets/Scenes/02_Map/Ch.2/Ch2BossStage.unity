@@ -1076,8 +1076,9 @@ GameObject:
   m_Component:
   - component: {fileID: 165180457}
   - component: {fileID: 165180456}
+  - component: {fileID: 165180458}
   m_Layer: 0
-  m_Name: BossHp0_1@2x
+  m_Name: BossHpUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1153,6 +1154,20 @@ Transform:
   - {fileID: 180614625}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &165180458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165180455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca80747acd73680418ccf2ba4bba1add, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpTransform: {fileID: 776633899}
+  hpText: {fileID: 979540824}
 --- !u!1001 &172819172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10461,6 +10476,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5655850740774170441, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
+      propertyPath: HpUI
+      value: 
+      objectReference: {fileID: 165180458}
+    - target: {fileID: 5655850740774170441, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
       propertyPath: tentaclesCrash.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -10547,10 +10566,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6247073068693189145, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
 --- !u!1 &1457717334
 GameObject:

@@ -51,7 +51,8 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
 
             float distance = targetPosition.x - GetMonsterFrontPos().x;
 
-            if (monsterAttackCollider.rb != null) monsterAttackCollider.rb.velocity = GetVelocityConstantFlyTime(distance);
+            if (monsterAttackCollider != null) monsterAttackCollider.rb.velocity = GetVelocityConstantFlyTime(distance);
+            else obj.GetComponent<BossEgg>().rb.velocity = GetVelocityConstantFlyTime(distance);
             throwCountCurrent++;
         }
     }

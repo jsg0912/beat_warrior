@@ -1,23 +1,7 @@
 using System.Collections;
 using UnityEngine;
-public class SystemMessageUIManager : MonoBehaviour
+public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
 {
-    private static SystemMessageUIManager instance;
-
-    public static SystemMessageUIManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                GameObject singletonObject = new GameObject("GameManager");
-                instance = singletonObject.AddComponent<SystemMessageUIManager>(); 
-                DontDestroyOnLoad(singletonObject);
-            }
-            return instance;
-        }
-    }
-
     public SystemMessagePopup systemMessagePopup;
     public SystemMessagePopup mapTitleMessagePopup;
 
