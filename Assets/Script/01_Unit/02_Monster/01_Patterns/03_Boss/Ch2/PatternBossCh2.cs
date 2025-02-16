@@ -22,7 +22,6 @@ public class PatternCh2Boss : PatternBoss
 
     override public void Initialize(Monster monster)
     {
-        DebugConsole.Log("PatternCh2Boss Initialize");
         bossGergus = monster as BossGergus;
 
         attackStrategyRightHook = new AttackStrategyMelee(BossConstantCh2.AttackAnimTriggerRightHook);
@@ -30,7 +29,7 @@ public class PatternCh2Boss : PatternBoss
         attackStrategyFullSwing = new AttackStrategyMelee(BossConstantCh2.AttackAnimTriggerFullSwing);
 
         attackStrategyLeftTripleCombo = new AttackStrategyMelee(BossConstantCh2.AttackAnimTriggerLeftTripleCombo);
-        attackStrategyRightTripleCombo = new AttackStrategyMelee(BossConstantCh2.AttackAnimTriggerRightHook);
+        attackStrategyRightTripleCombo = new AttackStrategyMelee(BossConstantCh2.AttackAnimTriggerRightTripleCombo);
 
         attackStrategyRange = new AttackStrategyThrowMany(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.EnergyBallSpawnNumber, BossConstantCh2.SpawnInterval, PoolTag.GergusThrow, BossConstantCh2.AttackAnimTriggerIppaliSpawn);
         attackStrategyRangeMad = new AttackStrategyThrowMany(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.EnergyBallSpawnNumberMad, BossConstantCh2.SpawnInterval, PoolTag.GergusThrow, BossConstantCh2.AttackAnimTriggerIppaliSpawn);
@@ -71,7 +70,8 @@ public class PatternCh2Boss : PatternBoss
             if (monster.GetCurrentHP() <= monster.GetFinalStat(StatKind.HP) * BossConstantCh2.Phase2Threshold)
             {
                 ChangePhase(PatternPhase.Phase2);
-
+                bossGergus.PlayAnimation(BossConstantCh2.StandAnimTrigger);
+                bossGergus.SetAnimationFloat(BossConstantCh2.IsStandAnimBool, 1.0f);
             }
         }
     }
@@ -82,29 +82,24 @@ public class PatternCh2Boss : PatternBoss
         base.PlayPattern();
         if (!monster.GetIsAttacking() && !attackCoolTimer.Tick() && monster.GetIsAttackAble())
         {
-            DebugConsole.Log("i can attack 씨발아");
             if (attackCounter % BossConstantCh2.IppaliSpawnCycle == 0)
             {
-                DebugConsole.Log($"boss Attack ippali");
                 currentAttackStrategy = attackStrategySpawnIppali;
                 attackStrategySpawnIppali.PlayStrategy();
                 bossGergus.SetStatus(MonsterStatus.Attack);
             }
             else
             {
-                DebugConsole.Log($"boss Attack random");
                 currentAttackStrategy = RandomSystem.GetRandom(attackStrategies[currentPhase]);
                 currentAttackStrategy.PlayStrategy();
                 bossGergus.SetStatus(MonsterStatus.Attack);
             }
             attackCounter++;
-            DebugConsole.Log($"boss Attack {attackCounter}");
         }
     }
 
     public void ResetAttackCoolTimer()
     {
-        DebugConsole.Log("Reset CoolTime");
         attackCoolTimer.Initialize();
     }
 }
