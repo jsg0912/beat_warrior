@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2148411854989943231}
   - component: {fileID: 9083114808991776564}
-  - component: {fileID: 4920750692737937792}
+  - component: {fileID: 5655850740774170441}
   - component: {fileID: 2296474326589475115}
   - component: {fileID: 7716725584058300384}
   m_Layer: 7
@@ -57,7 +57,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4920750692737937792
+--- !u!114 &5655850740774170441
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,25 +66,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2529686815831883854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5833a4c1f2adea741ac0d28befbb471a, type: 3}
+  m_Script: {fileID: 11500000, guid: dfa267aa7c002bb43909f128516984b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movingDirection: 1
   objectDirection: 1
   spriteRenderer: {fileID: 5938675433907970453}
-  childDirectionalObjects:
-  - {fileID: 0}
+  childDirectionalObjects: []
   monsterName: 6
   _status: 0
   AnotherHPValue: 0
+  soulDropRate: 20
   HpUI: {fileID: 0}
   attackEffect: {fileID: 0}
   MarkedEffect: {fileID: 0}
-  hitEffects:
-  - {fileID: 0}
-  - {fileID: 0}
+  hitEffects: []
   attackCollider: {fileID: 0}
   monsterBodyCollider: {fileID: 4271014955822344814}
+  tentaclesVertical: []
+  tentaclesHorizontal: []
+  tentaclesCrash: []
 --- !u!50 &2296474326589475115
 Rigidbody2D:
   serializedVersion: 4
@@ -262,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581d4b387bf463f4d8b93c26b3983efa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monster: {fileID: 4920750692737937792}
+  monster: {fileID: 0}
   colliderObj: {fileID: 0}
 --- !u!114 &5431938697097428371
 MonoBehaviour:

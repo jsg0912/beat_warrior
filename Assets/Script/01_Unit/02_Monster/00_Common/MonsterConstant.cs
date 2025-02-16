@@ -74,6 +74,7 @@ public class MonsterConstant
     };
 
     public static Dictionary<MonsterName, bool> IsRepeatAttackAnimation = new() {
+        { MonsterName.TutorialIppali, false},
         { MonsterName.Ippali, false },
         { MonsterName.Ibkkugi, false },
         { MonsterName.Koppulso, true },

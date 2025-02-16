@@ -61,6 +61,8 @@ public class FadeManager : MonoBehaviour
     public IEnumerator StartFadeInWithSceneTitle()
     {
         yield return null;
+        // TODO: 여기서 이걸 하는게 맞는가?? - SDH, 20250216
+        Player.Instance?.RecoverHealthyStatus(); // Recover Player Healthy When Stage start newly
         StartCoroutine(FadeIn());
         StartCoroutine(SystemMessageUIManager.Instance.TriggerTurnOnMapTitleMassage(GameManager.Instance.currentScene));
     }
@@ -69,7 +71,4 @@ public class FadeManager : MonoBehaviour
     {
         StartCoroutine(StartFadeInWithSceneTitle());
     }
-
-
 }
-

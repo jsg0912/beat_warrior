@@ -6,8 +6,8 @@ public enum PromptType
 
 public static class PromptMessageGenerator
 {
-    public static string GeneratePromptMessage()
+    public static string GeneratePromptMessage(PlayerAction action)
     {
-        return $"Press [{KeySetting.keys[PlayerAction.Interaction]}]";
+        return $"Press [{ScriptPool.KeyCodeText[KeySetting.GetKey(action)]}]";
     }
 }

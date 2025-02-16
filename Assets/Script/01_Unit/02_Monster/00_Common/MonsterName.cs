@@ -1,5 +1,6 @@
 public enum MonsterName
 {
+    TutorialIppali,
     Ippali,
     Ibkkugi,
     Koppulso,

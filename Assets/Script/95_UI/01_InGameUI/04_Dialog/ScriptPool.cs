@@ -1,4 +1,4 @@
-﻿// UI에서 언어 설정에 따라 보이는 글씨의 내용을 적는 곳 - 신동환, 2024.08
+// UI에서 언어 설정에 따라 보이는 글씨의 내용을 적는 곳 - 신동환, 2024.08
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -306,5 +306,57 @@ public static class ScriptPool
         { KeyCode.KeypadPeriod, "KP."},
         { KeyCode.KeypadEquals, "KP="},
         { KeyCode.Comma, "KP," }
+    };
+
+    public static Dictionary<PlayerAction, Dictionary<Language, string>> TutorialText = new()
+    {
+        {PlayerAction.Left, new () {
+            { Language.kr, "A/D를 눌러 좌우로 이동할 수 있습니다" },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Right, new () {
+            { Language.kr, "A/D를 눌러 좌우로 이동할 수 있습니다" },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Attack, new () {
+            { Language.kr, "스페이스바를 눌러 상대를 공격하고 넉백할 수 있습니다." },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Skill1, new () {
+            { Language.kr, "Q키를 눌러 바로 앞에 적을 베어 피해를 줍니다." },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Skill2, new () {
+            { Language.kr, "E키를 눌러 돌진하여 경로상의 모든 적에게 피해를 줍니다." },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Jump, new () {
+            { Language.kr, "W키를 눌러 위로 점프할 수 있습니다." },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Down, new () {
+            { Language.kr, "S키를 눌러 위로 점프할 수 있습니다." },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Tutorial_Mark, new () {
+            { Language.kr, "마우스 우클릭을 눌러 표식을 발사합니다. 표식 대상을 처치하면 쿨타임을 초기화합니다." },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Tutorial_Dash, new () {
+            { Language.kr, "마우스 우클릭을 다시 눌러 표식을 적중한 대상에게 돌진합니다.\n 돌진하는 경로에 있는 모든 적을 공격합니다." },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Tutorial_SkillReset, new () {
+            { Language.kr, "표식이 새겨진 적을 없애면 스킬 쿨타임이 초기화 됩니다\n 이를 활용하여 효과적인 전투를 진행하세요" },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Tutorial_Altar, new () {
+            { Language.kr, "F키를 눌러 제단을 활성화 합니다.\n 제단에서는 몬스터를 처치하여 얻은 영혼들을 사용하여 원하는 특성을 활성화하고 사용합니다." },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Tutorial_Portal, new () {
+            { Language.kr, "F키를 눌러 다음 스테이지로 이동합니다.\n 다음 스테이지로 이동하기 전 휴식을 취하며 플레이어의 모든 체력을 회복시킵니다." },
+            { Language.en, "English" }
+        }},
     };
 }

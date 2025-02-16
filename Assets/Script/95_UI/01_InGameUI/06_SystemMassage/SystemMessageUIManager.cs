@@ -12,17 +12,23 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
 
     public FadeInEffect LowerPartBossMapAnimation;
 
-    public void TurnOnSystemMassageUI(SystemMessageType syetemMessageType)
+    public void TurnOnSystemMassageUI(SystemMessageType systemMessageType, bool isAffectedByDeltaTime = false)
     {
-        string message = ScriptPool.SystemMassageDictionary[syetemMessageType][GameManager.Instance.Language];
+        string message = ScriptPool.SystemMassageDictionary[systemMessageType][GameManager.Instance.Language];
         systemMessagePopup.SetMessageText(message);
-        systemMessagePopup.TurnOnPopup();
+        systemMessagePopup.TurnOnPopup(isAffectedByDeltaTime);
+    }
+
+    public void TurnOnTutorialMassageUI(PlayerAction playerAction)
+    {
+        string message = ScriptPool.TutorialText[playerAction][GameManager.Instance.Language];
+        systemMessagePopup.SetMessageText(message);
+        systemMessagePopup.TurnOnPopup(DisplayDuration: 5.0f);
     }
 
     public void TurnOnMapTitleMassageUI(SceneName sceneName)
     {
-        //string message = sceneName.ToString();
-        //MapTitleMessagePopup.SetMessageText(message);
+        bool isExist = true;
         switch (sceneName)
         {
             case SceneName.Title:
@@ -37,8 +43,11 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
             case SceneName.Ch2BossStage:
                 mapTitleMessagePopup.SetBackgroundImage(LowerPartBossMapImage);
                 break;
+            default:
+                isExist = false;
+                break;
         }
-        mapTitleMessagePopup.TurnOnPopup();
+        if (isExist) mapTitleMessagePopup.TurnOnPopup();
     }
 
     public IEnumerator TriggerTurnOnMapTitleMassage(SceneName sceneName)

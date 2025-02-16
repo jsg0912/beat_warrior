@@ -127,15 +127,22 @@ public class Player : DirectionalGameObject
     // SET Functions
     public void SetStatus(PlayerStatus status)
     {
-        this.status = status;
-        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
-
         switch (status)
         {
+            case PlayerStatus.Normal:
+                if (this.status == PlayerStatus.Rest)
+                {
+                    DebugConsole.Log("ansdianidsanmd");
+                    SetAnimTrigger(PlayerConstant.restartAnimTrigger);
+                }
+                break;
             case PlayerStatus.Dead:
                 SetAnimTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
+
+        this.status = status;
+        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
     }
 
     public void SetLastSkillColor(PlayerSkillEffectColor color)
@@ -229,13 +236,13 @@ public class Player : DirectionalGameObject
 
         bool isMove = false;
 
-        if (Input.GetKey(KeySetting.keys[PlayerAction.Right]))
+        if (Input.GetKey(KeySetting.GetKey(PlayerAction.Right)))
         {
             SetMovingDirection(Direction.Right);
             isMove = true;
         }
 
-        if (Input.GetKey(KeySetting.keys[PlayerAction.Left]))
+        if (Input.GetKey(KeySetting.GetKey(PlayerAction.Left)))
         {
             SetMovingDirection(Direction.Left);
             isMove = true;
@@ -267,6 +274,42 @@ public class Player : DirectionalGameObject
         }
         FixedSkillUpdate();
         CheckGround();
+    }
+
+    public void ForcePlayerAction(PlayerAction playerAction)
+    {
+        if (IsActionAble())
+        {
+            switch (playerAction)
+            {
+                case PlayerAction.Jump:
+                    TryJump();
+                    break;
+                case PlayerAction.Down:
+                    Down();
+                    break;
+                case PlayerAction.Skill1:
+                    ForceUseSkill<QSkill>(SkillName.Skill1);
+                    break;
+                case PlayerAction.Skill2:
+                    ForceUseSkill<ESkill>(SkillName.Skill2);
+                    break;
+                case PlayerAction.Attack:
+                    ForceUseSkill<Mark>(SkillName.Attack);
+                    break;
+                case PlayerAction.Tutorial_Mark:
+                    ForceUseSkill<Mark>(SkillName.Mark);
+                    break;
+                case PlayerAction.Tutorial_Dash:
+                    ForceUseSkill<Dash>(SkillName.Dash);
+                    break;
+            }
+        }
+    }
+
+    private void ForceUseSkill<T>(SkillName skillName) where T : ActiveSkillPlayer
+    {
+        (skillList.Find(skill => skill.skillName == SkillName.Attack) as T).CheckInputKeyCode(true);
     }
 
     private bool IsMoveable()
@@ -304,14 +347,14 @@ public class Player : DirectionalGameObject
 
     private void Down()
     {
-        if (!Input.GetKeyDown(KeySetting.keys[PlayerAction.Down])) return;
+        if (!Input.GetKeyDown(KeySetting.GetKey(PlayerAction.Down))) return;
         if (!isGround) return;
 
         if (tileLeft != null) colliderController.PassTile(tileLeft);
         if (tileRight != null && tileRight != tileLeft) colliderController.PassTile(tileRight);
     }
 
-    private void CheckGround()
+    public void CheckGround()
     {
         if (jumpOffsetTimer.remainTime > 0) return;
 
@@ -332,12 +375,12 @@ public class Player : DirectionalGameObject
         if (rayHitRight.collider != null) tileRight = rayHitRight.collider.GetComponent<BoxCollider2D>();
     }
 
-    private void TryJump()
+    public void TryJump()
     {
         jumpOffsetTimer.Tick();
         if (!IsActionAble() || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
 
-        if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Jump]))
+        if (Input.GetKeyDown(KeySetting.GetKey(PlayerAction.Jump)))
         {
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
             Jump();
