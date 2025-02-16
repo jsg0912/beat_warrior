@@ -10,18 +10,18 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
     public Sprite LowerPartMapImage;
     public Sprite LowerPartBossMapImage;
 
-    public void TurnOnSystemMassageUI(SystemMessageType systemMessageType, bool isAffectedByDeltaTime = false)
+    public void TurnOnSystemMassageUI(SystemMessageType systemMessageType, float displayDuration = 2.0f, bool isStayWhenPause = false)
     {
         string message = ScriptPool.SystemMassageDictionary[systemMessageType][GameManager.Instance.Language];
         systemMessagePopup.SetMessageText(message);
-        systemMessagePopup.TurnOnPopup(isAffectedByDeltaTime);
+        systemMessagePopup.TurnOnPopup(displayDuration, isStayWhenPause);
     }
 
-    public void TurnOnTutorialMassageUI(PlayerAction playerAction)
+    public void TurnOnTutorialMassageUI(PlayerAction playerAction, bool isStayWhenPause)
     {
         string message = ScriptPool.TutorialText[playerAction][GameManager.Instance.Language];
         systemMessagePopup.SetMessageText(message);
-        systemMessagePopup.TurnOnPopup(true, DisplayDuration: 5.0f);
+        systemMessagePopup.TurnOnPopup(displayDuration: 4.0f, isStayWhenPause);
     }
 
     public void TurnOnMapTitleMassageUI(SceneName sceneName)
