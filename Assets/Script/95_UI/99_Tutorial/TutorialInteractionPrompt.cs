@@ -34,7 +34,7 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
         {
             PauseController.Instance.TryPauseGame();
             // Blur 켜기
-            BlurUIManager.Instance.TurnOnActiveBlur(BlurType.BlackBlur);
+            BlurUIManager.Instance.TurnOnActiveBlur(BlurType.SystemMessageBlackBlur);
             // Key Input 받도록 설정
             TutorialManager.Instance.SetCurrentTutorialAction(tutorialAction);
             // 설명창 켜기

@@ -5,7 +5,9 @@ public enum BlurType
 {
     None,
     MarkSlow,
-    BlackBlur
+    SystemMessageBlackBlur,
+    MenuBlackBlur,
+    TopPopupBlackBlur,
 }
 
 [Serializable]
