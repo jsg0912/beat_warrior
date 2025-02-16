@@ -68,12 +68,11 @@ public class PatternCh2Boss : PatternBoss
         }
     }
 
-
     override public void PlayPattern()
     {
         base.PlayPattern();
         // 공격과정
-        if (!attackCoolTimer.Tick() && monster.GetIsAttackAble())
+        if (!monster.GetIsAttacking() && !attackCoolTimer.Tick() && monster.GetIsAttackAble())
         {
             if (attackCounter % BossConstantCh2.IppaliSpawnCycle == 0)
             {
