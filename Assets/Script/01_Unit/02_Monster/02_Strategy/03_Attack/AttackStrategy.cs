@@ -29,9 +29,6 @@ public abstract class AttackStrategy : Strategy
 
     public override bool PlayStrategy(Action callback = null)
     {
-        DebugConsole.Log("PlayStrategy");
-        Debug.Log("PlayStrategy GetIsAttacking()" + monster.GetIsAttacking());
-        Debug.Log("PlayStrategy GetIsAttackAble()" + monster.GetIsAttackAble());
         if (monster.GetIsAttacking()) return true;
         if (!monster.GetIsAttackAble()) return false;
         return TryAttack();
@@ -40,10 +37,6 @@ public abstract class AttackStrategy : Strategy
     // Attack을 시도해서 가능한 상황이면, AttackCharge Animation을 시작하고, AnimatorController에서 그 후 처리를 시작함.
     protected virtual bool TryAttack()
     {
-        DebugConsole.Log($"TryAttack {monster.monsterName}");
-
-        DebugConsole.Log($"TryAttack attackCoolTime:  {attackCoolTime}");
-        DebugConsole.Log($"TryAttack IsInAttackRange: {IsInAttackRange()}");
         if (attackCoolTime > 0 || !IsInAttackRange()) return false;
 
         SetAttackDirection();
@@ -53,7 +46,6 @@ public abstract class AttackStrategy : Strategy
 
     protected virtual void StartAttackCharge()
     {
-        DebugConsole.Log($"StartAttackCharge {monsterAnimTrigger}");
         monster.PlayAnimation(monsterAnimTrigger);
     }
 

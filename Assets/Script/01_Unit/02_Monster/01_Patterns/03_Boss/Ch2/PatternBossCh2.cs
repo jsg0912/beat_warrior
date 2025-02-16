@@ -32,10 +32,10 @@ public class PatternCh2Boss : PatternBoss
         attackStrategyLeftTripleCombo = new AttackStrategyMelee(BossConstantCh2.AttackAnimTriggerLeftTripleCombo);
         attackStrategyRightTripleCombo = new AttackStrategyMelee(BossConstantCh2.AttackAnimTriggerRightHook);
 
-        attackStrategyRange = new AttackStrategyThrowMany(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.EnergyBallSpawnNumber, BossConstantCh2.SpawnInterval, PoolTag.GergusThrow, BossConstantCh2.AttackAnimTriggerRange);
-        attackStrategyRangeMad = new AttackStrategyThrowMany(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.EnergyBallSpawnNumberMad, BossConstantCh2.SpawnInterval, PoolTag.GergusThrow, BossConstantCh2.AttackAnimTriggerRange);
+        attackStrategyRange = new AttackStrategyThrowMany(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.EnergyBallSpawnNumber, BossConstantCh2.SpawnInterval, PoolTag.GergusThrow, BossConstantCh2.AttackAnimTriggerIppaliSpawn);
+        attackStrategyRangeMad = new AttackStrategyThrowMany(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.EnergyBallSpawnNumberMad, BossConstantCh2.SpawnInterval, PoolTag.GergusThrow, BossConstantCh2.AttackAnimTriggerIppaliSpawn);
 
-        attackStrategySpawnIppali = new AttackStrategyThrowManyIppali(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.IppaliSpawnNumber, BossConstantCh2.SpawnInterval, PoolTag.IppaliEgg, BossConstantCh2.AttackAnimTriggerRange);
+        attackStrategySpawnIppali = new AttackStrategyThrowManyIppali(BossConstantCh2.DisgorgeSpeed, BossConstantCh2.DisgorgeMaxHeight, BossConstantCh2.IppaliSpawnNumber, BossConstantCh2.SpawnInterval, PoolTag.IppaliEgg, BossConstantCh2.AttackAnimTriggerIppaliSpawn);
 
         attackStrategySummonTentacleHorizontal = new AttackStrategyMeleeRandomAttack(BossConstantCh2.AttackAnimTriggerSummonTentacle, bossGergus.tentaclesHorizontal);
         attackStrategySummonTentacleVertical = new AttackStrategyMeleeRandomAttack(BossConstantCh2.AttackAnimTriggerSummonTentacle, bossGergus.tentaclesVertical);
@@ -44,11 +44,10 @@ public class PatternCh2Boss : PatternBoss
 
         attackStrategies[PatternPhase.Phase1] = new()
         {
-            attackStrategyLeftTripleCombo,
-            // attackStrategyRange,
-            // attackStrategySummonTentacleHorizontal,
-            // attackStrategySummonTentacleVertical,
-            // attackStrategyFullTentacle
+            attackStrategyRange,
+            attackStrategySummonTentacleHorizontal,
+            attackStrategySummonTentacleVertical,
+            attackStrategyFullTentacle
         };
         attackStrategies[PatternPhase.Phase2] = new()
         {
@@ -86,13 +85,15 @@ public class PatternCh2Boss : PatternBoss
             if (attackCounter % BossConstantCh2.IppaliSpawnCycle == 0)
             {
                 DebugConsole.Log($"boss Attack ippali");
+                currentAttackStrategy = attackStrategySpawnIppali;
                 attackStrategySpawnIppali.PlayStrategy();
                 bossGergus.SetStatus(MonsterStatus.Attack);
             }
             else
             {
                 DebugConsole.Log($"boss Attack random");
-                RandomSystem.GetRandom(attackStrategies[currentPhase]).PlayStrategy();
+                currentAttackStrategy = RandomSystem.GetRandom(attackStrategies[currentPhase]);
+                currentAttackStrategy.PlayStrategy();
                 bossGergus.SetStatus(MonsterStatus.Attack);
             }
             attackCounter++;
@@ -100,5 +101,9 @@ public class PatternCh2Boss : PatternBoss
         }
     }
 
-    public void ResetAttackCoolTimer() { attackCoolTimer.Initialize(); }
+    public void ResetAttackCoolTimer()
+    {
+        DebugConsole.Log("Reset CoolTiem");
+        attackCoolTimer.Initialize();
+    }
 }

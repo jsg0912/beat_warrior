@@ -81,7 +81,8 @@ public class MonsterConstant
         { MonsterName.Koppulso, 6.0f },
         { MonsterName.Dulduli, 3.0f },
         { MonsterName.Giljjugi, 6.0f },
-        { MonsterName.Itmomi, 3.5f }
+        { MonsterName.Itmomi, 3.5f },
+        { MonsterName.Gergus, 3.0f }
     };
 
     public static Dictionary<MonsterName, bool> IsRepeatAttackAnimation = new() {

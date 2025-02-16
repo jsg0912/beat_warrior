@@ -12,7 +12,6 @@ public class BossConstantCh2
     public const string AttackAnimTriggerFullTentacle = "FullTentacle"; // 4. 촉수 옆에서 내려찍기
     public const string AttackEndAnimTrigger = "AttackEnd";
     public const string AttackAnimTriggerIppaliSpawn = "IppaliSpawn";
-    public const string AttackAnimTriggerRange = "RangeAttack";
     public const float Phase2Threshold = 0.5f;
 
 

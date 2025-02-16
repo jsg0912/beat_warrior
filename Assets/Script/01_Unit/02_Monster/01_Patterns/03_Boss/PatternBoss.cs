@@ -6,6 +6,7 @@ public abstract class PatternBoss : Pattern
     protected Dictionary<PatternPhase, List<AttackStrategy>> attackStrategies = new();
     protected PatternPhase currentPhase = 0;
     protected PatternPhase maxPhase;
+    protected AttackStrategy currentAttackStrategy;
     public PatternBoss(PatternPhase maxPhase)
     {
         Recognize = new RecognizeStrategyAbsolute();
@@ -34,4 +35,7 @@ public abstract class PatternBoss : Pattern
         Recognize?.PlayStrategy();
         // Implement AttackPattern in each Boss
     }
+
+
+    public override void AttackStartMethod() { currentAttackStrategy?.AttackStart(); }
 }
