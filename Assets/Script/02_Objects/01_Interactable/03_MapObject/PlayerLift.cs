@@ -28,6 +28,7 @@ public class PlayerLift : ObjectWithInteractionPrompt
     private IEnumerator MoveLift()
     {
         isMoving = true;
+        SoundManager.Instance.SFXPlay("elevator", SoundList.Instance.elevator);
 
         while (Vector3.Distance(transform.position, targetPosition) > 0.01f)
         {
