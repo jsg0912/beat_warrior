@@ -15,11 +15,14 @@ public class BossGergusAnimatorController : StateMachineBehaviour
             bossGergus.SetStatus(MonsterStatus.Idle);
             (bossGergus.pattern as PatternCh2Boss).ResetAttackCoolTimer();
         }
-        if (stateInfo.IsName(MonsterAnimation.Hurt))
+        else if (stateInfo.IsName(MonsterAnimation.Idle))
+        {
+            animator.ResetTrigger(MonsterAnimation.AttackEnd);
+        }
+        else if (stateInfo.IsName(MonsterAnimation.Hurt))
         {
             bossGergus.PlayScarEffect();
         }
-
         else if (stateInfo.IsName(MonsterAnimation.Die))
         {
             bossGergus.SetStatus(MonsterStatus.Dead);

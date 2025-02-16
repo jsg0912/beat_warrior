@@ -10,10 +10,10 @@ public class AttackStrategyThrowManyIppali : AttackStrategyThrowMany
     }
     protected override void SetTargetPosition()
     {
+        // TODO: 임시수정정
         Vector3 startPos = monster.GetMiddlePos();
-
-        if (throwCountMax == 1) startPos.x += (Random.value > 0.5f) ? 5f : -5f;
-
+        startPos.x += 5;
+        if (throwCountCurrent == 1) startPos.x += Random.Range(0, 2) % 2 == 0 ? 5f : -5f;
         RaycastHit2D hit = Physics2D.Raycast(startPos, Vector2.down, Mathf.Infinity, LayerMask.GetMask(LayerConstant.Tile));
 
         targetPosition = hit.point;
