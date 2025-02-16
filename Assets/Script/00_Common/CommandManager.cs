@@ -70,7 +70,7 @@ public class CommandManager : SingletonObject<CommandManager>
                 {
                     InteractionManager.Instance.InteractWithLastObject();
                 }
-                // CheckTestCommandInGame();
+                CheckTestCommandInGame();
             }
         }
     }
