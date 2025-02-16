@@ -9,7 +9,8 @@ public class MenuUI : PopupSystem
 
     public override void Awake()
     {
-        Instance = this;
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
         base.Awake();
     }
 
@@ -38,7 +39,6 @@ public class MenuUI : PopupSystem
     public void OnClickContinue()
     {
         TurnOffPopup();
-        PopupManager.Instance.RemovePopup(this);
     }
 
     public void OnClickOption()
@@ -49,7 +49,6 @@ public class MenuUI : PopupSystem
     public void OnClickQuit()
     {
         TurnOffPopup();
-        PopupManager.Instance.RemovePopup(this);
         GameManager.Instance.QuitInGame();
     }
 }
