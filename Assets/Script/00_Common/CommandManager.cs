@@ -28,15 +28,23 @@ public class CommandManager : SingletonObject<CommandManager>
                     }
                     else
                     {
-                        // TODO: Game Exit Popup 띄우기
+                        PopupManager.Instance.TurnOnGameExitPopup();
                     }
                 }
             }
 
             if (isInGame)
             {
+                if (TutorialManager.InstanceWithoutCreate?.IsWaitingForTutorialAction == true)
+                {
+                    PlayerAction tutorialAction = TutorialManager.InstanceWithoutCreate.currentTutorialAction;
+                    if (tutorialAction != PlayerAction.Null && Input.GetKeyDown(KeySetting.keys[tutorialAction]))
+                    {
+                        TutorialManager.InstanceWithoutCreate.SetUserInput(TutorialManager.InstanceWithoutCreate.currentTutorialAction);
+                    }
+                }
                 // When we paused the game, we don't want to check below commands.
-                if (!PauseController.Instance.IsPause() && Player.Instance != null)
+                else if (!PauseController.Instance.IsPause() && Player.Instance != null)
                 {
                     Player.Instance.CheckPlayerCommand();
                 }

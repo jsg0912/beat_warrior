@@ -8,6 +8,6 @@ public static class PromptMessageGenerator
 {
     public static string GeneratePromptMessage(PlayerAction action)
     {
-        return $"Press [{KeySetting.keys[action]}]";
+        return $"Press [{ScriptPool.KeyCodeText[KeySetting.keys[action]]}]";
     }
 }
