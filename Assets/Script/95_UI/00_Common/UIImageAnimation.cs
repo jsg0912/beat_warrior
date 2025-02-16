@@ -13,13 +13,23 @@ public class UIImageAnimation : MonoBehaviour
 
     public Image overlayImage;
     void Start()
-    {
-        overlayImage.gameObject.SetActive(false);
-        StartCoroutine(AnimateSprite());
+    {  
+        //StartCoroutine(AnimateSprite());
     }
 
-    IEnumerator AnimateSprite()
+    public void Initialize()
     {
+        if(sprites.Length>0)
+        {
+            uiImage.sprite = sprites[0];
+        }
+
+        overlayImage.gameObject.SetActive(false);
+    }
+
+    public IEnumerator AnimateSprite()
+    {
+        
         yield return new WaitForSecondsRealtime(1f);
         SoundManager.Instance.SFXPlay("chapter2BossMapTitle", SoundList.Instance.chapter2BossMapTitle);
         for (int i = 0; i < sprites.Length; i++) 
