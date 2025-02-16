@@ -15,6 +15,6 @@ public enum PoolTag
     Tentacle,
     TentacleVertical,
     TentacleHorizontal,
-    Ippali,
+    GergusThrow,
     IppaliEgg
 }

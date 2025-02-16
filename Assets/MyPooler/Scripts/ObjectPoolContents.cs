@@ -155,10 +155,10 @@ namespace MyPooler
                 }
             },
             {
-                PoolTag.Ippali,
+                PoolTag.GergusThrow,
                 new ObjectPoolContent
                 {
-                    prefab = Resources.Load<GameObject>(PrefabRouter.IppaliPrefab),
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MonsterAttackPrefab[MonsterName.Gergus]),
                     amount = 5,
                     shouldExpandPool = true,
                 }

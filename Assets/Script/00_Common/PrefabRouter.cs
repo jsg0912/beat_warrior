@@ -59,5 +59,5 @@ public class PrefabRouter
     public const string IppaliEggPrefab = MonsterObjectRoute + "IppaliEgg";
     public const string IppaliPrefab = "Prefab/01_Unit/02_Monster/Ippali";
 
-    
+
 }
