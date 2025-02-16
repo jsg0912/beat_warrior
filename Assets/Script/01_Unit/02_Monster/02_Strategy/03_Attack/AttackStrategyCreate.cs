@@ -1,25 +1,28 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class AttackStrategyCreate : AttackStrategy
 {
     protected GameObject prefab;
     protected GameObject obj;
     protected MonsterAttackCollider monsterAttackCollider;
+    Dictionary<MonsterName, PoolTag> enemyCreate = new() {
+        { MonsterName.Ibkkugi, PoolTag.IbkkugiThrow },
+        { MonsterName.Itmomi, PoolTag.ItmomiThrow },
+    };
 
     public AttackStrategyCreate(string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger) : base(monsterAnimTrigger)
     {
     }
-
-    public override void Initialize(Monster monster)
+    private PoolTag GetEnemyCreatePoolTag(MonsterName monsterName)
     {
-        base.Initialize(monster);
-        if (PrefabRouter.MonsterAttackPrefab.ContainsKey(monster.monsterName))
-            prefab = Resources.Load(PrefabRouter.MonsterAttackPrefab[monster.monsterName]) as GameObject;
+        // return PoolTag.EnemyMiniMapIcon;
+        return enemyCreate.ContainsKey(monsterName) ? enemyCreate[monsterName] : PoolTag.IbkkugiThrow;
     }
 
     protected override void AttackMethod()
     {
-        obj = GameObject.Instantiate(prefab);
+        obj = MyPooler.ObjectPooler.Instance.GetFromPool(GetEnemyCreatePoolTag(monster.monsterName), GetMonsterPos(), Quaternion.identity);
 
         monsterAttackCollider = obj.GetComponent<MonsterAttackCollider>();
         monsterAttackCollider.Initiate();

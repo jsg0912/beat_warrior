@@ -4,8 +4,9 @@ using UnityEngine.Audio;
 public class SoundManager : SingletonObject<SoundManager>
 {
     public AudioSource backGroundSound;
+    public AudioSource soundEffect;
     public AudioMixer mixer;
-    private float sfxVolume;
+    private float sfxVolume = 1.0f;
     private float backgroundVolume;
     private float masterVolume;
 
@@ -50,14 +51,8 @@ public class SoundManager : SingletonObject<SoundManager>
             // Debug.LogError("SoundManager: " + name + " is null");
             return;
         }
-        GameObject go = new GameObject(name + "Sound");
-        AudioSource audioSource = go.AddComponent<AudioSource>();
-        audioSource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
-        audioSource.clip = clip;
-        audioSource.PlayOneShot(clip, 0.5f);
-
-        Destroy(go, clip.length);
-        //backGroundSound.PlayOneShot(clip, 0.5f * sfxVolume);
+        soundEffect.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
+        soundEffect.PlayOneShot(clip, 0.5f * sfxVolume);
     }
 
     public void BackGroundPlay(AudioClip clip)

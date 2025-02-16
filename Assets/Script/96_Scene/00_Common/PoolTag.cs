@@ -7,5 +7,9 @@ public enum PoolTag
     MiniMapIconGiljjugi,
     MiniMapIconDulduli,
     MiniMapIconItmomi,
-    IbkkugiThrow
+    IbkkugiThrow,
+    ItmomiThrow,
+    Soul,
+    Ghost,
+    Mark
 }

@@ -9,13 +9,13 @@ public class BlurUIManager : SingletonObject<BlurUIManager>
 
     public void TurnOnActiveBlur(BlurType blurType)
     {
-        if (currentBlurType == blurType)
+        if (blurType == BlurType.None || currentBlurType == blurType)
         {
             return;
         }
         TurnOffActiveBlur();
 
-        bool success = Util.SetActive(blurTypePairs.Find(pair => pair.blurType == blurType).gameObject, true);
+        bool success = Util.SetActive(blurTypePairs.Find(pair => pair.blurType == blurType)?.gameObject, true);
         if (success) currentBlurType = blurType;
     }
 

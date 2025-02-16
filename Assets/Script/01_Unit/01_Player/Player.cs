@@ -37,7 +37,6 @@ public class Player : DirectionalGameObject
     private BoxCollider2D tileLeft;
     private BoxCollider2D tileRight;
 
-    private PlayerGhostController playerGhostController;
     public HitMonsterFunc hitMonsterFuncList = null;
     public UseSkillFunc useSKillFuncList = null;
     public ReviveSkillFunc reviveSKillFuncList = null;
@@ -64,7 +63,7 @@ public class Player : DirectionalGameObject
         player.GetComponent<Player>().Initialize();
     }
 
-    public void RecoverHealthyStatus(bool isRestart = false)
+    public void RecoverHealthyStatus()
     {
         playerUnit.SetFullStatAll();
         ResetSkillCoolTimeAll();
@@ -96,7 +95,6 @@ public class Player : DirectionalGameObject
             new QSkill(gameObject),
             new ESkill(gameObject)
         };
-        playerGhostController = new PlayerGhostController();
 
         traitList.Clear();
         Inventory.Instance.Initialize();
@@ -129,15 +127,22 @@ public class Player : DirectionalGameObject
     // SET Functions
     public void SetStatus(PlayerStatus status)
     {
-        this.status = status;
-        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
-
         switch (status)
         {
+            case PlayerStatus.Normal:
+                if (this.status == PlayerStatus.Rest)
+                {
+                    DebugConsole.Log("ansdianidsanmd");
+                    SetAnimTrigger(PlayerConstant.restartAnimTrigger);
+                }
+                break;
             case PlayerStatus.Dead:
                 SetAnimTrigger(PlayerConstant.dieAnimTrigger);
                 break;
         }
+
+        this.status = status;
+        PlayerUIManager.InstanceWithoutCreate?.SetPlayerFace(status, Hp);
     }
 
     public void SetLastSkillColor(PlayerSkillEffectColor color)
@@ -216,6 +221,13 @@ public class Player : DirectionalGameObject
         {
             skill.ResetCoolTime();
         }
+    }
+
+    // 주의: PlayerLift 같은 곳에서 Player를 자식으로 삼는 경우가 있는데, 그럴 때 맵을 이동하면 Player가 같이 사라지는 문제가 있었음
+    public void ResetTransform()
+    {
+        transform.SetParent(null);
+        DontDestroyOnLoad(this);
     }
 
     public void CheckIsMove()
@@ -371,7 +383,7 @@ public class Player : DirectionalGameObject
         {
             if (!passWall && CheckWall()) break;
 
-            playerGhostController.TryMakeGhost(dir);
+            PlayerGhostController.Instance.TryMakeGhost(dir);
 
             transform.position = Vector2.Lerp(transform.position, end, PlayerSkillConstant.DashSpeed);
             moveCount++;
@@ -467,7 +479,7 @@ public class Player : DirectionalGameObject
 
         if (trait == null)
         {
-            throw new Exception("Trait 없어서 추가 실패!");
+            throw new Exception($"Trait 없어서 추가 실패! {name}");
         }
 
         trait.GetSkill();

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class AltarDetailPopup : PopupSystem
@@ -11,8 +12,9 @@ public class AltarDetailPopup : PopupSystem
     // TODO: 아래 interactionButton Class 만들면 좋음
     public Button interactionButton;
     public TMP_Text interactionButtonText;
+    public Image getIcon;
 
-    private SkillName traitName;
+    private SkillName traitName => AltarUIManager.Instance.SelectedTraitName;
 
     private void Start()
     {
@@ -28,16 +30,16 @@ public class AltarDetailPopup : PopupSystem
         bool success = base.TurnOnPopup();
         if (success)
         {
-            UpdateEquippedTraitUIs();
+            AltarUIManager.Instance.UpdateEquippedTraitUIs(equippedTraitUIs);
             UpdateAltarUIButtons();
         }
         return success;
     }
 
-    private void UpdateTargetTraitInfo()
+    public void UpdateTargetTraitInfo()
     {
         targetTraitUI.UpdateTraitStatus(false);
-        UpdateEquippedTraitUIs();
+        AltarUIManager.Instance.UpdateEquippedTraitUIs(equippedTraitUIs);
         UpdateAltarUIButtons();
     }
 
@@ -54,11 +56,11 @@ public class AltarDetailPopup : PopupSystem
     public void ShowSkillDetail(SkillName traitName)
     {
         if (traitName == SkillName.End) return;
-        this.traitName = traitName;
         targetTraitUI.SetTraitName(traitName, false);
         UpdateTraitName();
         UpdateTraitDescription();
         UpdateAltarUIButtons();
+        AltarUIManager.Instance.SetSelectedTraitName(traitName);
     }
 
     private void UpdateAltarUIButtons()
@@ -67,33 +69,23 @@ public class AltarDetailPopup : PopupSystem
         {
             case TraitSetButtonStatus.Locked:
                 Util.SetActive(interactionButton, false);
+                getIcon.color = Color.gray;
                 break;
             case TraitSetButtonStatus.Buyable:
                 Util.SetActive(interactionButton, true);
+                getIcon.color = Color.gray;
                 interactionButtonText.text = "구매";
                 break;
             case TraitSetButtonStatus.EquipAble:
                 Util.SetActive(interactionButton, true);
+                getIcon.color = Color.white;
                 interactionButtonText.text = "장착";
                 break;
             case TraitSetButtonStatus.Equipped:
                 Util.SetActive(interactionButton, true);
+                getIcon.color = Color.white;
                 interactionButtonText.text = "해제";
                 break;
-        }
-    }
-
-    private void UpdateEquippedTraitUIs()
-    {
-        SkillName[] equippedTraits = Player.Instance.GetTraits();
-        int i = 0;
-        for (; i < equippedTraits.Length; i++)
-        {
-            equippedTraitUIs[i].SetTraitName(equippedTraits[i]);
-        }
-        for (; i < equippedTraitUIs.Count; i++)
-        {
-            equippedTraitUIs[i].ShowEmpty();
         }
     }
 
@@ -102,43 +94,14 @@ public class AltarDetailPopup : PopupSystem
         switch (traitUI.traitStatus)
         {
             case TraitSetButtonStatus.Buyable:
-                TryBuyTrait();
+                AltarUIManager.Instance.TryBuyTrait(traitName);
                 break;
             case TraitSetButtonStatus.EquipAble:
-                TryEquipTrait();
+                AltarUIManager.Instance.TryEquipTrait(traitName);
                 break;
             case TraitSetButtonStatus.Equipped:
-                TryUnEquipTrait();
+                AltarUIManager.Instance.TryUnEquipTrait(traitName);
                 break;
         }
-    }
-
-    private void TryBuyTrait()
-    {
-        if (Inventory.Instance.GetSoulNumber() >= TraitPriceList.Info[traitName])
-        {
-            Inventory.Instance.ChangeSoulNumber(-TraitPriceList.Info[traitName]);
-            Inventory.Instance.AddSkill(traitName);
-            AltarUIManager.Instance.UpdatePlayerSoulView();
-            UpdateTargetTraitInfo();
-            AltarUIManager.Instance.RefreshMainAltarPopup();
-
-            SoundManager.Instance. SFXPlay("Equip", SoundList.Instance.altarBuy);
-        }
-    }
-
-    private void TryEquipTrait()
-    {
-        if (!Player.Instance.CheckFullEquipTrait())
-        {
-            Player.Instance.EquipTrait(traitName);
-            UpdateTargetTraitInfo();
-        }
-    }
-
-    private void TryUnEquipTrait()
-    {
-        Player.Instance.RemoveTrait(traitName);
-        UpdateTargetTraitInfo();
     }
 }

@@ -1,7 +1,8 @@
 public class Altar : ObjectWithInteractionPrompt
 {
-    public override void StartInteraction()
+    public override bool StartInteraction()
     {
         UIManager.Instance.TurnOnAltarPopup();
+        return true;
     }
 }

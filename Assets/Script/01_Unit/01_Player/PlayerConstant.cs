@@ -35,6 +35,8 @@ public class PlayerConstant
     public const string QSkill1AnimTrigger = "qSkill1";
     public const string QSkill2AnimTrigger = "qSkill2";
     public const string ESkillAnimTrigger = "eSkill";
+    public const string Rest1AnimTrigger = "rest1";
+    public const string Rest2AnimTrigger = "rest2";
 
     public const int MaxAdditionalSkillCount = 3;
     public const int PlayerHurtFaceTriggerHp = 1;

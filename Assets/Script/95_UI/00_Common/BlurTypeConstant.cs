@@ -5,7 +5,7 @@ public enum BlurType
 {
     None,
     MarkSlow,
-    MenuStop
+    BlackBlur
 }
 
 [Serializable]

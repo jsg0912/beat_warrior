@@ -28,15 +28,23 @@ public class CommandManager : SingletonObject<CommandManager>
                     }
                     else
                     {
-                        // TODO: Game Exit Popup 띄우기
+                        PopupManager.Instance.TurnOnGameExitPopup();
                     }
                 }
             }
 
             if (isInGame)
             {
+                if (TutorialManager.InstanceWithoutCreate?.IsWaitingForTutorialAction == true)
+                {
+                    PlayerAction tutorialAction = TutorialManager.InstanceWithoutCreate.currentTutorialAction;
+                    if (tutorialAction != PlayerAction.Null && Input.GetKeyDown(KeySetting.keys[tutorialAction]))
+                    {
+                        TutorialManager.InstanceWithoutCreate.SetUserInput(TutorialManager.InstanceWithoutCreate.currentTutorialAction);
+                    }
+                }
                 // When we paused the game, we don't want to check below commands.
-                if (!PauseController.Instance.IsPause() && Player.Instance != null)
+                else if (!PauseController.Instance.IsPause() && Player.Instance != null)
                 {
                     Player.Instance.CheckPlayerCommand();
                 }
@@ -53,6 +61,7 @@ public class CommandManager : SingletonObject<CommandManager>
     // TODO: 이 아래는 Test용 임시 코드들로 삭제해야 함. - SDH, 20250124
     public void CheckTestCommandInGame()
     {
+        // if (!Util.IsEditor) return;
         if (Input.GetKeyDown(KeyCode.B))
         {
             GameManager.Instance.RestartCurrentStage();
@@ -72,6 +81,30 @@ public class CommandManager : SingletonObject<CommandManager>
         if (Input.GetKeyDown(KeyCode.P))
         {
             PauseController.Instance.ChangeDefaultGameSpeed(0.1f);
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Inventory.Instance.ChangeSoulNumber(1000);
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            GameObject[] monsters = GameObject.FindGameObjectsWithTag(TagConstant.Monster);
+            foreach (GameObject monster in monsters)
+            {
+                Monster monsterComponent = monster.GetComponent<Monster>();
+                if (monsterComponent != null)
+                {
+                    monsterComponent.AttackedByPlayer(monsterComponent.GetCurrentStat(StatKind.HP), true);
+                }
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            Portal portal = FindObjectOfType<Portal>();
+            if (portal != null)
+            {
+                Player.Instance.transform.position = portal.transform.position;
+            }
         }
     }
 }
