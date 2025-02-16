@@ -307,4 +307,36 @@ public static class ScriptPool
         { KeyCode.KeypadEquals, "KP="},
         { KeyCode.Comma, "KP," }
     };
+
+    public static Dictionary<PlayerAction, Dictionary<Language, string>> TutorialText = new()
+    {
+        {PlayerAction.Attack, new () {
+            { Language.kr, "한국어" },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Skill1, new () {
+            { Language.kr, "한국어" },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Skill2, new () {
+            { Language.kr, "한국어" },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Jump, new () {
+            { Language.kr, "한국어" },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Tutorial_Mark, new () {
+            { Language.kr, "한국어" },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Tutorial_Dash, new () {
+            { Language.kr, "한국어" },
+            { Language.en, "English" }
+        }},
+        {PlayerAction.Interaction, new () {
+            { Language.kr, "한국어" },
+            { Language.en, "English" }
+        }},
+    };
 }

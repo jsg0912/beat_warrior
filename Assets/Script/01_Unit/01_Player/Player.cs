@@ -65,7 +65,6 @@ public class Player : DirectionalGameObject
 
     public void RecoverHealthyStatus()
     {
-        DebugConsole.Log("RecoverHealthyStatus");
         playerUnit.SetFullStatAll();
         ResetSkillCoolTimeAll();
         SetStatus(PlayerStatus.Normal);
@@ -164,7 +163,6 @@ public class Player : DirectionalGameObject
         {
             if (status != PlayerStatus.Dead && status != PlayerStatus.Rest) return;
         }
-        DebugConsole.Log($"SetAnimTrigger: {trigger}");
         _animator.SetTrigger(trigger);
     }
 

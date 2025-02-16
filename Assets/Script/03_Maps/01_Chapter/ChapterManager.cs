@@ -9,7 +9,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
     private Chapter currentChapter;
     private StageController CurrentStage => currentChapter.stages[currentStageIndex];
     private int currentStageIndex;
-    private bool tutorialCompleted = true; // TODO: 임시로 true임 - 신동환, 20250123
+    private bool tutorialCompleted = false;
     private bool IsCurrentStageCompleted => CurrentStage.Cleared;
     private ChapterName currentChapterName => currentChapter.name;
 
@@ -36,10 +36,9 @@ public class ChapterManager : SingletonObject<ChapterManager>
         if (IsCurrentStageCompleted) PlayerUIManager.Instance.SetPlayerFace(PlayerStatus.Happy, 0);
     }
 
-    public void SetTutorialComplete(bool tutorialCompleted)
+    public void SetTutorialComplete()
     {
-        this.tutorialCompleted = tutorialCompleted;
-        if (this.tutorialCompleted) Debug.Log("Tutorial completed!");
+        tutorialCompleted = true;
     }
 
     public void StartNewGame()
@@ -107,7 +106,6 @@ public class ChapterManager : SingletonObject<ChapterManager>
     private void LoadStageScene()
     {
         StartCoroutine(SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapterName][currentStageIndex]));
-        Player.Instance?.RecoverHealthyStatus(); // Recover Player Healthy When Stage start newly
     }
 
     private void MoveToNextChapter()
