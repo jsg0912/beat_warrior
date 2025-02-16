@@ -62,7 +62,7 @@ public class FadeManager : MonoBehaviour
     {
         yield return null;
         // TODO: 여기서 이걸 하는게 맞는가?? - SDH, 20250216
-        Player.Instance?.RecoverHealthyStatus(); // Recover Player Healthy When Stage start newly
+        if (GameManager.Instance.isInGame) Player.Instance?.RecoverHealthyStatus(); // Recover Player Healthy When Stage start newly
         StartCoroutine(FadeIn());
         StartCoroutine(SystemMessageUIManager.Instance.TriggerTurnOnMapTitleMassage(GameManager.Instance.currentScene));
     }
