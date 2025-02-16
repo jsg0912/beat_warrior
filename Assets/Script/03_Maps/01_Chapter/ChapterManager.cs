@@ -144,6 +144,10 @@ public class ChapterManager : SingletonObject<ChapterManager>
                 break;
             case ChapterName.Ch2:
                 SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter2BGM);
+                if(GameManager.Instance.currentScene == SceneName.Ch2BossStage)
+                {
+                    SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter2BossBGM);
+                }
                 break;
             case ChapterName.Ch3:
                 SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter3BGM);

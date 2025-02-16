@@ -6,6 +6,7 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip titleBGM;
     public AudioClip chapter1BGM;
     public AudioClip chapter2BGM;
+    public AudioClip chapter2BossBGM;
     public AudioClip chapter3BGM;
     public AudioClip chapter4BGM;
 
