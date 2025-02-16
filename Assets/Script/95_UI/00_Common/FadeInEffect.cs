@@ -11,6 +11,11 @@ public class FadeInEffect : MonoBehaviour
         StartCoroutine(FadeIn());
     }
 
+    public void SetAlpha(float Alphavalue)
+    {
+        canvasGroup.alpha = Alphavalue;
+    }
+
     private IEnumerator FadeIn()
     {
         float time = 0f;
