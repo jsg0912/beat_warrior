@@ -35,10 +35,10 @@ public class Monster : DirectionalGameObject
     [SerializeField] private MonsterHPUI HpUI;
     [SerializeField] private GameObject attackEffect;
     [SerializeField] private GameObject MarkedEffect;
-    [SerializeField] private List<GameObject> hitEffects = new List<GameObject>();
+    [SerializeField] protected List<GameObject> hitEffects = new List<GameObject>();
 
     [SerializeField] public GameObject attackCollider;
-    [SerializeField] private MonsterBodyCollider monsterBodyCollider;
+    [SerializeField] protected MonsterBodyCollider monsterBodyCollider;
 
     private Timer markRemainTimer;
 
