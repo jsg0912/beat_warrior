@@ -34,7 +34,6 @@ public abstract class AttackStrategy : Strategy
         Debug.Log("PlayStrategy GetIsAttackAble()" + monster.GetIsAttackAble());
         if (monster.GetIsAttacking()) return true;
         if (!monster.GetIsAttackAble()) return false;
-        DebugConsole.Log("PlayStrategy");
         return TryAttack();
     }
 
@@ -52,7 +51,11 @@ public abstract class AttackStrategy : Strategy
         return true;
     }
 
-    protected virtual void StartAttackCharge() { monster.PlayAnimation(monsterAnimTrigger); }
+    protected virtual void StartAttackCharge()
+    {
+        DebugConsole.Log($"StartAttackCharge {monsterAnimTrigger}");
+        monster.PlayAnimation(monsterAnimTrigger);
+    }
 
     // 이 함수가 실행되면 정말로 공격을 실행한는 것으로 간주
     protected abstract void AttackMethod();

@@ -100,6 +100,6 @@ public class MonsterConstant
     };
 
     public static List<MonsterName> FixedAnimationWhenAttacking = new(){
-        MonsterName.Giljjugi, MonsterName.Koppulso, MonsterName.Dulduli, MonsterName.Gergus,
+        MonsterName.Giljjugi, MonsterName.Koppulso, MonsterName.Dulduli,
     };
 }

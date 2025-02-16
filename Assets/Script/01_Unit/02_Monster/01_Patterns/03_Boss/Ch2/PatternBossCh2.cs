@@ -79,11 +79,10 @@ public class PatternCh2Boss : PatternBoss
     override public void PlayPattern()
     {
         if (SystemMessageUIManager.Instance.isTimeLinePlaying) return;
-        DebugConsole.Log($"boss status {monster.GetStatus()}");
-        DebugConsole.Log($"boss try PlayPattern {currentPhase}");
         base.PlayPattern();
         if (!monster.GetIsAttacking() && !attackCoolTimer.Tick() && monster.GetIsAttackAble())
         {
+            DebugConsole.Log("i can attack 씨발아");
             if (attackCounter % BossConstantCh2.IppaliSpawnCycle == 0)
             {
                 DebugConsole.Log($"boss Attack ippali");
