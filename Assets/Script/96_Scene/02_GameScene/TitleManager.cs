@@ -24,5 +24,6 @@ public class TitleManager : MonoBehaviour
     {
         SoundManager.Instance.PlayTitleBGM();
         GameManager.Instance.SetDefaultCursor();
+        Destroy(Player.Instance);
     }
 }
