@@ -31,17 +31,18 @@ public class TutorialManager : SingletonObject<TutorialManager>
         if (!tutorialList.ContainsKey(action)) return;
         if (IsWaitingForTutorialAction && action == currentTutorialAction)
         {
+            SetActionTutorialComplete(action);
+            tutorialInteractionPrompts.First(x => x.GetTutorialAction() == action).StartInteraction();
+            currentTutorialAction = PlayerAction.Null;
+
             if (action == PlayerAction.Jump)
             {
                 isJumpAble = true;
             }
-            if (action == PlayerAction.Tutorial_Mark)
+            if (action == PlayerAction.Skill2)
             {
                 isSkillAble = true;
             }
-            SetActionTutorialComplete(action);
-            tutorialInteractionPrompts.First(x => x.GetTutorialAction() == action).StartInteraction();
-            currentTutorialAction = PlayerAction.Null;
         }
     }
 
