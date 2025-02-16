@@ -9,4 +9,16 @@ public class BossTentacle : MonsterAttackCollider
         GameObject obj = other.gameObject;
         if (obj.CompareTag(TagConstant.Player)) Player.Instance.GetDamaged(damage, GetRelativeDirectionToPlayer());
     }
+
+    public void PlayTentacleStabSFX()
+    {
+        SoundManager.Instance.SFXPlay("TentacleStab", SoundList.Instance.bossTentacleStabTentacle);
+
+    }
+
+    public void PlayTentacleHitSFX()
+    {
+        SoundManager.Instance.SFXPlay("TentacleHit", SoundList.Instance.bossTentacleHit);
+        
+    }
 }

@@ -77,8 +77,9 @@ public class ChapterManager : SingletonObject<ChapterManager>
             if (++currentStageIndex == currentChapter.stages.Length)
             {
                 Debug.Log($"{currentChapterName} completed!");
-                MoveToNextChapter();
                 UIManager.Instance.TurnOnMiniMap();
+                SoundManager.Instance.StopBackGroundSFX();
+                MoveToNextChapter();
             }
             else
             {
@@ -87,6 +88,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
                     if(currentChapterName == ChapterName.Ch2)
                     {
                         SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter2BossBGM);
+                        SoundManager.Instance.PlayCh2BGSFX();
                         UIManager.Instance.TurnOffMiniMap();
                     }
                 }
