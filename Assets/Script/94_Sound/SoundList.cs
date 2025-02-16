@@ -30,6 +30,15 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip monsterItmomiAttack; //
     public AudioClip monsterItmomiThorn; // 1.0s up in itmomi attack animation
 
+    public AudioClip bossSpit;
+    public AudioClip bossIppaliSpawn;
+    public AudioClip bossTentacleStab;
+    public AudioClip bossTentacleHit;
+    public AudioClip bossAttackThree;
+    public AudioClip bossHalfHp;
+    public AudioClip bossDie;
+    public AudioClip bossBackGroundSoundEffect;
+
     public AudioClip playerHit; //
     public AudioClip playerHolyBlade; //
     public AudioClip playerMark; //
@@ -43,4 +52,5 @@ public class SoundList : SingletonScriptableObject<SoundList>
 
     public AudioClip timeSlow;
     public AudioClip soulGet; //
+    public AudioClip elevator;//
 }

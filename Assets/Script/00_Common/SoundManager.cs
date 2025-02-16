@@ -73,6 +73,18 @@ public class SoundManager : SingletonObject<SoundManager>
     {
         SFXPlay("Equip", SoundList.Instance.buttonClick);
     }
+    public void BackGroundSFXPlay(AudioClip clip)
+    {
+        soundEffect.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
+        soundEffect.clip = clip;
+        soundEffect.loop = true;
+        soundEffect.Play();
+    }
+
+    public void PlayCh2BGSFX()
+    {
+        BackGroundSFXPlay(SoundList.Instance.bossBackGroundSoundEffect);
+    }
 }
 
 
