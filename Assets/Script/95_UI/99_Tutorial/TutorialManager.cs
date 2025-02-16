@@ -10,9 +10,10 @@ public class TutorialManager : SingletonObject<TutorialManager>
         {PlayerAction.Skill1, false},
         {PlayerAction.Skill2, false},
         {PlayerAction.Jump, false},
+        {PlayerAction.Down, false},
         {PlayerAction.Tutorial_Mark, false},
         {PlayerAction.Tutorial_Dash, false},
-        {PlayerAction.Interaction, false},
+        {PlayerAction.Tutorial_Portal, false},
     };
 
     [SerializeField] private TutorialInteractionPrompt[] tutorialInteractionPrompts;
@@ -23,6 +24,7 @@ public class TutorialManager : SingletonObject<TutorialManager>
 
     public void SetUserInput(PlayerAction action)
     {
+        if (!tutorialList.ContainsKey(action)) return;
         if (IsWaitingForTutorialAction && action == currentTutorialAction)
         {
             SetActionTutorialComplete(action);

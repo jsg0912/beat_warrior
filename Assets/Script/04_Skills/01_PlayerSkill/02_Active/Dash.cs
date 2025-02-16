@@ -18,14 +18,14 @@ public class Dash : ActiveSkillPlayer
 
     protected override void SetSkillName() { skillName = SkillName.Dash; }
 
-    public override void CheckInputKeyCode()
+    public override void CheckInputKeyCode(bool forced = false)
     {
         base.CheckInputKeyCode();
     }
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[PlayerAction.Mark_Dash];
+        keyCode = KeySetting.GetKey(PlayerAction.Mark_Dash);
     }
 
     protected override void TrySkill()

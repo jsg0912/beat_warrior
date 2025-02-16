@@ -22,7 +22,7 @@ public class DialogTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayerInTrigger && Input.GetKeyDown(KeySetting.keys[PlayerAction.Interaction]))
+        if (isPlayerInTrigger && Input.GetKeyDown(KeySetting.GetKey(PlayerAction.Interaction)))
         {
             StartDialog();
         }

@@ -38,7 +38,7 @@ public class CommandManager : SingletonObject<CommandManager>
                 if (TutorialManager.InstanceWithoutCreate?.IsWaitingForTutorialAction == true)
                 {
                     PlayerAction tutorialAction = TutorialManager.InstanceWithoutCreate.currentTutorialAction;
-                    if (tutorialAction != PlayerAction.Null && Input.GetKeyDown(KeySetting.keys[tutorialAction]))
+                    if (tutorialAction != PlayerAction.Null && Input.GetKeyDown(KeySetting.GetKey(tutorialAction)))
                     {
                         TutorialManager.InstanceWithoutCreate.SetUserInput(tutorialAction);
                     }
@@ -49,7 +49,7 @@ public class CommandManager : SingletonObject<CommandManager>
                     Player.Instance.CheckPlayerCommand();
                 }
 
-                if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Interaction]))
+                if (Input.GetKeyDown(KeySetting.GetKey(PlayerAction.Interaction)))
                 {
                     InteractionManager.Instance.InteractWithLastObject();
                 }

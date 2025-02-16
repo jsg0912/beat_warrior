@@ -18,7 +18,7 @@ public class ESkill : ActiveSkillPlayer
 
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[PlayerAction.Skill2];
+        keyCode = KeySetting.GetKey(PlayerAction.Skill2);
     }
 
     protected override void SetAttackCollider()

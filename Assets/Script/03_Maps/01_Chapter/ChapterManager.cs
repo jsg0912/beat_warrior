@@ -135,6 +135,9 @@ public class ChapterManager : SingletonObject<ChapterManager>
     {
         switch (currentChapterName)
         {
+            case ChapterName.Tutorial:
+                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter1BGM);
+                break;
             case ChapterName.Ch1:
                 SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter1BGM);
                 break;

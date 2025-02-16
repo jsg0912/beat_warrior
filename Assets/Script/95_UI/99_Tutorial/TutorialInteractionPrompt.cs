@@ -3,7 +3,7 @@ using UnityEngine;
 public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
 {
     [SerializeField] private PlayerAction tutorialAction;
-    [SerializeField] private bool NeedPause = true;
+    [SerializeField] private bool NeedPause;
 
     override public bool StartInteraction()
     {
@@ -21,21 +21,24 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
 
     override public void SetInteractAble()
     {
-        if (isInitialized) return;
-        Initialize();
         // Prompt 창 띄우기
         SetActivePromptText(true);
         promptText.text = PromptMessageGenerator.GeneratePromptMessage(tutorialAction);
+
+        if (isInitialized) return;
+        Initialize();
+
+        // 설명창 켜기
+        SystemMessageUIManager.Instance.TurnOnTutorialMassageUI(tutorialAction);
         // 게임 멈추기
         if (NeedPause)
         {
             PauseController.Instance.TryPauseGame();
-            // Blur 및 설명창 켜기
-            SystemMessageUIManager.Instance.TurnOnTutorialMassageUI(tutorialAction);
+            // Blur 켜기
+            BlurUIManager.Instance.TurnOnActiveBlur(BlurType.BlackBlur);
+            // Key Input 받도록 설정
+            TutorialManager.Instance.SetCurrentTutorialAction(tutorialAction);
         }
-        BlurUIManager.Instance.TurnOnActiveBlur(BlurType.BlackBlur);
-        // Key Input 받도록 설정
-        TutorialManager.Instance.SetCurrentTutorialAction(tutorialAction);
     }
 
     override public void SetInteractDisable()

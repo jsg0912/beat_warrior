@@ -236,13 +236,13 @@ public class Player : DirectionalGameObject
 
         bool isMove = false;
 
-        if (Input.GetKey(KeySetting.keys[PlayerAction.Right]))
+        if (Input.GetKey(KeySetting.GetKey(PlayerAction.Right)))
         {
             SetMovingDirection(Direction.Right);
             isMove = true;
         }
 
-        if (Input.GetKey(KeySetting.keys[PlayerAction.Left]))
+        if (Input.GetKey(KeySetting.GetKey(PlayerAction.Left)))
         {
             SetMovingDirection(Direction.Left);
             isMove = true;
@@ -347,7 +347,7 @@ public class Player : DirectionalGameObject
 
     private void Down()
     {
-        if (!Input.GetKeyDown(KeySetting.keys[PlayerAction.Down])) return;
+        if (!Input.GetKeyDown(KeySetting.GetKey(PlayerAction.Down))) return;
         if (!isGround) return;
 
         if (tileLeft != null) colliderController.PassTile(tileLeft);
@@ -380,7 +380,7 @@ public class Player : DirectionalGameObject
         jumpOffsetTimer.Tick();
         if (!IsActionAble() || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;
 
-        if (Input.GetKeyDown(KeySetting.keys[PlayerAction.Jump]))
+        if (Input.GetKeyDown(KeySetting.GetKey(PlayerAction.Jump)))
         {
             playerUnit.unitStat.ChangeCurrentStat(StatKind.JumpCount, -1);
             Jump();

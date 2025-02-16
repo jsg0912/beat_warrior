@@ -26,8 +26,7 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
 
     public void TurnOnMapTitleMassageUI(SceneName sceneName)
     {
-        //string message = sceneName.ToString();
-        //MapTitleMessagePopup.SetMessageText(message);
+        bool isExist = true;
         switch (sceneName)
         {
             case SceneName.Title:
@@ -42,8 +41,11 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
             case SceneName.Ch2BossStage:
                 mapTitleMessagePopup.SetBackgroundImage(LowerPartBossMapImage);
                 break;
+            default:
+                isExist = false;
+                break;
         }
-        mapTitleMessagePopup.TurnOnPopup();
+        if (isExist) mapTitleMessagePopup.TurnOnPopup();
     }
 
     public IEnumerator TriggerTurnOnMapTitleMassage(SceneName sceneName)

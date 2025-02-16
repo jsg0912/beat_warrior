@@ -14,7 +14,7 @@ public class Mark : ActiveSkillPlayer
 
     protected override void SetSkillName() { skillName = SkillName.Mark; }
 
-    public override void CheckInputKeyCode()
+    public override void CheckInputKeyCode(bool forced = false)
     {
         UpdateKey();
 
@@ -58,7 +58,7 @@ public class Mark : ActiveSkillPlayer
     // TODO: UpdateKey 사용 시점 수정(지금 무슨 실행될떄마다 실행되고 있음 쓸데없이)
     protected override void UpdateKey()
     {
-        keyCode = KeySetting.keys[PlayerAction.Mark_Dash];
+        keyCode = KeySetting.GetKey(PlayerAction.Mark_Dash);
     }
 
     protected override IEnumerator CountCoolTime()
@@ -75,7 +75,7 @@ public class Mark : ActiveSkillPlayer
         Vector3 end = Util.GetMousePointWithPerspectiveCamera();
         end.z = 0;
         GameObject Marker = MyPooler.ObjectPooler.Instance.GetFromPool(PoolTag.Mark, start, Quaternion.identity);
-        
+
 
         Vector3 direction = end - start;
         Util.RotateObjectForwardingDirection(Marker, direction, true);

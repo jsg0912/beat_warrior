@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1619677809930906334}
   - component: {fileID: 9052459551233661571}
-  - component: {fileID: 2072152166953213458}
+  - component: {fileID: 6612642105804204716}
+  - component: {fileID: 5050070372431772338}
   m_Layer: 0
   m_Name: "\uD45C\uC9C0\uD310"
   m_TagString: Untagged
@@ -72,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1364767153
-  m_SortingLayer: 7
+  m_SortingLayerID: 1686646113
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 91c5c4aa14859154e88273b5a91c1052, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -86,7 +87,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2072152166953213458
+--- !u!114 &6612642105804204716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,6 +101,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptText: {fileID: 3853226966940639035}
   tutorialAction: 0
+  NeedPause: 1
+--- !u!61 &5050070372431772338
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5753822476360874530}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 8}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 4.01, y: 3.81}
+    newSize: {x: 4.01, y: 3.81}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4, y: 20}
+  m_EdgeRadius: 0
 --- !u!1001 &3666754087511487666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108,6 +155,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1619677809930906334}
     m_Modifications:
+    - target: {fileID: 548177913965882249, guid: 6047627639febbc4d9df9fa2a475f5de, type: 3}
+      propertyPath: m_fontSize
+      value: 6.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 548177913965882249, guid: 6047627639febbc4d9df9fa2a475f5de, type: 3}
+      propertyPath: m_margin.x
+      value: -0.8684703
+      objectReference: {fileID: 0}
+    - target: {fileID: 548177913965882249, guid: 6047627639febbc4d9df9fa2a475f5de, type: 3}
+      propertyPath: m_margin.z
+      value: -0.8546856
+      objectReference: {fileID: 0}
+    - target: {fileID: 548177913965882249, guid: 6047627639febbc4d9df9fa2a475f5de, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.5283019
+      objectReference: {fileID: 0}
+    - target: {fileID: 548177913965882249, guid: 6047627639febbc4d9df9fa2a475f5de, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.34032205
+      objectReference: {fileID: 0}
+    - target: {fileID: 548177913965882249, guid: 6047627639febbc4d9df9fa2a475f5de, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.24172305
+      objectReference: {fileID: 0}
+    - target: {fileID: 548177913965882249, guid: 6047627639febbc4d9df9fa2a475f5de, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4287059774
+      objectReference: {fileID: 0}
+    - target: {fileID: 661046370847479879, guid: 6047627639febbc4d9df9fa2a475f5de, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6276288012236097297, guid: 6047627639febbc4d9df9fa2a475f5de, type: 3}
       propertyPath: m_Name
       value: InteractionPrompt
@@ -178,7 +257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8022009096421628376, guid: 6047627639febbc4d9df9fa2a475f5de, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.823
       objectReference: {fileID: 0}
     - target: {fileID: 8022009096421628376, guid: 6047627639febbc4d9df9fa2a475f5de, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
