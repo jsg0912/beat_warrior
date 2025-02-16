@@ -20,7 +20,7 @@ public class TutorialManager : SingletonObject<TutorialManager>
 
     public PlayerAction currentTutorialAction { get; private set; } = PlayerAction.Null;
     public bool IsTutorialComplete { get; private set; } = false;
-    public bool IsWaitingForTutorialAction { get; private set; } = false;
+    public bool IsWaitingForTutorialAction => currentTutorialAction != PlayerAction.Null;
 
     public void SetUserInput(PlayerAction action)
     {
@@ -28,20 +28,28 @@ public class TutorialManager : SingletonObject<TutorialManager>
         if (IsWaitingForTutorialAction && action == currentTutorialAction)
         {
             SetActionTutorialComplete(action);
-            IsWaitingForTutorialAction = false;
             tutorialInteractionPrompts.First(x => x.GetTutorialAction() == action).StartInteraction();
+            currentTutorialAction = PlayerAction.Null;
         }
     }
 
     public void SetCurrentTutorialAction(PlayerAction action)
     {
         currentTutorialAction = action;
-        IsWaitingForTutorialAction = true;
     }
 
     public void SetActionTutorialComplete(PlayerAction action)
     {
         tutorialList[action] = true;
+        UpdateIsTutorialComplete();
+    }
+
+    private void UpdateIsTutorialComplete()
+    {
         IsTutorialComplete = tutorialList.All(x => x.Value == true);
+        if (IsTutorialComplete)
+        {
+            ChapterManager.Instance.SetTutorialComplete();
+        }
     }
 }

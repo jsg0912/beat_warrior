@@ -10,11 +10,11 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
     public Sprite LowerPartMapImage;
     public Sprite LowerPartBossMapImage;
 
-    public void TurnOnSystemMassageUI(SystemMessageType systemMessageType)
+    public void TurnOnSystemMassageUI(SystemMessageType systemMessageType, bool isAffectedByDeltaTime = false)
     {
         string message = ScriptPool.SystemMassageDictionary[systemMessageType][GameManager.Instance.Language];
         systemMessagePopup.SetMessageText(message);
-        systemMessagePopup.TurnOnPopup();
+        systemMessagePopup.TurnOnPopup(isAffectedByDeltaTime);
     }
 
     public void TurnOnTutorialMassageUI(PlayerAction playerAction)
