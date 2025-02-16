@@ -18,7 +18,7 @@ public abstract class DirectionalGameObject : MonoBehaviour
         else SetMovingDirection(Direction.Right);
     }
 
-    public void SetMovingDirection(Direction dir)
+    public virtual void SetMovingDirection(Direction dir)
     {
         movingDirection = dir;
         if (objectDirection != movingDirection)

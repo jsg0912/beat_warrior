@@ -191,7 +191,7 @@ public class Monster : DirectionalGameObject
         if (attackEffect != null) StartCoroutine(Util.PlayInstantEffect(attackEffect, 0.3f));
     }
 
-    public void PlayScarEffect()
+    public virtual void PlayScarEffect()
     {
         foreach (GameObject hitEffect in hitEffects)
         {
