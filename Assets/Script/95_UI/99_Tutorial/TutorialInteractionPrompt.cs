@@ -3,13 +3,19 @@ using UnityEngine;
 public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
 {
     [SerializeField] private PlayerAction tutorialAction;
+    [SerializeField] private bool NeedPause = true;
 
     override public bool StartInteraction()
     {
-        // 게임 재개
-        PauseController.Instance.TryResumeGame();
-        // Blur 제거
-        BlurUIManager.Instance.TurnOffActiveBlur();
+        if (NeedPause)
+        {
+            // 게임 재개
+            PauseController.Instance.TryResumeGame();
+            // Blur 제거
+            BlurUIManager.Instance.TurnOffActiveBlur();
+            // Player Action
+            Player.Instance.ForcePlayerAction(tutorialAction);
+        }
         return true;
     }
 
@@ -21,9 +27,12 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
         SetActivePromptText(true);
         promptText.text = PromptMessageGenerator.GeneratePromptMessage(tutorialAction);
         // 게임 멈추기
-        PauseController.Instance.TryPauseGame();
-        // Blur 및 설명창 켜기
-        SystemMessageUIManager.Instance.TurnOnTutorialMassageUI(tutorialAction);
+        if (NeedPause)
+        {
+            PauseController.Instance.TryPauseGame();
+            // Blur 및 설명창 켜기
+            SystemMessageUIManager.Instance.TurnOnTutorialMassageUI(tutorialAction);
+        }
         BlurUIManager.Instance.TurnOnActiveBlur(BlurType.BlackBlur);
         // Key Input 받도록 설정
         TutorialManager.Instance.SetCurrentTutorialAction(tutorialAction);

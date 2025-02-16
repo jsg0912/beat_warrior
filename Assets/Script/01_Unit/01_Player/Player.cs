@@ -276,6 +276,42 @@ public class Player : DirectionalGameObject
         CheckGround();
     }
 
+    public void ForcePlayerAction(PlayerAction playerAction)
+    {
+        if (IsActionAble())
+        {
+            switch (playerAction)
+            {
+                case PlayerAction.Jump:
+                    TryJump();
+                    break;
+                case PlayerAction.Down:
+                    Down();
+                    break;
+                case PlayerAction.Skill1:
+                    ForceUseSkill<QSkill>(SkillName.Skill1);
+                    break;
+                case PlayerAction.Skill2:
+                    ForceUseSkill<ESkill>(SkillName.Skill2);
+                    break;
+                case PlayerAction.Attack:
+                    ForceUseSkill<Mark>(SkillName.Attack);
+                    break;
+                case PlayerAction.Tutorial_Mark:
+                    ForceUseSkill<Mark>(SkillName.Mark);
+                    break;
+                case PlayerAction.Tutorial_Dash:
+                    ForceUseSkill<Dash>(SkillName.Dash);
+                    break;
+            }
+        }
+    }
+
+    private void ForceUseSkill<T>(SkillName skillName) where T : ActiveSkillPlayer
+    {
+        (skillList.Find(skill => skill.skillName == SkillName.Attack) as T).CheckInputKeyCode(true);
+    }
+
     private bool IsMoveable()
     {
         switch (status)

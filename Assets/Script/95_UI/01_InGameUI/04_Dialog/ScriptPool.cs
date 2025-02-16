@@ -310,6 +310,10 @@ public static class ScriptPool
 
     public static Dictionary<PlayerAction, Dictionary<Language, string>> TutorialText = new()
     {
+        {PlayerAction.Left, new () {
+            { Language.kr, "A/D를 눌러 좌우로 이동할 수 있습니다" },
+            { Language.en, "English" }
+        }},
         {PlayerAction.Attack, new () {
             { Language.kr, "한국어" },
             { Language.en, "English" }

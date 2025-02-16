@@ -40,7 +40,7 @@ public class CommandManager : SingletonObject<CommandManager>
                     PlayerAction tutorialAction = TutorialManager.InstanceWithoutCreate.currentTutorialAction;
                     if (tutorialAction != PlayerAction.Null && Input.GetKeyDown(KeySetting.keys[tutorialAction]))
                     {
-                        TutorialManager.InstanceWithoutCreate.SetUserInput(TutorialManager.InstanceWithoutCreate.currentTutorialAction);
+                        TutorialManager.InstanceWithoutCreate.SetUserInput(tutorialAction);
                     }
                 }
                 // When we paused the game, we don't want to check below commands.
