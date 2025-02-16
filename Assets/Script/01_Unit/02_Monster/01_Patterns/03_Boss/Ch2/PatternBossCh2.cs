@@ -15,12 +15,12 @@ public class PatternCh2Boss : PatternBoss
 
     private int attackCounter = 0;
     private Timer attackCoolTimer;
-
-    public PatternCh2Boss() : base(PatternPhase.Phase2)
+    override public void Initialize(Monster monster)
     {
         bossGergus = monster as BossGergus;
+        if (bossGergus)
 
-        attackStrategyRightHook = new AttackStrategyMelee(BossConstantCh2.AttackAnimTriggerRightHook);
+            attackStrategyRightHook = new AttackStrategyMelee(BossConstantCh2.AttackAnimTriggerRightHook);
         attackStrategyLeftHook = new AttackStrategyMelee(BossConstantCh2.AttackAnimTriggerLeftHook);
         attackStrategyFullSwing = new AttackStrategyMelee(BossConstantCh2.AttackAnimTriggerFullSwing);
 
@@ -55,6 +55,11 @@ public class PatternCh2Boss : PatternBoss
         };
 
         attackCoolTimer = new Timer(BossConstantCh2.AttackCoolTime);
+        base.Initialize(bossGergus);
+    }
+
+    public PatternCh2Boss() : base(PatternPhase.Phase2)
+    {
     }
 
     protected override void CheckPhase()
@@ -68,12 +73,11 @@ public class PatternCh2Boss : PatternBoss
         }
     }
 
-
     override public void PlayPattern()
     {
         base.PlayPattern();
         // 공격과정
-        if (!attackCoolTimer.Tick() && monster.GetIsAttackAble())
+        if (!monster.GetIsAttacking() && !attackCoolTimer.Tick() && monster.GetIsAttackAble())
         {
             if (attackCounter % BossConstantCh2.IppaliSpawnCycle == 0)
             {
