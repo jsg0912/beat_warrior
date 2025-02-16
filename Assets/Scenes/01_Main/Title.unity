@@ -1518,7 +1518,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -5
   m_TargetDisplay: 0
 --- !u!224 &695329074
 RectTransform:
@@ -7074,6 +7074,14 @@ PrefabInstance:
     - target: {fileID: 2070472356622733471, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165066334017198344, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+      propertyPath: m_SortingOrder
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165066334017198344, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2385637358504534912, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
       propertyPath: m_SizeDelta.x
