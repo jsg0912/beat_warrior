@@ -42,7 +42,7 @@ public class Monster : DirectionalGameObject
 
     private Timer markRemainTimer;
 
-    void Start()
+    protected virtual void Start()
     {
         _animator = GetComponent<Animator>();
         _animator.SetBool(MonsterAnimTrigger.repeatAttackBool, MonsterConstant.IsRepeatAttackAnimation[monsterName]);
