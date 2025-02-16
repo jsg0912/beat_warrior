@@ -77,9 +77,4 @@ public class BossGergus : Monster
     {
         SoundManager.Instance.SFXPlay("BossDie2", SoundList.Instance.bossDie2);
     }
-
-
-
-
-
 }
