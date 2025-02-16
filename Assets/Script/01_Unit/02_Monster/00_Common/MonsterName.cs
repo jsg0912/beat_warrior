@@ -1,6 +1,5 @@
 public enum MonsterName
 {
-    TutorialIppali,
     Ippali,
     Ibkkugi,
     Koppulso,
@@ -8,4 +7,5 @@ public enum MonsterName
     Giljjugi,
     Itmomi,
     Ch2Boss,
+    TutorialIppali
 }
