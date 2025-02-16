@@ -35,6 +35,6 @@ public class BossGergusAnimatorController : StateMachineBehaviour
                stateInfo.IsName("Right1") || stateInfo.IsName("Last1") ||
                stateInfo.IsName("SloshCharge") || stateInfo.IsName("Slosh") ||
                stateInfo.IsName("CrashCharge") || stateInfo.IsName("Crash") ||
-               stateInfo.IsName("AttackEnd") || stateInfo.IsName("Throw");
+               stateInfo.IsName("TentacleAttackEnd") || stateInfo.IsName("Throw");
     }
 }
