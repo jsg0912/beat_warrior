@@ -80,7 +80,7 @@ public class AltarUIManager : SingletonObject<AltarUIManager>
         }
         else
         {
-            SystemMessageUIManager.Instance.TurnOnSystemMassageUI(SystemMessageType.LackSoul, true);
+            SystemMessageUIManager.Instance.TurnOnSystemMassageUI(SystemMessageType.LackSoul);
         }
     }
 

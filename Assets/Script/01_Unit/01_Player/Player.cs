@@ -295,7 +295,7 @@ public class Player : DirectionalGameObject
                     ForceUseSkill<ESkill>(SkillName.Skill2);
                     break;
                 case PlayerAction.Attack:
-                    ForceUseSkill<Mark>(SkillName.Attack);
+                    ForceUseSkill<HolyBlade>(SkillName.Attack);
                     break;
                 case PlayerAction.Tutorial_Mark:
                     ForceUseSkill<Mark>(SkillName.Mark);
@@ -309,7 +309,7 @@ public class Player : DirectionalGameObject
 
     private void ForceUseSkill<T>(SkillName skillName) where T : ActiveSkillPlayer
     {
-        (skillList.Find(skill => skill.skillName == SkillName.Attack) as T).CheckInputKeyCode(true);
+        (skillList.Find(skill => skill.skillName == skillName) as T).CheckInputKeyCode(true);
     }
 
     private bool IsMoveable()

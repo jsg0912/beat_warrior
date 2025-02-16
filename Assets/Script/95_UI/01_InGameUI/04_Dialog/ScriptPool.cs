@@ -335,7 +335,7 @@ public static class ScriptPool
             { Language.en, "English" }
         }},
         {PlayerAction.Down, new () {
-            { Language.kr, "S키를 눌러 위로 점프할 수 있습니다." },
+            { Language.kr, "S키를 눌러 아래로 내려갈 수 있습니다." },
             { Language.en, "English" }
         }},
         {PlayerAction.Tutorial_Mark, new () {

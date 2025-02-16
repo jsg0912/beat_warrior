@@ -13,8 +13,9 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
             PauseController.Instance.TryResumeGame();
             // Blur 제거
             BlurUIManager.Instance.TurnOffActiveBlur();
-            // Player Action
-            Player.Instance.ForcePlayerAction(tutorialAction);
+            if (!TutorialManager.Instance.isSkillAble)
+                // Player Action
+                Player.Instance.ForcePlayerAction(tutorialAction);
         }
         return true;
     }

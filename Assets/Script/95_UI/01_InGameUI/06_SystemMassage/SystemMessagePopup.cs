@@ -12,6 +12,7 @@ public class SystemMessagePopup : MonoBehaviour
     public Image MapTitleImage;
 
     private Coroutine fadeCoroutine;
+    private Coroutine hideCoroutine;
 
     void Start()
     {
@@ -40,7 +41,8 @@ public class SystemMessagePopup : MonoBehaviour
             {
                 StopCoroutine(fadeCoroutine);
             }
-            StartCoroutine(AutoHideRoutine(isAffectedByDeltaTime, DisplayDuration));
+            if (hideCoroutine != null) StopCoroutine(hideCoroutine);
+            hideCoroutine = StartCoroutine(AutoHideRoutine(isAffectedByDeltaTime, DisplayDuration));
         }
         return success;
     }
@@ -53,7 +55,7 @@ public class SystemMessagePopup : MonoBehaviour
 
     private IEnumerator AutoHideRoutine(bool isAffectedByDeltaTime, float DisplayDuration)
     {
-        if(isAffectedByDeltaTime == true) { yield return new WaitForSeconds(DisplayDuration); }
+        if (isAffectedByDeltaTime == true) { yield return new WaitForSeconds(DisplayDuration); }
         else { yield return new WaitForSecondsRealtime(DisplayDuration); }
         FadeOut();
     }

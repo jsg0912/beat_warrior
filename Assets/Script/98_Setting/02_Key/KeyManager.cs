@@ -17,6 +17,12 @@ public static class KeySetting
                 return GetKey(PlayerAction.Mark_Dash);
             case PlayerAction.Tutorial_Mark:
                 return GetKey(PlayerAction.Mark_Dash);
+            case PlayerAction.Tutorial_SkillReset:
+                return GetKey(PlayerAction.Interaction);
+            case PlayerAction.Tutorial_Altar:
+                return GetKey(PlayerAction.Interaction);
+            case PlayerAction.Tutorial_Portal:
+                return GetKey(PlayerAction.Interaction);
             default:
                 Debug.LogError("Key for " + action + " is not set.");
                 return KeyCode.None;
