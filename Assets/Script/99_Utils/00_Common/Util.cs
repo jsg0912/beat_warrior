@@ -143,7 +143,9 @@ public static class Util
 
     public static GameObject GetMonsterGameObject(Collider2D collision)
     {
-        return collision.gameObject.transform.parent?.gameObject;
+        // TODO: 보스때문에 임시로 수정해놨는데 나중에 다시 수정해야함 - KMJ
+        if (collision.gameObject.transform.parent == null) return collision.gameObject;
+        else return collision.gameObject.transform.parent?.gameObject;
     }
 
     public static int Round(int p, int q)
