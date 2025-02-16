@@ -37,25 +37,26 @@ public class CommandManager : SingletonObject<CommandManager>
             {
                 if (TutorialManager.InstanceWithoutCreate != null)
                 {
-                    if (TutorialManager.InstanceWithoutCreate.isSkillAble)
+                    TutorialManager tutorialManager = TutorialManager.InstanceWithoutCreate;
+                    if (tutorialManager.isSkillAble)
                     {
                         Player.Instance.CheckPlayerCommand();
                     }
                     else
                     {
                         Player.Instance.CheckGround();
-                        if (TutorialManager.InstanceWithoutCreate.isJumpAble)
+                        if (tutorialManager.isJumpAble)
                         {
                             Player.Instance.TryJump();
                         }
                     }
 
-                    if (TutorialManager.InstanceWithoutCreate.IsWaitingForTutorialAction)
+                    if (tutorialManager.IsWaitingForTutorialAction)
                     {
-                        PlayerAction tutorialAction = TutorialManager.InstanceWithoutCreate.currentTutorialAction;
+                        PlayerAction tutorialAction = tutorialManager.currentTutorialAction;
                         if (tutorialAction != PlayerAction.Null && Input.GetKeyDown(KeySetting.GetKey(tutorialAction)))
                         {
-                            TutorialManager.InstanceWithoutCreate.SetUserInput(tutorialAction);
+                            tutorialManager.SetUserInput(tutorialAction);
                         }
                     }
                 }
@@ -69,7 +70,7 @@ public class CommandManager : SingletonObject<CommandManager>
                 {
                     InteractionManager.Instance.InteractWithLastObject();
                 }
-                CheckTestCommandInGame();
+                // CheckTestCommandInGame();
             }
         }
     }

@@ -37,7 +37,7 @@ public class TutorialManager : SingletonObject<TutorialManager>
             {
                 isJumpAble = true;
             }
-            if (action == PlayerAction.Skill2)
+            if (tutorialList[PlayerAction.Skill1] && tutorialList[PlayerAction.Skill2])
             {
                 isSkillAble = true;
             }

@@ -132,7 +132,6 @@ public class Player : DirectionalGameObject
             case PlayerStatus.Normal:
                 if (this.status == PlayerStatus.Rest)
                 {
-                    DebugConsole.Log("ansdianidsanmd");
                     SetAnimTrigger(PlayerConstant.restartAnimTrigger);
                 }
                 break;

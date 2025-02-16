@@ -5,6 +5,7 @@ public class AttackStrategyMelee : AttackStrategy
 
     }
 
+    // 공격은 Animation에서 Collider를 끄면서 공격함
     protected override void AttackMethod()
     {
     }

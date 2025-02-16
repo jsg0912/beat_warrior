@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class MoveStrategyNormal : MoveStrategyRandom
 {
     public override void Initialize(Monster monster)
