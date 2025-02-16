@@ -12,6 +12,12 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
 
     public FadeInEffect LowerPartBossMapAnimation;
 
+    public bool isTimeLinePlaying = false;
+
+    public void SetIsTimeLindPlaying()
+    {
+        isTimeLinePlaying = !isTimeLinePlaying;
+    }
     public void TurnOnSystemMassageUI(SystemMessageType systemMessageType, float displayDuration = 2.0f, bool isStayWhenPause = false)
     {
         string message = ScriptPool.SystemMassageDictionary[systemMessageType][GameManager.Instance.Language];
