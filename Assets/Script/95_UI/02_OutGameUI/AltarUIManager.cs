@@ -39,7 +39,7 @@ public class AltarUIManager : SingletonObject<AltarUIManager>
         return salesSkillList.Contains(skillName);
     }
 
-    public void UpdatePlayerSoulView() => PlayerSoulView.text = " : " + spiritCount.ToString();
+    public void UpdatePlayerSoulView() => PlayerSoulView.text = spiritCount.ToString();
 
     public void UpdateEquippedTraitUIs(List<TraitIcon> equippedTraitUIs)
     {

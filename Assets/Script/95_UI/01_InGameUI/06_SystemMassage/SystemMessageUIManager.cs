@@ -10,9 +10,16 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
     public Sprite LowerPartMapImage;
     public Sprite LowerPartBossMapImage;
 
-    public void TurnOnSystemMassageUI(SystemMessageType syetemMessageType)
+    public void TurnOnSystemMassageUI(SystemMessageType systemMessageType)
     {
-        string message = ScriptPool.SystemMassageDictionary[syetemMessageType][GameManager.Instance.Language];
+        string message = ScriptPool.SystemMassageDictionary[systemMessageType][GameManager.Instance.Language];
+        systemMessagePopup.SetMessageText(message);
+        systemMessagePopup.TurnOnPopup();
+    }
+
+    public void TurnOnTutorialMassageUI(PlayerAction playerAction)
+    {
+        string message = ScriptPool.TutorialText[playerAction][GameManager.Instance.Language];
         systemMessagePopup.SetMessageText(message);
         systemMessagePopup.TurnOnPopup();
     }

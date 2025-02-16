@@ -27,6 +27,7 @@ public class Monster : DirectionalGameObject
         }
     }
     [SerializeField] private int AnotherHPValue = 0;
+    [SerializeField] private float soulDropRate = ObjectConstant.SoulDropRate;
 
     protected Animator _animator;
     private bool isFixedAnimation = false;
@@ -241,7 +242,7 @@ public class Monster : DirectionalGameObject
 
     public void MakePlayerRewards()
     {
-        InGameManager.Instance.CreateSoul(transform.position);
+        InGameManager.Instance.CreateSoul(transform.position, soulDropRate);
         ChapterManager.Instance.AlarmMonsterKilled(monsterName);
     }
 
