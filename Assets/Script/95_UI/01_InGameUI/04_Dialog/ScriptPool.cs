@@ -334,6 +334,10 @@ public static class ScriptPool
             { Language.kr, "W키를 눌러 위로 점프할 수 있습니다." },
             { Language.en, "English" }
         }},
+        {PlayerAction.Down, new () {
+            { Language.kr, "S키를 눌러 위로 점프할 수 있습니다." },
+            { Language.en, "English" }
+        }},
         {PlayerAction.Tutorial_Mark, new () {
             { Language.kr, "마우스 우클릭을 눌러 표식을 발사합니다. 표식 대상을 처치하면 쿨타임을 초기화합니다." },
             { Language.en, "English" }

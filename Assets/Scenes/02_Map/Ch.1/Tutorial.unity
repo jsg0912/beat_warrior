@@ -739,6 +739,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 170213243}
+  - component: {fileID: 170213244}
   m_Layer: 0
   m_Name: TutorialObject
   m_TagString: Untagged
@@ -773,6 +774,30 @@ Transform:
   - {fileID: 78836408}
   m_Father: {fileID: 1976003800}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &170213244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170213242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de77ae18d3d358e4b9a3e3956707752f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialInteractionPrompts:
+  - {fileID: 2140893209328398364}
+  - {fileID: 1473773334}
+  - {fileID: 71554664}
+  - {fileID: 778065317}
+  - {fileID: 639175027}
+  - {fileID: 1295240853}
+  - {fileID: 644980497}
+  - {fileID: 1742718956}
+  - {fileID: 696906614}
+  - {fileID: 1301485229}
+  - {fileID: 78836407}
 --- !u!4 &176971028 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3652792511268289499, guid: 1c3cafb8deb5e7246a04b05da6453faf, type: 3}
@@ -42422,7 +42447,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2059763324}
   - component: {fileID: 2059763321}
-  - component: {fileID: 2059763325}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -42458,30 +42482,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2059763325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2059763320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de77ae18d3d358e4b9a3e3956707752f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialInteractionPrompts:
-  - {fileID: 2140893209328398364}
-  - {fileID: 1473773334}
-  - {fileID: 71554664}
-  - {fileID: 778065317}
-  - {fileID: 639175027}
-  - {fileID: 1295240853}
-  - {fileID: 644980497}
-  - {fileID: 1742718956}
-  - {fileID: 696906614}
-  - {fileID: 1301485229}
-  - {fileID: 78836407}
 --- !u!4 &2092374207 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6557635014384647708, guid: 861bff8231ed06c47abd0d01baf3c2c7, type: 3}

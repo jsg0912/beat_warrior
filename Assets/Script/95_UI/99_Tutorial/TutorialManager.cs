@@ -16,6 +16,9 @@ public class TutorialManager : SingletonObject<TutorialManager>
         {PlayerAction.Tutorial_Portal, false},
     };
 
+    //TODO: 시간 없어서 아래처럼 함
+    public bool isJumpAble { private set; get; } = false;
+
     [SerializeField] private TutorialInteractionPrompt[] tutorialInteractionPrompts;
 
     public PlayerAction currentTutorialAction { get; private set; } = PlayerAction.Null;
@@ -27,6 +30,10 @@ public class TutorialManager : SingletonObject<TutorialManager>
         if (!tutorialList.ContainsKey(action)) return;
         if (IsWaitingForTutorialAction && action == currentTutorialAction)
         {
+            if (action == PlayerAction.Jump)
+            {
+                isJumpAble = true;
+            }
             SetActionTutorialComplete(action);
             tutorialInteractionPrompts.First(x => x.GetTutorialAction() == action).StartInteraction();
             currentTutorialAction = PlayerAction.Null;

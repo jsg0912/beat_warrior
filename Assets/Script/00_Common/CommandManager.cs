@@ -37,6 +37,11 @@ public class CommandManager : SingletonObject<CommandManager>
             {
                 if (TutorialManager.InstanceWithoutCreate != null)
                 {
+                    Player.Instance.CheckGround();
+                    if (TutorialManager.InstanceWithoutCreate.isJumpAble)
+                    {
+                        Player.Instance.TryJump();
+                    }
                     if (TutorialManager.InstanceWithoutCreate.IsWaitingForTutorialAction)
                     {
                         PlayerAction tutorialAction = TutorialManager.InstanceWithoutCreate.currentTutorialAction;

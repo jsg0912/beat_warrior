@@ -354,7 +354,7 @@ public class Player : DirectionalGameObject
         if (tileRight != null && tileRight != tileLeft) colliderController.PassTile(tileRight);
     }
 
-    private void CheckGround()
+    public void CheckGround()
     {
         if (jumpOffsetTimer.remainTime > 0) return;
 
@@ -375,7 +375,7 @@ public class Player : DirectionalGameObject
         if (rayHitRight.collider != null) tileRight = rayHitRight.collider.GetComponent<BoxCollider2D>();
     }
 
-    private void TryJump()
+    public void TryJump()
     {
         jumpOffsetTimer.Tick();
         if (!IsActionAble() || playerUnit.unitStat.GetCurrentStat(StatKind.JumpCount) == 0) return;

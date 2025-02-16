@@ -21,7 +21,7 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
     {
         string message = ScriptPool.TutorialText[playerAction][GameManager.Instance.Language];
         systemMessagePopup.SetMessageText(message);
-        systemMessagePopup.TurnOnPopup();
+        systemMessagePopup.TurnOnPopup(DisplayDuration: 5.0f);
     }
 
     public void TurnOnMapTitleMassageUI(SceneName sceneName)
