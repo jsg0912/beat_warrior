@@ -34,11 +34,15 @@ public class SoundList : SingletonScriptableObject<SoundList>
 
     public AudioClip bossSpit;
     public AudioClip bossIppaliSpawn;
-    public AudioClip bossTentacleStab;
+    public AudioClip bossTentacleStabBoss;
+    public AudioClip bossTentacleStabTentacle;
     public AudioClip bossTentacleHit;
+    public AudioClip bossAttackOneTwo;
     public AudioClip bossAttackThree;
-    public AudioClip bossHalfHp;
-    public AudioClip bossDie;
+    public AudioClip bossStand;
+    public AudioClip bossDie0;
+    public AudioClip bossDie1;
+    public AudioClip bossDie2;
     public AudioClip bossBackGroundSoundEffect;
 
     public AudioClip playerHit; //
