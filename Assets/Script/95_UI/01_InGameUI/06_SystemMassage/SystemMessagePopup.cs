@@ -30,7 +30,7 @@ public class SystemMessagePopup : MonoBehaviour
         fadeCoroutine = StartCoroutine(FadeOutRoutine());
     }
 
-    public bool TurnOnPopup(bool isAffectedByDeltaTime = false)
+    public bool TurnOnPopup(bool isAffectedByDeltaTime = false, float DisplayDuration = 3.0f)
     {
         bool success = Util.SetActive(gameObject, true);
         if (success)
@@ -40,7 +40,7 @@ public class SystemMessagePopup : MonoBehaviour
             {
                 StopCoroutine(fadeCoroutine);
             }
-            StartCoroutine(AutoHideRoutine(isAffectedByDeltaTime));
+            StartCoroutine(AutoHideRoutine(isAffectedByDeltaTime, DisplayDuration));
         }
         return success;
     }
@@ -51,10 +51,10 @@ public class SystemMessagePopup : MonoBehaviour
         return success;
     }
 
-    private IEnumerator AutoHideRoutine(bool isAffectedByDeltaTime)
+    private IEnumerator AutoHideRoutine(bool isAffectedByDeltaTime, float DisplayDuration)
     {
-        if(isAffectedByDeltaTime == true) { yield return new WaitForSeconds(displayDuration); }
-        else { yield return new WaitForSecondsRealtime(displayDuration); }
+        if(isAffectedByDeltaTime == true) { yield return new WaitForSeconds(DisplayDuration); }
+        else { yield return new WaitForSecondsRealtime(DisplayDuration); }
         FadeOut();
     }
 
