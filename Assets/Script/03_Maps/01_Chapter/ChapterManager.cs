@@ -76,21 +76,10 @@ public class ChapterManager : SingletonObject<ChapterManager>
         {
             if (++currentStageIndex == currentChapter.stages.Length)
             {
-                UIManager.Instance.TurnOnMiniMap();
-                SoundManager.Instance.StopBackGroundSFX();
                 MoveToNextChapter();
             }
             else
             {
-                if (currentStageIndex + 2 == currentChapter.stages.Length) // TODO: 하드 코딩 수정 필요 - SDH, 20250217
-                {
-                    if (currentChapterName == ChapterName.Ch2)
-                    {
-                        SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter2BossBGM);
-                        SoundManager.Instance.PlayCh2BGSFX();
-                        UIManager.Instance.TurnOffMiniMap();
-                    }
-                }
                 LoadStageScene();
             }
             return true;
