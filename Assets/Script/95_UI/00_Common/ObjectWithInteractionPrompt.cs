@@ -4,9 +4,9 @@ using TMPro;
 public abstract class ObjectWithInteractionPrompt : MonoBehaviour
 {
     public TextMeshPro promptText;
-    private bool isInitialized = false;
+    protected bool isInitialized = false;
 
-    private void Initialize()
+    protected void Initialize()
     {
         if (isInitialized) return;
         isInitialized = true;
@@ -14,21 +14,21 @@ public abstract class ObjectWithInteractionPrompt : MonoBehaviour
 
     public abstract bool StartInteraction();
 
-    public void SetInteractAble()
+    public virtual void SetInteractAble()
     {
         Initialize();
         bool success = SetActivePromptText(true);
         if (success) InteractionManager.Instance.AddObject(this);
-        promptText.text = PromptMessageGenerator.GeneratePromptMessage();
+        promptText.text = PromptMessageGenerator.GeneratePromptMessage(PlayerAction.Interaction);
     }
 
-    public void SetInteractDisable()
+    public virtual void SetInteractDisable()
     {
         bool success = SetActivePromptText(false);
         if (success) InteractionManager.Instance.RemoveObject(this);
     }
 
-    private bool SetActivePromptText(bool isActive) { return Util.SetActive(promptText.gameObject, isActive); }
+    protected bool SetActivePromptText(bool isActive) { return Util.SetActive(promptText.gameObject, isActive); }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {

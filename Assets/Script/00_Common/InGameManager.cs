@@ -11,9 +11,9 @@ public class InGameManager : SingletonObject<InGameManager>
         //PauseController.Instance.ChangeDefaultGameSpeed(0.1f);
     }
 
-    public void CreateSoul(Vector3 position)
+    public void CreateSoul(Vector3 position, float dropRate)
     {
-        if (RandomSystem.RandomBool(ObjectConstant.SoulDropRate))
+        if (RandomSystem.RandomBool(dropRate))
         {
             MyPooler.ObjectPooler.Instance.GetFromPool(PoolTag.Soul, position + SoulPositionOffset, Quaternion.identity);
             //Instantiate(SoulPrefab, position + SoulPositionOffset, Quaternion.identity);
