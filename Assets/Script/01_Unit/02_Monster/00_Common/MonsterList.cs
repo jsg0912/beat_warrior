@@ -66,7 +66,7 @@ public static class MonsterList
             {StatKind.Def, 0},
         },
         PatternName.Ippali),
-        new MonsterJSON(MonsterName.Ch2Boss,
+        new MonsterJSON(MonsterName.Gergus,
         "황혼의 촉수 빨판이",
         new Dictionary<StatKind, int>{
             {StatKind.HP, 100},

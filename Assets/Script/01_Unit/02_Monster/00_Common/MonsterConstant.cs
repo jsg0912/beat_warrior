@@ -28,6 +28,13 @@ public class MonsterConstant
     public const float WallCheckRayDistance = 0.1f;
     public const float GroundCheckRayDistance = 0.1f;
 
+    // Boss Ch2
+
+    public const int GergusIppaliSpawnCount = 2;
+
+    public const float GergusThrowSpeed = 6f;
+    public const float GergusMaxHeight = 7f;
+
     public static Dictionary<MonsterName, float> RecognizeRange = new() {
         { MonsterName.Ippali, 5.0f },
         { MonsterName.Ibkkugi, 10.0f },

@@ -117,6 +117,51 @@ namespace MyPooler
                     amount = 2,
                     shouldExpandPool = true,
                 }
+            },
+            {
+                PoolTag.Tentacle,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.TentaclePrefab),
+                    amount = 2,
+                    shouldExpandPool = true,
+                }
+            },
+            {
+                PoolTag.TentacleVertical,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.TentacleVerticalPrefab),
+                    amount = 2,
+                    shouldExpandPool = true,
+                }
+            },
+            {
+                PoolTag.TentacleHorizontal,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.TentacleHorizontalPrefab),
+                    amount = 2,
+                    shouldExpandPool = true,
+                }
+            },
+            {
+                PoolTag.IppaliEgg,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.IppaliEggPrefab),
+                    amount = 2,
+                    shouldExpandPool = true,
+                }
+            },
+            {
+                PoolTag.GergusThrow,
+                new ObjectPoolContent
+                {
+                    prefab = Resources.Load<GameObject>(PrefabRouter.MonsterAttackPrefab[MonsterName.Gergus]),
+                    amount = 5,
+                    shouldExpandPool = true,
+                }
             }
         };
     }

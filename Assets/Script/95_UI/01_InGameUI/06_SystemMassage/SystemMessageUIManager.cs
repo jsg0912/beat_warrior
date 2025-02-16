@@ -10,6 +10,8 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
     public Sprite LowerPartMapImage;
     public Sprite LowerPartBossMapImage;
 
+    public FadeInEffect LowerPartBossMapAnimation;
+
     public void TurnOnSystemMassageUI(SystemMessageType systemMessageType, float displayDuration = 2.0f, bool isStayWhenPause = false)
     {
         string message = ScriptPool.SystemMassageDictionary[systemMessageType][GameManager.Instance.Language];
@@ -52,5 +54,10 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
     {
         yield return new WaitForSeconds(0f);
         TurnOnMapTitleMassageUI(sceneName);
+    }
+
+    public void TurnOnBossMapTitle()
+    {
+        LowerPartBossMapAnimation.gameObject.SetActive(true);
     }
 }
