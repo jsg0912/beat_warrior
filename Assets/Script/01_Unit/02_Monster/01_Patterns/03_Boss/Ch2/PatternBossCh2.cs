@@ -7,8 +7,8 @@ public class PatternCh2Boss : PatternBoss
     private AttackStrategyMelee attackStrategyLeftTripleCombo;
     private AttackStrategyThrow attackStrategyRange;
     private AttackStrategyThrow attackStrategySpawnIppali;
-    private AttackStrategyCreate attackStrategySummonTentacle;
-    private AttackStrategyCreate attackStrategyFullTentacle;
+    private AttackStrategyMeleeRandomAttack attackStrategySummonTentacle;
+    private AttackStrategyMeleeRandomAttack attackStrategyFullTentacle;
 
     private int attackCounter = 0;
     private Timer attackCoolTimer;
