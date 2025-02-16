@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AttackStrategyMeleeRandomAttack : AttackStrategy
 {
-    protected List<MonsterAttackCollider> attackColliders;
+    protected List<MonsterAttackCollider> attackColliders = new List<MonsterAttackCollider>();
     MonsterAttackCollider attackCollider;
     public AttackStrategyMeleeRandomAttack(string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger,
     List<MonsterAttackCollider> attackColliders = null) : base(monsterAnimTrigger)
@@ -14,7 +14,6 @@ public class AttackStrategyMeleeRandomAttack : AttackStrategy
     public AttackStrategyMeleeRandomAttack(string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger,
     List<BossTentacle> attackColliders = null) : base(monsterAnimTrigger)
     {
-
         attackColliders.ForEach(attackCollider => this.attackColliders.Add(attackCollider));
     }
 

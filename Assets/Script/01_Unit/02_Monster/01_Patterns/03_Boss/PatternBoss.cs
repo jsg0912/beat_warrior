@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public abstract class PatternBoss : Pattern
 {
-    protected Dictionary<PatternPhase, List<AttackStrategy>> attackStrategies;
+    protected Dictionary<PatternPhase, List<AttackStrategy>> attackStrategies = new();
     protected PatternPhase currentPhase = 0;
     protected PatternPhase maxPhase;
     public PatternBoss(PatternPhase maxPhase)
