@@ -13,6 +13,10 @@ public class BossGergusAnimatorController : StateMachineBehaviour
             bossGergus.AttackEnd();
             (bossGergus.pattern as PatternCh2Boss).ResetAttackCoolTimer();
         }
+        if (stateInfo.IsName(MonsterAnimation.Hurt))
+        {
+            bossGergus.PlayScarEffect();
+        }
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

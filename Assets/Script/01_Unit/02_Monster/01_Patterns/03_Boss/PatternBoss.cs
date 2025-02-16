@@ -30,7 +30,6 @@ public abstract class PatternBoss : Pattern
 
     override public void PlayPattern()
     {
-        if (SystemMessageUIManager.Instance.isTimeLinePlaying) return;
         CheckPhase();
         Recognize?.PlayStrategy();
         // Implement AttackPattern in each Boss

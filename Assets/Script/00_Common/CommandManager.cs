@@ -4,7 +4,7 @@ public class CommandManager : SingletonObject<CommandManager>
 {
     void FixedUpdate()
     {
-        if (GameManager.Instance.isInGame && !PauseController.Instance.IsPause())
+        if (GameManager.Instance.isInGame && !PauseController.Instance.IsPause() && !SystemMessageUIManager.Instance.isTimeLinePlaying)
         {
             Player.Instance?.CheckIsMove();
         }

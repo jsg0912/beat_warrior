@@ -29,8 +29,12 @@ public abstract class AttackStrategy : Strategy
 
     public override bool PlayStrategy(Action callback = null)
     {
+        DebugConsole.Log("PlayStrategy");
+        Debug.Log("PlayStrategy GetIsAttacking()" + monster.GetIsAttacking());
+        Debug.Log("PlayStrategy GetIsAttackAble()" + monster.GetIsAttackAble());
         if (monster.GetIsAttacking()) return true;
         if (!monster.GetIsAttackAble()) return false;
+        DebugConsole.Log("PlayStrategy");
         return TryAttack();
     }
 

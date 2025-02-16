@@ -78,24 +78,23 @@ public class PatternCh2Boss : PatternBoss
 
     override public void PlayPattern()
     {
+        if (SystemMessageUIManager.Instance.isTimeLinePlaying) return;
+        DebugConsole.Log($"boss status {monster.GetStatus()}");
         DebugConsole.Log($"boss try PlayPattern {currentPhase}");
         base.PlayPattern();
-        // 공격과정
-        DebugConsole.Log($"boss GetIsAttacking {monster.GetIsAttacking()}");
-        DebugConsole.Log($"boss attackCoolTimer.Tick() {attackCoolTimer.Tick()}");
-        DebugConsole.Log($"boss GetIsAttackAble {monster.GetIsAttackAble()}");
         if (!monster.GetIsAttacking() && !attackCoolTimer.Tick() && monster.GetIsAttackAble())
         {
-            bossGergus.SetStatus(MonsterStatus.Attack);
             if (attackCounter % BossConstantCh2.IppaliSpawnCycle == 0)
             {
                 DebugConsole.Log($"boss Attack ippali");
-                attackStrategySpawnIppali.PlayStrategy(ResetAttackCoolTimer);
+                attackStrategySpawnIppali.PlayStrategy();
+                bossGergus.SetStatus(MonsterStatus.Attack);
             }
             else
             {
                 DebugConsole.Log($"boss Attack random");
-                RandomSystem.GetRandom(attackStrategies[currentPhase]).PlayStrategy(ResetAttackCoolTimer);
+                RandomSystem.GetRandom(attackStrategies[currentPhase]).PlayStrategy();
+                bossGergus.SetStatus(MonsterStatus.Attack);
             }
             attackCounter++;
             DebugConsole.Log($"boss Attack {attackCounter}");
