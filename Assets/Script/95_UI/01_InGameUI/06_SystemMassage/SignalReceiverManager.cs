@@ -48,6 +48,7 @@ public class SignalReceiverManager : MonoBehaviour
                         {
                             timeline.SetGenericBinding(track, receiver);
                             Debug.Log($"씬 변경 후 Signal Receiver 바인딩 성공: {receiver.gameObject.name}");
+                            SystemMessageUIManager.Instance.isTimeLinePlaying = true;
                             return; 
                         }
                     }

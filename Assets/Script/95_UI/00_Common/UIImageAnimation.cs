@@ -31,5 +31,7 @@ public class UIImageAnimation : MonoBehaviour
         overlayFadeInEffect.ShowWithFadeIn();
         yield return new WaitForSeconds(overlayFadeInEffect.fadeDuration);
         fadeInEffect.HideWithFadeOut();
+        yield return new WaitForSeconds(2f);
+        SystemMessageUIManager.Instance.isTimeLinePlaying = false;
     }
 }
