@@ -9,7 +9,7 @@ public static class StartSceneInitializer
 
     static StartSceneInitializer()
     {
-        EditorApplication.playModeStateChanged += OnPlayModeChanged;
+        //EditorApplication.playModeStateChanged += OnPlayModeChanged;
     }
 
     private static void OnPlayModeChanged(PlayModeStateChange state)
