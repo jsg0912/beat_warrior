@@ -26,4 +26,16 @@ public class BossGergusAnimatorController : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
     }
+
+    public bool IsAttackAnimation(AnimatorStateInfo stateInfo)
+    {
+        return stateInfo.IsName(BossConstantCh2.AttackAnimTriggerFullSwing) ||
+               stateInfo.IsName(BossConstantCh2.AttackAnimTriggerLeftHook) ||
+               stateInfo.IsName(BossConstantCh2.AttackAnimTriggerRightHook) ||
+               stateInfo.IsName(BossConstantCh2.AttackAnimTriggerLeftTripleCombo) ||
+               stateInfo.IsName(BossConstantCh2.AttackAnimTriggerRightTripleCombo) ||
+               stateInfo.IsName(BossConstantCh2.AttackAnimTriggerIppaliSpawn) ||
+               stateInfo.IsName(BossConstantCh2.AttackAnimTriggerSummonTentacle) ||
+               stateInfo.IsName(BossConstantCh2.AttackAnimTriggerFullTentacle);
+    }
 }
