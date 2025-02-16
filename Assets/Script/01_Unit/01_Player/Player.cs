@@ -445,8 +445,8 @@ public class Player : DirectionalGameObject
 
     private float DistanceToWall(Vector3 pos, float dir)
     {
-        RaycastHit2D hit = Physics2D.Raycast(pos, -Vector3.right * dir, GetSize().x, LayerMask.GetMask(LayerConstant.Tile));
-        return hit.point.x - pos.x;
+        RaycastHit2D hit = Physics2D.Raycast(pos, Vector3.right * dir, GetSize().x, LayerMask.GetMask(LayerConstant.Tile));
+        return (hit.point.x - pos.x) * dir;
     }
 
     public Vector3 GetSize() { return Util.GetSizeBoxCollider2D(_collider); }
