@@ -10,7 +10,7 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
     public Sprite LowerPartMapImage;
     public Sprite LowerPartBossMapImage;
 
-    public FadeInEffect LowerPartBossMapAnimation;
+    public UIImageAnimation LowerPartBossMapAnimation;
 
     public bool isTimeLinePlaying = false;
 
@@ -65,5 +65,8 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
     public void TurnOnBossMapTitle()
     {
         LowerPartBossMapAnimation.gameObject.SetActive(true);
+        LowerPartBossMapAnimation.Initialize();
+        //LowerPartBossMapAnimation.gameObject.SetActive(true);
+        StartCoroutine(LowerPartBossMapAnimation.AnimateSprite());
     }
 }

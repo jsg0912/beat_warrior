@@ -198,7 +198,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: -2
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!1 &1687089186795558435
 GameObject:
@@ -338,7 +338,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 6
   m_TargetDisplay: 0
 --- !u!114 &8074677171112104366
 MonoBehaviour:
@@ -960,6 +960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGameUIPrefab: {fileID: 3500340461339598338}
+  minimap: {fileID: 0}
 --- !u!114 &1083366258680861782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1358,7 +1359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 324421891648930052, guid: 39034393f1e31504c82944b89013931c, type: 3}
       propertyPath: m_SortingOrder
-      value: -4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 324421891648930052, guid: 39034393f1e31504c82944b89013931c, type: 3}
       propertyPath: m_OverrideSorting
@@ -2919,7 +2920,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3423197402337273031, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3423197402337273031, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
       propertyPath: m_OverrideSorting
@@ -2969,6 +2970,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7753164387774165489, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
+      propertyPath: LowerPartBossMapAnimation
+      value: 
+      objectReference: {fileID: 5423119919182797893}
     - target: {fileID: 8863760114933088812, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3054,6 +3059,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
+--- !u!114 &5423119919182797893 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9085082472804137160, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
+  m_PrefabInstance: {fileID: 3843391869054772365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465d354e39f862441a2ff84b1425c48f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5644169589588666017 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8863760114933088812, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
@@ -3306,7 +3322,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2012567744475329684, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
       propertyPath: m_SortingOrder
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2012567744475329684, guid: 757b83e8a8a9bbd48b4092304899d301, type: 3}
       propertyPath: m_OverrideSorting
@@ -3888,6 +3904,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4030472575650841747, guid: 168ad4ae3241062488defe6bf7ad328a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4030472575650841747, guid: 168ad4ae3241062488defe6bf7ad328a, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4471208394998432827, guid: 168ad4ae3241062488defe6bf7ad328a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4129,6 +4153,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3179310080390546474}
     m_Modifications:
+    - target: {fileID: 237283080948600980, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 931533807222359360, guid: 542e7608b7f55d94f9613568ffb30561, type: 3}
       propertyPath: m_SizeDelta.x
       value: 100

@@ -9,7 +9,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
     private Chapter currentChapter;
     private StageController CurrentStage => currentChapter.stages[currentStageIndex];
     private int currentStageIndex;
-    private bool tutorialCompleted = true;
+    private bool tutorialCompleted = false;
     private bool IsCurrentStageCompleted => CurrentStage.Cleared;
     private ChapterName currentChapterName => currentChapter.name;
 
@@ -78,9 +78,18 @@ public class ChapterManager : SingletonObject<ChapterManager>
             {
                 Debug.Log($"{currentChapterName} completed!");
                 MoveToNextChapter();
+                UIManager.Instance.TurnOnMiniMap();
             }
             else
             {
+                if(currentStageIndex + 2  == currentChapter.stages.Length)
+                {
+                    if(currentChapterName == ChapterName.Ch2)
+                    {
+                        SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter2BossBGM);
+                        UIManager.Instance.TurnOffMiniMap();
+                    }
+                }
                 LoadStageScene();
             }
             return true;
