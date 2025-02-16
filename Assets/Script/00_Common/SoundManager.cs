@@ -9,6 +9,10 @@ public class SoundManager : SingletonObject<SoundManager>
     private float sfxVolume = 1.0f;
     private float backgroundVolume;
     private float masterVolume;
+    void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     private void ApplyVolume()
     {
