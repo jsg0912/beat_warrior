@@ -52,7 +52,7 @@ public class SoundManager : SingletonObject<SoundManager>
             return;
         }
         soundEffect.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
-        soundEffect.PlayOneShot(clip, 0.5f * sfxVolume);
+        soundEffect.PlayOneShot(clip, sfxVolume / 2);
     }
 
     public void BackGroundPlay(AudioClip clip)
@@ -63,7 +63,7 @@ public class SoundManager : SingletonObject<SoundManager>
         backGroundSound.volume = 1.0f;
         backGroundSound.Play();
     }
-    
+
 
     public void PlayTitleBGM()
     {
@@ -74,6 +74,7 @@ public class SoundManager : SingletonObject<SoundManager>
     {
         SFXPlay("Equip", SoundList.Instance.buttonClick);
     }
+
     public void PlayBackGroundSFX(AudioClip clip)
     {
         soundEffect.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
@@ -91,8 +92,4 @@ public class SoundManager : SingletonObject<SoundManager>
     {
         PlayBackGroundSFX(SoundList.Instance.bossBackGroundSoundEffect);
     }
-
 }
-
-
-

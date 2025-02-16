@@ -33,7 +33,6 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
 
     private IEnumerator ThrowMany()
     {
-        DebugConsole.Log("ThrowMany");
         yield return new WaitForSeconds(BossConstantCh2.ThrowAnimationDelay);
         while (throwCountCurrent < throwCountMax)
         {

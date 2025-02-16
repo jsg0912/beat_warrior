@@ -29,7 +29,6 @@ public class BossGergus : Monster
 
     public override void PlayScarEffect()
     {
-        DebugConsole.Log("Gergus PlayScarEffect");
         Vector3 playerPos = Player.Instance.GetMiddlePos();
         Collider2D bossCollider = monsterBodyCollider.GetCollider(); // it can be boxCollider2D or polygonCollider2D
 
@@ -48,34 +47,34 @@ public class BossGergus : Monster
     }
     public void PlayStabSFX()
     {
-        SoundManager.Instance.SFXPlay("TentacleStabBoss", SoundList.Instance.bossTentacleStabBoss);        
+        SoundManager.Instance.SFXPlay("TentacleStabBoss", SoundList.Instance.bossTentacleStabBoss);
     }
     public void PlayAtkOTSFX()
     {
-        SoundManager.Instance.SFXPlay("BossAttackOneTwo", SoundList.Instance.bossAttackOneTwo);        
+        SoundManager.Instance.SFXPlay("BossAttackOneTwo", SoundList.Instance.bossAttackOneTwo);
     }
     public void PlayAtkTSFX()
     {
-        SoundManager.Instance.SFXPlay("BossAttackThree", SoundList.Instance.bossAttackThree);      
+        SoundManager.Instance.SFXPlay("BossAttackThree", SoundList.Instance.bossAttackThree);
     }
     public void PlayStandSFX()
     {
         SoundManager.Instance.SFXPlay("BossStand", SoundList.Instance.bossStand);
-        
+
     }
     public void PlayDie0SFX()
     {
         SoundManager.Instance.SFXPlay("BossDie0", SoundList.Instance.bossDie0);
-        
+
     }
     public void PlayDie1SFX()
     {
         SoundManager.Instance.SFXPlay("BossDie1", SoundList.Instance.bossDie1);
-        
+
     }
     public void PlayDie2SFX()
     {
-        SoundManager.Instance.SFXPlay("BossDie2", SoundList.Instance.bossDie2);        
+        SoundManager.Instance.SFXPlay("BossDie2", SoundList.Instance.bossDie2);
     }
 
 

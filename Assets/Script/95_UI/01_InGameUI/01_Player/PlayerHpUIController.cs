@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// PlayerHpUIController는 없으면 없는대로 되어야 하기 때문에(안그러면 버그가 생김), SingletonObject를 상속받지 않는다.
 public class PlayerHpUIController : SingletonObject<PlayerHpUIController>
 {
     public GameObject HPPrefab;
