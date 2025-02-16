@@ -12,7 +12,7 @@ public class AttackStrategyThrowManyIppali : AttackStrategyThrowMany
     {
         Vector3 startPos = monster.GetMiddlePos();
 
-        if (throwCountMax == 1) startPos.x += (Random.value > 0.5f) ? 2f : -2f;
+        if (throwCountMax == 1) startPos.x += (Random.value > 0.5f) ? 5f : -5f;
 
         RaycastHit2D hit = Physics2D.Raycast(startPos, Vector2.down, Mathf.Infinity, LayerMask.GetMask(LayerConstant.Tile));
 
