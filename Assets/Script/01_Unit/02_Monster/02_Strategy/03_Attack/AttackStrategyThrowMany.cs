@@ -7,6 +7,7 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
     protected float throwInterval;
     protected int throwCountMax;
     protected int throwCountCurrent;
+    protected float targetPosOffset = 2.0f;
 
     public AttackStrategyThrowMany(float throwSpeed, float maxHeight, int throwCountMax, float throwInterval, PoolTag poolTag) : base(throwSpeed, maxHeight)
     {
@@ -17,13 +18,11 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
 
     protected override void SetTargetPosition()
     {
-        /*
-            TODO KMJ
-            플레이어 방향으로 1개 
-            나머지 구체는 양옆으로 1/2개씩 나누어 랜덤한 방향으로 떨어진다.
-            기본 3/광폭 5
-        */
         targetPosition = GetPlayerPos();
+
+        if (throwCountCurrent == 0) return;
+        else if (throwCountCurrent % 2 == 1) targetPosition.x -= Random.Range(0, targetPosOffset);
+        else targetPosition.x += Random.Range(0, targetPosOffset);
     }
 
     protected override void AttackMethod()
