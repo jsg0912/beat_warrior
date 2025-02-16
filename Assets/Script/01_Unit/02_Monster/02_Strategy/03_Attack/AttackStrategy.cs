@@ -21,6 +21,7 @@ public abstract class AttackStrategy : Strategy
         base.Initialize(monster);
         monoBehaviour = monster.GetComponent<MonoBehaviour>();
 
+        if (monster.monsterName == MonsterName.Gergus) return;
         attackRange = MonsterConstant.AttackRange[monster.monsterName];
         attackCoolTimeMax = MonsterConstant.AttackCoolTime[monster.monsterName];
         attackCoolTime = 0;

@@ -8575,18 +8575,13 @@ PrefabInstance:
       propertyPath: tentaclesHorizontal.Array.data[0]
       value: 
       objectReference: {fileID: 2015460891}
-    - target: {fileID: 5938675433907970453, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
-      propertyPath: m_SortingOrder
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7716725584058300384, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
-      propertyPath: m_Offset.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6247073068693189145, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
 --- !u!1 &1457717334
 GameObject:
