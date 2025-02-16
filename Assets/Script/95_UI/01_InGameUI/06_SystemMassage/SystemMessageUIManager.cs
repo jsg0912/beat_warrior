@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
-public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
+public class SystemMessageUIManager : MonoBehaviour
 {
+    public static SystemMessageUIManager Instance;
     public SystemMessagePopup systemMessagePopup;
     public SystemMessagePopup mapTitleMessagePopup;
 
