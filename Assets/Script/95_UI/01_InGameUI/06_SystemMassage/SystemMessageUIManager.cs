@@ -64,8 +64,9 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
 
     public void TurnOnBossMapTitle()
     {
-        LowerPartBossMapAnimation.Initialize();
         LowerPartBossMapAnimation.gameObject.SetActive(true);
+        LowerPartBossMapAnimation.Initialize();
+        //LowerPartBossMapAnimation.gameObject.SetActive(true);
         StartCoroutine(LowerPartBossMapAnimation.AnimateSprite());
     }
 }
