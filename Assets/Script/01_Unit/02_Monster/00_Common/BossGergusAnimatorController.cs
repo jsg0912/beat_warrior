@@ -8,6 +8,7 @@ public class BossGergusAnimatorController : StateMachineBehaviour
     {
         if (bossGergus == null) bossGergus = animator.GetComponent<BossGergus>();
 
+        if (GetIsAttacking(stateInfo)) bossGergus.AttackStart();
         if (stateInfo.IsName(MonsterAnimation.AttackEnd))
         {
             bossGergus.AttackEnd();
@@ -25,5 +26,15 @@ public class BossGergusAnimatorController : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+    }
+
+    public bool GetIsAttacking(AnimatorStateInfo stateInfo)
+    {
+        return stateInfo.IsName("Left") || stateInfo.IsName("Right") ||
+               stateInfo.IsName("Last") || stateInfo.IsName("Left1") ||
+               stateInfo.IsName("Right1") || stateInfo.IsName("Last1") ||
+               stateInfo.IsName("SloshCharge") || stateInfo.IsName("Slosh") ||
+               stateInfo.IsName("CrashCharge") || stateInfo.IsName("Crash") ||
+               stateInfo.IsName("AttackEnd") || stateInfo.IsName("Throw");
     }
 }
