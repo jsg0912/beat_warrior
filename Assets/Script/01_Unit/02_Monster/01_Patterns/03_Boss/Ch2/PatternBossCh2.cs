@@ -91,5 +91,5 @@ public class PatternCh2Boss : PatternBoss
         }
     }
 
-    private void ResetAttackCoolTimer() { attackCoolTimer.Initialize(); }
+    public void ResetAttackCoolTimer() { attackCoolTimer.Initialize(); }
 }
