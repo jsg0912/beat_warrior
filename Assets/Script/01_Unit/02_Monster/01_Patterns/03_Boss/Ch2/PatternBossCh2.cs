@@ -71,6 +71,7 @@ public class PatternCh2Boss : PatternBoss
             if (monster.GetCurrentHP() <= monster.GetFinalStat(StatKind.HP) * BossConstantCh2.Phase2Threshold)
             {
                 ChangePhase(PatternPhase.Phase2);
+
             }
         }
     }
