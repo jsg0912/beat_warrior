@@ -7,7 +7,7 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
     protected float throwInterval;
     protected int throwCountMax;
     protected int throwCountCurrent;
-    protected float targetPosOffset = 2.0f;
+    protected float targetPosOffset = 5.0f;
 
     public AttackStrategyThrowMany(float throwSpeed, float maxHeight, int throwCountMax, float throwInterval, PoolTag poolTag, string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger) : base(throwSpeed, maxHeight, monsterAnimTrigger)
     {
