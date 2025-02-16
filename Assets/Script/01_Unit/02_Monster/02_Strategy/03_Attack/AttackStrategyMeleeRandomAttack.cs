@@ -25,6 +25,7 @@ public class AttackStrategyMeleeRandomAttack : AttackStrategy
 
     public override void AttackStart()
     {
+        Debug.Log("dd");
         attackCollider = attackColliders[Random.Range(0, attackColliders.Count)];
         attackCollider.SetMonsterAtk(monster.GetFinalStat(StatKind.ATK));
         Util.SetActive(attackCollider.gameObject, true);

@@ -15,11 +15,14 @@ public class BossGergusAnimatorController : StateMachineBehaviour
             bossGergus.SetStatus(MonsterStatus.Idle);
             (bossGergus.pattern as PatternCh2Boss).ResetAttackCoolTimer();
         }
-        if (stateInfo.IsName(MonsterAnimation.Hurt))
+        else if (stateInfo.IsName(MonsterAnimation.Idle))
+        {
+            animator.ResetTrigger(MonsterAnimation.AttackEnd);
+        }
+        else if (stateInfo.IsName(MonsterAnimation.Hurt))
         {
             bossGergus.PlayScarEffect();
         }
-
         else if (stateInfo.IsName(MonsterAnimation.Die))
         {
             bossGergus.SetStatus(MonsterStatus.Dead);
@@ -38,11 +41,8 @@ public class BossGergusAnimatorController : StateMachineBehaviour
 
     public bool GetIsAttacking(AnimatorStateInfo stateInfo)
     {
-        return stateInfo.IsName("Left") || stateInfo.IsName("Right") ||
-               stateInfo.IsName("Last") || stateInfo.IsName("Left1") ||
-               stateInfo.IsName("Right1") || stateInfo.IsName("Last1") ||
-               stateInfo.IsName("SloshCharge") || stateInfo.IsName("Slosh") ||
-               stateInfo.IsName("CrashCharge") || stateInfo.IsName("Crash") ||
-               stateInfo.IsName("TentacleAttackEnd") || stateInfo.IsName("Throw");
+        return stateInfo.IsName("Left") || stateInfo.IsName("Right1") ||
+               stateInfo.IsName("Slosh") || stateInfo.IsName("Crash") ||
+               stateInfo.IsName("Throw");
     }
 }

@@ -960,6 +960,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGameUIPrefab: {fileID: 3500340461339598338}
+  minimap: {fileID: 0}
 --- !u!114 &1083366258680861782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2969,6 +2970,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7753164387774165489, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
+      propertyPath: LowerPartBossMapAnimation
+      value: 
+      objectReference: {fileID: 5423119919182797893}
     - target: {fileID: 8863760114933088812, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3054,6 +3059,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
+--- !u!114 &5423119919182797893 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9085082472804137160, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
+  m_PrefabInstance: {fileID: 3843391869054772365}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465d354e39f862441a2ff84b1425c48f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5644169589588666017 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8863760114933088812, guid: c98b28fbfe67d2443b94936faf38a538, type: 3}
