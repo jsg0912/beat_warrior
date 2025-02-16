@@ -8,11 +8,10 @@ public class BossGergusAnimatorController : StateMachineBehaviour
     {
         if (bossGergus == null) bossGergus = animator.GetComponent<BossGergus>();
 
-        if (stateInfo.IsName(MonsterAnimation.Charge)) bossGergus.SetStatus(MonsterStatus.Attack);
-        else if (stateInfo.IsName(MonsterAnimation.AttackEnd))
+        if (stateInfo.IsName(MonsterAnimation.AttackEnd))
         {
             bossGergus.AttackEnd();
-            //bossGergus.
+            (bossGergus.pattern as PatternCh2Boss).ResetAttackCoolTimer();
         }
     }
 
