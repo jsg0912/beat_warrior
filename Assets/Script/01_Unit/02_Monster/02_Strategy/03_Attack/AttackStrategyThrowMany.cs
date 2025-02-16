@@ -3,18 +3,27 @@ using UnityEngine;
 
 public class AttackStrategyThrowMany : AttackStrategyThrow
 {
-    PoolTag poolTag;
-    private float throwInterval;
-    private int throwCountMax;
-    private int throwCountCurrent;
-
-    private int throwCount;
+    protected PoolTag poolTag;
+    protected float throwInterval;
+    protected int throwCountMax;
+    protected int throwCountCurrent;
 
     public AttackStrategyThrowMany(float throwSpeed, float maxHeight, int throwCountMax, float throwInterval, PoolTag poolTag) : base(throwSpeed, maxHeight)
     {
         this.throwCountMax = throwCountMax;
         this.throwInterval = throwInterval;
         this.poolTag = poolTag;
+    }
+
+    protected override void SetTargetPosition()
+    {
+        /*
+            TODO KMJ
+            플레이어 방향으로 1개 
+            나머지 구체는 양옆으로 1/2개씩 나누어 랜덤한 방향으로 떨어진다.
+            기본 3/광폭 5
+        */
+        targetPosition = GetPlayerPos();
     }
 
     protected override void AttackMethod()
@@ -26,9 +35,10 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
     private IEnumerator ThrowMany()
     {
         yield return new WaitForSeconds(BossConstantCh2.ThrowAnimationDelay);
-        while (throwCountCurrent < throwCount)
+        while (throwCountCurrent < throwCountMax)
         {
             yield return new WaitForSeconds(throwInterval);
+            SetTargetPosition();
             obj = MyPooler.ObjectPooler.Instance.GetFromPool(poolTag, GetMonsterPos(), Quaternion.identity);
             monsterAttackCollider = obj.GetComponent<MonsterAttackCollider>();
             if (monsterAttackCollider != null)
