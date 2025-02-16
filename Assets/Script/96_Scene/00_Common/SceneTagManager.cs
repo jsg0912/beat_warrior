@@ -14,7 +14,13 @@ public class SceneTagManager
         PoolTag.MiniMapIconItmomi,
         PoolTag.Soul,
         PoolTag.Ghost,
-        PoolTag.Mark
+        PoolTag.Mark,
+        PoolTag.Tentacle,
+        PoolTag.TentacleVertical,
+        PoolTag.TentacleHorizontal,
+        PoolTag.Ippali,
+        PoolTag.IppaliEgg
+
     };
     private static SceneTagManager _instance;
     public static SceneTagManager Instance => _instance ??= new SceneTagManager();

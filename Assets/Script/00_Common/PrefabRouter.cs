@@ -12,6 +12,7 @@ public class PrefabRouter
     public const string InteractionObjectRoute = "Prefab/02_Object/03_InteractionObject/";
     public const string ScriptableObjectRoute = "Prefab/99_ScriptableObject/";
     public const string PlayerSkillEffectRoute = "Prefab/06_Effect/PlayerSkill/";
+    public const string BossMonsterRoute = "Prefab/01_Unit/03_BossMonster/";
 
     public const string PlayerPrefab = PlayerPrefabRoute + "Player";
     public const string PlayerAttackPrefab = PlayerPrefabRoute + "AttackCollider";
@@ -50,4 +51,12 @@ public class PrefabRouter
     {
         return MiniMapMonsterIconRoute + monsterName.ToString();
     }
+
+    public const string TentaclePrefab = BossMonsterRoute + "Tentacle";
+    public const string TentacleHorizontalPrefab = BossMonsterRoute + "TentacleHorizontal";
+    public const string TentacleVerticalPrefab = BossMonsterRoute + "TentacleVertical";
+    public const string IppaliEggPrefab = MonsterObjectRoute + "IppaliEgg";
+    public const string IppaliPrefab = "Prefab/01_Unit/02_Monster/Ippali";
+
+    
 }

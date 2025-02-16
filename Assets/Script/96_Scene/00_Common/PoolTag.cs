@@ -11,5 +11,10 @@ public enum PoolTag
     ItmomiThrow,
     Soul,
     Ghost,
-    Mark
+    Mark,
+    Tentacle,
+    TentacleVertical,
+    TentacleHorizontal,
+    Ippali,
+    IppaliEgg
 }
