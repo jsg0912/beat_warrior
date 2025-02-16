@@ -21,8 +21,15 @@ public class BossGergus : Monster
         return;
     }
 
+    public override void GetDamaged(int dmg)
+    {
+        base.GetDamaged(dmg);
+        PlayScarEffect();
+    }
+
     public override void PlayScarEffect()
     {
+        DebugConsole.Log("Gergus PlayScarEffect");
         Vector3 playerPos = Player.Instance.GetMiddlePos();
         Collider2D bossCollider = monsterBodyCollider.GetCollider(); // it can be boxCollider2D or polygonCollider2D
 

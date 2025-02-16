@@ -81,7 +81,6 @@ public class Monster : DirectionalGameObject
 
     public void PlayAnimation(string trigger)
     {
-        DebugConsole.Log(isFixedAnimation);
         if (isFixedAnimation) return;
         if (trigger == MonsterAnimTrigger.hurtAnimTrigger)
         {

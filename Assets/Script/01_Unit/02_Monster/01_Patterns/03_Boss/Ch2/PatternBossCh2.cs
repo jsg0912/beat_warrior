@@ -103,7 +103,7 @@ public class PatternCh2Boss : PatternBoss
 
     public void ResetAttackCoolTimer()
     {
-        DebugConsole.Log("Reset CoolTiem");
+        DebugConsole.Log("Reset CoolTime");
         attackCoolTimer.Initialize();
     }
 }
