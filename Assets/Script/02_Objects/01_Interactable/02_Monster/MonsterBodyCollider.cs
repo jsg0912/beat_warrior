@@ -41,4 +41,11 @@ public class MonsterBodyCollider : MonoBehaviour
         else if (polygonCollider != null) return Util.GetBottomPosPolygonCollider2D(polygonCollider);
         else return Vector3.zero;
     }
+
+    public Collider2D GetCollider()
+    {
+        if (boxCollider != null) return boxCollider;
+        else if (polygonCollider != null) return polygonCollider;
+        else return null;
+    }
 }
