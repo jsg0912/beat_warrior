@@ -9,10 +9,7 @@ public class SignalReceiverManager : MonoBehaviour
     public GameObject signalReceiverObject; 
     private PlayableDirector timeline;
 
-    void Awake()
-    {
-        DontDestroyOnLoad(this.gameObject); 
-    }
+    
 
     void Start()
     {
