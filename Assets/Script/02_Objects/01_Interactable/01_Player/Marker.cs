@@ -33,7 +33,7 @@ public class Marker : MonoBehaviour
         if (isUsed) return;
         GameObject obj = Util.GetMonsterGameObject(collision);
 
-        if (obj != null && obj.CompareTag(TagConstant.Monster) && obj.GetComponent<Monster>().GetIsAlive())
+        if (obj != null && obj.CompareTag(TagConstant.Monster) && obj.GetComponent<Monster>().GetIsAlive() && obj.GetComponent<Monster>().monsterName != MonsterName.Gergus)
         {
             isUsed = true;
             Player.Instance.SetTarget(obj);
