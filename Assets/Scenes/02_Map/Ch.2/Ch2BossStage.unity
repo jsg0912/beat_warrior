@@ -4245,17 +4245,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7922104734847138795, guid: 5ce79bc1a314f6e4babd17dc7e61f279, type: 3}
   m_PrefabInstance: {fileID: 1247804821}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1257985512 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4920750692737937792, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
-  m_PrefabInstance: {fileID: 1451989078}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5833a4c1f2adea741ac0d28befbb471a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1275998031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4551800756442141603, guid: 2f8fb37e95fbd7e4ba2b01fa6a8c1b4e, type: 3}
@@ -4405,6 +4394,17 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &1312233284 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -2222642603546368909, guid: 725d820fe6553a842a511352c8ff432d, type: 3}
+  m_PrefabInstance: {fileID: 4204215848255481027}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65be8ef974dcfc548a87a37000c4b0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1350771360
 GameObject:
   m_ObjectHideFlags: 0
@@ -4693,6 +4693,17 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1367452560 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8960993397640668260, guid: 1293bd8071714184e8a8c49ef9a07988, type: 3}
+  m_PrefabInstance: {fileID: 7453829328924839513}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65be8ef974dcfc548a87a37000c4b0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1388520578
 GameObject:
   m_ObjectHideFlags: 0
@@ -7521,6 +7532,30 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5655850740774170441, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
+      propertyPath: tentaclesCrash.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655850740774170441, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
+      propertyPath: tentaclesCrash.Array.data[0]
+      value: 
+      objectReference: {fileID: 1367452560}
+    - target: {fileID: 5655850740774170441, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
+      propertyPath: tentaclesVertical.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655850740774170441, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
+      propertyPath: tentaclesHorizontal.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5655850740774170441, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
+      propertyPath: tentaclesVertical.Array.data[0]
+      value: 
+      objectReference: {fileID: 1312233284}
+    - target: {fileID: 5655850740774170441, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
+      propertyPath: tentaclesHorizontal.Array.data[0]
+      value: 
+      objectReference: {fileID: 2015460891}
     - target: {fileID: 5938675433907970453, guid: d98589438dfb8e54ba53425a268204cf, type: 3}
       propertyPath: m_SortingOrder
       value: -1
@@ -9357,6 +9392,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2472213766912013561, guid: 18cba3b03d6403043a9b0032882db683, type: 3}
   m_PrefabInstance: {fileID: 1727103162}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2015460891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2130970266809667725, guid: e0f37abbdc1610e4293a7a580fed4454, type: 3}
+  m_PrefabInstance: {fileID: 2830551758695620519}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65be8ef974dcfc548a87a37000c4b0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2017967934
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10404,7 +10450,7 @@ PrefabInstance:
     - target: {fileID: 2130970266809667725, guid: e0f37abbdc1610e4293a7a580fed4454, type: 3}
       propertyPath: Boss
       value: 
-      objectReference: {fileID: 1257985512}
+      objectReference: {fileID: 0}
     - target: {fileID: 3704574739946483508, guid: e0f37abbdc1610e4293a7a580fed4454, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13
@@ -10448,6 +10494,10 @@ PrefabInstance:
     - target: {fileID: 4484985831099579610, guid: e0f37abbdc1610e4293a7a580fed4454, type: 3}
       propertyPath: m_Name
       value: TentacleHorizontal
+      objectReference: {fileID: 0}
+    - target: {fileID: 4484985831099579610, guid: e0f37abbdc1610e4293a7a580fed4454, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10527,10 +10577,14 @@ PrefabInstance:
     - target: {fileID: -2222642603546368909, guid: 725d820fe6553a842a511352c8ff432d, type: 3}
       propertyPath: Boss
       value: 
-      objectReference: {fileID: 1257985512}
+      objectReference: {fileID: 0}
     - target: {fileID: 4271236913243021034, guid: 725d820fe6553a842a511352c8ff432d, type: 3}
       propertyPath: m_Name
       value: TentacleVertical
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271236913243021034, guid: 725d820fe6553a842a511352c8ff432d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5531441225554274011, guid: 725d820fe6553a842a511352c8ff432d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10589,6 +10643,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tentacle
       objectReference: {fileID: 0}
+    - target: {fileID: 2516064593718054224, guid: 1293bd8071714184e8a8c49ef9a07988, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4111336322780508452, guid: 1293bd8071714184e8a8c49ef9a07988, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.01
@@ -10632,7 +10690,7 @@ PrefabInstance:
     - target: {fileID: 8960993397640668260, guid: 1293bd8071714184e8a8c49ef9a07988, type: 3}
       propertyPath: Boss
       value: 
-      objectReference: {fileID: 1257985512}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

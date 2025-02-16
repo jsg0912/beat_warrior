@@ -7,6 +7,6 @@ public class BossTentacleAnimationController : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (boss == null) boss = animator.GetComponent<BossTentacle>().Boss;
-        if (stateInfo.IsName("Attack")) boss.PlayAnimation(MonsterAnimation.AttackEnd);
+        if (stateInfo.IsName("End")) boss.PlayAnimation(BossConstantCh2.AttackEndAnimTrigger);
     }
 }
