@@ -11,7 +11,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
     private int currentStageIndex;
     private bool tutorialCompleted = false;
     private bool IsCurrentStageCompleted => CurrentStage.Cleared;
-    private ChapterName currentChapterName => currentChapter.name;
+    public ChapterName currentChapterName => currentChapter.name;
 
     protected override void Awake()
     {
@@ -62,7 +62,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
             currentChapter = chapters[chapterName];
             currentStageIndex = 0;
             LoadStageScene();
-            PlayChapterBGM();
+            SoundManager.Instance.PlayChapterBGM();
         }
         else
         {
@@ -129,30 +129,5 @@ public class ChapterManager : SingletonObject<ChapterManager>
             return currentChapterName + 1;
         }
         return ChapterName.End;
-    }
-
-    private void PlayChapterBGM()
-    {
-        switch (currentChapterName)
-        {
-            case ChapterName.Tutorial:
-                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter1BGM);
-                break;
-            case ChapterName.Ch1:
-                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter1BGM);
-                break;
-            case ChapterName.Ch2:
-                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter2BGM);
-                break;
-            case ChapterName.Ch3:
-                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter3BGM);
-                break;
-            case ChapterName.Ch4:
-                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter4BGM);
-                break;
-            default:
-                Debug.LogError($"Chapter {currentChapterName} does not have BGM");
-                break;
-        }
     }
 }
