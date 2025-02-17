@@ -72,7 +72,6 @@ public class PatternCh2Boss : PatternBoss
             {
                 ChangePhase(PatternPhase.Phase2);
                 bossGergus.PlayAnimation(BossConstantCh2.StandAnimTrigger);
-                bossGergus.SetAnimationFloat(BossConstantCh2.IsStandAnimBool, 1.0f);
             }
         }
     }

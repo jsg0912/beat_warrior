@@ -19,6 +19,10 @@ public class BossGergusAnimatorController : StateMachineBehaviour
         {
             animator.ResetTrigger(MonsterAnimation.AttackEnd);
         }
+        else if (stateInfo.IsName("Stand"))
+        {
+            bossGergus.SetAnimationFloat(BossConstantCh2.IsStandAnimBool, 1.0f);
+        }
         else if (stateInfo.IsName(MonsterAnimation.Die))
         {
             bossGergus.SetStatus(MonsterStatus.Dead);
@@ -28,6 +32,14 @@ public class BossGergusAnimatorController : StateMachineBehaviour
             Destroy(bossGergus.gameObject);
             // TODO: TBD
             SystemMessageUIManager.Instance.TurnOnSystemMassageUI(SystemMessageType.ToBeContinued, 10.0f);
+        }
+    }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        if (stateInfo.IsName("Stand"))
+        {
+            bossGergus.SetStatus(MonsterStatus.Idle);
         }
     }
 
