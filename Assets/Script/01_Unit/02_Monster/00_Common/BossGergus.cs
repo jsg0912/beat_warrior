@@ -9,7 +9,12 @@ public class BossGergus : Monster
 
     protected override void Start()
     {
-        base.Start();
+        _animator = GetComponent<Animator>();
+        monsterUnit = MonsterList.FindMonster(monsterName);
+        pattern = PatternFactory.GetPatternByPatternName(monsterUnit.patternName);
+        pattern.Initialize(this);
+
+        HpUI.SetMaxHP(monsterUnit.GetCurrentHP()); // Customizing HP Code - SDH, 20250119
 
         foreach (var tentacle in tentaclesVertical) tentacle.Boss = this;
         foreach (var tentacle in tentaclesHorizontal) tentacle.Boss = this;
@@ -43,38 +48,38 @@ public class BossGergus : Monster
 
     public void PlaySpitSFX()
     {
-        SoundManager.Instance.SFXPlay("BossSpit", SoundList.Instance.bossSpit);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.bossSpit);
     }
     public void PlayStabSFX()
     {
-        SoundManager.Instance.SFXPlay("TentacleStabBoss", SoundList.Instance.bossTentacleStabBoss);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.bossTentacleStabBoss);
     }
     public void PlayAtkOTSFX()
     {
-        SoundManager.Instance.SFXPlay("BossAttackOneTwo", SoundList.Instance.bossAttackOneTwo);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.bossAttackOneTwo);
     }
     public void PlayAtkTSFX()
     {
-        SoundManager.Instance.SFXPlay("BossAttackThree", SoundList.Instance.bossAttackThree);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.bossAttackThree);
     }
     public void PlayStandSFX()
     {
-        SoundManager.Instance.SFXPlay("BossStand", SoundList.Instance.bossStand);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.bossStand);
 
     }
     public void PlayDie0SFX()
     {
-        SoundManager.Instance.SFXPlay("BossDie0", SoundList.Instance.bossDie0);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.bossDie0);
 
     }
     public void PlayDie1SFX()
     {
-        SoundManager.Instance.SFXPlay("BossDie1", SoundList.Instance.bossDie1);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.bossDie1);
         SoundManager.Instance.StopBackGroundSFX();
 
     }
     public void PlayDie2SFX()
     {
-        SoundManager.Instance.SFXPlay("BossDie2", SoundList.Instance.bossDie2);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.bossDie2);
     }
 }
