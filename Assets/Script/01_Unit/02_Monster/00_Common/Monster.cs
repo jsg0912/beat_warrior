@@ -32,7 +32,7 @@ public class Monster : DirectionalGameObject
     protected Animator _animator;
     private bool isFixedAnimation = false;
 
-    [SerializeField] private MonsterHPUI HpUI;
+    [SerializeField] protected MonsterHPUI HpUI;
     [SerializeField] private GameObject attackEffect;
     [SerializeField] private GameObject MarkedEffect;
     [SerializeField] protected List<GameObject> hitEffects = new List<GameObject>();
@@ -339,4 +339,9 @@ public class Monster : DirectionalGameObject
         SoundManager.Instance.SFXPlay("monsterItmomiThorn", SoundList.Instance.monsterItmomiThorn);
     }
 
+    public void ForceKill()
+    {
+        SetBuffMultiply(StatKind.Def, -1);
+        AttackedByPlayer(GetCurrentHP(), true);
+    }
 }

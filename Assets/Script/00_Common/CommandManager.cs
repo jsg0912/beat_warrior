@@ -92,7 +92,7 @@ public class CommandManager : SingletonObject<CommandManager>
                 Monster monsterComponent = monster.GetComponent<Monster>();
                 if (monsterComponent != null)
                 {
-                    monsterComponent.AttackedByPlayer(monsterComponent.GetCurrentStat(StatKind.HP), true);
+                    monsterComponent.ForceKill();
                 }
             }
         }
