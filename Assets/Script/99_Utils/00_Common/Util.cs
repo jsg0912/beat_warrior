@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public static class Util
 {
-    // Vector 활용에 있어서 오차범위용
-    public static float OffsetX = 0.05f;
-    public static float OffsetY = 0.05f;
-
     public static T ParseEnumFromString<T>(string value)
     {
         return (T)Enum.Parse(typeof(T), value);
@@ -27,37 +23,6 @@ public static class Util
             return true;
         }
         return false;
-    }
-
-    public static Vector2 GetSizeBoxCollider2D(BoxCollider2D boxCollider2D)
-    {
-        return boxCollider2D.size;
-    }
-
-    public static Vector3 GetMiddlePosBoxCollider2D(BoxCollider2D boxCollider2D)
-    {
-        return boxCollider2D.bounds.center;
-    }
-
-    public static Vector3 GetBottomPosBoxCollider2D(BoxCollider2D boxCollider2D)
-    {
-        return boxCollider2D.bounds.center - new Vector3(0, boxCollider2D.size.y / 2, 0);
-    }
-
-    public static Vector2 GetSizePolygonCollider2D(PolygonCollider2D polygonCollider2D)
-    {
-        // 결과 반환
-        return new Vector2(polygonCollider2D.bounds.extents.x * 2, polygonCollider2D.bounds.extents.y * 2);
-    }
-
-    public static Vector3 GetMiddlePosPolygonCollider2D(PolygonCollider2D polygonCollider2D)
-    {
-        return polygonCollider2D.bounds.center;
-    }
-
-    public static Vector3 GetBottomPosPolygonCollider2D(PolygonCollider2D polygonCollider2D)
-    {
-        return polygonCollider2D.bounds.center - new Vector3(0, polygonCollider2D.bounds.extents.y, 0);
     }
 
     public static void FlipDirectionX(GameObject gameObject)
@@ -148,11 +113,6 @@ public static class Util
         else return collision.gameObject.transform.parent?.gameObject;
     }
 
-    public static int Round(int p, int q)
-    {
-        return (p + q - 1) / q;
-    }
-
     public static Vector3 GetMousePointWithPerspectiveCamera()
     {
         Vector3 mousePosition = Input.mousePosition;
@@ -165,12 +125,6 @@ public static class Util
     public static bool IsRootGameObject(GameObject gameObject)
     {
         return gameObject.transform.parent == null;
-    }
-
-    public static bool IsStoppedSpeed(float speed)
-    {
-        // Speed can be not exact zero, just check it is close to zero, - SDH, 20250208
-        return -1e-4f <= speed && speed <= 1e4f;
     }
 
     public static IEnumerator PlayInstantEffect(GameObject effect, float duration)
