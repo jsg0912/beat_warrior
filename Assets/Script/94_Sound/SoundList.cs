@@ -11,7 +11,7 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip chapter4BGM;
 
     public AudioClip chapter2BossMapTitle;
-    
+
     public AudioClip buttonClick;
     public AudioClip menuOpen; //
     public AudioClip menuClose; //
@@ -20,7 +20,7 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip altarBuy; //
     public AudioClip altarEquip; //
     public AudioClip altarUnequip; //
-    
+
     public AudioClip monsterHit; //
     public AudioClip defMonsterHit; //
     public AudioClip monsterIppaliAttack; //

@@ -64,7 +64,8 @@ public class FadeManager : MonoBehaviour
         // TODO: 여기서 이걸 하는게 맞는가?? - SDH, 20250216
         if (GameManager.Instance.isInGame) Player.Instance?.RecoverHealthyStatus(); // Recover Player Healthy When Stage start newly
         StartCoroutine(FadeIn());
-        StartCoroutine(SystemMessageUIManager.Instance.TriggerTurnOnMapTitleMassage(GameManager.Instance.currentScene));
+        StartCoroutine(SystemMessageUIManager.Instance.TriggerTurnOnMapTitleMassage(SceneController.Instance.currentScene));
+        SoundManager.Instance.PlayStageBGM();
     }
 
     public void FadeOutWithSceneTitle()

@@ -9,7 +9,7 @@ public class BossEgg : MonoBehaviour
     public void SummonMonster()
     {
         Instantiate(monster, transform.position, Quaternion.identity);
-        SoundManager.Instance.SFXPlay("BossEgg", SoundList.Instance.bossIppaliSpawn);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.bossIppaliSpawn);
         Destroy(gameObject, 0.5f);
     }
 

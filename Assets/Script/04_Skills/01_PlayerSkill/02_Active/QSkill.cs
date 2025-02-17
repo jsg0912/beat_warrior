@@ -20,7 +20,6 @@ public class QSkill : ActiveSkillPlayer
     protected override void SkillMethod()
     {
         SetAttackCollider();
-        SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.playerQSkill);
     }
 
     protected override void SetAttackCollider()

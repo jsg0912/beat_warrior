@@ -21,7 +21,7 @@ public class MenuUI : PopupSystem
         {
             PopupManager.Instance.PushPopup(this);
             GameManager.Instance.SetDefaultCursor();
-            SoundManager.Instance.SFXPlay("MenuOpen", SoundList.Instance.menuOpen);
+            SoundManager.Instance.SFXPlay(SoundList.Instance.menuOpen);
             if (GameManager.Instance.isInGame) UIManager.Instance.TurnOnBlur(BlurType.MenuBlackBlur);
         }
         return success;
@@ -30,7 +30,7 @@ public class MenuUI : PopupSystem
     public override bool TurnOffPopup()
     {
         bool success = Util.SetActive(menu, false);
-        SoundManager.Instance.SFXPlay("MenuClose", SoundList.Instance.menuClose);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.menuClose);
         UIManager.Instance.TurnOffBlur();
         PopupManager.Instance.RemovePopup(this);
         return success;

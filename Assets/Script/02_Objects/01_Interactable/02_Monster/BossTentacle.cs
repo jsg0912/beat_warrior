@@ -12,13 +12,12 @@ public class BossTentacle : MonsterAttackCollider
 
     public void PlayTentacleStabSFX()
     {
-        SoundManager.Instance.SFXPlay("TentacleStab", SoundList.Instance.bossTentacleStabTentacle);
-
+        SoundManager.Instance.SFXPlay(SoundList.Instance.bossTentacleStabTentacle);
     }
 
     public void PlayTentacleHitSFX()
     {
-        SoundManager.Instance.SFXPlay("TentacleHit", SoundList.Instance.bossTentacleHit);
-        
+        SoundManager.Instance.SFXPlay(SoundList.Instance.bossTentacleHit);
+
     }
 }

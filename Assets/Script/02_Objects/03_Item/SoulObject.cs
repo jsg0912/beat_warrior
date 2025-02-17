@@ -32,7 +32,7 @@ public class SoulObject : MonoBehaviour
     {
         if (collision.gameObject.CompareTag(TagConstant.Player))
         {
-            SoundManager.Instance.SFXPlay("soulGet", SoundList.Instance.soulGet);
+            SoundManager.Instance.SFXPlay(SoundList.Instance.soulGet);
             Inventory.Instance.ChangeSoulNumber(ObjectConstant.SoulIdleMotionSpeed);
             MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.Soul, this.gameObject);
         }

@@ -60,7 +60,6 @@ public class HolyBlade : ActiveSkillPlayer
 
     protected override void SkillMethod()
     {
-        SoundManager.Instance.SFXPlay("PlayerHolyBlade", SoundList.Instance.playerHolyBlade);
         Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, -1);
         AttackCountUI.Instance.UpdateUI();
         SetAttackCollider(); // [Code Review - KMJ] Do not create new prefab every time, just use one obj and use activate/inactivate - SDH, 20250106
