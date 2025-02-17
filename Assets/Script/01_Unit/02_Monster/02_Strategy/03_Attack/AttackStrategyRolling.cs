@@ -39,7 +39,7 @@ public class AttackStrategyRolling : AttackStrategySplash
             .AppendCallback(() =>
             {
                 rb.gravityScale = 0;
-                rb.velocity = Vector2.zero;
+                PhysicsCalculator.StopRigidBody(rb);
             });
 
         // 덜덜이 공중에서 대기
