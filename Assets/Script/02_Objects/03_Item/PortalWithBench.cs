@@ -14,13 +14,14 @@ public class PortalWithBench : Portal
             if (RandomSystem.RandomBool(50.0f))
             {
                 Player.Instance.transform.position = bench.transform.position;
+                Player.Instance.SetMovingDirection(Direction.Right);
                 Player.Instance.SetAnimTrigger(PlayerConstant.Rest1AnimTrigger);
             }
             else
             {
                 Player.Instance.transform.position = rest.transform.position;
-                Player.Instance.SetAnimTrigger(PlayerConstant.Rest2AnimTrigger);
                 Player.Instance.SetMovingDirection(Direction.Left);
+                Player.Instance.SetAnimTrigger(PlayerConstant.Rest2AnimTrigger);
             }
         }
         return success;
