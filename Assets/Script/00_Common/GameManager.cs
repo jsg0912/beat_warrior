@@ -6,7 +6,7 @@ public class GameManager : SingletonObject<GameManager>
     private Language language = Language.kr;
     public Language Language => language;
     public bool IsLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();
-    public SceneName currentScene;
+
     public bool isInGame { get; private set; }
 
     protected override void Awake()
@@ -18,7 +18,6 @@ public class GameManager : SingletonObject<GameManager>
     public void Start()
     {
         SetIsInGame(false);
-        Enum.TryParse(SceneManager.GetActiveScene().name, true, out currentScene);
     }
 
     public void SetLanguage(Language language)

@@ -1,11 +1,18 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
+
 public class SceneController : SingletonObject<SceneController>
 {
+    public SceneName currentScene { get; private set; }
+
+    void Start()
+    {
+        currentScene = Util.ParseEnumFromString<SceneName>(SceneManager.GetActiveScene().name);
+    }
+
     public void ChangeScene(SceneName sceneName)
     {
         RunChangeSceneProcess(sceneName);
-        CheckBossStage(sceneName);
         SceneManager.LoadScene(sceneName.ToString());
     }
 
@@ -17,7 +24,7 @@ public class SceneController : SingletonObject<SceneController>
             case SceneName.Loading:
                 break;
             default:
-                GameManager.Instance.currentScene = targetScene;
+                currentScene = targetScene;
                 ChangeScene(SceneName.Loading);
                 break;
         }
@@ -37,18 +44,14 @@ public class SceneController : SingletonObject<SceneController>
         StartCoroutine(ChangeSceneWithLoading(SceneName.Title));
     }
 
-    public void CheckBossStage(SceneName scene)
+    public bool GetIsBossStage(SceneName sceneName)
     {
-        switch(scene)
+        switch (sceneName)
         {
             case SceneName.Ch2BossStage:
-                SoundManager.Instance.BackGroundPlay(SoundList.Instance.chapter2BossBGM);
-                SoundManager.Instance.PlayCh2BGSFX();
-                UIManager.Instance.TurnOffMiniMap();
-                break;
+                return true;
             default:
-                UIManager.Instance.TurnOnMiniMap();
-                break;
+                return false;
         }
     }
 }
