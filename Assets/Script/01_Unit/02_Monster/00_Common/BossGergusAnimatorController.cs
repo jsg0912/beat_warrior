@@ -8,7 +8,7 @@ public class BossGergusAnimatorController : StateMachineBehaviour
     {
         if (bossGergus == null) bossGergus = animator.GetComponent<BossGergus>();
 
-        if (GetIsAttacking(stateInfo)) bossGergus.AttackStart();
+        if (IsAttackInfo(stateInfo)) bossGergus.AttackStart();
         if (stateInfo.IsName(MonsterAnimation.AttackEnd))
         {
             bossGergus.AttackEnd();
@@ -19,27 +19,19 @@ public class BossGergusAnimatorController : StateMachineBehaviour
         {
             animator.ResetTrigger(MonsterAnimation.AttackEnd);
         }
-        else if (stateInfo.IsName(MonsterAnimation.Hurt))
-        {
-            bossGergus.PlayScarEffect();
-        }
         else if (stateInfo.IsName(MonsterAnimation.Die))
         {
             bossGergus.SetStatus(MonsterStatus.Dead);
-            bossGergus.PlayScarEffect();
-            Destroy(bossGergus.gameObject, MonsterConstant.monsterDieRemoveTime);
+        }
+        else if (stateInfo.IsName(MonsterAnimation.DieEnd))
+        {
+            Destroy(bossGergus.gameObject);
+            // TODO: TBD
+            SystemMessageUIManager.Instance.TurnOnSystemMassageUI(SystemMessageType.ToBeContinued, 10.0f);
         }
     }
 
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-    }
-
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-    }
-
-    public bool GetIsAttacking(AnimatorStateInfo stateInfo)
+    private bool IsAttackInfo(AnimatorStateInfo stateInfo)
     {
         return stateInfo.IsName("Left") || stateInfo.IsName("Right1") ||
                stateInfo.IsName("Slosh") || stateInfo.IsName("Crash") ||

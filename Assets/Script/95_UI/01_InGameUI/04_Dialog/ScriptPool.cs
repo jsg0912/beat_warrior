@@ -198,6 +198,11 @@ public static class ScriptPool
             {Language.kr, "영혼이 부족합니다" },
             {Language.en, "Not Enough Soul" },
         }},
+        {SystemMessageType.ToBeContinued,new Dictionary<Language, string>
+        {
+            {Language.kr, "To Be Continued..." },
+            {Language.en, "TBD..." },
+        }},
     };
 
     public static Dictionary<KeyCode, string> KeyCodeText = new()

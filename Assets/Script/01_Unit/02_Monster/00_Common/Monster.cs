@@ -30,7 +30,7 @@ public class Monster : DirectionalGameObject
     [SerializeField] private float soulDropRate = ObjectConstant.SoulDropRate;
 
     protected Animator _animator;
-    private bool isFixedAnimation = false;
+    protected bool isFixedAnimation = false;
 
     [SerializeField] protected MonsterHPUI HpUI;
     [SerializeField] private GameObject attackEffect;
@@ -84,7 +84,7 @@ public class Monster : DirectionalGameObject
         _animator.SetFloat(trigger, value);
     }
 
-    public void PlayAnimation(string trigger)
+    virtual public void PlayAnimation(string trigger)
     {
         if (isFixedAnimation) return;
         if (trigger == MonsterAnimTrigger.hurtAnimTrigger)
