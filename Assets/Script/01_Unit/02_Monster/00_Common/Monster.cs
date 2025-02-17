@@ -126,6 +126,7 @@ public class Monster : DirectionalGameObject
         {
             case MonsterStatus.Attack:
             case MonsterStatus.Groggy:
+            case MonsterStatus.PhaseChanging:
                 return false;
             default:
                 return true;
