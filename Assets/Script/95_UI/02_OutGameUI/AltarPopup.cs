@@ -18,7 +18,7 @@ public class AltarPopup : PageAblePopupSystem
     public void Initialize()
     {
         AltarUIManager.Instance.UpdatePlayerSoulView();
-        maxPage = Util.Round(AltarUIManager.Instance.salesSkillList.Length, traitUIs.Count);
+        maxPage = MathCalculator.Round(AltarUIManager.Instance.salesSkillList.Length, traitUIs.Count);
         ChangePage(1);
     }
 
@@ -55,7 +55,7 @@ public class AltarPopup : PageAblePopupSystem
         if (success)
         {
             Initialize();
-            SoundManager.Instance.SFXPlay("AltarOpen", SoundList.Instance.altarOpen);
+            SoundManager.Instance.SFXPlay(SoundList.Instance.altarOpen);
             Util.SetActive(MiniMap.Instance.gameObject, false);
             ShowCurrentPageText();
         }
@@ -67,7 +67,7 @@ public class AltarPopup : PageAblePopupSystem
         bool success = base.TurnOffPopup();
         if (success)
         {
-            SoundManager.Instance.SFXPlay("AltarOpen", SoundList.Instance.altarClose);
+            SoundManager.Instance.SFXPlay(SoundList.Instance.altarClose);
             Util.SetActive(MiniMap.Instance.gameObject, true);
         }
         return success;

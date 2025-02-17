@@ -38,7 +38,7 @@ public class RecognizeStrategyMelee : RecognizeStrategy
     private bool TryRecognizePlayer()
     {
         Vector3 start = GetMonsterPos();
-        start.y += Player.Instance.GetSize().y - Util.OffsetY;
+        start.y += Player.Instance.GetSize().y - VectorCalculator.OffsetY;
 
         Vector3 dir = Vector3.right * GetMovingDirectionFloat();
         RaycastHit2D rayHit = Physics2D.Raycast(start, dir, recognizeRange, TargetLayer);
