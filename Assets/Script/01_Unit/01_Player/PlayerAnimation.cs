@@ -7,6 +7,7 @@ public class PlayerAnimation
     public const string Jump = "Jump";
     public const string Hurt = "Hurt";
     public const string Die = "Die";
+    public const string DieEnd = "DieEnd";
     public const string Attack = "Attack";
     public const string Mark = "Mark";
     public const string Dash = "Dash";
