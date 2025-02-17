@@ -5,14 +5,6 @@ public class TitleManager : MonoBehaviour
     public void Start() { Initialize(); }
     public void OnEnable() { Initialize(); }
 
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            OnExitClick();
-        }
-    }
-
     public void OnPlayClick()
     {
         GameManager.Instance.StartGame();
