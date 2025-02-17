@@ -4,10 +4,12 @@ using System.Collections;
 public class Marker : MonoBehaviour
 {
     bool isUsed = false; // 2명이 동시에 맞는 순간 버그를 처리하기 위해 어쩔 수 없는 Bool 변수 - SDH, 20240213
+
     private void Start()
     {
         StartCoroutine(DestroyMarker(PlayerSkillConstant.markerDuration));
     }
+
     private void OnEnable()
     {
         isUsed = false;
@@ -18,8 +20,6 @@ public class Marker : MonoBehaviour
     {
         StopAllCoroutines();
     }
-
-
 
     public void SetVelocity(Vector2 start, Vector2 end)
     {
@@ -33,7 +33,7 @@ public class Marker : MonoBehaviour
         if (isUsed) return;
         GameObject obj = Util.GetMonsterGameObject(collision);
 
-        if (obj != null && obj.CompareTag(TagConstant.Monster) && obj.GetComponent<Monster>().GetIsAlive() && obj.GetComponent<Monster>().monsterName != MonsterName.Gergus)
+        if (IsHitAbleObject(obj))
         {
             isUsed = true;
             Player.Instance.SetTarget(obj);
@@ -41,6 +41,11 @@ public class Marker : MonoBehaviour
             PlayerUIManager.Instance.SwapMarkAndDash(false);
             MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.Mark, this.gameObject);
         }
+    }
+
+    public bool IsHitAbleObject(GameObject obj)
+    {
+        return obj != null && obj.CompareTag(TagConstant.Monster) && obj.GetComponent<Monster>().GetIsAlive() && !PlayerSkillConstant.MarkerIgnoreMonsterList.Contains(obj.GetComponent<Monster>().monsterName);
     }
 
     public IEnumerator DestroyMarker(float delay = 0.0f)

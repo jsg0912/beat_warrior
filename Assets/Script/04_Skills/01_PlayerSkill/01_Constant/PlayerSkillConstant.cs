@@ -38,6 +38,11 @@ public class PlayerSkillConstant
         { AdditionalEffectName.KnockBack, false },
     };
 
+    public static List<MonsterName> MarkerIgnoreMonsterList = new()
+    {
+        MonsterName.Gergus,
+    };
+
     public const float ghostDelayTimeMax = 0.05f;
 
     public const int attackAtk = 1;
