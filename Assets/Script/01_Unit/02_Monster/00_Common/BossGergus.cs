@@ -26,12 +26,6 @@ public class BossGergus : Monster
         return;
     }
 
-    public override void GetDamaged(int dmg)
-    {
-        base.GetDamaged(dmg);
-        PlayScarEffect();
-    }
-
     public override void PlayScarEffect()
     {
         Vector3 playerPos = Player.Instance.GetMiddlePos();
@@ -44,6 +38,18 @@ public class BossGergus : Monster
             hitEffect.transform.position = closetPoint;
             StartCoroutine(Util.PlayInstantEffect(hitEffect, 0.3f));
         }
+    }
+
+    override public void PlayAnimation(string trigger)
+    {
+        if (isFixedAnimation) return;
+        if (trigger == MonsterAnimTrigger.hurtAnimTrigger)
+        {
+            PlayScarEffect();
+            // 색깔 변화
+            return;
+        }
+        _animator.SetTrigger(trigger);
     }
 
     public void PlaySpitSFX()
