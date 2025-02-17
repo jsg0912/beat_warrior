@@ -1688,6 +1688,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770551499}
   m_CullTransparentMesh: 1
+--- !u!1 &1091443814 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1980346654330800680, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+  m_PrefabInstance: {fileID: 1550215503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1142041766
 GameObject:
   m_ObjectHideFlags: 0
@@ -6989,7 +6994,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1934255822518878282, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1963476318210363914, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
       propertyPath: m_Enabled
@@ -7207,6 +7212,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5277374945448015515, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+      propertyPath: blurTypePairs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277374945448015515, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+      propertyPath: blurTypePairs.Array.data[2].blurType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277374945448015515, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+      propertyPath: blurTypePairs.Array.data[3].blurType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277374945448015515, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+      propertyPath: blurTypePairs.Array.data[4].blurType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277374945448015515, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+      propertyPath: blurTypePairs.Array.data[1].gameObject
+      value: 
+      objectReference: {fileID: 1550215505}
+    - target: {fileID: 5277374945448015515, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+      propertyPath: blurTypePairs.Array.data[3].gameObject
+      value: 
+      objectReference: {fileID: 1091443814}
+    - target: {fileID: 5277374945448015515, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+      propertyPath: blurTypePairs.Array.data[4].gameObject
+      value: 
+      objectReference: {fileID: 1550215504}
     - target: {fileID: 5319344285870992402, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -7429,7 +7462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8342737413228780305, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
       propertyPath: m_PresetInfoIsWorld
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8375365701843902027, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
       propertyPath: m_SizeDelta.x
@@ -7523,6 +7556,16 @@ PrefabInstance:
       addedObject: {fileID: 1855597330}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+--- !u!1 &1550215504 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7329390506882071924, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+  m_PrefabInstance: {fileID: 1550215503}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1550215505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7565074696505596367, guid: dbc6dcfb50223e5458777bc96cdb9099, type: 3}
+  m_PrefabInstance: {fileID: 1550215503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1573041057
 GameObject:
   m_ObjectHideFlags: 0

@@ -59,6 +59,7 @@ public class PatternCh2Boss : PatternBoss
         };
 
         attackCoolTimer = new Timer(BossConstantCh2.AttackCoolTime);
+        attackCoolTimer.SetRemainTimeZero();
         attackStrategySpawnIppali.Initialize(bossGergus);
         base.Initialize(bossGergus);
     }

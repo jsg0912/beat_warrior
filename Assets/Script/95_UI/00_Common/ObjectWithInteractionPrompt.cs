@@ -28,7 +28,7 @@ public abstract class ObjectWithInteractionPrompt : MonoBehaviour
         if (success) InteractionManager.Instance.RemoveObject(this);
     }
 
-    protected bool SetActivePromptText(bool isActive) { return Util.SetActive(promptText.gameObject, isActive); }
+    protected bool SetActivePromptText(bool isActive) { return Util.SetActive(promptText?.gameObject, isActive); }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {

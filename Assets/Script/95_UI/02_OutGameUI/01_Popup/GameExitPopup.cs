@@ -4,7 +4,7 @@ public class GameExitPopup : PopupSystem
 {
     public override BlurType SetBlur()
     {
-        return BlurType.BlackBlur;
+        return BlurType.TopPopupBlackBlur;
     }
 
     override public void OnClickOkay()

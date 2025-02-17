@@ -63,4 +63,29 @@ public class TutorialManager : SingletonObject<TutorialManager>
             ChapterManager.Instance.SetTutorialComplete();
         }
     }
+
+    public void CheckTutorialKey()
+    {
+        if (isSkillAble)
+        {
+            Player.Instance.CheckPlayerCommand();
+        }
+        else
+        {
+            Player.Instance.CheckGround();
+            if (isJumpAble)
+            {
+                Player.Instance.TryJump();
+            }
+        }
+
+        if (IsWaitingForTutorialAction)
+        {
+            PlayerAction tutorialAction = currentTutorialAction;
+            if (tutorialAction != PlayerAction.Null && Input.GetKeyDown(KeySetting.GetKey(tutorialAction)))
+            {
+                SetUserInput(tutorialAction);
+            }
+        }
+    }
 }
