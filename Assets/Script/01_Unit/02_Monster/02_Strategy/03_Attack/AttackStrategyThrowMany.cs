@@ -7,7 +7,7 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
     protected float throwInterval;
     protected int throwCountMax;
     protected int throwCountCurrent;
-    protected float targetPosOffset = 5.0f;
+    protected float targetPosOffset = 10.0f;
 
     public AttackStrategyThrowMany(float throwSpeed, float maxHeight, int throwCountMax, float throwInterval, PoolTag poolTag, string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger) : base(throwSpeed, maxHeight, monsterAnimTrigger)
     {
@@ -18,11 +18,9 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
 
     protected override void SetTargetPosition()
     {
-        targetPosition = GetPlayerPos();
-
-        if (throwCountCurrent == 0) return;
-        else if (throwCountCurrent % 2 == 1) targetPosition.x -= Random.Range(0, targetPosOffset);
-        else targetPosition.x += Random.Range(0, targetPosOffset);
+        if (throwCountCurrent == 0) targetPosition = GetPlayerPos();
+        else if (throwCountCurrent % 2 == 1) targetPosition = throwStartPos + new Vector3(RandomSystem.RandomFloat(targetPosOffset), 0);
+        else targetPosition = throwStartPos - new Vector3(RandomSystem.RandomFloat(targetPosOffset), 0);
     }
 
     protected override void AttackMethod()

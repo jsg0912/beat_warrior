@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class AttackStrategyThrow : AttackStrategyCreate
 {
-    private float throwSpeed;
-    private float maxHeight;
-    private float gravity = Physics2D.gravity.y;
+    protected float throwSpeed;
+    protected float maxHeight;
+    protected float gravity = Physics2D.gravity.y;
     protected Vector3 targetPosition;
+    protected Vector3 throwStartPos => monster.attackCollider.transform.position;
 
     public AttackStrategyThrow(float throwSpeed, float maxHeight, string monsterAnimTrigger = MonsterAnimTrigger.attackChargeAnimTrigger) : base(monsterAnimTrigger)
     {
@@ -24,7 +25,7 @@ public class AttackStrategyThrow : AttackStrategyCreate
 
         SetTargetPosition();
 
-        obj.transform.position = monster.attackCollider.transform.position; // 원거리 몬스터들은 attackCollider를 원거리 공격의 사용 위치로 지정
+        obj.transform.position = throwStartPos; // 원거리 몬스터들은 attackCollider를 원거리 공격의 사용 위치로 지정
 
         float distance = targetPosition.x - GetMonsterFrontPos().x;
 
