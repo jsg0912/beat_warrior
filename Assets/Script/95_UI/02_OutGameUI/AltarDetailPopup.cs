@@ -36,6 +36,7 @@ public class AltarDetailPopup : PopupSystem
         bool success = base.TurnOnPopup();
         if (success)
         {
+            Initialize();
             AltarUIManager.Instance.UpdateEquippedTraitUIs(equippedTraitUIs);
             UpdateAltarUIButtons();
         }
