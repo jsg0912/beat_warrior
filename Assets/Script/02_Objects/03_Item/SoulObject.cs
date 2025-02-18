@@ -37,4 +37,9 @@ public class SoulObject : MonoBehaviour
             MyPooler.ObjectPooler.Instance.ReturnToPool(PoolTag.Soul, this.gameObject);
         }
     }
+
+    public void DestroySoul()
+    {
+        Destroy(gameObject);
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -172,5 +173,32 @@ namespace MyPooler
             activeObjects[pooTag.ToString()].Add(obj);
             return obj;
         }
+
+        public bool DestroyAllObjectsInPool(PoolTag poolTag)
+        {
+            string tag = poolTag.ToString();
+
+            if (!parents.ContainsKey(tag))
+            {
+                return false;
+            }
+
+            foreach (GameObject obj in activeObjects[tag])
+            {
+                Destroy(obj);
+            }
+            activeObjects[tag].Clear(); 
+
+            foreach (GameObject obj in poolDictionary[tag])
+            {
+                Destroy(obj);
+            }
+            poolDictionary[tag].Clear(); 
+
+
+            return true;
+        }
     }
+
+
 }
