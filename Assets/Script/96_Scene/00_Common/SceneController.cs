@@ -15,7 +15,6 @@ public class SceneController : SingletonObject<SceneController>
     {
         RunChangeSceneProcess(sceneName);
         SceneManager.LoadScene(sceneName.ToString());
-        ObjectPooler.Instance.DestroyAllObjectsInPool(PoolTag.Soul);
     }
 
     public IEnumerator ChangeSceneWithLoading(SceneName targetScene)
@@ -24,9 +23,12 @@ public class SceneController : SingletonObject<SceneController>
         switch (targetScene)
         {
             case SceneName.Loading:
+                // 주의: 실제로 Loading Scene은 위 함수를 통해 불러올 일이 없어야함
+                DebugConsole.Error("Loading Scene cannot be loaded directly.");
                 break;
             default:
-                currentScene = targetScene;
+                currentScene = targetScene; // Loading Scene을 부르고 나서 실제 우리가 원하는 TargetScene을 켜야하기 때문에 설정(더 좋은 방식이 있다면 개선 가능)
+                ObjectPooler.Instance.ResetAllPools();
                 ChangeScene(SceneName.Loading);
                 break;
         }

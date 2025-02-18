@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -95,7 +94,7 @@ namespace MyPooler
             o.transform.rotation = rotation;
 
             IPooledObject pooledObj = o.GetComponent<IPooledObject>();
-            if (pooledObj != null)
+            if (IsResetObjectWhenSceneChange(poolTag, pooledObj))
             {
                 pooledObj.OnRequestedFromPool();
                 onResetPools += pooledObj.DiscardToPool;
@@ -104,7 +103,6 @@ namespace MyPooler
             activeObjects[tag].Add(o);
             return o;
         }
-
 
         /// <summary>
         /// Return an object to a pool
@@ -127,18 +125,16 @@ namespace MyPooler
             o.SetActive(false);
 
             IPooledObject pooledObj = o.GetComponent<IPooledObject>();
-            if (pooledObj != null)
+            if (IsResetObjectWhenSceneChange(poolTag, pooledObj))
                 onResetPools -= pooledObj.DiscardToPool;
         }
 
+        private bool IsResetObjectWhenSceneChange(PoolTag poolTag, IPooledObject pooledObj) => pooledObj != null && PoolTagException.WhenSceneChangeReset.Contains(poolTag);
 
         /// <summary>
         /// Reset all pools
         /// </summary>
-        public void ResetAllPools()
-        {
-            onResetPools?.Invoke();
-        }
+        public void ResetAllPools() { onResetPools?.Invoke(); }
 
         void CreatePools()
         {
@@ -173,32 +169,5 @@ namespace MyPooler
             activeObjects[pooTag.ToString()].Add(obj);
             return obj;
         }
-
-        public bool DestroyAllObjectsInPool(PoolTag poolTag)
-        {
-            string tag = poolTag.ToString();
-
-            if (!parents.ContainsKey(tag))
-            {
-                return false;
-            }
-
-            foreach (GameObject obj in activeObjects[tag])
-            {
-                Destroy(obj);
-            }
-            activeObjects[tag].Clear(); 
-
-            foreach (GameObject obj in poolDictionary[tag])
-            {
-                Destroy(obj);
-            }
-            poolDictionary[tag].Clear(); 
-
-
-            return true;
-        }
     }
-
-
 }
