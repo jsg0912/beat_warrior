@@ -13,7 +13,8 @@ public class PlayerConstant
     public const Direction initDirection = Direction.Left;
 
     public const float gravityScale = 5.0f;
-    public const float moveSpeed = 5.6f;
+    public const float moveSpeed = 8f;
+    public const float moveAcceleration = 10.0f;
     public const float jumpPower = 20.0f;
     public const float playerHeight = 1.0f;
 

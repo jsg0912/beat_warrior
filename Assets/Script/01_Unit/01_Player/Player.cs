@@ -235,7 +235,6 @@ public class Player : DirectionalGameObject
         if (!IsMoveable()) return;
 
         bool isMove = false;
-
         if (Input.GetKey(KeySetting.GetKey(PlayerAction.Right)))
         {
             SetMovingDirection(Direction.Right);
@@ -250,7 +249,18 @@ public class Player : DirectionalGameObject
 
         _animator.SetFloat("Speed", isMove ? 1 : 0);
 
-        if (isMove == true) transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
+        if (isMove)
+        {
+            float targetVelocity = GetMovingDirectionFloat() * PlayerConstant.moveSpeed;
+            float velocityChange = targetVelocity - _rigidbody.velocity.x;
+            _rigidbody.AddForce(new Vector2(velocityChange * PlayerConstant.moveAcceleration, 0), ForceMode2D.Force);
+            // transform.position += new Vector3((int)movingDirection * PlayerConstant.moveSpeed * Time.deltaTime, 0, 0);
+            // _rigidbody.velocity = new Vector2(PlayerConstant.moveSpeed * GetMovingDirectionFloat(), _rigidbody.velocity.y);
+        }
+        else
+        {
+            _rigidbody.velocity = new Vector2(Mathf.MoveTowards(_rigidbody.velocity.x, 0, PlayerConstant.moveAcceleration * Time.fixedDeltaTime), _rigidbody.velocity.y);
+        }
     }
 
     public bool CheckWall()
@@ -391,8 +401,7 @@ public class Player : DirectionalGameObject
     {
         SetAnimTrigger(PlayerConstant.jumpAnimTrigger);
 
-        PhysicsCalculator.StopRigidBodyY(_rigidbody);
-        _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpPower, ForceMode2D.Impulse);
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, PlayerConstant.jumpPower);
         jumpOffsetTimer.Initialize();
     }
 
