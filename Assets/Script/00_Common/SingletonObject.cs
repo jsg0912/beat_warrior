@@ -44,7 +44,7 @@ public abstract class SingletonObject<T> : MonoBehaviour where T : MonoBehaviour
 
             if (_instance == null)
             {
-                Debug.LogWarning($"[SingletonObject] {typeof(T).Name}이(가) 존재하지 않아서 새로운 인스턴스를 생성합니다.");
+                DebugConsole.Log($"[SingletonObject] {typeof(T).Name}이(가) 존재하지 않아서 새로운 인스턴스를 생성합니다.");
                 GameObject go = new GameObject(typeof(T).ToString());
                 _instance = go.AddComponent<T>();
 
