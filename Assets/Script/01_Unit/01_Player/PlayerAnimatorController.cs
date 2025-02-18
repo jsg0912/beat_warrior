@@ -27,6 +27,7 @@ public class PlayerAnimatorController : StateMachineBehaviour
             player.InitializeAttackCollider();
             player.AttackAnimationEnd();
         }
+        else if (stateInfo.IsName(PlayerAnimation.Revive1)) (player.HaveSkill(SkillName.Revive) as Revive).ReviveFunctionAfter();
     }
 
     private bool IsAttackStatus(AnimatorStateInfo stateInfo)
