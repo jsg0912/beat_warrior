@@ -1,3 +1,4 @@
+using MyPooler;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
@@ -14,6 +15,7 @@ public class SceneController : SingletonObject<SceneController>
     {
         RunChangeSceneProcess(sceneName);
         SceneManager.LoadScene(sceneName.ToString());
+        ObjectPooler.Instance.DestroyAllObjectsInPool(PoolTag.Soul);
     }
 
     public IEnumerator ChangeSceneWithLoading(SceneName targetScene)
