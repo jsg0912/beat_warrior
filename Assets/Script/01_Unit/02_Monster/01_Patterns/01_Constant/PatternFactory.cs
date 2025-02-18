@@ -1,5 +1,3 @@
-using System.Dynamic;
-
 public static class PatternFactory
 {
     public static Pattern GetPatternByPatternName(PatternName patternName)
@@ -20,8 +18,10 @@ public static class PatternFactory
                 return new PatternKoppulso();
             case PatternName.Giljjugi:
                 return new PatternGiljjugi();
-            case PatternName.Ch2Boss:
+            case PatternName.BossGergus:
                 return new PatternCh2Boss();
+            case PatternName.PriestGirl:
+                return new PatternNPCPriestGirl();
         }
 
         throw new System.Exception($"{patternName} is not exist");

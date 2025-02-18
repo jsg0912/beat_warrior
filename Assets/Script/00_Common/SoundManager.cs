@@ -48,7 +48,7 @@ public class SoundManager : SingletonObject<SoundManager>
         ApplyVolume();
     }
 
-    public void SFXPlay(string name, AudioClip clip)
+    public void SFXPlay(AudioClip clip, string name = "")
     {
         if (clip == null)
         {
@@ -57,6 +57,32 @@ public class SoundManager : SingletonObject<SoundManager>
         }
         soundEffect.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
         soundEffect.PlayOneShot(clip, sfxVolume / 2);
+    }
+
+    public void PlayPlayerSFX(string playerAction)
+    {
+        switch (playerAction)
+        {
+            case PlayerConstant.attackAnimTrigger:
+                SFXPlay(SoundList.Instance.playerHolyBlade);
+                break;
+            case PlayerConstant.jumpAnimTrigger:
+                SFXPlay(SoundList.Instance.playerJump);
+                break;
+            case PlayerConstant.dieAnimTrigger:
+                SFXPlay(SoundList.Instance.playerDead);
+                break;
+            case PlayerConstant.QSkill1AnimTrigger:
+            case PlayerConstant.QSkill2AnimTrigger:
+                SFXPlay(SoundList.Instance.playerQSkill);
+                break;
+            case PlayerConstant.ESkillAnimTrigger:
+                SFXPlay(SoundList.Instance.playerESkill);
+                break;
+            case PlayerConstant.dashAnimTrigger:
+                SFXPlay(SoundList.Instance.playerDash);
+                break;
+        }
     }
 
     public void BackGroundPlay(AudioClip clip)
@@ -68,7 +94,6 @@ public class SoundManager : SingletonObject<SoundManager>
         backGroundSound.Play();
     }
 
-
     public void PlayTitleBGM()
     {
         BackGroundPlay(SoundList.Instance.titleBGM);
@@ -76,7 +101,7 @@ public class SoundManager : SingletonObject<SoundManager>
 
     public void PlayButtonClickSFX()
     {
-        SFXPlay("Equip", SoundList.Instance.buttonClick);
+        SFXPlay(SoundList.Instance.buttonClick);
     }
 
     public void PlayBackGroundSFX(AudioClip clip)
@@ -92,8 +117,39 @@ public class SoundManager : SingletonObject<SoundManager>
         soundEffect.Stop();
     }
 
-    public void PlayCh2BGSFX()
+    public void PlayChapterBGM()
     {
-        PlayBackGroundSFX(SoundList.Instance.bossBackGroundSoundEffect);
+        switch (ChapterManager.Instance.currentChapterName)
+        {
+            case ChapterName.Tutorial:
+                BackGroundPlay(SoundList.Instance.chapter1BGM);
+                break;
+            case ChapterName.Ch1:
+                BackGroundPlay(SoundList.Instance.chapter1BGM);
+                break;
+            case ChapterName.Ch2:
+                BackGroundPlay(SoundList.Instance.chapter2BGM);
+                break;
+            case ChapterName.Ch3:
+                BackGroundPlay(SoundList.Instance.chapter3BGM);
+                break;
+            case ChapterName.Ch4:
+                BackGroundPlay(SoundList.Instance.chapter4BGM);
+                break;
+            default:
+                Debug.LogError($"Chapter {default} does not have BGM");
+                break;
+        }
+    }
+
+    public void PlayStageBGM()
+    {
+        switch (SceneController.Instance.currentScene) // TODO: StageName 개념 도입 필요 - 신동환, 20250217
+        {
+            case SceneName.Ch2BossStage:
+                BackGroundPlay(SoundList.Instance.chapter2BossBGM);
+                PlayBackGroundSFX(SoundList.Instance.bossBackGroundSoundEffect);
+                break;
+        }
     }
 }

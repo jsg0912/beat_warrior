@@ -6,7 +6,7 @@ public class Monster : DirectionalGameObject
 {
     // Hierarchy 상에서 monster Object의 이름을 정해주면 자동으로 같은 이름의 능력치가 할당 됨 - Tony, 2024.09.11
     public MonsterName monsterName;
-    private MonsterUnit monsterUnit;
+    protected MonsterUnit monsterUnit;
     public Pattern pattern;
 
     [SerializeField] private MonsterStatus _status;
@@ -30,9 +30,9 @@ public class Monster : DirectionalGameObject
     [SerializeField] private float soulDropRate = ObjectConstant.SoulDropRate;
 
     protected Animator _animator;
-    private bool isFixedAnimation = false;
+    protected bool isFixedAnimation = false;
 
-    [SerializeField] private MonsterHPUI HpUI;
+    [SerializeField] protected MonsterHPUI HpUI;
     [SerializeField] private GameObject attackEffect;
     [SerializeField] private GameObject MarkedEffect;
     [SerializeField] protected List<GameObject> hitEffects = new List<GameObject>();
@@ -84,7 +84,7 @@ public class Monster : DirectionalGameObject
         _animator.SetFloat(trigger, value);
     }
 
-    public void PlayAnimation(string trigger)
+    virtual public void PlayAnimation(string trigger)
     {
         if (isFixedAnimation) return;
         if (trigger == MonsterAnimTrigger.hurtAnimTrigger)
@@ -126,6 +126,7 @@ public class Monster : DirectionalGameObject
         {
             case MonsterStatus.Attack:
             case MonsterStatus.Groggy:
+            case MonsterStatus.PhaseChanging:
                 return false;
             default:
                 return true;
@@ -167,14 +168,14 @@ public class Monster : DirectionalGameObject
         if (!GetIsAlive()) return;
 
         int damage = playerATK - monsterUnit.unitStat.GetFinalStat(StatKind.Def);
-        if (monsterUnit.unitStat.GetFinalStat(StatKind.Def) > 0) SoundManager.Instance.SFXPlay("DefmonsterHit", SoundList.Instance.defMonsterHit);
+        if (monsterUnit.unitStat.GetFinalStat(StatKind.Def) > 0) SoundManager.Instance.SFXPlay(SoundList.Instance.defMonsterHit);
         if (damage <= 0) return;
 
         GetDamaged(damage);
         if (Player.Instance.hitMonsterFuncList != null && !isAlreadyCheckHitMonsterFunc) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.
 
         PlayAnimation(MonsterAnimTrigger.hurtAnimTrigger);
-        SoundManager.Instance.SFXPlay("MonsterHit", SoundList.Instance.monsterHit);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.monsterHit);
     }
 
     public virtual void GetDamaged(int dmg)
@@ -301,22 +302,22 @@ public class Monster : DirectionalGameObject
         switch (monsterName)
         {
             case MonsterName.Ippali:
-                SoundManager.Instance.SFXPlay("IppaliAttack", SoundList.Instance.monsterIppaliAttack);
+                SoundManager.Instance.SFXPlay(SoundList.Instance.monsterIppaliAttack);
                 break;
             case MonsterName.Ibkkugi:
-                SoundManager.Instance.SFXPlay("IbkkugiAttack", SoundList.Instance.monsterIbkkugiAttack);
+                SoundManager.Instance.SFXPlay(SoundList.Instance.monsterIbkkugiAttack);
                 break;
             case MonsterName.Koppulso:
-                SoundManager.Instance.SFXPlay("KoppulsoAttack", SoundList.Instance.monsterKoppulsoAttack);
+                SoundManager.Instance.SFXPlay(SoundList.Instance.monsterKoppulsoAttack);
                 break;
             case MonsterName.Dulduli:
-                SoundManager.Instance.SFXPlay("DulduliAttack", SoundList.Instance.monsterDulduliAttack);
+                SoundManager.Instance.SFXPlay(SoundList.Instance.monsterDulduliAttack);
                 break;
             case MonsterName.Giljjugi:
-                SoundManager.Instance.SFXPlay("GiljjugiAttack", SoundList.Instance.monsterGiljjugiAttack);
+                SoundManager.Instance.SFXPlay(SoundList.Instance.monsterGiljjugiAttack);
                 break;
             case MonsterName.Itmomi:
-                SoundManager.Instance.SFXPlay("ItmomiAttack", SoundList.Instance.monsterItmomiAttack);
+                SoundManager.Instance.SFXPlay(SoundList.Instance.monsterItmomiAttack);
                 break;
         }
     }
@@ -326,17 +327,22 @@ public class Monster : DirectionalGameObject
         switch (monsterName)
         {
             case MonsterName.Koppulso:
-                SoundManager.Instance.SFXPlay("KoppulsoCharge", SoundList.Instance.monsterKoppulsoCharge);
+                SoundManager.Instance.SFXPlay(SoundList.Instance.monsterKoppulsoCharge);
                 break;
             case MonsterName.Dulduli:
-                SoundManager.Instance.SFXPlay("DulduliCharge", SoundList.Instance.monsterDulduliCharge);
+                SoundManager.Instance.SFXPlay(SoundList.Instance.monsterDulduliCharge);
                 break;
         }
     }
 
     public void PlayMonsterThornSFX()
     {
-        SoundManager.Instance.SFXPlay("monsterItmomiThorn", SoundList.Instance.monsterItmomiThorn);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.monsterItmomiThorn);
     }
 
+    public void ForceKill()
+    {
+        SetBuffMultiply(StatKind.Def, -1);
+        AttackedByPlayer(GetCurrentHP(), true);
+    }
 }

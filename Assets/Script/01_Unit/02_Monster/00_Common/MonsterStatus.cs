@@ -4,5 +4,6 @@ public enum MonsterStatus
     Chase,
     Attack,
     Groggy,
+    PhaseChanging,
     Dead
 }

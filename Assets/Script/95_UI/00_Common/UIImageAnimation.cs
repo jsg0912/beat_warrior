@@ -4,8 +4,8 @@ using System.Collections;
 
 public class UIImageAnimation : MonoBehaviour
 {
-    public Image uiImage; 
-    public Sprite[] sprites; 
+    public Image uiImage;
+    public Sprite[] sprites;
     public float frameRate = 0.1f;
 
     public FadeInEffect overlayFadeInEffect;
@@ -13,13 +13,13 @@ public class UIImageAnimation : MonoBehaviour
 
     public Image overlayImage;
     void Start()
-    {  
+    {
         //StartCoroutine(AnimateSprite());
     }
 
     public void Initialize()
     {
-        if(sprites.Length>0)
+        if (sprites.Length > 0)
         {
             uiImage.sprite = sprites[0];
         }
@@ -31,8 +31,8 @@ public class UIImageAnimation : MonoBehaviour
     {
         fadeInEffect.SetAlpha(1f);
         yield return new WaitForSecondsRealtime(1f);
-        SoundManager.Instance.SFXPlay("chapter2BossMapTitle", SoundList.Instance.chapter2BossMapTitle);
-        for (int i = 0; i < sprites.Length; i++) 
+        SoundManager.Instance.SFXPlay(SoundList.Instance.chapter2BossMapTitle);
+        for (int i = 0; i < sprites.Length; i++)
         {
             uiImage.sprite = sprites[i];
             yield return new WaitForSeconds(frameRate);

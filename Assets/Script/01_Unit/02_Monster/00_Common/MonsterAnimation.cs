@@ -10,4 +10,5 @@ public class MonsterAnimation
     public const string Groggy = "Groggy";
     public const string GroggyEnd = "GroggyEnd";
     public const string Die = "Die";
+    public const string DieEnd = "DieEnd";
 }

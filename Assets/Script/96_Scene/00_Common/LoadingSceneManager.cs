@@ -16,8 +16,8 @@ public class LoadingSceneManager : MonoBehaviour
     IEnumerator LoadScene()
     {
         yield return null;
-        SceneController.Instance.RunChangeSceneProcess(GameManager.Instance.currentScene);
-        AsyncOperation loadingSceneProcess = SceneManager.LoadSceneAsync(GameManager.Instance.currentScene.ToString());
+        SceneController.Instance.RunChangeSceneProcess(SceneController.Instance.currentScene);
+        AsyncOperation loadingSceneProcess = SceneManager.LoadSceneAsync(SceneController.Instance.currentScene.ToString());
         loadingSceneProcess.allowSceneActivation = false;
         timer.Initialize();
         while (!loadingSceneProcess.isDone)

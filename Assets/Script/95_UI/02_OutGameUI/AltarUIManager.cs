@@ -76,7 +76,7 @@ public class AltarUIManager : SingletonObject<AltarUIManager>
             altarDetailPopup.UpdateTargetTraitInfo();
             AltarUIManager.Instance.RefreshMainAltarPopup();
 
-            SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.altarBuy);
+            SoundManager.Instance.SFXPlay(SoundList.Instance.altarBuy);
         }
         else
         {

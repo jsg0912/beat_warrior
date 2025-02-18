@@ -81,6 +81,6 @@ public class Mark : ActiveSkillPlayer
         Util.RotateObjectForwardingDirection(Marker, direction, true);
         Marker.GetComponent<Marker>().SetVelocity(start, end);
 
-        SoundManager.Instance.SFXPlay("PlayerMark", SoundList.Instance.playerMark);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.playerMark);
     }
 }

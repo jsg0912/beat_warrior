@@ -7,6 +7,7 @@ public abstract class PatternBoss : Pattern
     protected PatternPhase currentPhase = 0;
     protected PatternPhase maxPhase;
     protected AttackStrategy currentAttackStrategy;
+
     public PatternBoss(PatternPhase maxPhase)
     {
         Recognize = new RecognizeStrategyAbsolute();
@@ -17,6 +18,7 @@ public abstract class PatternBoss : Pattern
     protected void ChangePhase(PatternPhase phase)
     {
         currentPhase = phase;
+        monster.SetStatus(MonsterStatus.PhaseChanging);
     }
 
     override public void Initialize(Monster monster)

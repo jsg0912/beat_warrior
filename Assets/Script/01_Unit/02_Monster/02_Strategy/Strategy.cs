@@ -24,7 +24,7 @@ public abstract class Strategy
     protected Vector3 GetMonsterFrontOffsetPos()
     {
         Vector3 monsterFrontPos = GetMonsterFrontPos();
-        monsterFrontPos.y += Util.OffsetY;
+        monsterFrontPos.y += VectorCalculator.OffsetY;
         return monsterFrontPos;
     }
     protected Vector2 GetMonsterSize() { return monster.GetSize(); }

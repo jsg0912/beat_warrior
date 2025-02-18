@@ -4,7 +4,10 @@ using System.Collections.Generic;
 public class PopupManager : SingletonObject<PopupManager>
 {
     [SerializeField] private GameExitPopup gameExitPopup;
+    [SerializeField] private GameOverPopup gameOverPopup;
     private List<PopupSystem> popupSystemStack = new();
+
+    public bool IsGameOverPopup => gameOverPopup.gameObject.activeSelf;
 
     private bool IsAnyPopupAlive()
     {
@@ -57,5 +60,10 @@ public class PopupManager : SingletonObject<PopupManager>
     public void TurnOnGameExitPopup()
     {
         gameExitPopup.TurnOnPopup();
+    }
+
+    public void TurnOnGameOverPopup()
+    {
+        gameOverPopup.TurnOnPopup();
     }
 }

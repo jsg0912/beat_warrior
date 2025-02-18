@@ -31,8 +31,6 @@ public class ESkill : ActiveSkillPlayer
     {
         SetAttackCollider();
 
-        SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.playerESkill);
-
         Vector2 start = Player.Instance.transform.position;
         Vector2 end = start += new Vector2(dashRange, 0.0f) * Player.Instance.GetMovingDirectionFloat();
 

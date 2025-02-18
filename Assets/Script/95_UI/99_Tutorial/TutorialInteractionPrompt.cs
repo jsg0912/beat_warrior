@@ -24,7 +24,7 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
     {
         // Prompt 창 띄우기
         SetActivePromptText(true);
-        promptText.text = PromptMessageGenerator.GeneratePromptMessage(tutorialAction);
+        if (promptText != null) promptText.text = PromptMessageGenerator.GeneratePromptMessage(tutorialAction);
 
         if (isInitialized) return;
         Initialize();

@@ -42,8 +42,6 @@ public class Dash : ActiveSkillPlayer
         dashAvailableTimer.SetRemainTimeZero();
         PlayerUIManager.Instance.SwapMarkAndDash(true);
 
-        SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.playerDash);
-
         Vector2 playerBottom = Player.Instance.GetBottomPos();
         Vector2 endPoint = targetMonster.GetComponent<Monster>().GetBottomPos();
 

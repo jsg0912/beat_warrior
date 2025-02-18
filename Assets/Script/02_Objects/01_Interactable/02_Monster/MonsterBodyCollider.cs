@@ -13,8 +13,8 @@ public class MonsterBodyCollider : MonoBehaviour
         boxCollider = colliderObj.GetComponent<BoxCollider2D>();
         polygonCollider = colliderObj.GetComponent<PolygonCollider2D>();
 
-        if (boxCollider != null) size = Util.GetSizeBoxCollider2D(boxCollider);
-        else if (polygonCollider != null) size = Util.GetSizePolygonCollider2D(polygonCollider);
+        if (boxCollider != null) size = ColliderCalculator.GetSizeBoxCollider2D(boxCollider);
+        else if (polygonCollider != null) size = ColliderCalculator.GetSizePolygonCollider2D(polygonCollider);
         else size = Vector2.zero;
     }
 
@@ -30,15 +30,15 @@ public class MonsterBodyCollider : MonoBehaviour
 
     public Vector3 GetMiddlePos()
     {
-        if (boxCollider != null) return Util.GetMiddlePosBoxCollider2D(boxCollider);
-        else if (polygonCollider != null) return Util.GetMiddlePosPolygonCollider2D(polygonCollider);
+        if (boxCollider != null) return ColliderCalculator.GetMiddlePosBoxCollider2D(boxCollider);
+        else if (polygonCollider != null) return ColliderCalculator.GetMiddlePosPolygonCollider2D(polygonCollider);
         else return Vector2.zero;
     }
 
     public Vector3 GetBottomPos()
     {
-        if (boxCollider != null) return Util.GetBottomPosBoxCollider2D(boxCollider);
-        else if (polygonCollider != null) return Util.GetBottomPosPolygonCollider2D(polygonCollider);
+        if (boxCollider != null) return ColliderCalculator.GetBottomPosBoxCollider2D(boxCollider);
+        else if (polygonCollider != null) return ColliderCalculator.GetBottomPosPolygonCollider2D(polygonCollider);
         else return Vector3.zero;
     }
 

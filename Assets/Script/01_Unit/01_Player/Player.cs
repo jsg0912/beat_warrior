@@ -109,7 +109,7 @@ public class Player : DirectionalGameObject
     private void InitializeRigidBody()
     {
         SetGravityScale(true);
-        _rigidbody.velocity = Vector3.zero;
+        PhysicsCalculator.StopRigidBody(_rigidbody);
     }
 
     public void RestartPlayer()
@@ -152,7 +152,7 @@ public class Player : DirectionalGameObject
     public void SetGravityScale(bool gravity)
     {
         _rigidbody.gravityScale = gravity ? PlayerConstant.gravityScale : 0;
-        if (!gravity) _rigidbody.velocity = Vector3.zero;
+        if (!gravity) PhysicsCalculator.StopRigidBody(_rigidbody);
     }
 
     public void SetAnimTrigger(string trigger)
@@ -162,6 +162,7 @@ public class Player : DirectionalGameObject
         {
             if (status != PlayerStatus.Dead && status != PlayerStatus.Rest) return;
         }
+        SoundManager.Instance.PlayPlayerSFX(trigger);
         _animator.SetTrigger(trigger);
     }
 
@@ -363,7 +364,7 @@ public class Player : DirectionalGameObject
         RaycastHit2D rayHitLeft = Physics2D.Raycast(left, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
         RaycastHit2D rayHitRight = Physics2D.Raycast(right, Vector3.down, 0.1f, LayerMask.GetMask(LayerConstant.Tile));
 
-        isGround = !(rayHitLeft.collider == null && rayHitRight.collider == null) && Util.IsStoppedSpeed(_rigidbody.velocity.y);
+        isGround = !(rayHitLeft.collider == null && rayHitRight.collider == null) && PhysicsCalculator.IsStoppedSpeedY(_rigidbody);
         _animator.SetBool(PlayerConstant.groundedAnimBool, isGround);
 
         if (!isGround) return;
@@ -390,11 +391,9 @@ public class Player : DirectionalGameObject
     {
         SetAnimTrigger(PlayerConstant.jumpAnimTrigger);
 
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0.0f);
+        PhysicsCalculator.StopRigidBodyY(_rigidbody);
         _rigidbody.AddForce(Vector2.up * PlayerConstant.jumpPower, ForceMode2D.Impulse);
         jumpOffsetTimer.Initialize();
-
-        SoundManager.Instance.SFXPlay("PlayerJump", SoundList.Instance.playerJump);
     }
 
     public void Dashing(Vector2 end, bool changeDir, bool isInvincibility, bool passWall = true)
@@ -448,9 +447,9 @@ public class Player : DirectionalGameObject
         return (hit.point.x - pos.x) * dir;
     }
 
-    public Vector3 GetSize() { return Util.GetSizeBoxCollider2D(_collider); }
-    public Vector3 GetMiddlePos() { return Util.GetMiddlePosBoxCollider2D(_collider); }
-    public Vector3 GetBottomPos() { return Util.GetBottomPosBoxCollider2D(_collider); }
+    public Vector3 GetSize() { return ColliderCalculator.GetSizeBoxCollider2D(_collider); }
+    public Vector3 GetMiddlePos() { return ColliderCalculator.GetMiddlePosBoxCollider2D(_collider); }
+    public Vector3 GetBottomPos() { return ColliderCalculator.GetBottomPosBoxCollider2D(_collider); }
 
     private void Skill()
     {
@@ -534,7 +533,7 @@ public class Player : DirectionalGameObject
 
         trait.GetSkill();
         traitList.Add(trait);
-        SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.altarEquip);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.altarEquip);
     }
 
     public void RemoveTraitByIndex(int index)
@@ -551,7 +550,7 @@ public class Player : DirectionalGameObject
             if (trait.skillName == name)
             {
                 traitList.Remove(trait);
-                SoundManager.Instance.SFXPlay("Equip", SoundList.Instance.altarUnequip);
+                SoundManager.Instance.SFXPlay(SoundList.Instance.altarUnequip);
                 trait.RemoveSkill();
                 return;
             }
@@ -566,12 +565,11 @@ public class Player : DirectionalGameObject
 
         bool isAlive = ChangeCurrentHP(-dmg);
 
-        SoundManager.Instance.SFXPlay("PlayerHit", SoundList.Instance.playerHit);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.playerHit);
 
         if (!isAlive)
         {
             SetDead();
-            SoundManager.Instance.SFXPlay("PlayerDead", SoundList.Instance.playerDead);
             if (reviveSKillFuncList != null)
             {
                 reviveSKillFuncList();
@@ -593,7 +591,7 @@ public class Player : DirectionalGameObject
         SetStatus(PlayerStatus.Unmovable);
 
         if (direction == objectDirection) FlipDirection();
-        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), -1);
+        PlayerAddForce(new Vector2(PlayerConstant.knockBackedDistance, 1.0f), -1); // [Code Review - KMJ] 1.0f가 무슨 의미인지 확인 필요 - SDH, 20250217
         StartCoroutine(KnockBacked(PlayerConstant.knockBackedStunTime));
     }
 
@@ -640,11 +638,11 @@ public class Player : DirectionalGameObject
 
     public void PlayPlayerReviveSFX0()
     {
-        SoundManager.Instance.SFXPlay("PlayerRevive0", SoundList.Instance.playerRevive0);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.playerRevive0);
     }
 
     public void PlayPlayerReviveSFX1()
     {
-        SoundManager.Instance.SFXPlay("PlayerRevive1", SoundList.Instance.playerRevive1);
+        SoundManager.Instance.SFXPlay(SoundList.Instance.playerRevive1);
     }
 }

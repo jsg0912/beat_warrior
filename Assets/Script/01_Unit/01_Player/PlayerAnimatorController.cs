@@ -9,6 +9,7 @@ public class PlayerAnimatorController : StateMachineBehaviour
         if (IsAttackStatus(stateInfo)) player.AttackAnimationStart();
         if (stateInfo.IsName(PlayerAnimation.Dash) || stateInfo.IsName(PlayerAnimation.DashCharge)) player.SetStatus(PlayerStatus.Dash);
         else if (stateInfo.IsName(PlayerAnimation.Idle)) player.SetStatus(PlayerStatus.Normal);
+        else if (stateInfo.IsName(PlayerAnimation.DieEnd)) PopupManager.Instance.TurnOnGameOverPopup();
         else if (stateInfo.IsName(PlayerAnimation.Revive1)) (player.HaveSkill(SkillName.Revive) as Revive).ReviveFunctionBefore();
         else if (stateInfo.IsName(PlayerAnimation.Rest1) || stateInfo.IsName(PlayerAnimation.Rest2)) player.SetStatus(PlayerStatus.Rest);
     }
@@ -26,7 +27,6 @@ public class PlayerAnimatorController : StateMachineBehaviour
             player.InitializeAttackCollider();
             player.AttackAnimationEnd();
         }
-        else if (stateInfo.IsName(PlayerAnimation.Revive1)) (player.HaveSkill(SkillName.Revive) as Revive).ReviveFunctionAfter();
     }
 
     private bool IsAttackStatus(AnimatorStateInfo stateInfo)
