@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BossGergus : Monster
 {
+    public int Phase = 1;
     [SerializeField] public List<BossTentacle> tentaclesVertical;
     [SerializeField] public List<BossTentacle> tentaclesHorizontal;
     [SerializeField] public List<BossTentacle> tentaclesCrash;

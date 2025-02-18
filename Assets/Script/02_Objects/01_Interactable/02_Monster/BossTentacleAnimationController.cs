@@ -9,7 +9,7 @@ public class BossTentacleAnimationController : StateMachineBehaviour
         if (boss == null) boss = animator.GetComponent<BossTentacle>().Boss;
         if (stateInfo.IsName("End"))
         {
-            boss.PlayAnimation(BossConstantCh2.AttackEndAnimTrigger);
+            boss.AttackEnd();
             Util.SetActive(animator.gameObject, false);
         }
     }

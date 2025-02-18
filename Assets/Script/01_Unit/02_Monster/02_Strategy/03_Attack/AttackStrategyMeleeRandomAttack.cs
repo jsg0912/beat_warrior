@@ -32,6 +32,7 @@ public class AttackStrategyMeleeRandomAttack : AttackStrategy
 
     public override void AttackEnd()
     {
+        monster.PlayAnimation(MonsterAnimTrigger.attackEndAnimTrigger);
         Util.SetActive(attackCollider.gameObject, false);
     }
 

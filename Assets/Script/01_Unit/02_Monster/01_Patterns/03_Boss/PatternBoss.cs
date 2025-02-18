@@ -19,6 +19,7 @@ public abstract class PatternBoss : Pattern
     {
         currentPhase = phase;
         monster.SetStatus(MonsterStatus.PhaseChanging);
+        (monster as BossGergus).Phase = (int)phase + 1;
     }
 
     override public void Initialize(Monster monster)
