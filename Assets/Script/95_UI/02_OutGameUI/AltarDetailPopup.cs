@@ -18,11 +18,17 @@ public class AltarDetailPopup : PopupSystem
 
     private void Start()
     {
+        Initialize();
         interactionButton.onClick.AddListener(() => OnClickTraitUI(targetTraitUI));
         foreach (TraitIcon traitUI in equippedTraitUIs)
         {
             traitUI.traitSelectionButton.onClick.AddListener(() => ShowSkillDetail(traitUI.traitName));
         }
+    }
+
+    private void Initialize()
+    {
+        targetTraitUI.ShowEmpty();
     }
 
     public override bool TurnOnPopup()

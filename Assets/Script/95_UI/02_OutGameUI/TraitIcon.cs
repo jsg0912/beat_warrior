@@ -79,7 +79,6 @@ public class TraitIcon : MonoBehaviour
         }
     }
 
-    // TODO: Trait Icon 나오면 작업해야함 - 신동환, 20250126
     private void SetTraitImage()
     {
         traitImage.sprite = Resources.Load<Sprite>(PrefabRouter.TraitIconImages[traitName]);

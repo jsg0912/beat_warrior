@@ -57,7 +57,7 @@ public class AltarUIManager : SingletonObject<AltarUIManager>
 
     public void ShowSkillDetail(SkillName skillName)
     {
-        altarDetailPopup.TurnOnPopup();
+        // altarDetailPopup.TurnOnPopup();
         altarDetailPopup.ShowSkillDetail(skillName);
     }
 
@@ -75,8 +75,9 @@ public class AltarUIManager : SingletonObject<AltarUIManager>
             AltarUIManager.Instance.UpdatePlayerSoulView();
             altarDetailPopup.UpdateTargetTraitInfo();
             AltarUIManager.Instance.RefreshMainAltarPopup();
-
             SoundManager.Instance.SFXPlay(SoundList.Instance.altarBuy);
+
+            TryEquipTrait(traitName, false);
         }
         else
         {
@@ -84,14 +85,14 @@ public class AltarUIManager : SingletonObject<AltarUIManager>
         }
     }
 
-    public void TryEquipTrait(SkillName traitName)
+    public void TryEquipTrait(SkillName traitName, bool showSwapPopup = true)
     {
         if (!Player.Instance.CheckFullEquipTrait())
         {
             Player.Instance.EquipTrait(traitName);
             altarDetailPopup.UpdateTargetTraitInfo();
         }
-        else
+        else if (showSwapPopup)
         {
             TurnOnEquippedTraitChangePopup();
         }
