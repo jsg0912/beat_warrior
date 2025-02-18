@@ -75,7 +75,7 @@ public static class MonsterList
         },
         PatternName.BossGergus),
         new MonsterJSON(MonsterName.PriestGirl,
-        "황혼의 촉수 빨판이",
+        "수녀 NPC",
         new Dictionary<StatKind, int>{
             {StatKind.HP, 999},
             {StatKind.ATK, 1},
