@@ -13,7 +13,7 @@ public class AttackStrategyThrowManyIppali : AttackStrategyThrowMany
     {
         Vector3 startPos = monster.attackCollider.transform.position;
         // TODO: 임시수정
-        startPos.x += RandomSystem.RandomFloat(-targetPosOffset, targetPosOffset);
+        if (throwCountCurrent == 1) startPos.x += RandomSystem.RandomBool(50) ? 5f : -5f;
         RaycastHit2D hit = Physics2D.Raycast(startPos, Vector2.down, Mathf.Infinity, LayerMask.GetMask(LayerConstant.Tile));
 
         targetPosition = hit.point;
