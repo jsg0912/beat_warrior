@@ -85,6 +85,8 @@ public class Dash : ActiveSkillPlayer
         CheckMonsterHitBox(playerBottom, direction, distance);
         CheckMonsterHitBox(playerMiddle, direction, distance);
         CheckMonsterHitBox(playerTop, direction, distance);
+        CheckMonsterHitBoxOrigin(playerMiddle, 0.65f);
+
         attackedMonsterByDash = attackedMonsterByDash.Distinct().ToList();
 
         // Dash시에 Player 머리와 발끝 경로가 보이는 Test용 코드 - 김민지, 20240901
@@ -106,6 +108,16 @@ public class Dash : ActiveSkillPlayer
         }
 
         attackedMonsterByDash.Clear();
+    }
+
+    private void CheckMonsterHitBoxOrigin(Vector2 origin, float radius)
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, radius);
+
+        foreach (Collider2D hit in hits)
+        {
+            attackedMonsterByDash.Add(hit.gameObject);
+        }
     }
 
     private void CheckMonsterHitBox(Vector2 origin, Vector2 Direction, float distance)

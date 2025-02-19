@@ -5,6 +5,7 @@ public class PlayerSkillConstant
     public const int attackCountMax = 2;
     public const float attackKnockBackDistance = 3.0f;
     public const float skill2DashRange = 5.0f;
+    public const float skill2ColliderRadius = 0.65f;
     public const float DashEndPointInterval = 1f;
     public const float DashEndYOffset = 0.1f;
     public const float DashSpeed = 0.1f;
