@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
+using System.Collections;
+using System.Collections.Generic;
 
 public class SoundManager : SingletonObject<SoundManager>
 {
@@ -9,9 +11,17 @@ public class SoundManager : SingletonObject<SoundManager>
     private float sfxVolume = 1.0f;
     private float backgroundVolume;
     private float masterVolume;
+    private const float DUCKING_VOLUME = 0.5f;
+    private float originalBGMVolume;
+    private bool isDucking = false;
+    private ImportantSoundList importantSoundList;
+    private const int MAX_CONCURRENT_SOUNDS = 3;
+    private const float VOLUME_REDUCTION_FACTOR = 0.2f;
+    private List<AudioClip> activeClips = new List<AudioClip>();
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        importantSoundList = new ImportantSoundList();
     }
 
     private void ApplyVolume()
@@ -48,16 +58,67 @@ public class SoundManager : SingletonObject<SoundManager>
         ApplyVolume();
     }
 
+    public void StartDucking()
+    {
+        if (!isDucking)
+        {
+            isDucking = true;
+            originalBGMVolume = backGroundSound.volume;
+            backGroundSound.volume *= DUCKING_VOLUME;
+        }
+    }
+
+    public void StopDucking()
+    {
+        if (isDucking)
+        {
+            isDucking = false;
+            backGroundSound.volume = originalBGMVolume;
+        }
+    }
+
     public void SFXPlay(AudioClip clip, string name = "")
     {
-        if (clip == null)
+        if (clip == null) return;
+
+        float volume = CalculateVolume(clip);
+        soundEffect.PlayOneShot(clip, volume);
+
+        StartCoroutine(TrackActiveClip(clip));
+
+        if (IsImportantSound(clip))
         {
-            // Debug.LogError("SoundManager: " + name + " is null");
-            return;
+            StartDucking();
+            StartCoroutine(StopDuckingAfterDelay(clip.length));
         }
-        soundEffect.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0];
-        soundEffect.PlayOneShot(clip, sfxVolume / 2);
     }
+    private float CalculateVolume(AudioClip clip)
+    {
+        float baseVolume = sfxVolume / 2;
+        if (activeClips.Count >= MAX_CONCURRENT_SOUNDS && !importantSoundList.IsImportantSound(clip))
+        {
+            return baseVolume * VOLUME_REDUCTION_FACTOR;
+        }
+        return baseVolume;
+    }
+    private IEnumerator TrackActiveClip(AudioClip clip)
+    {
+        activeClips.Add(clip);
+        yield return new WaitForSeconds(clip.length);
+        activeClips.Remove(clip);
+    }
+
+    private bool IsImportantSound(AudioClip clip)
+    {
+        return importantSoundList.IsImportantSound(clip);
+    }
+
+    private IEnumerator StopDuckingAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        StopDucking();
+    }
+    
 
     public void PlayPlayerSFX(string playerAction)
     {
