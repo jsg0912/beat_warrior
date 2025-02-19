@@ -77,7 +77,7 @@ public class CommandManager : SingletonObject<CommandManager>
             BossGergus bossGergus = FindObjectOfType<BossGergus>();
             if (bossGergus != null)
             {
-                bossGergus.AttackedByPlayer(bossGergus.GetFinalStat(StatKind.HP), false);
+                bossGergus.AttackedByPlayer(bossGergus.GetFinalStat(StatKind.HP) / 2, false);
             }
         }
         if (Input.GetKeyDown(KeyCode.N))
