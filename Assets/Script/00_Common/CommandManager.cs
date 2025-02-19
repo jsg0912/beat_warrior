@@ -68,6 +68,10 @@ public class CommandManager : SingletonObject<CommandManager>
         {
             GameManager.Instance.RestartCurrentStage();
         }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            StartCoroutine(SceneController.Instance.ChangeSceneWithLoading(SceneName.Ch2BossStage));
+        }
         if (Input.GetKeyDown(KeyCode.N))
         {
             Player.Instance.GetDamaged(Player.Instance.GetCurrentStat(StatKind.HP), Player.Instance.GetMovingDirection());

@@ -94,7 +94,7 @@ public class Dash : ActiveSkillPlayer
 
         foreach (GameObject obj in attackedMonsterByDash)
         {
-            if (obj.layer == LayerMask.NameToLayer(LayerConstant.Monster))
+            if (obj != null && obj.layer == LayerMask.NameToLayer(LayerConstant.Monster))
             {
                 // TODO: 임시수정
                 if (obj.GetComponent<MonsterBodyCollider>() == null)

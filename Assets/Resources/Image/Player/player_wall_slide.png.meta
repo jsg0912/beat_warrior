@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 93f41d3f53f7e1d4b821936ca6204e5f
+guid: 19e6020136ef46a4cb72e006084f662f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -69,7 +69,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fall_Wall_0
+      name: player_wall_slide_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9d94bc9424e6204c9d6773d495bc080
-      internalID: -1569282322
+      spriteID: 307d18882a718f443ba7e8d215c9efaf
+      internalID: -265171557
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fall_Wall_1
+      name: player_wall_slide_1
       rect:
         serializedVersion: 2
         x: 1300
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cef82c7a78eb68243ba09e881d880ee2
-      internalID: 1431793741
+      spriteID: 868cd241f3d7f534094cbaa1ab441eb3
+      internalID: 1844454757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fall_Wall_2
+      name: player_wall_slide_2
       rect:
         serializedVersion: 2
         x: 2600
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0f040b86d4d2f64449644c793c28b557
-      internalID: -1792854614
+      spriteID: ffbe66f2f7ef7144cb2a27ae6d12889e
+      internalID: 1341777014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fall_Wall_3
+      name: player_wall_slide_3
       rect:
         serializedVersion: 2
         x: 3900
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 23177cec74bed634c96e704b67ae6d5e
-      internalID: 2077326087
+      spriteID: f3c543ca9fa82fb4d8bf8e39dfa40bd7
+      internalID: 1868722814
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fall_Wall_4
+      name: player_wall_slide_4
       rect:
         serializedVersion: 2
         x: 5200
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b2cd129a590b194c9510a698e4f4493
-      internalID: 1213856467
+      spriteID: d27a3d5cbd084324b9b93283ad5c1da6
+      internalID: 1795042023
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fall_Wall_5
+      name: player_wall_slide_5
       rect:
         serializedVersion: 2
         x: 6500
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d09b891d319d2764c8b452c2e455ac62
-      internalID: 1694406696
+      spriteID: 400ff59c6b5dd7c4a9ba2322c1765db5
+      internalID: 1204541468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fall_Wall_6
+      name: player_wall_slide_6
       rect:
         serializedVersion: 2
         x: 7800
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: da1f30319dfaab94bb7319b22752ebca
-      internalID: -2116781283
+      spriteID: 0af9909949ff64c4eab3d25fc5b7a058
+      internalID: 1357114718
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fall_Wall_7
+      name: player_wall_slide_7
       rect:
         serializedVersion: 2
         x: 9100
@@ -271,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 42b3fe2d5797c49459100130277e8d98
-      internalID: 645875882
+      spriteID: 66512618eacf07e4fae14a24400eca8d
+      internalID: -10047513
       vertices: []
       indices: 
       edges: []
@@ -288,14 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fall_Wall_0: -1569282322
-      Fall_Wall_1: 1431793741
-      Fall_Wall_2: -1792854614
-      Fall_Wall_3: 2077326087
-      Fall_Wall_4: 1213856467
-      Fall_Wall_5: 1694406696
-      Fall_Wall_6: -2116781283
-      Fall_Wall_7: 645875882
+      player_wall_slide_0: -265171557
+      player_wall_slide_1: 1844454757
+      player_wall_slide_2: 1341777014
+      player_wall_slide_3: 1868722814
+      player_wall_slide_4: 1795042023
+      player_wall_slide_5: 1204541468
+      player_wall_slide_6: 1357114718
+      player_wall_slide_7: -10047513
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

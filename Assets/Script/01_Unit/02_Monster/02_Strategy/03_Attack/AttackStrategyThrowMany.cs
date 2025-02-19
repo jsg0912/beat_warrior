@@ -19,8 +19,9 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
     protected override void SetTargetPosition()
     {
         if (throwCountCurrent == 0) targetPosition = GetPlayerPos();
-        else if (throwCountCurrent % 2 == 1) targetPosition = throwStartPos + new Vector3(RandomSystem.RandomFloat(targetPosOffset), 0);
-        else targetPosition = throwStartPos - new Vector3(RandomSystem.RandomFloat(targetPosOffset), 0);
+        // TODO: 아래의  + new Vector3(5, 0, 0) 는 임의의 offset
+        else if (throwCountCurrent % 2 == 1) targetPosition = throwStartPos + new Vector3(5, 0, 0) + new Vector3(RandomSystem.RandomFloat(targetPosOffset), 0);
+        else targetPosition = throwStartPos + new Vector3(5, 0, 0) - new Vector3(RandomSystem.RandomFloat(targetPosOffset), 0);
     }
 
     protected override void AttackMethod()
