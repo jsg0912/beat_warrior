@@ -129,7 +129,7 @@ namespace MyPooler
                 onResetPools -= pooledObj.DiscardToPool;
         }
 
-        private bool IsResetObjectWhenSceneChange(PoolTag poolTag, IPooledObject pooledObj) => pooledObj != null && PoolTagException.WhenSceneChangeReset.Contains(poolTag);
+        private bool IsResetObjectWhenSceneChange(PoolTag poolTag, IPooledObject pooledObj) => pooledObj != null && !PoolTagException.WhenSceneChangeReset.Contains(poolTag);
 
         /// <summary>
         /// Reset all pools
