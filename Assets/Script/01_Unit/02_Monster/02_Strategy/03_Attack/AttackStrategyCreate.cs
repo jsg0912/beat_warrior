@@ -25,7 +25,7 @@ public class AttackStrategyCreate : AttackStrategy
         obj = MyPooler.ObjectPooler.Instance.GetFromPool(GetEnemyCreatePoolTag(monster.monsterName), GetMonsterPos(), Quaternion.identity);
 
         monsterAttackCollider = obj.GetComponent<MonsterAttackCollider>();
-        monsterAttackCollider.Initiate();
+        monsterAttackCollider.Initialize();
         monsterAttackCollider.SetMonsterAtk(monster.GetFinalStat(StatKind.ATK));
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class BossTentacle : MonsterAttackCollider
 {
     public Monster Boss;
+    public bool isFinalTentacle = false;
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
