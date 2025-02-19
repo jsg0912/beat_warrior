@@ -22,7 +22,7 @@ public abstract class AttackStrategy : Strategy
         monoBehaviour = monster.GetComponent<MonoBehaviour>();
 
         attackRange = MonsterConstant.AttackRange[monster.monsterName];
-        if (monster.monsterName == MonsterName.Gurges) return;
+        if (monster.monsterName == MonsterName.Gurges) return; // TODO: 하드 코딩 수정 필요
         attackCoolTimeMax = MonsterConstant.AttackCoolTime[monster.monsterName];
         attackCoolTime = 0;
     }

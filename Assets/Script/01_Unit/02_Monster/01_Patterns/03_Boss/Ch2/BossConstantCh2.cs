@@ -17,11 +17,12 @@ public class BossConstantCh2
     public const float Phase2Threshold = 0.5f;
 
     public const float ThrowAnimationDelay = 0.45f;
+    public const float TentacleAnimationDelay = 0.7f;
     public const float AttackCoolTime = 2.0f;
     public const int IppaliSpawnCycle = 4;
     public const int IppaliSpawnNumber = 3;
-    public const int EnergyBallSpawnNumber = 5;
-    public const int EnergyBallSpawnNumberMad = 10;
+    public const int EnergyBallSpawnNumber = 7;
+    public const int EnergyBallSpawnNumberMad = 14;
     public const float DisgorgeSpeed = 6f;
     public const float DisgorgeMaxHeight = 30f;
     public const float SpawnInterval = 0.1f;

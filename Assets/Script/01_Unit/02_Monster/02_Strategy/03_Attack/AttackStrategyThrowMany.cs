@@ -40,7 +40,7 @@ public class AttackStrategyThrowMany : AttackStrategyThrow
             monsterAttackCollider = obj.GetComponent<MonsterAttackCollider>();
             if (monsterAttackCollider != null)
             {
-                monsterAttackCollider.Initiate();
+                monsterAttackCollider.Initialize();
                 monsterAttackCollider.SetMonsterAtk(monster.GetFinalStat(StatKind.ATK));
             }
 

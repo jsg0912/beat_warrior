@@ -5,7 +5,8 @@ public class BossGergus : Monster
 {
     [SerializeField] public List<BossTentacle> tentaclesVertical;
     [SerializeField] public List<BossTentacle> tentaclesHorizontal;
-    [SerializeField] public List<BossTentacle> tentaclesCrash;
+    [SerializeField] public List<BossTentacle> tentaclesLeft;
+    [SerializeField] public List<BossTentacle> tentaclesRight;
 
     protected override void Start()
     {
@@ -18,7 +19,6 @@ public class BossGergus : Monster
 
         foreach (var tentacle in tentaclesVertical) tentacle.Boss = this;
         foreach (var tentacle in tentaclesHorizontal) tentacle.Boss = this;
-        foreach (var tentacle in tentaclesCrash) tentacle.Boss = this;
     }
 
     public override void SetMovingDirection(Direction dir)
