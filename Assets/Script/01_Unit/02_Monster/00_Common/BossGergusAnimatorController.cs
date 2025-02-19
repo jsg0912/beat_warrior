@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class BossGergusAnimatorController : StateMachineBehaviour
 {
-    private BossGergus bossGergus;
+    private BossGergus bossGurges;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (bossGergus == null) bossGergus = animator.GetComponent<BossGergus>();
+        if (bossGurges == null) bossGurges = animator.GetComponent<BossGergus>();
 
-        if (IsAttackInfo(stateInfo)) bossGergus.AttackStart();
+        if (IsAttackInfo(stateInfo)) bossGurges.AttackStart();
         if (stateInfo.IsName(MonsterAnimation.AttackEnd))
         {
-            bossGergus.AttackEnd();
-            bossGergus.SetStatus(MonsterStatus.Idle);
-            (bossGergus.pattern as PatternCh2Boss).ResetAttackCoolTimer();
+            bossGurges.AttackEnd();
+            bossGurges.SetStatus(MonsterStatus.Idle);
+            (bossGurges.pattern as PatternBossGurges).ResetAttackCoolTimer();
         }
         else if (stateInfo.IsName(MonsterAnimation.Idle))
         {
@@ -21,15 +21,15 @@ public class BossGergusAnimatorController : StateMachineBehaviour
         }
         else if (stateInfo.IsName("Stand"))
         {
-            bossGergus.SetAnimationFloat(BossConstantCh2.IsStandAnimBool, 1.0f);
+            bossGurges.SetAnimationFloat(BossConstantCh2.IsStandAnimBool, 1.0f);
         }
         else if (stateInfo.IsName(MonsterAnimation.Die))
         {
-            bossGergus.SetStatus(MonsterStatus.Dead);
+            bossGurges.SetStatus(MonsterStatus.Dead);
         }
         else if (stateInfo.IsName(MonsterAnimation.DieEnd))
         {
-            Destroy(bossGergus.gameObject);
+            Destroy(bossGurges.gameObject);
             // TODO: TBD
             SystemMessageUIManager.Instance.TurnOnSystemMassageUI(SystemMessageType.ToBeContinued, 10.0f);
         }
@@ -39,7 +39,7 @@ public class BossGergusAnimatorController : StateMachineBehaviour
     {
         if (stateInfo.IsName("Stand"))
         {
-            bossGergus.SetStatus(MonsterStatus.Idle);
+            bossGurges.SetStatus(MonsterStatus.Idle);
         }
     }
 

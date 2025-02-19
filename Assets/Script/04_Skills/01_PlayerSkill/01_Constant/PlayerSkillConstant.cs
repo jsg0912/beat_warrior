@@ -40,7 +40,7 @@ public class PlayerSkillConstant
 
     public static List<MonsterName> MarkerIgnoreMonsterList = new()
     {
-        MonsterName.Gergus,
+        MonsterName.Gurges,
     };
 
     public const float ghostDelayTimeMax = 0.05f;

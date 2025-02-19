@@ -28,13 +28,6 @@ public class MonsterConstant
     public const float WallCheckRayDistance = 0.1f;
     public const float GroundCheckRayDistance = 0.1f;
 
-    // Boss Ch2
-
-    public const int GergusIppaliSpawnCount = 2;
-
-    public const float GergusThrowSpeed = 6f;
-    public const float GergusMaxHeight = 7f;
-
     public static Dictionary<MonsterName, float> RecognizeRange = new() {
         { MonsterName.Ippali, 5.0f },
         { MonsterName.Ibkkugi, 10.0f },
@@ -42,7 +35,7 @@ public class MonsterConstant
         { MonsterName.Dulduli, 7.0f },
         { MonsterName.Giljjugi, 7.0f },
         { MonsterName.Itmomi, 10.0f },
-        { MonsterName.Gergus, 1000.0f },
+        { MonsterName.Gurges, 1000.0f },
         { MonsterName.PriestGirl, 5.0f },
     };
 
@@ -53,7 +46,7 @@ public class MonsterConstant
         { MonsterName.Dulduli, 7.0f },
         { MonsterName.Giljjugi, 6.0f },
         { MonsterName.Itmomi, 9.0f },
-        { MonsterName.Gergus, 1000.0f }
+        { MonsterName.Gurges, 1000.0f }
     };
 
     private static Dictionary<MonsterName, float> MoveSpeedRatio = new() {
@@ -63,7 +56,7 @@ public class MonsterConstant
         { MonsterName.Dulduli, 0.4f },
         { MonsterName.Giljjugi, 0.7f },
         { MonsterName.Itmomi, 0f },
-        { MonsterName.Gergus, 0.0f },
+        { MonsterName.Gurges, 0.0f },
         { MonsterName.PriestGirl, 1.0f },
     };
 
@@ -75,7 +68,7 @@ public class MonsterConstant
         { MonsterName.Dulduli, moveSpeed * MoveSpeedRatio[MonsterName.Dulduli] },
         { MonsterName.Giljjugi, moveSpeed * MoveSpeedRatio[MonsterName.Giljjugi] },
         { MonsterName.Itmomi, moveSpeed * MoveSpeedRatio[MonsterName.Itmomi] },
-        { MonsterName.Gergus, moveSpeed * MoveSpeedRatio[MonsterName.Gergus] },
+        { MonsterName.Gurges, moveSpeed * MoveSpeedRatio[MonsterName.Gurges] },
         { MonsterName.PriestGirl, moveSpeed * MoveSpeedRatio[MonsterName.PriestGirl] },
     };
 
@@ -86,7 +79,7 @@ public class MonsterConstant
         { MonsterName.Dulduli, 3.0f },
         { MonsterName.Giljjugi, 6.0f },
         { MonsterName.Itmomi, 3.5f },
-        { MonsterName.Gergus, 3.0f }
+        { MonsterName.Gurges, 3.0f }
     };
 
     public static Dictionary<MonsterName, bool> IsRepeatAttackAnimation = new() {
@@ -97,11 +90,11 @@ public class MonsterConstant
         { MonsterName.Dulduli, true },
         { MonsterName.Giljjugi, false },
         { MonsterName.Itmomi, false },
-        { MonsterName.Gergus, false }
+        { MonsterName.Gurges, false }
     };
 
     public static List<MonsterName> NotKnockBackAbleWhenAttacking = new(){
-        MonsterName.Giljjugi, MonsterName.Koppulso, MonsterName.Dulduli, MonsterName.Gergus,
+        MonsterName.Giljjugi, MonsterName.Koppulso, MonsterName.Dulduli, MonsterName.Gurges,
     };
 
     public static List<MonsterName> FixedAnimationWhenAttacking = new(){

@@ -1,7 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using MyPooler;
 
-public class SoulObject : MonoBehaviour
+public class SoulObject : MonoBehaviour, IPooledObject
 {
     private float floatHeight = 0.2f; // 떠오르는 높이
     private float floatSpeed = 1f; // 떠오르는 속도
@@ -13,6 +14,11 @@ public class SoulObject : MonoBehaviour
         // 시작 위치 저장
         startPosition = transform.position;
         StartCoroutine(Float());
+    }
+
+    public void DiscardToPool()
+    {
+        ObjectPooler.Instance.ReturnToPool(PoolTag.Soul, gameObject);
     }
 
     private IEnumerator Float()

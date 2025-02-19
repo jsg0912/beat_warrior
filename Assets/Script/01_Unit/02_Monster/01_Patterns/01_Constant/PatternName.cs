@@ -9,7 +9,7 @@ public enum PatternName
     Giljjugi,
     Itmomi,
     // Boss
-    BossGergus,
+    BossGurges,
     //NPC
     PriestGirl,
 }

@@ -18,7 +18,7 @@ public class SceneTagManager
         PoolTag.Tentacle,
         PoolTag.TentacleVertical,
         PoolTag.TentacleHorizontal,
-        PoolTag.GergusThrow,
+        PoolTag.GurgesThrow,
         PoolTag.IppaliEgg
 
     };
