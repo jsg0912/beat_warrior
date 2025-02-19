@@ -72,6 +72,14 @@ public class CommandManager : SingletonObject<CommandManager>
         {
             StartCoroutine(SceneController.Instance.ChangeSceneWithLoading(SceneName.Ch2BossStage));
         }
+        if (Input.GetKeyDown(KeyCode.Semicolon))
+        {
+            BossGergus bossGergus = FindObjectOfType<BossGergus>();
+            if (bossGergus != null)
+            {
+                bossGergus.AttackedByPlayer(bossGergus.GetFinalStat(StatKind.HP), false);
+            }
+        }
         if (Input.GetKeyDown(KeyCode.N))
         {
             Player.Instance.GetDamaged(Player.Instance.GetCurrentStat(StatKind.HP), Player.Instance.GetMovingDirection());
