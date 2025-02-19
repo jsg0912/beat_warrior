@@ -2,10 +2,6 @@
 {
 	public interface IPooledObject
 	{
-		void OnRequestedFromPool();
 		void DiscardToPool();
 	}
 }
-
-
-

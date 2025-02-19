@@ -94,11 +94,8 @@ namespace MyPooler
             o.transform.rotation = rotation;
 
             IPooledObject pooledObj = o.GetComponent<IPooledObject>();
-            if (IsResetObjectWhenSceneChange(poolTag, pooledObj))
-            {
-                pooledObj.OnRequestedFromPool();
+            if (pooledObj != null)
                 onResetPools += pooledObj.DiscardToPool;
-            }
 
             activeObjects[tag].Add(o);
             return o;
@@ -125,11 +122,9 @@ namespace MyPooler
             o.SetActive(false);
 
             IPooledObject pooledObj = o.GetComponent<IPooledObject>();
-            if (IsResetObjectWhenSceneChange(poolTag, pooledObj))
+            if (pooledObj != null)
                 onResetPools -= pooledObj.DiscardToPool;
         }
-
-        private bool IsResetObjectWhenSceneChange(PoolTag poolTag, IPooledObject pooledObj) => pooledObj != null && !PoolTagException.WhenSceneChangeReset.Contains(poolTag);
 
         /// <summary>
         /// Reset all pools
