@@ -3,6 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SoundList", menuName = "Audio/AudioClipList")]
 public class SoundList : SingletonScriptableObject<SoundList>
 {
+    // Chapter BGM
     public AudioClip titleBGM;
     public AudioClip chapter1BGM;
     public AudioClip chapter2BGM;
@@ -10,8 +11,10 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip chapter3BGM;
     public AudioClip chapter4BGM;
 
+    // Stage Special BGM
     public AudioClip chapter2BossMapTitle;
 
+    // UI SFX
     public AudioClip buttonClick;
     public AudioClip menuOpen; //
     public AudioClip menuClose; //
@@ -21,6 +24,7 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip altarEquip; //
     public AudioClip altarUnequip; //
 
+    // Monster SFX
     public AudioClip monsterHit; //
     public AudioClip defMonsterHit; //
     public AudioClip monsterIppaliAttack; //
@@ -33,6 +37,7 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip monsterItmomiAttack; //
     public AudioClip monsterItmomiThorn; // 1.0s up in itmomi attack animation
 
+    // Boss SFX - Gurges
     public AudioClip bossSpit;
     public AudioClip bossIppaliSpawn;
     public AudioClip bossTentacleStabBoss;
@@ -46,6 +51,7 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip bossDie2;
     public AudioClip bossBackGroundSoundEffect;
 
+    // Player SFX
     public AudioClip playerHit; //
     public AudioClip playerHolyBlade; //
     public AudioClip playerMark; //
@@ -57,6 +63,7 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip playerRevive0; //
     public AudioClip playerRevive1; // 6.5
 
+    // Item SFX
     public AudioClip timeSlow;
     public AudioClip soulGet; //
     public AudioClip elevator;//
