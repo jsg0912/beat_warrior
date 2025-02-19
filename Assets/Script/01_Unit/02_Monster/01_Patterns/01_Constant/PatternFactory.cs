@@ -18,8 +18,8 @@ public static class PatternFactory
                 return new PatternKoppulso();
             case PatternName.Giljjugi:
                 return new PatternGiljjugi();
-            case PatternName.BossGergus:
-                return new PatternCh2Boss();
+            case PatternName.BossGurges:
+                return new PatternBossGurges();
             case PatternName.PriestGirl:
                 return new PatternNPCPriestGirl();
         }

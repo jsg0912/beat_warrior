@@ -6,7 +6,7 @@ public enum MonsterName
     Dulduli,
     Giljjugi,
     Itmomi,
-    Gergus,
+    Gurges,
     TutorialIppali,
     PriestGirl,
 }

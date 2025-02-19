@@ -34,7 +34,7 @@ public class PrefabRouter
     public static Dictionary<MonsterName, string> MonsterAttackPrefab = new() {
         { MonsterName.Ibkkugi, MonsterObjectRoute + "IbkkugiThrow"},
         { MonsterName.Itmomi, MonsterObjectRoute + "ItmomiThrow"},
-        { MonsterName.Gergus, MonsterObjectRoute + "GergusThrow"},
+        { MonsterName.Gurges, MonsterObjectRoute + "GurgesThrow"},
     };
 
     public static Dictionary<SkillName, string> TraitIconImages = new() {
