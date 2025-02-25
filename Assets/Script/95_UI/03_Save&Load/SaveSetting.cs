@@ -7,16 +7,18 @@ public class SaveSetting
 {
     public int resolutionWidth;
     public int resolutionHeight;
-    public string[] audioName;
-    public float[] audioValue;
+    public float masterVolume;
+    public float backgroundVolume;
+    public float effectVolume;
     public string[] keyCode;
 
     public SaveSetting()
     {
-        this.resolutionWidth = Screen.currentResolution.width;
-        this.resolutionHeight = Screen.currentResolution.height;
-        this.audioName = Enum.GetNames(typeof(AudioList));
-        this.audioValue = new float[3] { 1f, 1f, 1f };
+        this.resolutionWidth = 1920;
+        this.resolutionHeight = 1080;
+        this.masterVolume = 1f;
+        this.backgroundVolume = 1f;
+        this.effectVolume = 1f;
 
         KeyCode[] defaultKeys = { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.Mouse1, KeyCode.Space, KeyCode.Q, KeyCode.E, KeyCode.F };
         string[] temp;
@@ -28,7 +30,7 @@ public class SaveSetting
         this.keyCode = temp;
     }
 
-    public SaveSetting(Resolution resolution, Dictionary<AudioList, float> audio, KeyCode[] keys)
+    /*public SaveSetting(Resolution resolution, Dictionary<AudioList, float> audio, KeyCode[] keys)
     {
         this.resolutionWidth = resolution.width;
         this.resolutionHeight = resolution.height;
@@ -47,5 +49,6 @@ public class SaveSetting
             keyCode[i] = keys[i].ToString();
         }
     }
+    */
 
 }

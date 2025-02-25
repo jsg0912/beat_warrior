@@ -63,7 +63,7 @@ public class SaveLoadManager : SingletonObject<SaveLoadManager>
         if (files.Length == 0)
         {
             Debug.LogWarning("No save files found.");
-            return null;
+            return new SaveJSON();
         }
 
         foreach (var file in files)

@@ -12,7 +12,7 @@ public class SaveGamePlay
     {
         currentChapterName = ChapterName.Tutorial.ToString();
         equipSkill = null;
-        hp = Player.Instance.Hp;
+        hp = Player.Instance?.Hp ?? 5;
     }
     public SaveGamePlay(Chapter chapter, SkillName[] equipSkill, int hp)
     {

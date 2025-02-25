@@ -39,4 +39,12 @@ public class SettingUIPopup : PopupSystem
         Util.SetActive(settingContents[newSettingContent], true);
         SetCurrentContentTitle(newSettingContent);
     }
+
+    public override bool TurnOffPopup()
+    {
+        SaveJSON saveData = SaveLoadManager.Instance.LoadMostRecentData();
+        saveData.saveSetting = SettingUIManager.Instance.settingData;
+        SaveLoadManager.Instance.SaveData(saveData);
+        return base.TurnOffPopup();
+    }
 }
