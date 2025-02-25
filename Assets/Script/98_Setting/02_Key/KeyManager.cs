@@ -44,14 +44,12 @@ public static class KeySetting
 
 public class KeyManager : SingletonObject<KeyManager>
 {
-    private KeyCode[] defaultKeys = new KeyCode[]
-    { KeyCode.W, KeyCode.S, KeyCode.A, KeyCode.D, KeyCode.Mouse1,
-        KeyCode.Space, KeyCode.Q, KeyCode.E, KeyCode.F };
-
+    private KeyCode[] defaultKeys;
 
     protected override void Awake()
     {
         base.Awake();
+        defaultKeys = ConvertStringArrayToKeyCodeArray(SettingUIManager.Instance.settingData.keyCode);
         for (int i = 0; i < defaultKeys.Length; i++)
         {
             KeySetting.SetKey((PlayerAction)i, defaultKeys[i]);
@@ -59,4 +57,37 @@ public class KeyManager : SingletonObject<KeyManager>
     }
 
     public KeyCode[] GetKeyCodes() { return defaultKeys; }
+
+    public static string[] GetAllKeys()
+    {
+        string[] allKeys = new string[SettingUIManager.Instance.settingData.keyCode.Length];
+        for (int i = 0; i < allKeys.Length; i++)
+        {
+            PlayerAction action = (PlayerAction)i;
+            KeyCode keyCode = KeySetting.GetKey(action);
+            allKeys[i] = keyCode.ToString();
+        }
+        return allKeys;
+    }
+
+    public static KeyCode[] ConvertStringArrayToKeyCodeArray(string[] stringArray)
+    {
+        KeyCode[] keyCodeArray = new KeyCode[stringArray.Length];
+
+        for (int i = 0; i < stringArray.Length; i++)
+        {
+            try
+            {
+                keyCodeArray[i] = (KeyCode)System.Enum.Parse(typeof(KeyCode), stringArray[i], true);
+            }
+            catch (System.ArgumentException)
+            {
+                Debug.LogWarning($"Invalid KeyCode string: {stringArray[i]}. Setting to None.");
+                keyCodeArray[i] = KeyCode.None;
+            }
+        }
+
+        return keyCodeArray;
+    }
+
 }
