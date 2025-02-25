@@ -41,7 +41,7 @@ public class KeySettingButton : MonoBehaviour
     {
         isListeningForInput = false;
         KeySetting.SetKey(action, keyCode);
-        //SettingUIManager.Instance.settingData.keyCode = KeyManager.GetAllKeys();
+        SettingUIManager.Instance.settingData.keyCode = KeyManager.GetAllKeys();
         UpdateKeyText();
         EventSystem.current.SetSelectedGameObject(null);
         if (GameManager.Instance.isInGame) PlayerUIManager.Instance.UpdateHotKeyText(action);
