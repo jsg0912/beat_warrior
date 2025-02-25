@@ -13,8 +13,8 @@ public class VolumeController : MonoBehaviour
         bgmSlider.onValueChanged.AddListener(SoundManager.Instance.BackGroundVolume);
         sfxSlider.onValueChanged.AddListener(SoundManager.Instance.SFXVolume);
 
-        masterSlider.value = 1f;
-        bgmSlider.value = 1f;
-        sfxSlider.value = 1f;
+        masterSlider.value = SettingUIManager.Instance.settingData.masterVolume;
+        bgmSlider.value = SettingUIManager.Instance.settingData.backgroundVolume;
+        sfxSlider.value = SettingUIManager.Instance.settingData.effectVolume;
     }
 }

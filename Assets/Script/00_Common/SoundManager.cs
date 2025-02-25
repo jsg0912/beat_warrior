@@ -43,18 +43,21 @@ public class SoundManager : SingletonObject<SoundManager>
     public void BackGroundVolume(float val)
     {
         backgroundVolume = val;
+        SettingUIManager.Instance.settingData.backgroundVolume = val;
         ApplyVolume();
     }
 
     public void SFXVolume(float val)
     {
         sfxVolume = val;
+        SettingUIManager.Instance.settingData.effectVolume = val;
         ApplyVolume();
     }
 
     public void MasterVolume(float val)
     {
         masterVolume = val;
+        SettingUIManager.Instance.settingData.masterVolume = val;
         ApplyVolume();
     }
 
