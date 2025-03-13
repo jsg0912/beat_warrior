@@ -15,8 +15,8 @@ public class SoundManager : SingletonObject<SoundManager>
     private float originalBGMVolume;
     private bool isDucking = false;
     private ImportantSoundList importantSoundList;
-    private const int MAX_CONCURRENT_SOUNDS = 3;
-    private const float VOLUME_REDUCTION_FACTOR = 0.2f;
+    private const int MAX_CONCURRENT_SOUNDS = 5;
+    private const float VOLUME_REDUCTION_FACTOR = 1f; // TODO: 적정 값을 찾아야 함
     private List<AudioClip> activeClips = new List<AudioClip>();
     void Awake()
     {
@@ -86,7 +86,7 @@ public class SoundManager : SingletonObject<SoundManager>
 
         StartCoroutine(TrackActiveClip(clip));
 
-        if (IsImportantSound(clip))
+        if (!IsDuplicateSound(clip))
         {
             StartDucking();
             StartCoroutine(StopDuckingAfterDelay(clip.length));
@@ -95,7 +95,7 @@ public class SoundManager : SingletonObject<SoundManager>
     private float CalculateVolume(AudioClip clip)
     {
         float baseVolume = sfxVolume / 2;
-        if (activeClips.Count >= MAX_CONCURRENT_SOUNDS && !importantSoundList.IsImportantSound(clip))
+        if (activeClips.Count >= MAX_CONCURRENT_SOUNDS && IsDuplicateSound(clip))
         {
             return baseVolume * VOLUME_REDUCTION_FACTOR;
         }
@@ -108,9 +108,9 @@ public class SoundManager : SingletonObject<SoundManager>
         activeClips.Remove(clip);
     }
 
-    private bool IsImportantSound(AudioClip clip)
+    private bool IsDuplicateSound(AudioClip clip)
     {
-        return importantSoundList.IsImportantSound(clip);
+        return importantSoundList.IsDuplicateSound(clip);
     }
 
     private IEnumerator StopDuckingAfterDelay(float delay)
@@ -118,7 +118,7 @@ public class SoundManager : SingletonObject<SoundManager>
         yield return new WaitForSeconds(delay);
         StopDucking();
     }
-    
+
 
     public void PlayPlayerSFX(string playerAction)
     {
