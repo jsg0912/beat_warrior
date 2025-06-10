@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
 {
-    [SerializeField] private PlayerAction tutorialAction;
+    [SerializeField] private List<PlayerAction> tutorialActions;
     [SerializeField] private bool NeedPause;
 
     override public bool StartInteraction()
@@ -14,8 +15,8 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
             // Blur 제거
             BlurUIManager.Instance.TurnOffActiveBlur();
             if (!TutorialManager.Instance.isSkillAble)
-                // Player Action
-                Player.Instance.ForcePlayerAction(tutorialAction);
+            // Player Action
+            Player.Instance.ForcePlayerAction(GetTutorialAction());
         }
         return true;
     }
@@ -24,10 +25,14 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
     {
         // Prompt 창 띄우기
         SetActivePromptText(true);
-        if (promptText != null) promptText.text = PromptMessageGenerator.GeneratePromptMessage(tutorialAction);
+        if (promptText != null) promptText.text = PromptMessageGenerator.GeneratePromptMessage(GetTutorialAction());
 
         if (isInitialized) return;
         Initialize();
+
+        foreach (var action in tutorialActions) {
+            TutorialManager.Instance.SetActionTutorialComplete(action);
+        }
 
         // 게임 멈추기
         if (NeedPause)
@@ -36,15 +41,20 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
             // Blur 켜기
             BlurUIManager.Instance.TurnOnActiveBlur(BlurType.SystemMessageBlackBlur);
             // Key Input 받도록 설정
-            TutorialManager.Instance.SetCurrentTutorialAction(tutorialAction);
-            // 설명창 켜기
-            SystemMessageUIManager.Instance.TurnOnTutorialMassageUI(tutorialAction, true);
+            TutorialManager.Instance.SetCurrentTutorialAction(GetTutorialAction());
+
+            TurnOnTutorialMassageUI();
         }
         else
         {
-            // 설명창 켜기
-            SystemMessageUIManager.Instance.TurnOnTutorialMassageUI(tutorialAction, true);
+            TurnOnTutorialMassageUI();
         }
+    }
+
+    // 설명창 켜기
+    private void TurnOnTutorialMassageUI()
+    {
+        SystemMessageUIManager.Instance.TurnOnTutorialMassageUI(GetTutorialAction(), true);
     }
 
     override public void SetInteractDisable()
@@ -52,5 +62,5 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
         SetActivePromptText(false);
     }
 
-    public PlayerAction GetTutorialAction() => tutorialAction;
+    public PlayerAction GetTutorialAction() => tutorialActions[0];
 }
