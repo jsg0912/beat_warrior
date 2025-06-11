@@ -328,10 +328,10 @@ public static class ScriptPool
             { Language.en, "English" }
         }},
         {PlayerAction.Skill1, new () {
-            { Language.kr, "Q키를 눌러 바로 앞에 적을 베어 피해를 줍니다." },
-            { Language.en, "English" }
+            { Language.kr, "Q키를 눌러 바로 앞에 적을 베어 피해를 줍니다.\n E키를 눌러 돌진하여 경로상의 모든 적에게 피해를 줍니다." },
+            { Language.en, "Press 'Q' to slash enemy\nPress 'E' to dash with slash enemy" }
         }},
-        {PlayerAction.Skill2, new () {
+        {PlayerAction.Skill2, new () { // 표지판 하나로 합쳐서 이제 이건 안씀
             { Language.kr, "E키를 눌러 돌진하여 경로상의 모든 적에게 피해를 줍니다." },
             { Language.en, "English" }
         }},
