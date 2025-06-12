@@ -243,7 +243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -833.3, y: -431.3}
+  m_AnchoredPosition: {x: -833.3, y: -430}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6248612315812040271
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_IsTrail: 0
   m_IgnoreCanvasScaler: 0
   m_AbsoluteMode: 0
-  m_Scale3D: {x: 10, y: 10, z: 10}
+  m_Scale3D: {x: 8, y: 8, z: 8}
   m_AnimatableProperties: []
   m_Particles:
   - {fileID: 1185722949152553397}
@@ -2600,8 +2600,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1.58
-      minScalar: 0.18
+      scalar: 1.2
+      minScalar: 0.22
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3044,7 +3044,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 38
+    maxNumParticles: 20
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -3112,7 +3112,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: -1.8, y: 9.7, z: 3.5}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 3.88, y: 3.01, z: 14.18}
+    m_Scale: {x: 3.8, y: 3.01, z: 14.18}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
