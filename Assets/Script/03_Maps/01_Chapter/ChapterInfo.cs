@@ -7,7 +7,7 @@ public static class ChapterInfo
     {
         {ChapterName.Tutorial, new (){SceneName.Tutorial} },
         {ChapterName.Ch1, new (){SceneName.Tutorial2} },
-        {ChapterName.Ch2, new (){SceneName.Ch2, SceneName.Ch2BossStage} }
+        {ChapterName.Ch2, new (){SceneName.Ch2, SceneName.Ch2of1, SceneName.Ch2BossStage} }
     };
 
     public static bool CheckValid()
