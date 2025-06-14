@@ -22,7 +22,7 @@ public class HolyBlade : ActiveSkillPlayer
             yield return null;
         }
 
-        if (GameManager.Instance.gameMode != GameMode.Infinite) Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, 1);
+        Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, 1);
 
         CheckCoolTime();
         AttackCountUI.Instance.UpdateUI();
@@ -38,6 +38,8 @@ public class HolyBlade : ActiveSkillPlayer
 
     private void CheckCoolTime()
     {
+        if (GameManager.Instance.gameMode == GameMode.Infinite) return;
+
         if (coolTime > 0) return;
 
         if (!Player.Instance.playerUnit.GetIsFullStat(StatKind.AttackCount))
@@ -60,8 +62,11 @@ public class HolyBlade : ActiveSkillPlayer
 
     protected override void SkillMethod()
     {
-        Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, -1);
-        AttackCountUI.Instance.UpdateUI();
+        if (GameManager.Instance.gameMode != GameMode.Infinite)
+        {
+            Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, -1);
+            AttackCountUI.Instance.UpdateUI();
+        }
         SetAttackCollider(); // [Code Review - KMJ] Do not create new prefab every time, just use one obj and use activate/inactivate - SDH, 20250106
     }
 }
