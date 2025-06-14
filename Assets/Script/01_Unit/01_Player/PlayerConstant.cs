@@ -23,12 +23,12 @@ public class PlayerConstant
 
     public const string runAnimBool = "isRun";
     public const string jumpAnimTrigger = "jump";
-    public const string fallAnimTrigger = "fall";
+    public const string isAttackingAnimBool = "isAttacking";
     public const string groundedAnimBool = "isGrounded";
     public const string dieAnimTrigger = "die";
     public const string restartAnimTrigger = "restart";
     public const string reviveAnimTrigger = "revive";
-    public const string attackAnimTrigger = "attack";
+    public const string attackAnimTrigger = "Attack";
     public const string dashAnimTrigger = "dash";
     public const string dashEndAnimBool = "DashEnd";
     public const string hurtAnimTrigger = "hurt";
