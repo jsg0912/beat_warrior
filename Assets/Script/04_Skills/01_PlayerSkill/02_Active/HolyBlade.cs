@@ -22,7 +22,7 @@ public class HolyBlade : ActiveSkillPlayer
             yield return null;
         }
 
-        Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, 1);
+        if (GameManager.Instance.gameMode != GameMode.Infinite) Player.Instance.playerUnit.unitStat.ChangeCurrentStat(StatKind.AttackCount, 1);
 
         CheckCoolTime();
         AttackCountUI.Instance.UpdateUI();
