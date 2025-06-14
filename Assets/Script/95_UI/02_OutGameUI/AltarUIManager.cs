@@ -16,11 +16,20 @@ public class AltarUIManager : SingletonObject<AltarUIManager>
     override protected void Awake()
     {
         base.Awake();
-        salesSkillList = TraitPriceList.Info.Keys.ToArray();
+
+        Initialize();
+    }
+
+    private void Initialize()
+    {
+        if (GameManager.Instance.gameMode == GameMode.Infinite)
+            salesSkillList = TraitSalesList.SalesListInfinite;
+        else salesSkillList = TraitSalesList.SalesListNormal;
     }
 
     public void TurnOnAltarUI()
     {
+        Initialize();
         altarPopup.TurnOnPopup();
     }
 
