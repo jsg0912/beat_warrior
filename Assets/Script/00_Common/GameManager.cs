@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonObject<GameManager>
 {
+    public GameMode gameMode { get; private set; }
     private Language language = Language.kr;
     public Language Language => language;
     public bool IsLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();
@@ -23,6 +24,11 @@ public class GameManager : SingletonObject<GameManager>
     public void SetLanguage(Language language)
     {
         this.language = language;
+    }
+
+    public void SetGameMode(GameMode gameMode)
+    {
+        this.gameMode = gameMode;
     }
 
     public void SetDefaultCursor()
