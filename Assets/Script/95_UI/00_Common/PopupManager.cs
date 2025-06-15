@@ -5,6 +5,7 @@ public class PopupManager : SingletonObject<PopupManager>
 {
     [SerializeField] private GameExitPopup gameExitPopup;
     [SerializeField] private GameOverPopup gameOverPopup;
+    [SerializeField] private GameModeSettingPopup gameModeSettingPopup;
     private List<PopupSystem> popupSystemStack = new();
 
     public bool IsGameOverPopup => gameOverPopup.gameObject.activeSelf;
@@ -65,5 +66,10 @@ public class PopupManager : SingletonObject<PopupManager>
     public void TurnOnGameOverPopup()
     {
         gameOverPopup.TurnOnPopup();
+    }
+
+    public void TurnOnGameModeSettingPopup()
+    {
+        gameModeSettingPopup.TurnOnPopup();
     }
 }

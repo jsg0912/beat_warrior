@@ -163,13 +163,16 @@ public class Monster : DirectionalGameObject
     public int GetFinalStat(StatKind statKind) { return monsterUnit.unitStat.GetFinalStat(statKind); }
     public void SetBuffMultiply(StatKind statKind, int value) { monsterUnit.unitStat.SetBuffMultiply(statKind, value); }
     public void ResetBuffMultiply(StatKind statKind) { monsterUnit.unitStat.ResetBuffMultiply(statKind); }
-    public void AttackedByPlayer(int playerATK, bool isAlreadyCheckHitMonsterFunc = false)
+    public void AttackedByPlayer(int playerTotalDamage, bool isAlreadyCheckHitMonsterFunc = false)
     {
         if (!GetIsAlive()) return;
 
-        int damage = playerATK - monsterUnit.unitStat.GetFinalStat(StatKind.Def);
-        if (monsterUnit.unitStat.GetFinalStat(StatKind.Def) > 0) SoundManager.Instance.SFXPlay(SoundList.Instance.defMonsterHit);
-        if (damage <= 0) return;
+        int damage = GameManager.Instance.damageCalculator.CalculateDamage(monsterUnit.unitStat.GetFinalStat(StatKind.Def), playerTotalDamage);
+        if (damage <= 0)
+        {
+            if (monsterUnit.unitStat.GetFinalStat(StatKind.Def) > 0) SoundManager.Instance.SFXPlay(SoundList.Instance.defMonsterHit);
+            return;
+        }
 
         GetDamaged(damage);
         if (Player.Instance.hitMonsterFuncList != null && !isAlreadyCheckHitMonsterFunc) Player.Instance.hitMonsterFuncList(this); // TODO: 데미지 입기 전, 입은 후, 입히면서 등의 시간 순서에 따라 특성 발동 구분해야 함.

@@ -29,7 +29,6 @@ public class TutorialManager : SingletonObject<TutorialManager>
         if (!tutorialList.ContainsKey(action)) return;
         if (IsWaitingForTutorialAction && action == currentTutorialAction)
         {
-            SetActionTutorialComplete(action);
             tutorialInteractionPrompts.First(x => x.GetTutorialAction() == action).StartInteraction();
             currentTutorialAction = PlayerAction.Null;
 
@@ -51,6 +50,7 @@ public class TutorialManager : SingletonObject<TutorialManager>
 
     public void SetActionTutorialComplete(PlayerAction action)
     {
+        if (!tutorialList.ContainsKey(action)) return;
         tutorialList[action] = true;
         UpdateIsTutorialComplete();
     }

@@ -7,7 +7,7 @@ public class TitleManager : MonoBehaviour
 
     public void OnPlayClick()
     {
-        GameManager.Instance.StartGame();
+        PopupManager.Instance.TurnOnGameModeSettingPopup();
     }
 
     public void OnSettingClick()

@@ -623,6 +623,7 @@ public class Player : DirectionalGameObject
     {
         SetStatus(PlayerStatus.Normal);
         SetGravityScale(true);
+        _animator.SetBool(PlayerConstant.isAttackingAnimBool, false);
     }
 
     public void UnmovableAnimationStart()

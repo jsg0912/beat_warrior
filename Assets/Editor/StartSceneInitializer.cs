@@ -18,7 +18,6 @@ public static class StartSceneInitializer
         {
             if (SceneManager.GetActiveScene().name != StartSceneName.ToString())
             {
-                Debug.Log($"[StartSceneInitializer] 게임을 항상 {StartSceneName} 씬에서 시작합니다.");
                 SceneManager.LoadScene(SceneName.Title.ToString());
             }
         }

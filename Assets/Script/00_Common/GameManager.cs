@@ -3,8 +3,10 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonObject<GameManager>
 {
+    public GameMode gameMode { get; private set; }
     private Language language = Language.kr;
     public Language Language => language;
+    public DamageCalculator damageCalculator { get; private set; }
     public bool IsLoading => SceneManager.GetActiveScene().name == SceneName.Loading.ToString();
 
     public bool isInGame { get; private set; }
@@ -23,6 +25,19 @@ public class GameManager : SingletonObject<GameManager>
     public void SetLanguage(Language language)
     {
         this.language = language;
+    }
+
+    public void SetGameMode(GameMode gameMode)
+    {
+        this.gameMode = gameMode;
+        if (gameMode == GameMode.Infinite)
+        {
+            damageCalculator = new DamageCalculatorRandom();
+        }
+        else if (gameMode == GameMode.Normal)
+        {
+            damageCalculator = new DamageCalculatorFix();
+        }
     }
 
     public void SetDefaultCursor()

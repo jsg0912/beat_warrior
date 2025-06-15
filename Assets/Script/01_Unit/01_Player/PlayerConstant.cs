@@ -23,7 +23,7 @@ public class PlayerConstant
 
     public const string runAnimBool = "isRun";
     public const string jumpAnimTrigger = "jump";
-    public const string fallAnimTrigger = "fall";
+    public const string isAttackingAnimBool = "isAttacking";
     public const string groundedAnimBool = "isGrounded";
     public const string dieAnimTrigger = "die";
     public const string restartAnimTrigger = "restart";

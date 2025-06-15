@@ -205,6 +205,20 @@ public static class ScriptPool
         }},
     };
 
+    public static Dictionary<GameMode, Dictionary<Language, string>> GameModeText = new Dictionary<GameMode, Dictionary<Language, string>>
+    {
+        {GameMode.Normal, new Dictionary<Language, string>
+        {
+            {Language.kr, "일반 공격도 쿨타임이 존재합니다."},
+            {Language.en, "Normal attacks have a cooldown."},
+        }},
+        {GameMode.Infinite, new Dictionary<Language, string>
+        {
+            {Language.kr, "일반 공격을 무한으로 사용할 수 있습니다."},
+            {Language.en, "You can use normal attacks infinitely."},
+        }},
+    };
+
     public static Dictionary<KeyCode, string> KeyCodeText = new()
     {
         { KeyCode.A, "A"},
@@ -328,10 +342,10 @@ public static class ScriptPool
             { Language.en, "English" }
         }},
         {PlayerAction.Skill1, new () {
-            { Language.kr, "Q키를 눌러 바로 앞에 적을 베어 피해를 줍니다." },
-            { Language.en, "English" }
+            { Language.kr, "Q키를 눌러 바로 앞에 적을 베어 피해를 줍니다.\n E키를 눌러 돌진하여 경로상의 모든 적에게 피해를 줍니다." },
+            { Language.en, "Press 'Q' to slash enemy\nPress 'E' to dash with slash enemy" }
         }},
-        {PlayerAction.Skill2, new () {
+        {PlayerAction.Skill2, new () { // 표지판 하나로 합쳐서 이제 이건 안씀
             { Language.kr, "E키를 눌러 돌진하여 경로상의 모든 적에게 피해를 줍니다." },
             { Language.en, "English" }
         }},
