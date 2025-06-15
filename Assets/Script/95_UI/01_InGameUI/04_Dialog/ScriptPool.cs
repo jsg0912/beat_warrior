@@ -205,6 +205,20 @@ public static class ScriptPool
         }},
     };
 
+    public static Dictionary<GameMode, Dictionary<Language, string>> GameModeText = new Dictionary<GameMode, Dictionary<Language, string>>
+    {
+        {GameMode.Normal, new Dictionary<Language, string>
+        {
+            {Language.kr, "일반 공격도 쿨타임이 존재합니다."},
+            {Language.en, "Normal attacks have a cooldown."},
+        }},
+        {GameMode.Infinite, new Dictionary<Language, string>
+        {
+            {Language.kr, "일반 공격을 무한으로 사용할 수 있습니다."},
+            {Language.en, "You can use normal attacks infinitely."},
+        }},
+    };
+
     public static Dictionary<KeyCode, string> KeyCodeText = new()
     {
         { KeyCode.A, "A"},
