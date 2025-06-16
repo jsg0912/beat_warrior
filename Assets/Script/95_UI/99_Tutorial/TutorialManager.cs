@@ -14,6 +14,8 @@ public class TutorialManager : SingletonObject<TutorialManager>
         {PlayerAction.Tutorial_Dash, false},
     };
 
+    public CutSceneController cutSceneController;
+
     //TODO: 시간 없어서 아래처럼 함
     public bool isJumpAble { private set; get; } = false;
     public bool isSkillAble { private set; get; } = false;
@@ -23,6 +25,12 @@ public class TutorialManager : SingletonObject<TutorialManager>
     public PlayerAction currentTutorialAction { get; private set; } = PlayerAction.Null;
     public bool IsTutorialComplete { get; private set; } = false;
     public bool IsWaitingForTutorialAction => currentTutorialAction != PlayerAction.Null;
+
+    public void Start()
+    {
+        cutSceneController.gameObject.SetActive(true);
+        cutSceneController.StartCutScene();
+    }
 
     public void SetUserInput(PlayerAction action)
     {
@@ -66,6 +74,14 @@ public class TutorialManager : SingletonObject<TutorialManager>
 
     public void CheckTutorialKey()
     {
+        if (cutSceneController.isPlaying)
+        {
+            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetMouseButtonDown(0))
+            {
+                cutSceneController.NextCutScene();
+            }
+        }
+
         if (isSkillAble)
         {
             Player.Instance.CheckPlayerCommand();
