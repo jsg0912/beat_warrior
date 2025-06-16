@@ -11,11 +11,17 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip chapter3BGM;
     public AudioClip chapter4BGM;
 
+    //Chapter BGSFX
+    public AudioClip bossBackGroundSoundEffect;
+    public AudioClip chapter1SoundEffect;
+    public AudioClip chapter2SoundEffect;
+
     // Stage Special BGM
     public AudioClip chapter2BossMapTitle;
 
     // UI SFX
     public AudioClip buttonClick;
+    public AudioClip buttonHover;
     public AudioClip menuOpen; //
     public AudioClip menuClose; //
     public AudioClip altarOpen;
@@ -49,7 +55,6 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip bossDie0;
     public AudioClip bossDie1;
     public AudioClip bossDie2;
-    public AudioClip bossBackGroundSoundEffect;
 
     // Player SFX
     public AudioClip playerHit; //
@@ -67,4 +72,5 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip timeSlow;
     public AudioClip soulGet; //
     public AudioClip elevator;//
+    public AudioClip elevatorEnd;
 }
