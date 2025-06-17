@@ -13,6 +13,18 @@ public class CutSceneController : MonoBehaviour
 
     private int currentIndex = 0;
 
+    public void TutorialCommandCheck()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetMouseButtonDown(0))
+        {
+            NextCutScene();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EndCutScene();
+        }
+    }
+
     public void StartCutScene()
     {
         UIManager.Instance.SetActiveMiniMap(false);
@@ -58,6 +70,6 @@ public class CutSceneController : MonoBehaviour
                 UIManager.Instance.SetActiveMiniMap(true);
             });
         }
-        
+
     }
 }
