@@ -8,6 +8,7 @@ public class CutSceneController : MonoBehaviour
     public CutSceneKind cutSceneKind;
     [SerializeField] private TMP_Text cutSceneText;
     [SerializeField] private List<FadeInOutImage> cutSceneObjects;
+    [SerializeField] private Queue<string> dialogQueue = new Queue<string>();
 
     public FadeInEffect fadeInEffect;
 
@@ -38,6 +39,12 @@ public class CutSceneController : MonoBehaviour
 
     public void NextCutScene()
     {
+        if (dialogQueue.Count > 0)
+        {
+            cutSceneText.text = dialogQueue.Dequeue();
+            return;
+        }
+
         if (currentIndex < cutSceneObjects.Count - 1)
         {
             cutSceneObjects[currentIndex++].HideWithFadeOut(() =>
@@ -54,7 +61,12 @@ public class CutSceneController : MonoBehaviour
     public void ShowCutScene()
     {
         cutSceneObjects[currentIndex].ShowWithFadeIn();
-        cutSceneText.text = DialogScript.CutSceneData[cutSceneKind][GameManager.Instance.Language][currentIndex];
+        string[] dialogs = DialogScript.CutSceneData[cutSceneKind][GameManager.Instance.Language][currentIndex].Split('\r');
+        foreach (string dialog in dialogs)
+        {
+            dialogQueue.Enqueue(dialog);
+        }
+        cutSceneText.text = dialogQueue.Count > 0 ? dialogQueue.Dequeue() : string.Empty;
     }
 
     public void EndCutScene()

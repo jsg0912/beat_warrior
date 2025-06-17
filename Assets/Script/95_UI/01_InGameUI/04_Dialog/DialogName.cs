@@ -1,5 +1,6 @@
 public enum DialogName
 {
+    Tutorial,
     Act1,
     Act2,
     Act3,

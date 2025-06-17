@@ -45,11 +45,12 @@ public class DialogTrigger : MonoBehaviour
         }
     }
 
+    // TODO: Dialog 진행과정 수정 필요
     public void StartDialog()
     {
-        string dialogData = DialogManager.GetDialog(DialogManager.dialogName, GameManager.Instance.Language, dialogIndex);
+        var dialogData = DialogManager.GetDialog(DialogManager.dialogName, GameManager.Instance.Language, dialogIndex);
 
-        if (dialogData == null)
+        if (dialogData.Item1 == DialogSpeaker.Null)
         {
             dialogIndex = 0;
             Util.SetActive(dialogPanel, false);
@@ -58,7 +59,7 @@ public class DialogTrigger : MonoBehaviour
         }
 
         Util.SetActive(dialogPanel, true);
-        dialogText.text = dialogData;
+        dialogText.text = "";
         dialogIndex++;
         PauseController.Instance.TryPauseGame();
     }
