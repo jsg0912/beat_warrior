@@ -41831,6 +41831,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Priest_Girl
       objectReference: {fileID: 0}
+    - target: {fileID: 8043219666485081925, guid: e604f8df6a066c940a52ea8a41b31422, type: 3}
+      propertyPath: dialogName
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -41864,6 +41868,7 @@ MonoBehaviour:
   promptText: {fileID: 0}
   tutorialActions: 0e000000
   NeedPause: 0
+  dialog: 0
 --- !u!4 &1966651740 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8757766528606838011, guid: 65de8094bb2bf4a438ca20bf19bd1e79, type: 3}
@@ -42641,7 +42646,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b052987e1d10f543b249db9df0cfb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogName: 0
+  dialogPanel: {fileID: 0}
+  speakerText: {fileID: 0}
+  dialogText: {fileID: 0}
 --- !u!4 &2059763324
 Transform:
   m_ObjectHideFlags: 0

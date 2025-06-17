@@ -5,6 +5,7 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
 {
     [SerializeField] private List<PlayerAction> tutorialActions;
     [SerializeField] private bool NeedPause;
+    [SerializeField] private DialogName dialog;
 
     override public bool StartInteraction()
     {
