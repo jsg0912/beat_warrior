@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class DialogManager : MonoBehaviour
 {
@@ -8,6 +10,10 @@ public class DialogManager : MonoBehaviour
     public GameObject dialogPanel;
     public TextMeshProUGUI speakerText;
     public TextMeshProUGUI dialogText;
+    public Image speakerImage;
+
+    public List<SpeakerSprite> speakerSprites; // 인스펙터 연결용 리스트
+    private Dictionary<DialogSpeaker, Sprite> speakerSpriteDict;
 
     private DialogName currentDialogName;
     private (DialogSpeaker, string[])[] dialogSequence;
@@ -20,6 +26,12 @@ public class DialogManager : MonoBehaviour
         else Destroy(gameObject);
 
         dialogPanel.SetActive(false);
+        speakerSpriteDict = new Dictionary<DialogSpeaker, Sprite>();
+
+        foreach (var entry in speakerSprites)
+        {
+            speakerSpriteDict[entry.speaker] = entry.Sprite;
+        }
     }
 
     public void StartDialog(DialogName dialogName)
@@ -32,18 +44,18 @@ public class DialogManager : MonoBehaviour
 
         ShowCurrentLine();
         dialogPanel.SetActive(true);
-        PauseController.Instance.TryPauseGame(); // 필요 시
+        PauseController.Instance.TryPauseGame();
     }
 
     private void Update()
     {
         if (!dialogPanel.activeSelf) return;
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetMouseButtonDown(0)) // 대사 진행
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             lineIndex++;
-
             var (_, lines) = dialogSequence[dialogIndex];
+
             if (lineIndex < lines.Length)
             {
                 dialogText.text = lines[lineIndex];
@@ -67,13 +79,23 @@ public class DialogManager : MonoBehaviour
     private void ShowCurrentLine()
     {
         var (speaker, lines) = dialogSequence[dialogIndex];
-        speakerText.text = speaker.ToString(); // 한글 이름 매핑 필요 시 Dictionary 사용 가능
+        speakerText.text = speaker.ToString();
         dialogText.text = lines[lineIndex];
+
+        if (speakerSpriteDict.TryGetValue(speaker, out var sprite))
+        {
+            speakerImage.sprite = sprite;
+            speakerImage.enabled = true;
+        }
+        else
+        {
+            speakerImage.enabled = false;
+        }
     }
 
     private void EndDialog()
     {
         dialogPanel.SetActive(false);
-        PauseController.Instance.TryResumeGame(); // 필요 시
+        PauseController.Instance.TryResumeGame();
     }
 }
