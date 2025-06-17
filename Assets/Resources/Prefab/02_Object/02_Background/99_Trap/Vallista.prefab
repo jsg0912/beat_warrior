@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7690851920095504230}
   - component: {fileID: 2301839816525889547}
+  - component: {fileID: 8230474300647759653}
   - component: {fileID: 2324460835843023081}
-  - component: {fileID: 2297907932782671096}
   - component: {fileID: 7743289308323024543}
   m_Layer: 6
   m_Name: VallistaArrow
@@ -87,6 +87,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8230474300647759653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2683844262835264368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e4cd917c39d344faa51013d1574124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrowRb: {fileID: 7743289308323024543}
+  projectileSpeed: 10
 --- !u!61 &2324460835843023081
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -116,10 +130,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.014431953, y: -0.00480932}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -130,20 +144,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 3.8954163, y: 0.25931358}
   m_EdgeRadius: 0
---- !u!114 &2297907932782671096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2683844262835264368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 055c653a6aa37d44b8371e44918fa6dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &7743289308323024543
 Rigidbody2D:
   serializedVersion: 4
@@ -198,7 +200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5470981469257761363}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -247,7 +249,7 @@ SpriteRenderer:
   m_SortingLayerID: 1686646113
   m_SortingLayer: 5
   m_SortingOrder: 70
-  m_Sprite: {fileID: 633974314, guid: 60e0537eb9ecf0d40a2cb500a83f0a48, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8204c02dda050d048b74d7f2f2c71c5d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -295,11 +297,9 @@ MonoBehaviour:
   coolTime: 10
   damage: 1
   isTriggered: 0
-  trapAttackCollider: {fileID: 2297907932782671096}
+  trapAttackCollider: {fileID: 8230474300647759653}
   animator: {fileID: 1112166129347240180}
   detectionRange: 10
-  projectileSpeed: 10
-  arrow: {fileID: 2683844262835264368}
 --- !u!1 &7150770869995423031
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +327,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -13.260002, y: -0.9090004, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1642361206482930838}
