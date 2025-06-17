@@ -46,6 +46,9 @@ public class SystemMessageUIManager : SingletonObject<SystemMessageUIManager>
             case SceneName.Ch2:
                 mapTitleMessagePopup.SetBackgroundImage(LowerPartMapImage);
                 break;
+            case SceneName.Ch2of1:
+                mapTitleMessagePopup.SetBackgroundImage(LowerPartMapImage);
+                break;
             case SceneName.Ch2BossStage:
                 mapTitleMessagePopup.SetBackgroundImage(LowerPartBossMapImage);
                 break;
