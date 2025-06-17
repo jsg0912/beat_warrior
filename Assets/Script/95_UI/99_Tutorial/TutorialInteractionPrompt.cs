@@ -15,8 +15,8 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
             // Blur 제거
             BlurUIManager.Instance.TurnOffActiveBlur();
             if (!TutorialManager.Instance.isSkillAble)
-            // Player Action
-            Player.Instance.ForcePlayerAction(GetTutorialAction());
+                // Player Action
+                Player.Instance.ForcePlayerAction(GetTutorialAction());
         }
         return true;
     }
@@ -30,7 +30,8 @@ public class TutorialInteractionPrompt : ObjectWithInteractionPrompt
         if (isInitialized) return;
         Initialize();
 
-        foreach (var action in tutorialActions) {
+        foreach (var action in tutorialActions)
+        {
             TutorialManager.Instance.SetActionTutorialComplete(action);
         }
 

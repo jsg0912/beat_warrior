@@ -42,4 +42,9 @@ public abstract class DirectionalGameObject : MonoBehaviour
             Util.FlipDirectionX(obj);
         }
     }
+
+    public Direction GetRelativeDirectionToTarget(Vector3 targetPosition)
+    {
+        return gameObject.transform.position.x > targetPosition.x ? Direction.Right : Direction.Left;
+    }
 }

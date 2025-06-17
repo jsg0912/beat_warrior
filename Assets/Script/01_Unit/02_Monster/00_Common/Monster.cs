@@ -288,8 +288,8 @@ public class Monster : DirectionalGameObject
         monsterBodyCollider.TryFlipPolygonCollider();
     }
 
-    public Direction GetRelativeDirectionToPlayer() { return Player.Instance.GetBottomPos().x > GetBottomPos().x ? Direction.Right : Direction.Left; }
-    public float GetRelativePlayerDirectionFloat() { return Player.Instance.GetBottomPos().x > GetBottomPos().x ? 1.0f : -1.0f; }
+    public Direction GetRelativeDirectionToPlayer() { return Player.Instance.GetRelativeDirectionToTarget(GetBottomPos()); }
+    public float GetRelativePlayerDirectionFloat() { return Player.Instance.GetRelativeDirectionToTarget(GetBottomPos()) == Direction.Right ? 1.0f : -1.0f; }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {

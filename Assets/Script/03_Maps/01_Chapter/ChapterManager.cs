@@ -105,7 +105,7 @@ public class ChapterManager : SingletonObject<ChapterManager>
 
     private void LoadStageScene()
     {
-        StartCoroutine(SceneController.Instance.ChangeSceneWithLoading(ChapterInfo.ChapterSceneInfo[currentChapterName][currentStageIndex]));
+        StartCoroutine(SceneController.Instance.ChangeSceneWithLoading(RandomSystem.GetRandom(ChapterInfo.ChapterSceneInfo[currentChapterName][currentStageIndex])));
     }
 
     private void MoveToNextChapter()
