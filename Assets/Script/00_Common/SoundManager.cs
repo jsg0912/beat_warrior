@@ -187,9 +187,11 @@ public class SoundManager : SingletonObject<SoundManager>
                 break;
             case ChapterName.Ch1:
                 BackGroundPlay(SoundList.Instance.chapter1BGM);
+                PlayBackGroundSFX(SoundList.Instance.chapter1SoundEffect);
                 break;
             case ChapterName.Ch2:
                 BackGroundPlay(SoundList.Instance.chapter2BGM);
+                PlayBackGroundSFX(SoundList.Instance.chapter2SoundEffect);
                 break;
             case ChapterName.Ch3:
                 BackGroundPlay(SoundList.Instance.chapter3BGM);
@@ -213,4 +215,6 @@ public class SoundManager : SingletonObject<SoundManager>
                 break;
         }
     }
+
+    
 }

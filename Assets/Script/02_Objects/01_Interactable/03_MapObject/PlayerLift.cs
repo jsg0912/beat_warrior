@@ -37,6 +37,7 @@ public class PlayerLift : ObjectWithInteractionPrompt
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
             yield return null;
         }
+        SoundManager.Instance.SFXPlay(SoundList.Instance.elevatorEnd);
 
         isMoving = false;
 
