@@ -12,7 +12,7 @@ public class DialogManager : MonoBehaviour
     public TextMeshProUGUI dialogText;
     public Image speakerImage;
 
-    public List<SpeakerSprite> speakerSprites; // ÀÎ½ºÆåÅÍ ¿¬°á¿ë ¸®½ºÆ®
+    public List<SpeakerSprite> speakerSprites; // ï¿½Î½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
     private Dictionary<DialogSpeaker, Sprite> speakerSpriteDict;
 
     private DialogName currentDialogName;
@@ -51,7 +51,7 @@ public class DialogManager : MonoBehaviour
     {
         if (!dialogPanel.activeSelf) return;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetMouseButtonDown(0))
         {
             lineIndex++;
             var (_, lines) = dialogSequence[dialogIndex];
