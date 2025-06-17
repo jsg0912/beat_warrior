@@ -6,7 +6,8 @@ public class AttackCountUI : SingletonObject<AttackCountUI>
 {
     [SerializeField] Image AttackChargeGauge;
     [SerializeField] List<Sprite> Max2ChargeImages = new List<Sprite>();
-    [SerializeField] List<Sprite> Max3ChargeImages = new List<Sprite>(); // TODO: 나중에 Attack을 3번까지로 늘어나면 사용
+    [SerializeField] List<Sprite> Max3ChargeImages = new List<Sprite>();
+    [SerializeField] Sprite InfiniteChargeImage;
 
     public void Start()
     {
@@ -14,14 +15,21 @@ public class AttackCountUI : SingletonObject<AttackCountUI>
     }
     public void UpdateUI()
     {
-        if (Player.Instance.GetFinalStat(StatKind.AttackCount) == 2)
+        if (GameManager.Instance.gameMode == GameMode.Infinite)
         {
-            AttackChargeGauge.sprite = Max2ChargeImages[Player.Instance.GetCurrentStat(StatKind.AttackCount)];
+            AttackChargeGauge.sprite = InfiniteChargeImage;
         }
-
-        if (Player.Instance.GetFinalStat(StatKind.AttackCount) == 3)
+        else
         {
-            AttackChargeGauge.sprite = Max3ChargeImages[Player.Instance.GetCurrentStat(StatKind.AttackCount)];
+            if (Player.Instance.GetFinalStat(StatKind.AttackCount) == 2)
+            {
+                AttackChargeGauge.sprite = Max2ChargeImages[Player.Instance.GetCurrentStat(StatKind.AttackCount)];
+            }
+
+            if (Player.Instance.GetFinalStat(StatKind.AttackCount) == 3)
+            {
+                AttackChargeGauge.sprite = Max3ChargeImages[Player.Instance.GetCurrentStat(StatKind.AttackCount)];
+            }
         }
     }
 }

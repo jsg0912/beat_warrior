@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1686646113
   m_SortingLayer: 5
-  m_SortingOrder: 70
+  m_SortingOrder: 60
   m_Sprite: {fileID: 350034070, guid: 866acdc261c8e4e4c9b56395b75bc6aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -121,8 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64814c0a35cf08c4886014b7779b29be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trapName: 0
   duration: 3
-  coolTime: 10
+  coolTime: 5
   damage: 1
   isTriggered: 0
   trapAttackCollider: {fileID: 5924533147233005182}

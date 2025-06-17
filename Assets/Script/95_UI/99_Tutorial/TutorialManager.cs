@@ -76,10 +76,8 @@ public class TutorialManager : SingletonObject<TutorialManager>
     {
         if (cutSceneController.isPlaying)
         {
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetMouseButtonDown(0))
-            {
-                cutSceneController.NextCutScene();
-            }
+            cutSceneController.TutorialCommandCheck();
+            return;
         }
 
         if (isSkillAble)

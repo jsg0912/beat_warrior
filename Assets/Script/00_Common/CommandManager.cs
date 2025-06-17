@@ -23,7 +23,8 @@ public class CommandManager : SingletonObject<CommandManager>
         CheckCheatingMode();
         if (isCommandAble)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            // TODO: CutScene Skip 중에는 Menu 창 안켜지도록 작업했는데, 이 방식의 개선이 필요함 - SDH, 20250617
+            if (Input.GetKeyDown(KeyCode.Escape) && TutorialManager.InstanceWithoutCreate.cutSceneController.isPlaying != true)
             {
                 if (!PopupManager.Instance.TryPopPopup())
                 {
