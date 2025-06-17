@@ -36,14 +36,15 @@ public class MoveCamera : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Player.Instance != null)
+        if (Player.Instance == null) return;
+
+        Target = Player.Instance.transform;
+
+        if (!isShakeing)
         {
-            if (isShakeing) return;
-            Target = Player.Instance.transform;
             cameraMovement();
             maxCameraMovement();
         }
-
     }
 
     private void cameraMovement()
@@ -79,8 +80,7 @@ public class MoveCamera : MonoBehaviour
     {
         isShakeing = true;
 
-        Vector3 originalPos = transform.localPosition;
-
+        Vector3 originalPos = transform.position;
         float elapsed = 0.0f;
 
         while (elapsed < duration)
@@ -88,15 +88,27 @@ public class MoveCamera : MonoBehaviour
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
 
-            transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
+            transform.position = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
 
             elapsed += Time.deltaTime;
-
             yield return null;
         }
 
-        transform.localPosition = originalPos;
-
+        transform.position = originalPos;
         isShakeing = false;
+
+        Debug.Log(" 카메라 흔들림");
+    }
+
+    public static void Shake(float duration, float magnitude)
+    {
+        if (Camera.main != null)
+        {
+            var moveCam = Camera.main.GetComponent<MoveCamera>();
+            if (moveCam != null)
+            {
+                moveCam.StartCoroutine(moveCam.CameraShake(duration, magnitude));
+            }
+        }
     }
 }
