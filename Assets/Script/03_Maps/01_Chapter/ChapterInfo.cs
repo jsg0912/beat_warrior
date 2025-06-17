@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 public static class ChapterInfo
 {
-    public static Dictionary<ChapterName, List<SceneName>> ChapterSceneInfo = new()
+    public static Dictionary<ChapterName, List<List<SceneName>>> ChapterSceneInfo = new()
     {
-        {ChapterName.Tutorial, new (){SceneName.Tutorial} },
-        {ChapterName.Ch1, new (){SceneName.Tutorial2} },
-        {ChapterName.Ch2, new (){SceneName.Ch2, SceneName.Ch2of1, SceneName.Ch2BossStage} }
+        {ChapterName.Tutorial, new (){ new() { SceneName.Tutorial} } },
+        {ChapterName.Ch1, new (){new () {SceneName.Tutorial2}} },
+        {ChapterName.Ch2, new (){ new() { SceneName.Ch2}, new() { SceneName.Ch2of1, SceneName.Ch2of2, SceneName.Ch2of3}, new (){SceneName.Ch2BossStage}} }
     };
 
     public static bool CheckValid()
