@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class MoveCamera : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class MoveCamera : MonoBehaviour
 
     private float orthographicSize;
     private float horizontalGraphicSize;
+
+    private bool isShakeing = false;
 
     public bool isCamera = true;
 
@@ -35,10 +38,12 @@ public class MoveCamera : MonoBehaviour
     {
         if (Player.Instance != null)
         {
+            if (isShakeing) return;
             Target = Player.Instance.transform;
             cameraMovement();
             maxCameraMovement();
         }
+
     }
 
     private void cameraMovement()
@@ -50,7 +55,7 @@ public class MoveCamera : MonoBehaviour
         if (isCamera)
         {
             targetPosition = new Vector3(Target.position.x, Target.position.y + yOffest, z);
-            transform.position = Vector3.Lerp(transform.position, targetPosition,Time.deltaTime * speed);
+            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
         }
         else
         {
@@ -68,5 +73,30 @@ public class MoveCamera : MonoBehaviour
         float clampY = Mathf.Clamp(transform.position.y, -ly + center.y, ly + center.y);
 
         transform.position = new Vector3(clampX, clampY, z);
+    }
+
+    public IEnumerator CameraShake(float duration, float magnitude)
+    {
+        isShakeing = true;
+
+        Vector3 originalPos = transform.localPosition;
+
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            transform.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        transform.localPosition = originalPos;
+
+        isShakeing = false;
     }
 }
