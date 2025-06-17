@@ -7,7 +7,7 @@ public class CutSceneController : MonoBehaviour
     public bool isPlaying { get; private set; } = false;
     public CutSceneKind cutSceneKind;
     [SerializeField] private TMP_Text cutSceneText;
-    [SerializeField] private List<GameObject> cutSceneObjects = new List<GameObject>();
+    [SerializeField] private List<FadeInOutImage> cutSceneObjects;
 
     public FadeInEffect fadeInEffect;
 
@@ -28,9 +28,10 @@ public class CutSceneController : MonoBehaviour
     {
         if (currentIndex < cutSceneObjects.Count - 1)
         {
-            cutSceneObjects[currentIndex].SetActive(false);
-            currentIndex++;
-            ShowCutScene();
+            cutSceneObjects[currentIndex++].HideWithFadeOut(() =>
+            {
+                ShowCutScene();
+            });
         }
         else
         {
@@ -40,8 +41,7 @@ public class CutSceneController : MonoBehaviour
 
     public void ShowCutScene()
     {
-        cutSceneObjects[currentIndex].SetActive(true);
-        // TODO: DialogScript.cs 활용해서 작업
+        cutSceneObjects[currentIndex].ShowWithFadeIn();
         cutSceneText.text = DialogScript.CutSceneData[cutSceneKind][GameManager.Instance.Language][currentIndex];
     }
 
@@ -49,12 +49,15 @@ public class CutSceneController : MonoBehaviour
     {
         if (cutSceneObjects.Count > 0)
         {
-            cutSceneObjects[currentIndex].SetActive(false);
+            cutSceneObjects[currentIndex].HideWithFadeOut(() =>
+            {
+                currentIndex = 0;
+                cutSceneText.text = string.Empty;
+                isPlaying = false;
+                fadeInEffect.HideWithFadeOut();
+                UIManager.Instance.SetActiveMiniMap(true);
+            });
         }
-        currentIndex = 0;
-        cutSceneText.text = string.Empty;
-        isPlaying = false;
-        fadeInEffect.HideWithFadeOut();
-        UIManager.Instance.SetActiveMiniMap(true);
+        
     }
 }
