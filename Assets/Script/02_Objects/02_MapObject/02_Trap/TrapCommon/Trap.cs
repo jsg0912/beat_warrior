@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class Trap : MonoBehaviour
 {
+    [SerializeField] protected TrapName trapName;
     [SerializeField] protected float duration = 3f;
     [SerializeField] protected float coolTime = 10f;
     [SerializeField] protected int damage = 1;
