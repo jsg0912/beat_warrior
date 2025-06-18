@@ -73,4 +73,8 @@ public class SoundList : SingletonScriptableObject<SoundList>
     public AudioClip soulGet; //
     public AudioClip elevator;//
     public AudioClip elevatorEnd;
+    public AudioClip IronMaden;
+    public AudioClip FloorSpike;
+    public AudioClip FloorGas;
+    public AudioClip Vallista;
 }

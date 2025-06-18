@@ -13,6 +13,7 @@ public class TrapVallista : Trap
 
     protected override void TrapAction()
     {
+        base.TrapAction();
         if (!canShoot) return;
 
         StartCoroutine(ShootSequence());
