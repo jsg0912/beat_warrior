@@ -7,8 +7,14 @@ public class GameModeSettingPopup : PopupSystem
 
     public void OnEnable()
     {
-        infiniteModeText.text = ScriptPool.GameModeText[GameMode.Infinite][GameManager.Instance.Language];
-        normalModeText.text = ScriptPool.GameModeText[GameMode.Normal][GameManager.Instance.Language];
+        if (infiniteModeText != null)
+        {
+            infiniteModeText.text = ScriptPool.GameModeText[GameMode.Infinite][GameManager.Instance.Language];
+        }
+        if (normalModeText != null)
+        {
+            normalModeText.text = ScriptPool.GameModeText[GameMode.Normal][GameManager.Instance.Language];
+        }
     }
 
     public void OnClickInfiniteMode()
