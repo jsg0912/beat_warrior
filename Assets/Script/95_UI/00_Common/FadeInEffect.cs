@@ -5,10 +5,24 @@ public class FadeInEffect : MonoBehaviour
 {
     public CanvasGroup canvasGroup;
     public float fadeDuration = 0.15f;
+    private Coroutine fadeCoroutine;
 
     public void ShowWithFadeIn()
     {
-        StartCoroutine(FadeIn());
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+        }
+        fadeCoroutine = StartCoroutine(FadeIn());
+    }
+
+    public void HideWithFadeOut()
+    {
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+        }
+        fadeCoroutine = StartCoroutine(FadeOut());
     }
 
     public void SetAlpha(float Alphavalue)
@@ -30,10 +44,6 @@ public class FadeInEffect : MonoBehaviour
 
         canvasGroup.alpha = 1f;
     }
-    public void HideWithFadeOut()
-    {
-        StartCoroutine(FadeOut());
-    }
 
     private IEnumerator FadeOut()
     {
@@ -49,6 +59,4 @@ public class FadeInEffect : MonoBehaviour
         canvasGroup.alpha = 0f;
         gameObject.SetActive(false);
     }
-
 }
-
