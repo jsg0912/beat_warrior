@@ -17,14 +17,14 @@ public class CutSceneController : MonoBehaviour
 
     public void TutorialCommandCheck()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EndCutScene();
+        }
         if (isFading) return;
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetMouseButtonDown(0))
         {
             NextCutScene();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            EndCutScene();
         }
     }
 
