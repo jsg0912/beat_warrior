@@ -96,6 +96,11 @@ public class AltarDetailPopup : PopupSystem
         }
     }
 
+    public void OnClickTraitUI()
+    {
+        OnClickTraitUI(targetTraitUI);
+    }
+
     private void OnClickTraitUI(TraitIcon traitUI)
     {
         switch (traitUI.traitStatus)

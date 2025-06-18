@@ -11,8 +11,8 @@ public class DialogScript
                     "노아는 신성한 교단 테노브라에 의해 구원을 받았고,",
                     "그곳에서 성기사의 길을 걷게 되었지만, 그녀 안엔 어둠의 기운이 자라나고 있었습니다.",
                     "그러던 어느 날, 노아는 교황에게 불려갔습니다.",
-                    "교황: 노아여, 베르나스 마을에서 불길한 소문이 돌고 있다. 그 진위를 네가 확인하고 오너라.\r노아: …명 받들겠습니다. 곧 출발하겠습니다.",
-                    "노아: …이곳이 이렇게까지 무너졌을 줄은 몰랐군.\r노아: 표면적으로는 이 안에서 무슨 일이 벌어졌는지 알 수 없어.\r노아: …더 깊은 곳까지 들어가보자." } },
+                    "교황: 노아여, 베르나스 마을에서 불길한 소문이 돌고 있다. 그 진위를 네가 확인하고 오너라.\r노아: ...명 받들겠습니다. 곧 출발하겠습니다.",
+                    "노아: ...이곳이 이렇게까지 무너졌을 줄은 몰랐군.\r노아: 표면적으로는 이 안에서 무슨 일이 벌어졌는지 알 수 없어.\r노아: ...더 깊은 곳까지 들어가보자." } },
                 { Language.en, new string[]{
                     "Once upon a time, there was a girl named Noah who was abandoned by the world.",
                     "Noah was saved by the holy order of Tenobra,",
@@ -32,11 +32,11 @@ public class DialogScript
             {
                 Language.kr, new []{
                     (DialogSpeaker.Sister, new string[]{ "노아, 이제 떠날 준비는 되셨나요?" }),
-                    (DialogSpeaker.Noa, new string[]{ "준비란 게… 늘 되는 건 아니죠. 그래도 가야 하니까요." }),
-                    (DialogSpeaker.Sister, new string[]{ "빈민가로 가주세요. 최근 들어, 그곳에서 이상한 기척이 느껴진다고 합니다." }),
-                    (DialogSpeaker.Noa, new string[]{ "…오랜만이네요, 그쪽은." }),
-                    (DialogSpeaker.Sister, new string[]{ "당신에게 익숙한 곳이기에... 더 많은 것을 느낄 수 있을지도 모릅니다." }),
-                    (DialogSpeaker.Noa, new string[]{ "무엇을 보든, 피하지 않겠습니다. 다녀오죠." })
+                    (DialogSpeaker.Noa, new string[]{ "준비란 게... 늘 되어있는 건 아니죠.\n그래도 가야 하니까요." }),
+                    (DialogSpeaker.Sister, new string[]{ "빈민가 베르나스 마을로 가주세요.\n최근 들어, 그곳에서 이상한 기척이 느껴진다고 합니다." }),
+                    (DialogSpeaker.Noa, new string[]{ "...오랜만이네요, 그 마을은." }),
+                    (DialogSpeaker.Sister, new string[]{ "당신에게 익숙한 곳이기에... \n더 많은 것을 느낄 수 있을지도 모릅니다." }),
+                    (DialogSpeaker.Noa, new string[]{ "무엇을 만나게 되든, 피하지 않겠습니다.\n다녀오죠." })
                 }
             },
             {
@@ -55,10 +55,10 @@ public class DialogScript
             {
                 Language.kr, new []{
                     (DialogSpeaker.Noa, new string[]{
-                        "…기억보다 더 황폐하군.",
+                        "...기억보다 더 황폐하군.",
                         "사람 냄새보다 썩은 냄새가 먼저 코를 찌르다니.",
                         "여긴... 오랫동안 버려져 있었던 거겠지.",
-                        "오래도록 방치된 건… 건물만이 아니겠지."
+                        "오래도록 방치된 건... 건물만이 아니겠지."
                     })
                 }
             },
@@ -78,10 +78,10 @@ public class DialogScript
             {
                 Language.kr, new []{
                     (DialogSpeaker.Noa, new string[]{
-                        "…이곳이 이렇게까지 무너졌을 줄은 몰랐군.",
-                        "기도가 울려 퍼지던 자리에… 이제는 낯선 기척만 가득해.",
-                        "표면만으로는 이 안에서 무슨 일이 벌어졌는지 알 수 없어.",
-                        "…더 깊은 곳까지 들어가보자."
+                        "...이곳이 이렇게까지 무너졌을 줄은 몰랐군.",
+                        "기도가 울려 퍼지던 자리에... 이제는 낯선 기척만 가득해.",
+                        "표면적으로는 이 안에서 무슨 일이 벌어졌는지 알 수 없어.",
+                        "...더 깊은 곳까지 들어가보자."
                     })
                 }
             },

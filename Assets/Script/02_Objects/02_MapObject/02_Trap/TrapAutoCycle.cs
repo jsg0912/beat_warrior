@@ -12,6 +12,7 @@ public class TrapAutoCycle : Trap
 
     protected override void TrapAction()
     {
+        base.TrapAction();
         animator.SetBool("Trap", true);
     }
 
