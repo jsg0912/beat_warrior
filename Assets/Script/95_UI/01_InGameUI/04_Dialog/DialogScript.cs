@@ -12,7 +12,7 @@ public class DialogScript
                     "그곳에서 성기사의 길을 걷게 되었지만, 그녀 안엔 어둠의 기운이 자라나고 있었습니다.",
                     "그러던 어느 날, 노아는 교황에게 불려갔습니다.",
                     "교황: 노아여, 베르나스 마을에서 불길한 소문이 돌고 있다. 그 진위를 네가 확인하고 오너라.\r노아: …명 받들겠습니다. 곧 출발하겠습니다.",
-                    "노아: …이곳이 이렇게까지 무너졌을 줄은 몰랐군.\r노아: 표면만으로는 이 안에서 무슨 일이 벌어졌는지 알 수 없어.\r노아: …더 깊은 곳까지 들어가보자." } },
+                    "노아: …이곳이 이렇게까지 무너졌을 줄은 몰랐군.\r노아: 표면적으로는 이 안에서 무슨 일이 벌어졌는지 알 수 없어.\r노아: …더 깊은 곳까지 들어가보자." } },
                 { Language.en, new string[]{
                     "Once upon a time, there was a girl named Noah who was abandoned by the world.",
                     "Noah was saved by the holy order of Tenobra,",
