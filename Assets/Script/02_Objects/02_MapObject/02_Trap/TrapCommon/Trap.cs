@@ -21,5 +21,8 @@ public abstract class Trap : MonoBehaviour
         Initialize();
     }
 
-    protected abstract void TrapAction();
+    protected virtual void TrapAction()
+    {
+        SoundManager.Instance.PlayTrapSound(trapName);
+    }
 }

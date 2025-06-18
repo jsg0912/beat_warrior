@@ -216,5 +216,25 @@ public class SoundManager : SingletonObject<SoundManager>
         }
     }
 
+    public void PlayTrapSound(TrapName trapName)
+    {
+        switch (trapName)
+        {
+            case TrapName.Vallista:
+                SFXPlay(SoundList.Instance.IronMaden);
+                break;
+            case TrapName.IronMaden:
+                SFXPlay(SoundList.Instance.FloorSpike);
+                break;
+            case TrapName.FloorGas:
+                SFXPlay(SoundList.Instance.FloorGas);
+                break;
+            case TrapName.FloorSpike:
+                SFXPlay(SoundList.Instance.Vallista);
+                break;  
+
+        }
+    }
+
     
 }
