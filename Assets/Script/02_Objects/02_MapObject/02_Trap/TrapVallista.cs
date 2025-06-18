@@ -8,6 +8,7 @@ public class TrapVallista : Trap
 
     private bool canShoot = true;
     private Transform player;
+    [SerializeField] private Transform arrowStartPoint;
     private SpriteRenderer spriteRenderer;
 
     protected override void TrapAction()
@@ -42,7 +43,7 @@ public class TrapVallista : Trap
     {
         trapAttackCollider.Initialize();
         trapAttackCollider.SetDamage(damage);
-        trapAttackCollider.gameObject.transform.position = transform.position;
+        trapAttackCollider.gameObject.transform.position = arrowStartPoint.position;
     }
 
     private IEnumerator ShootSequence()
