@@ -15,6 +15,15 @@ public class AltarPopup : PageAblePopupSystem
         main.useUnscaledTime = true;
     }
 
+    // 임시로 F키 누르면 Trait 사지는 기능 추가 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            AltarUIManager.Instance.altarDetailPopup.OnClickTraitUI();
+        }
+    }
+
     public void Initialize()
     {
         AltarUIManager.Instance.UpdatePlayerSoulView();
