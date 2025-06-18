@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class TrapAttackCollider : MonoBehaviour
@@ -23,7 +24,13 @@ public class TrapAttackCollider : MonoBehaviour
         {
             Player.Instance.GetDamaged(damage, Player.Instance.GetRelativeDirectionToTarget(transform.position));
             isAttacked = true;
-
+            StartCoroutine(ResetIsAttackedAfterTime(1f)); // Reset isAttacked after 1 second
         }
+    }
+
+    public IEnumerator ResetIsAttackedAfterTime(float time)
+    {
+        yield return new WaitForSeconds(time);
+        isAttacked = false;
     }
 }
