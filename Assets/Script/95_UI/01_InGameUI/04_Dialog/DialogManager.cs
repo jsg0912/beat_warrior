@@ -13,7 +13,7 @@ public class DialogManager : MonoBehaviour
     public Image speakerImage;
 
     public List<SpeakerSprite> speakerSprites; // �ν����� ����� ����Ʈ
-    private Dictionary<DialogSpeaker, Sprite> speakerSpriteDict;
+    private Dictionary<DialogSpeaker, Sprite> speakerSpriteDict; // TODO: 굳이 필요할까?
 
     private DialogName currentDialogName;
     private (DialogSpeaker, string[])[] dialogSequence;
