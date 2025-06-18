@@ -6,6 +6,7 @@ public class TrapBooby : Trap
     [SerializeField] private Animator animator;
     protected override void TrapAction()
     {
+        base.TrapAction();
         animator.SetBool("Trap", true);
         isTriggered = true;
     }
