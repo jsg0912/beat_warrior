@@ -24,7 +24,7 @@ public class TrapAttackCollider : MonoBehaviour
         {
             Player.Instance.GetDamaged(damage, Player.Instance.GetRelativeDirectionToTarget(transform.position));
             isAttacked = true;
-            StartCoroutine(ResetIsAttackedAfterTime(1f)); // Reset isAttacked after 1 second
+            StartCoroutine(ResetIsAttackedAfterTime(2f)); // Reset isAttacked after 1 second
         }
     }
 
